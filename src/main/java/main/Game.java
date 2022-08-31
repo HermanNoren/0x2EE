@@ -1,8 +1,10 @@
 package main;
 
 import gamestates.GameState;
+import sprites.Enemy;
 import sprites.Player;
 import sprites.Sprite;
+import sprites.normalEnemy;
 
 import java.util.ArrayList;
 

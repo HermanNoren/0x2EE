@@ -22,6 +22,7 @@ public class GamePanel extends JPanel {
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        Graphics2D g2 = (Graphics2D) g;
         for (Sprite sprite : model.getSprites()) {
             g.fillRect((int) sprite.getPos().x, (int) sprite.getPos().y, sprite.getRect().getWidth(), sprite.getRect().getHeight());
             //sprite.draw(g);
