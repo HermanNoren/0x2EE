@@ -1,18 +1,48 @@
 package worldclasses;
 
+import config.config;
 import helperclasses.Rect;
 import helperclasses.Vector2;
+import sprites.Sprite;
 
-public class Tile {
+import java.awt.*;
+
+public class Tile implements Sprite {
+    private int size = config.SPRITE_SIZE;
     private Vector2 pos;
     private Rect rect;
 
     public Tile(int x, int y) {
         pos = new Vector2(x, y);
-        rect = new Rect(x, y, 16, 16);
+        rect = new Rect(x, y, size, size);
+    }
+
+    @Override
+    public int getWidth() {
+        return rect.getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return rect.getHeight();
     }
 
     public Vector2 getPos() {
         return new Vector2(pos);
+    }
+
+    @Override
+    public Rect getRect() {
+        return new Rect(rect);
+    }
+
+    @Override
+    public void update() {
+
+    }
+
+    @Override
+    public void draw(Graphics g) {
+
     }
 }

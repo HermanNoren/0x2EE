@@ -1,6 +1,7 @@
 package gamestates;
 
 import main.Observer;
+import sprites.HUD;
 import sprites.Player;
 import sprites.ShopSprite;
 import sprites.Sprite;
@@ -8,20 +9,25 @@ import worldclasses.Map;
 
 import java.util.ArrayList;
 
-public class Ingame implements GameState{
+public class InGame implements GameState{
 
     private Player player;
     private ArrayList<Sprite> sprites;
     private Map map;
+    private ArrayList<Observer> observers;
+    private HUD hud;
     private ShopSprite shop;
 
-    public Ingame() {
-        player = new Player(30, 30);
-        shop = new ShopSprite(0,0);
-
+    public InGame() {
+        player = new Player(0, 0);
         sprites = new ArrayList<>();
-        sprites.add(player);
+        shop = new ShopSprite(0,0);
         map = new Map();
+        sprites.add(player);
+        sprites.addAll(map.getTiles());
+        hud = new HUD(player);
+        observers = new ArrayList<>();
+        observers.add(hud);
         sprites.add(shop);
     }
 
@@ -32,14 +38,20 @@ public class Ingame implements GameState{
 
     @Override
     public ArrayList<Observer> getObservers() {
-        return null;
+        return observers;
     }
+
 
     @Override
     public void update() {
         for (Sprite sprite : sprites) {
             sprite.update();
         }
+
+        for (Observer observer : observers){
+            observer.update();
+        }
+
     }
 
     @Override

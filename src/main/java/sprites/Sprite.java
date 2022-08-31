@@ -8,6 +8,16 @@ import java.awt.*;
 public interface Sprite {
 
     /**
+     * Returns the width of the sprite
+     */
+    int getWidth();
+
+    /**
+     * Returns the height of the sprite
+     */
+    int getHeight();
+
+    /**
      * Returns the position of the upper left corner
      * of the sprite.
      */
