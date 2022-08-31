@@ -1,7 +1,7 @@
 package main;
 
 import gamestates.GameState;
-import gamestates.Ingame;
+import gamestates.InGame;
 import sprites.Sprite;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ public class Game implements Runnable {
     private GameState state;
 
     public Game() {
-        state = new Ingame();
+        state = new InGame();
         gamePanel = new GamePanel(this);
         window = new Window(gamePanel);
         gamePanel.requestFocus();

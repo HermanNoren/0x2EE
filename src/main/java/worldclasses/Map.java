@@ -1,7 +1,7 @@
 package worldclasses;
 
-import helperclasses.Rect;
-import helperclasses.Vector2;
+import config.config;
+import sprites.Sprite;
 
 import java.util.ArrayList;
 
@@ -14,11 +14,11 @@ public class Map {
             "                                        ",
             "                                        ",
             "                  WWWW                  ",
-            "                                        ",
-            "                                        ",
-            "                                        ",
-            "                                        ",
-            "                                        ",
+            "                     W                  ",
+            "                     W                  ",
+            "                     W                  ",
+            "                      W                  ",
+            "                      W                 ",
             "                                        ",
             "                                        ",
             "                                        ",
@@ -30,18 +30,18 @@ public class Map {
             "                                        "
     };
 
-    ArrayList<Tile> tiles;
+    ArrayList<Sprite> tiles;
 
     public Map() {
         tiles = createMap();
     }
 
-    public ArrayList<Tile> getTiles() {
+    public ArrayList<Sprite> getTiles() {
         return new ArrayList<>(tiles);
     }
 
-    private ArrayList<Tile> createMap() {
-        ArrayList<Tile> tiles = new ArrayList<>();
+    private ArrayList<Sprite> createMap() {
+        ArrayList<Sprite> tiles = new ArrayList<>();
         int x = 0;
         int y = 0;
         for (String row : map) {
@@ -52,10 +52,10 @@ public class Map {
                     case 'W':
                         tiles.add(new Tile(x, y));
                 }
-                x += 16;
+                x += config.SPRITE_SIZE;
             }
             x = 0;
-            y += 16;
+            y += config.SPRITE_SIZE;
         }
         return tiles;
     }

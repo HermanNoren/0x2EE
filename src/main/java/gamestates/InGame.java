@@ -6,17 +6,19 @@ import worldclasses.Map;
 
 import java.util.ArrayList;
 
-public class Ingame implements GameState{
+public class InGame implements GameState{
 
     private Player player;
     private ArrayList<Sprite> sprites;
     private Map map;
 
-    public Ingame() {
+    public InGame() {
         player = new Player(0, 0);
         sprites = new ArrayList<>();
-        sprites.add(player);
         map = new Map();
+
+        sprites.add(player);
+        sprites.addAll(map.getTiles());
     }
 
     @Override
