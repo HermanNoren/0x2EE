@@ -13,12 +13,30 @@ public class Player implements Sprite {
     private Vector2 pos;
     private Vector2 vel;
     private Vector2 acc;
+    private int health;
+    private int score;
+    private int money;
 
     public Player(int x, int y) {
         rect = new Rect(size, size, x, y);
         pos = new Vector2(x, y);
         vel = new Vector2(1, 1);
         acc = new Vector2(0, 0);
+        health = 100;
+        score = 0;
+        money = 0;
+    }
+
+    public int getScore(){
+        return score;
+    }
+
+    public int getHealth(){
+        return health;
+    }
+
+    public int getMoney(){
+        return money;
     }
 
     @Override

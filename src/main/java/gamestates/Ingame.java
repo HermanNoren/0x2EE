@@ -3,6 +3,7 @@ package gamestates;
 import sprites.Player;
 import sprites.ShopSprite;
 import sprites.Sprite;
+import worldclasses.Map;
 
 import java.util.ArrayList;
 
@@ -10,6 +11,7 @@ public class Ingame implements GameState{
 
     private Player player;
     private ArrayList<Sprite> sprites;
+    private Map map;
     private ShopSprite shop;
 
     public Ingame() {
@@ -18,12 +20,13 @@ public class Ingame implements GameState{
 
         sprites = new ArrayList<>();
         sprites.add(player);
+        map = new Map();
         sprites.add(shop);
     }
 
     @Override
     public ArrayList<Sprite> getSprites() {
-        return sprites;
+        return new ArrayList<>(sprites);
     }
 
     @Override

@@ -2,10 +2,7 @@ package main;
 
 import gamestates.GameState;
 import gamestates.Ingame;
-import sprites.Enemy;
-import sprites.Player;
 import sprites.Sprite;
-import sprites.normalEnemy;
 
 import java.util.ArrayList;
 
@@ -44,11 +41,11 @@ public class Game implements Runnable {
     }
 
     private void draw() {
-        /*
+
         for (Observer o : state.getObservers()) {
-            o.notify()
+            o.update();
         }
-         */
+
         gamePanel.repaint();
     }
 
