@@ -19,7 +19,7 @@ public class Game implements Runnable {
     private ArrayList<Sprite> sprites;
 
     public Game() {
-        player = new Player(50, 50);
+        player = new Player(0, 0);
         sprites = new ArrayList<>();
         sprites.add(player);
         gamePanel = new GamePanel(this);

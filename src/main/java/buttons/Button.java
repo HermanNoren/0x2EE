@@ -4,11 +4,11 @@ import helperclasses.Vector2;
 
 public class Button {
 
-    private Vector2 pos;
+    private Vector2 position;
     private ButtonAction action;
 
     public Button(int x, int y, ButtonAction action) {
-        pos = new Vector2(x, y);
+        position = new Vector2(x, y);
         this.action = action;
     }
 
