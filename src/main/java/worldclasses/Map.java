@@ -13,7 +13,7 @@ public class Map {
             "                                        ",
             "                                        ",
             "                                        ",
-            "                                        ",
+            "                  WWWW                  ",
             "                                        ",
             "                                        ",
             "                                        ",
@@ -30,22 +30,34 @@ public class Map {
             "                                        "
     };
 
+    ArrayList<Tile> tiles;
+
     public Map() {
-
+        tiles = createMap();
     }
 
-    public ArrayList<Tile> createMap() {
-        
+    public ArrayList<Tile> getTiles() {
+        return new ArrayList<>(tiles);
     }
-}
 
-class Tile {
-    private Vector2 pos;
-    private Rect rect;
+    private ArrayList<Tile> createMap() {
+        ArrayList<Tile> tiles = new ArrayList<>();
+        int x = 0;
+        int y = 0;
+        for (String row : map) {
+            for (int i = 0; i < row.length(); i++) {
+                char tile = row.charAt(i);
 
-    protected Tile(int x, int y) {
-        pos = new Vector2(x, y);
-        rect = new Rect(x, y, 16, 16);
+                switch(tile) {
+                    case 'W':
+                        tiles.add(new Tile(x, y));
+                }
+                x += 16;
+            }
+            x = 0;
+            y += 16;
+        }
+        return tiles;
     }
 }
 

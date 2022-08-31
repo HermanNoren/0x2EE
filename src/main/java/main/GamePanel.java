@@ -2,6 +2,7 @@ package main;
 
 import controllers.KeyboardController;
 import sprites.Sprite;
+import worldclasses.Tile;
 
 import javax.swing.JPanel;
 import java.awt.*;
