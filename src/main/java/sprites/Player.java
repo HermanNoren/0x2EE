@@ -23,12 +23,12 @@ public class Player implements Sprite {
 
     @Override
     public Vector2 getPos() {
-        return pos;
+        return new Vector2(pos);
     }
 
     @Override
     public Rect getRect() {
-        return rect;
+        return new Rect(rect);
     }
 
     @Override

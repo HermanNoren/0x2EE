@@ -18,7 +18,7 @@ public class Ingame implements GameState{
 
     @Override
     public ArrayList<Sprite> getSprites() {
-        return sprites;
+        return new ArrayList<>(sprites);
     }
 
     @Override

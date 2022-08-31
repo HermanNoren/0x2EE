@@ -3,14 +3,18 @@ package helperclasses;
 public class Rect {
     private int width;
     private int height;
-    private int x;
-    private int y;
+    private Vector2 pos;
 
     public Rect(int width, int height, int x, int y) {
         this.width = width;
         this.height = height;
-        this.x = x;
-        this.y = y;
+        pos = new Vector2(x, y);
+    }
+
+    public Rect(Rect rect) {
+        this.width = rect.getWidth();
+        this.height = rect.getHeight();
+        pos = new Vector2(rect.getPos());
     }
 
     public int getWidth() {
@@ -19,6 +23,10 @@ public class Rect {
 
     public int getHeight() {
         return height;
+    }
+
+    public Vector2 getPos() {
+        return new Vector2(pos);
     }
 
     // TODO
