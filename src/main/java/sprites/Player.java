@@ -13,11 +13,10 @@ public class Player implements Sprite {
     private Vector2 pos;
     private Vector2 vel;
     private Vector2 acc;
-
     public Player(int x, int y) {
         rect = new Rect(size, size, x, y);
         pos = new Vector2(x, y);
-        vel = new Vector2(1, 1);
+        vel = new Vector2(0, 0);
         acc = new Vector2(0, 0);
     }
 
@@ -33,12 +32,15 @@ public class Player implements Sprite {
 
     @Override
     public void update() {
-        pos.x += vel.x;
-        pos.y += vel.y;
+//        pos.x += vel.x;
+//        pos.y += vel.y;
+
+
     }
 
     @Override
     public void draw(Graphics g) {
         g.fillRect((int) pos.x, (int) pos.y, size, size);
     }
+
 }
