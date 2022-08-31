@@ -13,11 +13,30 @@ public class Player implements Sprite {
     private Vector2 pos;
     private Vector2 vel;
     private Vector2 acc;
+    private int health;
+    private int score;
+    private int money;
+
     public Player(int x, int y) {
         rect = new Rect(x, y, size, size);
         pos = new Vector2(x, y);
         vel = new Vector2(5, 5);
         acc = new Vector2(0, 0);
+        health = 100;
+        score = 0;
+        money = 0;
+    }
+
+    public int getScore(){
+        return score;
+    }
+
+    public int getHealth(){
+        return health;
+    }
+
+    public int getMoney(){
+        return money;
     }
 
     @Override
@@ -32,12 +51,12 @@ public class Player implements Sprite {
 
     @Override
     public Vector2 getPos() {
-        return new Vector2(pos);
+        return pos;
     }
 
     @Override
     public Rect getRect() {
-        return new Rect(rect);
+        return rect;
     }
 
     @Override
@@ -50,5 +69,4 @@ public class Player implements Sprite {
     public void draw(Graphics g) {
         g.fillRect((int) pos.x, (int) pos.y, size, size);
     }
-
 }

@@ -1,5 +1,6 @@
 package gamestates;
 
+import main.Observer;
 import sprites.Sprite;
 
 import java.util.ArrayList;
@@ -7,6 +8,8 @@ import java.util.ArrayList;
 public interface GameState {
 
     ArrayList<Sprite> getSprites();
+
+    ArrayList<Observer> getObservers();
 
     void update();
 
