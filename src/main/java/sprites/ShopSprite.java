@@ -27,6 +27,16 @@ public class ShopSprite implements Sprite{
     }
 
     @Override
+    public int getWidth() {
+        return getRect().getWidth();
+    }
+
+    @Override
+    public int getHeight() {
+        return getRect().getHeight();
+    }
+
+    @Override
     public Vector2 getPos() {
         return this.Position;
     }

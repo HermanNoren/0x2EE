@@ -19,12 +19,12 @@ public class Tile implements Sprite {
 
     @Override
     public int getWidth() {
-        return rect.getWidth();
+        return getRect().getWidth();
     }
 
     @Override
     public int getHeight() {
-        return rect.getHeight();
+        return getRect().getHeight();
     }
 
     public Vector2 getPos() {
