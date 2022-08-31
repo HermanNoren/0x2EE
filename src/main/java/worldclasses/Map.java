@@ -17,7 +17,7 @@ public class Map {
             "                     W                  ",
             "                     W                  ",
             "                     W                  ",
-            "                      W                  ",
+            "                      W                 ",
             "                      W                 ",
             "                                        ",
             "                                        ",

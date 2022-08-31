@@ -7,7 +7,7 @@ import worldclasses.Tile;
 import javax.swing.JPanel;
 import java.awt.*;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements Observer{
 
     private Game model;
 
@@ -19,8 +19,13 @@ public class GamePanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         for (Sprite sprite : model.getSprites()) {
-            g.fillRect((int) sprite.getPos().x, (int) sprite.getPos().y, sprite.getRect().getWidth(), sprite.getRect().getHeight());
+            g.fillRect((int) sprite.getPos().x, (int) sprite.getPos().y, sprite.getWidth(), sprite.getHeight());
             //sprite.draw(g);
         }
+    }
+
+    @Override
+    public void update() {
+        repaint();
     }
 }

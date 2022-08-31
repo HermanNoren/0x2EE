@@ -8,19 +8,16 @@ import java.util.ArrayList;
 
 public class Game implements Runnable {
     private Window window;
-    private GamePanel gamePanel;
     private Thread gameLoopThread;
     private final int FPS = 120; // FRAMES PER SECOND
     private final int UPS = 200; // UPDATES PER SECOND
 
+    private ArrayList<Observer> observers;
     private GameState state;
 
     public Game() {
+        observers = new ArrayList<>();
         state = new InGame();
-        gamePanel = new GamePanel(this);
-        window = new Window(gamePanel);
-        gamePanel.requestFocus();
-        startGameLoop();
     }
 
     public void setState(GameState state) {
@@ -31,7 +28,15 @@ public class Game implements Runnable {
         return state.getSprites();
     }
 
-    private void startGameLoop() {
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    public void addWindow(Window window) {
+        this.window = window;
+    }
+
+    public void startGame() {
         gameLoopThread = new Thread(this);
         gameLoopThread.start();
     }
@@ -41,14 +46,13 @@ public class Game implements Runnable {
     }
 
     private void draw() {
-/*
-        for (Observer o : state.getObservers()) {
-            o.update();                             // saknar HUD logik
+        for (Observer o : observers) {
+            o.update();
         }
 
- */
-
-        gamePanel.repaint();
+        for (Observer o : state.getObservers()) {
+            o.update();
+        }
     }
 
     @Override
