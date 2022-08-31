@@ -16,6 +16,7 @@ public interface Sprite {
     /**
      * Returns the sprites rect, which is used as a hitbox
      */
+
     Rect getRect();
 
     /**
