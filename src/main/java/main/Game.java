@@ -44,11 +44,11 @@ public class Game implements Runnable {
     }
 
     private void draw() {
-        /*
+
         for (Observer o : state.getObservers()) {
-            o.notify()
+            o.update();
         }
-         */
+
         gamePanel.repaint();
     }
 
