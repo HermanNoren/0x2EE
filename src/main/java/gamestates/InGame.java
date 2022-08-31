@@ -17,18 +17,24 @@ public class InGame implements GameState{
     private ArrayList<Observer> observers;
     private HUD hud;
     private ShopSprite shop;
+    private ShopSprite shop2;
+    private ShopSprite shop3;
 
     public InGame() {
         player = new Player(0, 0);
         sprites = new ArrayList<>();
-        shop = new ShopSprite(0,0);
+        shop = new ShopSprite(100,100, 100, 100);       //
+        shop2 = new ShopSprite(100,100, 250, 100);      // manligt organ
+        shop3 = new ShopSprite(120,500, 175, 150);      //
         map = new Map();
+        sprites.add(shop2);
+        sprites.add(shop);
+        sprites.add(shop3);
         sprites.add(player);
         sprites.addAll(map.getTiles());
         hud = new HUD(player);
         observers = new ArrayList<>();
         observers.add(hud);
-        sprites.add(shop);
     }
 
     @Override

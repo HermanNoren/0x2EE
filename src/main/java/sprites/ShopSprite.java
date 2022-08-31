@@ -14,9 +14,9 @@ public class ShopSprite implements Sprite{
 
     public final static int sizeLength = 25;
 
-    public ShopSprite(int x_position, int y_position) {
-        shopAreaSize = new Rect(100, 100,x_position , y_position);
-        Position = new Vector2(300, 300);
+    public ShopSprite(int x_size, int y_size, int x_position, int y_position) {
+        shopAreaSize = new Rect(100, 100,x_size , y_size);
+        Position = new Vector2(x_position, y_position);
     }
 
     /**
@@ -34,6 +34,16 @@ public class ShopSprite implements Sprite{
     @Override
     public int getHeight() {
         return getRect().getHeight();
+    }
+
+    @Override
+    public int getWidth() {
+        return 0;
+    }
+
+    @Override
+    public int getHeight() {
+        return 0;
     }
 
     @Override
