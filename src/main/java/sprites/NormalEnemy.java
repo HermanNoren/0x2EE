@@ -1,6 +1,6 @@
 package sprites;
 
-public class normalEnemy implements EnemyType{
+public class NormalEnemy implements EnemyType{
 
     @Override
     public void update() {
