@@ -45,9 +45,7 @@ public class Map {
         int x = 0;
         int y = 0;
         for (String row : map) {
-            for (int i = 0; i < row.length(); i++) {
-                char tile = row.charAt(i);
-
+            for (char tile : row.toCharArray()) {
                 switch(tile) {
                     case 'W':
                         tiles.add(new Tile(x, y));
