@@ -1,5 +1,6 @@
 package gamestates;
 
+import main.Observer;
 import sprites.Player;
 import sprites.ShopSprite;
 import sprites.Sprite;
@@ -15,7 +16,7 @@ public class Ingame implements GameState{
     private ShopSprite shop;
 
     public Ingame() {
-        player = new Player(0, 0);
+        player = new Player(30, 30);
         shop = new ShopSprite(0,0);
 
         sprites = new ArrayList<>();
@@ -27,6 +28,11 @@ public class Ingame implements GameState{
     @Override
     public ArrayList<Sprite> getSprites() {
         return new ArrayList<>(sprites);
+    }
+
+    @Override
+    public ArrayList<Observer> getObservers() {
+        return null;
     }
 
     @Override

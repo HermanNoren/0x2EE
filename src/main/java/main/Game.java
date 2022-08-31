@@ -41,10 +41,12 @@ public class Game implements Runnable {
     }
 
     private void draw() {
-
+/*
         for (Observer o : state.getObservers()) {
-            o.update();
+            o.update();                             // saknar HUD logik
         }
+
+ */
 
         gamePanel.repaint();
     }

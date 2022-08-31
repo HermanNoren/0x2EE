@@ -15,7 +15,7 @@ public class ShopSprite implements Sprite{
     public final static int sizeLength = 25;
 
     public ShopSprite(int x_position, int y_position) {
-        shopAreaSize = new Rect(25, 25,x_position , y_position);
+        shopAreaSize = new Rect(100, 100,x_position , y_position);
         Position = new Vector2(300, 300);
     }
 
