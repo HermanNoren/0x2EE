@@ -1,6 +1,7 @@
 package main;
 
 import gamestates.GameState;
+import gamestates.Ingame;
 import sprites.Enemy;
 import sprites.Player;
 import sprites.Sprite;
@@ -17,13 +18,8 @@ public class Game implements Runnable {
 
     private GameState state;
 
-    private Player player;
-    private ArrayList<Sprite> sprites;
-
     public Game() {
-        player = new Player(0, 0);
-        sprites = new ArrayList<>();
-        sprites.add(player);
+        state = new Ingame();
         gamePanel = new GamePanel(this);
         window = new Window(gamePanel);
         gamePanel.requestFocus();
@@ -35,7 +31,7 @@ public class Game implements Runnable {
     }
 
     public ArrayList<Sprite> getSprites() {
-        return sprites;
+        return state.getSprites();
     }
 
     private void startGameLoop() {
@@ -44,10 +40,7 @@ public class Game implements Runnable {
     }
 
     private void update() {
-        //state.update();
-        for (Sprite sprite : sprites) {
-            sprite.update();
-        }
+        state.update();
     }
 
     private void draw() {
