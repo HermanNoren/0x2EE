@@ -36,7 +36,7 @@ public class Game implements Runnable {
             return ((GameStateWithPlayer) state).getPlayer();
         }
         else {
-            throw new Exception("GameState has no player");
+            throw new Exception("Current GameState has no player");
         }
     }
 

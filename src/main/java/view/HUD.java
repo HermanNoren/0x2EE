@@ -5,7 +5,6 @@ import view.Observer;
 
 public class HUD implements Observer {
 
-    private Player player;
     private int score;
     private int money;
     private int health;
