@@ -1,7 +1,7 @@
 package main;
 
 import gamestates.GameState;
-import gamestates.InGame;
+import gamestates.InGameState;
 import sprites.Player;
 import sprites.Sprite;
 
@@ -14,11 +14,12 @@ public class Game implements Runnable {
     private final int UPS = 200; // UPDATES PER SECOND
 
     private ArrayList<Observer> observers;
+
     private GameState state;
 
     public Game() {
         observers = new ArrayList<>();
-        state = new InGame();
+        state = new InGameState();
     }
 
     public Player getPlayer() {

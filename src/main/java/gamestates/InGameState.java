@@ -9,7 +9,7 @@ import worldclasses.Map;
 
 import java.util.ArrayList;
 
-public class InGame implements GameState{
+public class InGameState implements GameState{
 
     private Player player;
     private ArrayList<Sprite> sprites;
@@ -17,7 +17,7 @@ public class InGame implements GameState{
     private ArrayList<Observer> observers;
     private HUD hud;
 
-    public InGame() {
+    public InGameState() {
         player = new Player(0, 0);
         sprites = new ArrayList<>();
         map = new Map();
