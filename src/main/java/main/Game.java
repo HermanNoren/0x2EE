@@ -4,7 +4,6 @@ import gamestates.GameState;
 import gamestates.InGame;
 import sprites.Player;
 import sprites.Sprite;
-
 import java.util.ArrayList;
 
 public class Game implements Runnable {
@@ -25,9 +24,19 @@ public class Game implements Runnable {
         return state.getPlayer();
     }
 
+
     public void setState(GameState state) {
         this.state = state;
     }
+
+    // ta inte in argument utan ändra till exempelvis
+    // be controller kalla på rätt state-metod istället.
+    //      public void setPausedStateAndSaveEarlier() {
+    //          this.Savedstate = Savedstate;
+    //          this.state = pausedState;
+    //}
+    //
+
 
     public ArrayList<Sprite> getSprites() {
         return state.getSprites();
