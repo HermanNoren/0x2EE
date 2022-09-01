@@ -4,6 +4,9 @@ import gamestates.GameState;
 import gamestates.InGameState;
 import sprites.Player;
 import sprites.Sprite;
+import view.Observer;
+import view.Window;
+
 import java.util.ArrayList;
 
 public class Game implements Runnable {

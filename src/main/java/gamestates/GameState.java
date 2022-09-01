@@ -1,6 +1,6 @@
 package gamestates;
 
-import main.Observer;
+import view.Observer;
 import sprites.Player;
 import sprites.Sprite;
 

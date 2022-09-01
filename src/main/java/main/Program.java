@@ -1,11 +1,14 @@
 package main;
 
+import view.MainPanel;
+import view.Window;
+
 public class Program {
     public static void main(String[] args) {
         Game game = new Game();
-        GamePanel gamePanel = new GamePanel(game);
-        game.addObserver(gamePanel);
-        game.addWindow(new Window(gamePanel));
+        MainPanel mainPanel = new MainPanel(game);
+        game.addObserver(mainPanel);
+        game.addWindow(new Window(mainPanel));
         game.startGame();
     }
 }

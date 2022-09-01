@@ -1,11 +1,10 @@
 package gamestates;
 
-import main.Observer;
-import sprites.HUD;
+import view.Observer;
+import view.HUD;
 import sprites.Player;
-import sprites.ShopSprite;
 import sprites.Sprite;
-import worldclasses.Map;
+import mapclasses.Map;
 
 import java.util.ArrayList;
 
