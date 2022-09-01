@@ -2,6 +2,7 @@ package main;
 
 import gamestates.GameState;
 import gamestates.InGame;
+import sprites.Player;
 import sprites.Sprite;
 
 import java.util.ArrayList;
@@ -18,6 +19,10 @@ public class Game implements Runnable {
     public Game() {
         observers = new ArrayList<>();
         state = new InGame();
+    }
+
+    public Player getPlayer() {
+        return state.getPlayer();
     }
 
     public void setState(GameState state) {

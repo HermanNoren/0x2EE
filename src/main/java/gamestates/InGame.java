@@ -29,6 +29,11 @@ public class InGame implements GameState{
     }
 
     @Override
+    public Player getPlayer() {
+        return player;
+    }
+
+    @Override
     public ArrayList<Sprite> getSprites() {
         return new ArrayList<>(sprites);
     }
@@ -37,7 +42,6 @@ public class InGame implements GameState{
     public ArrayList<Observer> getObservers() {
         return observers;
     }
-
 
     @Override
     public void update() {

@@ -1,11 +1,14 @@
 package gamestates;
 
 import main.Observer;
+import sprites.Player;
 import sprites.Sprite;
 
 import java.util.ArrayList;
 
 public interface GameState {
+
+    Player getPlayer();
 
     ArrayList<Sprite> getSprites();
 

@@ -1,10 +1,21 @@
 package controllers;
 
+import main.Game;
+
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyboardController implements KeyListener {
+
     public boolean wPressed, aPressed, sPressed, dPressed;
+    private Game game;
+
+    public KeyboardController(Game game) {
+        this.game = game;
+    }
+
+
     @Override
     public void keyTyped(KeyEvent e) {
 

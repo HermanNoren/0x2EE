@@ -10,10 +10,12 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Observer{
 
     private Game model;
+    KeyboardController keyboardController;
 
     public GamePanel(Game model) {
         this.model = model;
-        addKeyListener(new KeyboardController());
+        keyboardController =  new KeyboardController(model);
+        addKeyListener(keyboardController);
     }
 
     public void paintComponent(Graphics g) {
