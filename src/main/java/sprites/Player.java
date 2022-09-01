@@ -20,7 +20,7 @@ public class Player implements Sprite {
     public Player(int x, int y) {
         rect = new Rect(x, y, size, size);
         pos = new Vector2(x, y);
-        vel = new Vector2(5, 5);
+        vel = new Vector2(1, 1);
         acc = new Vector2(0, 0);
         health = 100;
         score = 0;
@@ -51,12 +51,12 @@ public class Player implements Sprite {
 
     @Override
     public Vector2 getPos() {
-        return pos;
+        return new Vector2(pos);
     }
 
     @Override
     public Rect getRect() {
-        return rect;
+        return new Rect(rect);
     }
 
     @Override
@@ -67,6 +67,7 @@ public class Player implements Sprite {
 
     @Override
     public void draw(Graphics g) {
+        g.setColor(Color.BLUE);
         g.fillRect((int) pos.x, (int) pos.y, size, size);
     }
 }

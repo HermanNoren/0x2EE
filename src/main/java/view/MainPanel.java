@@ -2,6 +2,7 @@ package view;
 
 import controllers.KeyboardController;
 import main.Game;
+import sprites.Player;
 import sprites.Sprite;
 import view.panelstates.PanelState;
 
@@ -14,18 +15,16 @@ public class MainPanel extends JPanel implements Observer{
     private PanelState state;
     private KeyboardController keyboardController;
 
-    public MainPanel(Game model) {
+    public MainPanel(Game game, PanelState startState) {
         this.game = game;
+        state = startState;
         keyboardController =  new KeyboardController(game);
         addKeyListener(keyboardController);
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (Sprite sprite : game.getSprites()) {
-            g.fillRect((int) sprite.getPos().x, (int) sprite.getPos().y, sprite.getWidth(), sprite.getHeight());
-            //sprite.draw(g);
-        }
+        state.Draw(g);
     }
 
     @Override
