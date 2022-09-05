@@ -37,5 +37,5 @@ public interface Sprite {
     /**
      * Draws the sprite
      */
-    void draw(Graphics g);
+    void draw(Graphics2D g2);
 }

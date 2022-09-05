@@ -1,10 +1,8 @@
 package gamestates;
 
-import view.Observer;
-import view.HUD;
 import sprites.Player;
 import sprites.Sprite;
-import mapclasses.Map;
+import mapclasses.GameMap;
 
 import java.util.ArrayList;
 
@@ -15,12 +13,12 @@ public class InGameState implements GameStateWithPlayer{
 
     private Player player;
     private ArrayList<Sprite> sprites;
-    private Map map;
+    private GameMap map;
 
-    public InGameState() {
+    public InGameState(){
         player = new Player(0, 0);
         sprites = new ArrayList<>();
-        map = new Map();
+        map = new GameMap();
         sprites.add(player);
         sprites.addAll(map.getTiles());
     }

@@ -15,16 +15,21 @@ public class MainPanel extends JPanel implements Observer{
     private PanelState state;
     private KeyboardController keyboardController;
 
+    Player player;
+
     public MainPanel(Game game, PanelState startState) {
         this.game = game;
         state = startState;
         keyboardController =  new KeyboardController(game);
+        setFocusable(true);
         addKeyListener(keyboardController);
     }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        state.Draw(g);
+        Graphics2D g2 = (Graphics2D) g;
+        state.Draw(g2);
+
     }
 
     @Override

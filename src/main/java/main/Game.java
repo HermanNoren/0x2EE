@@ -7,6 +7,7 @@ import sprites.Player;
 import sprites.Sprite;
 import view.Observer;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -20,7 +21,7 @@ public class Game implements Runnable {
     private ArrayList<Observer> observers;
     private GameState state;
 
-    public Game() {
+    public Game() throws IOException {
         observers = new ArrayList<>();
         state = new InGameState();
         startGame();

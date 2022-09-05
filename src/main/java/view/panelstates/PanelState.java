@@ -4,6 +4,6 @@ import java.awt.*;
 
 public interface PanelState {
 
-    void Draw(Graphics g);
+    void Draw(Graphics2D g2);
 
 }
