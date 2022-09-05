@@ -1,12 +1,15 @@
 package main;
 
+import view.MainPanel;
+import view.Window;
+import view.panelstates.InGamePanel;
+
 public class Program {
     public static void main(String[] args) {
         Game game = new Game();
-        GamePanel gamePanel = new GamePanel(game);
-        game.addObserver(gamePanel);
-        game.addWindow(new Window(gamePanel));
-        game.startGame();
+        MainPanel mainPanel = new MainPanel(game, new InGamePanel(game));
+        game.addObserver(mainPanel);
+        Window window = new Window(mainPanel);
     }
 }
 

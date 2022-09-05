@@ -1,4 +1,4 @@
-package worldclasses;
+package mapclasses;
 
 import config.config;
 import helperclasses.Rect;
@@ -43,6 +43,7 @@ public class Tile implements Sprite {
 
     @Override
     public void draw(Graphics g) {
-
+        g.setColor(Color.black);
+        g.fillRect((int) pos.x, (int) pos.y, size, size);
     }
 }

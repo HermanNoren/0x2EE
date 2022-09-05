@@ -1,10 +1,10 @@
-package sprites;
+package view;
 
-import main.Observer;
+import sprites.Player;
+import view.Observer;
 
 public class HUD implements Observer {
 
-    private Player player;
     private int score;
     private int money;
     private int health;
@@ -14,7 +14,6 @@ public class HUD implements Observer {
         this.money = player.getMoney();
         this.health = player.getHealth();
     }
-
 
     @Override
     public void update() {

@@ -1,30 +1,48 @@
 package main;
 
 import gamestates.GameState;
-import gamestates.InGame;
+import gamestates.GameStateWithPlayer;
+import gamestates.InGameState;
 import sprites.Player;
 import sprites.Sprite;
+import view.Observer;
+
 import java.util.ArrayList;
 
+/**
+ * This class contains the main game loop.
+ * With help of the main game loop it delegates work to the active GameState
+ */
 public class Game implements Runnable {
-    private Window window;
     private Thread gameLoopThread;
     private final int FPS = 120; // FRAMES PER SECOND
     private final int UPS = 200; // UPDATES PER SECOND
-
     private ArrayList<Observer> observers;
     private GameState state;
 
     public Game() {
         observers = new ArrayList<>();
-        state = new InGame();
+        state = new InGameState();
+        startGame();
     }
 
-    public Player getPlayer() {
-        return state.getPlayer();
+    /**
+     * Returns the player if current GameState has a player, else throws an exception
+     * @return Player
+     */
+    public Player getPlayer() throws Exception {
+        if (state instanceof GameStateWithPlayer) {
+            return ((GameStateWithPlayer) state).getPlayer();
+        }
+        else {
+            throw new Exception("Current GameState has no player");
+        }
     }
 
-
+    /**
+     * Use to change the current GameState
+     * @param state an instance of a class that has implemented the GameState interface
+     */
     public void setState(GameState state) {
         this.state = state;
     }
@@ -38,43 +56,57 @@ public class Game implements Runnable {
     //
 
 
+    /**
+     * Returns an ArrayList containing all the sprites in the current GameState
+     * @return ArrayList containing Sprites
+     */
     public ArrayList<Sprite> getSprites() {
         return state.getSprites();
     }
 
+    /**
+     * Add an observer. Observers will be notified 120 times per second
+     * @param observer observer
+     */
     public void addObserver(Observer observer) {
         observers.add(observer);
     }
 
-    public void addWindow(Window window) {
-        this.window = window;
-    }
-
-    public void startGame() {
+    /**
+     * Starts the game
+     */
+    private void startGame() {
         gameLoopThread = new Thread(this);
         gameLoopThread.start();
     }
 
+    /**
+     * Updates the current GameState
+     */
     private void update() {
         state.update();
     }
 
-    private void draw() {
+    /**
+     * Notifies potential observers
+     */
+    private void notifyObservers() {
         for (Observer o : observers) {
-            o.update();
-        }
-                            //Fixa
-        for (Observer o : state.getObservers()) {
             o.update();
         }
     }
 
+    /**
+     * Main game loop.
+     * Handles logic of when to update the internal game classes and when to notify potential observers
+     */
     @Override
     public void run() {
 
-        double drawTime =  1000000000.0 / FPS;
-        double updateTime = 1000000000.0 / UPS;
-
+        double timePerRender =  1000000000.0 / FPS;
+        double timePerUpdate = 1000000000.0 / UPS;
+        double deltaUpdateTime = 0;
+        double deltaDrawTime = 0;
         long currentTime;
         long previousTime = System.nanoTime();
 
@@ -82,14 +114,11 @@ public class Game implements Runnable {
         int updates = 0;
         long lastFpsCheck = System.currentTimeMillis();
 
-        double deltaUpdateTime = 0;
-        double deltaDrawTime = 0;
-
         while(true) {
             currentTime = System.nanoTime();
 
-            deltaUpdateTime += (currentTime - previousTime) / updateTime;
-            deltaDrawTime += (currentTime - previousTime) / drawTime;
+            deltaUpdateTime += (currentTime - previousTime) / timePerUpdate;
+            deltaDrawTime += (currentTime - previousTime) / timePerRender;
             previousTime = currentTime;
 
             if (deltaUpdateTime >= 1) {
@@ -99,7 +128,7 @@ public class Game implements Runnable {
             }
 
             if (deltaDrawTime >= 1) {
-                draw();
+                notifyObservers();
                 frames++;
                 deltaDrawTime--;
             }

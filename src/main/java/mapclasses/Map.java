@@ -1,4 +1,4 @@
-package worldclasses;
+package mapclasses;
 
 import config.config;
 import sprites.Sprite;
