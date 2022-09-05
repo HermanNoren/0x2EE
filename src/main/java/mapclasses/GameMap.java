@@ -5,9 +5,9 @@ import sprites.Sprite;
 
 import java.util.ArrayList;
 
-public class Map {
+public class GameMap {
 
-    private String[] map = new String[] {
+    private String[] gameMap = new String[] {
             "                                        ",
             "                                        ",
             "                                        ",
@@ -32,7 +32,7 @@ public class Map {
 
     ArrayList<Sprite> tiles;
 
-    public Map() {
+    public GameMap() {
         tiles = createMap();
     }
 
@@ -44,7 +44,7 @@ public class Map {
         ArrayList<Sprite> tiles = new ArrayList<>();
         int x = 0;
         int y = 0;
-        for (String row : map) {
+        for (String row : gameMap) {
             for (char tile : row.toCharArray()) {
                 switch(tile) {
                     case 'W':

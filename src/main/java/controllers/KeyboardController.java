@@ -2,16 +2,16 @@ package controllers;
 
 import main.Game;
 
-import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyboardController implements KeyListener {
 
-    public boolean wPressed, aPressed, sPressed, dPressed;
+    Direction direction;
     private Game game;
 
     public KeyboardController(Game game) {
+        System.out.println("Activated Controller");
         this.game = game;
     }
 
@@ -22,45 +22,53 @@ public class KeyboardController implements KeyListener {
     }
 
     @Override
-    public void keyPressed(KeyEvent e) {
+    public void keyPressed(KeyEvent e) throws RuntimeException {
         int code = e.getKeyCode();
+        switch (code) {
+            case (KeyEvent.VK_W) -> {
+                try {
+                    game.getPlayer().move(Direction.UP);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            case (KeyEvent.VK_A) -> {
+                try {
+                    game.getPlayer().move(Direction.LEFT);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
 
-        if(code == KeyEvent.VK_W){
-            wPressed = true;
+            }
+            case (KeyEvent.VK_S) -> {
+                try {
+                    game.getPlayer().move(Direction.DOWN);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            case (KeyEvent.VK_D) -> {
+                try {
+                    game.getPlayer().move(Direction.RIGHT);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+
+            }
         }
-
-        if(code == KeyEvent.VK_W){
-            aPressed = true;
-        }
-
-        if(code == KeyEvent.VK_W){
-            sPressed = true;
-        }
-
-        if(code == KeyEvent.VK_W){
-            dPressed = true;
-        }
-
     }
+
+
 
     @Override
     public void keyReleased(KeyEvent e) {
         switch(e.getKeyCode()) {
             case KeyEvent.VK_W:
-                System.out.println("W");
-                wPressed = false;
-                break;
-            case KeyEvent.VK_A:
-                System.out.println("A");
-                aPressed = false;
-                break;
-            case KeyEvent.VK_S:
-                System.out.println("S");
-                sPressed = false;
-                break;
-            case KeyEvent.VK_D:
-                System.out.println("D");
-                dPressed = false;
+                try {
+                    game.getPlayer().move(Direction.NEUTRAL);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
                 break;
         }
     }

@@ -42,8 +42,8 @@ public class Tile implements Sprite {
     }
 
     @Override
-    public void draw(Graphics g) {
-        g.setColor(Color.black);
-        g.fillRect((int) pos.x, (int) pos.y, size, size);
+    public void draw(Graphics2D g2) {
+        g2.setColor(Color.black);
+        g2.fillRect((int) pos.x, (int) pos.y, size, size);
     }
 }
