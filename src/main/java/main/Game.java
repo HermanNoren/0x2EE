@@ -63,7 +63,7 @@ public class Game implements Runnable {
         for (Observer o : observers) {
             o.update();
         }
-
+                            //Fixa
         for (Observer o : state.getObservers()) {
             o.update();
         }
