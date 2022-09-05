@@ -1,18 +1,14 @@
 package sprites.enemies;
 
 import helperclasses.Vector2;
+import sprites.Entity;
 
-public class Enemy {
+public class Enemy extends Entity {
+
     private EnemyType enemyType;
-    private Vector2 pos;
-    private Vector2 vel;
-    private Vector2 acc;
 
-
-    public Enemy(int x, int y, EnemyType enemyType){
-        this.pos = new Vector2(x, y);
-        this.vel = new Vector2(1, 1);
-        this.acc = new Vector2(0, 0);
+    public Enemy(int x, int y, int health, EnemyType enemyType){
+        super(x, y, health);
         this.enemyType = enemyType;
     }
 }

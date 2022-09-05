@@ -6,23 +6,16 @@ import config.config;
 
 import java.awt.*;
 
-public class Player implements Sprite {
+public class Player extends Entity implements Sprite {
 
     private int size = config.SPRITE_SIZE * 3;
     private Rect rect;
-    private Vector2 pos;
-    private Vector2 vel;
-    private Vector2 acc;
-    private int health;
     private int score;
     private int money;
 
-    public Player(int x, int y) {
+    public Player(int x, int y, int health) {
+        super(x, y, health);
         rect = new Rect(x, y, size, size);
-        pos = new Vector2(x, y);
-        vel = new Vector2(1, 1);
-        acc = new Vector2(0, 0);
-        health = 100;
         score = 0;
         money = 0;
     }
