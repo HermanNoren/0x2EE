@@ -6,6 +6,13 @@ import helperclasses.Vector2;
 
 import java.awt.*;
 
+/**
+ * The Entity class contains logic to represent the sprite,
+ * for example by containing information regarding its position and health
+ * the program can determine if an entity is in range to take damage thus
+ * if reduces its health.
+ */
+
 public abstract class Entity implements Sprite {
 
     Vector2 pos;
@@ -15,6 +22,12 @@ public abstract class Entity implements Sprite {
     private int size = config.SPRITE_SIZE * 3;
     private Rect rect;
 
+    /**
+     *
+     * @param x represents the entities' x-coordinate
+     * @param y represents the entities' y-coordinate
+     * @param health
+     */
 
 
 
@@ -46,6 +59,9 @@ public abstract class Entity implements Sprite {
         return new Rect(this.rect);
     }
 
+    /**
+     * Updates the entites' location by adding its coordinate with its velocity
+     */
     @Override
     public void update() {
         pos.x += vel.x;

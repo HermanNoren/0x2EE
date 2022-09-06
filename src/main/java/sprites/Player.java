@@ -1,10 +1,5 @@
 package sprites;
 
-import helperclasses.Rect;
-import helperclasses.Vector2;
-import config.config;
-
-import java.awt.*;
 
 public class Player extends Entity implements Sprite {
 
