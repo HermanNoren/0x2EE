@@ -1,11 +1,12 @@
 package gamestates;
 
+import mapclasses.GameMap;
 import view.Observer;
 import view.HUD;
 import sprites.Player;
 import sprites.Sprite;
-import mapclasses.Map;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -15,12 +16,12 @@ public class InGameState implements GameStateWithPlayer{
 
     private Player player;
     private ArrayList<Sprite> sprites;
-    private Map map;
+    private GameMap map;
 
-    public InGameState() {
+    public InGameState() throws IOException {
         player = new Player(0, 0, 100);
         sprites = new ArrayList<>();
-        map = new Map();
+        map = new GameMap();
         sprites.add(player);
         sprites.addAll(map.getTiles());
     }

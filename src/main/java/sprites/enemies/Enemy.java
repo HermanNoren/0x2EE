@@ -2,6 +2,8 @@ package sprites.enemies;
 
 import sprites.Entity;
 
+import java.awt.*;
+
 public class Enemy extends Entity {
 
     private EnemyType enemyType;
@@ -11,5 +13,8 @@ public class Enemy extends Entity {
         this.enemyType = enemyType;
     }
 
+    @Override
+    public void draw(Graphics2D g2) {
 
+    }
 }

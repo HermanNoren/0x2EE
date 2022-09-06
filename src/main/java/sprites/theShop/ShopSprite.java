@@ -89,7 +89,7 @@ public class ShopSprite implements Sprite {
     }
 
     @Override
-    public void draw(Graphics g) {
-        g.fillRect( x_position, y_position, sizeLength, sizeLength);
+    public void draw(Graphics2D g2) {
+        g2.fillRect( x_position, y_position, sizeLength, sizeLength);
     }
 }

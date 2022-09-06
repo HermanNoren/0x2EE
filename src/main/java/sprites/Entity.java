@@ -1,10 +1,16 @@
 package sprites;
 
 import config.config;
+import controllers.Direction;
 import helperclasses.Rect;
 import helperclasses.Vector2;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
 
 /**
  * The Entity class contains logic to represent the sprite,
@@ -14,13 +20,17 @@ import java.awt.*;
  */
 
 public abstract class Entity implements Sprite {
-
+    int animationCounter;
+    int imageSwitcher;
     Vector2 pos;
     Vector2 vel;
     Vector2 acc;
     int health;
+    private BufferedImage image;
+    Direction direction;
     private int size = config.SPRITE_SIZE * 3;
     private Rect rect;
+
 
     /**
      *
@@ -29,16 +39,33 @@ public abstract class Entity implements Sprite {
      * @param health
      */
 
-
-
     public Entity(int x, int y, int health){
-        pos = new Vector2(x, y);
-        vel = new Vector2(1, 1);
-        acc = new Vector2(0, 0);
-        rect = new Rect(x, y, size, size);
+        this.direction = Direction.NOT_MOVING; // Default value
+        this.pos = new Vector2(x, y);
+        this.vel = new Vector2(1, 1);
+        this.acc = new Vector2(0, 0);
+        this.rect = new Rect(x, y, size, size);
         this.health = health;
     }
 
+    public BufferedImage setImage(String path) throws IOException {
+        BufferedImage image;
+        image = ImageIO.read(new File(path));
+        return image;
+    }
+    public void updatePos(Direction direction){
+        System.out.println(pos.y);
+        switch (direction){
+            case UP -> {
+                System.out.println("up");
+                pos.y -= vel.y;
+                System.out.println(pos.y);
+            }
+            case LEFT -> pos.x -= vel.x;
+            case DOWN -> pos.y += vel.y;
+            case RIGHT -> pos.x += vel.x;
+        }
+    }
     @Override
     public int getWidth() {
         return getRect().getWidth();
@@ -64,13 +91,22 @@ public abstract class Entity implements Sprite {
      */
     @Override
     public void update() {
-        pos.x += vel.x;
-        pos.y += vel.y;
+        animationCounter++;
+        if(animationCounter > 100){
+            imageSwitcher = 1;
+            animationCounter = 0;
+            System.out.println(imageSwitcher);
+        }else if(animationCounter == 50){
+            imageSwitcher = 2;
+            System.out.println(imageSwitcher);
+        }
+    }
+
+    public int getSize() {
+        return size;
     }
 
     @Override
-    public void draw(Graphics g) {
-        g.setColor(Color.BLUE);
-        g.fillRect((int) pos.x, (int) pos.y, size, size);
-    }
+    public abstract void draw(Graphics2D g2);
+
 }
