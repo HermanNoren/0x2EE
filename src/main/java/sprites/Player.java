@@ -52,6 +52,10 @@ public class Player extends Entity implements Sprite, MovableSprite{
         return money;
     }
 
+    /**
+     * @param direction Used to move movable sprites.
+     *                  Moves the player on the screen.
+     */
     @Override
     public void move(Direction direction) {
         switch (direction){
@@ -82,6 +86,12 @@ public class Player extends Entity implements Sprite, MovableSprite{
     }
 
     private BufferedImage prevImg;
+
+    /**
+     * @param g2
+     * Draws the character on screen, updates image according to position
+     *
+     */
     @Override
     public void draw(Graphics2D g2){
         BufferedImage image = null;
