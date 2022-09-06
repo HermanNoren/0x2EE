@@ -121,10 +121,10 @@ public class Player extends Entity implements Sprite, MovableSprite{
         }
 
         if(prevImg == null){
-            g2.drawImage(up1, getSize(), getSize(), null); // Sets default image
+            g2.drawImage(up1, (int) getPos().x, (int) getPos().y, null); // Sets default image
 
         }else {
-            g2.drawImage(image, getSize(), getSize(), null);
+            g2.drawImage(image, (int)getPos().x,(int) getPos().y, null);
         }
     }
 }
