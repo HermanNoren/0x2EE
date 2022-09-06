@@ -18,7 +18,7 @@ public class InGameState implements GameStateWithPlayer{
     private Map map;
 
     public InGameState() {
-        player = new Player(0, 0);
+        player = new Player(0, 0, 100);
         sprites = new ArrayList<>();
         map = new Map();
         sprites.add(player);

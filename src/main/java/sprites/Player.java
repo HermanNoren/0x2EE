@@ -1,28 +1,15 @@
 package sprites;
 
-import helperclasses.Rect;
-import helperclasses.Vector2;
-import config.config;
+/**
+ * The player, more implementation to come.
+ */
+public class Player extends Entity implements Sprite {
 
-import java.awt.*;
-
-public class Player implements Sprite {
-
-    private int size = config.SPRITE_SIZE * 3;
-    private Rect rect;
-    private Vector2 pos;
-    private Vector2 vel;
-    private Vector2 acc;
-    private int health;
     private int score;
     private int money;
 
-    public Player(int x, int y) {
-        rect = new Rect(x, y, size, size);
-        pos = new Vector2(x, y);
-        vel = new Vector2(1, 1);
-        acc = new Vector2(0, 0);
-        health = 100;
+    public Player(int x, int y, int health) {
+        super(x, y, health);
         score = 0;
         money = 0;
     }
@@ -39,35 +26,4 @@ public class Player implements Sprite {
         return money;
     }
 
-    @Override
-    public int getWidth() {
-        return getRect().getWidth();
-    }
-
-    @Override
-    public int getHeight() {
-        return getRect().getHeight();
-    }
-
-    @Override
-    public Vector2 getPos() {
-        return new Vector2(pos);
-    }
-
-    @Override
-    public Rect getRect() {
-        return new Rect(rect);
-    }
-
-    @Override
-    public void update() {
-        pos.x += vel.x;
-        pos.y += vel.y;
-    }
-
-    @Override
-    public void draw(Graphics g) {
-        g.setColor(Color.BLUE);
-        g.fillRect((int) pos.x, (int) pos.y, size, size);
-    }
 }

@@ -24,7 +24,7 @@ public interface Sprite {
     Vector2 getPos();
 
     /**
-     * Returns the sprites rect, which is used as a hitbox
+     * Returns the sprites' rect, which is used as a hitbox
      */
 
     Rect getRect();
