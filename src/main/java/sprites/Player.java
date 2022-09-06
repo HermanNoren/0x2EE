@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Player class
+ * Player class, used to create an instance of a playable sprite within the game.
  */
 public class Player implements Sprite, MovableSprite {
 
@@ -29,7 +29,11 @@ public class Player implements Sprite, MovableSprite {
 
     private Direction direction;
 
-    public Player(int x, int y){
+    /**
+     * @param x, x position of player sprite
+     * @param y, y position of player sprite
+     */
+    public Player(int x, int y) {
         rect = new Rect(x, y, size, size);
         pos = new Vector2(x, y);
         vel = new Vector2(4, 4);
@@ -41,8 +45,11 @@ public class Player implements Sprite, MovableSprite {
         setPlayerImages();
     }
 
-    private void setPlayerImages(){
-        try{
+    /**
+     * Method used to read images from directory.
+     */
+    private void setPlayerImages() {
+        try {
             up1 = ImageIO.read(new File("imgs/player_up_1.png"));
             up2 = ImageIO.read(new File("imgs/player_up_2.png"));
             right1 = ImageIO.read(new File("imgs/player_right_1.png"));
@@ -51,38 +58,60 @@ public class Player implements Sprite, MovableSprite {
             left2 = ImageIO.read(new File("imgs/player_left_2.png"));
             down1 = ImageIO.read(new File("imgs/player_down_1.png"));
             down2 = ImageIO.read(new File("imgs/player_down_2.png"));
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public int getScore(){
+    /**
+     * @return score which the player has achieved during the game
+     */
+    public int getScore() {
         return score;
     }
 
-    public int getHealth(){
+    /**
+     * @return the player health
+     */
+    public int getHealth() {
         return health;
     }
 
-    public int getMoney(){
+    /**
+     * @return currency which the player has accumulated during game
+     * Money is used in the ingame shop.
+     */
+    public int getMoney() {
         return money;
     }
 
+    /**
+     * @return width of rectangle surrounding sprite
+     */
     @Override
     public int getWidth() {
         return getRect().getWidth();
     }
 
+    /**
+     * @return height of rectangle surrounding sprite
+     */
     @Override
     public int getHeight() {
         return getRect().getHeight();
     }
 
+    /**
+     * @return position vector
+     */
     @Override
     public Vector2 getPos() {
         return new Vector2(pos);
     }
 
+    /**
+     * @return rectangle surrounding sprite.
+     */
     @Override
     public Rect getRect() {
         return new Rect(rect);
@@ -91,6 +120,9 @@ public class Player implements Sprite, MovableSprite {
     private int imageSwitchCounter = 0;
     private int imageChooser = 0;
 
+    /**
+     * Updates player sprite
+     */
     @Override
     public void update() {
         animateCounter();
@@ -113,61 +145,58 @@ public class Player implements Sprite, MovableSprite {
     }
 
 
-    @Override
-    public void draw(Graphics2D g2) {
-        drawPlayerCharacter(g2);
-    }
-
-    private BufferedImage prevImage = null;
-
     /**
      * @param g2
-     * Draws the player character, switches between images creating animation
-     *      and indicating which direction player is moving.
+     * Method used to draw player on view.
      */
-    private void drawPlayerCharacter(Graphics2D g2) {
+    @Override
+    public void draw(Graphics2D g2) {
+        drawPlayerSprite(g2);
+    }
+
+    private BufferedImage prevImage = down1;
+
+    /**
+     * @param g2 Draws the player character, switches between images creating animation
+     *           and indicating which direction player is moving.
+     */
+    private void drawPlayerSprite(Graphics2D g2) {
         BufferedImage image = null;
-        switch (direction){
+        switch (direction) {
             case UP -> {
-                if (imageChooser == 1){
+                if (imageChooser == 1) {
                     image = up1;
-                }else if(imageChooser == 2){
+                } else if (imageChooser == 2) {
                     image = up2;
                 }
                 prevImage = image;
             }
             case LEFT -> {
-                if (imageChooser == 1){
+                if (imageChooser == 1) {
                     image = left1;
 
-                }else if(imageChooser == 2){
+                } else if (imageChooser == 2) {
                     image = left2;
                 }
                 prevImage = image;
             }
             case RIGHT -> {
-                if (imageChooser == 1){
+                if (imageChooser == 1) {
                     image = right1;
-                }else if(imageChooser == 2){
+                } else if (imageChooser == 2) {
                     image = right2;
                 }
                 prevImage = image;
             }
-            case DOWN ->{
-                if (imageChooser == 1){
+            case DOWN -> {
+                if (imageChooser == 1) {
                     image = down1;
-                }else if (imageChooser == 2){
+                } else if (imageChooser == 2) {
                     image = down2;
                 }
                 prevImage = image;
             }
-            case NOT_MOVING -> {
-                if(image == null){ // Starting image.
-                    image = down1;
-                } else {
-                    image = prevImage;
-                }
-            }
+            case NOT_MOVING -> image = prevImage;
         }
 
         g2.drawImage(image, (int)pos.x, (int)pos.y, size, size, null);
