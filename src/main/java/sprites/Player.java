@@ -198,8 +198,11 @@ public class Player implements Sprite, MovableSprite {
             }
             case NOT_MOVING -> image = prevImage;
         }
-
-        g2.drawImage(image, (int)pos.x, (int)pos.y, size, size, null);
+        if(prevImage == null){
+            g2.drawImage(down1, (int)pos.x, (int)pos.y, size, size, null);
+        }else {
+            g2.drawImage(image, (int)pos.x, (int)pos.y, size, size, null);
+        }
     }
 
     /**
