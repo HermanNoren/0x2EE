@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
+
 
 /**
  * The player, more implementation to come.
@@ -40,14 +40,23 @@ public class Player extends Entity implements Sprite, MovableSprite{
 
     }
 
+    /**
+     * @return score acquired during game
+     */
     public int getScore(){
         return score;
     }
 
+    /**
+     * @return player's health
+     */
     public int getHealth(){
         return health;
     }
 
+    /**
+     * @return currency acquired during game
+     */
     public int getMoney(){
         return money;
     }
