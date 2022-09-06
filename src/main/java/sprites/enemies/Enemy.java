@@ -1,6 +1,5 @@
 package sprites.enemies;
 
-import helperclasses.Vector2;
 import sprites.Entity;
 
 public class Enemy extends Entity {
