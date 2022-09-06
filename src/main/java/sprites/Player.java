@@ -89,7 +89,7 @@ public class Player extends Entity implements Sprite, MovableSprite{
 
     /**
      * @param g2
-     * Draws the character on screen, updates image according to position
+     * Updates image according to position and draws the image.
      *
      */
     @Override
