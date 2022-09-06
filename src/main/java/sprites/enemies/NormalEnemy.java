@@ -6,4 +6,6 @@ public class NormalEnemy implements EnemyType{
     public void update() {
         //normal walking behavior
     }
+
+
 }

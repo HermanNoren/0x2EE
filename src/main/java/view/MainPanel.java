@@ -3,7 +3,6 @@ package view;
 import controllers.KeyboardController;
 import main.Game;
 import sprites.Player;
-import sprites.Sprite;
 import view.panelstates.PanelState;
 
 import javax.swing.JPanel;
@@ -28,7 +27,7 @@ public class MainPanel extends JPanel implements Observer{
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        state.Draw(g2);
+        state.draw(g2);
 
     }
 
