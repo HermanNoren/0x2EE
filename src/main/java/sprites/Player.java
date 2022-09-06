@@ -8,14 +8,11 @@ import java.awt.*;
 
 public class Player extends Entity implements Sprite {
 
-    private int size = config.SPRITE_SIZE * 3;
-    private Rect rect;
     private int score;
     private int money;
 
     public Player(int x, int y, int health) {
         super(x, y, health);
-        rect = new Rect(x, y, size, size);
         score = 0;
         money = 0;
     }
@@ -32,35 +29,4 @@ public class Player extends Entity implements Sprite {
         return money;
     }
 
-    @Override
-    public int getWidth() {
-        return getRect().getWidth();
-    }
-
-    @Override
-    public int getHeight() {
-        return getRect().getHeight();
-    }
-
-    @Override
-    public Vector2 getPos() {
-        return new Vector2(pos);
-    }
-
-    @Override
-    public Rect getRect() {
-        return new Rect(rect);
-    }
-
-    @Override
-    public void update() {
-        pos.x += vel.x;
-        pos.y += vel.y;
-    }
-
-    @Override
-    public void draw(Graphics g) {
-        g.setColor(Color.BLUE);
-        g.fillRect((int) pos.x, (int) pos.y, size, size);
-    }
 }

@@ -7,8 +7,10 @@ public class Enemy extends Entity {
 
     private EnemyType enemyType;
 
-    public Enemy(int x, int y, int health, EnemyType enemyType){
-        super(x, y, health);
+    public Enemy(int position_x, int position_y, int health, EnemyType enemyType){
+        super(position_x, position_y, health);
         this.enemyType = enemyType;
     }
+
+
 }
