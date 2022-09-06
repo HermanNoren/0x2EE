@@ -23,9 +23,8 @@ public class InGamePanel implements PanelState{
     }
 
     @Override
-    public void Draw(Graphics2D g2) {
+    public void draw(Graphics2D g2) {
         for (Sprite sprite : game.getSprites()) {
-            //g.fillRect((int) sprite.getPos().x, (int) sprite.getPos().y, sprite.getWidth(), sprite.getHeight());
             sprite.draw(g2);
         }
     }

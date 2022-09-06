@@ -6,19 +6,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyboardController implements KeyListener {
-
-    Direction direction;
     private Game game;
 
     public KeyboardController(Game game) {
-        System.out.println("Activated Controller");
         this.game = game;
     }
 
-
     @Override
     public void keyTyped(KeyEvent e) {
-
     }
 
     @Override
@@ -58,18 +53,34 @@ public class KeyboardController implements KeyListener {
         }
     }
 
-
-
     @Override
     public void keyReleased(KeyEvent e) {
         switch(e.getKeyCode()) {
             case KeyEvent.VK_W:
                 try {
-                    game.getPlayer().move(Direction.NEUTRAL);
+                    game.getPlayer().move(Direction.NOT_MOVING);
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
-                break;
+            case KeyEvent.VK_A:
+                try {
+                    game.getPlayer().move(Direction.NOT_MOVING);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            case KeyEvent.VK_S:
+                try {
+                    game.getPlayer().move(Direction.NOT_MOVING);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            case KeyEvent.VK_D:
+                try {
+                    game.getPlayer().move(Direction.NOT_MOVING);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+
         }
     }
 }

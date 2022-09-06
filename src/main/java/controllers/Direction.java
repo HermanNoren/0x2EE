@@ -1,7 +1,7 @@
 package controllers;
 
 public enum Direction {
-    NEUTRAL,
+    NOT_MOVING,
     UP,
     LEFT,
     DOWN,
