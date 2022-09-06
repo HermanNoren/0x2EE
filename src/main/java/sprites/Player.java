@@ -1,6 +1,8 @@
 package sprites;
 
-
+/**
+ * The player, more implementation to come.
+ */
 public class Player extends Entity implements Sprite {
 
     private int score;
