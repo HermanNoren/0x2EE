@@ -1,7 +1,9 @@
 package sprites;
 
+import armor.Armor;
 import controllers.Direction;
 import org.imgscalr.Scalr;
+import weapons.Pistol;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
