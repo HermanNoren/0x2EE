@@ -24,6 +24,12 @@ public class Player extends Entity implements Sprite, MovableSprite{
         score = 0;
         money = 0;
     }
+
+    @Override
+    public void attack() {
+
+    }
+
     BufferedImage testImage;
 
     private void rescaleImages() {

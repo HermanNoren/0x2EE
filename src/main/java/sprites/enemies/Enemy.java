@@ -14,6 +14,11 @@ public class Enemy extends Entity {
     }
 
     @Override
+    public void attack() {
+
+    }
+
+    @Override
     public void draw(Graphics2D g2) {
 
     }

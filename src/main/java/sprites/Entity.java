@@ -114,6 +114,7 @@ public abstract class Entity implements Sprite {
             imageSwitcher = 2;
         }
     }
+    public abstract void attack();
 
     public int getSize() {
         return size;
