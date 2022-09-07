@@ -67,6 +67,7 @@ public class Player extends Entity implements Sprite, MovableSprite{
         return money;
     }
 
+
     /**
      * @param direction Used to move movable sprites.
      *                  Moves the player on the screen.
