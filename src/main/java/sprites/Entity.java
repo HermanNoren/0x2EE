@@ -1,6 +1,6 @@
 package sprites;
 
-import config.config;
+import config.Config;
 import controllers.Direction;
 import helperclasses.Rect;
 import helperclasses.Vector2;
@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * The Entity class contains logic to represent the sprite,
@@ -28,7 +27,7 @@ public abstract class Entity implements Sprite {
     int health;
     private BufferedImage image;
     Direction direction;
-    private int size = config.SPRITE_SIZE * 3;
+    private int size = Config.SPRITE_SIZE * 3;
     private Rect rect;
 
 

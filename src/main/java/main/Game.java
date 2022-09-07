@@ -3,6 +3,7 @@ package main;
 import gamestates.GameState;
 import gamestates.GameStateWithPlayer;
 import gamestates.InGameState;
+import gamestates.MenuTest;
 import sprites.Player;
 import sprites.Sprite;
 import view.Observer;
@@ -21,10 +22,22 @@ public class Game implements Runnable {
     private ArrayList<Observer> observers;
     private GameState state;
 
+    private boolean wPressed;
+    private boolean aPressed;
+    private boolean sPressed;
+    private boolean dPressed;
+
+    private boolean enterPressed;
+
     public Game() throws IOException {
         observers = new ArrayList<>();
-        state = new InGameState();
+        state = new MenuTest(this);
         startGame();
+        wPressed = false;
+        aPressed = false;
+        sPressed = false;
+        dPressed = false;
+        enterPressed = false;
     }
 
     /**
@@ -38,6 +51,46 @@ public class Game implements Runnable {
         else {
             throw new Exception("Current GameState has no player");
         }
+    }
+
+    public void setWPressed(boolean value) {
+        wPressed = value;
+    }
+
+    public void setAPressed(boolean value) {
+        aPressed = value;
+    }
+
+    public void setSPressed(boolean value) {
+        sPressed = value;
+    }
+
+    public void setDPressed(boolean value) {
+        dPressed = value;
+    }
+
+    public void setEnterPressed(boolean value) {
+        enterPressed = value;
+    }
+
+    public boolean getWPressed() {
+        return wPressed;
+    }
+
+    public boolean getAPressed() {
+        return aPressed;
+    }
+
+    public boolean getSPressed() {
+        return sPressed;
+    }
+
+    public boolean getDPressed() {
+        return dPressed;
+    }
+
+    public boolean getEnterPressed() {
+        return enterPressed;
     }
 
     /**

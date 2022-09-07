@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 /**
  * The player, more implementation to come.
  */
@@ -16,7 +15,7 @@ public class Player extends Entity implements Sprite, MovableSprite{
     private int money;
     private Direction direction;
     private BufferedImage up1, up2, left1, left2, down1, down2, right1, right2;
-    public Player(int x, int y, int health) throws IOException {
+    public Player(int x, int y, int health) {
         super(x, y, health);
         this.direction = Direction.NOT_MOVING;
         setPlayerImages();
@@ -28,15 +27,20 @@ public class Player extends Entity implements Sprite, MovableSprite{
      * @throws IOException
      * Sets the player's images.
      */
-    private void setPlayerImages() throws IOException {
-        up1 = setImage("imgs/player_up_1.png");
-        up2 = setImage("imgs/player_up_2.png");
-        left1 = setImage("imgs/player_left_1.png");
-        left2 = setImage("imgs/player_left_2.png");
-        down1 = setImage("imgs/player_down_1.png");
-        down2 = setImage("imgs/player_down_2.png");
-        right1 = setImage("imgs/player_right_1.png");
-        right2 = setImage("imgs/player_right_2.png");
+    private void setPlayerImages() {
+        try {
+            up1 = setImage("imgs/player_up_1.png");
+            up2 = setImage("imgs/player_up_2.png");
+            left1 = setImage("imgs/player_left_1.png");
+            left2 = setImage("imgs/player_left_2.png");
+            down1 = setImage("imgs/player_down_1.png");
+            down2 = setImage("imgs/player_down_2.png");
+            right1 = setImage("imgs/player_right_1.png");
+            right2 = setImage("imgs/player_right_2.png");
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
     }
 
@@ -142,7 +146,7 @@ public class Player extends Entity implements Sprite, MovableSprite{
         if(prevImg == null){
             g2.drawImage(up1, (int) getPos().x, (int) getPos().y, null); // Sets default image
 
-        }else {
+        } else {
             g2.drawImage(image, (int)getPos().x,(int) getPos().y, null);
         }
     }

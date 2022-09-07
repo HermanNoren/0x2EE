@@ -18,7 +18,7 @@ public class InGameState implements GameStateWithPlayer{
     private ArrayList<Sprite> sprites;
     private GameMap map;
 
-    public InGameState() throws IOException {
+    public InGameState() {
         player = new Player(0, 0, 100);
         sprites = new ArrayList<>();
         map = new GameMap();

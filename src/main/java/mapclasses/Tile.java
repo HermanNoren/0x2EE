@@ -1,6 +1,6 @@
 package mapclasses;
 
-import config.config;
+import config.Config;
 import helperclasses.Rect;
 import helperclasses.Vector2;
 import sprites.Sprite;
@@ -8,7 +8,7 @@ import sprites.Sprite;
 import java.awt.*;
 
 public class Tile implements Sprite {
-    private int size = config.SPRITE_SIZE;
+    private int size = Config.SPRITE_SIZE;
     private Vector2 pos;
     private Rect rect;
 

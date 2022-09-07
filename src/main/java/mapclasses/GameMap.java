@@ -1,6 +1,6 @@
 package mapclasses;
 
-import config.config;
+import config.Config;
 import sprites.Sprite;
 
 import java.util.ArrayList;
@@ -50,10 +50,10 @@ public class GameMap {
                     case 'W':
                         tiles.add(new Tile(x, y));
                 }
-                x += config.SPRITE_SIZE;
+                x += Config.SPRITE_SIZE;
             }
             x = 0;
-            y += config.SPRITE_SIZE;
+            y += Config.SPRITE_SIZE;
         }
         return tiles;
     }
