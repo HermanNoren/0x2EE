@@ -6,6 +6,8 @@ import java.awt.*;
 
 public class Enemy extends Entity {
 
+    int damage = 3;
+
     private EnemyType enemyType;
 
     public Enemy(int position_x, int position_y, int health, EnemyType enemyType){
@@ -13,8 +15,14 @@ public class Enemy extends Entity {
         this.enemyType = enemyType;
     }
 
+
     @Override
-    public void attack() {
+    public int damageDelt() {
+        return 0;
+    }
+
+    @Override
+    public void damageTaken(int damage) {
 
     }
 

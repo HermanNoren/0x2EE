@@ -114,11 +114,19 @@ public abstract class Entity implements Sprite {
             imageSwitcher = 2;
         }
     }
-    public abstract void attack();
+    public abstract int damageDelt();
+
+    /**
+     * The same argument can be said regarding the
+     * damage taken.
+     *
+     */
+    public abstract void damageTaken(int damage);
 
     public int getSize() {
         return size;
     }
+
 
     @Override
     public abstract void draw(Graphics2D g2);
