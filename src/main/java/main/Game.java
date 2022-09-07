@@ -129,7 +129,7 @@ public class Game implements Runnable {
             }
 
             if (deltaDrawTime >= 1) {
-                notifyObservers();
+                notifyObservers(); //DRAW
                 frames++;
                 deltaDrawTime--;
             }

@@ -28,7 +28,6 @@ public class MainPanel extends JPanel implements Observer{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         state.draw(g2);
-
     }
 
     @Override

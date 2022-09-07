@@ -10,11 +10,7 @@ import java.util.Map;
  * MovableSprite sprites
  */
 public interface MovableSprite {
-    /**
-     * @param direction
-     * Used to move movable sprites.
-     */
-    void move(Direction direction);
-    void setImages(ArrayList<String> imagePath);
+
+
 
 }

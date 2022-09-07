@@ -1,10 +1,12 @@
 package sprites;
 
 import controllers.Direction;
+import org.imgscalr.Scalr;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.util.ArrayList;
 
 
@@ -14,14 +16,18 @@ import java.util.ArrayList;
 public class Player extends Entity implements Sprite, MovableSprite{
     private int score;
     private int money;
-    private Direction direction;
     private BufferedImage up1, up2, left1, left2, down1, down2, right1, right2;
     public Player(int x, int y, int health) throws IOException {
         super(x, y, health);
-        this.direction = Direction.NOT_MOVING;
         setPlayerImages();
+        rescaleImages();
         score = 0;
         money = 0;
+    }
+    BufferedImage testImage;
+
+    private void rescaleImages() {
+
     }
 
     /**
@@ -65,34 +71,9 @@ public class Player extends Entity implements Sprite, MovableSprite{
      * @param direction Used to move movable sprites.
      *                  Moves the player on the screen.
      */
-    @Override
-    public void move(Direction direction) {
-        switch (direction){
-            case UP ->{
-                this.direction = Direction.UP;
-                updatePos(this.direction);
-            }
-            case LEFT ->{
-                this.direction = Direction.LEFT;
-                updatePos(this.direction);
-            }
 
-            case DOWN -> {
-                this.direction = Direction.DOWN;
-                updatePos(this.direction);
-            }
-            case RIGHT -> {
-                this.direction = Direction.RIGHT;
-                updatePos(this.direction);
-            }
-            case NOT_MOVING -> this.direction = Direction.NOT_MOVING;
-        }
-    }
 
-    @Override
-    public void setImages(ArrayList<String> imagePath) {
 
-    }
 
     private BufferedImage prevImg;
 
@@ -104,7 +85,7 @@ public class Player extends Entity implements Sprite, MovableSprite{
     @Override
     public void draw(Graphics2D g2){
         BufferedImage image = null;
-        switch (this.direction){
+        switch (getDirection()){
             case UP -> {
                 if(imageSwitcher == 1){
                     image = up1;
@@ -140,10 +121,10 @@ public class Player extends Entity implements Sprite, MovableSprite{
         }
 
         if(prevImg == null){
-            g2.drawImage(up1, (int) getPos().x, (int) getPos().y, null); // Sets default image
-
+            g2.drawImage(testImage, (int) getPos().x, (int) getPos().y, null); // Sets default image
         }else {
             g2.drawImage(image, (int)getPos().x,(int) getPos().y, null);
+
         }
     }
 }

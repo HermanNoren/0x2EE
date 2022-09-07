@@ -19,7 +19,6 @@ public class InGamePanel implements PanelState{
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     @Override
@@ -28,4 +27,5 @@ public class InGamePanel implements PanelState{
             sprite.draw(g2);
         }
     }
+
 }

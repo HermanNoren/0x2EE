@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * The Entity class contains logic to represent the sprite,
@@ -27,7 +26,7 @@ public abstract class Entity implements Sprite {
     Vector2 acc;
     int health;
     private BufferedImage image;
-    Direction direction;
+    private Direction direction;
     private int size = config.SPRITE_SIZE * 3;
     private Rect rect;
 
@@ -42,26 +41,41 @@ public abstract class Entity implements Sprite {
     public Entity(int x, int y, int health){
         this.direction = Direction.NOT_MOVING; // Default value
         this.pos = new Vector2(x, y);
-        this.vel = new Vector2(1, 1);
+        this.vel = new Vector2(0.5, 0.5);
         this.acc = new Vector2(0, 0);
         this.rect = new Rect(x, y, size, size);
         this.health = health;
     }
 
-    public BufferedImage setImage(String path) throws IOException {
+    public BufferedImage setImage(String path){
         BufferedImage image;
-        image = ImageIO.read(new File(path));
+        try {
+            image = ImageIO.read(new File(path));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return image;
     }
-    public void updatePos(Direction direction){
-        System.out.println(pos.y);
-        switch (direction){
-            case UP -> pos.y -= vel.y;
-            case LEFT -> pos.x -= vel.x;
-            case DOWN -> pos.y += vel.y;
-            case RIGHT -> pos.x += vel.x;
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
+
+    public void updatePos(){
+        if(!(direction == Direction.NOT_MOVING)){
+            switch (direction){
+                case UP -> pos.y -= vel.y;
+                case LEFT -> pos.x -= vel.x;
+                case DOWN -> pos.y += vel.y;
+                case RIGHT -> pos.x += vel.x;
+            }
         }
     }
+
     @Override
     public int getWidth() {
         return getRect().getWidth();
@@ -87,14 +101,17 @@ public abstract class Entity implements Sprite {
      */
     @Override
     public void update() {
+        updatePos();
+        movementAnimation();
+    }
+
+    private void movementAnimation() {
         animationCounter++;
         if(animationCounter > 100){
             imageSwitcher = 1;
             animationCounter = 0;
-            System.out.println(imageSwitcher);
         }else if(animationCounter == 50){
             imageSwitcher = 2;
-            System.out.println(imageSwitcher);
         }
     }
 
