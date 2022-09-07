@@ -1,24 +1,28 @@
 package weapons;
 
-public class Pistol implements IWeapon {
+import sprites.Player;
 
-    private int damage;
-    private int ammo;
-    private boolean reloading;
+public class Pistol {
 
+    public int damage;
+    public int ammo;
+    public boolean reloading;
+
+    /**
+     * The main weapon of the
+     */
     public Pistol(){
         damage = 40;
         ammo = 7;
         reloading = false;
     }
 
-    @Override
-    public void shoot(){
+
+    public void shoot(Player player){
         if (ammo != 0) ammo--;
         else reload();
     }
 
-    @Override
     public void reload(){
         reloading = true;
         // TODO: Add some kind of delay (might need threading?)
@@ -30,7 +34,8 @@ public class Pistol implements IWeapon {
      *
      * @return true if weapon is reloading
      */
-    public boolean isReloading(){return reloading;}
-
+    public boolean isReloading(){
+        return reloading;
+    }
 
 }

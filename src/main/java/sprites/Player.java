@@ -1,9 +1,9 @@
 package sprites;
 
-import Armour.Armour;
+import armor.Armor;
 import controllers.Direction;
 import org.imgscalr.Scalr;
-import weapons.Weapon;
+import weapons.Pistol;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -17,12 +17,13 @@ import java.util.List;
  * The player, more implementation to come.
  */
 public class Player extends Entity implements Sprite, MovableSprite{
-    //Properties
-    private Weapon weapon;
-    private Armour armour;
-
     private int score;
     private int money;
+    protected Pistol pistol;
+
+    protected Armor armor;
+
+
     private BufferedImage up1, up2, left1, left2, down1, down2, right1, right2;
     private List<BufferedImage> images;
 
@@ -36,10 +37,29 @@ public class Player extends Entity implements Sprite, MovableSprite{
         super(x, y, health);
         images = new ArrayList<>();
         setPlayerImages();
+        rescaleImages();
         score = 0;
         money = 0;
     }
+
+    /**
+     * add the weapon object into the attack.
+     */
+    @Override
+    public int damageDelt() {
+        return this.pistol.damage;
+    }
+
+    @Override
+    public void damageTaken(int damage) {
+
+    }
+
     BufferedImage testImage;
+
+    private void rescaleImages() {
+
+    }
 
     /**
      * Sets the player's images, and rescales according to entity size.
@@ -102,7 +122,6 @@ public class Player extends Entity implements Sprite, MovableSprite{
      */
     @Override
     public void draw(Graphics2D g2){
-        drawRect(g2);
         BufferedImage image = null;
         switch (getDirection()){
             case UP -> {

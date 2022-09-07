@@ -13,9 +13,9 @@ import java.io.IOException;
 
 /**
  * The Entity class contains logic to represent the sprite,
- * for example by containing information regarding its position and health
- * the program can determine if an entity is in range to take damage thus
- * if reduces its health.
+ * for example by containing information regarding its position
+ * and health the program can determine if an entity is in range
+ * to take damage thus if reduces its health.
  */
 
 public abstract class Entity implements Sprite {
