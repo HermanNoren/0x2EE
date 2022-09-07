@@ -13,9 +13,9 @@ import java.io.IOException;
 
 /**
  * The Entity class contains logic to represent the sprite,
- * for example by containing information regarding its position and health
- * the program can determine if an entity is in range to take damage thus
- * if reduces its health.
+ * for example by containing information regarding its position
+ * and health the program can determine if an entity is in range
+ * to take damage thus if reduces its health.
  */
 
 public abstract class Entity implements Sprite {
@@ -97,7 +97,7 @@ public abstract class Entity implements Sprite {
     }
 
     /**
-     * Updates the entites' location by adding its coordinate with its velocity
+     * Updates the entities' location by adding its coordinate with its velocity
      */
     @Override
     public void update() {
@@ -114,6 +114,13 @@ public abstract class Entity implements Sprite {
             imageSwitcher = 2;
         }
     }
+
+    /**
+     * Every entity should have the ability
+     * to attack. The implementation can be different
+     * as in some enemies are melee while the player
+     * is ranged.
+     */
     public abstract void attack();
 
     public int getSize() {

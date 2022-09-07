@@ -1,13 +1,8 @@
 package sprites;
 
-import controllers.Direction;
-import org.imgscalr.Scalr;
-
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.nio.Buffer;
-import java.util.ArrayList;
 
 
 /**
@@ -16,6 +11,8 @@ import java.util.ArrayList;
 public class Player extends Entity implements Sprite, MovableSprite{
     private int score;
     private int money;
+
+
     private BufferedImage up1, up2, left1, left2, down1, down2, right1, right2;
     public Player(int x, int y, int health) throws IOException {
         super(x, y, health);
@@ -25,6 +22,9 @@ public class Player extends Entity implements Sprite, MovableSprite{
         money = 0;
     }
 
+    /**
+     * add the weapon object into the attack.
+     */
     @Override
     public void attack() {
 

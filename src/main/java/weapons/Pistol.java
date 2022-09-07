@@ -1,24 +1,30 @@
 package weapons;
 
-public class Pistol implements Weapon{
+import sprites.Player;
+
+public class Pistol {
 
     private int damage;
     private int ammo;
     private boolean reloading;
 
+    /**
+     * The main weapon of the
+     */
     public Pistol(){
         damage = 40;
         ammo = 7;
         reloading = false;
     }
 
-    @Override
-    public void shoot(){
+
+
+    public void shoot(Player player){
         if (ammo != 0) ammo--;
+
         else reload();
     }
 
-    @Override
     public void reload(){
         reloading = true;
         // TODO: Add some kind of delay (might need threading?)
