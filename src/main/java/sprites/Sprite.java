@@ -3,8 +3,6 @@ package sprites;
 import helperclasses.Rect;
 import helperclasses.Vector2;
 
-import java.awt.*;
-
 public interface Sprite {
 
     /**
@@ -33,9 +31,4 @@ public interface Sprite {
      * Updates the sprite
      */
     void update();
-
-    /**
-     * Draws the sprite
-     */
-    void draw(Graphics2D g2);
 }

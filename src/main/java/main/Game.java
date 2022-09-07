@@ -31,13 +31,19 @@ public class Game implements Runnable {
      * Returns the player if current GameState has a player, else throws an exception
      * @return Player
      */
-    public Player getPlayer() throws Exception {
-        if (state instanceof GameStateWithPlayer) {
-            return ((GameStateWithPlayer) state).getPlayer();
+    public Player getPlayer() {
+        try {
+            if (state instanceof GameStateWithPlayer) {
+                return ((GameStateWithPlayer) state).getPlayer();
+            }
+            else {
+                throw new Exception("Current GameState has no player");
+            }
         }
-        else {
-            throw new Exception("Current GameState has no player");
+        catch (Exception e) {
+            e.printStackTrace();
         }
+        return null;
     }
 
     /**

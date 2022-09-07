@@ -1,6 +1,6 @@
 package sprites;
 
-import config.config;
+import config.Config;
 import controllers.Direction;
 import helperclasses.Rect;
 import helperclasses.Vector2;
@@ -20,14 +20,12 @@ import java.io.IOException;
 
 public abstract class Entity implements Sprite {
     int animationCounter;
-    int imageSwitcher;
     Vector2 pos;
     Vector2 vel;
     Vector2 acc;
     int health;
-    private BufferedImage image;
     private Direction direction;
-    private int size = config.SPRITE_SIZE * 3;
+    private int size = Config.SPRITE_SIZE * 3;
     private Rect rect;
 
 
@@ -45,16 +43,6 @@ public abstract class Entity implements Sprite {
         this.acc = new Vector2(0, 0);
         this.rect = new Rect(x, y, size, size);
         this.health = health;
-    }
-
-    public BufferedImage setImage(String path){
-        BufferedImage image;
-        try {
-            image = ImageIO.read(new File(path));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return image;
     }
 
     public void setDirection(Direction direction) {
@@ -102,17 +90,6 @@ public abstract class Entity implements Sprite {
     @Override
     public void update() {
         updatePos();
-        movementAnimation();
-    }
-
-    private void movementAnimation() {
-        animationCounter++;
-        if(animationCounter > 100){
-            imageSwitcher = 1;
-            animationCounter = 0;
-        }else if(animationCounter == 50){
-            imageSwitcher = 2;
-        }
     }
     public abstract int damageDelt();
 
@@ -126,9 +103,4 @@ public abstract class Entity implements Sprite {
     public int getSize() {
         return size;
     }
-
-
-    @Override
-    public abstract void draw(Graphics2D g2);
-
 }
