@@ -16,7 +16,7 @@ public class PlayerDrawer implements SpriteDrawer {
 
     private BufferedImage prevImg;
 
-    private BufferedImage up1, up2, left1, left2, down1, down2, right1, right2;
+    private BufferedImage up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
 
     public PlayerDrawer(Entity player) {
         this.player = player;
@@ -25,47 +25,55 @@ public class PlayerDrawer implements SpriteDrawer {
 
     public void draw(Graphics2D g) {
         movementAnimation();
-        BufferedImage image = null;
+        chooseActiveImage();
+        if(prevImg == null){
+            g.drawImage(up1, (int) player.getPos().x, (int) player.getPos().y, null); // Sets default image
+        }
+        else {
+            g.drawImage(activeImage, (int) player.getPos().x,(int) player.getPos().y, null);
+
+        }
+    }
+
+    private void chooseActiveImage() {
         switch (player.getDirection()){
             case UP -> {
                 if(imageSwitcher == 1){
-                    image = up1;
-                }else if(imageSwitcher == 2){
-                    image = up2;
-                }prevImg = image;
+                    activeImage = up1;
+                }
+                else if(imageSwitcher == 2){
+                    activeImage = up2;
+                }
+                prevImg = activeImage;
             }
             case LEFT -> {
                 if(imageSwitcher == 1){
-                    image = left1;
-                }else if(imageSwitcher == 2){
-                    image = left2;
+                    activeImage = left1;
                 }
-                prevImg = image;
+                else if(imageSwitcher == 2){
+                    activeImage = left2;
+                }
+                prevImg = activeImage;
             }
             case DOWN -> {
                 if(imageSwitcher == 1){
-                    image = down1;
-                }else if(imageSwitcher == 2){
-                    image = down2;
+                    activeImage = down1;
                 }
-                prevImg = image;
+                else if(imageSwitcher == 2){
+                    activeImage = down2;
+                }
+                prevImg = activeImage;
             }
             case RIGHT -> {
                 if(imageSwitcher == 1){
-                    image = right1;
-                }else if(imageSwitcher == 2){
-                    image = right2;
+                    activeImage = right1;
                 }
-                prevImg = image;
+                else if(imageSwitcher == 2){
+                    activeImage = right2;
+                }
+                prevImg = activeImage;
             }
-            case NOT_MOVING -> image = prevImg;
-        }
-
-        if(prevImg == null){
-            g.drawImage(up1, (int) player.getPos().x, (int) player.getPos().y, null); // Sets default image
-        }else {
-            g.drawImage(image, (int) player.getPos().x,(int) player.getPos().y, null);
-
+            case NOT_MOVING -> activeImage = prevImg;
         }
     }
 

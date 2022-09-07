@@ -85,7 +85,7 @@ public abstract class Entity implements Sprite {
     }
 
     /**
-     * Updates the entites' location by adding its coordinate with its velocity
+     * Updates the entites location by adding its coordinate with its velocity
      */
     @Override
     public void update() {
