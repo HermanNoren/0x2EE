@@ -1,11 +1,13 @@
 package sprites;
 
-import armor.Armor;
-import weapons.Pistol;
+import controllers.Direction;
+import org.imgscalr.Scalr;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.Buffer;
+import java.util.ArrayList;
 
 
 /**
