@@ -53,8 +53,6 @@ public class Player extends Entity implements Sprite, MovableSprite{
 
     }
 
-    BufferedImage testImage;
-
     private void rescaleImages() {
 
     }
@@ -103,24 +101,16 @@ public class Player extends Entity implements Sprite, MovableSprite{
         return money;
     }
 
-    /**
-     * @param direction Used to move movable sprites.
-     *                  Moves the player on the screen.
-     */
-
-
-
-
     private BufferedImage prevImg;
 
     /**
      * @param g2
      * Updates image according to position and draws the image.
-     *
      */
     @Override
     public void draw(Graphics2D g2){
         BufferedImage image = null;
+        drawRect(g2);
         switch (getDirection()){
             case UP -> {
                 if(imageSwitcher == 1){
@@ -157,9 +147,9 @@ public class Player extends Entity implements Sprite, MovableSprite{
         }
 
         if(prevImg == null){
-            g2.drawImage(up1, (int) getPos().x, (int) getPos().y, null); // Sets default image
+            g2.drawImage(up1, (int) getPos().x, (int) getPos().y, getSize(), getSize(), null); // Sets default image
         }else {
-            g2.drawImage(image, (int)getPos().x,(int) getPos().y, null);
+            g2.drawImage(image, (int)getPos().x,(int) getPos().y, getSize(), getSize(), null);
 
         }
     }

@@ -16,12 +16,12 @@ public class Enemy extends Entity {
     }
 
 
-    @Override
+
     public int damageDelt() {
         return 0;
     }
 
-    @Override
+
     public void damageTaken(int damage) {
 
     }
