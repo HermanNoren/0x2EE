@@ -47,6 +47,11 @@ public abstract class Entity implements Sprite {
         this.health = health;
     }
 
+    /**
+     * @param path, path to image, should be .png and 16px*16px
+     * @return BufferedImage.
+     * Method used to set BufferedImages for entities.
+     */
     public BufferedImage setImage(String path){
         BufferedImage image;
         try {
@@ -57,14 +62,25 @@ public abstract class Entity implements Sprite {
         return image;
     }
 
+    /**
+     * @param direction, updated direction.
+     * Used to update direction of entity.
+     */
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
 
+    /**
+     * @return current direction.
+     * Used to get the current direction of entity.
+     */
     public Direction getDirection() {
         return direction;
     }
 
+    /**
+     * Updates current position of entity on game screen.
+     */
     public void updatePos(){
         if(!(direction == Direction.NOT_MOVING)){
             switch (direction){
@@ -97,7 +113,7 @@ public abstract class Entity implements Sprite {
     }
 
     /**
-     * Updates the entites' location by adding its coordinate with its velocity
+     * Method used to update the entites' position and state.
      */
     @Override
     public void update() {
@@ -105,6 +121,9 @@ public abstract class Entity implements Sprite {
         movementAnimation();
     }
 
+    /**
+     * Loop which updates which images to be shown. Meant to create animation.
+     */
     private void movementAnimation() {
         animationCounter++;
         if(animationCounter > 100){
@@ -115,11 +134,19 @@ public abstract class Entity implements Sprite {
         }
     }
 
+    /**
+     * @return size of entity
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * @param g2
+     * Abstract method used to draw the different entities.
+     */
     @Override
     public abstract void draw(Graphics2D g2);
+
 
 }

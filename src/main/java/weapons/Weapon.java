@@ -1,6 +1,4 @@
 package weapons;
 
-public interface Weapon {
-    void shoot();
-    void reload();
+public class Weapon {
 }

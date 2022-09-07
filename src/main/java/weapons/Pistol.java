@@ -1,6 +1,6 @@
 package weapons;
 
-public class Pistol implements Weapon{
+public class Pistol implements IWeapon {
 
     private int damage;
     private int ammo;

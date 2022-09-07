@@ -1,49 +1,67 @@
 package sprites;
 
+import Armour.Armour;
 import controllers.Direction;
 import org.imgscalr.Scalr;
+import weapons.Weapon;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.nio.Buffer;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
  * The player, more implementation to come.
  */
 public class Player extends Entity implements Sprite, MovableSprite{
+    //Properties
+    private Weapon weapon;
+    private Armour armour;
+
     private int score;
     private int money;
     private BufferedImage up1, up2, left1, left2, down1, down2, right1, right2;
-    public Player(int x, int y, int health) throws IOException {
+    private List<BufferedImage> images;
+
+    /**
+     * @param x, starting x-position
+     * @param y, starting y-position
+     * @param health, starting health
+     * Player constructor, used to create an instance of player.
+     */
+    public Player(int x, int y, int health){
         super(x, y, health);
+        images = new ArrayList<>();
         setPlayerImages();
-        rescaleImages();
         score = 0;
         money = 0;
     }
     BufferedImage testImage;
 
-    private void rescaleImages() {
-
-    }
-
     /**
-     * @throws IOException
-     * Sets the player's images.
+     * Sets the player's images, and rescales according to entity size.
      */
-    private void setPlayerImages() throws IOException {
+    private void setPlayerImages(){
+//        up1 = Scalr.resize(setImage("imgs/player_up_1.png"), getSize());
+//        up2 = Scalr.resize(setImage("imgs/player_up_2.png"), getSize());
+//        left1 = Scalr.resize(setImage("imgs/player_left_1.png"), getSize());
+//        left2 = Scalr.resize(setImage("imgs/player_left_2.png"), getSize());
+//        down1 = Scalr.resize(setImage("imgs/player_down_1.png"), getSize());
+//        down2 = Scalr.resize(setImage("imgs/player_down_2.png"), getSize());
+//        right1 =Scalr.resize(setImage("imgs/player_right_1.png"), getSize());
+//        right2 =Scalr.resize(setImage("imgs/player_right_2.png"), getSize());
+
         up1 = setImage("imgs/player_up_1.png");
         up2 = setImage("imgs/player_up_2.png");
         left1 = setImage("imgs/player_left_1.png");
         left2 = setImage("imgs/player_left_2.png");
         down1 = setImage("imgs/player_down_1.png");
         down2 = setImage("imgs/player_down_2.png");
-        right1 = setImage("imgs/player_right_1.png");
-        right2 = setImage("imgs/player_right_2.png");
-
+        right1 =setImage("imgs/player_right_1.png");
+        right2 =setImage("imgs/player_right_2.png");
     }
 
     /**
@@ -84,6 +102,7 @@ public class Player extends Entity implements Sprite, MovableSprite{
      */
     @Override
     public void draw(Graphics2D g2){
+        drawRect(g2);
         BufferedImage image = null;
         switch (getDirection()){
             case UP -> {
@@ -121,10 +140,13 @@ public class Player extends Entity implements Sprite, MovableSprite{
         }
 
         if(prevImg == null){
-            g2.drawImage(testImage, (int) getPos().x, (int) getPos().y, null); // Sets default image
+            g2.drawImage(up1, (int) getPos().x, (int) getPos().y, null); // Sets default image
         }else {
             g2.drawImage(image, (int)getPos().x,(int) getPos().y, null);
 
         }
+    }
+    public void drawRect(Graphics2D g2){
+        g2.drawRect((int)getPos().x, (int)getPos().y, getWidth(), getHeight());
     }
 }
