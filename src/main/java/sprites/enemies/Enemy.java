@@ -25,9 +25,4 @@ public class Enemy extends Entity {
     public void damageTaken(int damage) {
 
     }
-
-    @Override
-    public void draw(Graphics2D g2) {
-
-    }
 }

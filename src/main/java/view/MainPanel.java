@@ -14,8 +14,6 @@ public class MainPanel extends JPanel implements Observer{
     private PanelState state;
     private KeyboardController keyboardController;
 
-    Player player;
-
     public MainPanel(Game game, PanelState startState) {
         this.game = game;
         state = startState;

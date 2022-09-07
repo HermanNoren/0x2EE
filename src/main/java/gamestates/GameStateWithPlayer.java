@@ -1,6 +1,9 @@
 package gamestates;
 
 import sprites.Player;
+import sprites.Sprite;
+
+import java.util.ArrayList;
 
 /**
  * A GameState that implements this interface has a player
@@ -13,4 +16,5 @@ public interface GameStateWithPlayer extends GameState {
      */
     Player getPlayer();
 
+    ArrayList<Sprite> getTiles();
 }
