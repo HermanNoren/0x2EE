@@ -46,6 +46,21 @@ public class Game implements Runnable {
         return null;
     }
 
+    public ArrayList<Sprite> getTiles() {
+        try {
+            if (state instanceof GameStateWithPlayer) {
+                return ((GameStateWithPlayer) state).getTiles();
+            }
+            else {
+                throw new Exception("Current GameState has no player");
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      * Use to change the current GameState
      * @param state an instance of a class that has implemented the GameState interface

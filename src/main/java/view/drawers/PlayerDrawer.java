@@ -1,6 +1,5 @@
 package view.drawers;
 
-import controllers.Direction;
 import sprites.Entity;
 
 import javax.imageio.ImageIO;
@@ -9,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class PlayerDrawer implements Drawer{
+public class PlayerDrawer implements SpriteDrawer {
 
     int animationCounter;
     int imageSwitcher;

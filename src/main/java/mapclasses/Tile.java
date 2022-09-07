@@ -8,7 +8,7 @@ import sprites.Sprite;
 import java.awt.*;
 
 public class Tile implements Sprite {
-    private int size = Config.SPRITE_SIZE;
+    private final int size = Config.SPRITE_SIZE;
     private Vector2 pos;
     private Rect rect;
 
@@ -40,13 +40,4 @@ public class Tile implements Sprite {
     public void update() {
 
     }
-
-    /*
-    @Override
-    public void draw(Graphics2D g2) {
-        g2.setColor(Color.black);
-        g2.fillRect((int) pos.x, (int) pos.y, size, size);
-    }
-
-     */
 }

@@ -44,6 +44,11 @@ public class InGameState implements GameStateWithPlayer{
         return new ArrayList<>(sprites);
     }
 
+    @Override
+    public ArrayList<Sprite> getTiles() {
+        return new ArrayList<>(map.getTiles());
+    }
+
     /**
      * Updates all the in-game objects
      */
