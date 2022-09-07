@@ -45,12 +45,10 @@ public class Player extends Entity implements Sprite, MovableSprite{
     /**
      * add the weapon object into the attack.
      */
-    @Override
     public int damageDelt() {
         return this.pistol.damage;
     }
 
-    @Override
     public void damageTaken(int damage) {
 
     }
