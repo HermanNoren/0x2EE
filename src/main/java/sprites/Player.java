@@ -6,10 +6,6 @@ import weapons.Pistol;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.nio.Buffer;
-import java.util.ArrayList;
-
-import static java.lang.Integer.valueOf;
 
 
 /**
