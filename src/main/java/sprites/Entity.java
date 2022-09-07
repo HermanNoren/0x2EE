@@ -56,11 +56,7 @@ public abstract class Entity implements Sprite {
     public void updatePos(Direction direction){
         System.out.println(pos.y);
         switch (direction){
-            case UP -> {
-                System.out.println("up");
-                pos.y -= vel.y;
-                System.out.println(pos.y);
-            }
+            case UP -> pos.y -= vel.y;
             case LEFT -> pos.x -= vel.x;
             case DOWN -> pos.y += vel.y;
             case RIGHT -> pos.x += vel.x;
