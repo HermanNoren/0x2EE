@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class StartGameButtonAction implements ButtonAction{
 
-    Game game;
+    private Game game;
 
     public StartGameButtonAction(Game game) {
         this.game = game;
@@ -15,6 +15,6 @@ public class StartGameButtonAction implements ButtonAction{
 
     @Override
     public void performAction() {
-        game.setState(new InGameState());
+        game.setState(new InGameState(game));
     }
 }

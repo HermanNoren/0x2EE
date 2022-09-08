@@ -9,21 +9,27 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Strictly used to draw the player onto the screen
+ */
 public class PlayerDrawer implements SpriteDrawer {
 
-    int animationCounter;
-    int imageSwitcher;
-    Entity player;
+    private int animationCounter;
+    private int imageSwitcher;
+    private Entity player;
 
     private BufferedImage prevImg;
-
     private BufferedImage up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
 
     public PlayerDrawer(Entity player) {
         this.player = player;
-        setPlayerImages();
+        initPlayerImages();
     }
 
+    /**
+     * Draws the player onto the screen in the correct position
+     * @param g
+     */
     public void draw(Graphics2D g) {
         movementAnimation();
         chooseActiveImage();
@@ -36,6 +42,9 @@ public class PlayerDrawer implements SpriteDrawer {
         }
     }
 
+    /**
+     * Used to choose the correct image to use for the drawing of the player
+     */
     private void chooseActiveImage() {
         switch (player.getDirection()){
             case UP -> {
@@ -78,7 +87,10 @@ public class PlayerDrawer implements SpriteDrawer {
         }
     }
 
-    private void setPlayerImages(){
+    /**
+     * Initialized all the images used to draw the player
+     */
+    private void initPlayerImages(){
         try {
             up1 = setImage("imgs/player_up_1.png");
             up2 = setImage("imgs/player_up_2.png");
@@ -94,6 +106,11 @@ public class PlayerDrawer implements SpriteDrawer {
         }
     }
 
+    /**
+     * Fetches an image from the given path
+     * @param path path to the image
+     * @return image
+     */
     private BufferedImage setImage(String path){
         BufferedImage image;
         try {
@@ -104,6 +121,9 @@ public class PlayerDrawer implements SpriteDrawer {
         return image;
     }
 
+    /**
+     * Clock for switching image, gives an animation effect
+     */
     private void movementAnimation() {
         animationCounter++;
         if(animationCounter > 100){

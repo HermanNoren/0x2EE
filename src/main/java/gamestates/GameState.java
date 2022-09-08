@@ -8,8 +8,5 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public interface GameState {
-
-    ArrayList<Sprite> getSprites();
-
     void update();
 }

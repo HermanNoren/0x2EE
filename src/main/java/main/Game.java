@@ -1,11 +1,13 @@
 package main;
 
 import gamestates.GameState;
-import gamestates.InGameState;
 import mapclasses.GameMap;
 import gamestates.MenuTest;
 import sprites.Player;
 import sprites.Sprite;
+import sprites.buttons.GameButton;
+import sprites.buttons.buttonactions.EmptyButtonAction;
+import sprites.buttons.buttonactions.StartGameButtonAction;
 import view.Observer;
 
 import java.io.IOException;
@@ -23,6 +25,10 @@ public class Game implements Runnable {
     private GameState state;
     private Player player;
     private GameMap gameMap;
+    private GameButton mainMenuButton1;
+    private GameButton mainMenuButton2;
+    private GameButton mainMenuButton3;
+    private ArrayList<GameButton> mainMenuButtons;
     private boolean wPressed;
     private boolean aPressed;
     private boolean sPressed;
@@ -33,13 +39,24 @@ public class Game implements Runnable {
         player = new Player(10, 10, 100);
         gameMap = new GameMap();
         observers = new ArrayList<>();
-        state = new MenuTest(this);
-        startGame();
+
+        mainMenuButton1 = new GameButton("Start Game", 50, 50, new StartGameButtonAction(this));
+        mainMenuButton2 = new GameButton("Knapp 2", 50, 150, new EmptyButtonAction());
+        mainMenuButton3 = new GameButton("Knapp 3", 50, 250, new EmptyButtonAction());
+        mainMenuButtons = new ArrayList<>();
+        mainMenuButtons.add(mainMenuButton1);
+        mainMenuButtons.add(mainMenuButton2);
+        mainMenuButtons.add(mainMenuButton3);
+
         wPressed = false;
         aPressed = false;
         sPressed = false;
         dPressed = false;
         enterPressed = false;
+
+        state = new MenuTest(this);
+
+        startGame();
     }
 
     /**
@@ -56,6 +73,10 @@ public class Game implements Runnable {
      */
     public ArrayList<Sprite> getTiles() {
         return gameMap.getTiles();
+    }
+
+    public ArrayList<GameButton> getMainMenuButtons() {
+        return mainMenuButtons;
     }
 
     public void setWPressed(boolean value) {

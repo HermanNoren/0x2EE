@@ -20,15 +20,6 @@ public class InGameState implements GameState{
     }
 
     /**
-     * Returns an ArrayList containing all the sprites
-     * @return All sprites
-     */
-    @Override
-    public ArrayList<Sprite> getSprites() {
-        return new ArrayList<>(sprites);
-    }
-
-    /**
      * Updates all the in-game objects
      */
     @Override

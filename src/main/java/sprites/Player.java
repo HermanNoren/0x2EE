@@ -1,17 +1,7 @@
 package sprites;
 
 import armor.Armor;
-import controllers.Direction;
-import org.imgscalr.Scalr;
 import weapons.Pistol;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.nio.Buffer;
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * The player, more implementation to come.
