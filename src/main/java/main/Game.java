@@ -1,8 +1,8 @@
 package main;
 
 import gamestates.GameState;
-import gamestates.GameStateWithPlayer;
 import gamestates.InGameState;
+import mapclasses.GameMap;
 import sprites.Player;
 import sprites.Sprite;
 import view.Observer;
@@ -21,44 +21,31 @@ public class Game implements Runnable {
     private ArrayList<Observer> observers;
     private GameState state;
 
+    private Player player;
+    private GameMap gameMap;
+
     public Game() throws IOException {
+        player = new Player(10, 10, 100);
+        gameMap = new GameMap();
         observers = new ArrayList<>();
-        state = new InGameState();
+        state = new InGameState(this);
         startGame();
     }
 
     /**
-     * Returns the player if current GameState has a player, else throws an exception
+     * Returns the instance of the player
      * @return Player
      */
     public Player getPlayer() {
-        try {
-            if (state instanceof GameStateWithPlayer) {
-                return ((GameStateWithPlayer) state).getPlayer();
-            }
-            else {
-                throw new Exception("Current GameState has no player");
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return player;
     }
 
+    /**
+     * Returns an ArrayList containing all the tiles in the Game Map.
+     * @return  All sprites
+     */
     public ArrayList<Sprite> getTiles() {
-        try {
-            if (state instanceof GameStateWithPlayer) {
-                return ((GameStateWithPlayer) state).getTiles();
-            }
-            else {
-                throw new Exception("Current GameState has no player");
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return gameMap.getTiles();
     }
 
     /**
@@ -76,15 +63,6 @@ public class Game implements Runnable {
     //          this.state = pausedState;
     //}
     //
-
-
-    /**
-     * Returns an ArrayList containing all the sprites in the current GameState
-     * @return ArrayList containing Sprites
-     */
-    public ArrayList<Sprite> getSprites() {
-        return state.getSprites();
-    }
 
     /**
      * Add an observer. Observers will be notified 120 times per second

@@ -1,5 +1,6 @@
 package view.drawers;
 
+import config.Config;
 import sprites.Entity;
 
 import javax.imageio.ImageIO;
@@ -27,10 +28,10 @@ public class PlayerDrawer implements SpriteDrawer {
         movementAnimation();
         chooseActiveImage();
         if(prevImg == null){
-            g.drawImage(up1, (int) player.getPos().x, (int) player.getPos().y, null); // Sets default image
+            g.drawImage(up1, (int) player.getPos().x, (int) player.getPos().y, player.getSize(), player.getSize(), null); // Sets default image
         }
         else {
-            g.drawImage(activeImage, (int) player.getPos().x,(int) player.getPos().y, null);
+            g.drawImage(activeImage, (int) player.getPos().x,(int) player.getPos().y, player.getSize(), player.getSize(), null);
 
         }
     }

@@ -13,7 +13,6 @@ public class InGamePanel implements PanelState{
 
     private Game game;
     private HUD hud;
-
     private ArrayList<SpriteDrawer> drawers;
 
     public InGamePanel(Game game) {

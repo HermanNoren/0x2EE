@@ -1,38 +1,24 @@
 package gamestates;
 
+import main.Game;
 import mapclasses.GameMap;
-import view.Observer;
-import view.HUD;
 import sprites.Player;
 import sprites.Sprite;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * The GameState that represents the in-game logic
  */
-public class InGameState implements GameStateWithPlayer{
-
-    private Player player;
+public class InGameState implements GameState{
     private ArrayList<Sprite> sprites;
-    private GameMap map;
+    private Game game;
 
-    public InGameState() throws IOException {
-        player = new Player(0, 0, 100);
+    public InGameState(Game game) {
+        this.game = game;
         sprites = new ArrayList<>();
-        map = new GameMap();
-        sprites.add(player);
-        sprites.addAll(map.getTiles());
-    }
-
-    /**
-     * Returns the instance of the player
-     * @return player
-     */
-    @Override
-    public Player getPlayer() {
-        return player;
+        sprites.add(game.getPlayer());
+        sprites.addAll(game.getTiles());
     }
 
     /**
@@ -42,11 +28,6 @@ public class InGameState implements GameStateWithPlayer{
     @Override
     public ArrayList<Sprite> getSprites() {
         return new ArrayList<>(sprites);
-    }
-
-    @Override
-    public ArrayList<Sprite> getTiles() {
-        return new ArrayList<>(map.getTiles());
     }
 
     /**
