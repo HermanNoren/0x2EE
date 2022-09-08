@@ -114,7 +114,7 @@ public class Game implements Runnable {
      */
     private void notifyObservers() {
         for (Observer o : observers) {
-            o.update();
+            o.draw();
         }
     }
 

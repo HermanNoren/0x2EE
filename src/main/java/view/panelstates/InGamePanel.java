@@ -16,8 +16,6 @@ public class InGamePanel implements PanelState{
 
     private ArrayList<SpriteDrawer> drawers;
 
-    PlayerDrawer pd;
-
     public InGamePanel(Game game) {
         this.game = game;
         try{

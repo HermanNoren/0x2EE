@@ -16,7 +16,7 @@ public class HUD implements Observer {
     }
 
     @Override
-    public void update() {
+    public void draw() {
 
     }
 }

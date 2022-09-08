@@ -11,7 +11,4 @@ public interface GameState {
     ArrayList<Sprite> getSprites();
 
     void update();
-
-    void draw();
-
 }
