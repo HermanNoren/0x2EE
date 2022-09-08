@@ -1,8 +1,6 @@
 package gamestates;
 
 import main.Game;
-import mapclasses.GameMap;
-import sprites.Player;
 import sprites.Sprite;
 
 import java.util.ArrayList;

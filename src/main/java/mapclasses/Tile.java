@@ -8,6 +8,7 @@ import sprites.Sprite;
 import java.awt.*;
 
 public class Tile implements Sprite {
+
     private final int size = Config.SPRITE_SIZE;
     private Vector2 pos;
     private Rect rect;

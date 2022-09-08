@@ -21,32 +21,19 @@ public class KeyboardController implements KeyListener {
         int code = e.getKeyCode();
         switch (code) {
             case (KeyEvent.VK_W) -> {
-                try {
-                    game.getPlayer().setDirection(Direction.UP);
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
+                game.setWPressed(true);
             }
             case (KeyEvent.VK_A) -> {
-                try {
-                    game.getPlayer().setDirection(Direction.LEFT);
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
+                game.setAPressed(true);
             }
             case (KeyEvent.VK_S) -> {
-                try {
-                    game.getPlayer().setDirection(Direction.DOWN);
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
+                game.setSPressed(true);
             }
             case (KeyEvent.VK_D) -> {
-                try {
-                    game.getPlayer().setDirection(Direction.RIGHT);
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
+                game.setDPressed(true);
+            }
+            case (KeyEvent.VK_ENTER) -> {
+                game.setEnterPressed(true);
             }
         }
     }
@@ -54,31 +41,21 @@ public class KeyboardController implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
         switch(e.getKeyCode()) {
-            case KeyEvent.VK_W:
-                try {
-                    game.getPlayer().setDirection(Direction.NOT_MOVING);
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
-            case KeyEvent.VK_A:
-                try {
-                    game.getPlayer().setDirection(Direction.NOT_MOVING);
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
-            case KeyEvent.VK_S:
-                try {
-                    game.getPlayer().setDirection(Direction.NOT_MOVING);
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
-            case KeyEvent.VK_D:
-                try {
-                    game.getPlayer().setDirection(Direction.NOT_MOVING);
-                } catch (Exception ex) {
-                    throw new RuntimeException(ex);
-                }
-
+            case (KeyEvent.VK_W) -> {
+                game.setWPressed(false);
+            }
+            case (KeyEvent.VK_A) -> {
+                game.setAPressed(false);
+            }
+            case (KeyEvent.VK_S) -> {
+                game.setSPressed(false);
+            }
+            case (KeyEvent.VK_D) -> {
+                game.setDPressed(false);
+            }
+            case (KeyEvent.VK_ENTER) -> {
+                game.setEnterPressed(false);
+            }
         }
     }
 }
