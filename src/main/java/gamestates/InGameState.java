@@ -58,10 +58,4 @@ public class InGameState implements GameStateWithPlayer{
             sprite.update();
         }
     }
-
-    @Override
-    public void draw() {
-
-    }
-
 }
