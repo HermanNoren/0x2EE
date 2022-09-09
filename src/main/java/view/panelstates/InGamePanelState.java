@@ -9,19 +9,15 @@ import view.drawers.TileDrawer;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class InGamePanel implements PanelState{
+public class InGamePanelState implements PanelState{
 
     private Game game;
     private HUD hud;
     private ArrayList<SpriteDrawer> drawers;
 
-    public InGamePanel(Game game) {
+    public InGamePanelState(Game game) {
         this.game = game;
-        try{
-            hud = new HUD(game.getPlayer());
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
+        hud = new HUD(game.getPlayer());
         drawers = new ArrayList<>();
         drawers.add(new PlayerDrawer(game.getPlayer()));
         drawers.add(new TileDrawer(game.getTiles()));

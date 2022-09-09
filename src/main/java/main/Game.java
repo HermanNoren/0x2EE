@@ -10,7 +10,6 @@ import sprites.buttons.buttonactions.EmptyButtonAction;
 import sprites.buttons.buttonactions.StartGameButtonAction;
 import view.Observer;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -35,18 +34,14 @@ public class Game implements Runnable {
     private boolean dPressed;
     private boolean enterPressed;
 
-    public Game() throws IOException {
+
+    private boolean stateChangedFlag;
+
+    public Game() {
         player = new Player(10, 10, 100);
         gameMap = new GameMap();
-        observers = new ArrayList<>();
 
-        mainMenuButton1 = new GameButton("Start Game", 50, 50, new StartGameButtonAction(this));
-        mainMenuButton2 = new GameButton("Knapp 2", 50, 150, new EmptyButtonAction());
-        mainMenuButton3 = new GameButton("Knapp 3", 50, 250, new EmptyButtonAction());
-        mainMenuButtons = new ArrayList<>();
-        mainMenuButtons.add(mainMenuButton1);
-        mainMenuButtons.add(mainMenuButton2);
-        mainMenuButtons.add(mainMenuButton3);
+        initMainMenuButtons();
 
         wPressed = false;
         aPressed = false;
@@ -54,7 +49,10 @@ public class Game implements Runnable {
         dPressed = false;
         enterPressed = false;
 
+        stateChangedFlag = false;
+
         state = new MenuTest(this);
+        observers = new ArrayList<>();
 
         startGame();
     }
@@ -69,36 +67,64 @@ public class Game implements Runnable {
 
     /**
      * Returns an ArrayList containing all the tiles in the Game Map.
-     * @return  All sprites
+     * @return  All Game Map Tiles
      */
     public ArrayList<Sprite> getTiles() {
         return gameMap.getTiles();
     }
 
+    /**
+     * Returns an ArrayList containing all the buttons for the main menu.
+     * @return  Main Menu Buttons
+     */
     public ArrayList<GameButton> getMainMenuButtons() {
         return mainMenuButtons;
     }
 
+    /**
+     * Used as a way for outside controllers to tell the game whether the W key is pressed or released.
+     * @param value True if W pressed, else False
+     */
     public void setWPressed(boolean value) {
         wPressed = value;
     }
 
+    /**
+     * Used as a way for outside controllers to tell the game whether the A key is pressed or released.
+     * @param value True if A pressed, else False
+     */
     public void setAPressed(boolean value) {
         aPressed = value;
     }
 
+    /**
+     * Used as a way for outside controllers to tell the game whether the S key is pressed or released.
+     * @param value True if S pressed, else False
+     */
     public void setSPressed(boolean value) {
         sPressed = value;
     }
 
+    /**
+     * Used as a way for outside controllers to tell the game whether the D key is pressed or released.
+     * @param value True if D pressed, else False
+     */
     public void setDPressed(boolean value) {
         dPressed = value;
     }
 
+    /**
+     * Used as a way for outside controllers to tell the game whether the Enter key is pressed or released.
+     * @param value True if Enter pressed, else False
+     */
     public void setEnterPressed(boolean value) {
         enterPressed = value;
     }
 
+    /**
+     * Used as a way for objects inside to read whether the W key is pressed
+     * @return
+     */
     public boolean getWPressed() {
         return wPressed;
     }
@@ -119,12 +145,29 @@ public class Game implements Runnable {
         return enterPressed;
     }
 
+    public boolean readStateChangedFlag() {
+        return stateChangedFlag;
+    }
+
+    public void resetStateChangedFlag() {
+        stateChangedFlag = false;
+    }
+
     /**
      * Use to change the current GameState
      * @param state an instance of a class that has implemented the GameState interface
      */
     public void setState(GameState state) {
         this.state = state;
+        stateChangedFlag = true;
+    }
+
+    /**
+     * Returns a string containing a unique tag used for identifying the different game states from outside sources.
+     * @return StateTag
+     */
+    public String getStateTag() {
+        return state.getStateTag();
     }
 
     // ta inte in argument utan ändra till exempelvis
@@ -219,5 +262,18 @@ public class Game implements Runnable {
                 updates = 0;
             }
         }
+    }
+
+    /**
+     * Initializes the buttons used in the main menu and stores them in an ArrayList
+     */
+    private void initMainMenuButtons() {
+        mainMenuButton1 = new GameButton("Start Game", 50, 50, new StartGameButtonAction(this));
+        mainMenuButton2 = new GameButton("Knapp 2", 50, 150, new EmptyButtonAction());
+        mainMenuButton3 = new GameButton("Knapp 3", 50, 250, new EmptyButtonAction());
+        mainMenuButtons = new ArrayList<>();
+        mainMenuButtons.add(mainMenuButton1);
+        mainMenuButtons.add(mainMenuButton2);
+        mainMenuButtons.add(mainMenuButton3);
     }
 }

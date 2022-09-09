@@ -14,7 +14,8 @@ public class MenuTest implements GameState {
     private int activePos;
     private boolean recentlyMovedUp;
     private boolean recentlyMovedDown;
-    private ArrayList<GameButton> buttons;
+    private final ArrayList<GameButton> buttons;
+    private final String stateTag = "MainMenu";
 
     public MenuTest(Game game) {
         this.game = game;
@@ -23,6 +24,11 @@ public class MenuTest implements GameState {
         recentlyMovedDown = false;
 
         buttons = game.getMainMenuButtons();
+    }
+
+    @Override
+    public String getStateTag() {
+        return stateTag;
     }
 
     @Override
