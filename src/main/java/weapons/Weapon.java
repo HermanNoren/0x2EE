@@ -2,7 +2,7 @@ package weapons;
 
 import sprites.Player;
 
-public class Pistol {
+public class Weapon {
 
     public int damage;
     public int ammo;
@@ -11,7 +11,7 @@ public class Pistol {
     /**
      * The main weapon of the
      */
-    public Pistol(){
+    public Weapon(){
         damage = 40;
         ammo = 7;
         reloading = false;

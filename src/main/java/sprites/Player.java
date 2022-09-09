@@ -1,16 +1,7 @@
 package sprites;
 
 import armor.Armor;
-import controllers.Direction;
-import org.imgscalr.Scalr;
-import weapons.Pistol;
-
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.nio.Buffer;
-import java.util.ArrayList;
-import java.util.List;
+import weapons.Weapon;
 
 
 /**
@@ -19,9 +10,10 @@ import java.util.List;
 public class Player extends Entity implements Sprite, MovableSprite{
     private int score;
     private int money;
-    protected Pistol pistol;
+    protected Weapon weapon;
 
     protected Armor armor;
+    boolean isDamageTaken;
 
     /**
      * @param x, starting x-position
@@ -31,6 +23,8 @@ public class Player extends Entity implements Sprite, MovableSprite{
      */
     public Player(int x, int y, int health){
         super(x, y, health);
+        this.armor = new Armor();
+        this.weapon = new Weapon();
         score = 0;
         money = 0;
     }
@@ -39,11 +33,16 @@ public class Player extends Entity implements Sprite, MovableSprite{
      * add the weapon object into the attack.
      */
     public int damageDelt() {
-        return this.pistol.damage;
+        return this.weapon.damage;
     }
 
     public void damageTaken(int damage) {
 
+    }
+
+    public boolean isDamageTaken(){
+
+        return isDamageTaken;
     }
 
     /**
