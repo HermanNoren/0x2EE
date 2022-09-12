@@ -1,8 +1,7 @@
 package view.panelstates;
 
-import javax.swing.*;
 import java.awt.*;
 
-public interface PanelState {
+public interface IPanelState {
     void draw(Graphics2D g2);
 }

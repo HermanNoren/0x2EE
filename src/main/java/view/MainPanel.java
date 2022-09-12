@@ -4,18 +4,18 @@ import main.Game;
 import controllers.KeyboardController;
 import view.panelstates.InGamePanelState;
 import view.panelstates.MainMenuPanelState;
-import view.panelstates.PanelState;
+import view.panelstates.IPanelState;
 
 import javax.swing.JPanel;
 import java.awt.*;
 
-public class MainPanel extends JPanel implements Observer {
+public class MainPanel extends JPanel implements IObserver {
 
     private Game game;
-    private PanelState state;
+    private IPanelState state;
     private KeyboardController keyboardController;
 
-    public MainPanel(Game game, PanelState startState) {
+    public MainPanel(Game game, IPanelState startState) {
         this.game = game;
         state = startState;
         keyboardController =  new KeyboardController(game);

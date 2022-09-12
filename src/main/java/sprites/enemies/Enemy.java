@@ -2,15 +2,13 @@ package sprites.enemies;
 
 import sprites.Entity;
 
-import java.awt.*;
-
 public class Enemy extends Entity {
 
     int damage = 3;
 
-    private EnemyType enemyType;
+    private IEnemyType enemyType;
 
-    public Enemy(int position_x, int position_y, int health, EnemyType enemyType){
+    public Enemy(int position_x, int position_y, int health, IEnemyType enemyType){
         super(position_x, position_y, health);
         this.enemyType = enemyType;
     }

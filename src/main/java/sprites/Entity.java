@@ -1,7 +1,7 @@
 package sprites;
 
 import config.Config;
-import controllers.Direction;
+import controllers.EDirection;
 import helperclasses.Rect;
 import helperclasses.Vector2;
 
@@ -12,13 +12,13 @@ import helperclasses.Vector2;
  * to take damage thus if reduces its health.
  */
 
-public abstract class Entity implements Sprite {
+public abstract class Entity implements ISprite {
     int animationCounter;
     Vector2 pos;
     Vector2 vel;
     Vector2 acc;
     int health;
-    private Direction direction;
+    private EDirection direction;
     private int size = Config.SPRITE_SIZE * 3;
     private Rect rect;
 
@@ -31,7 +31,7 @@ public abstract class Entity implements Sprite {
      */
 
     public Entity(int x, int y, int health){
-        this.direction = Direction.NOT_MOVING; // Default value
+        this.direction = EDirection.NOT_MOVING; // Default value
         this.pos = new Vector2(x, y);
         this.vel = new Vector2(0.5, 0.5);
         this.acc = new Vector2(0, 0);
@@ -45,7 +45,7 @@ public abstract class Entity implements Sprite {
      * @param direction, updated direction.
      * Used to update direction of entity.
      */
-    public void setDirection(Direction direction) {
+    public void setDirection(EDirection direction) {
         this.direction = direction;
     }
 
@@ -53,7 +53,7 @@ public abstract class Entity implements Sprite {
      * @return current direction.
      * Used to get the current direction of entity.
      */
-    public Direction getDirection() {
+    public EDirection getDirection() {
         return direction;
     }
 
@@ -61,7 +61,7 @@ public abstract class Entity implements Sprite {
      * Updates current position of entity on game screen.
      */
     public void updatePos(){
-        if(!(direction == Direction.NOT_MOVING)){
+        if(!(direction == EDirection.NOT_MOVING)){
             switch (direction){
                 case UP -> pos.y -= vel.y;
                 case LEFT -> pos.x -= vel.x;

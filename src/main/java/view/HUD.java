@@ -1,9 +1,8 @@
 package view;
 
 import sprites.Player;
-import view.Observer;
 
-public class HUD implements Observer {
+public class HUD implements IObserver {
 
     private int score;
     private int money;

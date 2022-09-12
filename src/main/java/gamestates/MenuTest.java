@@ -1,15 +1,11 @@
 package gamestates;
 
 import main.Game;
-import sprites.Sprite;
 import sprites.buttons.GameButton;
-import sprites.buttons.buttonactions.EmptyButtonAction;
-import sprites.buttons.buttonactions.StartGameButtonAction;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-public class MenuTest implements GameState {
+public class MenuTest implements IGameState {
     private Game game;
     private int activePos;
     private boolean recentlyMovedUp;

@@ -6,7 +6,7 @@ import weapons.Weapon;
 /**
  * The player, more implementation to come.
  */
-public class Player extends Entity implements Sprite, MovableSprite{
+public class Player extends Entity implements ISprite, IMovableSprite {
     private int score;
     private int money;
     protected Weapon weapon;
@@ -23,7 +23,7 @@ public class Player extends Entity implements Sprite, MovableSprite{
     public Player(int x, int y, int health){
         super(x, y, health);
         this.armor = new Armor();
-        this.weapon = new Weapon();
+        this.weapon = new Weapon(10, 10);
         score = 0;
         money = 0;
     }

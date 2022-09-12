@@ -1,7 +1,7 @@
 package mapclasses;
 
 import config.Config;
-import sprites.Sprite;
+import sprites.ISprite;
 
 import java.util.ArrayList;
 
@@ -30,18 +30,18 @@ public class GameMap {
             "                                        "
     };
 
-    ArrayList<Sprite> tiles;
+    ArrayList<ISprite> tiles;
 
     public GameMap() {
         tiles = createMap();
     }
 
-    public ArrayList<Sprite> getTiles() {
+    public ArrayList<ISprite> getTiles() {
         return new ArrayList<>(tiles);
     }
 
-    private ArrayList<Sprite> createMap() {
-        ArrayList<Sprite> tiles = new ArrayList<>();
+    private ArrayList<ISprite> createMap() {
+        ArrayList<ISprite> tiles = new ArrayList<>();
         int x = 0;
         int y = 0;
         for (String row : gameMap) {

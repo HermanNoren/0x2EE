@@ -3,7 +3,7 @@ package sprites;
 import helperclasses.Rect;
 import helperclasses.Vector2;
 
-public interface Sprite {
+public interface ISprite {
 
     /**
      * Returns the width of the sprite

@@ -1,15 +1,15 @@
 package gamestates;
 
 import main.Game;
-import sprites.Sprite;
+import sprites.ISprite;
 
 import java.util.ArrayList;
 
 /**
- * The GameState that represents the in-game logic
+ * The IGameState that represents the in-game logic
  */
-public class InGameState implements GameState{
-    private ArrayList<Sprite> sprites;
+public class InGameState implements IGameState {
+    private ArrayList<ISprite> sprites;
     private Game game;
     private final String stateTag = "InGame";
 
@@ -30,7 +30,7 @@ public class InGameState implements GameState{
      */
     @Override
     public void update() {
-        for (Sprite sprite : sprites) {
+        for (ISprite sprite : sprites) {
             sprite.update();
         }
     }

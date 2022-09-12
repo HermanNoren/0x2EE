@@ -11,9 +11,9 @@ public class Weapon {
     /**
      * The main weapon of the
      */
-    public Weapon(){
-        damage = 40;
-        ammo = 7;
+    public Weapon(int damage, int ammo){
+        this.damage = damage;
+        this.ammo = ammo;
         reloading = false;
     }
 

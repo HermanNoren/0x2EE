@@ -2,16 +2,14 @@ package sprites.theShop;
 
 import helperclasses.Rect;
 import helperclasses.Vector2;
-import sprites.Sprite;
-
-import java.awt.*;
+import sprites.ISprite;
 
 /**
- * This Sprite is the shop where weapons and armor can be
+ * This ISprite is the shop where weapons and armor can be
  * upgraded through the game. It will also contain logic regarding
  * when the player is in range to enter the shop (more logic to come).
  */
-public class ShopSprite implements Sprite {
+public class ShopSprite implements ISprite {
     public final static int x_position = 0;
     public final static int y_position = 0;
     private Rect shopAreaSize;

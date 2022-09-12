@@ -2,23 +2,20 @@ package sprites.buttons;
 
 import helperclasses.Rect;
 import helperclasses.Vector2;
-import sprites.Sprite;
+import sprites.ISprite;
 import config.Config;
-import sprites.buttons.buttonactions.ButtonAction;
+import sprites.buttons.buttonactions.IButtonAction;
 
-import java.awt.*;
-import java.io.IOException;
-
-public class GameButton implements Sprite {
+public class GameButton implements ISprite {
 
     private String buttonText;
     private Vector2 pos;
     private int width = Config.SPRITE_SIZE * 18;
     private int height = Config.SPRITE_SIZE * 4;
-    private ButtonAction action;
+    private IButtonAction action;
     private boolean isSelected;
 
-    public GameButton(String buttonText, int x, int y, ButtonAction action) {
+    public GameButton(String buttonText, int x, int y, IButtonAction action) {
         this.buttonText = buttonText;
         pos = new Vector2(x, y);
         isSelected = false;

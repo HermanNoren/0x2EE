@@ -3,9 +3,7 @@ package sprites.buttons.buttonactions;
 import gamestates.InGameState;
 import main.Game;
 
-import java.io.IOException;
-
-public class StartGameButtonAction implements ButtonAction{
+public class StartGameButtonAction implements IButtonAction {
 
     private Game game;
 

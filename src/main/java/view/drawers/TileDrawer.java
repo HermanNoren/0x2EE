@@ -1,20 +1,20 @@
 package view.drawers;
 
-import sprites.Sprite;
+import sprites.ISprite;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class TileDrawer implements SpriteDrawer {
+public class TileDrawer implements IDrawer {
 
-    ArrayList<Sprite> tiles;
-    public TileDrawer(ArrayList<Sprite> tiles) {
+    ArrayList<ISprite> tiles;
+    public TileDrawer(ArrayList<ISprite> tiles) {
         this.tiles = tiles;
     }
 
     @Override
     public void draw(Graphics2D g2) {
-        for (Sprite tile: tiles) {
+        for (ISprite tile: tiles) {
             g2.setColor(Color.black);
             g2.fillRect((int) tile.getPos().x, (int) tile.getPos().y, tile.getWidth(), tile.getHeight());
         }

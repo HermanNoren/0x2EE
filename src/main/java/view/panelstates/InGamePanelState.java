@@ -2,18 +2,18 @@ package view.panelstates;
 
 import main.Game;
 import view.HUD;
-import view.drawers.SpriteDrawer;
+import view.drawers.IDrawer;
 import view.drawers.PlayerDrawer;
 import view.drawers.TileDrawer;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class InGamePanelState implements PanelState{
+public class InGamePanelState implements IPanelState {
 
     private Game game;
     private HUD hud;
-    private ArrayList<SpriteDrawer> drawers;
+    private ArrayList<IDrawer> drawers;
 
     public InGamePanelState(Game game) {
         this.game = game;
@@ -25,7 +25,7 @@ public class InGamePanelState implements PanelState{
 
     @Override
     public void draw(Graphics2D g) {
-        for (SpriteDrawer drawer : drawers) {
+        for (IDrawer drawer : drawers) {
             drawer.draw(g);
         }
     }

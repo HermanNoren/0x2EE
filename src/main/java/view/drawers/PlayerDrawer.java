@@ -1,6 +1,5 @@
 package view.drawers;
 
-import config.Config;
 import sprites.Entity;
 
 import javax.imageio.ImageIO;
@@ -12,7 +11,7 @@ import java.io.IOException;
 /**
  * Strictly used to draw the player onto the screen
  */
-public class PlayerDrawer implements SpriteDrawer {
+public class PlayerDrawer implements IDrawer {
 
     private int animationCounter;
     private int imageSwitcher;

@@ -5,7 +5,7 @@ import sprites.buttons.GameButton;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ButtonDrawer implements SpriteDrawer{
+public class ButtonDrawer implements IDrawer {
 
     private ArrayList<GameButton> buttons;
 

@@ -1,6 +1,6 @@
 package view;
 
-public interface Observer {
+public interface IObserver {
 
     void draw();
 

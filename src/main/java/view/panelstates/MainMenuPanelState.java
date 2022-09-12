@@ -1,19 +1,16 @@
 package view.panelstates;
 
 import main.Game;
-import view.HUD;
 import view.drawers.ButtonDrawer;
-import view.drawers.PlayerDrawer;
-import view.drawers.SpriteDrawer;
-import view.drawers.TileDrawer;
+import view.drawers.IDrawer;
 
 import java.awt.*;
 import java.util.ArrayList;
 
-public class MainMenuPanelState implements PanelState {
+public class MainMenuPanelState implements IPanelState {
 
     private Game game;
-    private ArrayList<SpriteDrawer> drawers;
+    private ArrayList<IDrawer> drawers;
 
     public MainMenuPanelState(Game game) {
         this.game = game;
@@ -23,7 +20,7 @@ public class MainMenuPanelState implements PanelState {
 
     @Override
     public void draw(Graphics2D g) {
-        for (SpriteDrawer drawer : drawers) {
+        for (IDrawer drawer : drawers) {
             drawer.draw(g);
         }
     }

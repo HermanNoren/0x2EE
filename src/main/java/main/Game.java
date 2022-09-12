@@ -1,27 +1,27 @@
 package main;
 
-import gamestates.GameState;
+import gamestates.IGameState;
 import mapclasses.GameMap;
 import gamestates.MenuTest;
+import sprites.ISprite;
 import sprites.Player;
-import sprites.Sprite;
 import sprites.buttons.GameButton;
 import sprites.buttons.buttonactions.EmptyButtonAction;
 import sprites.buttons.buttonactions.StartGameButtonAction;
-import view.Observer;
+import view.IObserver;
 
 import java.util.ArrayList;
 
 /**
  * This class contains the main game loop.
- * With help of the main game loop it delegates work to the active GameState
+ * With help of the main game loop it delegates work to the active IGameState
  */
 public class Game implements Runnable {
     private Thread gameLoopThread;
     private final int FPS = 120; // FRAMES PER SECOND
     private final int UPS = 200; // UPDATES PER SECOND
-    private ArrayList<Observer> observers;
-    private GameState state;
+    private ArrayList<IObserver> observers;
+    private IGameState state;
     private Player player;
     private GameMap gameMap;
     private GameButton mainMenuButton1;
@@ -69,7 +69,7 @@ public class Game implements Runnable {
      * Returns an ArrayList containing all the tiles in the Game Map.
      * @return  All Game Map Tiles
      */
-    public ArrayList<Sprite> getTiles() {
+    public ArrayList<ISprite> getTiles() {
         return gameMap.getTiles();
     }
 
@@ -154,10 +154,10 @@ public class Game implements Runnable {
     }
 
     /**
-     * Use to change the current GameState
-     * @param state an instance of a class that has implemented the GameState interface
+     * Use to change the current IGameState
+     * @param state an instance of a class that has implemented the IGameState interface
      */
-    public void setState(GameState state) {
+    public void setState(IGameState state) {
         this.state = state;
         stateChangedFlag = true;
     }
@@ -182,7 +182,7 @@ public class Game implements Runnable {
      * Add an observer. Observers will be notified 120 times per second
      * @param observer observer
      */
-    public void addObserver(Observer observer) {
+    public void addObserver(IObserver observer) {
         observers.add(observer);
     }
 
@@ -195,7 +195,7 @@ public class Game implements Runnable {
     }
 
     /**
-     * Updates the current GameState
+     * Updates the current IGameState
      */
     private void update() {
         state.update();
@@ -205,7 +205,7 @@ public class Game implements Runnable {
      * Notifies potential observers
      */
     private void notifyObservers() {
-        for (Observer o : observers) {
+        for (IObserver o : observers) {
             o.draw();
         }
     }

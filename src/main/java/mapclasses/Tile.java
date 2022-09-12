@@ -3,9 +3,9 @@ package mapclasses;
 import config.Config;
 import helperclasses.Rect;
 import helperclasses.Vector2;
-import sprites.Sprite;
+import sprites.ISprite;
 
-public class Tile implements Sprite {
+public class Tile implements ISprite {
 
     private final int size = Config.SPRITE_SIZE;
     private Vector2 pos;

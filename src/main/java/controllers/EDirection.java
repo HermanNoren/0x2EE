@@ -1,6 +1,6 @@
 package controllers;
 
-public enum Direction {
+public enum EDirection {
     NOT_MOVING,
     UP,
     LEFT,
