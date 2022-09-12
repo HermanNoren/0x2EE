@@ -2,13 +2,14 @@ package main;
 
 import gamestates.IGameState;
 import mapclasses.GameMap;
-import gamestates.MenuTest;
+import gamestates.MainMenuState;
 import sprites.ISprite;
 import sprites.Player;
 import sprites.buttons.GameButton;
 import sprites.buttons.buttonactions.EmptyButtonAction;
 import sprites.buttons.buttonactions.StartGameButtonAction;
 import view.IObserver;
+import view.panelstates.EPanelState;
 
 import java.util.ArrayList;
 
@@ -51,7 +52,7 @@ public class Game implements Runnable {
 
         stateChangedFlag = false;
 
-        state = new MenuTest(this);
+        state = new MainMenuState(this);
         observers = new ArrayList<>();
 
         startGame();
@@ -166,7 +167,7 @@ public class Game implements Runnable {
      * Returns a string containing a unique tag used for identifying the different game states from outside sources.
      * @return StateTag
      */
-    public String getStateTag() {
+    public EPanelState getStateTag() {
         return state.getStateTag();
     }
 

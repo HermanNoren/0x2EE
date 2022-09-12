@@ -2,18 +2,19 @@ package gamestates;
 
 import main.Game;
 import sprites.buttons.GameButton;
+import view.panelstates.EPanelState;
 
 import java.util.ArrayList;
 
-public class MenuTest implements IGameState {
+public class MainMenuState implements IGameState {
     private Game game;
     private int activePos;
     private boolean recentlyMovedUp;
     private boolean recentlyMovedDown;
     private final ArrayList<GameButton> buttons;
-    private final String stateTag = "MainMenu";
+    private final EPanelState stateTag = EPanelState.MAINMENU;
 
-    public MenuTest(Game game) {
+    public MainMenuState(Game game) {
         this.game = game;
         activePos = 0;
         recentlyMovedUp = false;
@@ -23,7 +24,7 @@ public class MenuTest implements IGameState {
     }
 
     @Override
-    public String getStateTag() {
+    public EPanelState getStateTag() {
         return stateTag;
     }
 

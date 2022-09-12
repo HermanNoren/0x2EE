@@ -2,6 +2,7 @@ package gamestates;
 
 import main.Game;
 import sprites.ISprite;
+import view.panelstates.EPanelState;
 
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 public class InGameState implements IGameState {
     private ArrayList<ISprite> sprites;
     private Game game;
-    private final String stateTag = "InGame";
+    private final EPanelState stateTag = EPanelState.INGAME;
 
     public InGameState(Game game) {
         this.game = game;
@@ -20,8 +21,12 @@ public class InGameState implements IGameState {
         sprites.addAll(game.getTiles());
     }
 
+    /**
+     * Returns the specific state tag
+     * @return stateTag
+     */
     @Override
-    public String getStateTag() {
+    public EPanelState getStateTag() {
         return stateTag;
     }
 

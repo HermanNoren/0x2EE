@@ -5,6 +5,7 @@ import controllers.KeyboardController;
 import view.panelstates.InGamePanelState;
 import view.panelstates.MainMenuPanelState;
 import view.panelstates.IPanelState;
+import view.panelstates.PanelStateFactory;
 
 import javax.swing.JPanel;
 import java.awt.*;
@@ -15,12 +16,16 @@ public class MainPanel extends JPanel implements IObserver {
     private IPanelState state;
     private KeyboardController keyboardController;
 
-    public MainPanel(Game game, IPanelState startState) {
+    public MainPanel(Game game) {
         this.game = game;
-        state = startState;
+        state = PanelStateFactory.createPanelState(game.getStateTag(), this);
         keyboardController =  new KeyboardController(game);
         setFocusable(true);
         addKeyListener(keyboardController);
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     public void paintComponent(Graphics g) {
@@ -38,10 +43,7 @@ public class MainPanel extends JPanel implements IObserver {
     }
 
     private void changePanelState() {
-        switch (game.getStateTag()) {
-            case "MainMenu" -> state = new MainMenuPanelState(game);
-            case "InGame" -> state = new InGamePanelState(game);
-        }
+        state = PanelStateFactory.createPanelState(game.getStateTag(), this);
     }
 
     @Override
