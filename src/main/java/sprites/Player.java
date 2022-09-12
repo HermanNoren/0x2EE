@@ -3,7 +3,6 @@ package sprites;
 import armor.Armor;
 import weapons.Weapon;
 
-
 /**
  * The player, more implementation to come.
  */

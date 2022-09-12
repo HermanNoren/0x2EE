@@ -1,13 +1,15 @@
 package main;
 
 import gamestates.GameState;
-import gamestates.GameStateWithPlayer;
-import gamestates.InGameState;
+import mapclasses.GameMap;
+import gamestates.MenuTest;
 import sprites.Player;
 import sprites.Sprite;
+import sprites.buttons.GameButton;
+import sprites.buttons.buttonactions.EmptyButtonAction;
+import sprites.buttons.buttonactions.StartGameButtonAction;
 import view.Observer;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -20,45 +22,135 @@ public class Game implements Runnable {
     private final int UPS = 200; // UPDATES PER SECOND
     private ArrayList<Observer> observers;
     private GameState state;
+    private Player player;
+    private GameMap gameMap;
+    private GameButton mainMenuButton1;
+    private GameButton mainMenuButton2;
+    private GameButton mainMenuButton3;
+    private ArrayList<GameButton> mainMenuButtons;
+    private boolean wPressed;
+    private boolean aPressed;
+    private boolean sPressed;
+    private boolean dPressed;
+    private boolean enterPressed;
 
-    public Game() throws IOException {
+
+    private boolean stateChangedFlag;
+
+    public Game() {
+        player = new Player(10, 10, 100);
+        gameMap = new GameMap();
+
+        initMainMenuButtons();
+
+        wPressed = false;
+        aPressed = false;
+        sPressed = false;
+        dPressed = false;
+        enterPressed = false;
+
+        stateChangedFlag = false;
+
+        state = new MenuTest(this);
         observers = new ArrayList<>();
-        state = new InGameState();
+
         startGame();
     }
 
     /**
-     * Returns the player if current GameState has a player, else throws an exception
+     * Returns the instance of the player
      * @return Player
      */
     public Player getPlayer() {
-        try {
-            if (state instanceof GameStateWithPlayer) {
-                return ((GameStateWithPlayer) state).getPlayer();
-            }
-            else {
-                throw new Exception("Current GameState has no player");
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return player;
     }
 
+    /**
+     * Returns an ArrayList containing all the tiles in the Game Map.
+     * @return  All Game Map Tiles
+     */
     public ArrayList<Sprite> getTiles() {
-        try {
-            if (state instanceof GameStateWithPlayer) {
-                return ((GameStateWithPlayer) state).getTiles();
-            }
-            else {
-                throw new Exception("Current GameState has no player");
-            }
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+        return gameMap.getTiles();
+    }
+
+    /**
+     * Returns an ArrayList containing all the buttons for the main menu.
+     * @return  Main Menu Buttons
+     */
+    public ArrayList<GameButton> getMainMenuButtons() {
+        return mainMenuButtons;
+    }
+
+    /**
+     * Used as a way for outside controllers to tell the game whether the W key is pressed or released.
+     * @param value True if W pressed, else False
+     */
+    public void setWPressed(boolean value) {
+        wPressed = value;
+    }
+
+    /**
+     * Used as a way for outside controllers to tell the game whether the A key is pressed or released.
+     * @param value True if A pressed, else False
+     */
+    public void setAPressed(boolean value) {
+        aPressed = value;
+    }
+
+    /**
+     * Used as a way for outside controllers to tell the game whether the S key is pressed or released.
+     * @param value True if S pressed, else False
+     */
+    public void setSPressed(boolean value) {
+        sPressed = value;
+    }
+
+    /**
+     * Used as a way for outside controllers to tell the game whether the D key is pressed or released.
+     * @param value True if D pressed, else False
+     */
+    public void setDPressed(boolean value) {
+        dPressed = value;
+    }
+
+    /**
+     * Used as a way for outside controllers to tell the game whether the Enter key is pressed or released.
+     * @param value True if Enter pressed, else False
+     */
+    public void setEnterPressed(boolean value) {
+        enterPressed = value;
+    }
+
+    /**
+     * Used as a way for objects inside to read whether the W key is pressed
+     * @return
+     */
+    public boolean getWPressed() {
+        return wPressed;
+    }
+
+    public boolean getAPressed() {
+        return aPressed;
+    }
+
+    public boolean getSPressed() {
+        return sPressed;
+    }
+
+    public boolean getDPressed() {
+        return dPressed;
+    }
+
+    public boolean getEnterPressed() {
+        return enterPressed;
+    }
+
+    public boolean readStateChangedFlag() {
+        return stateChangedFlag;
+    }
+
+    public void resetStateChangedFlag() {
+        stateChangedFlag = false;
     }
 
     /**
@@ -67,6 +159,15 @@ public class Game implements Runnable {
      */
     public void setState(GameState state) {
         this.state = state;
+        stateChangedFlag = true;
+    }
+
+    /**
+     * Returns a string containing a unique tag used for identifying the different game states from outside sources.
+     * @return StateTag
+     */
+    public String getStateTag() {
+        return state.getStateTag();
     }
 
     // ta inte in argument utan ändra till exempelvis
@@ -76,15 +177,6 @@ public class Game implements Runnable {
     //          this.state = pausedState;
     //}
     //
-
-
-    /**
-     * Returns an ArrayList containing all the sprites in the current GameState
-     * @return ArrayList containing Sprites
-     */
-    public ArrayList<Sprite> getSprites() {
-        return state.getSprites();
-    }
 
     /**
      * Add an observer. Observers will be notified 120 times per second
@@ -170,5 +262,18 @@ public class Game implements Runnable {
                 updates = 0;
             }
         }
+    }
+
+    /**
+     * Initializes the buttons used in the main menu and stores them in an ArrayList
+     */
+    private void initMainMenuButtons() {
+        mainMenuButton1 = new GameButton("Start Game", 50, 50, new StartGameButtonAction(this));
+        mainMenuButton2 = new GameButton("Knapp 2", 50, 150, new EmptyButtonAction());
+        mainMenuButton3 = new GameButton("Knapp 3", 50, 250, new EmptyButtonAction());
+        mainMenuButtons = new ArrayList<>();
+        mainMenuButtons.add(mainMenuButton1);
+        mainMenuButtons.add(mainMenuButton2);
+        mainMenuButtons.add(mainMenuButton3);
     }
 }

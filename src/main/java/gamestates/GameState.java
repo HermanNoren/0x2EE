@@ -4,11 +4,10 @@ import view.Observer;
 import sprites.Player;
 import sprites.Sprite;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public interface GameState {
-
-    ArrayList<Sprite> getSprites();
-
+    String getStateTag();
     void update();
 }
