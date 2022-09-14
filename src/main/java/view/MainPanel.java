@@ -42,8 +42,11 @@ public class MainPanel extends JPanel implements IObserver {
         }
     }
 
+
     private void changePanelState() {
         state = PanelStateFactory.createPanelState(game.getStateTag(), this);
+        removeKeyListener(keyboardController);
+        addKeyListener(state.getKeyListener());
     }
 
     @Override

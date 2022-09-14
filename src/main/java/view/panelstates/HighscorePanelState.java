@@ -1,27 +1,33 @@
 package view.panelstates;
 
+import controllers.KeyboardController;
 import main.Game;
 import view.MainPanel;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class HighscorePanelState implements  IPanelState {
+public class HighscorePanelState implements IPanelState {
 
     private ArrayList<String> scores;
     private MainPanel mainPanel;
     private ArrayList<IDrawer> drawers;
+
+    private KeyListener keyListener;
 
     private Game game;
 
     public HighscorePanelState(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
         this.game = mainPanel.getGame();
+        this.keyListener = new KeyboardController(game);
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(game.getBackButtons()));
         File file = new File("textfiles/highscores.txt");
@@ -37,6 +43,8 @@ public class HighscorePanelState implements  IPanelState {
         }
 
     }
+
+
 
     @Override
     public void draw(Graphics2D g2) {
@@ -62,6 +70,11 @@ public class HighscorePanelState implements  IPanelState {
         }
 
 
+    }
+
+    @Override
+    public KeyListener getKeyListener() {
+        return keyListener;
     }
 
 }

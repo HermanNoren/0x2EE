@@ -68,7 +68,7 @@ public class Game implements Runnable {
 
         stateChangedFlag = false;
 
-        state = new MainMenuState(this);
+        state = new HighscoreState(this);
         observers = new ArrayList<>();
 
         startGame();

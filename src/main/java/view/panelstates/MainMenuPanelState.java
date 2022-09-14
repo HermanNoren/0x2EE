@@ -1,5 +1,6 @@
 package view.panelstates;
 
+import controllers.KeyboardController;
 import main.Game;
 import view.MainPanel;
 import view.drawers.ButtonDrawer;
@@ -7,6 +8,7 @@ import view.drawers.IDrawer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class MainMenuPanelState implements IPanelState {
@@ -15,9 +17,12 @@ public class MainMenuPanelState implements IPanelState {
     private ArrayList<IDrawer> drawers;
     private MainPanel mainPanel;
 
+    private KeyListener keyListener;
+
     public MainMenuPanelState(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
         this.game = mainPanel.getGame();
+        this.keyListener = new KeyboardController(game);
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(game.getMainMenuButtons()));
     }
@@ -33,5 +38,10 @@ public class MainMenuPanelState implements IPanelState {
         String paused = "0x2EE";
         g2.drawString(paused, (mainPanel.getWidth() - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
 
+    }
+
+    @Override
+    public KeyListener getKeyListener() {
+        return keyListener;
     }
 }

@@ -1,12 +1,15 @@
 package view.panelstates;
 
 import com.sun.tools.javac.Main;
+import controllers.KeyboardController;
 import main.Game;
 import view.MainPanel;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class PausePanelState implements IPanelState {
@@ -14,15 +17,19 @@ public class PausePanelState implements IPanelState {
     private MainPanel mainPanel;
     private Game game;
 
+    private KeyListener keyListener;
+
     private ArrayList<IDrawer> drawers;
 
     public PausePanelState(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
         this.game = mainPanel.getGame();
+        this.keyListener = new KeyboardController(game);
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(game.getPauseButtons()));
 
     }
+
 
     @Override
     public void draw(Graphics2D g2) {
@@ -38,6 +45,9 @@ public class PausePanelState implements IPanelState {
 
     }
 
-
+    @Override
+    public KeyListener getKeyListener() {
+        return keyListener;
+    }
 
 }

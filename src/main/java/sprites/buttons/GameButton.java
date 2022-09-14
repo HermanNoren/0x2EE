@@ -1,5 +1,4 @@
 package sprites.buttons;
-
 import helperclasses.Rect;
 import helperclasses.Vector2;
 import sprites.ISprite;

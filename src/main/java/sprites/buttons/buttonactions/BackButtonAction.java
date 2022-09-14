@@ -1,5 +1,4 @@
 package sprites.buttons.buttonactions;
-
 import gamestates.MainMenuState;
 import main.Game;
 

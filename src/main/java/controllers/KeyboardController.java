@@ -1,8 +1,6 @@
 package controllers;
-
 import gamestates.PauseState;
 import main.Game;
-
 import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -40,6 +38,7 @@ public class KeyboardController implements KeyListener {
             }
             case (KeyEvent.VK_ESCAPE) -> {
                 game.setState(new PauseState(game));
+
             }
         }
     }
