@@ -6,21 +6,25 @@ import view.panelstates.EPanelState;
 
 import java.util.ArrayList;
 
-public class MainMenuState implements IGameState {
+public class PauseState implements IGameState{
+
     private Game game;
+
     private int activePos;
     private boolean recentlyMovedUp;
     private boolean recentlyMovedDown;
-    private final ArrayList<GameButton> buttons;
-    private final EPanelState stateTag = EPanelState.MAINMENU;
 
-    public MainMenuState(Game game) {
+    private final EPanelState stateTag = EPanelState.PAUSE;
+
+    private ArrayList<GameButton> buttons;
+
+    public PauseState(Game game){
         this.game = game;
         activePos = 0;
         recentlyMovedUp = false;
         recentlyMovedDown = false;
+        buttons = game.getPauseButtons();
 
-        buttons = game.getMainMenuButtons();
     }
 
     @Override
@@ -54,4 +58,5 @@ public class MainMenuState implements IGameState {
             buttons.get(activePos).isClicked();
         }
     }
+
 }

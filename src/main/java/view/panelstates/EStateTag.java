@@ -10,5 +10,6 @@ public enum EStateTag {
     HIGHSCORES,
     GAMEOVER,
     NEWHIGHSCORE,
-    SHOP;
+    SHOP,
+    HOWTOPLAY;
 }

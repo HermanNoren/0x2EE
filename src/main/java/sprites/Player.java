@@ -2,7 +2,7 @@ package sprites;
 
 import armor.Armor;
 import controllers.EDirection;
-import main.Game;
+import helperclasses.Vector2;
 import weapons.Weapon;
 
 /**
@@ -15,7 +15,8 @@ public class Player extends Entity implements ISprite, IMovableSprite {
 
     protected Armor armor;
     boolean isDamageTaken;
-    private Game game;
+
+    private boolean upPressed, downPressed, leftPressed, rightPressed;
 
     /**
      * @param x, starting x-position
@@ -23,13 +24,65 @@ public class Player extends Entity implements ISprite, IMovableSprite {
      * @param health, starting health
      * Player constructor, used to create an instance of player.
      */
-    public Player(int x, int y, int health, Game game){
+    public Player(int x, int y, int health){
         super(x, y, health);
-        this.game = game;
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);
+        upPressed = false;
+        downPressed = false;
+        leftPressed = false;
+        rightPressed = false;
         score = 0;
         money = 0;
+    }
+
+    public void setUpPressed(boolean value) {
+        upPressed = value;
+    }
+
+    public void setDownPressed(boolean value) {
+        downPressed = value;
+    }
+
+    public void setRightPressed(boolean value) {
+        rightPressed = value;
+    }
+
+    public void setLeftPressed(boolean value) {
+        leftPressed = value;
+    }
+
+    @Override
+    public void update() {
+        acc.x = 0;
+
+        /*
+        if (rightPressed && leftPressed) { }
+        else if (rightPressed) { acc.x = 0.1; }
+        else if (leftPressed) { acc.x = -0.1; }
+         */
+
+        if (getDirection() == EDirection.RIGHT) { acc.x = 0.1; }
+        if (getDirection() == EDirection.LEFT) { acc.x = -0.1; }
+
+        acc.x += vel.x * -0.12;
+        vel.x += acc.x;
+        pos.x += vel.x;
+
+        acc.y = 0;
+
+        /*
+        if (upPressed && downPressed) { }
+        else if (downPressed) { acc.y = 0.1; }
+        else if (upPressed) { acc.y = -0.1; }
+         */
+
+        if (getDirection() == EDirection.UP) { acc.y = -0.1; }
+        if (getDirection() == EDirection.DOWN) { acc.y = 0.1; }
+
+        acc.y += vel.y * -0.12;
+        vel.y += acc.y;
+        pos.y += vel.y;
     }
 
     /**
@@ -38,29 +91,13 @@ public class Player extends Entity implements ISprite, IMovableSprite {
     public int damageDelt() {
         return this.weapon.damage;
     }
-    public void movePlayer(){
-        if(game.getAPressed()){
-            setDirection(EDirection.LEFT);
-            updatePos();
-        }else if(game.getWPressed()){
-            setDirection(EDirection.UP);
-            updatePos();
-        }else if(game.getSPressed()){
-            setDirection(EDirection.DOWN);
-            updatePos();
-        }else if(game.getDPressed()){
-            setDirection(EDirection.RIGHT);
-            updatePos();
-        }else {
-            setDirection(EDirection.NOT_MOVING);
-        }
-    }
 
     public void damageTaken(int damage) {
 
     }
 
     public boolean isDamageTaken(){
+
         return isDamageTaken;
     }
 
@@ -72,21 +109,9 @@ public class Player extends Entity implements ISprite, IMovableSprite {
     }
 
     /**
-     * @return the player health
-     */
-    public int getHealth(){
-        return health;
-    }
-
-    /**
      * @return currency acquired during game
      */
     public int getMoney(){
         return money;
     }
-    @Override
-    public void update(){
-        movePlayer();
-    }
-
 }

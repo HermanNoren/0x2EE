@@ -38,6 +38,11 @@ public class InGameState implements IGameState {
      */
     @Override
     public void update() {
+        if (game.getEscapePressed()) {
+            game.resetEscapePressed();
+            game.setState(new PauseState(game));
+        }
+
         for (ISprite sprite : sprites) {
             sprite.update();
         }

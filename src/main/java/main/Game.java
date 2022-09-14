@@ -1,20 +1,15 @@
 package main;
 
-import gamestates.IGameState;
+import gamestates.*;
 import mapclasses.GameMap;
-import gamestates.MainMenuState;
 import sprites.ISprite;
 import sprites.Player;
-import sprites.buttons.GameButton;
-import sprites.buttons.buttonactions.EmptyButtonAction;
-import sprites.buttons.buttonactions.StartGameButtonAction;
-import sprites.enemies.EEnemyType;
-import sprites.enemies.Enemy;
-import sprites.enemies.IEnemy;
-import sprites.enemies.NormalEnemy;
+import buttons.GameButton;
+import buttons.buttonactions.BackButtonAction;
+import buttons.buttonactions.EmptyButtonAction;
+import buttons.buttonactions.StartGameButtonAction;
 import view.IObserver;
-import view.panelstates.EStateTag;
-
+import view.panelstates.EPanelState;
 
 import java.util.ArrayList;
 
@@ -29,34 +24,28 @@ public class Game implements Runnable {
     private ArrayList<IObserver> observers;
     private IGameState state;
     private Player player;
-    private ArrayList<Enemy> enemies;
     private GameMap gameMap;
-    private GameButton mainMenuButton1;
-    private GameButton mainMenuButton2;
-    private GameButton mainMenuButton3;
-    private ArrayList<GameButton> mainMenuButtons;
-    private boolean wPressed;
-    private boolean aPressed;
-    private boolean sPressed;
-    private boolean dPressed;
-    private boolean enterPressed;
 
+    private ArrayList<GameButton> mainMenuButtons, backButtons, pauseButtons;
+
+    private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed;
 
     private boolean stateChangedFlag;
 
     public Game() {
-        player = new Player(10, 10, 100, this);
-        enemies = new ArrayList<>();
-        enemies.add(new NormalEnemy(100, 100, 200, EEnemyType.NORMAL));
+        player = new Player(10, 10, 100);
         gameMap = new GameMap();
 
         initMainMenuButtons();
+        initBackButtons();
+        initPauseButtons();
 
         wPressed = false;
         aPressed = false;
         sPressed = false;
         dPressed = false;
         enterPressed = false;
+        escapePressed = false;
 
         stateChangedFlag = false;
 
@@ -72,10 +61,6 @@ public class Game implements Runnable {
      */
     public Player getPlayer() {
         return player;
-    }
-
-    public ArrayList<Enemy> getEnemies(){
-        return enemies;
     }
 
     /**
@@ -94,68 +79,86 @@ public class Game implements Runnable {
         return mainMenuButtons;
     }
 
-    /**
-     * Used as a way for outside controllers to tell the game whether the W key is pressed or released.
-     * @param value True if W pressed, else False
-     */
-    public void setWPressed(boolean value) {
-        wPressed = value;
+    public ArrayList<GameButton> getBackButtons(){return backButtons;}
+
+    public ArrayList<GameButton> getPauseButtons(){
+        return pauseButtons;
     }
 
     /**
-     * Used as a way for outside controllers to tell the game whether the A key is pressed or released.
-     * @param value True if A pressed, else False
+     * Used as a way for outside components to tell Game if the W key is pressed.
      */
-    public void setAPressed(boolean value) {
-        aPressed = value;
+    public void setWPressed() {
+        wPressed = true;
     }
 
     /**
-     * Used as a way for outside controllers to tell the game whether the S key is pressed or released.
-     * @param value True if S pressed, else False
+     * Used as a way for outside components to tell Game if the W key is released.
      */
-    public void setSPressed(boolean value) {
-        sPressed = value;
+    public void resetWPressed() {
+        wPressed = false;
     }
 
     /**
-     * Used as a way for outside controllers to tell the game whether the D key is pressed or released.
-     * @param value True if D pressed, else False
+     * Used as a way for outside components to tell Game if the S key is pressed.
      */
-    public void setDPressed(boolean value) {
-        dPressed = value;
+    public void setSPressed() {
+        sPressed = true;
     }
 
     /**
-     * Used as a way for outside controllers to tell the game whether the Enter key is pressed or released.
-     * @param value True if Enter pressed, else False
+     * Used as a way for outside components to tell Game if the S key is released.
      */
-    public void setEnterPressed(boolean value) {
-        enterPressed = value;
+    public void resetSPressed() {
+        sPressed = false;
+    }
+
+    /**
+     * Used as a way for outside components to tell Game if the Enter key is pressed.
+     */
+    public void setEnterPressed() {
+        enterPressed = true;
+    }
+
+    /**
+     * Used as a way for outside components to tell Game if the Enter key is released.
+     */
+    public void resetEnterPressed() {
+        enterPressed = false;
+    }
+
+    /**
+     * Used as a way for outside components to tell Game if the Escape key is pressed.
+     */
+    public void setEscapePressed() {
+        escapePressed = true;
+    }
+
+    /**
+     * Used as a way for outside components to tell Game if the Escape key is released.
+     */
+    public void resetEscapePressed() {
+        escapePressed = false;
     }
 
     /**
      * Used as a way for objects inside to read whether the W key is pressed
-     * @return
+     * @return wPressed
      */
     public boolean getWPressed() {
         return wPressed;
-    }
-
-    public boolean getAPressed() {
-        return aPressed;
     }
 
     public boolean getSPressed() {
         return sPressed;
     }
 
-    public boolean getDPressed() {
-        return dPressed;
-    }
-
     public boolean getEnterPressed() {
         return enterPressed;
+    }
+
+    public boolean getEscapePressed() {
+        return escapePressed;
     }
 
     public boolean readStateChangedFlag() {
@@ -176,10 +179,10 @@ public class Game implements Runnable {
     }
 
     /**
-     * Returns an Enum containing the current state.
+     * Returns a string containing a unique tag used for identifying the different game states from outside sources.
      * @return StateTag
      */
-    public EStateTag getStateTag() {
+    public EPanelState getStateTag() {
         return state.getStateTag();
     }
 
@@ -223,9 +226,6 @@ public class Game implements Runnable {
         }
     }
 
-
-
-
     /**
      * Main game loop.
      * Handles logic of when to update the internal game classes and when to notify potential observers
@@ -246,7 +246,6 @@ public class Game implements Runnable {
 
         while(true) {
             currentTime = System.nanoTime();
-
             deltaUpdateTime += (currentTime - previousTime) / timePerUpdate;
             deltaDrawTime += (currentTime - previousTime) / timePerRender;
             previousTime = currentTime;
@@ -284,12 +283,33 @@ public class Game implements Runnable {
      * Initializes the buttons used in the main menu and stores them in an ArrayList
      */
     private void initMainMenuButtons() {
-        mainMenuButton1 = new GameButton("Start Game", 50, 50, new StartGameButtonAction(this));
-        mainMenuButton2 = new GameButton("Knapp 2", 50, 150, new EmptyButtonAction());
-        mainMenuButton3 = new GameButton("Knapp 3", 50, 250, new EmptyButtonAction());
+        GameButton mainMenuButton1 = new GameButton("PLAY", 325, 200, new StartGameButtonAction(this));
+        GameButton mainMenuButton2 = new GameButton("HIGHSCORES", 325, 300, new EmptyButtonAction());
+        GameButton mainMenuButton3 = new GameButton("HOW TO PLAY", 325, 400, new EmptyButtonAction());
+        GameButton mainMenuButton4 = new GameButton("QUIT", 325, 500, new EmptyButtonAction());
         mainMenuButtons = new ArrayList<>();
         mainMenuButtons.add(mainMenuButton1);
         mainMenuButtons.add(mainMenuButton2);
         mainMenuButtons.add(mainMenuButton3);
+        mainMenuButtons.add(mainMenuButton4);
     }
+
+    private void initBackButtons(){
+        GameButton backButton1 = new GameButton("BACK", 325, 650, new BackButtonAction(this));
+        backButton1.setIsSelected(true);
+        backButtons = new ArrayList<>();
+        backButtons.add(backButton1);
+    }
+
+    private void initPauseButtons(){
+        GameButton pauseButton1 = new GameButton("RESUME", 325, 200, new StartGameButtonAction(this));
+        GameButton pauseButton2 = new GameButton("RESTART", 325, 300, new StartGameButtonAction(this));
+        GameButton pauseButton3 = new GameButton("MAIN MENU", 325, 400, new StartGameButtonAction(this));
+        pauseButtons = new ArrayList<>();
+        pauseButtons.add(pauseButton1);
+        pauseButtons.add(pauseButton2);
+        pauseButtons.add(pauseButton3);
+
+    }
+
 }
