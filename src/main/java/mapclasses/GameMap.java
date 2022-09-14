@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class GameMap {
 
-    private String[] gameMap = new String[] {
+    private final String[] gameMap = new String[] {
             "                                        ",
             "                                        ",
             "                                        ",
@@ -30,32 +30,31 @@ public class GameMap {
             "                                        "
     };
 
-    ArrayList<ISprite> tiles;
+    private ArrayList<ISprite> tiles;
 
     public GameMap() {
-        tiles = createMap();
+        createMap();
     }
 
     public ArrayList<ISprite> getTiles() {
         return new ArrayList<>(tiles);
     }
 
-    private ArrayList<ISprite> createMap() {
-        ArrayList<ISprite> tiles = new ArrayList<>();
+    private void createMap() {
+        tiles = new ArrayList<>();
         int x = 0;
         int y = 0;
         for (String row : gameMap) {
             for (char tile : row.toCharArray()) {
                 switch(tile) {
                     case 'W':
-                        tiles.add(new Tile(x, y));
+                        tiles.add(new Terrain(x, y));
                 }
                 x += Config.SPRITE_SIZE;
             }
             x = 0;
             y += Config.SPRITE_SIZE;
         }
-        return tiles;
     }
 }
 
