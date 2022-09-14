@@ -1,6 +1,7 @@
 package sprites;
 
 import armor.Armor;
+import controllers.EDirection;
 import helperclasses.Vector2;
 import weapons.Weapon;
 
@@ -55,8 +56,14 @@ public class Player extends Entity implements ISprite, IMovableSprite {
     public void update() {
         acc.x = 0;
 
-        if (rightPressed) { acc.x = 0.1; }
+        /*
+        if (rightPressed && leftPressed) { }
+        else if (rightPressed) { acc.x = 0.1; }
         else if (leftPressed) { acc.x = -0.1; }
+         */
+
+        if (getDirection() == EDirection.RIGHT) { acc.x = 0.1; }
+        if (getDirection() == EDirection.LEFT) { acc.x = -0.1; }
 
         acc.x += vel.x * -0.12;
         vel.x += acc.x;
@@ -64,8 +71,14 @@ public class Player extends Entity implements ISprite, IMovableSprite {
 
         acc.y = 0;
 
-        if (downPressed) { acc.y = 0.1; }
+        /*
+        if (upPressed && downPressed) { }
+        else if (downPressed) { acc.y = 0.1; }
         else if (upPressed) { acc.y = -0.1; }
+         */
+
+        if (getDirection() == EDirection.UP) { acc.y = -0.1; }
+        if (getDirection() == EDirection.DOWN) { acc.y = 0.1; }
 
         acc.y += vel.y * -0.12;
         vel.y += acc.y;

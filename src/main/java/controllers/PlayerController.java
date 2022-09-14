@@ -11,7 +11,6 @@ public class PlayerController implements KeyListener {
 
     public PlayerController(Game game) {
         this.player = game.getPlayer();
-
     }
 
     @Override

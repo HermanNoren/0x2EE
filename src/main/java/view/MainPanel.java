@@ -1,7 +1,6 @@
 package view;
 
 import main.Game;
-import controllers.KeyClickedController;
 import view.panelstates.IPanelState;
 import view.panelstates.PanelStateFactory;
 
@@ -11,7 +10,7 @@ import java.awt.event.KeyListener;
 
 public class MainPanel extends JPanel implements IObserver {
 
-    private Game game;
+    private final Game game;
     private IPanelState state;
 
     public MainPanel(Game game) {

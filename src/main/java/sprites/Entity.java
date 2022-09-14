@@ -19,6 +19,7 @@ public abstract class Entity implements ISprite {
     Vector2 acc;
     int health;
     private EDirection direction;
+    private EDirection lastDirection;
     private int size = Config.SPRITE_SIZE * 3;
     private Rect rect;
 
@@ -32,6 +33,7 @@ public abstract class Entity implements ISprite {
 
     public Entity(int x, int y, int health){
         this.direction = EDirection.NOT_MOVING; // Default value
+        this.lastDirection = direction;
         this.pos = new Vector2(x, y);
         this.vel = new Vector2(0.5, 0.5);
         this.acc = new Vector2(0, 0);
@@ -46,6 +48,7 @@ public abstract class Entity implements ISprite {
      * Used to update direction of entity.
      */
     public void setDirection(EDirection direction) {
+        lastDirection = this.direction;
         this.direction = direction;
     }
 
@@ -57,6 +60,9 @@ public abstract class Entity implements ISprite {
         return direction;
     }
 
+    public EDirection getLastDirection() {
+        return lastDirection;
+    }
     /**
      * Updates current position of entity on game screen.
      */
