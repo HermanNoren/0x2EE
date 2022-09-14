@@ -14,9 +14,9 @@ import helperclasses.Vector2;
 
 public abstract class Entity implements ISprite {
     int animationCounter;
-    private Vector2 pos;
-    private Vector2 vel;
-    private Vector2 acc;
+    Vector2 pos;
+    Vector2 vel;
+    Vector2 acc;
     private int health;
     private EDirection direction;
     private EDirection lastDirection;
