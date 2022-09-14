@@ -2,7 +2,7 @@ package view;
 
 import main.Game;
 import view.panelstates.IPanelState;
-import view.panelstates.PausePanelState;
+import view.panelstates.PanelStateFactory;
 
 import javax.swing.JPanel;
 import java.awt.*;

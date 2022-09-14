@@ -1,4 +1,4 @@
-package view;
+package view.panelstates;
 
 import view.MainPanel;
 import view.panelstates.*;
