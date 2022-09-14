@@ -1,11 +1,12 @@
 package main;
 
-import gamestates.IGameState;
+import com.sun.tools.javac.Main;
+import gamestates.*;
 import mapclasses.GameMap;
-import gamestates.MainMenuState;
 import sprites.ISprite;
 import sprites.Player;
 import sprites.buttons.GameButton;
+import sprites.buttons.buttonactions.BackButtonAction;
 import sprites.buttons.buttonactions.EmptyButtonAction;
 import sprites.buttons.buttonactions.StartGameButtonAction;
 import view.IObserver;
@@ -28,7 +29,20 @@ public class Game implements Runnable {
     private GameButton mainMenuButton1;
     private GameButton mainMenuButton2;
     private GameButton mainMenuButton3;
+    private GameButton mainMenuButton4;
+
+    private GameButton backButton1;
+
+    private GameButton pauseButton1;
+    private GameButton pauseButton2;
+    private GameButton pauseButton3;
+
+
     private ArrayList<GameButton> mainMenuButtons;
+
+    private ArrayList<GameButton> backButtons;
+
+    private ArrayList<GameButton> pauseButtons;
     private boolean wPressed;
     private boolean aPressed;
     private boolean sPressed;
@@ -43,6 +57,8 @@ public class Game implements Runnable {
         gameMap = new GameMap();
 
         initMainMenuButtons();
+        initBackButtons();
+        initPauseButtons();
 
         wPressed = false;
         aPressed = false;
@@ -80,6 +96,13 @@ public class Game implements Runnable {
      */
     public ArrayList<GameButton> getMainMenuButtons() {
         return mainMenuButtons;
+    }
+
+
+    public ArrayList<GameButton> getBackButtons(){return backButtons;}
+
+    public ArrayList<GameButton> getPauseButtons(){
+        return pauseButtons;
     }
 
     /**
@@ -231,7 +254,6 @@ public class Game implements Runnable {
 
         while(true) {
             currentTime = System.nanoTime();
-
             deltaUpdateTime += (currentTime - previousTime) / timePerUpdate;
             deltaDrawTime += (currentTime - previousTime) / timePerRender;
             previousTime = currentTime;
@@ -269,12 +291,33 @@ public class Game implements Runnable {
      * Initializes the buttons used in the main menu and stores them in an ArrayList
      */
     private void initMainMenuButtons() {
-        mainMenuButton1 = new GameButton("Start Game", 50, 50, new StartGameButtonAction(this));
-        mainMenuButton2 = new GameButton("Knapp 2", 50, 150, new EmptyButtonAction());
-        mainMenuButton3 = new GameButton("Knapp 3", 50, 250, new EmptyButtonAction());
+        mainMenuButton1 = new GameButton("PLAY", 325, 200, new StartGameButtonAction(this));
+        mainMenuButton2 = new GameButton("HIGHSCORES", 325, 300, new EmptyButtonAction());
+        mainMenuButton3 = new GameButton("HOW TO PLAY", 325, 400, new EmptyButtonAction());
+        mainMenuButton4 = new GameButton("QUIT", 325, 500, new EmptyButtonAction());
         mainMenuButtons = new ArrayList<>();
         mainMenuButtons.add(mainMenuButton1);
         mainMenuButtons.add(mainMenuButton2);
         mainMenuButtons.add(mainMenuButton3);
+        mainMenuButtons.add(mainMenuButton4);
     }
+
+    private void initBackButtons(){
+        backButton1 = new GameButton("BACK", 325, 650, new BackButtonAction(this));
+        backButton1.setIsSelected(true);
+        backButtons = new ArrayList<>();
+        backButtons.add(backButton1);
+    }
+
+    private void initPauseButtons(){
+        pauseButton1 = new GameButton("RESUME", 325, 200, new StartGameButtonAction(this));
+        pauseButton2 = new GameButton("RESTART", 325, 300, new StartGameButtonAction(this));
+        pauseButton3 = new GameButton("MAIN MENU", 325, 400, new StartGameButtonAction(this));
+        pauseButtons = new ArrayList<>();
+        pauseButtons.add(pauseButton1);
+        pauseButtons.add(pauseButton2);
+        pauseButtons.add(pauseButton3);
+
+    }
+
 }

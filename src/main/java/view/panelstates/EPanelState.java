@@ -10,5 +10,6 @@ public enum EPanelState {
     HIGHSCORES,
     GAMEOVER,
     NEWHIGHSCORE,
-    SHOP;
+    SHOP,
+    HOWTOPLAY;
 }

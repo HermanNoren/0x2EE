@@ -1,9 +1,12 @@
 package controllers;
 
+import gamestates.PauseState;
 import main.Game;
 
+import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.Key;
 
 public class KeyboardController implements KeyListener {
     private Game game;
@@ -34,6 +37,9 @@ public class KeyboardController implements KeyListener {
             }
             case (KeyEvent.VK_ENTER) -> {
                 game.setEnterPressed(true);
+            }
+            case (KeyEvent.VK_ESCAPE) -> {
+                game.setState(new PauseState(game));
             }
         }
     }
