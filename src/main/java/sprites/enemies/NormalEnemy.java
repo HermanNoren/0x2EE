@@ -1,15 +1,10 @@
 package sprites.enemies;
 
-public class NormalEnemy extends Enemy implements IEnemy {
+public class NormalEnemy extends Enemy{
 
 
-    public NormalEnemy(int position_x, int position_y, int health, EEnemyType enemyType) {
-        super(position_x, position_y, health, enemyType);
-    }
-
-    @Override
-    public EEnemyType getEnemyType() {
-        return null;
+    protected NormalEnemy(int position_x, int position_y, double vel, int health) {
+        super(position_x, position_y, vel, health);
     }
 
     @Override

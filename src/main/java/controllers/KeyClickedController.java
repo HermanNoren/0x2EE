@@ -1,5 +1,4 @@
 package controllers;
-import gamestates.PauseState;
 import main.Game;
 
 import java.awt.event.KeyEvent;
