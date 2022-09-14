@@ -32,7 +32,6 @@ public class InGamePanelState implements IPanelState {
         hud = new HUD(game.getPlayer());
         drawers = new ArrayList<>();
         drawers.add(new PlayerDrawer(game.getPlayer()));
-        drawers.add(new EnemyDrawer(game.getEnemies()));
         drawers.add(new TileDrawer(game.getTiles()));
     }
 

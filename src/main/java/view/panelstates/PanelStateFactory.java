@@ -1,15 +1,10 @@
 package view.panelstates;
 
-import gamestates.HowToPlayState;
-import main.Game;
 import view.MainPanel;
-
-import javax.swing.*;
-import java.io.FileNotFoundException;
 
 public class PanelStateFactory {
 
-    public static IPanelState createPanelState(EStateTag state, MainPanel mainPanel)  {
+    public static IPanelState createPanelState(EPanelState state, MainPanel mainPanel)  {
         switch (state) {
             case INGAME -> {
                 return new InGamePanelState(mainPanel);
