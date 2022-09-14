@@ -2,7 +2,7 @@ package view;
 
 import main.Game;
 import view.panelstates.IPanelState;
-import view.panelstates.PanelStateFactory;
+import view.panelstates.PausePanelState;
 
 import javax.swing.JPanel;
 import java.awt.*;
@@ -11,6 +11,7 @@ import java.awt.event.KeyListener;
 public class MainPanel extends JPanel implements IObserver {
 
     private final Game game;
+
     private IPanelState state;
 
     public MainPanel(Game game) {

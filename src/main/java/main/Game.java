@@ -9,6 +9,7 @@ import buttons.buttonactions.BackButtonAction;
 import buttons.buttonactions.EmptyButtonAction;
 import buttons.buttonactions.StartGameButtonAction;
 import sprites.enemies.Enemy;
+import sprites.enemies.IEnemy;
 import view.IObserver;
 import view.panelstates.EPanelState;
 
@@ -25,6 +26,7 @@ public class Game implements Runnable {
     private ArrayList<IObserver> observers;
     private IGameState state;
     private Player player;
+    private ArrayList<IEnemy> enemies;
     private GameMap gameMap;
 
     private ArrayList<GameButton> mainMenuButtons, backButtons, pauseButtons;
@@ -33,8 +35,38 @@ public class Game implements Runnable {
 
     private boolean stateChangedFlag;
 
-    public Game() {
-        player = new Player(10, 10, 100);
+    private Game() {
+//        player = new Player(10, 10, 0.5, 100);
+//        gameMap = new GameMap();
+//
+//        initMainMenuButtons();
+//        initBackButtons();
+//        initPauseButtons();
+//
+//        wPressed = false;
+//        aPressed = false;
+//        sPressed = false;
+//        dPressed = false;
+//        enterPressed = false;
+//        escapePressed = false;
+//
+//        stateChangedFlag = false;
+//
+//        state = new MainMenuState(this);
+//        observers = new ArrayList<>();
+//
+//        startGame();
+    }
+    private static Game game;
+    public static Game getInstance(){
+        if(game == null){
+            game = new Game();
+        }return game;
+    }
+
+    public void createGame(){
+        player = new Player(10, 10, 0.5, 100);
+        enemies = new ArrayList<>();
         gameMap = new GameMap();
 
         initMainMenuButtons();
@@ -62,6 +94,9 @@ public class Game implements Runnable {
      */
     public Player getPlayer() {
         return player;
+    }
+    public ArrayList<IEnemy> getEnemies(){
+        return enemies;
     }
 
     /**
