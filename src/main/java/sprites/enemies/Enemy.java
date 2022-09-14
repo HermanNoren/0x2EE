@@ -10,9 +10,10 @@ public abstract class Enemy extends sprites.Entity {
 
     private EEnemyType enemyType;
 
-    public Enemy(int position_x, int position_y, int health, EEnemyType enemyType){
-        super(position_x, position_y, health);
-        enemyType = enemyType;
+    public Enemy(int position_x, int position_y, int vel,  int health, EEnemyType enemyType){
+        super(position_x, position_y, vel, health);
+        this.enemyType = enemyType;
+
     }
 
 

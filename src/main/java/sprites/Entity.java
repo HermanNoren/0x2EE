@@ -17,11 +17,10 @@ public abstract class Entity implements ISprite {
     private Vector2 pos;
     private Vector2  vel;
     private Vector2 acc;
-     int health;
+    int health;
     private EDirection direction;
     private int size = Config.SPRITE_SIZE * 3;
     private Rect rect;
-
 
     /**
      *
@@ -30,10 +29,10 @@ public abstract class Entity implements ISprite {
      * @param health
      */
 
-    public Entity(int x, int y, int health){
+    public Entity(int x, int y, int vel, int health){
         this.direction = EDirection.NOT_MOVING; // Default value
         this.pos = new Vector2(x, y);
-        this.vel = new Vector2(0.5, 0.5);
+        this.vel = new Vector2(vel, vel);
         this.acc = new Vector2(0, 0);
         this.rect = new Rect(x, y, size, size);
         this.health = health;

@@ -23,6 +23,7 @@ import java.util.ArrayList;
  * With help of the main game loop it delegates work to the active IGameState
  */
 public class Game implements Runnable {
+
     private Thread gameLoopThread;
     private final int FPS = 120; // FRAMES PER SECOND
     private final int UPS = 200; // UPDATES PER SECOND
@@ -40,16 +41,20 @@ public class Game implements Runnable {
     private boolean sPressed;
     private boolean dPressed;
     private boolean enterPressed;
-
-
     private boolean stateChangedFlag;
+    private static volatile Game gameInstance;
 
-    public Game() {
-        player = new Player(10, 10, 100);
+    public static Game getInstance(){
+        if (gameInstance == null){
+            gameInstance = new Game();
+        }
+        return gameInstance;
+    }
+
+    private Game() {
+        player = new Player(10, 10, 5, 100);
         enemies = new ArrayList<>();
-        enemies.add(new NormalEnemy(100, 100, 200, EEnemyType.NORMAL));
-
-
+        enemies.add(new NormalEnemy(100, 10, 2,200, EEnemyType.NORMAL));
 
         gameMap = new GameMap();
 

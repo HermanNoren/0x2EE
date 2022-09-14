@@ -22,8 +22,8 @@ public class Player extends Entity implements ISprite, IMovableSprite {
      * @param health, starting health
      * Player constructor, used to create an instance of player.
      */
-    public Player(int x, int y, int health){
-        super(x, y, health);
+    public Player(int x, int y, int vel, int health){
+        super(x, y, vel, health);
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);
         score = 0;
