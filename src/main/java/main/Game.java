@@ -25,29 +25,10 @@ public class Game implements Runnable {
     private IGameState state;
     private Player player;
     private GameMap gameMap;
-    private GameButton mainMenuButton1;
-    private GameButton mainMenuButton2;
-    private GameButton mainMenuButton3;
-    private GameButton mainMenuButton4;
 
-    private GameButton backButton1;
-
-    private GameButton pauseButton1;
-    private GameButton pauseButton2;
-    private GameButton pauseButton3;
-
-
-    private ArrayList<GameButton> mainMenuButtons;
-
-    private ArrayList<GameButton> backButtons;
-
-    private ArrayList<GameButton> pauseButtons;
-    private boolean wPressed;
-    private boolean aPressed;
-    private boolean sPressed;
-    private boolean dPressed;
-    private boolean enterPressed;
-    private boolean escapePressed;
+    private ArrayList<GameButton> mainMenuButtons, backButtons, pauseButtons;
+    
+    private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed;
 
     private boolean stateChangedFlag;
 
@@ -302,10 +283,10 @@ public class Game implements Runnable {
      * Initializes the buttons used in the main menu and stores them in an ArrayList
      */
     private void initMainMenuButtons() {
-        mainMenuButton1 = new GameButton("PLAY", 325, 200, new StartGameButtonAction(this));
-        mainMenuButton2 = new GameButton("HIGHSCORES", 325, 300, new EmptyButtonAction());
-        mainMenuButton3 = new GameButton("HOW TO PLAY", 325, 400, new EmptyButtonAction());
-        mainMenuButton4 = new GameButton("QUIT", 325, 500, new EmptyButtonAction());
+        GameButton mainMenuButton1 = new GameButton("PLAY", 325, 200, new StartGameButtonAction(this));
+        GameButton mainMenuButton2 = new GameButton("HIGHSCORES", 325, 300, new EmptyButtonAction());
+        GameButton mainMenuButton3 = new GameButton("HOW TO PLAY", 325, 400, new EmptyButtonAction());
+        GameButton mainMenuButton4 = new GameButton("QUIT", 325, 500, new EmptyButtonAction());
         mainMenuButtons = new ArrayList<>();
         mainMenuButtons.add(mainMenuButton1);
         mainMenuButtons.add(mainMenuButton2);
@@ -314,16 +295,16 @@ public class Game implements Runnable {
     }
 
     private void initBackButtons(){
-        backButton1 = new GameButton("BACK", 325, 650, new BackButtonAction(this));
+        GameButton backButton1 = new GameButton("BACK", 325, 650, new BackButtonAction(this));
         backButton1.setIsSelected(true);
         backButtons = new ArrayList<>();
         backButtons.add(backButton1);
     }
 
     private void initPauseButtons(){
-        pauseButton1 = new GameButton("RESUME", 325, 200, new StartGameButtonAction(this));
-        pauseButton2 = new GameButton("RESTART", 325, 300, new StartGameButtonAction(this));
-        pauseButton3 = new GameButton("MAIN MENU", 325, 400, new StartGameButtonAction(this));
+        GameButton pauseButton1 = new GameButton("RESUME", 325, 200, new StartGameButtonAction(this));
+        GameButton pauseButton2 = new GameButton("RESTART", 325, 300, new StartGameButtonAction(this));
+        GameButton pauseButton3 = new GameButton("MAIN MENU", 325, 400, new StartGameButtonAction(this));
         pauseButtons = new ArrayList<>();
         pauseButtons.add(pauseButton1);
         pauseButtons.add(pauseButton2);
