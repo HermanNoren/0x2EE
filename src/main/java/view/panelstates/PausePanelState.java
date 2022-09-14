@@ -6,6 +6,7 @@ import view.MainPanel;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -13,7 +14,6 @@ public class PausePanelState implements IPanelState {
 
     private MainPanel mainPanel;
     private Game game;
-
     private ArrayList<IDrawer> drawers;
 
     public PausePanelState(MainPanel mainPanel) {
@@ -21,7 +21,6 @@ public class PausePanelState implements IPanelState {
         this.game = mainPanel.getGame();
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(game.getPauseButtons()));
-
     }
 
     @Override
