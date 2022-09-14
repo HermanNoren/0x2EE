@@ -1,7 +1,8 @@
 package main;
 
 import gamestates.IGameState;
-import mapclasses.Terrain;
+import gamestates.InGameState;
+import mapclasses.TerrainBorder;
 import gamestates.MainMenuState;
 import sprites.ISprite;
 import sprites.Player;
@@ -29,7 +30,7 @@ public class Game implements Runnable {
     private IGameState state;
     private Player player;
     private ArrayList<Enemy> enemies;
-    private Terrain terrain;
+    private TerrainBorder terrainBorder;
     private GameButton mainMenuButton1;
     private GameButton mainMenuButton2;
     private GameButton mainMenuButton3;
@@ -47,7 +48,7 @@ public class Game implements Runnable {
         player = new Player(10, 10, 100, this);
         enemies = new ArrayList<>();
         enemies.add(new NormalEnemy(100, 100, 200, EEnemyType.NORMAL));
-        terrain = new Terrain();
+        terrainBorder = new TerrainBorder(960, 800);
 
         initMainMenuButtons();
 
@@ -59,7 +60,7 @@ public class Game implements Runnable {
 
         stateChangedFlag = false;
 
-        state = new MainMenuState(this);
+        state = new InGameState(this);
         observers = new ArrayList<>();
 
         startGame();
@@ -81,8 +82,8 @@ public class Game implements Runnable {
      * Returns an ArrayList containing all the tiles in the Game Map.
      * @return  All Game Map Tiles
      */
-    public ArrayList<ISprite> getTerrain() {
-        return terrain.getTerrain();
+    public ArrayList<ISprite> getTerrainBorder() {
+        return terrainBorder.getTerrainBorder();
     }
 
     /**

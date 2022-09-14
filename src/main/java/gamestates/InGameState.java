@@ -19,7 +19,7 @@ public class InGameState implements IGameState {
         this.game = game;
         sprites = new ArrayList<>();
         sprites.add(game.getPlayer());
-        sprites.addAll(game.getTerrain());
+        sprites.addAll(game.getTerrainBorder());
     }
 
 
