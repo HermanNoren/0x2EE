@@ -52,13 +52,6 @@ public class Player extends Entity implements ISprite, IMovableSprite {
     }
 
     /**
-     * @return player's health
-     */
-    public int getHealth(){
-        return health;
-    }
-
-    /**
      * @return currency acquired during game
      */
     public int getMoney(){

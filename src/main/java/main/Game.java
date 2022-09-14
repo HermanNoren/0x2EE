@@ -27,7 +27,7 @@ public class Game implements Runnable {
     private GameMap gameMap;
 
     private ArrayList<GameButton> mainMenuButtons, backButtons, pauseButtons;
-    
+
     private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed;
 
     private boolean stateChangedFlag;
@@ -49,7 +49,7 @@ public class Game implements Runnable {
 
         stateChangedFlag = false;
 
-        state = new HighscoreState(this);
+        state = new MainMenuState(this);
         observers = new ArrayList<>();
 
         startGame();

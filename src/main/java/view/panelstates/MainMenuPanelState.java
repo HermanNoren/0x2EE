@@ -8,6 +8,7 @@ import view.drawers.IDrawer;
 
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.util.ArrayList;
 
 public class MainMenuPanelState implements IPanelState {
@@ -33,6 +34,7 @@ public class MainMenuPanelState implements IPanelState {
         for (IDrawer drawer : drawers) {
             drawer.draw(g2);
         }
+
         g2.setColor(Color.black);
         g2.setFont(new Font("Public Pixel", Font.PLAIN, 64));
         String paused = "0x2EE";
