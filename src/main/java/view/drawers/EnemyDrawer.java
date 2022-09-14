@@ -15,11 +15,11 @@ import java.util.ArrayList;
 
 public class EnemyDrawer implements IDrawer {
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
-    private final ArrayList<Enemy> enemies;
+    private final ArrayList<IEnemy> enemies;
     private int animationCounter;
     private int imageSwitcher;
 
-    public EnemyDrawer(ArrayList<Enemy> enemies){
+    public EnemyDrawer(ArrayList<IEnemy> enemies){
         this.enemies = enemies;
         initEnemyImages();
 
@@ -69,7 +69,7 @@ public class EnemyDrawer implements IDrawer {
     @Override
     public void draw(Graphics2D g2) {
         movementAnimation();
-        for(Entity enemy: enemies){
+        for(IEnemy enemy: enemies){
             switch (enemy.getDirection()){
                 case UP ->{
                     if(imageSwitcher == 1){
@@ -110,7 +110,7 @@ public class EnemyDrawer implements IDrawer {
             if(!(prevImg == null)){
                 g2.drawImage(activeImage, (int)enemy.getPos().x, (int)enemy.getPos().y, enemy.getSize(), enemy.getSize(), null);
             }else {
-                g2.drawImage(up1, (int)enemy.getPos().x, (int)enemy.getPos().y, enemy.getSize(), enemy.getSize(), null);
+                g2.drawImage(up1, (int) enemy.getPos().x, (int)enemy.getPos().y, enemy.getSize(), enemy.getSize(), null);
             }
         }
     }

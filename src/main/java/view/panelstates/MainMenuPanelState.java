@@ -7,6 +7,7 @@ import view.drawers.IDrawer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class MainMenuPanelState implements IPanelState {
@@ -17,7 +18,7 @@ public class MainMenuPanelState implements IPanelState {
 
     public MainMenuPanelState(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
-        this.game = mainPanel.getGame();
+        this.game = Game.getInstance();
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(game.getMainMenuButtons()));
     }
@@ -27,5 +28,10 @@ public class MainMenuPanelState implements IPanelState {
         for (IDrawer drawer : drawers) {
             drawer.draw(g);
         }
+    }
+
+    @Override
+    public KeyListener getKeyListener() {
+        return null;
     }
 }

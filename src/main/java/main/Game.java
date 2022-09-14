@@ -8,10 +8,7 @@ import sprites.Player;
 import sprites.buttons.GameButton;
 import sprites.buttons.buttonactions.EmptyButtonAction;
 import sprites.buttons.buttonactions.StartGameButtonAction;
-import sprites.enemies.EEnemyType;
-import sprites.enemies.Enemy;
-import sprites.enemies.IEnemy;
-import sprites.enemies.NormalEnemy;
+import sprites.enemies.*;
 import view.IObserver;
 import view.panelstates.EStateTag;
 
@@ -23,14 +20,13 @@ import java.util.ArrayList;
  * With help of the main game loop it delegates work to the active IGameState
  */
 public class Game implements Runnable {
-
     private Thread gameLoopThread;
     private final int FPS = 120; // FRAMES PER SECOND
     private final int UPS = 200; // UPDATES PER SECOND
     private ArrayList<IObserver> observers;
     private IGameState state;
     private Player player;
-    private ArrayList<Enemy> enemies;
+    private ArrayList<IEnemy> enemies;
     private GameMap gameMap;
     private GameButton mainMenuButton1;
     private GameButton mainMenuButton2;
@@ -52,9 +48,34 @@ public class Game implements Runnable {
     }
 
     private Game() {
-        player = new Player(10, 10, 5, 100);
+//        player = new Player(10, 10, 5, 100);
+//        enemies = new ArrayList<>();
+//        enemies.add(new NormalEnemy(100, 10, 2,200, EEnemyType.NORMAL));
+//
+//        gameMap = new GameMap();
+//
+//        initMainMenuButtons();
+//
+//        wPressed = false;
+//        aPressed = false;
+//        sPressed = false;
+//        dPressed = false;
+//        enterPressed = false;
+//
+//        stateChangedFlag = false;
+//
+//        state = new MainMenuState(this);
+//        observers = new ArrayList<>();
+//
+//        startGame();
+    }
+    public void createGame(){
+        player = new Player(10, 10, 0.5, 100);
+
         enemies = new ArrayList<>();
-        enemies.add(new NormalEnemy(100, 10, 2,200, EEnemyType.NORMAL));
+        EnemyFactory enemyFactory;
+        enemyFactory = new NormalEnemyFactory();
+        enemies.add(enemyFactory.createEnemy());
 
         gameMap = new GameMap();
 
@@ -82,7 +103,7 @@ public class Game implements Runnable {
         return player;
     }
 
-    public ArrayList<Enemy> getEnemies(){
+    public ArrayList<IEnemy> getEnemies(){
         return enemies;
     }
 
@@ -240,7 +261,6 @@ public class Game implements Runnable {
      */
     @Override
     public void run() {
-
         double timePerRender =  1000000000.0 / FPS;
         double timePerUpdate = 1000000000.0 / UPS;
         double deltaUpdateTime = 0;
@@ -287,7 +307,6 @@ public class Game implements Runnable {
             }
         }
     }
-
     /**
      * Initializes the buttons used in the main menu and stores them in an ArrayList
      */

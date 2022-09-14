@@ -19,6 +19,18 @@ public class KeyboardController implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
+        if(code == KeyEvent.VK_W){
+            game.setWPressed(true);
+        }
+        if(code == KeyEvent.VK_A){
+            game.setAPressed(true);
+        }
+        if(code == KeyEvent.VK_S){
+            game.setSPressed(true);
+        }
+        if(code == KeyEvent.VK_D){
+            game.setDPressed(true);
+        }
         switch (code) {
             case (KeyEvent.VK_W) -> {
                 game.setWPressed(true);

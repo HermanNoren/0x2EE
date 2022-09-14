@@ -29,7 +29,7 @@ public abstract class Entity implements ISprite {
      * @param health
      */
 
-    public Entity(int x, int y, int vel, int health){
+    public Entity(int x, int y, double vel, int health){
         this.direction = EDirection.NOT_MOVING; // Default value
         this.pos = new Vector2(x, y);
         this.vel = new Vector2(vel, vel);
@@ -37,9 +37,6 @@ public abstract class Entity implements ISprite {
         this.rect = new Rect(x, y, size, size);
         this.health = health;
     }
-
-
-
     /**
      * @param direction, updated direction.
      * Used to update direction of entity.
@@ -96,7 +93,7 @@ public abstract class Entity implements ISprite {
      */
     @Override
     public void update() {
-
+        updatePos();
     }
 
     /**

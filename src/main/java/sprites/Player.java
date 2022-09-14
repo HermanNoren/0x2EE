@@ -11,51 +11,33 @@ import weapons.Weapon;
 public class Player extends Entity implements ISprite, IMovableSprite {
     private int score;
     private int money;
-    protected Weapon weapon;
+    private Weapon weapon;
 
-    protected Armor armor;
-    boolean isDamageTaken;
-
+    private Armor armor;
+    private boolean isDamageTaken;
     /**
      * @param x, starting x-position
      * @param y, starting y-position
      * @param health, starting health
      * Player constructor, used to create an instance of player.
      */
-    public Player(int x, int y, int vel, int health){
+    public Player(int x, int y, double vel, int health){
         super(x, y, vel, health);
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);
         score = 0;
         money = 0;
     }
-
     /**
      * add the weapon object into the attack.
      */
     public int damageDelt() {
-        return this.weapon.damage;
+        return weapon.damage;
     }
-    public void movePlayer(Game game){
-        if(game.getAPressed()){
-            setDirection(EDirection.LEFT);
-            updatePos();
-        }else if(game.getWPressed()){
-            setDirection(EDirection.UP);
-            updatePos();
-        }else if(game.getSPressed()){
-            setDirection(EDirection.DOWN);
-            updatePos();
-        }else if(game.getDPressed()){
-            setDirection(EDirection.RIGHT);
-            updatePos();
-        }else {
-            setDirection(EDirection.NOT_MOVING);
-        }
-    }
+
 
     public void damageTaken(int damage) {
-
+        this.health -= armor.damageReduction(damage);
     }
 
     public boolean isDamageTaken(){
@@ -81,10 +63,6 @@ public class Player extends Entity implements ISprite, IMovableSprite {
      */
     public int getMoney(){
         return money;
-    }
-    @Override
-    public void update(){
-
     }
 
 }

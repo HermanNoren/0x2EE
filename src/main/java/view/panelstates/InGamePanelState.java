@@ -10,6 +10,7 @@ import view.drawers.TileDrawer;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class InGamePanelState implements IPanelState {
@@ -19,9 +20,11 @@ public class InGamePanelState implements IPanelState {
     private ArrayList<IDrawer> drawers;
     private MainPanel mainPanel;
 
+    private KeyListener keyListener;
+
     public InGamePanelState(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
-        this.game = mainPanel.getGame();
+        this.game = Game.getInstance();
         hud = new HUD(game.getPlayer());
         drawers = new ArrayList<>();
         drawers.add(new PlayerDrawer(game.getPlayer()));
@@ -34,5 +37,9 @@ public class InGamePanelState implements IPanelState {
         for (IDrawer drawer : drawers) {
             drawer.draw(g);
         }
+    }
+
+    public KeyListener getKeyListener() {
+        return keyListener;
     }
 }

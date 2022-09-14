@@ -28,8 +28,6 @@ public class InGameState implements IGameState {
         sprites.addAll(game.getTiles());
     }
 
-
-
     /**
      * Returns the specific state tag
      * @return stateTag
@@ -44,10 +42,6 @@ public class InGameState implements IGameState {
      */
     @Override
     public void update() {
-        player.movePlayer(game);
-        for(Enemy enemy : game.getEnemies()){
-            enemy.moveEnemy();
-        }
         for (ISprite sprite : sprites) {
             sprite.update();
         }
