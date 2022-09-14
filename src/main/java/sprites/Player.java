@@ -1,6 +1,7 @@
 package sprites;
 
 import armor.Armor;
+import helperclasses.Vector2;
 import weapons.Weapon;
 
 /**
@@ -14,6 +15,8 @@ public class Player extends Entity implements ISprite, IMovableSprite {
     protected Armor armor;
     boolean isDamageTaken;
 
+    private boolean upPressed, downPressed, leftPressed, rightPressed;
+
     /**
      * @param x, starting x-position
      * @param y, starting y-position
@@ -24,8 +27,49 @@ public class Player extends Entity implements ISprite, IMovableSprite {
         super(x, y, health);
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);
+        upPressed = false;
+        downPressed = false;
+        leftPressed = false;
+        rightPressed = false;
         score = 0;
         money = 0;
+    }
+
+    public void setUpPressed(boolean value) {
+        upPressed = value;
+    }
+
+    public void setDownPressed(boolean value) {
+        downPressed = value;
+    }
+
+    public void setRightPressed(boolean value) {
+        rightPressed = value;
+    }
+
+    public void setLeftPressed(boolean value) {
+        leftPressed = value;
+    }
+
+    @Override
+    public void update() {
+        acc.x = 0;
+
+        if (rightPressed) { acc.x = 0.1; }
+        else if (leftPressed) { acc.x = -0.1; }
+
+        acc.x += vel.x * -0.12;
+        vel.x += acc.x;
+        pos.x += vel.x;
+
+        acc.y = 0;
+
+        if (downPressed) { acc.y = 0.1; }
+        else if (upPressed) { acc.y = -0.1; }
+
+        acc.y += vel.y * -0.12;
+        vel.y += acc.y;
+        pos.y += vel.y;
     }
 
     /**
