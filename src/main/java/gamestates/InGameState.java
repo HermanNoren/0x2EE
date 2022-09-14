@@ -1,7 +1,6 @@
 package gamestates;
 
 import main.Game;
-import sprites.Entity;
 import sprites.ISprite;
 
 import sprites.Player;
@@ -28,6 +27,8 @@ public class InGameState implements IGameState {
         sprites.addAll(game.getTiles());
     }
 
+
+
     /**
      * Returns the specific state tag
      * @return stateTag
@@ -42,6 +43,11 @@ public class InGameState implements IGameState {
      */
     @Override
     public void update() {
+        if (game.getEscapePressed()) {
+            game.resetEscapePressed();
+            game.setState(new PauseState(game));
+        }
+
         for (ISprite sprite : sprites) {
             sprite.update();
         }
