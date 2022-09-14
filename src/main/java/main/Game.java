@@ -45,9 +45,12 @@ public class Game implements Runnable {
     private boolean stateChangedFlag;
 
     public Game() {
-        player = new Player(10, 10, 100, this);
+        player = new Player(10, 10, 100);
         enemies = new ArrayList<>();
         enemies.add(new NormalEnemy(100, 100, 200, EEnemyType.NORMAL));
+
+
+
         gameMap = new GameMap();
 
         initMainMenuButtons();

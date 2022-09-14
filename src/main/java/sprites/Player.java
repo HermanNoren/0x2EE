@@ -15,7 +15,6 @@ public class Player extends Entity implements ISprite, IMovableSprite {
 
     protected Armor armor;
     boolean isDamageTaken;
-    private Game game;
 
     /**
      * @param x, starting x-position
@@ -23,9 +22,8 @@ public class Player extends Entity implements ISprite, IMovableSprite {
      * @param health, starting health
      * Player constructor, used to create an instance of player.
      */
-    public Player(int x, int y, int health, Game game){
+    public Player(int x, int y, int health){
         super(x, y, health);
-        this.game = game;
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);
         score = 0;
@@ -38,7 +36,7 @@ public class Player extends Entity implements ISprite, IMovableSprite {
     public int damageDelt() {
         return this.weapon.damage;
     }
-    public void movePlayer(){
+    public void movePlayer(Game game){
         if(game.getAPressed()){
             setDirection(EDirection.LEFT);
             updatePos();
@@ -86,7 +84,7 @@ public class Player extends Entity implements ISprite, IMovableSprite {
     }
     @Override
     public void update(){
-        movePlayer();
+
     }
 
 }

@@ -1,8 +1,11 @@
 package gamestates;
 
 import main.Game;
+import sprites.Entity;
 import sprites.ISprite;
 
+import sprites.Player;
+import sprites.enemies.Enemy;
 import view.panelstates.EStateTag;
 
 import java.util.ArrayList;
@@ -12,12 +15,15 @@ import java.util.ArrayList;
  */
 public class InGameState implements IGameState {
     private ArrayList<ISprite> sprites;
+
     private Game game;
+    private Player player;
     private final EStateTag stateTag = EStateTag.INGAME;
 
     public InGameState(Game game) {
         this.game = game;
         sprites = new ArrayList<>();
+        this.player = game.getPlayer();
         sprites.add(game.getPlayer());
         sprites.addAll(game.getTiles());
     }
@@ -38,6 +44,10 @@ public class InGameState implements IGameState {
      */
     @Override
     public void update() {
+        player.movePlayer(game);
+        for(Enemy enemy : game.getEnemies()){
+            enemy.moveEnemy();
+        }
         for (ISprite sprite : sprites) {
             sprite.update();
         }

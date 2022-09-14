@@ -13,11 +13,11 @@ import helperclasses.Vector2;
  */
 
 public abstract class Entity implements ISprite {
-    int animationCounter;
-    Vector2 pos;
-    Vector2 vel;
-    Vector2 acc;
-    int health;
+
+    private Vector2 pos;
+    private Vector2  vel;
+    private Vector2 acc;
+     int health;
     private EDirection direction;
     private int size = Config.SPRITE_SIZE * 3;
     private Rect rect;
