@@ -7,7 +7,7 @@ import sprites.ISprite;
 
 public class Tile implements ISprite {
 
-    private final int size = Config.SPRITE_SIZE;
+    private final int size = Config.WALL_SIZE;
     private Vector2 pos;
     private Rect rect;
 

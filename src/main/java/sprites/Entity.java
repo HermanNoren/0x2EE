@@ -33,7 +33,7 @@ public abstract class Entity implements ISprite {
     public Entity(int x, int y, int health){
         this.direction = EDirection.NOT_MOVING; // Default value
         this.pos = new Vector2(x, y);
-        this.vel = new Vector2(0.5, 0.5);
+        this.vel = new Vector2(2, 2);
         this.acc = new Vector2(0, 0);
         this.rect = new Rect(x, y, size, size);
         this.health = health;

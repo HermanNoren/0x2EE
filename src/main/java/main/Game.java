@@ -1,7 +1,7 @@
 package main;
 
 import gamestates.IGameState;
-import mapclasses.GameMap;
+import mapclasses.Terrain;
 import gamestates.MainMenuState;
 import sprites.ISprite;
 import sprites.Player;
@@ -10,7 +10,6 @@ import sprites.buttons.buttonactions.EmptyButtonAction;
 import sprites.buttons.buttonactions.StartGameButtonAction;
 import sprites.enemies.EEnemyType;
 import sprites.enemies.Enemy;
-import sprites.enemies.IEnemy;
 import sprites.enemies.NormalEnemy;
 import view.IObserver;
 import view.panelstates.EStateTag;
@@ -30,7 +29,7 @@ public class Game implements Runnable {
     private IGameState state;
     private Player player;
     private ArrayList<Enemy> enemies;
-    private GameMap gameMap;
+    private Terrain terrain;
     private GameButton mainMenuButton1;
     private GameButton mainMenuButton2;
     private GameButton mainMenuButton3;
@@ -48,7 +47,7 @@ public class Game implements Runnable {
         player = new Player(10, 10, 100, this);
         enemies = new ArrayList<>();
         enemies.add(new NormalEnemy(100, 100, 200, EEnemyType.NORMAL));
-        gameMap = new GameMap();
+        terrain = new Terrain();
 
         initMainMenuButtons();
 
@@ -82,8 +81,8 @@ public class Game implements Runnable {
      * Returns an ArrayList containing all the tiles in the Game Map.
      * @return  All Game Map Tiles
      */
-    public ArrayList<ISprite> getTiles() {
-        return gameMap.getTiles();
+    public ArrayList<ISprite> getTerrain() {
+        return terrain.getTerrain();
     }
 
     /**
@@ -189,7 +188,6 @@ public class Game implements Runnable {
     //          this.Savedstate = Savedstate;
     //          this.state = pausedState;
     //}
-    //
 
     /**
      * Add an observer. Observers will be notified 120 times per second
@@ -228,7 +226,8 @@ public class Game implements Runnable {
 
     /**
      * Main game loop.
-     * Handles logic of when to update the internal game classes and when to notify potential observers
+     * Handles logic of when to update the internal game
+     * classes and when to notify potential observers.
      */
     @Override
     public void run() {
