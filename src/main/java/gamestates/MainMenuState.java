@@ -31,26 +31,18 @@ public class MainMenuState implements IGameState {
     @Override
     public void update() {
 
-        if (game.getSPressed() && !recentlyMovedDown) {
-            recentlyMovedDown = true;
+        if (game.getSPressed()) {
+            game.resetSPressed();
             activePos += 1;
             activePos %= buttons.size();
         }
 
-        if (!game.getSPressed() && recentlyMovedDown) {
-            recentlyMovedDown = false;
-        }
-
-        if (game.getWPressed() && !recentlyMovedUp) {
-            recentlyMovedUp = true;
+        if (game.getWPressed()) {
+            game.resetWPressed();
             activePos -= 1;
             if (activePos < 0) {
                 activePos = buttons.size() - 1;
             }
-        }
-
-        if (!game.getWPressed() && recentlyMovedUp) {
-            recentlyMovedUp = false;
         }
 
         for (int i = 0; i < buttons.size(); i++) {
