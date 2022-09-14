@@ -1,6 +1,8 @@
 package sprites;
 
 import armor.Armor;
+import controllers.EDirection;
+import main.Game;
 import weapons.Weapon;
 
 /**
@@ -13,6 +15,7 @@ public class Player extends Entity implements ISprite, IMovableSprite {
 
     protected Armor armor;
     boolean isDamageTaken;
+    private Game game;
 
     /**
      * @param x, starting x-position
@@ -20,8 +23,9 @@ public class Player extends Entity implements ISprite, IMovableSprite {
      * @param health, starting health
      * Player constructor, used to create an instance of player.
      */
-    public Player(int x, int y, int health){
+    public Player(int x, int y, int health, Game game){
         super(x, y, health);
+        this.game = game;
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);
         score = 0;
@@ -34,13 +38,29 @@ public class Player extends Entity implements ISprite, IMovableSprite {
     public int damageDelt() {
         return this.weapon.damage;
     }
+    public void movePlayer(){
+        if(game.getAPressed()){
+            setDirection(EDirection.LEFT);
+            updatePos();
+        }else if(game.getWPressed()){
+            setDirection(EDirection.UP);
+            updatePos();
+        }else if(game.getSPressed()){
+            setDirection(EDirection.DOWN);
+            updatePos();
+        }else if(game.getDPressed()){
+            setDirection(EDirection.RIGHT);
+            updatePos();
+        }else {
+            setDirection(EDirection.NOT_MOVING);
+        }
+    }
 
     public void damageTaken(int damage) {
 
     }
 
     public boolean isDamageTaken(){
-
         return isDamageTaken;
     }
 
@@ -52,7 +72,7 @@ public class Player extends Entity implements ISprite, IMovableSprite {
     }
 
     /**
-     * @return player's health
+     * @return the player health
      */
     public int getHealth(){
         return health;
@@ -64,4 +84,9 @@ public class Player extends Entity implements ISprite, IMovableSprite {
     public int getMoney(){
         return money;
     }
+    @Override
+    public void update(){
+        movePlayer();
+    }
+
 }

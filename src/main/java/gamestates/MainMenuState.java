@@ -2,7 +2,8 @@ package gamestates;
 
 import main.Game;
 import sprites.buttons.GameButton;
-import view.panelstates.EPanelState;
+
+import view.panelstates.EStateTag;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public class MainMenuState implements IGameState {
     private boolean recentlyMovedUp;
     private boolean recentlyMovedDown;
     private final ArrayList<GameButton> buttons;
-    private final EPanelState stateTag = EPanelState.MAINMENU;
+    private final EStateTag stateTag = EStateTag.MAINMENU;
 
     public MainMenuState(Game game) {
         this.game = game;
@@ -23,11 +24,17 @@ public class MainMenuState implements IGameState {
         buttons = game.getMainMenuButtons();
     }
 
+    /**
+     * @return an enum containing the current statetag, being MAINMENU.
+     */
     @Override
-    public EPanelState getStateTag() {
+    public EStateTag getStateTag() {
         return stateTag;
     }
 
+    /**
+     * Updates the currently focused button on the main menu.
+     */
     @Override
     public void update() {
 

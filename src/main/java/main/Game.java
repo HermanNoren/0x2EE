@@ -8,8 +8,13 @@ import sprites.Player;
 import sprites.buttons.GameButton;
 import sprites.buttons.buttonactions.EmptyButtonAction;
 import sprites.buttons.buttonactions.StartGameButtonAction;
+import sprites.enemies.EEnemyType;
+import sprites.enemies.Enemy;
+import sprites.enemies.IEnemy;
+import sprites.enemies.NormalEnemy;
 import view.IObserver;
-import view.panelstates.EPanelState;
+import view.panelstates.EStateTag;
+
 
 import java.util.ArrayList;
 
@@ -24,6 +29,7 @@ public class Game implements Runnable {
     private ArrayList<IObserver> observers;
     private IGameState state;
     private Player player;
+    private ArrayList<Enemy> enemies;
     private GameMap gameMap;
     private GameButton mainMenuButton1;
     private GameButton mainMenuButton2;
@@ -39,7 +45,9 @@ public class Game implements Runnable {
     private boolean stateChangedFlag;
 
     public Game() {
-        player = new Player(10, 10, 100);
+        player = new Player(10, 10, 100, this);
+        enemies = new ArrayList<>();
+        enemies.add(new NormalEnemy(100, 100, 200, EEnemyType.NORMAL));
         gameMap = new GameMap();
 
         initMainMenuButtons();
@@ -64,6 +72,10 @@ public class Game implements Runnable {
      */
     public Player getPlayer() {
         return player;
+    }
+
+    public ArrayList<Enemy> getEnemies(){
+        return enemies;
     }
 
     /**
@@ -164,10 +176,10 @@ public class Game implements Runnable {
     }
 
     /**
-     * Returns a string containing a unique tag used for identifying the different game states from outside sources.
+     * Returns an Enum containing the current state.
      * @return StateTag
      */
-    public EPanelState getStateTag() {
+    public EStateTag getStateTag() {
         return state.getStateTag();
     }
 
@@ -210,6 +222,9 @@ public class Game implements Runnable {
             o.draw();
         }
     }
+
+
+
 
     /**
      * Main game loop.

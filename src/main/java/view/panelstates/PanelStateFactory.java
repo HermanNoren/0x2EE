@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class PanelStateFactory {
 
-    public static IPanelState createPanelState(EPanelState state, MainPanel mainPanel)  {
+    public static IPanelState createPanelState(EStateTag state, MainPanel mainPanel)  {
         switch (state) {
             case INGAME -> {
                 return new InGamePanelState(mainPanel);

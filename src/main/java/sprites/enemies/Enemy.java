@@ -1,16 +1,14 @@
 package sprites.enemies;
 
-import sprites.Entity;
-
-public class Enemy extends Entity {
+public abstract class Enemy extends sprites.Entity {
 
     int damage = 3;
 
-    private IEnemyType enemyType;
+    private EEnemyType enemyType;
 
-    public Enemy(int position_x, int position_y, int health, IEnemyType enemyType){
+    public Enemy(int position_x, int position_y, int health, EEnemyType enemyType){
         super(position_x, position_y, health);
-        this.enemyType = enemyType;
+        enemyType = enemyType;
     }
 
 

@@ -6,7 +6,7 @@ import helperclasses.Rect;
 import helperclasses.Vector2;
 
 /**
- * The Entity class contains logic to represent the sprite,
+ * The IEnemy class contains logic to represent the sprite,
  * for example by containing information regarding its position
  * and health the program can determine if an entity is in range
  * to take damage thus if reduces its health.
@@ -97,7 +97,7 @@ public abstract class Entity implements ISprite {
      */
     @Override
     public void update() {
-        updatePos();
+
     }
 
     /**

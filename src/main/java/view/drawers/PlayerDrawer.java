@@ -87,7 +87,7 @@ public class PlayerDrawer implements IDrawer {
     }
 
     /**
-     * Initialized all the images used to draw the player
+     * Initializes all the images used to draw the player
      */
     private void initPlayerImages(){
         try {

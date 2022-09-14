@@ -1,8 +1,9 @@
 package gamestates;
 
-import view.panelstates.EPanelState;
+
+import view.panelstates.EStateTag;
 
 public interface IGameState {
-    EPanelState getStateTag();
+    EStateTag getStateTag();
     void update();
 }
