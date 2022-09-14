@@ -1,27 +1,24 @@
 package view;
 
 import main.Game;
-import controllers.KeyboardController;
-import view.panelstates.InGamePanelState;
-import view.panelstates.MainMenuPanelState;
+import controllers.KeyClickedController;
 import view.panelstates.IPanelState;
 import view.panelstates.PanelStateFactory;
 
 import javax.swing.JPanel;
 import java.awt.*;
+import java.awt.event.KeyListener;
 
 public class MainPanel extends JPanel implements IObserver {
 
     private Game game;
     private IPanelState state;
-    private KeyboardController keyboardController;
 
     public MainPanel(Game game) {
         this.game = game;
         state = PanelStateFactory.createPanelState(game.getStateTag(), this);
-        keyboardController =  new KeyboardController(game);
+        changeKeyListeners();
         setFocusable(true);
-        addKeyListener(keyboardController);
     }
 
     public Game getGame() {
@@ -45,8 +42,16 @@ public class MainPanel extends JPanel implements IObserver {
 
     private void changePanelState() {
         state = PanelStateFactory.createPanelState(game.getStateTag(), this);
-        removeKeyListener(keyboardController);
-        addKeyListener(state.getKeyListener());
+        changeKeyListeners();
+    }
+
+    private void changeKeyListeners() {
+        for (KeyListener listener : getKeyListeners()) {
+            removeKeyListener(listener);
+        }
+        for (KeyListener listener : state.getKeyListeners()) {
+            addKeyListener(listener);
+        }
     }
 
     @Override

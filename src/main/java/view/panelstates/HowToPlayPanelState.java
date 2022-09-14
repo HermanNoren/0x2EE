@@ -1,14 +1,12 @@
 package view.panelstates;
 
-import controllers.KeyboardController;
+import controllers.KeyClickedController;
 import main.Game;
-import sprites.buttons.GameButton;
 import view.MainPanel;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -26,12 +24,13 @@ public class HowToPlayPanelState implements IPanelState{
 
     private ArrayList<IDrawer> drawers;
 
-    private KeyListener keyListener;
+    private ArrayList<KeyListener> keyListeners;
 
     public HowToPlayPanelState(MainPanel mainPanel){
         this.mainPanel = mainPanel;
         this.game = mainPanel.getGame();
-        this.keyListener = new KeyboardController(game);
+        keyListeners = new ArrayList<>();
+        keyListeners.add(new KeyClickedController(game));
         controls = setImage("imgs/h2p.png");
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(game.getBackButtons()));
@@ -64,8 +63,8 @@ public class HowToPlayPanelState implements IPanelState{
     }
 
     @Override
-    public KeyListener getKeyListener() {
-        return keyListener;
+    public ArrayList<KeyListener> getKeyListeners() {
+        return keyListeners;
     }
 
 }

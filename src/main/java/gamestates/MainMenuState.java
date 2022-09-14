@@ -1,7 +1,7 @@
 package gamestates;
 
 import main.Game;
-import sprites.buttons.GameButton;
+import buttons.GameButton;
 import view.panelstates.EPanelState;
 
 import java.util.ArrayList;
@@ -58,6 +58,7 @@ public class MainMenuState implements IGameState {
         }
 
         if (game.getEnterPressed()) {
+            game.resetEnterPressed();
             buttons.get(activePos).isClicked();
         }
     }

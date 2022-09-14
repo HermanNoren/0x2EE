@@ -1,11 +1,11 @@
-package sprites.buttons;
+package buttons;
 import helperclasses.Rect;
 import helperclasses.Vector2;
 import sprites.ISprite;
 import config.Config;
-import sprites.buttons.buttonactions.IButtonAction;
+import buttons.buttonactions.IButtonAction;
 
-public class GameButton implements ISprite {
+public class GameButton {
 
     private String buttonText;
     private Vector2 pos;
@@ -37,28 +37,15 @@ public class GameButton implements ISprite {
         isSelected = value;
     }
 
-    @Override
     public int getWidth() {
         return width;
     }
 
-    @Override
     public int getHeight() {
         return height;
     }
 
-    @Override
     public Vector2 getPos() {
         return new Vector2(pos);
-    }
-
-    @Override
-    public Rect getRect() {
-        return null;
-    }
-
-    @Override
-    public void update() {
-
     }
 }

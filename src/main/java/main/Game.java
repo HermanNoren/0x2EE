@@ -1,14 +1,13 @@
 package main;
 
-import com.sun.tools.javac.Main;
 import gamestates.*;
 import mapclasses.GameMap;
 import sprites.ISprite;
 import sprites.Player;
-import sprites.buttons.GameButton;
-import sprites.buttons.buttonactions.BackButtonAction;
-import sprites.buttons.buttonactions.EmptyButtonAction;
-import sprites.buttons.buttonactions.StartGameButtonAction;
+import buttons.GameButton;
+import buttons.buttonactions.BackButtonAction;
+import buttons.buttonactions.EmptyButtonAction;
+import buttons.buttonactions.StartGameButtonAction;
 import view.IObserver;
 import view.panelstates.EPanelState;
 
@@ -48,7 +47,7 @@ public class Game implements Runnable {
     private boolean sPressed;
     private boolean dPressed;
     private boolean enterPressed;
-
+    private boolean escapePressed;
 
     private boolean stateChangedFlag;
 
@@ -65,10 +64,11 @@ public class Game implements Runnable {
         sPressed = false;
         dPressed = false;
         enterPressed = false;
+        escapePressed = false;
 
         stateChangedFlag = false;
 
-        state = new MainMenuState(this);
+        state = new HighscoreState(this);
         observers = new ArrayList<>();
 
         startGame();
@@ -98,7 +98,6 @@ public class Game implements Runnable {
         return mainMenuButtons;
     }
 
-
     public ArrayList<GameButton> getBackButtons(){return backButtons;}
 
     public ArrayList<GameButton> getPauseButtons(){
@@ -106,67 +105,79 @@ public class Game implements Runnable {
     }
 
     /**
-     * Used as a way for outside controllers to tell the game whether the W key is pressed or released.
-     * @param value True if W pressed, else False
+     * Used as a way for outside components to tell Game if the W key is pressed.
      */
-    public void setWPressed(boolean value) {
-        wPressed = value;
+    public void setWPressed() {
+        wPressed = true;
     }
 
     /**
-     * Used as a way for outside controllers to tell the game whether the A key is pressed or released.
-     * @param value True if A pressed, else False
+     * Used as a way for outside components to tell Game if the W key is released.
      */
-    public void setAPressed(boolean value) {
-        aPressed = value;
+    public void resetWPressed() {
+        wPressed = false;
     }
 
     /**
-     * Used as a way for outside controllers to tell the game whether the S key is pressed or released.
-     * @param value True if S pressed, else False
+     * Used as a way for outside components to tell Game if the S key is pressed.
      */
-    public void setSPressed(boolean value) {
-        sPressed = value;
+    public void setSPressed() {
+        sPressed = true;
     }
 
     /**
-     * Used as a way for outside controllers to tell the game whether the D key is pressed or released.
-     * @param value True if D pressed, else False
+     * Used as a way for outside components to tell Game if the S key is released.
      */
-    public void setDPressed(boolean value) {
-        dPressed = value;
+    public void resetSPressed() {
+        sPressed = false;
     }
 
     /**
-     * Used as a way for outside controllers to tell the game whether the Enter key is pressed or released.
-     * @param value True if Enter pressed, else False
+     * Used as a way for outside components to tell Game if the Enter key is pressed.
      */
-    public void setEnterPressed(boolean value) {
-        enterPressed = value;
+    public void setEnterPressed() {
+        enterPressed = true;
+    }
+
+    /**
+     * Used as a way for outside components to tell Game if the Enter key is released.
+     */
+    public void resetEnterPressed() {
+        enterPressed = false;
+    }
+
+    /**
+     * Used as a way for outside components to tell Game if the Escape key is pressed.
+     */
+    public void setEscapePressed() {
+        escapePressed = true;
+    }
+
+    /**
+     * Used as a way for outside components to tell Game if the Escape key is released.
+     */
+    public void resetEscapePressed() {
+        escapePressed = false;
     }
 
     /**
      * Used as a way for objects inside to read whether the W key is pressed
-     * @return
+     * @return wPressed
      */
     public boolean getWPressed() {
         return wPressed;
-    }
-
-    public boolean getAPressed() {
-        return aPressed;
     }
 
     public boolean getSPressed() {
         return sPressed;
     }
 
-    public boolean getDPressed() {
-        return dPressed;
-    }
-
     public boolean getEnterPressed() {
         return enterPressed;
+    }
+
+    public boolean getEscapePressed() {
+        return escapePressed;
     }
 
     public boolean readStateChangedFlag() {

@@ -1,4 +1,4 @@
-package sprites.buttons.buttonactions;
+package buttons.buttonactions;
 
 public class EmptyButtonAction implements IButtonAction {
     @Override

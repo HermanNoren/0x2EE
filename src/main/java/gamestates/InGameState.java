@@ -38,5 +38,9 @@ public class InGameState implements IGameState {
         for (ISprite sprite : sprites) {
             sprite.update();
         }
+        if (game.getEscapePressed()) {
+            game.resetEscapePressed();
+            game.setState(new PauseState(game));
+        }
     }
 }

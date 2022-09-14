@@ -1,7 +1,7 @@
 package gamestates;
 
 import main.Game;
-import sprites.buttons.GameButton;
+import buttons.GameButton;
 import view.panelstates.EPanelState;
 
 import java.util.ArrayList;
@@ -26,6 +26,7 @@ public class HowToPlayState implements  IGameState{
     @Override
     public void update() {
         if (game.getEnterPressed()){
+            game.resetEnterPressed();
             buttons.get(0).isClicked();
         }
     }

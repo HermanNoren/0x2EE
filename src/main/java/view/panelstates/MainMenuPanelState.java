@@ -1,12 +1,11 @@
 package view.panelstates;
 
-import controllers.KeyboardController;
+import controllers.KeyClickedController;
 import main.Game;
 import view.MainPanel;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -17,12 +16,13 @@ public class MainMenuPanelState implements IPanelState {
     private ArrayList<IDrawer> drawers;
     private MainPanel mainPanel;
 
-    private KeyListener keyListener;
+    private ArrayList<KeyListener> keyListeners;
 
     public MainMenuPanelState(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
         this.game = mainPanel.getGame();
-        this.keyListener = new KeyboardController(game);
+        keyListeners = new ArrayList<>();
+        keyListeners.add(new KeyClickedController(game));
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(game.getMainMenuButtons()));
     }
@@ -41,7 +41,7 @@ public class MainMenuPanelState implements IPanelState {
     }
 
     @Override
-    public KeyListener getKeyListener() {
-        return keyListener;
+    public ArrayList<KeyListener> getKeyListeners() {
+        return keyListeners;
     }
 }

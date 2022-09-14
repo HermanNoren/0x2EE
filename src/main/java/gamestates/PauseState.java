@@ -1,7 +1,7 @@
 package gamestates;
 
 import main.Game;
-import sprites.buttons.GameButton;
+import buttons.GameButton;
 import view.panelstates.EPanelState;
 
 import java.util.ArrayList;
@@ -62,6 +62,7 @@ public class PauseState implements IGameState{
         }
 
         if (game.getEnterPressed()) {
+            game.resetEnterPressed();
             buttons.get(activePos).isClicked();
         }
     }
