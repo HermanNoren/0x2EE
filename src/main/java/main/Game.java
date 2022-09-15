@@ -1,14 +1,14 @@
 package main;
 
-import gamestates.*;
-import mapclasses.GameMap;
+import gamestates.IGameState;
+import gamestates.InGameState;
+import mapclasses.TerrainBorder;
 import sprites.ISprite;
 import sprites.Player;
 import buttons.GameButton;
 import buttons.buttonactions.BackButtonAction;
 import buttons.buttonactions.EmptyButtonAction;
 import buttons.buttonactions.StartGameButtonAction;
-import sprites.enemies.Enemy;
 import sprites.enemies.IEnemy;
 import view.IObserver;
 import view.panelstates.EPanelState;
@@ -27,7 +27,7 @@ public class Game implements Runnable {
     private IGameState state;
     private Player player;
     private ArrayList<IEnemy> enemies;
-    private GameMap gameMap;
+    private TerrainBorder terrainBorder;
 
     private ArrayList<GameButton> mainMenuButtons, backButtons, pauseButtons;
 
@@ -67,7 +67,7 @@ public class Game implements Runnable {
     public void createGame(){
         player = new Player(10, 10, 0.5, 100);
         enemies = new ArrayList<>();
-        gameMap = new GameMap();
+        terrainBorder = new TerrainBorder(960, 800);
 
         initMainMenuButtons();
         initBackButtons();
@@ -82,7 +82,7 @@ public class Game implements Runnable {
 
         stateChangedFlag = false;
 
-        state = new MainMenuState(this);
+        state = new InGameState(this);
         observers = new ArrayList<>();
 
         startGame();
@@ -103,8 +103,8 @@ public class Game implements Runnable {
      * Returns an ArrayList containing all the tiles in the Game Map.
      * @return  All Game Map Tiles
      */
-    public ArrayList<ISprite> getTiles() {
-        return gameMap.getTiles();
+    public ArrayList<ISprite> getTerrainBorder() {
+        return terrainBorder.getTerrainBorder();
     }
 
     /**
@@ -228,7 +228,6 @@ public class Game implements Runnable {
     //          this.Savedstate = Savedstate;
     //          this.state = pausedState;
     //}
-    //
 
     /**
      * Add an observer. Observers will be notified 120 times per second
@@ -264,7 +263,8 @@ public class Game implements Runnable {
 
     /**
      * Main game loop.
-     * Handles logic of when to update the internal game classes and when to notify potential observers
+     * Handles logic of when to update the internal game
+     * classes and when to notify potential observers.
      */
     @Override
     public void run() {

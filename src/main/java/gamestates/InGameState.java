@@ -30,7 +30,7 @@ public class InGameState implements IGameState {
         EnemyFactory enemyFactory= new NormalEnemyFactory();
         enemies.add(enemyFactory.createEnemy());
         sprites.add(game.getPlayer());
-        sprites.addAll(game.getTiles());
+        sprites.addAll(game.getTerrainBorder());
     }
 
 

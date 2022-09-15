@@ -8,7 +8,7 @@ import view.MainPanel;
 import view.drawers.EnemyDrawer;
 import view.drawers.IDrawer;
 import view.drawers.PlayerDrawer;
-import view.drawers.TileDrawer;
+import view.drawers.TerrainDrawer;
 
 import java.awt.*;
 import java.awt.event.KeyListener;
@@ -33,7 +33,7 @@ public class InGamePanelState implements IPanelState {
         drawers = new ArrayList<>();
         drawers.add(new PlayerDrawer(game.getPlayer()));
         drawers.add(new EnemyDrawer(game.getEnemies()));
-        drawers.add(new TileDrawer(game.getTiles()));
+        drawers.add(new TerrainDrawer(game.getTerrainBorder()));
     }
 
 

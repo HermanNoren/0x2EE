@@ -48,7 +48,6 @@ public abstract class Entity implements ISprite {
      * Used to update direction of entity.
      */
     public void setDirection(EDirection direction) {
-        lastDirection = this.direction;
         this.direction = direction;
     }
 
@@ -107,7 +106,7 @@ public abstract class Entity implements ISprite {
      */
     @Override
     public void update() {
-        updatePos();
+
     }
 
     /**

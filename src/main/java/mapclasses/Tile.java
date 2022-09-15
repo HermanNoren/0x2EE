@@ -5,13 +5,13 @@ import helperclasses.Rect;
 import helperclasses.Vector2;
 import sprites.ISprite;
 
-public class Terrain implements ISprite {
+public class Tile implements ISprite {
 
-    private final int size = Config.SPRITE_SIZE;
+    private final int size = Config.WALL_SIZE;
     private Vector2 pos;
     private Rect rect;
 
-    public Terrain(int x, int y) {
+    public Tile(int x, int y) {
         pos = new Vector2(x, y);
         rect = new Rect(x, y, size, size);
     }
