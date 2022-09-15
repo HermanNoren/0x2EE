@@ -1,5 +1,6 @@
 package main;
 
+import config.Config;
 import gamestates.*;
 import mapclasses.GameMap;
 import sprites.ISprite;
@@ -59,13 +60,13 @@ public class Game implements Runnable {
     }
     private static Game game;
     public static Game getInstance(){
-        if(game == null){
+        if (game == null){
             game = new Game();
-        }return game;
+        } return game;
     }
 
     public void createGame(){
-        player = new Player(10, 10, 0.5, 100);
+        player = new Player(Config.SCREEN_WIDTH / 2, Config.SCREEN_HEIGHT / 2, 0.5, 100);
         enemies = new ArrayList<>();
         gameMap = new GameMap();
 

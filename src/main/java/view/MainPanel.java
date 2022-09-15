@@ -11,7 +11,6 @@ import java.awt.event.KeyListener;
 public class MainPanel extends JPanel implements IObserver {
 
     private final Game game;
-
     private IPanelState state;
 
     public MainPanel(Game game) {

@@ -4,6 +4,7 @@ import controllers.EDirection;
 import sprites.Entity;
 import sprites.enemies.Enemy;
 import sprites.enemies.IEnemy;
+import view.Camera;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -19,8 +20,11 @@ public class EnemyDrawer implements IDrawer {
     private int animationCounter;
     private int imageSwitcher;
 
-    public EnemyDrawer(ArrayList<IEnemy> enemies){
+    private Camera camera;
+
+    public EnemyDrawer(ArrayList<IEnemy> enemies, Camera camera){
         this.enemies = enemies;
+        this.camera = camera;
         initEnemyImages();
 
     }
@@ -108,9 +112,9 @@ public class EnemyDrawer implements IDrawer {
                 }
             }
             if(!(prevImg == null)){
-                g2.drawImage(activeImage, (int)enemy.getPos().x, (int)enemy.getPos().y, enemy.getSize(), enemy.getSize(), null);
+                g2.drawImage(activeImage, (int) (enemy.getPos().x - camera.getOffset().x), (int) (enemy.getPos().y - camera.getOffset().y), enemy.getSize(), enemy.getSize(), null);
             }else {
-                g2.drawImage(up1, (int) enemy.getPos().x, (int)enemy.getPos().y, enemy.getSize(), enemy.getSize(), null);
+                g2.drawImage(up1, (int) (enemy.getPos().x - camera.getOffset().x), (int) (enemy.getPos().y - camera.getOffset().y), enemy.getSize(), enemy.getSize(), null);
             }
         }
     }

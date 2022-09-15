@@ -1,6 +1,7 @@
 package view.drawers;
 
 import sprites.Entity;
+import view.Camera;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -17,10 +18,13 @@ public class PlayerDrawer implements IDrawer {
     private int imageSwitcher;
     private Entity player;
 
+    private Camera camera;
+
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
 
-    public PlayerDrawer(Entity player) {
+    public PlayerDrawer(Entity player, Camera camera) {
         this.player = player;
+        this.camera = camera;
         initPlayerImages();
     }
 
@@ -32,12 +36,12 @@ public class PlayerDrawer implements IDrawer {
         movementAnimation();
         chooseActiveImage();
         if(prevImg == null){
-            g.drawImage(up1, (int) player.getPos().x, (int) player.getPos().y, player.getSize(), player.getSize(), null); // Sets default image
+            g.drawImage(up1, (int) (player.getPos().x - camera.getOffset().x), (int) (player.getPos().y - camera.getOffset().y), player.getSize(), player.getSize(), null); // Sets default image
         }
         else {
-            g.drawImage(activeImage, (int) player.getPos().x,(int) player.getPos().y, player.getSize(), player.getSize(), null);
-
+            g.drawImage(activeImage, (int) (player.getPos().x - camera.getOffset().x), (int) (player.getPos().y - camera.getOffset().y), player.getSize(), player.getSize(), null);
         }
+        g.setColor(Color.red);
     }
 
     /**
