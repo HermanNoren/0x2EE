@@ -1,26 +1,17 @@
 package sprites.enemies;
 
+import controllers.EDirection;
 import sprites.Entity;
 
-public class Enemy extends Entity {
+import java.util.Random;
 
-    int damage = 3;
+public abstract class Enemy extends Entity implements IEnemy {
 
-    private IEnemyType enemyType;
-
-    public Enemy(int position_x, int position_y, int health, IEnemyType enemyType){
-        super(position_x, position_y, health);
-        this.enemyType = enemyType;
+    protected Enemy(int position_x, int position_y, double vel,  int health){
+        super(position_x, position_y, vel, health);
     }
 
-
-
-    public int damageDelt() {
-        return 0;
-    }
-
-
-    public void damageTaken(int damage) {
+    public void moveEnemy(){
 
     }
 }

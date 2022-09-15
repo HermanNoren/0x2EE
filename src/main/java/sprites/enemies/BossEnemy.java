@@ -1,9 +1,8 @@
 package sprites.enemies;
 
-public class NormalEnemy extends Enemy{
+public class BossEnemy extends Enemy{
 
-
-    protected NormalEnemy(int position_x, int position_y, double vel, int health) {
+    public BossEnemy(int position_x, int position_y, double vel, int health) {
         super(position_x, position_y, vel, health);
     }
 
@@ -11,6 +10,4 @@ public class NormalEnemy extends Enemy{
     public void specialAbility() {
 
     }
-
-
 }

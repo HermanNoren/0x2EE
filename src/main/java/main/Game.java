@@ -1,13 +1,15 @@
 package main;
 
-import gamestates.*;
-import mapclasses.GameMap;
+import gamestates.IGameState;
+import gamestates.InGameState;
+import mapclasses.TerrainBorder;
 import sprites.ISprite;
 import sprites.Player;
 import buttons.GameButton;
 import buttons.buttonactions.BackButtonAction;
 import buttons.buttonactions.EmptyButtonAction;
 import buttons.buttonactions.StartGameButtonAction;
+import sprites.enemies.IEnemy;
 import view.IObserver;
 import view.panelstates.EPanelState;
 
@@ -24,7 +26,8 @@ public class Game implements Runnable {
     private ArrayList<IObserver> observers;
     private IGameState state;
     private Player player;
-    private GameMap gameMap;
+    private ArrayList<IEnemy> enemies;
+    private TerrainBorder terrainBorder;
 
     private ArrayList<GameButton> mainMenuButtons, backButtons, pauseButtons;
 
@@ -32,9 +35,39 @@ public class Game implements Runnable {
 
     private boolean stateChangedFlag;
 
-    public Game() {
-        player = new Player(10, 10, 100);
-        gameMap = new GameMap();
+    private Game() {
+//        player = new Player(10, 10, 0.5, 100);
+//        gameMap = new GameMap();
+//
+//        initMainMenuButtons();
+//        initBackButtons();
+//        initPauseButtons();
+//
+//        wPressed = false;
+//        aPressed = false;
+//        sPressed = false;
+//        dPressed = false;
+//        enterPressed = false;
+//        escapePressed = false;
+//
+//        stateChangedFlag = false;
+//
+//        state = new MainMenuState(this);
+//        observers = new ArrayList<>();
+//
+//        startGame();
+    }
+    private static Game game;
+    public static Game getInstance(){
+        if(game == null){
+            game = new Game();
+        }return game;
+    }
+
+    public void createGame(){
+        player = new Player(10, 10, 0.5, 100);
+        enemies = new ArrayList<>();
+        terrainBorder = new TerrainBorder(960, 800);
 
         initMainMenuButtons();
         initBackButtons();
@@ -49,7 +82,7 @@ public class Game implements Runnable {
 
         stateChangedFlag = false;
 
-        state = new MainMenuState(this);
+        state = new InGameState(this);
         observers = new ArrayList<>();
 
         startGame();
@@ -62,13 +95,16 @@ public class Game implements Runnable {
     public Player getPlayer() {
         return player;
     }
+    public ArrayList<IEnemy> getEnemies(){
+        return enemies;
+    }
 
     /**
      * Returns an ArrayList containing all the tiles in the Game Map.
      * @return  All Game Map Tiles
      */
-    public ArrayList<ISprite> getTiles() {
-        return gameMap.getTiles();
+    public ArrayList<ISprite> getTerrainBorder() {
+        return terrainBorder.getTerrainBorder();
     }
 
     /**
@@ -192,7 +228,6 @@ public class Game implements Runnable {
     //          this.Savedstate = Savedstate;
     //          this.state = pausedState;
     //}
-    //
 
     /**
      * Add an observer. Observers will be notified 120 times per second
@@ -228,7 +263,8 @@ public class Game implements Runnable {
 
     /**
      * Main game loop.
-     * Handles logic of when to update the internal game classes and when to notify potential observers
+     * Handles logic of when to update the internal game
+     * classes and when to notify potential observers.
      */
     @Override
     public void run() {

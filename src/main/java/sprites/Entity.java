@@ -6,7 +6,7 @@ import helperclasses.Rect;
 import helperclasses.Vector2;
 
 /**
- * The Entity class contains logic to represent the sprite,
+ * The IEnemy class contains logic to represent the sprite,
  * for example by containing information regarding its position
  * and health the program can determine if an entity is in range
  * to take damage thus if reduces its health.
@@ -17,7 +17,7 @@ public abstract class Entity implements ISprite {
     Vector2 pos;
     Vector2 vel;
     Vector2 acc;
-    private int health;
+    int health;
     private EDirection direction;
     private EDirection lastDirection;
     private int size = Config.SPRITE_SIZE * 3;
@@ -31,11 +31,11 @@ public abstract class Entity implements ISprite {
      * @param health
      */
 
-    public Entity(int x, int y, int health){
+    public Entity(int x, int y, double vel, int health){
         this.direction = EDirection.NOT_MOVING; // Default value
         this.lastDirection = direction;
         this.pos = new Vector2(x, y);
-        this.vel = new Vector2(0.5, 0.5);
+        this.vel = new Vector2(vel, vel);
         this.acc = new Vector2(0, 0);
         this.rect = new Rect(x, y, size, size);
         this.health = health;
@@ -48,7 +48,6 @@ public abstract class Entity implements ISprite {
      * Used to update direction of entity.
      */
     public void setDirection(EDirection direction) {
-        lastDirection = this.direction;
         this.direction = direction;
     }
 
@@ -107,7 +106,7 @@ public abstract class Entity implements ISprite {
      */
     @Override
     public void update() {
-        updatePos();
+
     }
 
     /**

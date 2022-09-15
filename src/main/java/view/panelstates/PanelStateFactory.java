@@ -1,11 +1,7 @@
 package view.panelstates;
 
-import gamestates.HowToPlayState;
-import main.Game;
 import view.MainPanel;
-
-import javax.swing.*;
-import java.io.FileNotFoundException;
+import view.panelstates.*;
 
 public class PanelStateFactory {
 

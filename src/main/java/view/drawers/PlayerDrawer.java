@@ -17,8 +17,7 @@ public class PlayerDrawer implements IDrawer {
     private int imageSwitcher;
     private Entity player;
 
-    private BufferedImage prevImg;
-    private BufferedImage up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
+    private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
 
     public PlayerDrawer(Entity player) {
         this.player = player;
@@ -87,7 +86,7 @@ public class PlayerDrawer implements IDrawer {
     }
 
     /**
-     * Initialized all the images used to draw the player
+     * Initializes all the images used to draw the player
      */
     private void initPlayerImages(){
         try {

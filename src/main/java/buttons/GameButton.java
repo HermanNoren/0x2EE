@@ -1,7 +1,5 @@
 package buttons;
-import helperclasses.Rect;
 import helperclasses.Vector2;
-import sprites.ISprite;
 import config.Config;
 import buttons.buttonactions.IButtonAction;
 
