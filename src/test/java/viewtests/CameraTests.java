@@ -10,7 +10,7 @@ public class CameraTests {
     Camera camera;
 
     @Test
-    void testfunction() {
+    void testZoomIn() {
 
     }
 

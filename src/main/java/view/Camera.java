@@ -21,13 +21,13 @@ public class Camera {
     private double currentZoomMultiplier;
 
     /**
-     *
+     * Instantiates a camera object
      */
     public Camera() {
         this.focusedObject = new ArrayList<>();
         relativePos = new Vector2(0, 0);  // Relative pos will be used when calculating zoom
         absolutePos = new Vector2(relativePos);     // Absolute pos will not take zoom into consideration
-        dragEffectConstant = 50;
+        dragEffectConstant = 60;
         currentZoomMultiplier = 1;
         calculateCenterPos();
     }
@@ -87,7 +87,7 @@ public class Camera {
      * Resets the drag effect to its standard value
      */
     public void resetDragEffectConstant() {
-        dragEffectConstant = 50;
+        dragEffectConstant = 60;
     }
 
     /**
