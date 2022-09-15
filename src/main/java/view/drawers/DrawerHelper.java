@@ -15,10 +15,10 @@ public class DrawerHelper {
         double newWidth = width * camera.getZoomAmount();
         double newHeight = height * camera.getZoomAmount();
 
-        drawInformation.add((int) x);
-        drawInformation.add((int) y);
-        drawInformation.add((int) newWidth);
-        drawInformation.add((int) newHeight);
+        drawInformation.add((int) Math.round(x));
+        drawInformation.add((int) Math.round(y));
+        drawInformation.add((int) Math.round(newWidth));
+        drawInformation.add((int) Math.round(newHeight));
 
         return drawInformation;
     }
