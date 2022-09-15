@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Strictly used to draw the player onto the screen
@@ -35,11 +36,12 @@ public class PlayerDrawer implements IDrawer {
     public void draw(Graphics2D g) {
         movementAnimation();
         chooseActiveImage();
+        ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(player.getPos(), player.getSize(), player.getSize(), camera);
         if(prevImg == null){
-            g.drawImage(up1, (int) (player.getPos().x - camera.getOffset().x), (int) (player.getPos().y - camera.getOffset().y), player.getSize(), player.getSize(), null); // Sets default image
+            g.drawImage(up1, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null); // Sets default image
         }
         else {
-            g.drawImage(activeImage, (int) (player.getPos().x - camera.getOffset().x), (int) (player.getPos().y - camera.getOffset().y), player.getSize(), player.getSize(), null);
+            g.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
         }
         g.setColor(Color.red);
     }

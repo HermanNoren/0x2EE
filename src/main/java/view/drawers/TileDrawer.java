@@ -20,7 +20,8 @@ public class TileDrawer implements IDrawer {
     public void draw(Graphics2D g2) {
         for (ISprite tile: tiles) {
             g2.setColor(Color.black);
-            g2.fillRect((int) (tile.getPos().x - camera.getOffset().x), (int) (tile.getPos().y - camera.getOffset().y), tile.getWidth(), tile.getHeight());
+            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(tile.getPos(), tile.getWidth(), tile.getHeight(), camera);
+            g2.fillRect(drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3));
         }
     }
 }

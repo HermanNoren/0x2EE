@@ -1,13 +1,9 @@
 package view.drawers;
 
-import controllers.EDirection;
-import sprites.Entity;
-import sprites.enemies.Enemy;
 import sprites.enemies.IEnemy;
 import view.Camera;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -111,10 +107,14 @@ public class EnemyDrawer implements IDrawer {
                     activeImage = prevImg;
                 }
             }
+
+            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getSize(), enemy.getSize(), camera);
+
             if(!(prevImg == null)){
-                g2.drawImage(activeImage, (int) (enemy.getPos().x - camera.getOffset().x), (int) (enemy.getPos().y - camera.getOffset().y), enemy.getSize(), enemy.getSize(), null);
-            }else {
-                g2.drawImage(up1, (int) (enemy.getPos().x - camera.getOffset().x), (int) (enemy.getPos().y - camera.getOffset().y), enemy.getSize(), enemy.getSize(), null);
+                g2.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
+            }
+            else {
+                g2.drawImage(up1, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
             }
         }
     }
