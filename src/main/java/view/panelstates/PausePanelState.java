@@ -1,5 +1,6 @@
 package view.panelstates;
 
+import config.Config;
 import controllers.KeyClickedController;
 import main.Game;
 import view.MainPanel;
@@ -12,14 +13,12 @@ import java.util.ArrayList;
 
 public class PausePanelState implements IPanelState {
 
-    private MainPanel mainPanel;
     private Game game;
     private ArrayList<KeyListener> keyListeners;
     private ArrayList<IDrawer> drawers;
 
-    public PausePanelState(MainPanel mainPanel) {
-        this.mainPanel = mainPanel;
-        this.game = mainPanel.getGame();
+    public PausePanelState() {
+        this.game = Game.getInstance();
         keyListeners = new ArrayList<>();
         keyListeners.add(new KeyClickedController(game));
         drawers = new ArrayList<>();
@@ -38,7 +37,7 @@ public class PausePanelState implements IPanelState {
         g2.setColor(Color.black);
         g2.setFont(new Font("Public Pixel", Font.PLAIN, 64));
         String paused = "PAUSED";
-        g2.drawString(paused, (mainPanel.getWidth() - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
+        g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
 
     }
 

@@ -1,5 +1,6 @@
 package view.panelstates;
 
+import config.Config;
 import controllers.KeyClickedController;
 import main.Game;
 import view.MainPanel;
@@ -15,13 +16,11 @@ public class MainMenuPanelState implements IPanelState {
 
     private Game game;
     private ArrayList<IDrawer> drawers;
-    private MainPanel mainPanel;
 
     private ArrayList<KeyListener> keyListeners;
 
-    public MainMenuPanelState(MainPanel mainPanel) {
-        this.mainPanel = mainPanel;
-        this.game = mainPanel.getGame();
+    public MainMenuPanelState() {
+        this.game = Game.getInstance();
         keyListeners = new ArrayList<>();
         keyListeners.add(new KeyClickedController(game));
         drawers = new ArrayList<>();
@@ -38,7 +37,7 @@ public class MainMenuPanelState implements IPanelState {
         g2.setColor(Color.black);
         g2.setFont(new Font("Public Pixel", Font.PLAIN, 64));
         String paused = "0x2EE";
-        g2.drawString(paused, (mainPanel.getWidth() - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
+        g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
 
     }
 

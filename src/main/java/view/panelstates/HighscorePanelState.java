@@ -1,5 +1,6 @@
 package view.panelstates;
 
+import config.Config;
 import controllers.KeyClickedController;
 import main.Game;
 import view.MainPanel;
@@ -16,14 +17,12 @@ import java.util.Scanner;
 public class HighscorePanelState implements IPanelState {
 
     private ArrayList<String> scores;
-    private MainPanel mainPanel;
     private ArrayList<IDrawer> drawers;
     private ArrayList<KeyListener> keyListeners;
     private Game game;
 
-    public HighscorePanelState(MainPanel mainPanel) {
-        this.mainPanel = mainPanel;
-        this.game = mainPanel.getGame();
+    public HighscorePanelState() {
+        this.game = Game.getInstance();
         keyListeners = new ArrayList<>();
         keyListeners.add(new KeyClickedController(game));
         drawers = new ArrayList<>();
@@ -52,7 +51,7 @@ public class HighscorePanelState implements IPanelState {
         g2.setFont(new Font("Public Pixel", Font.PLAIN, 64));
         FontMetrics metrics = g2.getFontMetrics();
         String paused = "HIGHSCORES";
-        g2.drawString(paused, (mainPanel.getWidth() - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
+        g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
 
         int ypos = 200;
         int rank = 1;
@@ -60,7 +59,7 @@ public class HighscorePanelState implements IPanelState {
             String[] playerscore = score.split(":");
             String listitem = "#" + String.valueOf(rank) + " " + playerscore[0].toUpperCase() + ": " + playerscore[1];
             g2.setFont(new Font("Public Pixel", Font.PLAIN, 32));
-            g2.drawString(listitem, (mainPanel.getWidth() - g2.getFontMetrics().stringWidth(listitem)) / 2 , ypos);
+            g2.drawString(listitem, (Config.SCREEN_HEIGHT - g2.getFontMetrics().stringWidth(listitem)) / 2 , ypos);
             ypos += 40;
             rank++;
         }

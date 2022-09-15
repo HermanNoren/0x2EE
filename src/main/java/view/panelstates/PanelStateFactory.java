@@ -9,24 +9,24 @@ import java.io.FileNotFoundException;
 
 public class PanelStateFactory {
 
-    public static IPanelState createPanelState(EPanelState state, MainPanel mainPanel)  {
+    public static IPanelState createPanelState(EPanelState state)  {
         switch (state) {
             case INGAME -> {
-                return new InGamePanelState(mainPanel);
+                return new InGamePanelState();
             }
             case MAINMENU -> {
-                return new MainMenuPanelState(mainPanel);
+                return new MainMenuPanelState();
             }
             case HIGHSCORES -> {
-                return new HighscorePanelState(mainPanel);
+                return new HighscorePanelState();
             }
 
             case PAUSE -> {
-                return new PausePanelState(mainPanel);
+                return new PausePanelState();
             }
 
             case HOWTOPLAY -> {
-                return new HowToPlayPanelState(mainPanel);
+                return new HowToPlayPanelState();
             }
 
             default -> {

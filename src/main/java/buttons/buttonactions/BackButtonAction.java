@@ -6,8 +6,9 @@ public class BackButtonAction implements IButtonAction{
 
     private Game game;
 
-    public BackButtonAction(Game game){
-        this.game = game;
+    public BackButtonAction(){
+
+        this.game = Game.getInstance();
     }
     @Override
     public void performAction() { game.setState(new MainMenuState(game));

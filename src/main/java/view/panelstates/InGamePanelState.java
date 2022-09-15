@@ -18,13 +18,11 @@ public class InGamePanelState implements IPanelState {
     private Game game;
     private HUD hud;
     private ArrayList<IDrawer> drawers;
-    private MainPanel mainPanel;
 
     private ArrayList<KeyListener> keyListeners;
 
-    public InGamePanelState(MainPanel mainPanel) {
-        this.mainPanel = mainPanel;
-        this.game = mainPanel.getGame();
+    public InGamePanelState() {
+        this.game = Game.getInstance();
         keyListeners = new ArrayList<>();
         keyListeners.add(new PlayerController(game));
         keyListeners.add(new KeyClickedController(game));
@@ -40,7 +38,7 @@ public class InGamePanelState implements IPanelState {
         for (IDrawer drawer : drawers) {
             drawer.draw(g);
         }
-        hud.update(g, mainPanel);
+        hud.update(g);
     }
 
     @Override

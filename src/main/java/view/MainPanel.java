@@ -15,7 +15,7 @@ public class MainPanel extends JPanel implements IObserver {
 
     public MainPanel(Game game) {
         this.game = game;
-        state = PanelStateFactory.createPanelState(game.getStateTag(), this);
+        state = PanelStateFactory.createPanelState(game.getStateTag());
         changeKeyListeners();
         setFocusable(true);
     }
@@ -40,7 +40,8 @@ public class MainPanel extends JPanel implements IObserver {
 
 
     private void changePanelState() {
-        state = PanelStateFactory.createPanelState(game.getStateTag(), this);
+        state = PanelStateFactory.createPanelState(game.getStateTag()
+        );
         changeKeyListeners();
     }
 
