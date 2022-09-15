@@ -53,6 +53,13 @@ public class Player extends Entity implements ISprite, IMovableSprite {
     }
 
     @Override
+    public Vector2 getCenter() {
+        double x = pos.x + (double) (getWidth() / 2);
+        double y = pos.y + (double) (getHeight() / 2);
+        return new Vector2(x, y);
+    }
+
+    @Override
     public void update() {
         acc.x = 0;
 

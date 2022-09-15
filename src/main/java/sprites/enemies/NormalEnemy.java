@@ -1,5 +1,7 @@
 package sprites.enemies;
 
+import helperclasses.Vector2;
+
 public class NormalEnemy extends Enemy{
 
 
@@ -13,4 +15,8 @@ public class NormalEnemy extends Enemy{
     }
 
 
+    @Override
+    public Vector2 getCenter() {
+        return null;
+    }
 }
