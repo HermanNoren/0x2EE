@@ -38,20 +38,22 @@ public class Camera {
         return new Vector2(pos.x, pos.y);
     }
 
-    public void zoom() {
-        zoomStarted = true;
+    public void zoomIn() {
+        currentZoomAmount += 0.2;
+        if (currentZoomAmount >= 4) { currentZoomAmount = 4; }
     }
 
-    public void resetZoom() {
-        resetZoomStarted = true;
+    public void zoomOut() {
+        currentZoomAmount -= 0.2;
+        if (currentZoomAmount <= 1) { currentZoomAmount = 1; }
     }
 
     public double getZoomAmount() {
         return currentZoomAmount;
     }
 
-    public void halfDragEffectConstant() {
-        dragEffectConstant = 15;
+    public void setDragEffectConstant(int value) {
+        dragEffectConstant = value;
     }
 
     public void resetDragEffectConstant() {
@@ -59,21 +61,6 @@ public class Camera {
     }
 
     public void update() {
-        if (zoomStarted) {
-            currentZoomAmount *= 1.01;
-        }
-        if (currentZoomAmount >= totalZoomAmount) {
-            currentZoomAmount = totalZoomAmount;
-            zoomStarted = false;
-        }
-        if (resetZoomStarted) {
-            currentZoomAmount /= 1.01;
-        }
-        if (currentZoomAmount <= 1) {
-            currentZoomAmount = 1;
-            resetZoomStarted = false;
-        }
-
         calculateCenterPos();
         pos = new Vector2(absolutePos);
         pos.x += (focusedObject.getCenter().x - (pos.x + center.x)) / (dragEffectConstant / currentZoomAmount);

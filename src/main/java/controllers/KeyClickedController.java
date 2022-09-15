@@ -10,7 +10,6 @@ public class KeyClickedController implements KeyListener {
     private boolean sKeyDown;
     private boolean enterKeyDown;
     private boolean escapeKeyDown;
-
     private boolean spaceKeyDown;
 
     public KeyClickedController(Game game) {
