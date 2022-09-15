@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class TileDrawer implements IDrawer {
 
     ArrayList<ISprite> tiles;
-
     private Camera camera;
+
     public TileDrawer(ArrayList<ISprite> tiles, Camera camera) {
         this.camera = camera;
         this.tiles = tiles;
