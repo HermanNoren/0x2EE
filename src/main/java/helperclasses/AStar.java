@@ -9,9 +9,6 @@ import java.util.PriorityQueue;
 
 public class AStar {
 
-    private void test(){
-
-    }
     public static Terrain aStar(Terrain start, Terrain target){
         PriorityQueue<Terrain> closedList = new PriorityQueue<>();
 
@@ -22,7 +19,7 @@ public class AStar {
         openList.add(start);
 
         while(!openList.isEmpty()){
-            Terrain n = openList.peek();
+            Terrain n = openList.peek(); //n = next node
 
             if(n == target){
                 return n;

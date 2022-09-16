@@ -19,29 +19,26 @@ public class Terrain implements ISprite, Comparable<Terrain> {
     private Vector2 pos;
     private Rect rect;
     private Game game = Game.getInstance();
-    private Player player;
+    private final Player player;
     private static int idCounter = 0;
     private int id; // Id of the node to keep track of the path later on. (The "name" of the node)
-
     private double f = Double.MAX_VALUE; // Will later be equal to g + h
-    private double g = Double.MAX_VALUE; //
+    private double g = Double.MAX_VALUE; // g(n), n = next node, distance from start to n.
+    public List<Terrain.Edge> neighbors;
 
     private Terrain parent = null;
+    private Vector2 playerPos; // Target node
 
-    public Terrain(int x, int y) {
-//        this.player = game.getPlayer();
 
-//        this.pos = new Vector2(x, y);
-//        this.rect = new Rect(x, y, size, size);
-    }
     public Terrain(Vector2 vector2){
-        this.player = new Player(100, 100, 0.5, 1);
+        this.player = game.getPlayer();
         playerPos = player.getPos();
         this.neighbors = new ArrayList<>();
         this.id = idCounter++;
         System.out.println(id);
         this.pos = vector2;
     }
+
     @Override
     public int getWidth() {
         return getRect().getWidth();
@@ -61,11 +58,9 @@ public class Terrain implements ISprite, Comparable<Terrain> {
         return new Rect(rect);
     }
 
-    private Vector2 playerPos; //Goal node
-
     @Override
     public void update() {
-
+        playerPos = player.getPos();
     }
 
     public double getF() {
@@ -96,28 +91,23 @@ public class Terrain implements ISprite, Comparable<Terrain> {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @Override
     public int compareTo(Terrain n) {
         return Double.compare(this.f, n.getF());
     }
 
-
     public static class Edge {
 
         public int weight;
         public Terrain node;
+
         Edge(int weight, Terrain node){
             this.weight = weight;
             this.node = node;
         }
 
-
     }
-    public List<Terrain.Edge> neighbors;
     public void addBranch(int weight, Terrain node){
         Terrain.Edge newEdge = new Terrain.Edge(weight, node);
         neighbors.add(newEdge);

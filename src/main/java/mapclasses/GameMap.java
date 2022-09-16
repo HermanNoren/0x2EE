@@ -1,6 +1,7 @@
 package mapclasses;
 
 import config.Config;
+import helperclasses.Vector2;
 import sprites.ISprite;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class GameMap {
             for (char tile : row.toCharArray()) {
                 switch(tile) {
                     case 'W':
-                        tiles.add(new Terrain(x, y));
+                        tiles.add(new Terrain(new Vector2(x, y)));
                 }
                 x += Config.SPRITE_SIZE;
             }
