@@ -20,7 +20,7 @@ public class PausePanelState implements IPanelState {
     public PausePanelState() {
         this.game = Game.getInstance();
         keyListeners = new ArrayList<>();
-        keyListeners.add(new KeyClickedController(game));
+        keyListeners.add(new KeyClickedController());
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(game.getPauseButtons()));
 

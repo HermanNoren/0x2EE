@@ -13,14 +13,18 @@ public class HighscoreState implements IGameState {
 
     private ArrayList<GameButton> buttons;
 
-    public HighscoreState(Game game){
-        this.game = game;
-        buttons = game.getBackButtons();
+    public HighscoreState(){
+        this.game = Game.getInstance();
     }
 
     @Override
     public EPanelState getStateTag() {
         return stateTag;
+    }
+
+    @Override
+    public void setButtons() {
+        buttons = game.getBackButtons();
     }
 
     @Override

@@ -28,7 +28,7 @@ public class HowToPlayPanelState implements IPanelState{
     public HowToPlayPanelState(){
         this.game = Game.getInstance();
         keyListeners = new ArrayList<>();
-        keyListeners.add(new KeyClickedController(game));
+        keyListeners.add(new KeyClickedController());
         controls = setImage("imgs/h2p.png");
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(game.getBackButtons()));
@@ -45,8 +45,8 @@ public class HowToPlayPanelState implements IPanelState{
         g2.setColor(Color.black);
         g2.setFont(new Font("Public Pixel", Font.PLAIN, 48));
         String paused = "HOW TO PLAY";
-        g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
-        g2.drawImage(controls, 0,110, Config.SCREEN_WIDTH*100/150, Config.SCREEN_HEIGHT, null);
+        g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 100);
+        g2.drawImage(controls, 0,100, Config.SCREEN_WIDTH*100/150, Config.SCREEN_HEIGHT, null);
     }
 
     private BufferedImage setImage(String path) {

@@ -24,7 +24,7 @@ public class HighscorePanelState implements IPanelState {
     public HighscorePanelState() {
         this.game = Game.getInstance();
         keyListeners = new ArrayList<>();
-        keyListeners.add(new KeyClickedController(game));
+        keyListeners.add(new KeyClickedController());
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(game.getBackButtons()));
         File file = new File("textfiles/highscores.txt");
@@ -59,7 +59,7 @@ public class HighscorePanelState implements IPanelState {
             String[] playerscore = score.split(":");
             String listitem = "#" + String.valueOf(rank) + " " + playerscore[0].toUpperCase() + ": " + playerscore[1];
             g2.setFont(new Font("Public Pixel", Font.PLAIN, 32));
-            g2.drawString(listitem, (Config.SCREEN_HEIGHT - g2.getFontMetrics().stringWidth(listitem)) / 2 , ypos);
+            g2.drawString(listitem, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(listitem)) / 2 , ypos);
             ypos += 40;
             rank++;
         }

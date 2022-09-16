@@ -22,8 +22,8 @@ public class InGameState implements IGameState {
     private Player player;
     private final EPanelState stateTag = EPanelState.INGAME;
 
-    public InGameState(Game game) {
-        this.game = game;
+    public InGameState() {
+        this.game = Game.getInstance();
         sprites = new ArrayList<>();
         enemies = game.getEnemies();
         this.player = game.getPlayer();
@@ -32,8 +32,6 @@ public class InGameState implements IGameState {
         sprites.add(game.getPlayer());
         sprites.addAll(game.getTerrainBorder());
     }
-
-
 
     /**
      * Returns the specific state tag
@@ -44,6 +42,10 @@ public class InGameState implements IGameState {
         return stateTag;
     }
 
+    @Override
+    public void setButtons() {
+    }
+
     /**
      * Updates all the in-game objects
      */
@@ -51,7 +53,7 @@ public class InGameState implements IGameState {
     public void update() {
         if (game.getEscapePressed()) {
             game.resetEscapePressed();
-            game.setState(new PauseState(game));
+            game.setState(new PauseState());
         }
 
         for (ISprite sprite : sprites) {

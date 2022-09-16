@@ -11,8 +11,8 @@ public class KeyClickedController implements KeyListener {
     private boolean enterKeyDown;
     private boolean escapeKeyDown;
 
-    public KeyClickedController(Game game) {
-        this.game = game;
+    public KeyClickedController() {
+        this.game = Game.getInstance();
     }
 
     @Override

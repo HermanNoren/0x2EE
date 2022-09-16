@@ -6,21 +6,25 @@ import view.panelstates.EPanelState;
 
 import java.util.ArrayList;
 
-public class HowToPlayState implements  IGameState{
+public class HowToPlayState implements IGameState{
 
     private Game game;
     private EPanelState stateTag = EPanelState.HOWTOPLAY;
 
     private ArrayList<GameButton> buttons;
 
-    public HowToPlayState(Game game){
-        this.game = game;
-        buttons = game.getBackButtons();
+    public HowToPlayState(){
+        this.game = Game.getInstance();
 
     }
     @Override
     public EPanelState getStateTag() {
         return stateTag;
+    }
+
+    @Override
+    public void setButtons() {
+        buttons = game.getBackButtons();
     }
 
     @Override
