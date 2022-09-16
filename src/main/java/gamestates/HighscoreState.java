@@ -8,10 +8,10 @@ import java.util.ArrayList;
 
 public class HighscoreState implements IGameState {
 
-    private Game game;
+    private final Game game;
     private final EPanelState stateTag = EPanelState.HIGHSCORES;
 
-    private ArrayList<GameButton> buttons;
+    private final ArrayList<GameButton> buttons;
 
     public HighscoreState(Game game){
         this.game = game;

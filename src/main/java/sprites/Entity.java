@@ -13,17 +13,16 @@ import helperclasses.Vector2;
  */
 
 public abstract class Entity implements ISprite {
-    int animationCounter;
-    Vector2 pos;
-    Vector2 vel;
-    Vector2 acc;
-    int health;
+    private Vector2 pos;
+
+    private Vector2 vel;
+
+    private Vector2 acc;
+    private int health;
     private EDirection direction;
     private EDirection lastDirection;
     private int size = Config.SPRITE_SIZE * 3;
     private Rect rect;
-
-
     /**
      *
      * @param x represents the entities' x-coordinate
@@ -39,6 +38,38 @@ public abstract class Entity implements ISprite {
         this.acc = new Vector2(0, 0);
         this.rect = new Rect(x, y, size, size);
         this.health = health;
+    }
+
+    public Vector2 getVel() {
+        return vel;
+    }
+    public double getVelX(){
+        return vel.getX();
+    }
+    public void setVelX(double velX){
+        vel.setX(velX);
+    }
+    public void setPosX(double posX) {
+        this.pos.setX(posX);
+    }
+
+    public double getPosX(){
+        return this.pos.getX();
+    }
+    public void setAccX(double accX){
+        acc.setX(accX);
+    }
+    public double getAccX(){
+        return acc.getX();
+    }
+
+    public Vector2 getAcc() {
+        return acc;
+    }
+
+    @Override
+    public Vector2 getPos() {
+        return new Vector2(pos);
     }
 
 
@@ -59,20 +90,20 @@ public abstract class Entity implements ISprite {
     public EDirection getDirection() {
         return direction;
     }
-
     public EDirection getLastDirection() {
         return lastDirection;
     }
+
     /**
      * Updates current position of entity on game screen.
      */
     public void updatePos(){
         if(!(direction == EDirection.NOT_MOVING)){
             switch (direction){
-                case UP -> pos.y -= vel.y;
-                case LEFT -> pos.x -= vel.x;
-                case DOWN -> pos.y += vel.y;
-                case RIGHT -> pos.x += vel.x;
+                case UP -> pos.setY(pos.getY() - vel.getY());
+                case LEFT -> pos.setX(pos.getX() - vel.getX());
+                case DOWN -> pos.setY(pos.getY() + vel.getY());
+                case RIGHT -> pos.setX(pos.getX() + vel.getX());
             }
         }
     }
@@ -92,11 +123,6 @@ public abstract class Entity implements ISprite {
     }
 
     @Override
-    public Vector2 getPos() {
-        return new Vector2(pos);
-    }
-
-    @Override
     public Rect getRect() {
         return new Rect(this.rect);
     }
@@ -107,7 +133,7 @@ public abstract class Entity implements ISprite {
      */
     @Override
     public void update() {
-        updatePos();
+        //updatePos();
     }
 
     /**

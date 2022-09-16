@@ -8,7 +8,6 @@ import buttons.GameButton;
 import buttons.buttonactions.BackButtonAction;
 import buttons.buttonactions.EmptyButtonAction;
 import buttons.buttonactions.StartGameButtonAction;
-import sprites.enemies.Enemy;
 import sprites.enemies.IEnemy;
 import view.IObserver;
 import view.panelstates.EPanelState;
@@ -35,28 +34,8 @@ public class Game implements Runnable {
 
     private boolean stateChangedFlag;
 
-    private Game() {
-//        player = new Player(10, 10, 0.5, 100);
-//        gameMap = new GameMap();
-//
-//        initMainMenuButtons();
-//        initBackButtons();
-//        initPauseButtons();
-//
-//        wPressed = false;
-//        aPressed = false;
-//        sPressed = false;
-//        dPressed = false;
-//        enterPressed = false;
-//        escapePressed = false;
-//
-//        stateChangedFlag = false;
-//
-//        state = new MainMenuState(this);
-//        observers = new ArrayList<>();
-//
-//        startGame();
-    }
+    private Game() {}
+
     private static Game game;
     public static Game getInstance(){
         if(game == null){

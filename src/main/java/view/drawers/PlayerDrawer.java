@@ -32,10 +32,10 @@ public class PlayerDrawer implements IDrawer {
         movementAnimation();
         chooseActiveImage();
         if(prevImg == null){
-            g.drawImage(up1, (int) player.getPos().x, (int) player.getPos().y, player.getSize(), player.getSize(), null); // Sets default image
+            g.drawImage(up1, (int) player.getPos().getX(), (int) player.getPos().getY(), player.getSize(), player.getSize(), null); // Sets default image
         }
         else {
-            g.drawImage(activeImage, (int) player.getPos().x,(int) player.getPos().y, player.getSize(), player.getSize(), null);
+            g.drawImage(activeImage, (int) player.getPos().getX(),(int) player.getPos().getY(), player.getSize(), player.getSize(), null);
 
         }
     }

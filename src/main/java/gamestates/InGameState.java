@@ -4,7 +4,7 @@ import main.Game;
 import sprites.ISprite;
 
 import sprites.Player;
-import sprites.enemies.Enemy;
+
 import sprites.enemies.EnemyFactory;
 import sprites.enemies.IEnemy;
 import sprites.enemies.NormalEnemyFactory;

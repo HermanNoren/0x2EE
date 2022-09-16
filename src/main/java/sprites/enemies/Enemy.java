@@ -5,13 +5,19 @@ import sprites.Entity;
 
 import java.util.Random;
 
-public abstract class Enemy extends Entity implements IEnemy {
+abstract class Enemy extends Entity implements IEnemy {
 
-    protected Enemy(int position_x, int position_y, double vel,  int health){
-        super(position_x, position_y, vel, health);
+    protected Enemy(int x, int y, double vel,  int health){
+        super(x, y, vel, health);
     }
+
 
     public void moveEnemy(){
 
+    }
+
+    @Override
+    public void update() {
+        super.update();
     }
 }

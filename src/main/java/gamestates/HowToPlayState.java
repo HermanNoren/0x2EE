@@ -16,7 +16,6 @@ public class HowToPlayState implements  IGameState{
     public HowToPlayState(Game game){
         this.game = game;
         buttons = game.getBackButtons();
-
     }
     @Override
     public EPanelState getStateTag() {
