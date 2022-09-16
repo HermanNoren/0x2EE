@@ -37,6 +37,7 @@ public class Terrain implements ISprite, Comparable<Terrain> {
         this.id = idCounter++;
         System.out.println(id);
         this.pos = vector2;
+
     }
 
     @Override
