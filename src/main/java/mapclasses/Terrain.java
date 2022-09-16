@@ -1,19 +1,46 @@
 package mapclasses;
 
 import config.Config;
+import datastructures.Node;
 import helperclasses.Rect;
 import helperclasses.Vector2;
 import sprites.ISprite;
 
-public class Terrain implements ISprite {
+import java.util.List;
+
+public class Terrain implements ISprite, Comparable<Terrain> {
 
     private final int size = Config.SPRITE_SIZE;
     private Vector2 pos;
     private Rect rect;
 
+    public List<Node.Edge> neighbors;
+
+    // Evaluation functions
+    public double f = Double.MAX_VALUE;
+    public double g = Double.MAX_VALUE;
+
+    // Heuristic
+    public Vector2 playerPos;
+
     public Terrain(int x, int y) {
         pos = new Vector2(x, y);
         rect = new Rect(x, y, size, size);
+    }
+
+    public static class Edge {
+        Edge(int weight, Node node){
+            this.weight = weight;
+            this.node = node;
+        }
+
+        public int weight;
+        public Node node;
+    }
+
+    public void addBranch(int weight, Node node){
+        Edge newEdge = new Edge(weight, node);
+        neighbors.add(newEdge);
     }
 
     @Override
@@ -38,5 +65,24 @@ public class Terrain implements ISprite {
     @Override
     public void update() {
 
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int distanceToPlayer(){
+        int dx = (int) Math.abs(playerPos.getX() - this.getPos().getX());
+        int dy = (int) Math.abs(playerPos.getY() - this.getPos().getY());
+        return dy + dx;
+    }
+
+    @Override
+    public int compareTo(Terrain terrain) {
+        if (this.distanceToPlayer() < terrain.distanceToPlayer())
+            return -1;
+        if (this.distanceToPlayer() > terrain.distanceToPlayer())
+            return 1;
+        return 0;
     }
 }
