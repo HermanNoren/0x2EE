@@ -32,7 +32,7 @@ public class PauseState implements IGameState{
     }
 
     @Override
-    public void setButtons() {
+    public void updateButtons() {
         buttons = game.getPauseButtons();
     }
 

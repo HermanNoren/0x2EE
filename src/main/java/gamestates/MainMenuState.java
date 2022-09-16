@@ -27,7 +27,7 @@ public class MainMenuState implements IGameState {
     }
 
     @Override
-    public void setButtons() {
+    public void updateButtons() {
         buttons = game.getMainMenuButtons();
     }
 

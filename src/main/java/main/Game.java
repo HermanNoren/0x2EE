@@ -84,7 +84,7 @@ public class Game implements Runnable {
         stateChangedFlag = false;
 
         state = new MainMenuState();
-        state.setButtons();
+        state.updateButtons();
         observers = new ArrayList<>();
 
         startGame();
@@ -225,7 +225,7 @@ public class Game implements Runnable {
      */
     public void setState(IGameState state) {
         this.state = state;
-        state.setButtons();
+        state.updateButtons();
         stateChangedFlag = true;
     }
 

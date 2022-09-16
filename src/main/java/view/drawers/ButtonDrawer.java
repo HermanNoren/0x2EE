@@ -33,7 +33,7 @@ public class ButtonDrawer implements IDrawer {
     }
 
     private static void drawOutline(Graphics2D g, GameButton button) {
-        g.setColor(Color.BLACK);
+        g.setColor(Color.DARK_GRAY);
         g.setStroke(new BasicStroke(5));
         g.drawRect((int) button.getPos().x, (int) button.getPos().y, button.getWidth(), button.getHeight());
     }
@@ -43,7 +43,7 @@ public class ButtonDrawer implements IDrawer {
             g.setColor(Color.GREEN);
         }
         else {
-            g.setColor(Color.WHITE);
+            g.setColor(new Color(217, 217, 217));
         }
         g.fillRect((int) button.getPos().x, (int) button.getPos().y, button.getWidth(), button.getHeight());
     }
