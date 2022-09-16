@@ -3,6 +3,9 @@ package main;
 import buttons.buttonactions.*;
 import gamestates.*;
 import mapclasses.TerrainBorder;
+import config.Config;
+import gamestates.*;
+import mapclasses.GameMap;
 import sprites.ISprite;
 import sprites.Player;
 import buttons.GameButton;
@@ -28,7 +31,7 @@ public class Game implements Runnable {
 
     private ArrayList<GameButton> mainMenuButtons, backButtons, pauseButtons;
 
-    private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed;
+    private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
 
     private boolean stateChangedFlag;
 
@@ -62,11 +65,12 @@ public class Game implements Runnable {
     }
 
     public void createGame(){
-        player = new Player(10, 10, 0.5, 100);
+        player = new Player(32, 32, 0.5, 100);
         enemies = new ArrayList<>();
         terrainBorder = new TerrainBorder(960, 800);
-        initBackButtons();
+
         initMainMenuButtons();
+        initBackButtons();
         initPauseButtons();
 
         wPressed = false;
@@ -75,6 +79,7 @@ public class Game implements Runnable {
         dPressed = false;
         enterPressed = false;
         escapePressed = false;
+        spacePressed = false;
 
         stateChangedFlag = false;
 
@@ -153,6 +158,10 @@ public class Game implements Runnable {
         enterPressed = true;
     }
 
+    public void setSpacePressed() {
+        spacePressed = true;
+    }
+
     /**
      * Used as a way for outside components to tell Game if the Enter key is released.
      */
@@ -174,6 +183,10 @@ public class Game implements Runnable {
         escapePressed = false;
     }
 
+    public void resetSpacePressed() {
+        spacePressed = false;
+    }
+
     /**
      * Used as a way for objects inside to read whether the W key is pressed
      * @return wPressed
@@ -192,6 +205,10 @@ public class Game implements Runnable {
 
     public boolean getEscapePressed() {
         return escapePressed;
+    }
+
+    public boolean getSpacePressed() {
+        return spacePressed;
     }
 
     public boolean readStateChangedFlag() {

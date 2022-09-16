@@ -8,26 +8,26 @@ import java.util.ArrayList;
 public class GameMap {
 
     private final String[] gameMap = new String[] {
-            "                                        ",
-            "                                        ",
-            "                                        ",
-            "                                        ",
-            "                                        ",
-            "                  WWWW                  ",
-            "                     W                  ",
-            "                     W                  ",
-            "                     W                  ",
-            "                      W                 ",
-            "                      W                 ",
-            "                                        ",
-            "                                        ",
-            "                                        ",
-            "                                        ",
-            "                                        ",
-            "                                        ",
-            "             WWWWWWWWWWWW               ",
-            "                                        ",
-            "                                        "
+            "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+            "W                                       ",
+            "W                                       ",
+            "W                                       ",
+            "W                                       ",
+            "W                 WWWW                  ",
+            "W                    W                  ",
+            "W                    W                  ",
+            "W                    W                  ",
+            "W                     W                 ",
+            "W                     W                 ",
+            "W                                       ",
+            "W                                       ",
+            "W                                       ",
+            "W                                       ",
+            "W                                       ",
+            "W                                       ",
+            "W            WWWWWWWWWWWW               ",
+            "W                                       ",
+            "W                                       "
     };
 
     private ArrayList<ISprite> tiles;

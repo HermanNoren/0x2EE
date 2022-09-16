@@ -6,23 +6,22 @@ import view.Camera;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class TerrainDrawer implements IDrawer {
+public class TileDrawer implements IDrawer {
 
-    ArrayList<ISprite> terrain;
+    ArrayList<ISprite> tiles;
     private Camera camera;
 
-    public TerrainDrawer(ArrayList<ISprite> terrain, Camera camera) {
-        this.terrain = terrain;
+    public TileDrawer(ArrayList<ISprite> tiles, Camera camera) {
         this.camera = camera;
+        this.tiles = tiles;
     }
 
     @Override
     public void draw(Graphics2D g2) {
-        for (ISprite terrain: terrain) {
+        for (ISprite tile: tiles) {
             g2.setColor(Color.black);
-            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(terrain.getPos(), terrain.getWidth(), terrain.getHeight(), camera);
+            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(tile.getPos(), tile.getWidth(), tile.getHeight(), camera);
             g2.fillRect(drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3));
         }
     }
 }
-

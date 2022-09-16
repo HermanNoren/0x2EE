@@ -77,6 +77,11 @@ public class ShopSprite implements ISprite {
     }
 
     @Override
+    public Vector2 getCenter() {
+        return null;
+    }
+
+    @Override
     public Rect getRect() {
         return this.shopAreaSize;
     }
