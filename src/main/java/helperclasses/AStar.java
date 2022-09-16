@@ -29,14 +29,14 @@ public class AStar {
                 Terrain m = edge.node;
                 double totalWeight = n.getG() + edge.weight; //
 
-                if(!openList.contains(m) && !closedList.contains(m)){
+                if(!openList.contains(m) && !closedList.contains(m) && m.isPassable()){
                     m.setParent(n);
                     m.setG(totalWeight);
                     m.setF(m.getG() + m.calculateHeuristic(target));
                     openList.add(m);
 
                 } else {
-                    if(totalWeight < m.getG()){
+                    if(totalWeight < m.getG() && m.isPassable()){
                         m.setParent(n);
                         m.setG(totalWeight);
                         m.setF(m.getG() + m.calculateHeuristic(target));
@@ -78,13 +78,13 @@ public class AStar {
 
     public static void main(String[] args) {
 
-        Terrain head = new Terrain(new Vector2(0, 0));
+        Terrain head = new Terrain(new Vector2(0, 0), true);
 
         head.setG(0);
 
-        Terrain n1 = new Terrain(new Vector2(16, 16));
-        Terrain n2 = new Terrain( new Vector2(32, 32));
-        Terrain n3 = new Terrain(new Vector2(48,48));
+        Terrain n1 = new Terrain(new Vector2(16, 16), true);
+        Terrain n2 = new Terrain( new Vector2(32, 32), true);
+        Terrain n3 = new Terrain(new Vector2(48,48), true);
 
         head.addBranch(1, n1);
         head.addBranch(1, n2);
@@ -92,10 +92,10 @@ public class AStar {
 
         n3.addBranch(1, n2);
 
-        Terrain n4 = new Terrain(new Vector2(64,64));
+        Terrain n4 = new Terrain(new Vector2(64,64), true);
 
 
-        Terrain target = new Terrain(new Vector2(96, 96));
+        Terrain target = new Terrain(new Vector2(96, 96), true);
 
         n1.addBranch(1, n4);
         n3.addBranch(1, n4);

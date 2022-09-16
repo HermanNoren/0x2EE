@@ -13,7 +13,7 @@ abstract class Enemy extends Entity implements IEnemy {
 
     protected Enemy(int x, int y, double vel,  int health){
         super(x, y, vel, health);
-        Terrain goal = AStar.aStar(new Terrain(getPos()), new Terrain(Game.getInstance().getPlayer().getPos()));
+        Terrain goal = AStar.aStar(new Terrain(getPos(), true), new Terrain(Game.getInstance().getPlayer().getPos(), true));
         AStar.printPath(goal);
     }
 

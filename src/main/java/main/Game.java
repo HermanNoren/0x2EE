@@ -87,6 +87,14 @@ public class Game implements Runnable {
     }
 
     /**
+     * Returns an ArrayList containing all the tiles in the Game Map.
+     * @return  All Game Map Tiles
+     */
+    public ArrayList<ISprite> getGrass() {
+        return gameMap.getGrass();
+    }
+
+    /**
      * Returns an ArrayList containing all the buttons for the main menu.
      * @return  Main Menu Buttons
      */

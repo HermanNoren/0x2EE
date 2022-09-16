@@ -18,6 +18,7 @@ public class Terrain implements ISprite, Comparable<Terrain> {
     private final int size = Config.SPRITE_SIZE;
     private Vector2 pos;
     private Rect rect;
+    private boolean passable;
     private Game game = Game.getInstance();
     private final Player player;
     private static int idCounter = 0;
@@ -30,14 +31,14 @@ public class Terrain implements ISprite, Comparable<Terrain> {
     private Vector2 playerPos; // Target node
 
 
-    public Terrain(Vector2 vector2){
+    public Terrain(Vector2 vector2, boolean passable){
         this.player = game.getPlayer();
         playerPos = player.getPos();
         this.neighbors = new ArrayList<>();
         this.id = idCounter++;
         System.out.println(id);
         this.pos = vector2;
-
+        this.passable = passable;
     }
 
     @Override
@@ -90,6 +91,10 @@ public class Terrain implements ISprite, Comparable<Terrain> {
 
     public int getId() {
         return id;
+    }
+
+    public boolean isPassable(){
+        return passable;
     }
 
 
