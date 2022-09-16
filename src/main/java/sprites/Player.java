@@ -90,6 +90,7 @@ public class Player extends Entity implements ISprite, IMovableSprite {
         acc.y += vel.y * -0.1;
         vel.y += acc.y;
         pos.y += vel.y + 0.5 * acc.y;
+
     }
 
     /**

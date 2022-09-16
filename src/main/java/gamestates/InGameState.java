@@ -9,6 +9,7 @@ import sprites.enemies.IEnemy;
 import sprites.enemies.NormalEnemyFactory;
 import view.panelstates.EPanelState;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 /**
@@ -42,7 +43,7 @@ public class InGameState implements IGameState {
     }
 
     @Override
-    public void setButtons() {
+    public void updateButtons() {
     }
 
     /**
@@ -50,6 +51,14 @@ public class InGameState implements IGameState {
      */
     @Override
     public void update() {
+
+        /* GAME OVER
+        if (player.getHealth() < 1){
+            game.setState(new MainMenuState());
+        }
+
+         */
+
         if (game.getEscapePressed()) {
             game.resetEscapePressed();
             game.setState(new PauseState());
