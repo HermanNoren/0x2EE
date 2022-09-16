@@ -12,7 +12,7 @@ public class Graph {
             this.value = value;
             this.weight = weight;
         }
-    };
+    }
     //Adjacency list
     List<List<Node>> adj_list = new ArrayList<>();
     public Graph(List<Edge> edges){
