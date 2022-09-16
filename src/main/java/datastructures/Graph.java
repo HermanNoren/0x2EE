@@ -17,9 +17,9 @@ public class Graph {
     List<List<Node>> adj_list = new ArrayList<>();
     public Graph(List<Edge> edges){
 
-        for (int i = 0; 1 < edges.size(); i++){
+        for (int i = 0; i < edges.size(); i++)
             adj_list.add(i, new ArrayList<>());
-        }
+
         for(Edge e: edges){
             adj_list.get(e.src).add(new Node(e.dest, e.weight));
         }
@@ -40,7 +40,9 @@ public class Graph {
     }
 
     public static void main(String[] args) {
-        List<Edge> edges = Arrays.asList(new Edge(0, 1, 2));
+        List<Edge> edges = Arrays.asList(new Edge(0, 1, 2),new Edge(0, 2, 4),
+                new Edge(1, 2, 4),new Edge(2, 0, 5), new Edge(2, 1, 4),
+                new Edge(3, 2, 3), new Edge(4, 5, 1),new Edge(5, 4, 3));
         Graph graph =  new Graph(edges);
         Graph.printGraph(graph);
     }

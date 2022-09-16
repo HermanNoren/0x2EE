@@ -10,7 +10,6 @@ public class Vector2 {
 
     public void setX(double x) {
         this.x = x;
-        System.out.println("new x set:" + this.getX());
 
     }
 

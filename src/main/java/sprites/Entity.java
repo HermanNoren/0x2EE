@@ -43,24 +43,44 @@ public abstract class Entity implements ISprite {
     public Vector2 getVel() {
         return vel;
     }
+
     public double getVelX(){
         return vel.getX();
     }
+
     public void setVelX(double velX){
         vel.setX(velX);
     }
     public void setPosX(double posX) {
-        this.pos.setX(posX);
+        pos.setX(posX);
     }
-
     public double getPosX(){
-        return this.pos.getX();
+        return pos.getX();
     }
     public void setAccX(double accX){
         acc.setX(accX);
     }
     public double getAccX(){
         return acc.getX();
+    }
+    public double getVelY(){
+        return vel.getY();
+    }
+
+    public void setVelY(double velY){
+        vel.setY(velY);
+    }
+    public void setPosY(double posY) {
+        pos.setY(posY);
+    }
+    public double getPosY(){
+        return pos.getY();
+    }
+    public void setAccY(double accY){
+        acc.setY(accY);
+    }
+    public double getAccY(){
+        return acc.getY();
     }
 
     public Vector2 getAcc() {
