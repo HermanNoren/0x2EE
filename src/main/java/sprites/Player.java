@@ -54,7 +54,7 @@ public class Player extends Entity implements ISprite, IMovableSprite {
 
     @Override
     public void update() {
-        acc.x = 0;
+        setAccX(0);
 
         /*
         if (rightPressed && leftPressed) { }
@@ -62,14 +62,17 @@ public class Player extends Entity implements ISprite, IMovableSprite {
         else if (leftPressed) { acc.x = -0.1; }
          */
 
-        if (getDirection() == EDirection.RIGHT) { acc.x = 0.1; }
-        if (getDirection() == EDirection.LEFT) { acc.x = -0.1; }
+        if (getDirection() == EDirection.RIGHT) { setAccX(0.1); }
+        if (getDirection() == EDirection.LEFT) { setAccX(-0.1); }
 
-        acc.x += vel.x * -0.1;
-        vel.x += acc.x;
-        pos.x += vel.x + 0.5 * acc.x;
+        setAccX(getAccX() + getVelX()*0.1);
+        setVelX(getVelX() + getAccX());
 
-        acc.y = 0;
+        setPosX(getPosX() + getVelX() + 0.5*getAccX());
+
+
+
+        getAcc().setY(0);
 
         /*
         if (upPressed && downPressed) { }
@@ -77,12 +80,14 @@ public class Player extends Entity implements ISprite, IMovableSprite {
         else if (upPressed) { acc.y = -0.1; }
          */
 
-        if (getDirection() == EDirection.UP) { acc.y = -0.1; }
-        if (getDirection() == EDirection.DOWN) { acc.y = 0.1; }
+        if (getDirection() == EDirection.DOWN) { getAcc().setY(0.1);  }
+        if (getDirection() == EDirection.UP) { getAcc().setY(-0.1); }
 
-        acc.y += vel.y * -0.1;
-        vel.y += acc.y;
-        pos.y += vel.y + 0.5 * acc.y;
+        getAcc().setY(getAcc().getY() + getVel().getY()*-0.1);
+
+        getVel().setY(getVel().getY() + getAcc().getY());
+
+        getPos().setY(getPos().getY() + getVel().getY() + 0.5*getAcc().getY());
     }
 
     /**
@@ -93,7 +98,7 @@ public class Player extends Entity implements ISprite, IMovableSprite {
     }
 
     public void damageTaken(int damage) {
-        this.health -= armor.damageReduction(damage);
+
     }
 
     public boolean isDamageTaken(){
