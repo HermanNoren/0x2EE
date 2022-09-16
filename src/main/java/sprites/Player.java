@@ -18,7 +18,7 @@ public class Player extends Entity implements ISprite, IMovableSprite {
 
     private boolean upPressed, downPressed, leftPressed, rightPressed;
 
-    /**
+        /**
      * @param x, starting x-position
      * @param y, starting y-position
      * @param health, starting health
