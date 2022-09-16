@@ -1,7 +1,6 @@
 package mapclasses;
 
 import config.Config;
-import datastructures.Node;
 import helperclasses.Rect;
 import helperclasses.Vector2;
 import sprites.ISprite;
@@ -14,7 +13,7 @@ public class Terrain implements ISprite, Comparable<Terrain> {
     private Vector2 pos;
     private Rect rect;
 
-    public List<Node.Edge> neighbors;
+    public List<Terrain.Edge> neighbors;
 
     // Evaluation functions
     public double f = Double.MAX_VALUE;
@@ -29,17 +28,17 @@ public class Terrain implements ISprite, Comparable<Terrain> {
     }
 
     public static class Edge {
-        Edge(int weight, Node node){
+        Edge(int weight, Terrain terrain){
             this.weight = weight;
-            this.node = node;
+            this.terrain = terrain;
         }
 
         public int weight;
-        public Node node;
+        public Terrain terrain;
     }
 
-    public void addBranch(int weight, Node node){
-        Edge newEdge = new Edge(weight, node);
+    public void addBranch(int weight, Terrain terrain){
+        Edge newEdge = new Edge(weight, terrain);
         neighbors.add(newEdge);
     }
 
