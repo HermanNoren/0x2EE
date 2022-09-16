@@ -20,9 +20,12 @@ public class TileDrawer implements IDrawer {
             g2.setColor(Color.black);
             g2.fillRect((int) tile.getPos().getX(), (int) tile.getPos().getY(), tile.getWidth(), tile.getHeight());
         }
+        /*
         for (ISprite tile: grass) {
             g2.setColor(Color.green);
             g2.fillRect((int) tile.getPos().getX(), (int) tile.getPos().getY(), tile.getWidth(), tile.getHeight());
         }
+
+         */
     }
 }

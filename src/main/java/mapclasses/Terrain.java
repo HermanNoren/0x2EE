@@ -38,6 +38,7 @@ public class Terrain implements ISprite, Comparable<Terrain> {
         this.id = idCounter++;
         System.out.println(id);
         this.pos = vector2;
+        this.rect = new Rect((int) Math.round(vector2.getX()), (int) Math.round(vector2.getY()), size, size);
         this.passable = passable;
     }
 
