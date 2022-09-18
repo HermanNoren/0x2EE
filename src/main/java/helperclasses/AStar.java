@@ -22,6 +22,8 @@ public class AStar {
             Terrain n = openList.peek(); //n = next node
 
             if(n == target){
+                while (n.getParent() != null && n.getParent() != start)
+                    n = n.getParent();
                 return n;
             }
 
@@ -54,6 +56,8 @@ public class AStar {
         }
         return null;
     }
+
+
 
     public static void printPath(Terrain target){
         Terrain n = target;

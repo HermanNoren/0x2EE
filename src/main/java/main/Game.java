@@ -1,7 +1,9 @@
 package main;
 
 import gamestates.*;
+import helperclasses.Vector2;
 import mapclasses.GameMap;
+import mapclasses.Terrain;
 import sprites.ISprite;
 import sprites.Player;
 import buttons.GameButton;
@@ -13,6 +15,7 @@ import view.IObserver;
 import view.panelstates.EPanelState;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * This class contains the main game loop.
@@ -90,7 +93,7 @@ public class Game implements Runnable {
      * Returns an ArrayList containing all the tiles in the Game Map.
      * @return  All Game Map Tiles
      */
-    public ArrayList<ISprite> getGrass() {
+    public HashMap<String, Terrain> getGrass() {
         return gameMap.getGrass();
     }
 

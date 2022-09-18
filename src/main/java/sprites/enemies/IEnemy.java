@@ -11,5 +11,6 @@ public interface IEnemy{
     int getSize();
     EDirection getDirection();
     void specialAbility();
+    void update();
 
 }

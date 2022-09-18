@@ -57,5 +57,8 @@ public class InGameState implements IGameState {
         for (ISprite sprite : sprites) {
             sprite.update();
         }
+        for (IEnemy enemy : enemies){
+            enemy.update();
+        }
     }
 }
