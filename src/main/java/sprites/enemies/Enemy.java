@@ -1,5 +1,6 @@
 package sprites.enemies;
 
+import config.Config;
 import controllers.EDirection;
 import helperclasses.AStar;
 import helperclasses.Vector2;
@@ -22,9 +23,9 @@ abstract class Enemy extends Entity implements IEnemy {
     @Override
     public void update() {
         Game game = Game.getInstance();
-        Vector2 vec = new Vector2 (Math.round(game.getPlayer().getPos().getX()), Math.round(game.getPlayer().getPos().getY()));
-        String keyPlayer = "" + (int) vec.getX() + (int) vec.getY();
-        String keyEnemy = "" + (int) this.getPos().getX() + (int) this.getPos().getY();
+        int size = Config.SPRITE_SIZE;
+        String keyPlayer = "" + (int) (size*(Math.round(game.getPlayer().getPos().getX()/size))) + (int) (size*(Math.round(game.getPlayer().getPos().getY()/size)));
+        String keyEnemy = "" + (int) (size*(Math.round(this.getPos().getX()/size))) + (int) (size*(Math.round(this.getPos().getY()/size)));
         Terrain goal = null;
         if (game.getGrass().get(keyEnemy) != null) 
             goal = AStar.aStar(game.getGrass().get(keyEnemy), game.getGrass().get(keyPlayer));
