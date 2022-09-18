@@ -9,11 +9,14 @@ public class Tile implements ISprite {
 
     private final int size = Config.WALL_SIZE;
     private Vector2 pos;
+
+    private CollidableObject collidableObject;
     private Rect rect;
 
-    public Tile(int x, int y) {
+    public Tile(int x, int y, boolean isCollidable) {
         pos = new Vector2(x, y);
         rect = new Rect(x, y, size, size);
+        collidableObject.isCollidable = isCollidable;
     }
 
     @Override

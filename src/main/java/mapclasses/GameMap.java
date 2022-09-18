@@ -48,7 +48,7 @@ public class GameMap {
             for (char tile : row.toCharArray()) {
                 switch(tile) {
                     case 'W':
-                        tiles.add(new Tile(x, y));
+                        tiles.add(new Tile(x, y, true));
                 }
                 x += Config.SPRITE_SIZE;
             }
