@@ -3,9 +3,7 @@ package main;
 import buttons.buttonactions.*;
 import gamestates.*;
 import mapclasses.TerrainBorder;
-import config.Config;
 import gamestates.*;
-import mapclasses.GameMap;
 import sprites.ISprite;
 import sprites.Player;
 import buttons.GameButton;
@@ -30,7 +28,6 @@ public class Game implements Runnable {
     private ArrayList<IObserver> observers;
     private IGameState state;
     private Player player;
-
     private ArrayList<String> highscoreName;
     private ArrayList<IEnemy> enemies;
     private TerrainBorder terrainBorder;

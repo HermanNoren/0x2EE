@@ -1,9 +1,12 @@
 package gamestates;
 
+import Collision.CollisionHandler;
+import helperclasses.Vector2;
 import main.Game;
 import sprites.ISprite;
 
 import sprites.Player;
+import sprites.enemies.Enemy;
 import sprites.enemies.EnemyFactory;
 import sprites.enemies.IEnemy;
 import sprites.enemies.NormalEnemyFactory;
@@ -19,6 +22,7 @@ public class InGameState implements IGameState {
     private ArrayList<ISprite> sprites;
     private ArrayList<IEnemy> enemies;
     private Game game;
+
     private Player player;
     private final EPanelState stateTag = EPanelState.INGAME;
 
@@ -48,6 +52,8 @@ public class InGameState implements IGameState {
 
     /**
      * Updates all the in-game objects
+     * **Implement collision logic here**
+     * Maybe better to implement the border here to make it check faster although this approach is more OOP.
      */
     @Override
     public void update() {
@@ -67,5 +73,11 @@ public class InGameState implements IGameState {
         for (ISprite sprite : sprites) {
             sprite.update();
         }
+        for(IEnemy enemy : enemies){
+            //Check if enemy is close enough to damage player, could be done somewhere else also.
+        }
+
+        CollisionHandler.seeIfPlayerIsOutsideBorder(player);
+
     }
 }

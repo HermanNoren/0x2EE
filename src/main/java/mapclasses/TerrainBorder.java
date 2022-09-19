@@ -1,5 +1,6 @@
 package mapclasses;
 
+import config.Config;
 import sprites.ISprite;
 
 import java.util.ArrayList;
@@ -19,20 +20,20 @@ public class TerrainBorder {
 
         ArrayList<Tile> tiles = new ArrayList<>();
 
-        for(int i = 0; i < 1000; i++){
-            tiles.add(new Tile(0, i));
-            tiles.add(new Tile(i,0));
+        for(int i = 0; i < Config.SCREEN_HEIGHT_IN_GAME; i++){
+            tiles.add(new Tile(0, i, true));
+            tiles.add(new Tile(0 + Config.SCREEN_WIDTH_IN_GAME, i , true));
+        }
+        for(int i = 0; i < Config.SCREEN_WIDTH_IN_GAME; i++){
+            tiles.add(new Tile(i, 0, true));
+            tiles.add(new Tile(i, Config.SCREEN_HEIGHT_IN_GAME, true));
         }
         return tiles;
-    }
-    public Tile addNewTile(int x, int y){
-        return new Tile(x, y);
     }
 
     public ArrayList<ISprite> getTerrainBorder() {
         return new ArrayList<>(border);
     }
-
 
 }
 
