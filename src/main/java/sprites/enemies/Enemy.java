@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-abstract class Enemy extends Entity implements IEnemy {
+public abstract class Enemy extends Entity implements IEnemy {
     private Game game = Game.getInstance();
     private int size = Config.SPRITE_SIZE;
     protected Enemy(int x, int y, double vel,  int health){

@@ -21,26 +21,24 @@ public class TerrainBorder {
 
         ArrayList<Terrain> tiles = new ArrayList<>();
 
-        for(int i = 0; i < 1000; i++){
-            tiles.add(new Terrain(new Vector2(0,i), false));
+        for(int i = 0; i < 1000; i++) {
+            tiles.add(new Terrain(new Vector2(0, i), true));
             tiles.add(new Terrain(new Vector2(i, 0), false));
-        for(int i = 0; i < Config.SCREEN_HEIGHT_IN_GAME; i++){
-            tiles.add(new Tile(0, i, true));
-            tiles.add(new Tile(0 + Config.SCREEN_WIDTH_IN_GAME, i , true));
+        }
+        for(int i = 0; i < Config.SCREEN_HEIGHT_IN_GAME; i++) {
+            tiles.add(new Terrain(new Vector2(0, i), true));
+            tiles.add(new Terrain(new Vector2(0 + Config.SCREEN_WIDTH_IN_GAME, i), true));
         }
         for(int i = 0; i < Config.SCREEN_WIDTH_IN_GAME; i++){
-            tiles.add(new Tile(i, 0, true));
-            tiles.add(new Tile(i, Config.SCREEN_HEIGHT_IN_GAME, true));
+            tiles.add(new Terrain(new Vector2(i, 0), true));
+            tiles.add(new Terrain(new Vector2(i, Config.SCREEN_HEIGHT_IN_GAME), true));
         }
         return tiles;
     }
-    public Terrain addNewTile(int x, int y){
-        return new Terrain(new Vector2(x, y), false);
-    }
+
 
     public ArrayList<ISprite> getTerrainBorder() {
         return new ArrayList<>(border);
     }
-
 }
 
