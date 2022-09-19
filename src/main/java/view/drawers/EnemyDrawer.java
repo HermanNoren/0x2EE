@@ -2,6 +2,7 @@ package view.drawers;
 
 import controllers.EDirection;
 import sprites.Entity;
+import sprites.ISprite;
 import sprites.enemies.IEnemy;
 
 import javax.imageio.ImageIO;
@@ -109,7 +110,7 @@ public class EnemyDrawer implements IDrawer {
             if(!(prevImg == null)){
                 g2.drawImage(activeImage, (int)enemy.getPos().getX(), (int)enemy.getPos().getY(), enemy.getSize(), enemy.getSize(), null);
             }else {
-                g2.drawImage(up1, (int) enemy.getPos().getY(), (int)enemy.getPos().getY(), enemy.getSize(), enemy.getSize(), null);
+                g2.drawImage(up1, (int) enemy.getPos().getX(), (int)enemy.getPos().getY(), enemy.getSize(), enemy.getSize(), null);
             }
         }
     }

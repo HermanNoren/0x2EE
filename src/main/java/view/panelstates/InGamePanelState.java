@@ -34,7 +34,6 @@ public class InGamePanelState implements IPanelState {
         drawers.add(new TileDrawer(game.getTiles(), game.getGrass()));
         drawers.add(new PlayerDrawer(game.getPlayer()));
         drawers.add(new EnemyDrawer(game.getEnemies()));
-
     }
 
 
@@ -43,6 +42,7 @@ public class InGamePanelState implements IPanelState {
         for (IDrawer drawer : drawers) {
             drawer.draw(g);
         }
+
         hud.update(g, mainPanel);
     }
 

@@ -97,6 +97,13 @@ public class Game implements Runnable {
         return gameMap.getGrass();
     }
 
+    public ArrayList<Terrain> getPath(){
+        return gameMap.getPath();
+    }
+    public void setPath(ArrayList<Terrain> path){
+        gameMap.setPath(path);
+    }
+
     /**
      * Returns an ArrayList containing all the buttons for the main menu.
      * @return  Main Menu Buttons

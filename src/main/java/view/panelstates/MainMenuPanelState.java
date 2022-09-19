@@ -30,10 +30,10 @@ public class MainMenuPanelState implements IPanelState {
 
     @Override
     public void draw(Graphics2D g2) {
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 12));
         for (IDrawer drawer : drawers) {
             drawer.draw(g2);
         }
+        g2.setFont(new Font("Public Pixel", Font.PLAIN, 12));
 
         g2.setColor(Color.black);
         g2.setFont(new Font("Public Pixel", Font.PLAIN, 64));

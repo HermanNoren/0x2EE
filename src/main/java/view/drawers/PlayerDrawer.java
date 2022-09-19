@@ -16,7 +16,6 @@ public class PlayerDrawer implements IDrawer {
     private int animationCounter;
     private int imageSwitcher;
     private Entity player;
-
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
 
     public PlayerDrawer(Entity player) {
@@ -36,7 +35,6 @@ public class PlayerDrawer implements IDrawer {
         }
         else {
             g.drawImage(activeImage, (int) player.getPos().getX(),(int) player.getPos().getY(), player.getSize(), player.getSize(), null);
-
         }
     }
 

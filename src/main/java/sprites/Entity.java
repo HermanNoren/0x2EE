@@ -153,7 +153,6 @@ public abstract class Entity implements ISprite {
      */
     @Override
     public void update() {
-
     }
 
     /**

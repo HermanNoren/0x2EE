@@ -7,34 +7,42 @@ import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 
+/**
+ * AStar class contains a static method with the AStar algorithm.
+ */
 public class AStar {
 
+    /**
+     * Static method with A* algorithm, used to find the shortest path between two nodes
+     * by using a heuristic to approximate the shortest distance from the start to target to make the algorithm
+     * more accurate and efficient. Like the Djikastra algorithm except more efficient since A* uses the
+     * heuristic to search through a given path instead of searching through every surrounding node.
+     *
+     * @param start The start node
+     * @param target The target node
+     * @return The node which is the target, gets returned once the target has been reached.
+     *
+     */
     public static Terrain aStar(Terrain start, Terrain target){
         PriorityQueue<Terrain> closedList = new PriorityQueue<>();
-
-        PriorityQueue<Terrain> openList = new PriorityQueue<>(); // Contains
+        PriorityQueue<Terrain> openList = new PriorityQueue<>();
 
         start.setF(start.getG() + start.calculateHeuristic(target));
-
         openList.add(start);
-
         while(!openList.isEmpty()){
             Terrain n = openList.peek(); //n = next node
-
             if(n == target){
-                //while (n.getParent() != start)
-                //    n = n.getParent();
                 return n;
             }
 
             for(Terrain.Edge edge : n.neighbors){
                 Terrain m = edge.node;
-                double totalWeight = n.getG() + edge.weight; //
+                double totalWeight = n.getG() + edge.weight;
 
                 if(!openList.contains(m) && !closedList.contains(m) && m.isPassable()){
                     m.setParent(n);
                     m.setG(totalWeight);
-                    m.setF(m.getG() + m.calculateHeuristic(target));
+                    m.setF(m.getG() + m.calculateHeuristic(target)); // f = g+h
                     openList.add(m);
 
                 } else {
@@ -53,63 +61,33 @@ public class AStar {
 
             openList.remove(n);
             closedList.add(n);
+
         }
         return null;
     }
 
+    /**
+     * Returns the path from start to target in a ArrayList
+     * @param target
+     * @return ArrayList<Terrain>
+     *
+     */
+    public static ArrayList<Terrain> returnPath(Terrain target){
 
-
-    public static void printPath(Terrain target){
         Terrain n = target;
-
         if(n==null)
-            return;
+            return null;
 
-        List<Integer> ids = new ArrayList<>();
-
+        ArrayList<Terrain> terrains = new ArrayList<>();
         while(n.getParent() != null){
-            ids.add(n.getId());
+            terrains.add(n);
             n = n.getParent();
         }
-        ids.add(n.getId());
-        Collections.reverse(ids);
 
-        for(int id : ids){
-            System.out.print(id + " ");
-        }
-        System.out.println("");
-    }
+        terrains.add(n);
 
-    public static void main(String[] args) {
+        Collections.reverse(terrains);
 
-        Terrain head = new Terrain(new Vector2(0, 0), true);
-
-        head.setG(0);
-
-        Terrain n1 = new Terrain(new Vector2(16, 16), true);
-        Terrain n2 = new Terrain( new Vector2(32, 32), true);
-        Terrain n3 = new Terrain(new Vector2(48,48), true);
-
-        head.addBranch(1, n1);
-        head.addBranch(1, n2);
-        head.addBranch(1, n3);
-
-        n3.addBranch(1, n2);
-
-        Terrain n4 = new Terrain(new Vector2(64,64), true);
-
-
-        Terrain target = new Terrain(new Vector2(96, 96), true);
-
-        n1.addBranch(1, n4);
-        n3.addBranch(1, n4);
-
-        n4.addBranch(1, target);
-
-
-
-        Terrain result = aStar(head, target);
-
-        printPath(result);
+        return terrains;
     }
 }

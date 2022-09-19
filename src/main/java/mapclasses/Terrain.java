@@ -23,8 +23,8 @@ public class Terrain implements ISprite, Comparable<Terrain> {
     private final Player player;
     private static int idCounter = 0;
     private int id; // Id of the node to keep track of the path later on. (The "name" of the node)
-    private double f = Double.MAX_VALUE; // Will later be equal to g + h
-    private double g = Double.MAX_VALUE; // g(n), n = next node, distance from start to n.
+    private double f = 0; // Will later be equal to g + h
+    private double g = 0; // g(n), n = next node, distance from start to n.
     public List<Terrain.Edge> neighbors;
 
     private Terrain parent = null;
@@ -36,7 +36,6 @@ public class Terrain implements ISprite, Comparable<Terrain> {
         playerPos = player.getPos();
         this.neighbors = new ArrayList<>();
         this.id = idCounter++;
-        System.out.println(id);
         this.pos = vector2;
         this.rect = new Rect((int) Math.round(vector2.getX()), (int) Math.round(vector2.getY()), size, size);
         this.passable = passable;
@@ -127,8 +126,8 @@ public class Terrain implements ISprite, Comparable<Terrain> {
      */
     public double calculateHeuristic(Terrain target){
         int D = 1;
-        double dx = Math.abs(getPos().getX() - playerPos.getX());
-        double dy = Math.abs(getPos().getY() - playerPos.getY());
-        return D * (dx + dy);
+        double dx = Math.abs(getPos().getX() - target.getPos().getX());
+        double dy = Math.abs(getPos().getY() - target.getPos().getY());
+        return D* (dx + dy);
     }
 }
