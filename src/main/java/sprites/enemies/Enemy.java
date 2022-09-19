@@ -22,7 +22,6 @@ abstract class Enemy extends Entity implements IEnemy {
 
     }
 
-
     /**
      * Updates the enemy, uses A* algorithm to find the closest path to player,
      * then moves enemy through given path calculated by the A* algorithm

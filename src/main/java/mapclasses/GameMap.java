@@ -11,26 +11,24 @@ import java.util.Map;
 public class GameMap {
 
     private final String[] gameMap = new String[] {
-            "                                        ",
-            "   WWWWWWWWWWWWWWWWWWWWWWW              ",
-            "                  WWWWWWWWWWWW          ",
-            "                                        ",
-            "                     WWWWWWWWWWWW       ",
-            "                  WWWW                  ",
-            "                     W                  ",
-            "                     W                  ",
-            "                     WW                 ",
-            "     WWWWWWWWWWWW      W                ",
-            "                      W                 ",
-            "                   WWWWWWWWWWWW         ",
-            "         WWWWWWWWWWWW                   ",
-            "                        WWWWWWWWWWWW    ",
-            "             WWWWWWWWWWWW               ",
-            "                                        ",
-            "   WWWWWWWWWWWW                         ",
-            "             WWWWWWWWWWWW               ",
-            "                                        ",
-            "                                        "
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAWWWWWWWWWWWWWWAAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+
+
+
     };
 
     private ArrayList<ISprite> tiles;
@@ -123,7 +121,7 @@ public class GameMap {
                 switch(tile) {
                     case 'W':
                         tiles.add(new Terrain(vec, false));
-                    case ' ':
+                    case 'A':
                         Terrain terrain = new Terrain(vec, true);
                         grass.put(key, terrain);
                 }

@@ -35,21 +35,21 @@ public class AStar {
                 return n;
             }
 
-            for(Terrain.Edge edge : n.neighbors){
+            for(Terrain.Edge edge : n.neighbors){ // Check neighbors of n.
                 Terrain m = edge.node;
                 double totalWeight = n.getG() + edge.weight;
 
-                if(!openList.contains(m) && !closedList.contains(m) && m.isPassable()){
+                if(!openList.contains(m) && !closedList.contains(m)){
                     m.setParent(n);
                     m.setG(totalWeight);
-                    m.setF(m.getG() + m.calculateHeuristic(target)); // f = g+h
+                    m.setF(m.getG() + m.calculateHeuristic(m)); // f = g+h
                     openList.add(m);
 
                 } else {
-                    if(totalWeight < m.getG() && m.isPassable()){
+                    if(totalWeight < m.getG()){
                         m.setParent(n);
                         m.setG(totalWeight);
-                        m.setF(m.getG() + m.calculateHeuristic(target));
+                        m.setF(m.getG() + m.calculateHeuristic(m));
 
                         if(closedList.contains(m)){
                             closedList.remove(m);
