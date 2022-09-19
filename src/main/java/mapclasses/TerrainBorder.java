@@ -1,12 +1,13 @@
 package mapclasses;
 
+import helperclasses.Vector2;
 import config.Config;
 import sprites.ISprite;
 
 import java.util.ArrayList;
 
 public class TerrainBorder {
-    ArrayList<Tile> border;
+    ArrayList<Terrain> border;
 
     public TerrainBorder(int width, int height) {
         border =  createSurrounding();
@@ -16,10 +17,13 @@ public class TerrainBorder {
      * This method will create the walls of the map,
      * Nested for loops to iterate through the canvas.
      */
-    private ArrayList<Tile>createSurrounding(){
+    private ArrayList<Terrain>createSurrounding(){
 
-        ArrayList<Tile> tiles = new ArrayList<>();
+        ArrayList<Terrain> tiles = new ArrayList<>();
 
+        for(int i = 0; i < 1000; i++){
+            tiles.add(new Terrain(new Vector2(0,i), false));
+            tiles.add(new Terrain(new Vector2(i, 0), false));
         for(int i = 0; i < Config.SCREEN_HEIGHT_IN_GAME; i++){
             tiles.add(new Tile(0, i, true));
             tiles.add(new Tile(0 + Config.SCREEN_WIDTH_IN_GAME, i , true));
@@ -29,6 +33,9 @@ public class TerrainBorder {
             tiles.add(new Tile(i, Config.SCREEN_HEIGHT_IN_GAME, true));
         }
         return tiles;
+    }
+    public Terrain addNewTile(int x, int y){
+        return new Terrain(new Vector2(x, y), false);
     }
 
     public ArrayList<ISprite> getTerrainBorder() {

@@ -22,6 +22,7 @@ public class InGamePanelState implements IPanelState {
     private Game game;
     private HUD hud;
     private ArrayList<IDrawer> drawers;
+    private MainPanel mainPanel;
 
     private final Camera camera;
 
@@ -38,9 +39,10 @@ public class InGamePanelState implements IPanelState {
         keyListeners.add(new CameraController(camera));
 
         drawers = new ArrayList<>();
+
         drawers.add(new PlayerDrawer(game.getPlayer(), camera));
         drawers.add(new EnemyDrawer(game.getEnemies(), camera));
-        drawers.add(new TerrainDrawer(game.getTerrainBorder(), camera));
+        drawers.add(new TerrainDrawer(game.getTerrainBorder(), game.getGrass(), camera));
     }
 
 
@@ -50,6 +52,8 @@ public class InGamePanelState implements IPanelState {
         for (IDrawer drawer : drawers) {
             drawer.draw(g);
         }
+
+
         hud.update(g);
     }
 

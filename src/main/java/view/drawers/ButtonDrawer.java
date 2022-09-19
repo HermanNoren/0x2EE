@@ -27,15 +27,15 @@ public class ButtonDrawer implements IDrawer {
         Font newFont = oldFont.deriveFont(oldFont.getSize() * 2F);
         g.setFont(newFont);
         FontMetrics metrics = g.getFontMetrics();
-        g.drawString(button.getButtonText(), (int) button.getPos().x + (button.getWidth() - metrics.stringWidth(button.getButtonText())) / 2,
-                (int) button.getPos().y + (button.getHeight() - metrics.getHeight()) / 2 + metrics.getAscent());
+        g.drawString(button.getButtonText(), (int) button.getPos().getX() + (button.getWidth() - metrics.stringWidth(button.getButtonText())) / 2,
+                (int) button.getPos().getY() + (button.getHeight() - metrics.getHeight()) / 2 + metrics.getAscent());
         g.setFont(oldFont);
     }
 
     private static void drawOutline(Graphics2D g, GameButton button) {
         g.setColor(Color.DARK_GRAY);
         g.setStroke(new BasicStroke(5));
-        g.drawRect((int) button.getPos().x, (int) button.getPos().y, button.getWidth(), button.getHeight());
+        g.drawRect((int) button.getPos().getX(), (int) button.getPos().getY(), button.getWidth(), button.getHeight());
     }
 
     private static void fillButtonArea(Graphics2D g, GameButton button) {
@@ -45,6 +45,6 @@ public class ButtonDrawer implements IDrawer {
         else {
             g.setColor(new Color(217, 217, 217));
         }
-        g.fillRect((int) button.getPos().x, (int) button.getPos().y, button.getWidth(), button.getHeight());
+        g.fillRect((int) button.getPos().getX(), (int) button.getPos().getY(), button.getWidth(), button.getHeight());
     }
 }

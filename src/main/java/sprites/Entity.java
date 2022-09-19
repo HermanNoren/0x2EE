@@ -13,11 +13,12 @@ import helperclasses.Vector2;
  */
 
 public abstract class Entity implements ISprite {
-    int animationCounter;
-    Vector2 pos;
+   Vector2 pos;
+
     Vector2 vel;
+
     Vector2 acc;
-    int health;
+    private int health;
     private EDirection direction;
     private EDirection lastDirection;
     private int size = Config.SPRITE_SIZE * 3;
@@ -41,6 +42,58 @@ public abstract class Entity implements ISprite {
         this.health = health;
     }
 
+    public Vector2 getVel() {
+        return vel;
+    }
+
+    public double getVelX(){
+        return vel.getX();
+    }
+
+    public void setVelX(double velX){
+        vel.setX(velX);
+    }
+    public void setPosX(double posX) {
+        pos.setX(posX);
+    }
+    public double getPosX(){
+        return pos.getX();
+    }
+    public void setAccX(double accX){
+        acc.setX(accX);
+    }
+    public double getAccX(){
+        return acc.getX();
+    }
+    public double getVelY(){
+        return vel.getY();
+    }
+
+    public void setVelY(double velY){
+        vel.setY(velY);
+    }
+    public void setPosY(double posY) {
+        pos.setY(posY);
+    }
+    public double getPosY(){
+        return pos.getY();
+    }
+    public void setAccY(double accY){
+        acc.setY(accY);
+    }
+    public double getAccY(){
+        return acc.getY();
+    }
+
+    public Vector2 getAcc() {
+        return acc;
+    }
+
+    @Override
+    public Vector2 getPos() {
+        return new Vector2(pos);
+    }
+
 
 
     /**
@@ -48,6 +101,7 @@ public abstract class Entity implements ISprite {
      * Used to update direction of entity.
      */
     public void setDirection(EDirection direction) {
+        lastDirection = this.direction;
         this.direction = direction;
     }
 
@@ -62,16 +116,17 @@ public abstract class Entity implements ISprite {
     public EDirection getLastDirection() {
         return lastDirection;
     }
+
     /**
      * Updates current position of entity on game screen.
      */
     public void updatePos(){
         if(!(direction == EDirection.NOT_MOVING)){
             switch (direction){
-                case UP -> pos.y -= vel.y;
-                case LEFT -> pos.x -= vel.x;
-                case DOWN -> pos.y += vel.y;
-                case RIGHT -> pos.x += vel.x;
+                case UP -> pos.setY(pos.getY() - vel.getY());
+                case LEFT -> pos.setX(pos.getX() - vel.getX());
+                case DOWN -> pos.setY(pos.getY() + vel.getY());
+                case RIGHT -> pos.setX(pos.getX() + vel.getX());
             }
         }
     }
@@ -90,10 +145,6 @@ public abstract class Entity implements ISprite {
         return getRect().getHeight();
     }
 
-    @Override
-    public Vector2 getPos() {
-        return new Vector2(pos);
-    }
 
     @Override
     public Rect getRect() {
@@ -106,7 +157,6 @@ public abstract class Entity implements ISprite {
      */
     @Override
     public void update() {
-
     }
 
     /**

@@ -4,9 +4,13 @@ import buttons.buttonactions.*;
 import gamestates.*;
 import mapclasses.TerrainBorder;
 import gamestates.*;
+import helperclasses.Vector2;
+import mapclasses.GameMap;
+import mapclasses.Terrain;
 import sprites.ISprite;
 import sprites.Player;
 import buttons.GameButton;
+
 import sprites.enemies.IEnemy;
 import view.IObserver;
 import view.panelstates.EPanelState;
@@ -15,6 +19,7 @@ import java.awt.*;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -38,31 +43,12 @@ public class Game implements Runnable {
 
     private boolean stateChangedFlag;
 
+    private GameMap gameMap;
     private File highscoreFile;
     private ArrayList<String> highscoreList;
 
-    private Game() {
-//        player = new Player(10, 10, 0.5, 100);
-//        gameMap = new GameMap();
-//
-//        initMainMenuButtons();
-//        initBackButtons();
-//        initPauseButtons();
-//
-//        wPressed = false;
-//        aPressed = false;
-//        sPressed = false;
-//        dPressed = false;
-//        enterPressed = false;
-//        escapePressed = false;
-//
-//        stateChangedFlag = false;
-//
-//        state = new MainMenuState(this);
-//        observers = new ArrayList<>();
-//
-//        startGame();
-    }
+    private Game() {}
+
     private static Game game;
     public static Game getInstance(){
         if(game == null){
@@ -71,12 +57,11 @@ public class Game implements Runnable {
     }
 
     public void createGame(){
-
-
         player = new Player(32, 32, 0.5, 100);
         enemies = new ArrayList<>();
         terrainBorder = new TerrainBorder(960, 800);
         highscoreName = new ArrayList<>();
+        this.gameMap = new GameMap();
         initMainMenuButtons();
         initBackButtons();
         initPauseButtons();
@@ -219,6 +204,21 @@ public class Game implements Runnable {
     }
 
     /**
+     * Returns an ArrayList containing all the tiles in the Game Map.
+     * @return  All Game Map Tiles
+     */
+    public HashMap<String, Terrain> getGrass() {
+        return gameMap.getGrass();
+    }
+
+    public ArrayList<Terrain> getPath(){
+        return gameMap.getPath();
+    }
+    public void setPath(ArrayList<Terrain> path){
+        gameMap.setPath(path);
+    }
+
+    /**
      * Returns an ArrayList containing all the buttons for the main menu.
      * @return  Main Menu Buttons
      */
@@ -292,10 +292,6 @@ public class Game implements Runnable {
         escapePressed = false;
     }
 
-    public void resetSpacePressed() {
-        spacePressed = false;
-    }
-
     /**
      * Used as a way for objects inside to read whether the W key is pressed
      * @return wPressed
@@ -352,6 +348,7 @@ public class Game implements Runnable {
     //          this.Savedstate = Savedstate;
     //          this.state = pausedState;
     //}
+    //
 
     /**
      * Add an observer. Observers will be notified 120 times per second
@@ -474,5 +471,7 @@ public class Game implements Runnable {
     }
 
 
-
+    public void resetSpacePressed() {
+        this.spacePressed = false;
+    }
 }

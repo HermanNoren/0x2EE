@@ -20,6 +20,7 @@ public class MainMenuPanelState implements IPanelState {
 
     private Game game;
     private ArrayList<IDrawer> drawers;
+    private MainPanel mainPanel;
 
     private ArrayList<KeyListener> keyListeners;
 
@@ -42,6 +43,7 @@ public class MainMenuPanelState implements IPanelState {
         for (IDrawer drawer : drawers) {
             drawer.draw(g2);
         }
+        g2.setFont(new Font("Public Pixel", Font.PLAIN, 12));
 
         g2.setColor(Color.white);
         g2.setFont(new Font("Public Pixel", Font.PLAIN, 64));
