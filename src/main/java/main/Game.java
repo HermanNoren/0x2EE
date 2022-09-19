@@ -1,5 +1,9 @@
 package main;
 
+import buttons.buttonactions.*;
+import gamestates.*;
+import mapclasses.TerrainBorder;
+import config.Config;
 import gamestates.*;
 import helperclasses.Vector2;
 import mapclasses.GameMap;
@@ -14,8 +18,12 @@ import sprites.enemies.IEnemy;
 import view.IObserver;
 import view.panelstates.EPanelState;
 
+import java.awt.*;
+import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  * This class contains the main game loop.
@@ -28,15 +36,42 @@ public class Game implements Runnable {
     private ArrayList<IObserver> observers;
     private IGameState state;
     private Player player;
+
+    private ArrayList<String> highscoreName;
     private ArrayList<IEnemy> enemies;
-    private GameMap gameMap;
+    private TerrainBorder terrainBorder;
 
     private ArrayList<GameButton> mainMenuButtons, backButtons, pauseButtons;
 
-    private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed;
+    private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
 
     private boolean stateChangedFlag;
 
+    private File highscoreFile;
+    private ArrayList<String> highscoreList;
+
+    private Game() {
+//        player = new Player(10, 10, 0.5, 100);
+//        gameMap = new GameMap();
+//
+//        initMainMenuButtons();
+//        initBackButtons();
+//        initPauseButtons();
+//
+//        wPressed = false;
+//        aPressed = false;
+//        sPressed = false;
+//        dPressed = false;
+//        enterPressed = false;
+//        escapePressed = false;
+//
+//        stateChangedFlag = false;
+//
+//        state = new MainMenuState(this);
+//        observers = new ArrayList<>();
+//
+//        startGame();
+    }
     private Game() {}
 
     private static Game game;
@@ -47,10 +82,12 @@ public class Game implements Runnable {
     }
 
     public void createGame(){
-        player = new Player(10, 10, 0.5, 100);
-        enemies = new ArrayList<>();
-        gameMap = new GameMap();
 
+
+        player = new Player(32, 32, 0.5, 100);
+        enemies = new ArrayList<>();
+        terrainBorder = new TerrainBorder(960, 800);
+        highscoreName = new ArrayList<>();
         initMainMenuButtons();
         initBackButtons();
         initPauseButtons();
@@ -61,13 +98,116 @@ public class Game implements Runnable {
         dPressed = false;
         enterPressed = false;
         escapePressed = false;
+        spacePressed = false;
 
         stateChangedFlag = false;
 
-        state = new MainMenuState(this);
+        state = new MainMenuState();
+        state.updateButtons();
         observers = new ArrayList<>();
-
+        highscoreFile = new File("textfiles/highscores.txt");
+        highscoreList = getHighScoreList();
         startGame();
+    }
+
+
+    public ArrayList<String> getHighScoreList() {
+        Scanner sc = null;
+        highscoreList = new ArrayList<>();
+        try {
+            sc = new Scanner(highscoreFile);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        while(sc.hasNext()){
+            highscoreList.add(sc.next());
+        }
+        return highscoreList;
+    }
+
+    public ArrayList<String> getHighscoreName(){
+        return highscoreName;
+    }
+
+    public boolean isTopFive(){
+        int oldScore;
+        for (String playerScore : highscoreList){
+            oldScore = Integer.valueOf(playerScore.split(":")[1]);
+            if (player.getScore() >= oldScore){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Handles end of the game, either new highscore or back to menu.
+     */
+    public void gameOver(){
+
+        if (isTopFive()){
+            //NEW HIGHSCORE state
+        }else{
+            //GAME OVER MENU
+        }
+
+    }
+
+    /**
+     * Saves the new highscore to a textfile.
+     * @param list List of highscores
+     */
+
+    private void saveHighscore(ArrayList<String> list){
+        try {
+            BufferedWriter output = new BufferedWriter(new FileWriter(highscoreFile, false));
+            for (String s : highscoreList) {
+                output.write(s + " ");
+            }
+            output.close();
+
+        } catch (IOException ex1) {
+            System.out.printf("ERROR writing score to file: %s\n", ex1);
+        }
+    }
+
+
+    /**
+     * Updates the list containing highscores.
+     */
+    public void updateHighscoreList(){
+        int i = 0;
+        if (highscoreList.isEmpty()){
+            highscoreList.add(String.join("", highscoreName) + ":" + player.getScore());
+        }else {
+            for (String playerScore : highscoreList) {
+                String[] savedScore = playerScore.split(":");
+                int score = Integer.valueOf(savedScore[1]);
+                if (player.getScore() >= score) {
+                    highscoreList.add(i, String.join("", highscoreName) + ":" + player.getScore());
+                    break;
+                }
+                    i++;
+                if (i == highscoreList.size()){
+                    highscoreList.add(String.join("", highscoreName) + ":" + player.getScore());
+                    break;
+                }
+            }
+        }
+        saveHighscore(highscoreList);
+    }
+
+
+    public void deleteLetter(){
+        if (highscoreName.size() > 0){
+            highscoreName.remove(highscoreName.size()-1);
+        }
+    }
+
+    public void updateName(String letter){
+        if (highscoreName.size() < 6) {
+            highscoreName.add(letter);
+        }
     }
 
     /**
@@ -85,8 +225,8 @@ public class Game implements Runnable {
      * Returns an ArrayList containing all the tiles in the Game Map.
      * @return  All Game Map Tiles
      */
-    public ArrayList<ISprite> getTiles() {
-        return gameMap.getTiles();
+    public ArrayList<ISprite> getTerrainBorder() {
+        return terrainBorder.getTerrainBorder();
     }
 
     /**
@@ -153,6 +293,10 @@ public class Game implements Runnable {
         enterPressed = true;
     }
 
+    public void setSpacePressed() {
+        spacePressed = true;
+    }
+
     /**
      * Used as a way for outside components to tell Game if the Enter key is released.
      */
@@ -194,6 +338,10 @@ public class Game implements Runnable {
         return escapePressed;
     }
 
+    public boolean getSpacePressed() {
+        return spacePressed;
+    }
+
     public boolean readStateChangedFlag() {
         return stateChangedFlag;
     }
@@ -208,6 +356,7 @@ public class Game implements Runnable {
      */
     public void setState(IGameState state) {
         this.state = state;
+        state.updateButtons();
         stateChangedFlag = true;
     }
 
@@ -261,7 +410,8 @@ public class Game implements Runnable {
 
     /**
      * Main game loop.
-     * Handles logic of when to update the internal game classes and when to notify potential observers
+     * Handles logic of when to update the internal game
+     * classes and when to notify potential observers.
      */
     @Override
     public void run() {
@@ -312,14 +462,21 @@ public class Game implements Runnable {
         }
     }
 
+    private void initBackButtons(){
+        GameButton backButton1 = new GameButton("BACK", 325, 575, new MenuButtonAction(new MainMenuState()));
+        backButton1.setIsSelected(true);
+        backButtons = new ArrayList<>();
+        backButtons.add(backButton1);
+    }
+
     /**
      * Initializes the buttons used in the main menu and stores them in an ArrayList
      */
     private void initMainMenuButtons() {
-        GameButton mainMenuButton1 = new GameButton("PLAY", 325, 200, new StartGameButtonAction(this));
-        GameButton mainMenuButton2 = new GameButton("HIGHSCORES", 325, 300, new EmptyButtonAction());
-        GameButton mainMenuButton3 = new GameButton("HOW TO PLAY", 325, 400, new EmptyButtonAction());
-        GameButton mainMenuButton4 = new GameButton("QUIT", 325, 500, new EmptyButtonAction());
+        GameButton mainMenuButton1 = new GameButton("PLAY", 325, 200, new MenuButtonAction(new InGameState()));
+        GameButton mainMenuButton2 = new GameButton("HIGHSCORES", 325, 300, new MenuButtonAction(new HighscoreState()));
+        GameButton mainMenuButton3 = new GameButton("HOW TO PLAY", 325, 400, new MenuButtonAction(new HowToPlayState()));
+        GameButton mainMenuButton4 = new GameButton("QUIT", 325, 500, new QuitButtonAction());
         mainMenuButtons = new ArrayList<>();
         mainMenuButtons.add(mainMenuButton1);
         mainMenuButtons.add(mainMenuButton2);
@@ -327,22 +484,18 @@ public class Game implements Runnable {
         mainMenuButtons.add(mainMenuButton4);
     }
 
-    private void initBackButtons(){
-        GameButton backButton1 = new GameButton("BACK", 325, 650, new BackButtonAction(this));
-        backButton1.setIsSelected(true);
-        backButtons = new ArrayList<>();
-        backButtons.add(backButton1);
-    }
 
     private void initPauseButtons(){
-        GameButton pauseButton1 = new GameButton("RESUME", 325, 200, new StartGameButtonAction(this));
-        GameButton pauseButton2 = new GameButton("RESTART", 325, 300, new StartGameButtonAction(this));
-        GameButton pauseButton3 = new GameButton("MAIN MENU", 325, 400, new StartGameButtonAction(this));
+        GameButton pauseButton1 = new GameButton("RESUME", 325, 200, new MenuButtonAction(new InGameState()));
+        GameButton pauseButton2 = new GameButton("RESTART", 325, 300, new MenuButtonAction(new InGameState()));
+        GameButton pauseButton3 = new GameButton("MAIN MENU", 325, 400, new MenuButtonAction(new MainMenuState()));
         pauseButtons = new ArrayList<>();
         pauseButtons.add(pauseButton1);
         pauseButtons.add(pauseButton2);
         pauseButtons.add(pauseButton3);
 
     }
+
+
 
 }

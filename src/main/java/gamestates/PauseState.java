@@ -18,12 +18,11 @@ public class PauseState implements IGameState{
 
     private ArrayList<GameButton> buttons;
 
-    public PauseState(Game game){
-        this.game = game;
+    public PauseState(){
+        this.game = Game.getInstance();
         activePos = 0;
         recentlyMovedUp = false;
         recentlyMovedDown = false;
-        buttons = game.getPauseButtons();
 
     }
 
@@ -33,7 +32,13 @@ public class PauseState implements IGameState{
     }
 
     @Override
+    public void updateButtons() {
+        buttons = game.getPauseButtons();
+    }
+
+    @Override
     public void update() {
+
 
         if (game.getSPressed()) {
             game.resetSPressed();

@@ -11,21 +11,24 @@ public class MainMenuState implements IGameState {
     private int activePos;
     private boolean recentlyMovedUp;
     private boolean recentlyMovedDown;
-    private final ArrayList<GameButton> buttons;
+    private ArrayList<GameButton> buttons;
     private final EPanelState stateTag = EPanelState.MAINMENU;
 
-    public MainMenuState(Game game) {
-        this.game = game;
+    public MainMenuState() {
+        this.game = Game.getInstance();
         activePos = 0;
         recentlyMovedUp = false;
         recentlyMovedDown = false;
-
-        buttons = game.getMainMenuButtons();
     }
 
     @Override
     public EPanelState getStateTag() {
         return stateTag;
+    }
+
+    @Override
+    public void updateButtons() {
+        buttons = game.getMainMenuButtons();
     }
 
     @Override

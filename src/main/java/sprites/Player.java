@@ -18,7 +18,7 @@ public class Player extends Entity implements ISprite, IMovableSprite {
 
     private boolean upPressed, downPressed, leftPressed, rightPressed;
 
-        /**
+    /**
      * @param x, starting x-position
      * @param y, starting y-position
      * @param health, starting health
@@ -53,6 +53,13 @@ public class Player extends Entity implements ISprite, IMovableSprite {
     }
 
     @Override
+    public Vector2 getCenter() {
+        double x = pos.x + (double) (getWidth() / 2);
+        double y = pos.y + (double) (getHeight() / 2);
+        return new Vector2(x, y);
+    }
+
+    @Override
     public void update() {
         setAccX(0);
 
@@ -69,6 +76,9 @@ public class Player extends Entity implements ISprite, IMovableSprite {
         setVelX(getVelX() + getAccX());
         setPosX(getPosX() + getVelX() + 0.5*getAccX());
 
+        acc.x += vel.x * -0.1;
+        vel.x += acc.x;
+        pos.x += vel.x + 0.5 * acc.x;
 
 //        acc.x += vel.x * -0.1;
 //        vel.x += acc.x;
@@ -90,9 +100,10 @@ public class Player extends Entity implements ISprite, IMovableSprite {
 
         setAccY(getAccY() + getVelY()*-0.1);
 
-        setVelY(getVelY() + getAccY());
+        acc.y += vel.y * -0.1;
+        vel.y += acc.y;
+        pos.y += vel.y + 0.5 * acc.y;
 
-        setPosY(getPosY() + getVelY() + 0.5*getAccY());
     }
 
     /**

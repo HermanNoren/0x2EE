@@ -10,6 +10,7 @@ import sprites.enemies.IEnemy;
 import sprites.enemies.NormalEnemyFactory;
 import view.panelstates.EPanelState;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 /**
@@ -22,15 +23,15 @@ public class InGameState implements IGameState {
     private Player player;
     private final EPanelState stateTag = EPanelState.INGAME;
 
-    public InGameState(Game game) {
-        this.game = game;
+    public InGameState() {
+        this.game = Game.getInstance();
         sprites = new ArrayList<>();
         enemies = game.getEnemies();
         this.player = game.getPlayer();
         EnemyFactory enemyFactory= new NormalEnemyFactory();
         enemies.add(enemyFactory.createEnemy());
         sprites.add(game.getPlayer());
-        sprites.addAll(game.getTiles());
+        sprites.addAll(game.getTerrainBorder());
     }
 
 
@@ -44,14 +45,26 @@ public class InGameState implements IGameState {
         return stateTag;
     }
 
+    @Override
+    public void updateButtons() {
+    }
+
     /**
      * Updates all the in-game objects
      */
     @Override
     public void update() {
+
+        /* GAME OVER
+        if (player.getHealth() < 1){
+            game.setState(new MainMenuState());
+        }
+
+         */
+
         if (game.getEscapePressed()) {
             game.resetEscapePressed();
-            game.setState(new PauseState(game));
+            game.setState(new PauseState());
         }
 
         for (ISprite sprite : sprites) {

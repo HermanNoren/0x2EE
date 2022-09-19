@@ -1,25 +1,23 @@
 package gamestates;
 
-import main.Game;
 import buttons.GameButton;
+import main.Game;
 import view.panelstates.EPanelState;
+import view.panelstates.NewHighscorePanelState;
 
 import java.util.ArrayList;
 
-public class HowToPlayState implements IGameState{
+public class NewHighscoreState implements IGameState {
 
+    private final EPanelState stateTag = EPanelState.NEWHIGHSCORE;
     private Game game;
-    private EPanelState stateTag = EPanelState.HOWTOPLAY;
 
     private ArrayList<GameButton> buttons;
 
-    public HowToPlayState(Game game){
-        this.game = game;
-        buttons = game.getBackButtons();
-    public HowToPlayState(){
+    public NewHighscoreState(){
         this.game = Game.getInstance();
-
     }
+
     @Override
     public EPanelState getStateTag() {
         return stateTag;
@@ -34,6 +32,7 @@ public class HowToPlayState implements IGameState{
     public void update() {
         if (game.getEnterPressed()){
             game.resetEnterPressed();
+            game.updateHighscoreList();
             buttons.get(0).isClicked();
         }
     }

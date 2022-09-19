@@ -11,12 +11,11 @@ import java.awt.event.KeyListener;
 public class MainPanel extends JPanel implements IObserver {
 
     private final Game game;
-
     private IPanelState state;
 
     public MainPanel(Game game) {
         this.game = game;
-        state = PanelStateFactory.createPanelState(game.getStateTag(), this);
+        state = PanelStateFactory.createPanelState(game.getStateTag());
         changeKeyListeners();
         setFocusable(true);
     }
@@ -41,7 +40,8 @@ public class MainPanel extends JPanel implements IObserver {
 
 
     private void changePanelState() {
-        state = PanelStateFactory.createPanelState(game.getStateTag(), this);
+        state = PanelStateFactory.createPanelState(game.getStateTag()
+        );
         changeKeyListeners();
     }
 

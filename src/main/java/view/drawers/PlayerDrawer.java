@@ -1,12 +1,14 @@
 package view.drawers;
 
 import sprites.Entity;
+import view.Camera;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Strictly used to draw the player onto the screen
@@ -16,10 +18,14 @@ public class PlayerDrawer implements IDrawer {
     private int animationCounter;
     private int imageSwitcher;
     private Entity player;
+
+    private Camera camera;
+
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
 
-    public PlayerDrawer(Entity player) {
+    public PlayerDrawer(Entity player, Camera camera) {
         this.player = player;
+        this.camera = camera;
         initPlayerImages();
     }
 
@@ -30,12 +36,14 @@ public class PlayerDrawer implements IDrawer {
     public void draw(Graphics2D g) {
         movementAnimation();
         chooseActiveImage();
+        ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(player.getPos(), player.getSize(), player.getSize(), camera);
         if(prevImg == null){
-            g.drawImage(up1, (int) player.getPos().getX(), (int) player.getPos().getY(), player.getSize(), player.getSize(), null); // Sets default image
+            g.drawImage(up1, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null); // Sets default image
         }
         else {
-            g.drawImage(activeImage, (int) player.getPos().getX(),(int) player.getPos().getY(), player.getSize(), player.getSize(), null);
+            g.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
         }
+        g.setColor(Color.red);
     }
 
     /**

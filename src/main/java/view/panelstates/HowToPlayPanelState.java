@@ -1,5 +1,6 @@
 package view.panelstates;
 
+import config.Config;
 import controllers.KeyClickedController;
 import main.Game;
 import view.MainPanel;
@@ -16,8 +17,6 @@ import java.util.ArrayList;
 
 public class HowToPlayPanelState implements IPanelState{
 
-    private MainPanel mainPanel;
-
     private Game game;
 
     private BufferedImage controls;
@@ -26,11 +25,10 @@ public class HowToPlayPanelState implements IPanelState{
 
     private ArrayList<KeyListener> keyListeners;
 
-    public HowToPlayPanelState(MainPanel mainPanel){
-        this.mainPanel = mainPanel;
-        this.game = mainPanel.getGame();
+    public HowToPlayPanelState(){
+        this.game = Game.getInstance();
         keyListeners = new ArrayList<>();
-        keyListeners.add(new KeyClickedController(game));
+        keyListeners.add(new KeyClickedController());
         controls = setImage("imgs/h2p.png");
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(game.getBackButtons()));
@@ -39,16 +37,18 @@ public class HowToPlayPanelState implements IPanelState{
 
     @Override
     public void draw(Graphics2D g2) {
+        g2.setColor(Color.black);
+        g2.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         g2.setFont(new Font("Public Pixel", Font.PLAIN, 12));
         for (IDrawer drawer : drawers){
             drawer.draw(g2);
         }
 
-        g2.setColor(Color.black);
+        g2.setColor(Color.white);
         g2.setFont(new Font("Public Pixel", Font.PLAIN, 48));
         String paused = "HOW TO PLAY";
-        g2.drawString(paused, (mainPanel.getWidth() - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
-        g2.drawImage(controls, 0,110, mainPanel.getWidth()*100/150, mainPanel.getHeight(), null);
+        g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 100);
+        g2.drawImage(controls, 0,80, Config.SCREEN_WIDTH*100/150, Config.SCREEN_HEIGHT, null);
     }
 
     private BufferedImage setImage(String path) {

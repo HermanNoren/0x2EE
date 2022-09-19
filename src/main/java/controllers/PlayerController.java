@@ -9,7 +9,10 @@ import java.awt.event.KeyListener;
 public class PlayerController implements KeyListener {
     private final Player player;
 
-    public PlayerController(Game game) {
+    private Game game;
+
+    public PlayerController() {
+        game = Game.getInstance();
         this.player = game.getPlayer();
     }
 

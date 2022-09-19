@@ -22,9 +22,14 @@ public interface ISprite {
     Vector2 getPos();
 
     /**
+     * Returns the center position of the sprite
+     * @return Center position
+     */
+    Vector2 getCenter();
+
+    /**
      * Returns the sprites' rect, which is used as a hitbox
      */
-
     Rect getRect();
 
     /**

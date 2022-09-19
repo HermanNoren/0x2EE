@@ -23,6 +23,8 @@ public abstract class Entity implements ISprite {
     private EDirection lastDirection;
     private int size = Config.SPRITE_SIZE * 3;
     private Rect rect;
+
+
     /**
      *
      * @param x represents the entities' x-coordinate
@@ -110,6 +112,7 @@ public abstract class Entity implements ISprite {
     public EDirection getDirection() {
         return direction;
     }
+
     public EDirection getLastDirection() {
         return lastDirection;
     }
@@ -140,6 +143,11 @@ public abstract class Entity implements ISprite {
     @Override
     public int getHeight() {
         return getRect().getHeight();
+    }
+
+    @Override
+    public Vector2 getPos() {
+        return new Vector2(pos);
     }
 
     @Override
