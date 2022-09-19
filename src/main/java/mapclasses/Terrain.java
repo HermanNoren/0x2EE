@@ -53,6 +53,11 @@ public class Terrain implements ISprite, Comparable<Terrain> {
     }
 
     @Override
+    public Vector2 getCenter() {
+        return null;
+    }
+
+    @Override
     public Rect getRect() {
         return new Rect(rect);
     }

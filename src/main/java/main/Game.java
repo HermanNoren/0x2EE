@@ -11,9 +11,7 @@ import mapclasses.Terrain;
 import sprites.ISprite;
 import sprites.Player;
 import buttons.GameButton;
-import buttons.buttonactions.BackButtonAction;
-import buttons.buttonactions.EmptyButtonAction;
-import buttons.buttonactions.StartGameButtonAction;
+
 import sprites.enemies.IEnemy;
 import view.IObserver;
 import view.panelstates.EPanelState;
@@ -47,31 +45,10 @@ public class Game implements Runnable {
 
     private boolean stateChangedFlag;
 
+    private GameMap gameMap;
     private File highscoreFile;
     private ArrayList<String> highscoreList;
 
-    private Game() {
-//        player = new Player(10, 10, 0.5, 100);
-//        gameMap = new GameMap();
-//
-//        initMainMenuButtons();
-//        initBackButtons();
-//        initPauseButtons();
-//
-//        wPressed = false;
-//        aPressed = false;
-//        sPressed = false;
-//        dPressed = false;
-//        enterPressed = false;
-//        escapePressed = false;
-//
-//        stateChangedFlag = false;
-//
-//        state = new MainMenuState(this);
-//        observers = new ArrayList<>();
-//
-//        startGame();
-    }
     private Game() {}
 
     private static Game game;
@@ -82,12 +59,11 @@ public class Game implements Runnable {
     }
 
     public void createGame(){
-
-
         player = new Player(32, 32, 0.5, 100);
         enemies = new ArrayList<>();
         terrainBorder = new TerrainBorder(960, 800);
         highscoreName = new ArrayList<>();
+        this.gameMap = new GameMap();
         initMainMenuButtons();
         initBackButtons();
         initPauseButtons();
@@ -497,5 +473,7 @@ public class Game implements Runnable {
     }
 
 
-
+    public void resetSpacePressed() {
+        this.spacePressed = false;
+    }
 }

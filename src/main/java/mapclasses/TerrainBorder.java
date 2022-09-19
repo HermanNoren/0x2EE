@@ -1,11 +1,12 @@
 package mapclasses;
 
+import helperclasses.Vector2;
 import sprites.ISprite;
 
 import java.util.ArrayList;
 
 public class TerrainBorder {
-    ArrayList<Tile> border;
+    ArrayList<Terrain> border;
 
     public TerrainBorder(int width, int height) {
         border =  createSurrounding();
@@ -15,18 +16,18 @@ public class TerrainBorder {
      * This method will create the walls of the map,
      * Nested for loops to iterate through the canvas.
      */
-    private ArrayList<Tile>createSurrounding(){
+    private ArrayList<Terrain>createSurrounding(){
 
-        ArrayList<Tile> tiles = new ArrayList<>();
+        ArrayList<Terrain> tiles = new ArrayList<>();
 
         for(int i = 0; i < 1000; i++){
-            tiles.add(new Tile(0, i));
-            tiles.add(new Tile(i,0));
+            tiles.add(new Terrain(new Vector2(0,i), false));
+            tiles.add(new Terrain(new Vector2(i, 0), false));
         }
         return tiles;
     }
-    public Tile addNewTile(int x, int y){
-        return new Tile(x, y);
+    public Terrain addNewTile(int x, int y){
+        return new Terrain(new Vector2(x, y), false);
     }
 
     public ArrayList<ISprite> getTerrainBorder() {

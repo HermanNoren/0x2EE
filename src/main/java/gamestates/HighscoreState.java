@@ -11,7 +11,7 @@ public class HighscoreState implements IGameState {
     private final Game game;
     private final EPanelState stateTag = EPanelState.HIGHSCORES;
 
-    private final ArrayList<GameButton> buttons;
+    private  ArrayList<GameButton> buttons;
 
     public HighscoreState(){
         this.game = Game.getInstance();

@@ -12,19 +12,21 @@ import java.util.HashMap;
 
 public class TileDrawer implements IDrawer {
 
-    ArrayList<ISprite> tiles;
+    private ArrayList<ISprite> tiles;
     private Camera camera;
 
-    public TileDrawer(ArrayList<ISprite> tiles, Camera camera) {
+
+    private ArrayList<Terrain> path;
+    private HashMap<String, Terrain> grass;
+
+    public TileDrawer(ArrayList<ISprite> tiles, HashMap<String, Terrain> grass, Camera camera){
         this.camera = camera;
-    ArrayList<Terrain> path;
-    HashMap<String, Terrain> grass;
-    public TileDrawer(ArrayList<ISprite> tiles, HashMap<String, Terrain> grass) {
         this.tiles = tiles;
         this.grass = grass;
-
     }
+
     Game game = Game.getInstance();
+
     @Override
     public void draw(Graphics2D g2) {
         g2.setColor(Color.green);

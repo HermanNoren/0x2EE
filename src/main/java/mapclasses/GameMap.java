@@ -11,26 +11,6 @@ import java.util.Map;
 public class GameMap {
 
     private final String[] gameMap = new String[] {
-            "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
-            "W                                       ",
-            "W                                       ",
-            "W                                       ",
-            "W                                       ",
-            "W                 WWWW                  ",
-            "W                    W                  ",
-            "W                    W                  ",
-            "W                    W                  ",
-            "W                     W                 ",
-            "W                     W                 ",
-            "W                                       ",
-            "W                                       ",
-            "W                                       ",
-            "W                                       ",
-            "W                                       ",
-            "W                                       ",
-            "W            WWWWWWWWWWWW               ",
-            "W                                       ",
-            "W                                       "
             "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
             "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
@@ -140,7 +120,6 @@ public class GameMap {
 
                 switch(tile) {
                     case 'W':
-                        tiles.add(new Tile(x, y));
                         tiles.add(new Terrain(vec, false));
                     case 'A':
                         Terrain terrain = new Terrain(vec, true);

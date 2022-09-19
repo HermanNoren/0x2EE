@@ -13,9 +13,7 @@ public class HowToPlayState implements IGameState{
 
     private ArrayList<GameButton> buttons;
 
-    public HowToPlayState(Game game){
-        this.game = game;
-        buttons = game.getBackButtons();
+
     public HowToPlayState(){
         this.game = Game.getInstance();
 

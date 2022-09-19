@@ -1,8 +1,8 @@
 package helperclasses;
 
 public class Vector2 {
-    private double x;
-    private double y;
+     public double x;
+     public double y;
 
     public double getX() {
         return x;

@@ -120,8 +120,6 @@ public class EnemyDrawer implements IDrawer {
             else {
                 g2.drawImage(up1, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
                 g2.drawImage(activeImage, (int)enemy.getPos().getX(), (int)enemy.getPos().getY(), enemy.getSize(), enemy.getSize(), null);
-            }else {
-                g2.drawImage(up1, (int) enemy.getPos().getX(), (int)enemy.getPos().getY(), enemy.getSize(), enemy.getSize(), null);
             }
         }
     }
