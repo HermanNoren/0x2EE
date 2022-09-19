@@ -1,5 +1,6 @@
 package mapclasses;
-
+import Collision.CollidableObject;
+import Collision.ICollidable;
 import config.Config;
 import helperclasses.Rect;
 import helperclasses.Vector2;
@@ -16,7 +17,7 @@ public class Tile implements ISprite {
     public Tile(int x, int y, boolean isCollidable) {
         pos = new Vector2(x, y);
         rect = new Rect(x, y, size, size);
-        collidableObject.isCollidable = isCollidable;
+        collidableObject = new CollidableObject(isCollidable);
     }
 
     @Override

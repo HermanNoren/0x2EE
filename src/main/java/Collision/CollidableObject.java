@@ -1,7 +1,7 @@
-package mapclasses;
+package Collision;
 
-public class CollidableObject implements ICollidable{
-    boolean isCollidable;
+public class CollidableObject implements ICollidable {
+    public boolean isCollidable;
 
     public CollidableObject(boolean iscollidable){
         this.isCollidable = iscollidable;

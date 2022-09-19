@@ -1,4 +1,4 @@
-package mapclasses;
+package Collision;
 
 public interface ICollidable {
      boolean iscollidable();
