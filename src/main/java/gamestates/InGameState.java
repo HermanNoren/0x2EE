@@ -1,6 +1,7 @@
 package gamestates;
 
 import Collision.CollisionHandler;
+import helperclasses.Vector2;
 import main.Game;
 import sprites.ISprite;
 
@@ -46,7 +47,7 @@ public class InGameState implements IGameState {
 
     /**
      * Updates all the in-game objects
-     * Implement collision logic here
+     * **Implement collision logic here**
 
      */
     @Override
@@ -59,6 +60,7 @@ public class InGameState implements IGameState {
         for (ISprite sprite : sprites) {
             sprite.update();
         }
+        CollisionHandler.seeIfPlayerIsOutsideBorder(player);
 
     }
 }

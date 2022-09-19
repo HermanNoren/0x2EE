@@ -69,8 +69,8 @@ public class Player extends Entity implements ISprite, IMovableSprite {
         else if (leftPressed) { acc.x = -0.1; }
          */
 
-        if (getDirection() == EDirection.RIGHT) { acc.x = 0.1; }
-        if (getDirection() == EDirection.LEFT) { acc.x = -0.1; }
+        if (getDirection() == EDirection.RIGHT) { acc.x = 0.5; }
+        if (getDirection() == EDirection.LEFT) { acc.x = -0.5; }
 
         acc.x += vel.x * -0.1;
         vel.x += acc.x;
@@ -84,8 +84,8 @@ public class Player extends Entity implements ISprite, IMovableSprite {
         else if (upPressed) { acc.y = -0.1; }
          */
 
-        if (getDirection() == EDirection.UP) { acc.y = -0.1; }
-        if (getDirection() == EDirection.DOWN) { acc.y = 0.1; }
+        if (getDirection() == EDirection.UP) { acc.y = -0.5; }
+        if (getDirection() == EDirection.DOWN) { acc.y = 0.5; }
 
         acc.y += vel.y * -0.1;
         vel.y += acc.y;

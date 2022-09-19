@@ -1,5 +1,8 @@
 package Collision;
 
+import config.Config;
+import controllers.EDirection;
+import helperclasses.Vector2;
 import mapclasses.Tile;
 import sprites.Player;
 import sprites.enemies.Enemy;
@@ -29,12 +32,22 @@ public class CollisionHandler {
         }
     }
 
+
     /**
      * If the player every try to go outside the border of the map this method will be called, stopping the
      * velocity of the player in the direction it tries to leave in (might need extra attention in the corners).
      * @param player
      */
-    public void stopPlayerFromMovingOutOfMap(Player player){
+    public static void seeIfPlayerIsOutsideBorder(Player player){
+        Vector2 playerPosition = player.getPos();
+        if(playerPosition.y <= 0)
+            player.setDirection(EDirection.DOWN);
 
+        if (playerPosition.y > Config.SCREEN_HEIGHT)
+            player.setDirection(EDirection.UP);
+        if (playerPosition.x < 0)
+            player.setDirection(EDirection.RIGHT);
+        if(playerPosition.x > Config.SCREEN_WIDTH)
+            player.setDirection(EDirection.LEFT);
     }
 }

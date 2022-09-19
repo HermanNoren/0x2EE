@@ -67,7 +67,7 @@ public class Game implements Runnable {
     }
 
     public void createGame(){
-        player = new Player(32, 32, 0.5, 100);
+        player = new Player(32, 32, 4, 100);
         enemies = new ArrayList<>();
         terrainBorder = new TerrainBorder(960, 800);
 
