@@ -63,6 +63,7 @@ public class InGameState implements IGameState {
         for(IEnemy enemy : enemies){
             //Check if enemy is close enough to damage player, could be done somewhere else also.
         }
+
         CollisionHandler.seeIfPlayerIsOutsideBorder(player);
 
     }
