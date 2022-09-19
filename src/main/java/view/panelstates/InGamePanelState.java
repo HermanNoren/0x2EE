@@ -1,5 +1,6 @@
 package view.panelstates;
 
+import config.Config;
 import controllers.CameraController;
 import controllers.KeyClickedController;
 import controllers.PlayerController;

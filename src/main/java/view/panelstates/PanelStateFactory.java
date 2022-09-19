@@ -25,6 +25,10 @@ public class PanelStateFactory {
                 return new HowToPlayPanelState();
             }
 
+            case NEWHIGHSCORE -> {
+                return new NewHighscorePanelState();
+            }
+
             default -> {
                 return null;
             }

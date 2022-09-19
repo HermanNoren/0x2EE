@@ -13,7 +13,11 @@ import sprites.enemies.IEnemy;
 import view.IObserver;
 import view.panelstates.EPanelState;
 
+import java.awt.*;
+import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * This class contains the main game loop.
@@ -26,6 +30,8 @@ public class Game implements Runnable {
     private ArrayList<IObserver> observers;
     private IGameState state;
     private Player player;
+
+    private ArrayList<String> highscoreName;
     private ArrayList<IEnemy> enemies;
     private TerrainBorder terrainBorder;
 
@@ -34,6 +40,9 @@ public class Game implements Runnable {
     private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
 
     private boolean stateChangedFlag;
+
+    private File highscoreFile;
+    private ArrayList<String> highscoreList;
 
     private Game() {
 //        player = new Player(10, 10, 0.5, 100);
@@ -65,10 +74,12 @@ public class Game implements Runnable {
     }
 
     public void createGame(){
+
+
         player = new Player(32, 32, 0.5, 100);
         enemies = new ArrayList<>();
         terrainBorder = new TerrainBorder(960, 800);
-
+        highscoreName = new ArrayList<>();
         initMainMenuButtons();
         initBackButtons();
         initPauseButtons();
@@ -86,8 +97,109 @@ public class Game implements Runnable {
         state = new MainMenuState();
         state.updateButtons();
         observers = new ArrayList<>();
-
+        highscoreFile = new File("textfiles/highscores.txt");
+        highscoreList = getHighScoreList();
         startGame();
+    }
+
+
+    public ArrayList<String> getHighScoreList() {
+        Scanner sc = null;
+        highscoreList = new ArrayList<>();
+        try {
+            sc = new Scanner(highscoreFile);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        while(sc.hasNext()){
+            highscoreList.add(sc.next());
+        }
+        return highscoreList;
+    }
+
+    public ArrayList<String> getHighscoreName(){
+        return highscoreName;
+    }
+
+    public boolean isTopFive(){
+        int oldScore;
+        for (String playerScore : highscoreList){
+            oldScore = Integer.valueOf(playerScore.split(":")[1]);
+            if (player.getScore() >= oldScore){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Handles end of the game, either new highscore or back to menu.
+     */
+    public void gameOver(){
+
+        if (isTopFive()){
+            //NEW HIGHSCORE state
+        }else{
+            //GAME OVER MENU
+        }
+
+    }
+
+    /**
+     * Saves the new highscore to a textfile.
+     * @param list List of highscores
+     */
+
+    private void saveHighscore(ArrayList<String> list){
+        try {
+            BufferedWriter output = new BufferedWriter(new FileWriter(highscoreFile, false));
+            for (String s : highscoreList) {
+                output.write(s + " ");
+            }
+            output.close();
+
+        } catch (IOException ex1) {
+            System.out.printf("ERROR writing score to file: %s\n", ex1);
+        }
+    }
+
+
+    /**
+     * Updates the list containing highscores.
+     */
+    public void updateHighscoreList(){
+        int i = 0;
+        if (highscoreList.isEmpty()){
+            highscoreList.add(String.join("", highscoreName) + ":" + player.getScore());
+        }else {
+            for (String playerScore : highscoreList) {
+                String[] savedScore = playerScore.split(":");
+                int score = Integer.valueOf(savedScore[1]);
+                if (player.getScore() >= score) {
+                    highscoreList.add(i, String.join("", highscoreName) + ":" + player.getScore());
+                    break;
+                }
+                    i++;
+                if (i == highscoreList.size()){
+                    highscoreList.add(String.join("", highscoreName) + ":" + player.getScore());
+                    break;
+                }
+            }
+        }
+        saveHighscore(highscoreList);
+    }
+
+
+    public void deleteLetter(){
+        if (highscoreName.size() > 0){
+            highscoreName.remove(highscoreName.size()-1);
+        }
+    }
+
+    public void updateName(String letter){
+        if (highscoreName.size() < 6) {
+            highscoreName.add(letter);
+        }
     }
 
     /**
@@ -363,5 +475,7 @@ public class Game implements Runnable {
         pauseButtons.add(pauseButton3);
 
     }
+
+
 
 }
