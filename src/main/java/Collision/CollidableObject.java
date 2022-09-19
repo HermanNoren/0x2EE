@@ -10,5 +10,6 @@ public class CollidableObject implements ICollidable {
     public boolean iscollidable(){
         return this.isCollidable;
     }
+
 }
 

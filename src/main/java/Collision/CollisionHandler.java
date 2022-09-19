@@ -21,6 +21,7 @@ public class CollisionHandler {
      * @param player
      * @param tile
      */
+
     public void playerCollidesWithTile(Player player, Tile tile){
         if(
                 player.getPos().x >(tile.getPos().x + tile.getHeight() + tile.getWidth())
@@ -42,12 +43,11 @@ public class CollisionHandler {
         Vector2 playerPosition = player.getPos();
         if(playerPosition.y <= 0)
             player.setDirection(EDirection.DOWN);
-
-        if (playerPosition.y > Config.SCREEN_HEIGHT)
+        if (playerPosition.y >= Config.SCREEN_HEIGHT_IN_GAME - player.getHeight())
             player.setDirection(EDirection.UP);
         if (playerPosition.x < 0)
             player.setDirection(EDirection.RIGHT);
-        if(playerPosition.x > Config.SCREEN_WIDTH)
+        if(playerPosition.x >= Config.SCREEN_WIDTH_IN_GAME - player.getWidth())
             player.setDirection(EDirection.LEFT);
     }
 }

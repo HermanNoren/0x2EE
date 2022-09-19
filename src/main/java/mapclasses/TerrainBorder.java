@@ -20,13 +20,13 @@ public class TerrainBorder {
 
         ArrayList<Tile> tiles = new ArrayList<>();
 
-        for(int i = 0; i < Config.SCREEN_HEIGHT; i++){
+        for(int i = 0; i < Config.SCREEN_HEIGHT_IN_GAME; i++){
             tiles.add(new Tile(0, i, true));
-            tiles.add(new Tile(0 + Config.SCREEN_WIDTH, i , true));
+            tiles.add(new Tile(0 + Config.SCREEN_WIDTH_IN_GAME, i , true));
         }
-        for(int i = 0; i < Config.SCREEN_WIDTH; i++){
+        for(int i = 0; i < Config.SCREEN_WIDTH_IN_GAME; i++){
             tiles.add(new Tile(i, 0, true));
-            tiles.add(new Tile(i, Config.SCREEN_HEIGHT, true));
+            tiles.add(new Tile(i, Config.SCREEN_HEIGHT_IN_GAME, true));
         }
         return tiles;
     }

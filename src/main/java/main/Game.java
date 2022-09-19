@@ -2,9 +2,7 @@ package main;
 
 import gamestates.IGameState;
 import mapclasses.TerrainBorder;
-import config.Config;
 import gamestates.*;
-import mapclasses.GameMap;
 import sprites.ISprite;
 import sprites.Player;
 import buttons.GameButton;
@@ -14,7 +12,6 @@ import buttons.buttonactions.StartGameButtonAction;
 import sprites.enemies.IEnemy;
 import view.IObserver;
 import view.panelstates.EPanelState;
-
 import java.util.ArrayList;
 
 /**
