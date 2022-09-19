@@ -129,6 +129,6 @@ public class Terrain implements ISprite, Comparable<Terrain> {
         int D = 1;
         double dx = Math.abs(node.getPos().getX() - playerPos.getX());
         double dy = Math.abs(node.getPos().getY() - playerPos.getY());
-        return D* (dx + dy);
+        return D*(dx + dy);
     }
 }
