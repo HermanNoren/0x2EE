@@ -18,7 +18,7 @@ public class Weapon {
     }
 
 
-    public void shoot(Player player){
+    public void shoot(){
         if (ammo != 0) ammo--;
         else reload();
     }

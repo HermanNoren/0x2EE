@@ -1,6 +1,4 @@
-package armor;
-
-import sprites.Player;
+package equipment;
 
 public class Armor implements IArmor{
 

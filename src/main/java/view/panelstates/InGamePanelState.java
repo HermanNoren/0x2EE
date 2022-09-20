@@ -8,10 +8,7 @@ import main.Game;
 import view.Camera;
 import view.HUD;
 import view.MainPanel;
-import view.drawers.EnemyDrawer;
-import view.drawers.IDrawer;
-import view.drawers.PlayerDrawer;
-import view.drawers.TerrainDrawer;
+import view.drawers.*;
 
 import java.awt.*;
 import java.awt.event.KeyListener;
@@ -43,6 +40,7 @@ public class InGamePanelState implements IPanelState {
         drawers.add(new PlayerDrawer(game.getPlayer(), camera));
         drawers.add(new EnemyDrawer(game.getEnemies(), camera));
         drawers.add(new TerrainDrawer(game.getTerrainBorder(), game.getGrass(), camera));
+        drawers.add(new ProjectileDrawer(game.getProjectiles(), camera));
     }
 
 

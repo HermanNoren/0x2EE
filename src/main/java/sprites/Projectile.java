@@ -1,18 +1,26 @@
 package sprites;
 
 import config.Config;
+import controllers.EDirection;
 import helperclasses.Rect;
 import helperclasses.Vector2;
 
-public class Bullet implements ISprite{
+public class Projectile implements ISprite{
 
     private final int size = Config.SPRITE_SIZE / 2;
     private final Vector2 pos;
     private final Vector2 vel;
 
-    public Bullet(Vector2 pos, Vector2 vel) {
+    public Projectile(Vector2 pos, EDirection direction) {
         this.pos = pos;
-        this.vel = vel;
+        vel = new Vector2(0, 0);
+        switch (direction) {
+            case RIGHT -> vel.x = 5;
+            case LEFT -> vel.x = -5;
+            case UP -> vel.y = -5;
+            case DOWN -> vel.y = 5;
+        }
+
     }
 
     @Override

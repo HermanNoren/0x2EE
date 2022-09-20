@@ -11,6 +11,7 @@ import sprites.ISprite;
 import sprites.Player;
 import buttons.GameButton;
 
+import sprites.Projectile;
 import sprites.enemies.IEnemy;
 import view.IObserver;
 import view.panelstates.EPanelState;
@@ -35,6 +36,7 @@ public class Game implements Runnable {
     private Player player;
     private ArrayList<String> highscoreName;
     private ArrayList<IEnemy> enemies;
+    private ArrayList<Projectile> projectiles;
     private TerrainBorder terrainBorder;
 
     private ArrayList<GameButton> mainMenuButtons, backButtons, pauseButtons;
@@ -59,6 +61,7 @@ public class Game implements Runnable {
     public void createGame(){
         player = new Player(32, 32, 0.5, 100);
         enemies = new ArrayList<>();
+        projectiles = new ArrayList<>();
         terrainBorder = new TerrainBorder(960, 800);
         highscoreName = new ArrayList<>();
         this.gameMap = new GameMap();
@@ -194,7 +197,7 @@ public class Game implements Runnable {
     public ArrayList<IEnemy> getEnemies(){
         return enemies;
     }
-
+    public ArrayList<Projectile> getProjectiles() { return projectiles; }
     /**
      * Returns an ArrayList containing all the tiles in the Game Map.
      * @return  All Game Map Tiles

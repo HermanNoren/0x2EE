@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 
 public class CameraController implements KeyListener {
 
-    private Camera camera;
+    private final Camera camera;
     private boolean upKeyDown;
     private boolean downKeyDown;
 

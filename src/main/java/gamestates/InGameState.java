@@ -1,10 +1,12 @@
 package gamestates;
 
 import Collision.CollisionHandler;
+import helperclasses.Vector2;
 import main.Game;
 import sprites.ISprite;
 
 import sprites.Player;
+import sprites.Projectile;
 import sprites.enemies.EnemyFactory;
 import sprites.enemies.IEnemy;
 import sprites.enemies.NormalEnemyFactory;
@@ -19,7 +21,8 @@ import java.util.ArrayList;
 public class InGameState implements IGameState {
     private ArrayList<ISprite> sprites;
     private ArrayList<IEnemy> enemies;
-    private Game game;
+    private ArrayList<Projectile> projectiles;
+    private final Game game;
     private Player player;
     private final EPanelState stateTag = EPanelState.INGAME;
 
@@ -27,6 +30,7 @@ public class InGameState implements IGameState {
         this.game = Game.getInstance();
         sprites = new ArrayList<>();
         enemies = game.getEnemies();
+        projectiles = game.getProjectiles();
         this.player = game.getPlayer();
         EnemyFactory enemyFactory= new NormalEnemyFactory();
         enemies.add(enemyFactory.createEnemy());
@@ -67,12 +71,21 @@ public class InGameState implements IGameState {
             game.setState(new PauseState());
         }
 
+        if (game.getSpacePressed()) {
+            game.resetSpacePressed();
+            player.shoot();
+            projectiles.add(new Projectile(new Vector2(player.getCenter()), player.getDirection()));
+        }
+
         for (ISprite sprite : sprites) {
             sprite.update();
         }
         for(IEnemy enemy : enemies){
             enemy.update();
             //Check if enemy is close enough to damage player, could be done somewhere else also.
+        }
+        for (Projectile p : projectiles) {
+            p.update();
         }
 
         CollisionHandler.seeIfPlayerIsOutsideBorder(player);

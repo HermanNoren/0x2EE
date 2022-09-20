@@ -1,6 +1,6 @@
 package sprites;
 
-import armor.Armor;
+import equipment.Armor;
 import controllers.EDirection;
 import helperclasses.Vector2;
 import weapons.Weapon;
@@ -8,11 +8,10 @@ import weapons.Weapon;
 /**
  * The player, more implementation to come.
  */
-public class Player extends Entity implements ISprite, IMovableSprite {
+public class Player extends Entity implements ISprite {
     private int score;
     private int money;
     protected Weapon weapon;
-
     protected Armor armor;
     boolean isDamageTaken;
 
@@ -34,6 +33,10 @@ public class Player extends Entity implements ISprite, IMovableSprite {
         rightPressed = false;
         score = 0;
         money = 0;
+    }
+
+    public void shoot() {
+        weapon.shoot();
     }
 
     public void setUpPressed(boolean value) {
@@ -61,49 +64,23 @@ public class Player extends Entity implements ISprite, IMovableSprite {
 
     @Override
     public void update() {
-        setAccX(0);
-
-        /*
-        if (rightPressed && leftPressed) { }
-        else if (rightPressed) { acc.x = 0.1; }
-        else if (leftPressed) { acc.x = -0.1; }
-         */
+        acc.x = 0;
 
         if (getDirection() == EDirection.RIGHT) { setAccX(0.1); }
         if (getDirection() == EDirection.LEFT) { setAccX(-0.1); }
-
-        setAccX(getAccX() + getVelX() * -0.1);
-        setVelX(getVelX() + getAccX());
-        setPosX(getPosX() + getVelX() + 0.5*getAccX());
 
         acc.x += vel.x * -0.1;
         vel.x += acc.x;
         pos.x += vel.x + 0.5 * acc.x;
 
-//        acc.x += vel.x * -0.1;
-//        vel.x += acc.x;
-//        pos.x += vel.x + 0.5 * acc.x;
-//
-//        acc.y = 0;
-
-
-        setAccY(0);
-
-        /*
-        if (upPressed && downPressed) { }
-        else if (downPressed) { acc.y = 0.1; }
-        else if (upPressed) { acc.y = -0.1; }
-         */
+        acc.y = 0;
 
         if (getDirection() == EDirection.DOWN) { setAccY(0.1);  }
         if (getDirection() == EDirection.UP) { setAccY(-0.1); }
 
-        setAccY(getAccY() + getVelY()*-0.1);
-
         acc.y += vel.y * -0.1;
         vel.y += acc.y;
         pos.y += vel.y + 0.5 * acc.y;
-
     }
 
     /**
