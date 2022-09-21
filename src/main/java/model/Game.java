@@ -33,7 +33,7 @@ public class Game {
     private ArrayList<Projectile> projectiles;
     private TerrainBorder terrainBorder;
 
-    private ArrayList<GameButton> mainMenuButtons, backButtons, pauseButtons;
+    private ArrayList<GameButton> backButtons, pauseButtons;
 
     private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
 
@@ -59,7 +59,6 @@ public class Game {
         terrainBorder = new TerrainBorder(960, 800);
         highscoreName = new ArrayList<>();
         this.gameMap = new GameMap();
-        initMainMenuButtons();
         initBackButtons();
         initPauseButtons();
 
@@ -214,14 +213,6 @@ public class Game {
         gameMap.setPath(path);
     }
 
-    /**
-     * Returns an ArrayList containing all the buttons for the main menu.
-     * @return  Main Menu Buttons
-     */
-    public ArrayList<GameButton> getMainMenuButtons() {
-        return mainMenuButtons;
-    }
-
     public ArrayList<GameButton> getBackButtons(){return backButtons;}
 
     public ArrayList<GameButton> getPauseButtons(){
@@ -368,21 +359,6 @@ public class Game {
         backButton1.setIsSelected(true);
         backButtons = new ArrayList<>();
         backButtons.add(backButton1);
-    }
-
-    /**
-     * Initializes the buttons used in the main menu and stores them in an ArrayList
-     */
-    private void initMainMenuButtons() {
-        GameButton mainMenuButton1 = new GameButton("PLAY", 325, 200, new MenuButtonAction(new InGameState()));
-        GameButton mainMenuButton2 = new GameButton("HIGHSCORES", 325, 300, new MenuButtonAction(new HighscoreState()));
-        GameButton mainMenuButton3 = new GameButton("HOW TO PLAY", 325, 400, new MenuButtonAction(new HowToPlayState()));
-        GameButton mainMenuButton4 = new GameButton("QUIT", 325, 500, new QuitButtonAction());
-        mainMenuButtons = new ArrayList<>();
-        mainMenuButtons.add(mainMenuButton1);
-        mainMenuButtons.add(mainMenuButton2);
-        mainMenuButtons.add(mainMenuButton3);
-        mainMenuButtons.add(mainMenuButton4);
     }
 
 
