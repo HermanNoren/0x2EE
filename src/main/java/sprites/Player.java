@@ -63,12 +63,6 @@ public class Player extends Entity implements ISprite, IMovableSprite {
     public void update() {
         setAccX(0);
 
-        /*
-        if (rightPressed && leftPressed) { }
-        else if (rightPressed) { acc.x = 0.1; }
-        else if (leftPressed) { acc.x = -0.1; }
-         */
-
         if (getDirection() == EDirection.RIGHT) { setAccX(0.1); }
         if (getDirection() == EDirection.LEFT) { setAccX(-0.1); }
 
@@ -80,20 +74,7 @@ public class Player extends Entity implements ISprite, IMovableSprite {
         vel.x += acc.x;
         pos.x += vel.x + 0.5 * acc.x;
 
-//        acc.x += vel.x * -0.1;
-//        vel.x += acc.x;
-//        pos.x += vel.x + 0.5 * acc.x;
-//
-//        acc.y = 0;
-
-
         setAccY(0);
-
-        /*
-        if (upPressed && downPressed) { }
-        else if (downPressed) { acc.y = 0.1; }
-        else if (upPressed) { acc.y = -0.1; }
-         */
 
         if (getDirection() == EDirection.DOWN) { setAccY(0.1);  }
         if (getDirection() == EDirection.UP) { setAccY(-0.1); }

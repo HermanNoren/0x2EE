@@ -10,19 +10,19 @@ import sprites.ISprite;
  * when the player is in range to enter the shop (more logic to come).
  */
 public class ShopSprite implements ISprite {
-    public final static int x_position = 100;
+    public final static int x_position = 300;
     public final static int y_position = 100;
 
-    public final static int width = 32;
+    public final static int width = 160;
 
-    public final static int height = 32;
+    public final static int height = 160;
 
+    public ShopSprite(){}
 
     public final static Vector2 static_position = new Vector2(x_position,y_position);
     public final static Rect static_size = new Rect(x_position, y_position, width, height);
 
 
-    public final static int sizeLength = 25;
 
     /**
      * The shop will have different parameters for its location and
@@ -87,6 +87,8 @@ public class ShopSprite implements ISprite {
 
     @Override
     public void update() {
+
+        //skriv här för att rita skiten igen
 
     }
 

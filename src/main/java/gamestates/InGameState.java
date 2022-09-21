@@ -8,6 +8,7 @@ import sprites.Player;
 import sprites.enemies.EnemyFactory;
 import sprites.enemies.IEnemy;
 import sprites.enemies.NormalEnemyFactory;
+import sprites.theShop.ShopSprite;
 import view.panelstates.EPanelState;
 
 import java.io.PrintStream;
@@ -21,17 +22,20 @@ public class InGameState implements IGameState {
     private ArrayList<IEnemy> enemies;
     private Game game;
     private Player player;
+    private ShopSprite shop;
     private final EPanelState stateTag = EPanelState.INGAME;
 
     public InGameState() {
         this.game = Game.getInstance();
         sprites = new ArrayList<>();
         enemies = game.getEnemies();
+        this.shop = game.getShop();
         this.player = game.getPlayer();
         EnemyFactory enemyFactory= new NormalEnemyFactory();
         enemies.add(enemyFactory.createEnemy());
-        sprites.add(game.getPlayer());
         sprites.addAll(game.getTerrainBorder());
+        sprites.add(game.getShop());
+        sprites.add(game.getPlayer());
     }
 
     /**
@@ -67,15 +71,15 @@ public class InGameState implements IGameState {
             game.setState(new PauseState());
         }
 
+        CollisionHandler.seeIfPlayerIsOutsideBorder(player);
         for (ISprite sprite : sprites) {
             sprite.update();
         }
         for(IEnemy enemy : enemies){
             enemy.update();
-            //Check if enemy is close enough to damage player, could be done somewhere else also.
+            //Check if enemy is close enough to damage player, could be done somewhere else.
         }
 
-        CollisionHandler.seeIfPlayerIsOutsideBorder(player);
         
         }
     }

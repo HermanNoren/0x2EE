@@ -33,11 +33,12 @@ public class PlayerDrawer implements IDrawer {
     /**
      * Draws the player onto the screen in the correct position
      * @param g
+     * Can be refactored in the helper class??
      */
     public void draw(Graphics2D g) {
         movementAnimation();
         chooseActiveImage();
-        ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(player.getPos(), player.getSize(), player.getSize(), camera);
+        ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(player.getPos(), player.getWidth(), player.getHeight(), camera);
         if(prevImg == null){
             g.drawImage(up1, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null); // Sets default image
         }

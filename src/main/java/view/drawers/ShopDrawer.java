@@ -24,7 +24,7 @@ public class ShopDrawer implements IDrawer{
 
     private void initShopImages(){
         try{
-             frame1 = setImage("imgs/shopPiskel_.png");
+             frame1 = setImage("imgs/shopmovement/Shoppiskel2 copy.png"); //scale twice as large
         }
         catch (Exception errorMessage){
             System.out.println(errorMessage.getMessage());
@@ -43,7 +43,7 @@ public class ShopDrawer implements IDrawer{
 
     @Override
     public void draw(Graphics2D g2) {
-        ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(shopObject.getPos(), 128, 128, camera);
+        ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(shopObject.getPos(), shopObject.getWidth(), shopObject.getHeight(), camera);
         g2.drawImage(frame1, drawInformation.get(0),drawInformation.get(1),drawInformation.get(2),drawInformation.get(3), null);
     }
 

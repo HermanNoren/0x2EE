@@ -61,6 +61,7 @@ public class Game implements Runnable {
 
     public void createGame(){
         player = new Player(32, 32, 0.5, 100);
+        shop = new ShopSprite();
         enemies = new ArrayList<>();
         terrainBorder = new TerrainBorder(960, 800);
         highscoreName = new ArrayList<>();
@@ -68,8 +69,6 @@ public class Game implements Runnable {
         initMainMenuButtons();
         initBackButtons();
         initPauseButtons();
-        shop = new ShopSprite();
-
         wPressed = false;
         aPressed = false;
         sPressed = false;
@@ -195,7 +194,9 @@ public class Game implements Runnable {
     public Player getPlayer() {
         return player;
     }
-    public ShopSprite getShop(){ return shop;}
+    public ShopSprite getShop(){
+        return shop;
+    }
     public ArrayList<IEnemy> getEnemies(){
         return enemies;
     }
