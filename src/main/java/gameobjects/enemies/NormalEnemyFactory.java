@@ -1,6 +1,4 @@
-package sprites.enemies;
-
-import sprites.ISprite;
+package gameobjects.enemies;
 
 public class NormalEnemyFactory extends EnemyFactory{
     @Override

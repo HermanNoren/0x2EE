@@ -1,6 +1,6 @@
-package equipment;
+package armor;
 
-public class Armor implements IArmor{
+public class Armor implements IArmor {
 
     public Armor(){
 

@@ -1,7 +1,7 @@
 package controllers;
 
 import main.Game;
-import sprites.Player;
+import gameobjects.Player;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

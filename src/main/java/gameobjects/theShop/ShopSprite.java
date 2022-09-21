@@ -1,15 +1,15 @@
-package sprites.theShop;
+package gameobjects.theShop;
 
 import helperclasses.Rect;
 import helperclasses.Vector2;
-import sprites.ISprite;
+import gameobjects.IGameObject;
 
 /**
  * This ISprite is the shop where weapons and armor can be
  * upgraded through the game. It will also contain logic regarding
  * when the player is in range to enter the shop (more logic to come).
  */
-public class ShopSprite implements ISprite {
+public class ShopSprite implements IGameObject {
     public final static int x_position = 0;
     public final static int y_position = 0;
     private Rect shopAreaSize;

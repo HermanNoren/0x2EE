@@ -2,7 +2,7 @@ package mapclasses;
 
 import config.Config;
 import helperclasses.Vector2;
-import sprites.ISprite;
+import gameobjects.IGameObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +28,7 @@ public class GameMap {
             "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
     };
 
-    private ArrayList<ISprite> tiles;
+    private ArrayList<IGameObject> tiles;
     private Map<String, Terrain> grass;
 
     private ArrayList<Terrain> path;
@@ -38,7 +38,7 @@ public class GameMap {
 
     }
 
-    public ArrayList<ISprite> getTiles() {
+    public ArrayList<IGameObject> getTiles() {
         return new ArrayList<>(tiles);
     }
 

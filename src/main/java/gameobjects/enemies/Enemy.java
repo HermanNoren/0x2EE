@@ -1,17 +1,12 @@
-package sprites.enemies;
+package gameobjects.enemies;
 
 import config.Config;
-import controllers.EDirection;
 import helperclasses.AStar;
-import helperclasses.Vector2;
 import main.Game;
 import mapclasses.Terrain;
-import sprites.Entity;
+import gameobjects.Entity;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
 
 public abstract class Enemy extends Entity implements IEnemy {
     private Game game = Game.getInstance();

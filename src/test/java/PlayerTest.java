@@ -1,8 +1,5 @@
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import sprites.Player;
-
-import java.io.IOException;
 
 public class PlayerTest {
     @BeforeAll

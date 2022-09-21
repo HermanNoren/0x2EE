@@ -1,8 +1,8 @@
 package view;
 
 import config.Config;
+import gameobjects.IFocusableObject;
 import helperclasses.Vector2;
-import sprites.ISprite;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Camera {
 
-    private ArrayList<ISprite> focusedObject;
+    private ArrayList<IFocusableObject> focusedObject;
     private Vector2 relativePos, absolutePos, center;
     private int dragEffectConstant;
     private double currentZoomMultiplier;
@@ -36,7 +36,7 @@ public class Camera {
      * Used for changing what object the camera is focusing
      * @param object Object the camera will focus
      */
-    public void setFocusedObject(ISprite object) {
+    public void setFocusedObject(IFocusableObject object) {
         focusedObject = new ArrayList<>();
         focusedObject.add(object);
     }
@@ -97,7 +97,7 @@ public class Camera {
         calculateCenterPos();
 
         relativePos = new Vector2(absolutePos);
-        for (ISprite object : focusedObject) {
+        for (IFocusableObject object : focusedObject) {
             relativePos.x += (object.getCenter().x - (relativePos.x + center.x)) / (dragEffectConstant / currentZoomMultiplier);
             relativePos.y += (object.getCenter().y - (relativePos.y + center.y)) / (dragEffectConstant / currentZoomMultiplier);
         }

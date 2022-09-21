@@ -3,22 +3,18 @@ package main;
 import buttons.buttonactions.*;
 import gamestates.*;
 import mapclasses.TerrainBorder;
-import gamestates.*;
-import helperclasses.Vector2;
 import mapclasses.GameMap;
 import mapclasses.Terrain;
-import sprites.ISprite;
-import sprites.Player;
+import gameobjects.IGameObject;
+import gameobjects.Player;
 import buttons.GameButton;
 
-import sprites.Projectile;
-import sprites.enemies.IEnemy;
+import gameobjects.Projectile;
+import gameobjects.enemies.IEnemy;
 import view.IObserver;
 import view.panelstates.EPanelState;
 
-import java.awt.*;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -202,7 +198,7 @@ public class Game implements Runnable {
      * Returns an ArrayList containing all the tiles in the Game Map.
      * @return  All Game Map Tiles
      */
-    public ArrayList<ISprite> getTerrainBorder() {
+    public ArrayList<IGameObject> getTerrainBorder() {
         return terrainBorder.getTerrainBorder();
     }
 

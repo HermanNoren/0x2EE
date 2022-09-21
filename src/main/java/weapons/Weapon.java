@@ -1,6 +1,10 @@
 package weapons;
 
-import sprites.Player;
+import controllers.EDirection;
+import gameobjects.Projectile;
+import helperclasses.Vector2;
+
+import java.util.ArrayList;
 
 public class Weapon {
 
@@ -18,8 +22,11 @@ public class Weapon {
     }
 
 
-    public void shoot(){
-        if (ammo != 0) ammo--;
+    public void shoot(Vector2 pos, EDirection direction, ArrayList<Projectile> projectiles){
+        if (ammo != 0) {
+            ammo--;
+            projectiles.add(new Projectile(pos, direction));
+        }
         else reload();
     }
 

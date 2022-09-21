@@ -1,19 +1,17 @@
-package sprites.enemies;
+package gameobjects.enemies;
 
-import controllers.EDirection;
 import helperclasses.Vector2;
 
-class NormalEnemy extends Enemy{
+public class BossEnemy extends Enemy{
 
-
-    protected NormalEnemy(int x, int y, double vel, int health) {
+    public BossEnemy(int x, int y, double vel, int health) {
         super(x, y, vel, health);
     }
+
     @Override
     public void specialAbility() {
 
     }
-
 
     @Override
     public Vector2 getCenter() {

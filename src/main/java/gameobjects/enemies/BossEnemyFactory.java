@@ -1,6 +1,4 @@
-package sprites.enemies;
-
-import sprites.ISprite;
+package gameobjects.enemies;
 
 public class BossEnemyFactory extends EnemyFactory{
 

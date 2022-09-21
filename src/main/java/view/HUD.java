@@ -1,9 +1,8 @@
 package view;
 
 import config.Config;
-import sprites.Player;
+import gameobjects.Player;
 
-import javax.swing.*;
 import java.awt.*;
 
 public class HUD {

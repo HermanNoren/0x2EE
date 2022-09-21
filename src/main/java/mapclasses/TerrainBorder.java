@@ -2,7 +2,7 @@ package mapclasses;
 
 import helperclasses.Vector2;
 import config.Config;
-import sprites.ISprite;
+import gameobjects.IGameObject;
 
 import java.util.ArrayList;
 
@@ -37,7 +37,7 @@ public class TerrainBorder {
     }
 
 
-    public ArrayList<ISprite> getTerrainBorder() {
+    public ArrayList<IGameObject> getTerrainBorder() {
         return new ArrayList<>(border);
     }
 }

@@ -1,13 +1,9 @@
 package view.drawers;
 
-import controllers.EDirection;
-import sprites.Entity;
-import sprites.ISprite;
-import sprites.enemies.IEnemy;
+import gameobjects.enemies.IEnemy;
 import view.Camera;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;

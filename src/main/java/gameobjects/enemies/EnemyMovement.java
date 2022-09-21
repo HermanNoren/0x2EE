@@ -1,7 +1,4 @@
-package sprites.enemies;
-
-import main.Game;
-import sprites.Player;
+package gameobjects.enemies;
 
 public class EnemyMovement {
     //TODO implement movement for enemy

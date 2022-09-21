@@ -4,8 +4,8 @@ import config.Config;
 import controllers.EDirection;
 import helperclasses.Vector2;
 import mapclasses.Tile;
-import sprites.Player;
-import sprites.enemies.Enemy;
+import gameobjects.Player;
+import gameobjects.enemies.Enemy;
 
 public class CollisionHandler {
     private Player player;

@@ -3,9 +3,9 @@ import Collision.CollidableObject;
 import config.Config;
 import helperclasses.Rect;
 import helperclasses.Vector2;
-import sprites.ISprite;
+import gameobjects.IGameObject;
 
-public class Tile implements ISprite {
+public class Tile implements IGameObject {
 
     private final int size = Config.WALL_SIZE;
     private Vector2 pos;

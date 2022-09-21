@@ -1,14 +1,16 @@
-package sprites;
+package gameobjects;
 
-import equipment.Armor;
+import armor.Armor;
 import controllers.EDirection;
 import helperclasses.Vector2;
 import weapons.Weapon;
 
+import java.util.ArrayList;
+
 /**
  * The player, more implementation to come.
  */
-public class Player extends Entity implements ISprite {
+public class Player extends Entity implements IGameObject, IFocusableObject {
     private int score;
     private int money;
     protected Weapon weapon;
@@ -35,8 +37,11 @@ public class Player extends Entity implements ISprite {
         money = 0;
     }
 
-    public void shoot() {
-        weapon.shoot();
+    public void shoot(ArrayList<Projectile> projectiles) {
+        EDirection dir;
+        if (getDirection() == EDirection.NOT_MOVING) { dir = getLastDirection(); }
+        else { dir = getDirection(); }
+        weapon.shoot(getCenter(), dir, projectiles);
     }
 
     public void setUpPressed(boolean value) {

@@ -1,11 +1,11 @@
-package sprites;
+package gameobjects;
 
 import config.Config;
 import controllers.EDirection;
 import helperclasses.Rect;
 import helperclasses.Vector2;
 
-public class Projectile implements ISprite{
+public class Projectile implements IGameObject {
 
     private final int size = Config.SPRITE_SIZE / 2;
     private final Vector2 pos;

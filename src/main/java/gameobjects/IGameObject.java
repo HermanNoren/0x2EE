@@ -1,9 +1,9 @@
-package sprites;
+package gameobjects;
 
 import helperclasses.Rect;
 import helperclasses.Vector2;
 
-public interface ISprite {
+public interface IGameObject {
 
     /**
      * Returns the width of the sprite

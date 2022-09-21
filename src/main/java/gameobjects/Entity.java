@@ -1,4 +1,4 @@
-package sprites;
+package gameobjects;
 
 import config.Config;
 import controllers.EDirection;
@@ -12,7 +12,7 @@ import helperclasses.Vector2;
  * to take damage thus if reduces its health.
  */
 
-public abstract class Entity implements ISprite {
+public abstract class Entity implements IGameObject {
    Vector2 pos;
 
     Vector2 vel;

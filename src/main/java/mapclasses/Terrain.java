@@ -4,8 +4,8 @@ import config.Config;
 import helperclasses.Rect;
 import helperclasses.Vector2;
 import main.Game;
-import sprites.ISprite;
-import sprites.Player;
+import gameobjects.IGameObject;
+import gameobjects.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Acts a Node class, every Terrain is a node in the map.
  */
-public class Terrain implements ISprite, Comparable<Terrain> {
+public class Terrain implements IGameObject, Comparable<Terrain> {
     private final int size = Config.SPRITE_SIZE;
     private Vector2 pos;
     private Rect rect;

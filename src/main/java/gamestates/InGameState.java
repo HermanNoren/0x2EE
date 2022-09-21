@@ -3,23 +3,22 @@ package gamestates;
 import Collision.CollisionHandler;
 import helperclasses.Vector2;
 import main.Game;
-import sprites.ISprite;
+import gameobjects.IGameObject;
 
-import sprites.Player;
-import sprites.Projectile;
-import sprites.enemies.EnemyFactory;
-import sprites.enemies.IEnemy;
-import sprites.enemies.NormalEnemyFactory;
+import gameobjects.Player;
+import gameobjects.Projectile;
+import gameobjects.enemies.EnemyFactory;
+import gameobjects.enemies.IEnemy;
+import gameobjects.enemies.NormalEnemyFactory;
 import view.panelstates.EPanelState;
 
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 /**
  * The IGameState that represents the in-game logic
  */
 public class InGameState implements IGameState {
-    private ArrayList<ISprite> sprites;
+    private ArrayList<IGameObject> sprites;
     private ArrayList<IEnemy> enemies;
     private ArrayList<Projectile> projectiles;
     private final Game game;
@@ -73,11 +72,10 @@ public class InGameState implements IGameState {
 
         if (game.getSpacePressed()) {
             game.resetSpacePressed();
-            player.shoot();
-            projectiles.add(new Projectile(new Vector2(player.getCenter()), player.getDirection()));
+            player.shoot(projectiles);
         }
 
-        for (ISprite sprite : sprites) {
+        for (IGameObject sprite : sprites) {
             sprite.update();
         }
         for(IEnemy enemy : enemies){
