@@ -33,8 +33,6 @@ public class Game {
     private ArrayList<Projectile> projectiles;
     private TerrainBorder terrainBorder;
 
-    private ArrayList<GameButton> backButtons, pauseButtons;
-
     private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
 
     private boolean stateChangedFlag;
@@ -59,8 +57,6 @@ public class Game {
         terrainBorder = new TerrainBorder(960, 800);
         highscoreName = new ArrayList<>();
         this.gameMap = new GameMap();
-        initBackButtons();
-        initPauseButtons();
 
         wPressed = false;
         aPressed = false;
@@ -213,12 +209,6 @@ public class Game {
         gameMap.setPath(path);
     }
 
-    public ArrayList<GameButton> getBackButtons(){return backButtons;}
-
-    public ArrayList<GameButton> getPauseButtons(){
-        return pauseButtons;
-    }
-
     /**
      * Used as a way for outside components to tell Game if the W key is pressed.
      */
@@ -353,26 +343,6 @@ public class Game {
             o.draw();
         }
     }
-
-    private void initBackButtons(){
-        GameButton backButton1 = new GameButton("BACK", 325, 575, new MenuButtonAction(new MainMenuState()));
-        backButton1.setIsSelected(true);
-        backButtons = new ArrayList<>();
-        backButtons.add(backButton1);
-    }
-
-
-    private void initPauseButtons(){
-        GameButton pauseButton1 = new GameButton("RESUME", 325, 200, new MenuButtonAction(new InGameState()));
-        GameButton pauseButton2 = new GameButton("RESTART", 325, 300, new MenuButtonAction(new InGameState()));
-        GameButton pauseButton3 = new GameButton("MAIN MENU", 325, 400, new MenuButtonAction(new MainMenuState()));
-        pauseButtons = new ArrayList<>();
-        pauseButtons.add(pauseButton1);
-        pauseButtons.add(pauseButton2);
-        pauseButtons.add(pauseButton3);
-
-    }
-
 
     public void resetSpacePressed() {
         this.spacePressed = false;
