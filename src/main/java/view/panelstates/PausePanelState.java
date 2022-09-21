@@ -2,8 +2,7 @@ package view.panelstates;
 
 import config.Config;
 import controllers.KeyClickedController;
-import main.Game;
-import view.MainPanel;
+import model.Game;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 

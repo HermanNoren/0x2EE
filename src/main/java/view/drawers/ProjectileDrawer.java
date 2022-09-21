@@ -1,6 +1,6 @@
 package view.drawers;
 
-import gameobjects.Projectile;
+import model.gameobjects.Projectile;
 import view.Camera;
 
 import java.awt.*;

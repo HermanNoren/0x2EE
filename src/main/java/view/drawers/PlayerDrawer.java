@@ -1,6 +1,6 @@
 package view.drawers;
 
-import gameobjects.Entity;
+import model.gameobjects.Entity;
 import view.Camera;
 
 import javax.imageio.ImageIO;

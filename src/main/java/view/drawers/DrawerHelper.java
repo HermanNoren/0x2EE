@@ -1,6 +1,6 @@
 package view.drawers;
 
-import helperclasses.Vector2;
+import model.helperclasses.Vector2;
 import view.Camera;
 
 import java.util.ArrayList;

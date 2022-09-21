@@ -1,5 +1,4 @@
 package controllers;
-import main.Game;
 import view.Camera;
 
 import java.awt.event.KeyEvent;

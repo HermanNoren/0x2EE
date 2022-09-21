@@ -2,19 +2,15 @@ package view.panelstates;
 
 import config.Config;
 import controllers.KeyClickedController;
-import main.Game;
+import model.Game;
 import view.MainPanel;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class MainMenuPanelState implements IPanelState {
 

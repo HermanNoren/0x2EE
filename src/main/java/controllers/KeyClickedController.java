@@ -1,5 +1,5 @@
 package controllers;
-import main.Game;
+import model.Game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

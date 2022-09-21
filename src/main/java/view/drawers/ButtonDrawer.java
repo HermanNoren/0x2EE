@@ -1,6 +1,6 @@
 package view.drawers;
 
-import buttons.GameButton;
+import view.buttons.GameButton;
 
 import java.awt.*;
 import java.util.ArrayList;

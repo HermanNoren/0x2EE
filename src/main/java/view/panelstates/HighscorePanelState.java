@@ -2,18 +2,14 @@ package view.panelstates;
 
 import config.Config;
 import controllers.KeyClickedController;
-import main.Game;
-import view.MainPanel;
+import model.Game;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 
 import java.awt.*;
 import java.awt.event.KeyListener;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class HighscorePanelState implements IPanelState {
 

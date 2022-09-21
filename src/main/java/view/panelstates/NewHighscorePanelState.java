@@ -2,7 +2,7 @@ package view.panelstates;
 
 import config.Config;
 import controllers.HighscoreController;
-import main.Game;
+import model.Game;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 

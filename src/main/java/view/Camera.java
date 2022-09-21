@@ -1,8 +1,8 @@
 package view;
 
 import config.Config;
-import gameobjects.IFocusableObject;
-import helperclasses.Vector2;
+import model.gameobjects.IFocusableObject;
+import model.helperclasses.Vector2;
 
 import java.util.ArrayList;
 

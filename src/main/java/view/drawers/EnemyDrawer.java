@@ -1,6 +1,6 @@
 package view.drawers;
 
-import gameobjects.enemies.IEnemy;
+import model.gameobjects.enemies.IEnemy;
 import view.Camera;
 
 import javax.imageio.ImageIO;

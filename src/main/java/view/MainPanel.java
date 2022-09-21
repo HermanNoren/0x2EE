@@ -1,6 +1,6 @@
 package view;
 
-import main.Game;
+import model.Game;
 import view.panelstates.IPanelState;
 import view.panelstates.PanelStateFactory;
 

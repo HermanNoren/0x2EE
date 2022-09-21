@@ -1,10 +1,9 @@
 package view.panelstates;
 
-import config.Config;
 import controllers.CameraController;
 import controllers.KeyClickedController;
 import controllers.PlayerController;
-import main.Game;
+import model.Game;
 import view.Camera;
 import view.HUD;
 import view.MainPanel;

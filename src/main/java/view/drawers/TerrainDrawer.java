@@ -1,8 +1,8 @@
 package view.drawers;
 
-import main.Game;
-import mapclasses.Terrain;
-import gameobjects.IGameObject;
+import model.Game;
+import model.mapclasses.Terrain;
+import model.gameobjects.IGameObject;
 import view.Camera;
 
 import java.awt.*;
