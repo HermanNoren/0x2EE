@@ -2,6 +2,7 @@ package view.panelstates;
 
 import config.Config;
 import controllers.KeyClickedController;
+import helperclasses.HighscoreHandler;
 import main.Game;
 import view.MainPanel;
 import view.drawers.ButtonDrawer;
@@ -33,13 +34,16 @@ public class HighscorePanelState implements IPanelState {
             Arrays.asList(gold, silver,
                     bronze, Color.white, Color.white));
 
+    private HighscoreHandler highscoreHandler;
+
     public HighscorePanelState() {
         this.game = Game.getInstance();
+        highscoreHandler = new HighscoreHandler();
         keyListeners = new ArrayList<>();
         keyListeners.add(new KeyClickedController());
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(game.getBackButtons()));
-        scores = game.getHighScoreList();
+        scores = highscoreHandler.getHighscoreList();
 
     }
 

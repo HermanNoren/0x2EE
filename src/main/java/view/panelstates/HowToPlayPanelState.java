@@ -2,6 +2,7 @@ package view.panelstates;
 
 import config.Config;
 import controllers.KeyClickedController;
+import helperclasses.ImageHandler;
 import main.Game;
 import view.MainPanel;
 import view.drawers.ButtonDrawer;
@@ -25,11 +26,14 @@ public class HowToPlayPanelState implements IPanelState{
 
     private ArrayList<KeyListener> keyListeners;
 
+    private ImageHandler imageHandler;
+
     public HowToPlayPanelState(){
         this.game = Game.getInstance();
         keyListeners = new ArrayList<>();
         keyListeners.add(new KeyClickedController());
-        controls = setImage("imgs/h2p.png");
+        imageHandler = new ImageHandler();
+        controls = imageHandler.getImage("imgs/h2p.png");
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(game.getBackButtons()));
     }
@@ -51,16 +55,6 @@ public class HowToPlayPanelState implements IPanelState{
         g2.drawImage(controls, 0,80, Config.SCREEN_WIDTH*100/150, Config.SCREEN_HEIGHT, null);
     }
 
-    private BufferedImage setImage(String path) {
-        BufferedImage image;
-        try {
-            image = ImageIO.read(new File(path));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return image;
-
-    }
 
     @Override
     public ArrayList<KeyListener> getKeyListeners() {

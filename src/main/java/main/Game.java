@@ -2,6 +2,7 @@ package main;
 
 import buttons.buttonactions.*;
 import gamestates.*;
+import helperclasses.HighscoreHandler;
 import mapclasses.TerrainBorder;
 import mapclasses.GameMap;
 import mapclasses.Terrain;
@@ -42,8 +43,9 @@ public class Game implements Runnable {
     private boolean stateChangedFlag;
 
     private GameMap gameMap;
-    private File highscoreFile;
     private ArrayList<String> highscoreList;
+
+    private HighscoreHandler highscoreHandler;
 
     private Game() {}
 
@@ -72,30 +74,13 @@ public class Game implements Runnable {
         enterPressed = false;
         escapePressed = false;
         spacePressed = false;
-
         stateChangedFlag = false;
-
         state = new MainMenuState();
         state.updateButtons();
         observers = new ArrayList<>();
-        highscoreFile = new File("textfiles/highscores.txt");
-        highscoreList = getHighScoreList();
+        highscoreHandler = new HighscoreHandler();
+        highscoreList = highscoreHandler.getHighscoreList();
         startGame();
-    }
-
-
-    public ArrayList<String> getHighScoreList() {
-        Scanner sc = null;
-        highscoreList = new ArrayList<>();
-        try {
-            sc = new Scanner(highscoreFile);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        while(sc.hasNext()){
-            highscoreList.add(sc.next());
-        }
-        return highscoreList;
     }
 
     public ArrayList<String> getHighscoreName(){
@@ -123,27 +108,7 @@ public class Game implements Runnable {
         }else{
             //GAME OVER MENU
         }
-
     }
-
-    /**
-     * Saves the new highscore to a textfile.
-     * @param list List of highscores
-     */
-
-    private void saveHighscore(ArrayList<String> list){
-        try {
-            BufferedWriter output = new BufferedWriter(new FileWriter(highscoreFile, false));
-            for (String s : highscoreList) {
-                output.write(s + " ");
-            }
-            output.close();
-
-        } catch (IOException ex1) {
-            System.out.printf("ERROR writing score to file: %s\n", ex1);
-        }
-    }
-
 
     /**
      * Updates the list containing highscores.
@@ -167,7 +132,7 @@ public class Game implements Runnable {
                 }
             }
         }
-        saveHighscore(highscoreList);
+        highscoreHandler.saveHighscore(highscoreList);
     }
 
 
