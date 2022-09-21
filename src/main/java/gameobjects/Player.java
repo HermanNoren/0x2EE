@@ -69,6 +69,12 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
 
     @Override
     public void update() {
+        moveX();
+
+        moveY();
+    }
+
+    public void moveX() {
         acc.x = 0;
 
         if (getDirection() == EDirection.RIGHT) { setAccX(0.1); }
@@ -77,7 +83,9 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         acc.x += vel.x * -0.1;
         vel.x += acc.x;
         pos.x += vel.x + 0.5 * acc.x;
+    }
 
+    public void moveY() {
         acc.y = 0;
 
         if (getDirection() == EDirection.DOWN) { setAccY(0.1);  }
@@ -96,7 +104,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     }
 
     public void damageTaken(int damage) {
-
+        setHealth(getHealth() - damage);
     }
 
     public boolean isDamageTaken(){

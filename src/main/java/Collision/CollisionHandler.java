@@ -2,10 +2,16 @@ package Collision;
 
 import config.Config;
 import controllers.EDirection;
+import gameobjects.Entity;
+import gameobjects.IGameObject;
 import helperclasses.Vector2;
 import mapclasses.Tile;
 import gameobjects.Player;
 import gameobjects.enemies.Enemy;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class CollisionHandler {
     private Player player;
@@ -31,6 +37,51 @@ public class CollisionHandler {
         ){
             System.out.println("yes");
         }
+    }
+
+    /**
+     * Method for calculating if a game object is colliding with another game object
+     * @param object1 first object to compare
+     * @param object2 second object to compare
+     * @return true if objects are colliding, else false
+     */
+    public static boolean testCollision(IGameObject object1, IGameObject object2) {
+        return
+                object1.getPos().x < object2.getPos().x + object2.getWidth()
+                && object1.getPos().x + object1.getWidth() > object2.getPos().x
+                && object1.getPos().y < object2.getPos().y + object2.getHeight()
+                && object1.getHeight() + object1.getPos().y > object2.getPos().y;
+    }
+
+    public static Map<String, Boolean> testCollisionWithDirection(Entity object1, Entity object2, String direction) {
+        Map<String, Boolean> collisionTypes = new HashMap<>(Map.of(
+                "top", false,
+                "bottom", false,
+                "right", false,
+                "left", false
+        ));
+
+        if (testCollision(object1, object2)) {
+            if (Objects.equals(direction, "X")) {
+                if (object1.getDirection() == EDirection.RIGHT) {
+                    collisionTypes.replace("right", true);
+                }
+                if (object1.getDirection() == EDirection.LEFT) {
+                    collisionTypes.replace("left", true);
+                }
+            }
+
+            if (Objects.equals(direction, "Y")) {
+                if (object1.getDirection() == EDirection.UP) {
+                    collisionTypes.replace("top", true);
+                }
+                if (object1.getDirection() == EDirection.DOWN) {
+                    collisionTypes.replace("bottom", true);
+                }
+            }
+        }
+
+        return collisionTypes;
     }
 
 

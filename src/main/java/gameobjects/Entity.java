@@ -19,6 +19,7 @@ public abstract class Entity implements IGameObject {
 
     Vector2 acc;
     private int health;
+    private int maxHp;
     private EDirection direction;
     private EDirection lastDirection;
     private int size = Config.SPRITE_SIZE * 3;
@@ -40,6 +41,7 @@ public abstract class Entity implements IGameObject {
         this.acc = new Vector2(0, 0);
         this.rect = new Rect(x, y, size, size);
         this.health = health;
+        this.maxHp = health;
     }
 
     public Vector2 getVel() {
@@ -131,10 +133,18 @@ public abstract class Entity implements IGameObject {
         }
     }
 
+    public void setHealth(int value) {
+        if (value < 0) { health = 0; }
+        health = value;
+    }
+
     public int getHealth(){
         return health;
     }
 
+    public double getMaxHp() {
+        return maxHp;
+    }
     @Override
     public int getWidth() {
         return getRect().getWidth();

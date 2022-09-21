@@ -102,7 +102,7 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
 
     @Override
     public int compareTo(Terrain n) {
-        return Double.compare(this.f, n.getF());
+        return Double.compare(this.g, n.getG());
     }
 
     public static class Edge {

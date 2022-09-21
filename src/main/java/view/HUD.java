@@ -27,7 +27,7 @@ public class HUD {
         g2.setColor(Color.red);
         g2.fillRoundRect(20, Config.SCREEN_HEIGHT - 100, 200, 20, 0, 0);
         g2.setColor(Color.green);
-        g2.fillRoundRect(20, Config.SCREEN_HEIGHT - 100, player.getHealth() * 2, 20, 0, 0);
+        g2.fillRoundRect(20, Config.SCREEN_HEIGHT - 100, (int) (200 - (200 * (1 - player.getHealth() / player.getMaxHp()))), 20, 0, 0);
         g2.setColor(Color.black);
         g2.drawRoundRect(20, Config.SCREEN_HEIGHT - 100, 200, 20, 0, 0);
         g2.setColor(mana);

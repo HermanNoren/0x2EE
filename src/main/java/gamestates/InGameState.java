@@ -1,6 +1,7 @@
 package gamestates;
 
 import Collision.CollisionHandler;
+import gameobjects.Entity;
 import helperclasses.Vector2;
 import main.Game;
 import gameobjects.IGameObject;
@@ -13,6 +14,7 @@ import gameobjects.enemies.NormalEnemyFactory;
 import view.panelstates.EPanelState;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * The IGameState that represents the in-game logic
@@ -78,9 +80,14 @@ public class InGameState implements IGameState {
         for (IGameObject sprite : sprites) {
             sprite.update();
         }
+
         for(IEnemy enemy : enemies){
             enemy.update();
             //Check if enemy is close enough to damage player, could be done somewhere else also.
+            if (CollisionHandler.testCollision(player, (Entity) enemy)) {
+                player.damageTaken(1);
+            }
+
         }
         for (Projectile p : projectiles) {
             p.update();
