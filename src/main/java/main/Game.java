@@ -12,6 +12,7 @@ import sprites.Player;
 import buttons.GameButton;
 
 import sprites.enemies.IEnemy;
+import sprites.theShop.ShopSprite;
 import view.IObserver;
 import view.panelstates.EPanelState;
 
@@ -33,6 +34,8 @@ public class Game implements Runnable {
     private ArrayList<IObserver> observers;
     private IGameState state;
     private Player player;
+
+    private ShopSprite shop;
     private ArrayList<String> highscoreName;
     private ArrayList<IEnemy> enemies;
     private TerrainBorder terrainBorder;
@@ -65,6 +68,7 @@ public class Game implements Runnable {
         initMainMenuButtons();
         initBackButtons();
         initPauseButtons();
+        shop = new ShopSprite();
 
         wPressed = false;
         aPressed = false;
@@ -191,6 +195,7 @@ public class Game implements Runnable {
     public Player getPlayer() {
         return player;
     }
+    public ShopSprite getShop(){ return shop;}
     public ArrayList<IEnemy> getEnemies(){
         return enemies;
     }
@@ -403,7 +408,7 @@ public class Game implements Runnable {
 
         while(true) {
             currentTime = System.nanoTime();
-            deltaUpdateTime += (currentTime - previousTime) / timePerUpdate;
+             deltaUpdateTime += (currentTime - previousTime) / timePerUpdate;
             deltaDrawTime += (currentTime - previousTime) / timePerRender;
             previousTime = currentTime;
 

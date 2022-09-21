@@ -10,10 +10,16 @@ import sprites.ISprite;
  * when the player is in range to enter the shop (more logic to come).
  */
 public class ShopSprite implements ISprite {
-    public final static int x_position = 0;
-    public final static int y_position = 0;
-    private Rect shopAreaSize;
-    private Vector2 Position;
+    public final static int x_position = 100;
+    public final static int y_position = 100;
+
+    public final static int width = 32;
+
+    public final static int height = 32;
+
+
+    public final static Vector2 static_position = new Vector2(x_position,y_position);
+    public final static Rect static_size = new Rect(x_position, y_position, width, height);
 
 
     public final static int sizeLength = 25;
@@ -23,15 +29,7 @@ public class ShopSprite implements ISprite {
      * its size. This is to make the player be able to shop and not
      * having to stand on top of the shop to do so. (Could actually
      * be a fun implementation maybe?)
-     * @param x_size
-     * @param y_size
-     * @param x_position
-     * @param y_position
      */
-    public ShopSprite(int x_size, int y_size, int x_position, int y_position) {
-        shopAreaSize = new Rect(100, 100,x_size , y_size);
-        Position = new Vector2(x_position, y_position);
-    }
 
     /**
      * will communicate through game if the player
@@ -47,7 +45,7 @@ public class ShopSprite implements ISprite {
      * on the player's screen.
      */
     public void closeEnoughToShop(Vector2 position){
-         if(getRect().intersects(this.Position, position))
+         if(getRect().intersects(static_position, position))
              openShopPanel();
          //throw exception not close enough
 
@@ -73,7 +71,7 @@ public class ShopSprite implements ISprite {
      */
     @Override
     public Vector2 getPos() {
-        return this.Position;
+        return static_position;
     }
 
     @Override
@@ -83,19 +81,13 @@ public class ShopSprite implements ISprite {
 
     @Override
     public Rect getRect() {
-        return this.shopAreaSize;
+        return static_size;
     }
+
 
     @Override
     public void update() {
 
     }
 
-    /*
-    @Override
-    public void draw(Graphics2D g2) {
-        g2.fillRect( x_position, y_position, sizeLength, sizeLength);
-    }
-
-     */
 }

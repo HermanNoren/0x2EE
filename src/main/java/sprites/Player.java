@@ -99,6 +99,8 @@ public class Player extends Entity implements ISprite, IMovableSprite {
         if (getDirection() == EDirection.UP) { setAccY(-0.1); }
 
         setAccY(getAccY() + getVelY()*-0.1);
+        setVelY(getVelY() + getAccY());
+        setPosY(getPosY() + getVelY() + 0.5*getAccY());
 
         acc.y += vel.y * -0.1;
         vel.y += acc.y;

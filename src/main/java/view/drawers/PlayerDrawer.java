@@ -1,6 +1,7 @@
 package view.drawers;
 
 import sprites.Entity;
+import sprites.Player;
 import view.Camera;
 
 import javax.imageio.ImageIO;
@@ -23,7 +24,7 @@ public class PlayerDrawer implements IDrawer {
 
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
 
-    public PlayerDrawer(Entity player, Camera camera) {
+    public PlayerDrawer(Player player, Camera camera) {
         this.player = player;
         this.camera = camera;
         initPlayerImages();
