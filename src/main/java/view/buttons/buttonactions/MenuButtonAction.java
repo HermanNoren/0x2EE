@@ -1,21 +1,22 @@
 package view.buttons.buttonactions;
 
-import model.gamestates.IGameState;
 import model.Game;
+import view.panelstates.EPanelState;
+import view.panelstates.IPanelState;
 
 public class MenuButtonAction implements  IButtonAction{
 
-    private IGameState gameState;
-    private Game game;
+    private EPanelState panelState;
+    private IPanelState currentState;
 
-    public MenuButtonAction(IGameState gameState){
-        this.gameState = gameState;
-        this.game = Game.getInstance();
+    public MenuButtonAction(EPanelState panelState, IPanelState currentState){
+        this.panelState = panelState;
+        this.currentState = currentState;
     }
 
     @Override
     public void performAction() {
-        game.setState(gameState);
+        currentState.changePanelState(panelState);
 
     }
 }

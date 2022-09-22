@@ -4,9 +4,6 @@ import config.Config;
 import controllers.ButtonController;
 import controllers.KeyClickedController;
 import model.Game;
-import model.gamestates.HighscoreState;
-import model.gamestates.HowToPlayState;
-import model.gamestates.InGameState;
 import view.MainPanel;
 import view.buttons.GameButton;
 import view.buttons.buttonactions.MenuButtonAction;
@@ -27,9 +24,11 @@ public class MainMenuPanelState implements IPanelState {
     private final ArrayList<GameButton> buttons;
     private final ArrayList<IDrawer> drawers;
     private final ArrayList<KeyListener> keyListeners;
+    private MainPanel mainPanel;
 
-    public MainMenuPanelState() {
+    public MainMenuPanelState(MainPanel mainPanel) {
         this.game = Game.getInstance();
+        this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons();
         bc = new ButtonController(buttons);
@@ -60,14 +59,20 @@ public class MainMenuPanelState implements IPanelState {
     }
 
     @Override
+    public void changePanelState(EPanelState panelState) {
+        mainPanel.changePanelState(panelState);
+    }
+
+    @Override
     public ArrayList<KeyListener> getKeyListeners() {
         return keyListeners;
     }
 
+
     private void createButtons() {
-        GameButton mainMenuButton1 = new GameButton("PLAY", 325, 200, new MenuButtonAction(new InGameState()));
-        GameButton mainMenuButton2 = new GameButton("HIGHSCORES", 325, 300, new MenuButtonAction(new HighscoreState()));
-        GameButton mainMenuButton3 = new GameButton("HOW TO PLAY", 325, 400, new MenuButtonAction(new HowToPlayState()));
+        GameButton mainMenuButton1 = new GameButton("PLAY", 325, 200, new MenuButtonAction(EPanelState.INGAME, this));
+        GameButton mainMenuButton2 = new GameButton("HIGHSCORES", 325, 300, new MenuButtonAction(EPanelState.HIGHSCORES, this));
+        GameButton mainMenuButton3 = new GameButton("HOW TO PLAY", 325, 400, new MenuButtonAction(EPanelState.HOWTOPLAY, this));
         GameButton mainMenuButton4 = new GameButton("QUIT", 325, 500, new QuitButtonAction());
         buttons.add(mainMenuButton1);
         buttons.add(mainMenuButton2);

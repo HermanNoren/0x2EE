@@ -20,9 +20,11 @@ public class InGamePanelState implements IPanelState {
     private ArrayList<IDrawer> drawers;
     private final Camera camera;
     private final ArrayList<KeyListener> keyListeners;
+    private MainPanel mainPanel;
 
-    public InGamePanelState() {
+    public InGamePanelState(MainPanel mainPanel) {
         this.game = Game.getInstance();
+        this.mainPanel = mainPanel;
         keyListeners = new ArrayList<>();
         keyListeners.add(new PlayerController());
         keyListeners.add(new KeyClickedController());
@@ -49,6 +51,11 @@ public class InGamePanelState implements IPanelState {
 
 
         hud.update(g);
+    }
+
+    @Override
+    public void changePanelState(EPanelState panelState) {
+        mainPanel.changePanelState(panelState);
     }
 
     @Override

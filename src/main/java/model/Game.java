@@ -1,6 +1,9 @@
 package model;
 
-import model.gamestates.*;
+import model.collision.CollisionHandler;
+import model.gameobjects.Entity;
+import model.gameobjects.enemies.EnemyFactory;
+import model.gameobjects.enemies.NormalEnemyFactory;
 import model.mapclasses.TerrainBorder;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
@@ -26,7 +29,6 @@ import java.util.Scanner;
  */
 public class Game {
     private ArrayList<IObserver> observers;
-    private IGameState state;
     private Player player;
     private ArrayList<String> highscoreName;
     private ArrayList<IEnemy> enemies;
@@ -37,6 +39,7 @@ public class Game {
     private GameMap gameMap;
     private File highscoreFile;
     private ArrayList<String> highscoreList;
+    private ArrayList<IGameObject> sprites;
 
     private Game() {}
 
@@ -55,6 +58,12 @@ public class Game {
         highscoreName = new ArrayList<>();
         this.gameMap = new GameMap();
 
+        EnemyFactory enemyFactory= new NormalEnemyFactory();
+        enemies.add(enemyFactory.createEnemy());
+        sprites = new ArrayList<>();
+        sprites.add(player);
+        sprites.addAll(terrainBorder.getTerrainBorder());
+
         wPressed = false;
         aPressed = false;
         sPressed = false;
@@ -65,8 +74,6 @@ public class Game {
 
         stateChangedFlag = false;
 
-        state = new MainMenuState();
-        state.updateButtons();
         observers = new ArrayList<>();
         highscoreFile = new File("textfiles/highscores.txt");
         highscoreList = getHighScoreList();
@@ -290,33 +297,6 @@ public class Game {
         return spacePressed;
     }
 
-    public boolean readStateChangedFlag() {
-        return stateChangedFlag;
-    }
-
-    public void resetStateChangedFlag() {
-        stateChangedFlag = false;
-    }
-
-    /**
-     * Use to change the current IGameState
-     * @param state an instance of a class that has implemented the IGameState interface
-     */
-    public void setState(IGameState state) {
-        this.state = state;
-        state.updateButtons();
-        stateChangedFlag = true;
-    }
-
-    /**
-     * Returns a string containing a unique tag used for identifying the different game states from outside sources.
-     * @return StateTag
-     */
-    public EPanelState getStateTag() {
-        return state.getStateTag();
-    }
-
-
     /**
      * Add an observer. Observers will be notified 120 times per second
      * @param observer observer
@@ -329,7 +309,44 @@ public class Game {
      * Updates the current IGameState
      */
     public void update() {
-        state.update();
+
+
+        /* GAME OVER
+        if (player.getHealth() < 1){
+            game.setState(new MainMenuState());
+        }
+
+         */
+
+        if (escapePressed) {
+            escapePressed = false;
+        }
+
+        if (spacePressed) {
+            spacePressed = false;
+            player.shoot(projectiles);
+        }
+
+
+        for (IGameObject sprite : sprites) {
+            sprite.update();
+        }
+
+        for(IEnemy enemy : enemies){
+            enemy.update();
+            //Check if enemy is close enough to damage player, could be done somewhere else also.
+            if (CollisionHandler.testCollision(player, (Entity) enemy)) {
+                player.damageTaken(1);
+            }
+
+        }
+        for (Projectile p : projectiles) {
+            p.update();
+        }
+
+        CollisionHandler.seeIfPlayerIsOutsideBorder(player);
+
+
     }
 
     /**

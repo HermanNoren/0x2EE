@@ -4,7 +4,7 @@ import config.Config;
 import controllers.ButtonController;
 import controllers.KeyClickedController;
 import model.Game;
-import model.gamestates.MainMenuState;
+import view.MainPanel;
 import view.buttons.GameButton;
 import view.buttons.buttonactions.MenuButtonAction;
 import view.drawers.ButtonDrawer;
@@ -26,9 +26,11 @@ public class HowToPlayPanelState implements IPanelState{
     private final ArrayList<GameButton> buttons;
     private ArrayList<IDrawer> drawers;
     private ArrayList<KeyListener> keyListeners;
+    private MainPanel mainPanel;
 
-    public HowToPlayPanelState(){
+    public HowToPlayPanelState(MainPanel mainPanel){
         this.game = Game.getInstance();
+        this.mainPanel = mainPanel;
         controls = setImage("imgs/h2p.png");
         buttons = new ArrayList<>();
         createButtons();
@@ -59,6 +61,11 @@ public class HowToPlayPanelState implements IPanelState{
         g2.drawImage(controls, 0,80, Config.SCREEN_WIDTH*100/150, Config.SCREEN_HEIGHT, null);
     }
 
+    @Override
+    public void changePanelState(EPanelState panelState) {
+        mainPanel.changePanelState(panelState);
+    }
+
     private BufferedImage setImage(String path) {
         BufferedImage image;
         try {
@@ -76,7 +83,7 @@ public class HowToPlayPanelState implements IPanelState{
     }
 
     private void createButtons(){
-        GameButton backButton = new GameButton("BACK", 325, 575, new MenuButtonAction(new MainMenuState()));
+        GameButton backButton = new GameButton("BACK", 325, 575, new MenuButtonAction(EPanelState.MAINMENU, this));
         backButton.setIsSelected(true);
         buttons.add(backButton);
     }

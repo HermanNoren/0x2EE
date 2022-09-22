@@ -5,28 +5,28 @@ import view.panelstates.*;
 
 public class PanelStateFactory {
 
-    public static IPanelState createPanelState(EPanelState state)  {
+    public static IPanelState createPanelState(EPanelState state, MainPanel mainPanel)  {
         switch (state) {
             case INGAME -> {
-                return new InGamePanelState();
+                return new InGamePanelState(mainPanel);
             }
             case MAINMENU -> {
-                return new MainMenuPanelState();
+                return new MainMenuPanelState(mainPanel);
             }
             case HIGHSCORES -> {
-                return new HighscorePanelState();
+                return new HighscorePanelState(mainPanel);
             }
 
             case PAUSE -> {
-                return new PausePanelState();
+                return new PausePanelState(mainPanel);
             }
 
             case HOWTOPLAY -> {
-                return new HowToPlayPanelState();
+                return new HowToPlayPanelState(mainPanel);
             }
 
             case NEWHIGHSCORE -> {
-                return new NewHighscorePanelState();
+                return new NewHighscorePanelState(mainPanel);
             }
 
             default -> {

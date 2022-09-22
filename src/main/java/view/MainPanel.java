@@ -1,6 +1,7 @@
 package view;
 
 import model.Game;
+import view.panelstates.EPanelState;
 import view.panelstates.IPanelState;
 import view.panelstates.PanelStateFactory;
 
@@ -15,7 +16,7 @@ public class MainPanel extends JPanel implements IObserver {
 
     public MainPanel(Game game) {
         this.game = game;
-        state = PanelStateFactory.createPanelState(game.getStateTag());
+        state = PanelStateFactory.createPanelState(EPanelState.MAINMENU, this);
         changeKeyListeners();
         setFocusable(true);
     }
@@ -27,21 +28,12 @@ public class MainPanel extends JPanel implements IObserver {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        checkForStateChange();
         state.draw(g2);
     }
 
-    private void checkForStateChange() {
-        if (game.readStateChangedFlag()) {
-            game.resetStateChangedFlag();
-            changePanelState();
-        }
-    }
 
-
-    private void changePanelState() {
-        state = PanelStateFactory.createPanelState(game.getStateTag()
-        );
+    public void changePanelState(EPanelState state) {
+        this.state = PanelStateFactory.createPanelState(state, this);
         changeKeyListeners();
     }
 

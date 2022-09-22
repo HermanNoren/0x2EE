@@ -4,7 +4,7 @@ import config.Config;
 import controllers.ButtonController;
 import controllers.HighscoreController;
 import model.Game;
-import model.gamestates.MainMenuState;
+import view.MainPanel;
 import view.buttons.GameButton;
 import view.buttons.buttonactions.MenuButtonAction;
 import view.buttons.buttonactions.SaveScoreButtonAction;
@@ -24,9 +24,11 @@ public class NewHighscorePanelState implements IPanelState{
     private ArrayList<IDrawer> drawers;
 
     private int xpos, ypos;
+    private MainPanel mainPanel;
 
-    public NewHighscorePanelState(){
+    public NewHighscorePanelState(MainPanel mainPanel){
         this.game = Game.getInstance();
+        this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons();
         bc = new ButtonController(buttons);
@@ -74,12 +76,18 @@ public class NewHighscorePanelState implements IPanelState{
     }
 
     @Override
+    public void changePanelState(EPanelState panelState) {
+        game.updateHighscoreList();
+        mainPanel.changePanelState(panelState);
+    }
+
+    @Override
     public ArrayList<KeyListener> getKeyListeners() {
         return keyListeners;
     }
 
     private void createButtons(){
-        GameButton backButton = new GameButton("CONTINUE", 325, 575, new SaveScoreButtonAction(new MainMenuState()));
+        GameButton backButton = new GameButton("CONTINUE", 325, 575, new SaveScoreButtonAction(EPanelState.MAINMENU, this));
         buttons.add(backButton);
     }
 }

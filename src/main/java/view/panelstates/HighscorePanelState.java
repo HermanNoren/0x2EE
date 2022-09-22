@@ -4,7 +4,7 @@ import config.Config;
 import controllers.ButtonController;
 import controllers.KeyClickedController;
 import model.Game;
-import model.gamestates.MainMenuState;
+import view.MainPanel;
 import view.buttons.GameButton;
 import view.buttons.buttonactions.MenuButtonAction;
 import view.drawers.ButtonDrawer;
@@ -23,6 +23,7 @@ public class HighscorePanelState implements IPanelState {
     private ArrayList<IDrawer> drawers;
     private ArrayList<KeyListener> keyListeners;
     private Game game;
+    private MainPanel mainPanel;
 
     private int rank, ypos;
 
@@ -35,8 +36,9 @@ public class HighscorePanelState implements IPanelState {
             Arrays.asList(gold, silver,
                     bronze, Color.white, Color.white));
 
-    public HighscorePanelState() {
+    public HighscorePanelState(MainPanel mainPanel) {
         this.game = Game.getInstance();
+        this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons();
         bc = new ButtonController(buttons);
@@ -84,12 +86,17 @@ public class HighscorePanelState implements IPanelState {
     }
 
     @Override
+    public void changePanelState(EPanelState panelState) {
+        mainPanel.changePanelState(panelState);
+    }
+
+    @Override
     public ArrayList<KeyListener> getKeyListeners() {
         return keyListeners;
     }
 
     private void createButtons(){
-        GameButton backButton = new GameButton("BACK", 325, 575, new MenuButtonAction(new MainMenuState()));
+        GameButton backButton = new GameButton("BACK", 325, 575, new MenuButtonAction(EPanelState.MAINMENU, this));
         buttons.add(backButton);
     }
 }

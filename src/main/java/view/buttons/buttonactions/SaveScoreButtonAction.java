@@ -1,21 +1,21 @@
 package view.buttons.buttonactions;
 
 import model.Game;
-import model.gamestates.IGameState;
+import view.panelstates.EPanelState;
+import view.panelstates.IPanelState;
 
 public class SaveScoreButtonAction implements IButtonAction {
 
-    private IGameState gameState;
-    private Game game;
+    private EPanelState panelState;
+    private IPanelState currentState;
 
-    public SaveScoreButtonAction(IGameState gameState){
-        this.gameState = gameState;
-        this.game = Game.getInstance();
+    public SaveScoreButtonAction(EPanelState panelState, IPanelState currentState){
+        this.panelState = panelState;
+        this.currentState = currentState;
     }
 
     @Override
     public void performAction() {
-        game.updateHighscoreList();
-        game.setState(gameState);
+        currentState.changePanelState(panelState);
     }
 }
