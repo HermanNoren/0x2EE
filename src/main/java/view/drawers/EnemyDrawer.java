@@ -1,7 +1,6 @@
 package view.drawers;
 
 import model.gameobjects.enemies.IEnemy;
-import view.Camera;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -16,11 +15,8 @@ public class EnemyDrawer implements IDrawer {
     private int animationCounter;
     private int imageSwitcher;
 
-    private Camera camera;
-
-    public EnemyDrawer(ArrayList<IEnemy> enemies, Camera camera){
+    public EnemyDrawer(ArrayList<IEnemy> enemies){
         this.enemies = enemies;
-        this.camera = camera;
         initEnemyImages();
 
     }
@@ -108,7 +104,7 @@ public class EnemyDrawer implements IDrawer {
                 }
             }
 
-            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getSize(), enemy.getSize(), camera);
+            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getSize(), enemy.getSize());
 
             if(!(prevImg == null)){
                 g2.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);

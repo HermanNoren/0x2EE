@@ -32,11 +32,8 @@ public class Game {
     private ArrayList<IEnemy> enemies;
     private ArrayList<Projectile> projectiles;
     private TerrainBorder terrainBorder;
-
     private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
-
     private boolean stateChangedFlag;
-
     private GameMap gameMap;
     private File highscoreFile;
     private ArrayList<String> highscoreList;

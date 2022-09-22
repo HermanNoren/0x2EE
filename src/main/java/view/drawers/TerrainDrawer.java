@@ -3,7 +3,6 @@ package view.drawers;
 import model.Game;
 import model.mapclasses.Terrain;
 import model.gameobjects.IGameObject;
-import view.Camera;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,15 +11,13 @@ import java.util.HashMap;
 public class TerrainDrawer implements IDrawer {
 
     private ArrayList<IGameObject> tiles;
-    private Camera camera;
     private Game game = Game.getInstance();
 
 
     private ArrayList<Terrain> path;
     private HashMap<String, Terrain> grass;
 
-    public TerrainDrawer(ArrayList<IGameObject> tiles, HashMap<String, Terrain> grass, Camera camera) {
-        this.camera = camera;
+    public TerrainDrawer(ArrayList<IGameObject> tiles, HashMap<String, Terrain> grass) {
         this.tiles = tiles;
         this.grass = grass;
 
@@ -37,14 +34,14 @@ public class TerrainDrawer implements IDrawer {
 
         for (IGameObject tile: tiles) {
             g2.setColor(Color.black);
-            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(tile.getPos(), tile.getWidth(), tile.getHeight(), camera);
+            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(tile.getPos(), tile.getWidth(), tile.getHeight());
             g2.fillRect(drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3));
             g2.fillRect((int) tile.getPos().getX(), (int) tile.getPos().getY(), tile.getWidth(), tile.getHeight());
         }
 
         for (IGameObject terrain: tiles) {
             g2.setColor(Color.black);
-            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(terrain.getPos(), terrain.getWidth(), terrain.getHeight(), camera);
+            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(terrain.getPos(), terrain.getWidth(), terrain.getHeight());
             g2.fillRect(drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3));
         }
     }
