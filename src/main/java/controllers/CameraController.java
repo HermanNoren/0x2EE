@@ -10,8 +10,8 @@ public class CameraController implements KeyListener {
     private boolean upKeyDown;
     private boolean downKeyDown;
 
-    public CameraController(Camera camera) {
-        this.camera = camera;
+    public CameraController() {
+        camera = Camera.getInstance();
     }
 
     @Override
