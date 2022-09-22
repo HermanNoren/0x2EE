@@ -16,6 +16,11 @@ public class HighscoreHandler {
             highscoreList = getHighscoreList();
     }
 
+    /**
+     * Returns list of all highscores and related names
+     * @return list of highscores
+     */
+
     public ArrayList<String> getHighscoreList() {
         Scanner sc = null;
         highscoreList = new ArrayList<>();
@@ -30,12 +35,33 @@ public class HighscoreHandler {
         return highscoreList;
     }
 
-    /**
-     * Saves the new highscore to a textfile.
-     * @param list List of highscores
-     */
 
-    public void saveHighscore(ArrayList<String> list){
+    /**
+     * Saves highscore to file
+     * @param name name of player
+     * @param score score achieved during game
+     */
+    public void saveHighscore(String name, int newScore){
+        int i = 0;
+        if (highscoreList.isEmpty()){
+            highscoreList.add(name + ":" + newScore);
+        }else{
+            for (String playerScore : highscoreList) {
+                String[] savedScore = playerScore.split(":");
+                int score = Integer.valueOf(savedScore[1]);
+                if (newScore >= score) {
+                    highscoreList.add(i, name + ":" + newScore);
+                    break;
+                }
+                i++;
+                if (i == highscoreList.size()){
+                    highscoreList.add(name + ":" + newScore);
+                    break;
+                }
+            }
+
+        }
+
         try {
             BufferedWriter output = new BufferedWriter(new FileWriter(highscoreFile, false));
             for (String s : highscoreList) {
