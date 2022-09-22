@@ -67,7 +67,7 @@ public class PausePanelState implements IPanelState {
     private void createButtons(){
         GameButton pauseButton1 = new GameButton("RESUME", 325, 200, new MenuButtonAction(EPanelState.INGAME, this));
         GameButton pauseButton2 = new GameButton("RESTART", 325, 300, new MenuButtonAction(EPanelState.INGAME, this));
-        GameButton pauseButton3 = new GameButton("MAIN MENU", 325, 400, new MenuButtonAction(EPanelState.INGAME, this));
+        GameButton pauseButton3 = new GameButton("MAIN MENU", 325, 400, new MenuButtonAction(EPanelState.MAINMENU, this));
         buttons.add(pauseButton1);
         buttons.add(pauseButton2);
         buttons.add(pauseButton3);
