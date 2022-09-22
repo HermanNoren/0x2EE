@@ -114,25 +114,7 @@ public class Game implements Runnable {
      * Updates the list containing highscores.
      */
     public void updateHighscoreList(){
-        int i = 0;
-        if (highscoreList.isEmpty()){
-            highscoreList.add(String.join("", highscoreName) + ":" + player.getScore());
-        }else {
-            for (String playerScore : highscoreList) {
-                String[] savedScore = playerScore.split(":");
-                int score = Integer.valueOf(savedScore[1]);
-                if (player.getScore() >= score) {
-                    highscoreList.add(i, String.join("", highscoreName) + ":" + player.getScore());
-                    break;
-                }
-                    i++;
-                if (i == highscoreList.size()){
-                    highscoreList.add(String.join("", highscoreName) + ":" + player.getScore());
-                    break;
-                }
-            }
-        }
-        highscoreHandler.saveHighscore(highscoreList);
+        highscoreHandler.saveHighscore(String.join("", highscoreName), player.getScore());
     }
 
 

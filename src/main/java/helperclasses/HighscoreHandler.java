@@ -39,7 +39,7 @@ public class HighscoreHandler {
     /**
      * Saves highscore to file
      * @param name name of player
-     * @param score score achieved during game
+     * @param newScore score achieved during game
      */
     public void saveHighscore(String name, int newScore){
         int i = 0;
