@@ -5,8 +5,11 @@ import helperclasses.Vector2;
 class NormalEnemy extends Enemy{
 
 
-    protected NormalEnemy(int x, int y, double vel, int health) {
-        super(x, y, vel, health);
+    protected NormalEnemy(int x, int y) {
+        super(x, y);
+        setVelX(0.3);
+        setVelY(0.3);
+        setHealth(100);
     }
     @Override
     public void specialAbility() {

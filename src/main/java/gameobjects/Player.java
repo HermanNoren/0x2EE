@@ -22,11 +22,10 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     /**
      * @param x, starting x-position
      * @param y, starting y-position
-     * @param health, starting health
      * Player constructor, used to create an instance of player.
      */
-    public Player(int x, int y, double vel, int health){
-        super(x, y, vel, health);
+    public Player(int x, int y){
+        super(x, y);
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);
         upPressed = false;
@@ -35,6 +34,9 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         rightPressed = false;
         score = 0;
         money = 0;
+        setHealth(1000);
+        setVelX(0.5);
+        setVelY(0.5);
     }
 
     public void shoot(ArrayList<Projectile> projectiles) {
@@ -117,6 +119,14 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
      */
     public int getScore(){
         return score;
+    }
+
+    /**
+     * Adds score to total
+     * @param score to add
+     */
+    public void addScore(int score){
+        this.score += score;
     }
 
     /**

@@ -30,18 +30,15 @@ public abstract class Entity implements IGameObject {
      *
      * @param x represents the entities' x-coordinate
      * @param y represents the entities' y-coordinate
-     * @param health
      */
 
-    public Entity(int x, int y, double vel, int health){
+    public Entity(int x, int y){
         this.direction = EDirection.NOT_MOVING; // Default value
         this.lastDirection = direction;
         this.pos = new Vector2(x, y);
-        this.vel = new Vector2(vel, vel);
         this.acc = new Vector2(0, 0);
         this.rect = new Rect(x, y, size, size);
-        this.health = health;
-        this.maxHp = health;
+        this.vel = new Vector2(0,0);
     }
 
     public Vector2 getVel() {
