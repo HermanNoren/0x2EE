@@ -2,6 +2,7 @@ package gamestates;
 
 import Collision.CollisionHandler;
 import gameobjects.Entity;
+import gameobjects.theShop.ShopSprite;
 import helperclasses.Vector2;
 import main.Game;
 import gameobjects.IGameObject;

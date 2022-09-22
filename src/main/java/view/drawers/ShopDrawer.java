@@ -1,6 +1,6 @@
 package view.drawers;
 
-import sprites.theShop.ShopSprite;
+import gameobjects.theShop.ShopSprite;
 import view.Camera;
 
 import javax.imageio.ImageIO;

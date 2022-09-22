@@ -1,6 +1,7 @@
 package main;
 
 import buttons.buttonactions.*;
+import gameobjects.theShop.ShopSprite;
 import gamestates.*;
 import mapclasses.TerrainBorder;
 import mapclasses.GameMap;
