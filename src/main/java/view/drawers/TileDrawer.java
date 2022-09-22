@@ -1,9 +1,8 @@
 package view.drawers;
 
-import main.Game;
-import mapclasses.Terrain;
-import gameobjects.IGameObject;
-import view.Camera;
+import model.Game;
+import model.mapclasses.Terrain;
+import model.gameobjects.IGameObject;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,14 +11,10 @@ import java.util.HashMap;
 public class TileDrawer implements IDrawer {
 
     private ArrayList<IGameObject> tiles;
-    private Camera camera;
-
-
     private ArrayList<Terrain> path;
     private HashMap<String, Terrain> grass;
 
-    public TileDrawer(ArrayList<IGameObject> tiles, HashMap<String, Terrain> grass, Camera camera){
-        this.camera = camera;
+    public TileDrawer(ArrayList<IGameObject> tiles, HashMap<String, Terrain> grass){
         this.tiles = tiles;
         this.grass = grass;
     }
@@ -37,7 +32,7 @@ public class TileDrawer implements IDrawer {
 
         for (IGameObject tile: tiles) {
             g2.setColor(Color.black);
-            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(tile.getPos(), tile.getWidth(), tile.getHeight(), camera);
+            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(tile.getPos(), tile.getWidth(), tile.getHeight());
             g2.fillRect(drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3));
             g2.fillRect((int) tile.getPos().getX(), (int) tile.getPos().getY(), tile.getWidth(), tile.getHeight());
         }

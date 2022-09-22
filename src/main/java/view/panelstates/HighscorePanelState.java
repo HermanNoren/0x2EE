@@ -1,23 +1,25 @@
 package view.panelstates;
 
 import config.Config;
+import controllers.ButtonController;
 import controllers.KeyClickedController;
-import main.Game;
-import view.MainPanel;
+import model.Game;
+import model.gamestates.MainMenuState;
+import view.buttons.GameButton;
+import view.buttons.buttonactions.MenuButtonAction;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 
 import java.awt.*;
 import java.awt.event.KeyListener;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class HighscorePanelState implements IPanelState {
 
     private ArrayList<String> scores;
+    private final ButtonController bc;
+    private final ArrayList<GameButton> buttons;
     private ArrayList<IDrawer> drawers;
     private ArrayList<KeyListener> keyListeners;
     private Game game;
@@ -35,16 +37,21 @@ public class HighscorePanelState implements IPanelState {
 
     public HighscorePanelState() {
         this.game = Game.getInstance();
+        buttons = new ArrayList<>();
+        createButtons();
+        bc = new ButtonController(buttons);
         keyListeners = new ArrayList<>();
-        keyListeners.add(new KeyClickedController());
+        keyListeners.add(bc);
         drawers = new ArrayList<>();
-        drawers.add(new ButtonDrawer(game.getBackButtons()));
+        drawers.add(new ButtonDrawer(buttons));
         scores = game.getHighScoreList();
-
     }
 
     @Override
     public void draw(Graphics2D g2) {
+
+        bc.update();
+
         g2.setColor(Color.black);
         g2.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         g2.setFont(new Font("Public Pixel", Font.PLAIN, 12));
@@ -81,4 +88,8 @@ public class HighscorePanelState implements IPanelState {
         return keyListeners;
     }
 
+    private void createButtons(){
+        GameButton backButton = new GameButton("BACK", 325, 575, new MenuButtonAction(new MainMenuState()));
+        buttons.add(backButton);
+    }
 }
