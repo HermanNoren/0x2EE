@@ -1,4 +1,4 @@
-package model.mapclasses.panelstates;
+package view.panelstates;
 
 import view.MainPanel;
 import view.panelstates.*;

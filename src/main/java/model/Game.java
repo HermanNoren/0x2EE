@@ -9,10 +9,14 @@ import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import model.gameobjects.IGameObject;
 import model.gameobjects.Player;
+import view.buttons.GameButton;
 
 import model.gameobjects.Projectile;
 import model.gameobjects.enemies.IEnemy;
 import view.IObserver;
+import view.buttons.buttonactions.MenuButtonAction;
+import view.buttons.buttonactions.QuitButtonAction;
+import view.panelstates.EPanelState;
 
 import java.io.*;
 import java.util.ArrayList;

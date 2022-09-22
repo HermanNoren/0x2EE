@@ -1,7 +1,8 @@
 package view.buttons.buttonactions;
 
-import model.mapclasses.panelstates.EPanelState;
-import model.mapclasses.panelstates.IPanelState;
+import model.Game;
+import view.panelstates.EPanelState;
+import view.panelstates.IPanelState;
 
 public class SaveScoreButtonAction implements IButtonAction {
 
