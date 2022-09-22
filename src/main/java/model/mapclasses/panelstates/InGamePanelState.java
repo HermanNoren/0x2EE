@@ -1,4 +1,4 @@
-package view.panelstates;
+package model.mapclasses.panelstates;
 
 import controllers.CameraController;
 import controllers.KeyClickedController;

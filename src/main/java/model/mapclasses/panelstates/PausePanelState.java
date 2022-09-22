@@ -1,32 +1,28 @@
-package view.panelstates;
+package model.mapclasses.panelstates;
 
 import config.Config;
 import controllers.ButtonController;
-import controllers.KeyClickedController;
 import model.Game;
 import view.MainPanel;
 import view.buttons.GameButton;
 import view.buttons.buttonactions.MenuButtonAction;
-import view.buttons.buttonactions.QuitButtonAction;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 
 import java.awt.*;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-public class MainMenuPanelState implements IPanelState {
+public class PausePanelState implements IPanelState {
 
-    private final Game game;
-
+    private Game game;
     private final ButtonController bc;
     private final ArrayList<GameButton> buttons;
-    private final ArrayList<IDrawer> drawers;
-    private final ArrayList<KeyListener> keyListeners;
+    private ArrayList<KeyListener> keyListeners;
+    private ArrayList<IDrawer> drawers;
     private MainPanel mainPanel;
 
-    public MainMenuPanelState(MainPanel mainPanel) {
+    public PausePanelState(MainPanel mainPanel) {
         this.game = Game.getInstance();
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
@@ -47,15 +43,15 @@ public class MainMenuPanelState implements IPanelState {
         g2.setColor(Color.black);
         g2.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         g2.setFont(new Font("Public Pixel", Font.PLAIN, 12));
-        for (IDrawer drawer : drawers) {
+        for (IDrawer drawer : drawers){
             drawer.draw(g2);
         }
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 12));
 
-        g2.setColor(Color.white);
+        g2.setColor(Color.WHITE);
         g2.setFont(new Font("Public Pixel", Font.PLAIN, 64));
-        String paused = "0x2EE";
+        String paused = "PAUSED";
         g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
+
     }
 
     @Override
@@ -68,15 +64,12 @@ public class MainMenuPanelState implements IPanelState {
         return keyListeners;
     }
 
-
-    private void createButtons() {
-        GameButton mainMenuButton1 = new GameButton("PLAY", 325, 200, new MenuButtonAction(EPanelState.INGAME, this));
-        GameButton mainMenuButton2 = new GameButton("HIGHSCORES", 325, 300, new MenuButtonAction(EPanelState.HIGHSCORES, this));
-        GameButton mainMenuButton3 = new GameButton("HOW TO PLAY", 325, 400, new MenuButtonAction(EPanelState.HOWTOPLAY, this));
-        GameButton mainMenuButton4 = new GameButton("QUIT", 325, 500, new QuitButtonAction());
-        buttons.add(mainMenuButton1);
-        buttons.add(mainMenuButton2);
-        buttons.add(mainMenuButton3);
-        buttons.add(mainMenuButton4);
+    private void createButtons(){
+        GameButton pauseButton1 = new GameButton("RESUME", 325, 200, new MenuButtonAction(EPanelState.INGAME, this));
+        GameButton pauseButton2 = new GameButton("RESTART", 325, 300, new MenuButtonAction(EPanelState.INGAME, this));
+        GameButton pauseButton3 = new GameButton("MAIN MENU", 325, 400, new MenuButtonAction(EPanelState.INGAME, this));
+        buttons.add(pauseButton1);
+        buttons.add(pauseButton2);
+        buttons.add(pauseButton3);
     }
 }

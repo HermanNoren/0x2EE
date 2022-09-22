@@ -1,9 +1,9 @@
 package view;
 
 import model.Game;
-import view.panelstates.EPanelState;
-import view.panelstates.IPanelState;
-import view.panelstates.PanelStateFactory;
+import model.mapclasses.panelstates.EPanelState;
+import model.mapclasses.panelstates.IPanelState;
+import model.mapclasses.panelstates.PanelStateFactory;
 
 import javax.swing.JPanel;
 import java.awt.*;

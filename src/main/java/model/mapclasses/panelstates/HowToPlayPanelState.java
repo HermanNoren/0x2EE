@@ -1,4 +1,4 @@
-package view.panelstates;
+package model.mapclasses.panelstates;
 
 import config.Config;
 import controllers.ButtonController;
@@ -9,22 +9,28 @@ import view.buttons.buttonactions.MenuButtonAction;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class PausePanelState implements IPanelState {
+public class HowToPlayPanelState implements IPanelState{
 
     private Game game;
+    private BufferedImage controls;
     private final ButtonController bc;
     private final ArrayList<GameButton> buttons;
-    private ArrayList<KeyListener> keyListeners;
     private ArrayList<IDrawer> drawers;
+    private ArrayList<KeyListener> keyListeners;
     private MainPanel mainPanel;
 
-    public PausePanelState(MainPanel mainPanel) {
+    public HowToPlayPanelState(MainPanel mainPanel){
         this.game = Game.getInstance();
         this.mainPanel = mainPanel;
+        controls = setImage("imgs/h2p.png");
         buttons = new ArrayList<>();
         createButtons();
         bc = new ButtonController(buttons);
@@ -47,16 +53,27 @@ public class PausePanelState implements IPanelState {
             drawer.draw(g2);
         }
 
-        g2.setColor(Color.WHITE);
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 64));
-        String paused = "PAUSED";
-        g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
-
+        g2.setColor(Color.white);
+        g2.setFont(new Font("Public Pixel", Font.PLAIN, 48));
+        String paused = "HOW TO PLAY";
+        g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 100);
+        g2.drawImage(controls, 0,80, Config.SCREEN_WIDTH*100/150, Config.SCREEN_HEIGHT, null);
     }
 
     @Override
     public void changePanelState(EPanelState panelState) {
         mainPanel.changePanelState(panelState);
+    }
+
+    private BufferedImage setImage(String path) {
+        BufferedImage image;
+        try {
+            image = ImageIO.read(new File(path));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return image;
+
     }
 
     @Override
@@ -65,11 +82,8 @@ public class PausePanelState implements IPanelState {
     }
 
     private void createButtons(){
-        GameButton pauseButton1 = new GameButton("RESUME", 325, 200, new MenuButtonAction(EPanelState.INGAME, this));
-        GameButton pauseButton2 = new GameButton("RESTART", 325, 300, new MenuButtonAction(EPanelState.INGAME, this));
-        GameButton pauseButton3 = new GameButton("MAIN MENU", 325, 400, new MenuButtonAction(EPanelState.INGAME, this));
-        buttons.add(pauseButton1);
-        buttons.add(pauseButton2);
-        buttons.add(pauseButton3);
+        GameButton backButton = new GameButton("BACK", 325, 575, new MenuButtonAction(EPanelState.MAINMENU, this));
+        backButton.setIsSelected(true);
+        buttons.add(backButton);
     }
 }

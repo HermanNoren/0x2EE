@@ -1,4 +1,4 @@
-package view.panelstates;
+package model.mapclasses.panelstates;
 
 /**
  * Enum for all states in game. Add state if another state is implemeted.

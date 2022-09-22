@@ -1,6 +1,5 @@
-package view.panelstates;
+package model.mapclasses.panelstates;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;

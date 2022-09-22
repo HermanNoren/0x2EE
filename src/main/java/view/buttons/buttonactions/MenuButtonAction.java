@@ -1,8 +1,7 @@
 package view.buttons.buttonactions;
 
-import model.Game;
-import view.panelstates.EPanelState;
-import view.panelstates.IPanelState;
+import model.mapclasses.panelstates.EPanelState;
+import model.mapclasses.panelstates.IPanelState;
 
 public class MenuButtonAction implements  IButtonAction{
 
