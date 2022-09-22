@@ -35,6 +35,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         score = 0;
         money = 0;
         setHealth(1000);
+        setMaxHp(1000);
         setVelX(0.5);
         setVelY(0.5);
     }

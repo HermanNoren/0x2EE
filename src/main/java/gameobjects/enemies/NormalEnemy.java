@@ -10,6 +10,7 @@ class NormalEnemy extends Enemy{
         setVelX(0.3);
         setVelY(0.3);
         setHealth(100);
+        setMaxHp(100);
     }
     @Override
     public void specialAbility() {

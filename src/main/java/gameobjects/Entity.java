@@ -134,6 +134,9 @@ public abstract class Entity implements IGameObject {
         if (value < 0) { health = 0; }
         health = value;
     }
+    public void setMaxHp(int maxHp){
+        this.maxHp = maxHp;
+    }
 
     public int getHealth(){
         return health;
