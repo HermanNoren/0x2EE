@@ -318,9 +318,6 @@ public class Game {
 
          */
 
-        if (escapePressed) {
-            escapePressed = false;
-        }
 
         if (spacePressed) {
             spacePressed = false;

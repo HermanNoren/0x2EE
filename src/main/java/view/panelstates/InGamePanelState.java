@@ -48,9 +48,11 @@ public class InGamePanelState implements IPanelState {
         for (IDrawer drawer : drawers) {
             drawer.draw(g);
         }
-
-
         hud.update(g);
+        if (game.getEscapePressed()){
+            changePanelState(EPanelState.PAUSE);
+            game.resetEscapePressed();
+        }
     }
 
     @Override
