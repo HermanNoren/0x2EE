@@ -25,6 +25,7 @@ public class InGameState implements IGameState {
     private ArrayList<Projectile> projectiles;
     private final Game game;
     private Player player;
+    private ShopSprite shop;
     private final EPanelState stateTag = EPanelState.INGAME;
 
     public InGameState() {
@@ -32,11 +33,13 @@ public class InGameState implements IGameState {
         sprites = new ArrayList<>();
         enemies = game.getEnemies();
         projectiles = game.getProjectiles();
+        this.shop = game.getShop();
         this.player = game.getPlayer();
         EnemyFactory enemyFactory= new NormalEnemyFactory();
         enemies.add(enemyFactory.createEnemy());
         sprites.add(game.getPlayer());
         sprites.addAll(game.getTerrainBorder());
+        sprites.add(game.getShop());
     }
 
     /**

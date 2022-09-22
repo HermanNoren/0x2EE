@@ -30,6 +30,8 @@ public class Game implements Runnable {
     private ArrayList<IObserver> observers;
     private IGameState state;
     private Player player;
+
+    private ShopSprite shop;
     private ArrayList<String> highscoreName;
     private ArrayList<IEnemy> enemies;
     private ArrayList<Projectile> projectiles;
@@ -55,6 +57,8 @@ public class Game implements Runnable {
     }
 
     public void createGame(){
+        player = new Player(32, 32, 0.5, 100);
+        shop = new ShopSprite();
         player = new Player(32, 32, 0.5, 1000);
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
@@ -189,6 +193,9 @@ public class Game implements Runnable {
      */
     public Player getPlayer() {
         return player;
+    }
+    public ShopSprite getShop(){
+        return shop;
     }
     public ArrayList<IEnemy> getEnemies(){
         return enemies;
