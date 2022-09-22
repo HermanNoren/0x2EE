@@ -2,6 +2,7 @@ package gamestates;
 
 import Collision.CollisionHandler;
 import gameobjects.Entity;
+import gameobjects.enemies.Enemy;
 import helperclasses.Vector2;
 import main.Game;
 import gameobjects.IGameObject;
@@ -14,6 +15,7 @@ import gameobjects.enemies.NormalEnemyFactory;
 import view.panelstates.EPanelState;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -86,7 +88,19 @@ public class InGameState implements IGameState {
             //Check if enemy is close enough to damage player, could be done somewhere else also.
             if (CollisionHandler.testCollision(player, (Entity) enemy)) {
                 player.damageTaken(1);
+
             }
+
+            // Check if projectile hits enemy
+            Iterator<Projectile> p = projectiles.iterator();
+            while(p.hasNext()) {
+                if (CollisionHandler.testCollision((Entity) enemy, p.next())) {
+                    ((Enemy) enemy).damageTaken(100);
+                    p.remove();
+
+                }
+            }
+
 
         }
         for (Projectile p : projectiles) {

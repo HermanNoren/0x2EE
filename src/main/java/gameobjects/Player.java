@@ -70,7 +70,6 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     @Override
     public void update() {
         moveX();
-
         moveY();
     }
 

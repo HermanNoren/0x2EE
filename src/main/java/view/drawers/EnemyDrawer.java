@@ -1,5 +1,6 @@
 package view.drawers;
 
+import gameobjects.enemies.Enemy;
 import gameobjects.enemies.IEnemy;
 import view.Camera;
 
@@ -109,14 +110,21 @@ public class EnemyDrawer implements IDrawer {
             }
 
             ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getSize(), enemy.getSize(), camera);
-
+            if (enemy.getHealth() != ((Enemy)enemy).getMaxHp()){
+            g2.setColor(Color.red);
+            g2.fillRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / ((Enemy)enemy).getMaxHp()))), 4);
+            g2.setColor(Color.black);
+            g2.drawRoundRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / ((Enemy)enemy).getMaxHp()))), 4, 0,0);
+            }
             if(!(prevImg == null)){
                 g2.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
             }
             else {
+
                 g2.drawImage(up1, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
                 g2.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
             }
+
         }
     }
 }

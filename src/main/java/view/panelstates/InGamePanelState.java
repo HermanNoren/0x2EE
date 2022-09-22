@@ -1,9 +1,11 @@
 package view.panelstates;
 
+import com.sun.tools.javac.Main;
 import config.Config;
 import controllers.CameraController;
 import controllers.KeyClickedController;
 import controllers.PlayerController;
+import gamestates.MainMenuState;
 import main.Game;
 import view.Camera;
 import view.HUD;
@@ -49,9 +51,8 @@ public class InGamePanelState implements IPanelState {
         for (IDrawer drawer : drawers) {
             drawer.draw(g);
         }
-
-
         hud.update(g);
+
     }
 
     @Override

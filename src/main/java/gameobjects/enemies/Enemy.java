@@ -11,8 +11,10 @@ import java.util.ArrayList;
 public abstract class Enemy extends Entity implements IEnemy {
     private Game game = Game.getInstance();
     private int size = Config.SPRITE_SIZE;
+    private int health;
     protected Enemy(int x, int y, double vel,  int health){
         super(x, y, vel, health);
+        this.health = health;
 
 
     }
@@ -66,6 +68,15 @@ public abstract class Enemy extends Entity implements IEnemy {
     }
 
     private void calculateNextStep() {
+
+    }
+
+    public int getHealth(){
+        return health;
+    }
+
+    public void damageTaken(int damage) {
+        health-= damage;
 
     }
 

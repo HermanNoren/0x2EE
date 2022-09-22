@@ -10,7 +10,6 @@ public class ImageHandler {
     public ImageHandler(){
 
     }
-
     public BufferedImage getImage(String path) {
         BufferedImage image;
         try {
