@@ -17,11 +17,13 @@ public class ShopDrawer implements IDrawer{
 
     private Shop shopObject;
 
-    public ShopDrawer(Shop shopObject, Camera camera){
+    public ShopDrawer(Shop shopObject){
         this.shopObject = shopObject;
         this.camera = camera;
         initShopImages();
     }
+
+
 
     private void initShopImages(){
         try{
