@@ -12,7 +12,7 @@ public class Rect {
     }
 
     public Rect(Rect rect) {
-//        this.width = rect.getWidth();
+        this.width = rect.getWidth();
         this.height = rect.getHeight();
         pos = new Vector2(rect.getPos());
     }

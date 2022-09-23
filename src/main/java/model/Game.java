@@ -31,12 +31,8 @@ public class Game{
     private ArrayList<String> highscoreName;
     private ArrayList<IEnemy> enemies;
     private ArrayList<IGameObject> terrains;
-    private ArrayList<GameButton> mainMenuButtons, backButtons, pauseButtons;
-
     private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
-
     private boolean stateChangedFlag;
-
     private GameMap gameMap;
     private File highscoreFile;
     private ArrayList<String> highscoreList;
