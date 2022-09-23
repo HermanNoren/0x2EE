@@ -290,6 +290,9 @@ public class Game{
         observers.add(observer);
     }
 
+    public void makePlayerShoot(){
+        player.shoot(projectiles);
+    }
     /**
      * Updates the current IGameState
      */
@@ -302,13 +305,6 @@ public class Game{
         }
 
          */
-
-
-        if (spacePressed) {
-            spacePressed = false;
-            player.shoot(projectiles);
-        }
-
 
         for (IGameObject sprite : sprites) {
             sprite.update();
