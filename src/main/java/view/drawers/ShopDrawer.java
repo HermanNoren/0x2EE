@@ -1,6 +1,7 @@
 package view.drawers;
 
-import gameobjects.theShop.ShopSprite;
+
+import model.gameobjects.theShop.Shop;
 import view.Camera;
 
 import javax.imageio.ImageIO;
@@ -14,9 +15,9 @@ public class ShopDrawer implements IDrawer{
     Camera camera;
     private BufferedImage frame1;
 
-    private ShopSprite shopObject;
+    private Shop shopObject;
 
-    public ShopDrawer(ShopSprite shopObject, Camera camera){
+    public ShopDrawer(Shop shopObject, Camera camera){
         this.shopObject = shopObject;
         this.camera = camera;
         initShopImages();
@@ -43,7 +44,7 @@ public class ShopDrawer implements IDrawer{
 
     @Override
     public void draw(Graphics2D g2) {
-        ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(shopObject.getPos(), shopObject.getWidth(), shopObject.getHeight(), camera);
+        ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(shopObject.getPos(), shopObject.getWidth(), shopObject.getHeight());
         g2.drawImage(frame1, drawInformation.get(0),drawInformation.get(1),drawInformation.get(2),drawInformation.get(3), null);
     }
 
