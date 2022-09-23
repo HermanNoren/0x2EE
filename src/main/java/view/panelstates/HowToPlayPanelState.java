@@ -27,8 +27,8 @@ public class HowToPlayPanelState implements IPanelState{
     private ArrayList<KeyListener> keyListeners;
     private MainPanel mainPanel;
 
-    public HowToPlayPanelState(MainPanel mainPanel){
-        this.game = Game.getInstance();
+    public HowToPlayPanelState(MainPanel mainPanel, Game game){
+        this.game = game;
         this.mainPanel = mainPanel;
         controls = setImage("imgs/menus/h2p.png");
         buttons = new ArrayList<>();

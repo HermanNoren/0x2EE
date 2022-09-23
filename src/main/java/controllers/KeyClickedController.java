@@ -15,8 +15,8 @@ public class KeyClickedController implements KeyListener {
     private boolean escapeKeyDown;
     private boolean spaceKeyDown;
 
-    public KeyClickedController(IPanelState panel) {
-        this.game = Game.getInstance();
+    public KeyClickedController(Game game, IPanelState panel) {
+        this.game = game;
         this.panel = panel;
     }
 

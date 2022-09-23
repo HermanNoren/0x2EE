@@ -2,6 +2,7 @@ package model.mapclasses;
 
 import filehandler.WriteMapToFile;
 import model.gameobjects.*;
+import model.helperclasses.Vector2;
 
 import java.util.*;
 
@@ -11,6 +12,7 @@ import java.util.*;
  */
 public class GameMap {
     private final ArrayList<Terrain> terrains = new ArrayList<>();
+    private final ArrayList<Entity> entities;
     private final Terrain[][] gameMapCoordinates;
     private final int width;
     private final int height;
@@ -19,6 +21,7 @@ public class GameMap {
         this.width = width;
         this.height = height;
         gameMapCoordinates = new Terrain[width][height];
+        entities = new ArrayList<>();
         addCoordinatesAndTiles(width, height);
         randomizeMap();
         createBorder();
@@ -26,6 +29,10 @@ public class GameMap {
         terrains.forEach(this::addNeighbors);
         WriteMapToFile wr = new WriteMapToFile("maps/map1.txt");
         wr.writeToFile(this);
+    }
+
+    public void addEntity(int x, int y, Entity entity){
+        gameMapCoordinates[x][y].addEntity(entity);
     }
 
     private void addCoordinatesAndTiles(int width, int height) {
@@ -140,7 +147,19 @@ public class GameMap {
             }
         }
     }
+    private void generateWall(){
+        Terrain terrain = chooseRandomTerrain();
+        Vector2 terrainPos = terrain.getPos();
+        int x = (int) terrainPos.x/48;
+        int y = (int) terrainPos.y/48;
 
+    }
+    private Terrain chooseRandomTerrain(){
+        Random random = new Random();
+        int randowCol = random.nextInt(width-1);
+        int randomRow = random.nextInt(height-1);
+        return gameMapCoordinates[randowCol][randomRow];
+    }
 }
 
 

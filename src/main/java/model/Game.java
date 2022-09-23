@@ -7,6 +7,8 @@ import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
 import model.mapclasses.GameMap;
+import model.mapclasses.Terrain;
+import view.buttons.GameButton;
 import model.gameobjects.IGameObject;
 
 import view.IObserver;
@@ -25,6 +27,7 @@ public class Game{
     private final int UPS = 200; // UPDATES PER SECOND
     private ArrayList<IObserver> observers;
     private Player player;
+    private ArrayList<Terrain> path;
 
     private ArrayList<String> highscoreName;
     private ArrayList<IEnemy> enemies;
@@ -37,25 +40,17 @@ public class Game{
     private ArrayList<Projectile> projectiles;
     private ArrayList<IGameObject> sprites;
 
-    private Game() {}
-
-    private static Game game;
-    public static Game getInstance(){
-        if(game == null){
-            game = new Game();
-        }return game;
-    }
-
-    public void createGame(){
-        player = new Player(32, 32);
+    public Game(){
+        player = new Player(32, 32, this);
         this.gameMap = new GameMap(100, 100);
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         terrains = gameMap.getTerrains();
         highscoreName = new ArrayList<>();
+        this.path = new ArrayList<>();
 
         EnemyFactory enemyFactory= new NormalEnemyFactory();
-        enemies.add(enemyFactory.createEnemy());
+        enemies.add(enemyFactory.createEnemy(this));
         sprites = new ArrayList<>();
         sprites.add(player);
         sprites.addAll(terrains);
@@ -322,11 +317,11 @@ public class Game{
             }
 
         }
+
         for (Projectile p : projectiles) {
             p.update();
         }
 
-        CollisionHandler.seeIfPlayerIsOutsideBorder(player);
 
 
     }
@@ -346,5 +341,9 @@ public class Game{
 
     public ArrayList<Projectile> getProjectiles() {
         return projectiles;
+    }
+
+    public ArrayList<Terrain> getPath() {
+        return path;
     }
 }

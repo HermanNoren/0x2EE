@@ -22,8 +22,8 @@ public class PausePanelState implements IPanelState {
     private ArrayList<IDrawer> drawers;
     private MainPanel mainPanel;
 
-    public PausePanelState(MainPanel mainPanel) {
-        this.game = Game.getInstance();
+    public PausePanelState(MainPanel mainPanel, Game game ) {
+        this.game = game;
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons();

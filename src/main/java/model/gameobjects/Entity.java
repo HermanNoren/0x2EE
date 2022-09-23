@@ -2,6 +2,7 @@ package model.gameobjects;
 
 import config.Config;
 import controllers.EDirection;
+import model.Game;
 import model.helperclasses.Rect;
 import model.helperclasses.Vector2;
 
@@ -24,7 +25,7 @@ public abstract class Entity implements IGameObject {
     private EDirection lastDirection;
     private int size = Config.SPRITE_SIZE * 3;
     private Rect rect;
-
+    private Game game;
 
     /**
      *
@@ -32,7 +33,8 @@ public abstract class Entity implements IGameObject {
      * @param y represents the entities' y-coordinate
      */
 
-    public Entity(int x, int y){
+    public Entity(int x, int y, Game game){
+        this.game = game;
         this.direction = EDirection.NOT_MOVING; // Default value
         this.lastDirection = direction;
         this.pos = new Vector2(x, y);
