@@ -2,13 +2,11 @@ package model;
 
 import model.gameobjects.*;
 import model.gameobjects.enemies.*;
-import model.gamestates.*;
 
 import model.collision.CollisionHandler;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
-import model.mapclasses.TerrainBorder;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import model.gameobjects.IGameObject;
@@ -66,7 +64,7 @@ public class Game{
         enemies.add(enemyFactory.createEnemy());
         sprites = new ArrayList<>();
         sprites.add(player);
-        sprites.addAll(terrainBorder.getTerrainBorder());
+        sprites.addAll(terrains);
 
         wPressed = false;
         aPressed = false;
