@@ -1,7 +1,7 @@
 package view.drawers;
 
+import model.gameobjects.enemies.IEnemy;
 import gameobjects.enemies.Enemy;
-import gameobjects.enemies.IEnemy;
 import view.Camera;
 
 import javax.imageio.ImageIO;
@@ -69,6 +69,7 @@ public class EnemyDrawer implements IDrawer {
      */
     @Override
     public void draw(Graphics2D g2) {
+
         movementAnimation();
         for(IEnemy enemy: enemies){
             switch (enemy.getDirection()){
@@ -109,6 +110,8 @@ public class EnemyDrawer implements IDrawer {
                 }
             }
 
+            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getSize(), enemy.getSize());
+
             ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getSize(), enemy.getSize(), camera);
             if (enemy.getHealth() != ((Enemy)enemy).getMaxHp()){
             g2.setColor(Color.red);
@@ -120,11 +123,9 @@ public class EnemyDrawer implements IDrawer {
                 g2.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
             }
             else {
-
                 g2.drawImage(up1, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
                 g2.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
             }
-
         }
     }
 }

@@ -1,8 +1,8 @@
 package view;
 
 import config.Config;
-import gameobjects.IFocusableObject;
-import helperclasses.Vector2;
+import model.gameobjects.IFocusableObject;
+import model.helperclasses.Vector2;
 
 import java.util.ArrayList;
 
@@ -20,16 +20,24 @@ public class Camera {
     private int dragEffectConstant;
     private double currentZoomMultiplier;
 
+    private static Camera camera;
+
     /**
      * Instantiates a camera object
      */
-    public Camera() {
+    private Camera() {
         this.focusedObject = new ArrayList<>();
         relativePos = new Vector2(0, 0);  // Relative pos will be used when calculating zoom
         absolutePos = new Vector2(relativePos);     // Absolute pos will not take zoom into consideration
         dragEffectConstant = 60;
         currentZoomMultiplier = 1;
         calculateCenterPos();
+    }
+
+    public static Camera getInstance() {
+        if (camera == null){
+            camera = new Camera();
+        } return camera;
     }
 
     /**

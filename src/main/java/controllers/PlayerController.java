@@ -1,7 +1,7 @@
 package controllers;
 
-import main.Game;
-import gameobjects.Player;
+import model.Game;
+import model.gameobjects.Player;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -11,8 +11,8 @@ public class PlayerController implements KeyListener {
 
     private Game game;
 
-    public PlayerController() {
-        game = Game.getInstance();
+    public PlayerController(Game game) {
+        game = game;
         this.player = game.getPlayer();
     }
 

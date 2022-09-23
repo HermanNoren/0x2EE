@@ -1,5 +1,5 @@
 package controllers;
-import main.Game;
+import model.Game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -12,8 +12,8 @@ public class KeyClickedController implements KeyListener {
     private boolean escapeKeyDown;
     private boolean spaceKeyDown;
 
-    public KeyClickedController() {
-        this.game = Game.getInstance();
+    public KeyClickedController(Game game) {
+        this.game = game;
     }
 
     @Override

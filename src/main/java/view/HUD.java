@@ -1,7 +1,7 @@
 package view;
 
 import config.Config;
-import gameobjects.Player;
+import model.gameobjects.Player;
 
 import java.awt.*;
 

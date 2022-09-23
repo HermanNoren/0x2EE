@@ -1,12 +1,12 @@
 package view.drawers;
 
-import buttons.GameButton;
+import view.buttons.GameButton;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public class ButtonDrawer implements IDrawer {
-    private ArrayList<GameButton> buttons;
+    private final ArrayList<GameButton> buttons;
 
     public ButtonDrawer(ArrayList<GameButton> buttons) {
         this.buttons = buttons;
