@@ -21,17 +21,17 @@ public abstract class Enemy extends Entity implements IEnemy {
      */
     @Override
     public void update() {
-        int size = Config.SPRITE_SIZE;
-
-        String keyPlayer = "" + (int) (size*(Math.round(game.getPlayer().getPos().getX()/size))) +
-                (int) (size*(Math.round(game.getPlayer().getPos().getY()/size)));
-        String keyEnemy = "" + (int) (size*(Math.round(this.getPos().getX()/size))) +
-                (int) (size*(Math.round(this.getPos().getY()/size)));
-        Terrain goal = null;
-        if (game.getGrass().get(keyEnemy) != null)
-            goal = AStar.aStar(game.getGrass().get(keyEnemy), game.getGrass().get(keyPlayer));
-
-        game.setPath(AStar.returnPath(goal));
+//        int size = Config.SPRITE_SIZE;
+//
+//        String keyPlayer = "" + (int) (size*(Math.round(game.getPlayer().getPos().getX()/size))) +
+//                (int) (size*(Math.round(game.getPlayer().getPos().getY()/size)));
+//        String keyEnemy = "" + (int) (size*(Math.round(this.getPos().getX()/size))) +
+//                (int) (size*(Math.round(this.getPos().getY()/size)));
+//        Terrain goal = null;
+//        if (game.getGrass().get(keyEnemy) != null)
+//            goal = AStar.aStar(game.getGrass().get(keyEnemy), game.getGrass().get(keyPlayer));
+//
+//        game.setPath(AStar.returnPath(goal));
         super.update();
 
     }
@@ -42,19 +42,19 @@ public abstract class Enemy extends Entity implements IEnemy {
      *
      */
     private void moveToGoal(Terrain goal) {
-        ArrayList<Terrain> path = game.getPath();
-        assert path != null;
-        Terrain prevTerrain = null;
-        Terrain nextTerrain = null;
-
-        for(int i = 0; i < path.size(); i ++){
-            if(i > 0){
-                prevTerrain = path.get(i-1);
-            }
-
-            nextTerrain = path.get(i);
-            moveToTerrain(nextTerrain);
-        }
+//        ArrayList<Terrain> path = game.getPath();
+//        assert path != null;
+//        Terrain prevTerrain = null;
+//        Terrain nextTerrain = null;
+//
+//        for(int i = 0; i < path.size(); i ++){
+//            if(i > 0){
+//                prevTerrain = path.get(i-1);
+//            }
+//
+//            nextTerrain = path.get(i);
+//            moveToTerrain(nextTerrain);
+//        }
 
 
     }

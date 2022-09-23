@@ -5,9 +5,9 @@ import controllers.EDirection;
 import model.gameobjects.Entity;
 import model.gameobjects.IGameObject;
 import model.helperclasses.Vector2;
-import model.mapclasses.Tile;
 import model.gameobjects.Player;
 import model.gameobjects.enemies.Enemy;
+import model.mapclasses.Terrain;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,6 @@ import java.util.Objects;
 public class CollisionHandler {
     private Player player;
     private Enemy enemy;
-    private Tile tile;
 
     /**
      * Method for calculating if the player is overlapping/close to a wall.
@@ -28,7 +27,7 @@ public class CollisionHandler {
      * @param tile
      */
 
-    public void playerCollidesWithTile(Player player, Tile tile){
+    public void playerCollidesWithTile(Player player, Terrain tile){
         if(
                 player.getPos().x >(tile.getPos().x + tile.getHeight() + tile.getWidth())
                 || (player.getPos().x + player.getWidth()+ player.getHealth() < tile.getPos().x)

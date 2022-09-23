@@ -1,5 +1,6 @@
 package model.gameobjects.enemies;
 
+
 public class EnemyMovement {
     //TODO implement movement for enemy
     //TODO implement data structure (Graph) to store tiles(Vertices) and paths to other tiles (Edges).

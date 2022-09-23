@@ -1,4 +1,6 @@
+
 package model.gameobjects;
+
 
 import model.armor.Armor;
 import controllers.EDirection;
@@ -10,7 +12,9 @@ import java.util.ArrayList;
 /**
  * The player, more implementation to come.
  */
+
 public class Player extends Entity implements IGameObject, IFocusableObject {
+
     private int score;
     private int money;
     protected Weapon weapon;

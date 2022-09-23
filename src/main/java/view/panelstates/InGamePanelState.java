@@ -35,10 +35,10 @@ public class InGamePanelState implements IPanelState {
         keyListeners.add(new CameraController());
 
         drawers = new ArrayList<>();
+        drawers.add(new MapDrawer(game.getGameMap()));
         drawers.add(new ProjectileDrawer(game.getProjectiles()));
         drawers.add(new PlayerDrawer(game.getPlayer()));
         drawers.add(new EnemyDrawer(game.getEnemies()));
-        drawers.add(new TerrainDrawer(game.getTerrainBorder(), game.getGrass()));
     }
 
 

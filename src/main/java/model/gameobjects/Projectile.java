@@ -1,11 +1,14 @@
 package model.gameobjects;
 
+
 import config.Config;
 import controllers.EDirection;
 import model.helperclasses.Rect;
 import model.helperclasses.Vector2;
 
+
 public class Projectile implements IGameObject {
+
 
     private final int size = Config.SPRITE_SIZE / 2;
     private final Vector2 pos;

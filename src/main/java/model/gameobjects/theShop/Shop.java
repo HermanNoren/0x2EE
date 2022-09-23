@@ -9,7 +9,17 @@ import model.gameobjects.IGameObject;
  * upgraded through the game. It will also contain logic regarding
  * when the player is in range to enter the shop (more logic to come).
  */
-public class ShopSprite implements IGameObject {
+
+
+import model.helperclasses.Rect;
+import model.helperclasses.Vector2;
+import model.gameobjects.IGameObject;
+
+
+
+
+public class Shop implements IGameObject {
+
     public final static int x_position = 0;
     public final static int y_position = 0;
     private Rect shopAreaSize;
@@ -28,7 +38,7 @@ public class ShopSprite implements IGameObject {
      * @param x_position
      * @param y_position
      */
-    public ShopSprite(int x_size, int y_size, int x_position, int y_position) {
+    public Shop(int x_size, int y_size, int x_position, int y_position) {
         shopAreaSize = new Rect(100, 100,x_size , y_size);
         Position = new Vector2(x_position, y_position);
     }

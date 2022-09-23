@@ -31,7 +31,7 @@ public class HowToPlayPanelState implements IPanelState{
     public HowToPlayPanelState(MainPanel mainPanel){
         this.game = Game.getInstance();
         this.mainPanel = mainPanel;
-        controls = setImage("imgs/h2p.png");
+        controls = setImage("imgs/menus/h2p.png");
         buttons = new ArrayList<>();
         createButtons();
         bc = new ButtonController(buttons);

@@ -1,4 +1,6 @@
+
 package model.gameobjects.enemies;
+
 
 public abstract class EnemyFactory {
 

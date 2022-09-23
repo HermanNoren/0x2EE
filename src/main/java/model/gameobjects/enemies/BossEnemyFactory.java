@@ -1,5 +1,6 @@
 package model.gameobjects.enemies;
 
+
 public class BossEnemyFactory extends EnemyFactory{
 
     @Override
