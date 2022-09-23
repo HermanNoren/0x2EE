@@ -1,32 +1,32 @@
 package view.panelstates;
 
+import model.Game;
 import view.MainPanel;
-import view.panelstates.*;
 
 public class PanelStateFactory {
 
-    public static IPanelState createPanelState(EPanelState state)  {
+    public static IPanelState createPanelState(EPanelState state, MainPanel mainPanel, Game game)  {
         switch (state) {
             case INGAME -> {
-                return new InGamePanelState();
+                return new InGamePanelState(mainPanel, game);
             }
             case MAINMENU -> {
-                return new MainMenuPanelState();
+                return new MainMenuPanelState(mainPanel, game);
             }
             case HIGHSCORES -> {
-                return new HighscorePanelState();
+                return new HighscorePanelState(mainPanel, game);
             }
 
             case PAUSE -> {
-                return new PausePanelState();
+                return new PausePanelState(mainPanel, game);
             }
 
             case HOWTOPLAY -> {
-                return new HowToPlayPanelState();
+                return new HowToPlayPanelState(mainPanel, game);
             }
 
             case NEWHIGHSCORE -> {
-                return new NewHighscorePanelState();
+                return new NewHighscorePanelState(mainPanel, game);
             }
 
             default -> {

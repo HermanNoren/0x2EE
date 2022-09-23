@@ -1,7 +1,6 @@
 package view.drawers;
 
-import gameobjects.Entity;
-import view.Camera;
+import model.gameobjects.Entity;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -19,31 +18,11 @@ public class PlayerDrawer implements IDrawer {
     private int imageSwitcher;
     private Entity player;
 
-    private Camera camera;
-
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
 
-    public PlayerDrawer(Entity player, Camera camera) {
+    public PlayerDrawer(Entity player) {
         this.player = player;
-        this.camera = camera;
         initPlayerImages();
-    }
-
-    /**
-     * Draws the player onto the screen in the correct position
-     * @param g
-     */
-    public void draw(Graphics2D g) {
-        movementAnimation();
-        chooseActiveImage();
-        ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(player.getPos(), player.getSize(), player.getSize(), camera);
-        if(prevImg == null){
-            g.drawImage(up1, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null); // Sets default image
-        }
-        else {
-            g.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
-        }
-        g.setColor(Color.red);
     }
 
     /**
@@ -96,14 +75,14 @@ public class PlayerDrawer implements IDrawer {
      */
     private void initPlayerImages(){
         try {
-            up1 = setImage("imgs/player_up_1.png");
-            up2 = setImage("imgs/player_up_2.png");
-            left1 = setImage("imgs/player_left_1.png");
-            left2 = setImage("imgs/player_left_2.png");
-            down1 = setImage("imgs/player_down_1.png");
-            down2 = setImage("imgs/player_down_2.png");
-            right1 = setImage("imgs/player_right_1.png");
-            right2 = setImage("imgs/player_right_2.png");
+            up1 = setImage("imgs/player/player_up_1.png");
+            up2 = setImage("imgs/player/player_up_2.png");
+            left1 = setImage("imgs/player/player_left_1.png");
+            left2 = setImage("imgs/player/player_left_2.png");
+            down1 = setImage("imgs/player/player_down_1.png");
+            down2 = setImage("imgs/player/player_down_2.png");
+            right1 = setImage("imgs/player/player_right_1.png");
+            right2 = setImage("imgs/player/player_right_2.png");
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -136,5 +115,22 @@ public class PlayerDrawer implements IDrawer {
         }else if(animationCounter == 50){
             imageSwitcher = 2;
         }
+    }
+
+    /**
+     * Draws the player onto the screen in the correct position
+     * @param g
+     */
+    public void draw(Graphics2D g) {
+        movementAnimation();
+        chooseActiveImage();
+        ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(player.getPos(), player.getSize(), player.getSize());
+        if(prevImg == null){
+            g.drawImage(up1, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null); // Sets default image
+        }
+        else {
+            g.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
+        }
+        g.setColor(Color.red);
     }
 }

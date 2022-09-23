@@ -1,10 +1,9 @@
 package view.panelstates;
 
-import config.Config;
 import controllers.CameraController;
 import controllers.KeyClickedController;
 import controllers.PlayerController;
-import main.Game;
+import model.Game;
 import view.Camera;
 import view.HUD;
 import view.MainPanel;
@@ -19,28 +18,27 @@ public class InGamePanelState implements IPanelState {
     private Game game;
     private HUD hud;
     private ArrayList<IDrawer> drawers;
+    private final Camera camera;
+    private final ArrayList<KeyListener> keyListeners;
     private MainPanel mainPanel;
 
-    private final Camera camera;
-
-    private final ArrayList<KeyListener> keyListeners;
-
-    public InGamePanelState() {
-        this.game = Game.getInstance();
+    public InGamePanelState(MainPanel mainPanel, Game game) {
+        this.game = game;
+        this.mainPanel = mainPanel;
         keyListeners = new ArrayList<>();
-        keyListeners.add(new PlayerController());
-        keyListeners.add(new KeyClickedController());
+        keyListeners.add(new PlayerController(game));
+        keyListeners.add(new KeyClickedController(game));
         hud = new HUD(game.getPlayer());
-        camera = new Camera();
+
+        camera = Camera.getInstance();
         camera.setFocusedObject(game.getPlayer());
-        keyListeners.add(new CameraController(camera));
+        keyListeners.add(new CameraController());
 
         drawers = new ArrayList<>();
-        drawers.add(new ProjectileDrawer(game.getProjectiles(), camera));
-        drawers.add(new PlayerDrawer(game.getPlayer(), camera));
-        drawers.add(new EnemyDrawer(game.getEnemies(), camera));
-        drawers.add(new ShopDrawer(game.getShop(),camera));
-        drawers.add(new TerrainDrawer(game.getTerrainBorder(), game.getGrass(), camera));
+        drawers.add(new MapDrawer(game.getGameMap()));
+        drawers.add(new ProjectileDrawer(game.getProjectiles()));
+        drawers.add(new PlayerDrawer(game.getPlayer()));
+        drawers.add(new EnemyDrawer(game.getEnemies()));
     }
 
 
@@ -50,9 +48,16 @@ public class InGamePanelState implements IPanelState {
         for (IDrawer drawer : drawers) {
             drawer.draw(g);
         }
-
-
         hud.update(g);
+        if (game.getEscapePressed()){
+            changePanelState(EPanelState.PAUSE);
+            game.resetEscapePressed();
+        }
+    }
+
+    @Override
+    public void changePanelState(EPanelState panelState) {
+        mainPanel.changePanelState(panelState);
     }
 
     @Override
