@@ -110,9 +110,6 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         return weapon.damage;
     }
 
-    public void damageTaken(int damage) {
-        setHealth(getHealth() - damage);
-    }
 
     public boolean isDamageTaken(){
 

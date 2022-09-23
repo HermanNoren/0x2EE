@@ -2,6 +2,8 @@ package view.panelstates;
 
 import config.Config;
 import controllers.ButtonController;
+import controllers.HighscoreController;
+import controllers.KeyClickedController;
 import model.Game;
 import view.MainPanel;
 import view.buttons.GameButton;
@@ -32,6 +34,7 @@ public class NewHighscorePanelState implements IPanelState{
         bc = new ButtonController(buttons);
         keyListeners = new ArrayList<>();
         keyListeners.add(bc);
+        keyListeners.add(new HighscoreController(game));
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(buttons));
 

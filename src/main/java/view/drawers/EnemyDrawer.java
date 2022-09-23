@@ -1,9 +1,7 @@
 package view.drawers;
 
+import model.gameobjects.enemies.Enemy;
 import model.gameobjects.enemies.IEnemy;
-import gameobjects.enemies.Enemy;
-import view.Camera;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -17,11 +15,8 @@ public class EnemyDrawer implements IDrawer {
     private int animationCounter;
     private int imageSwitcher;
 
-    private Camera camera;
-
-    public EnemyDrawer(ArrayList<IEnemy> enemies, Camera camera){
+    public EnemyDrawer(ArrayList<IEnemy> enemies){
         this.enemies = enemies;
-        this.camera = camera;
         initEnemyImages();
 
     }
@@ -38,14 +33,14 @@ public class EnemyDrawer implements IDrawer {
 
     private void initEnemyImages(){
         try {
-            up1 = setImage("imgs/enemy_up_1.png");
-            up2 = setImage("imgs/enemy_up_2.png");
-            left1 = setImage("imgs/enemy_left_1.png");
-            left2 = setImage("imgs/enemy_left_2.png");
-            down1 = setImage("imgs/enemy_down_1.png");
-            down2 = setImage("imgs/enemy_down_2.png");
-            right1 =setImage("imgs/enemy_right_1.png");
-            right2 =setImage("imgs/enemy_right_2.png");
+            up1 = setImage("imgs/enemy/enemy_up_1.png");
+            up2 = setImage("imgs/enemy/enemy_up_2.png");
+            left1 = setImage("imgs/enemy/enemy_left_1.png");
+            left2 = setImage("imgs/enemy/enemy_left_2.png");
+            down1 = setImage("imgs/enemy/enemy_down_1.png");
+            down2 = setImage("imgs/enemy/enemy_down_2.png");
+            right1 =setImage("imgs/enemy/enemy_right_1.png");
+            right2 =setImage("imgs/enemy/enemy_right_2.png");
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -111,8 +106,6 @@ public class EnemyDrawer implements IDrawer {
             }
 
             ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getSize(), enemy.getSize());
-
-            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getSize(), enemy.getSize(), camera);
             if (enemy.getHealth() != ((Enemy)enemy).getMaxHp()){
             g2.setColor(Color.red);
             g2.fillRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / ((Enemy)enemy).getMaxHp()))), 4);

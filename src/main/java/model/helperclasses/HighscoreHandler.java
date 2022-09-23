@@ -1,4 +1,4 @@
-package helperclasses;
+package model.helperclasses;
 
 import java.io.*;
 import java.util.ArrayList;

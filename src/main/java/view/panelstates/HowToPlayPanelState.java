@@ -3,7 +3,7 @@ package view.panelstates;
 import config.Config;
 import controllers.ButtonController;
 import model.Game;
-import helperclasses.ImageHandler;
+import model.helperclasses.ImageHandler;
 import view.MainPanel;
 import view.buttons.GameButton;
 import view.buttons.buttonactions.MenuButtonAction;
@@ -33,14 +33,13 @@ public class HowToPlayPanelState implements IPanelState{
     public HowToPlayPanelState(MainPanel mainPanel, Game game){
         this.game = game;
         this.mainPanel = mainPanel;
-        controls = setImage("imgs/menus/h2p.png");
         buttons = new ArrayList<>();
         createButtons();
         bc = new ButtonController(buttons);
         keyListeners = new ArrayList<>();
         keyListeners.add(bc);
         imageHandler = new ImageHandler();
-        controls = imageHandler.getImage("imgs/h2p.png");
+        controls = imageHandler.getImage("imgs/menus/h2p.png");
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(buttons));
     }

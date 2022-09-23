@@ -7,15 +7,16 @@ import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
 import model.gameobjects.theShop.Shop;
+import model.helperclasses.HighscoreHandler;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
-import view.buttons.GameButton;
 import model.gameobjects.IGameObject;
 
 import view.IObserver;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -43,8 +44,6 @@ public class Game{
     private Shop shop;
     private HighscoreHandler highscoreHandler;
 
-    private Game() {}
-
     public Game(){
         player = new Player(32, 32, this);
         this.gameMap = new GameMap(100, 100);
@@ -54,14 +53,12 @@ public class Game{
         terrains = gameMap.getTerrains();
         highscoreName = new ArrayList<>();
         this.path = new ArrayList<>();
-
         EnemyFactory enemyFactory= new NormalEnemyFactory();
         enemies.add(enemyFactory.createEnemy(this));
         sprites = new ArrayList<>();
         sprites.add(player);
         sprites.add(shop);
         sprites.addAll(terrains);
-
         wPressed = false;
         aPressed = false;
         sPressed = false;
@@ -69,31 +66,14 @@ public class Game{
         enterPressed = false;
         escapePressed = false;
         spacePressed = false;
-
         stateChangedFlag = false;
-
         observers = new ArrayList<>();
         highscoreHandler = new HighscoreHandler();
         highscoreList = highscoreHandler.getHighscoreList();
-        startGame();
     }
 
     public GameMap getGameMap() {
         return gameMap;
-    }
-
-    public ArrayList<String> getHighScoreList() {
-        Scanner sc = null;
-        highscoreList = new ArrayList<>();
-        try {
-            sc = new Scanner(highscoreFile);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        while(sc.hasNext()){
-            highscoreList.add(sc.next());
-        }
-        return highscoreList;
     }
 
     public ArrayList<String> getHighscoreName(){
@@ -286,12 +266,21 @@ public class Game{
                 player.damageTaken(1);
             }
 
+            // Check if projectile hits enemy
+            Iterator<Projectile> p = projectiles.iterator();
+            while(p.hasNext()) {
+                if (CollisionHandler.testCollision((Entity) enemy, p.next())) {
+                    ((Entity) enemy).damageTaken(10);
+                    p.remove();
+
+                }
+            }
+
         }
 
         for (Projectile p : projectiles) {
             p.update();
         }
-
 
 
     }

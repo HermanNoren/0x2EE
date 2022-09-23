@@ -3,7 +3,7 @@ package view.panelstates;
 import config.Config;
 import controllers.ButtonController;
 import model.Game;
-import helperclasses.HighscoreHandler;
+import model.helperclasses.HighscoreHandler;
 import view.MainPanel;
 import view.buttons.GameButton;
 import view.buttons.buttonactions.MenuButtonAction;
@@ -41,6 +41,7 @@ public class HighscorePanelState implements IPanelState {
     public HighscorePanelState(MainPanel mainPanel, Game game) {
         this.game = game;
         this.mainPanel = mainPanel;
+        this.highscoreHandler = new HighscoreHandler();
         buttons = new ArrayList<>();
         createButtons();
         bc = new ButtonController(buttons);
