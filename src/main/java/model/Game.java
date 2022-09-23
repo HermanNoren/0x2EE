@@ -2,20 +2,14 @@ package model;
 
 import model.gameobjects.*;
 import model.gameobjects.enemies.*;
-
 import model.collision.CollisionHandler;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
 import model.mapclasses.GameMap;
-import model.mapclasses.Terrain;
 import model.gameobjects.IGameObject;
 
-import model.mapclasses.GameMap;
-import view.buttons.GameButton;
-
 import view.IObserver;
-import view.panelstates.EPanelState;
 
 import java.io.*;
 import java.util.ArrayList;

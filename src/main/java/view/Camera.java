@@ -1,7 +1,6 @@
 package view;
 
 import config.Config;
-import model.Game;
 import model.gameobjects.IFocusableObject;
 import model.helperclasses.Vector2;
 

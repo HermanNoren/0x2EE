@@ -2,11 +2,9 @@ package view.panelstates;
 
 import config.Config;
 import controllers.ButtonController;
-import controllers.HighscoreController;
 import model.Game;
 import view.MainPanel;
 import view.buttons.GameButton;
-import view.buttons.buttonactions.MenuButtonAction;
 import view.buttons.buttonactions.SaveScoreButtonAction;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;

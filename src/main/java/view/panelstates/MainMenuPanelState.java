@@ -2,7 +2,6 @@ package view.panelstates;
 
 import config.Config;
 import controllers.ButtonController;
-import controllers.KeyClickedController;
 import model.Game;
 import view.MainPanel;
 import view.buttons.GameButton;
@@ -13,7 +12,6 @@ import view.drawers.IDrawer;
 
 import java.awt.*;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class MainMenuPanelState implements IPanelState {

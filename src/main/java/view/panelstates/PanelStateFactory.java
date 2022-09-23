@@ -1,7 +1,6 @@
 package view.panelstates;
 
 import view.MainPanel;
-import view.panelstates.*;
 
 public class PanelStateFactory {
 
