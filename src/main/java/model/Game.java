@@ -6,6 +6,7 @@ import model.collision.CollisionHandler;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
+import model.gameobjects.theShop.Shop;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import view.buttons.GameButton;
@@ -40,9 +41,12 @@ public class Game{
     private ArrayList<Projectile> projectiles;
     private ArrayList<IGameObject> sprites;
 
+    private Shop shop;
+
     public Game(){
         player = new Player(32, 32, this);
         this.gameMap = new GameMap(100, 100);
+        shop = new Shop();
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         terrains = gameMap.getTerrains();
@@ -53,6 +57,7 @@ public class Game{
         enemies.add(enemyFactory.createEnemy(this));
         sprites = new ArrayList<>();
         sprites.add(player);
+        sprites.add(shop);
         sprites.addAll(terrains);
 
         wPressed = false;
@@ -345,5 +350,9 @@ public class Game{
 
     public ArrayList<Terrain> getPath() {
         return path;
+    }
+
+    public Shop getshop() {
+        return shop;
     }
 }

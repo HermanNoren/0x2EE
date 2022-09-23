@@ -38,6 +38,7 @@ public class InGamePanelState implements IPanelState {
         drawers.add(new MapDrawer(game.getGameMap()));
         drawers.add(new ProjectileDrawer(game.getProjectiles()));
         drawers.add(new PlayerDrawer(game.getPlayer()));
+        drawers.add(new ShopDrawer(game.getshop()));
         drawers.add(new EnemyDrawer(game.getEnemies()));
     }
 

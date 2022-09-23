@@ -3,9 +3,13 @@ package view.drawers;
 import model.helperclasses.Vector2;
 import view.Camera;
 
+import java.awt.*;
 import java.util.ArrayList;
 
-public class DrawerHelper {
+/**
+ * The DrawerHelper class is made to aid the representation of the sprite relative to the camera-view.
+ */
+public class DrawerHelper implements IDrawer {
 
     public static ArrayList<Integer> calculateDrawingInformation(Vector2 pos, int width, int height) {
         ArrayList<Integer> drawInformation = new ArrayList<>();
@@ -22,6 +26,12 @@ public class DrawerHelper {
         drawInformation.add((int) Math.ceil(newHeight));
 
         return drawInformation;
+        //Returnera inte listan utan rita direkt!
     }
 
+
+    @Override
+    public void draw(Graphics2D g2) {
+
+    }
 }
