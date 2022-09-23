@@ -27,7 +27,7 @@ public class InGamePanelState implements IPanelState {
         this.mainPanel = mainPanel;
         keyListeners = new ArrayList<>();
         keyListeners.add(new PlayerController());
-        keyListeners.add(new KeyClickedController());
+        keyListeners.add(new KeyClickedController(this));
         hud = new HUD(game.getPlayer());
 
         camera = Camera.getInstance();
@@ -49,10 +49,6 @@ public class InGamePanelState implements IPanelState {
             drawer.draw(g);
         }
         hud.update(g);
-        if (game.getEscapePressed()){
-            changePanelState(EPanelState.PAUSE);
-            game.resetEscapePressed();
-        }
     }
 
     @Override

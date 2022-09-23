@@ -1,19 +1,23 @@
 package controllers;
 import model.Game;
+import view.panelstates.EPanelState;
+import view.panelstates.IPanelState;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyClickedController implements KeyListener {
     private final Game game;
+    private final IPanelState panel;
     private boolean wKeyDown;
     private boolean sKeyDown;
     private boolean enterKeyDown;
     private boolean escapeKeyDown;
     private boolean spaceKeyDown;
 
-    public KeyClickedController() {
+    public KeyClickedController(IPanelState panel) {
         this.game = Game.getInstance();
+        this.panel = panel;
     }
 
     @Override
@@ -48,6 +52,7 @@ public class KeyClickedController implements KeyListener {
                 if (!escapeKeyDown) {
                     escapeKeyDown = true;
                     game.setEscapePressed();
+                    panel.changePanelState(EPanelState.PAUSE);
                 }
             }
             case (KeyEvent.VK_SPACE) -> {
