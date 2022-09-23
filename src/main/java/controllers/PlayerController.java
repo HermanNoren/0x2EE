@@ -85,8 +85,5 @@ public class PlayerController implements KeyListener {
                 spaceKeyDown = false;
             }
         }
-
-
     }
-
 }
