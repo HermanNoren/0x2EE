@@ -55,12 +55,7 @@ public class KeyClickedController implements KeyListener {
                     panel.changePanelState(EPanelState.PAUSE);
                 }
             }
-            case (KeyEvent.VK_SPACE) -> {
-                if (!spaceKeyDown) {
-                    spaceKeyDown = true;
-                    game.setSpacePressed();
-                }
-            }
+
         }
     }
 
@@ -82,10 +77,6 @@ public class KeyClickedController implements KeyListener {
             case (KeyEvent.VK_ESCAPE) -> {
                 escapeKeyDown = false;
                 game.resetEscapePressed();
-            }
-            case (KeyEvent.VK_SPACE) -> {
-                spaceKeyDown = false;
-                game.resetSpacePressed();
             }
         }
     }
