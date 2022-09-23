@@ -1,134 +1,146 @@
 package model.mapclasses;
 
-import config.Config;
-import model.helperclasses.Vector2;
-import model.gameobjects.IGameObject;
+import filehandler.WriteMapToFile;
+import model.gameobjects.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
+
+/**
+ * Game map class
+ */
 public class GameMap {
+    private final ArrayList<Terrain> terrains = new ArrayList<>();
+    private final Terrain[][] gameMapCoordinates;
+    private final int width;
+    private final int height;
 
-    private final String[] gameMap = new String[] {
-            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "AAAAAAAAAAAAAAAAWWWWWWWWWWWWWWAAAAAAAAAAAAAAAAAAAA",
-            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-    };
+    public GameMap(int width, int height) {
+        this.width = width;
+        this.height = height;
+        gameMapCoordinates = new Terrain[width][height];
+        addCoordinatesAndTiles(width, height);
+        randomizeMap();
+        createBorder();
 
-    private ArrayList<IGameObject> tiles;
-    private Map<String, Terrain> grass;
-
-    private ArrayList<Terrain> path;
-
-    public GameMap() {
-        createMap();
-
+        terrains.forEach(this::addNeighbors);
+        WriteMapToFile wr = new WriteMapToFile("maps/map1.txt");
+        wr.writeToFile(this);
     }
 
-    public ArrayList<IGameObject> getTiles() {
-        return new ArrayList<>(tiles);
+    private void addCoordinatesAndTiles(int width, int height) {
+        for(int i = 0; i < width; i ++){
+            for(int j = 0; j < height; j++){
+                gameMapCoordinates[i][j] = new Terrain(i, j);
+                terrains.add(gameMapCoordinates[i][j]);
+            }
+        }
     }
 
-    public HashMap<String, Terrain> getGrass() {
-        return new HashMap<String, Terrain>(grass);
+    public int getHeight() {
+        return height;
     }
 
-    public ArrayList<Terrain> getPath() {
-        return path;
+    public int getWidth() {
+        return width;
     }
 
-    /**
-     * Sets the ArrayList<Terrain> to the given path. Used to update the current path from start node to target node.
-     * @param path
-     */
-    public void setPath(ArrayList<Terrain> path) {
-        this.path = path;
+    public Terrain[][] getGameMapCoordinates() {
+        return gameMapCoordinates;
+    }
+
+    public ArrayList<IGameObject> getTerrains() {
+        return new ArrayList<>(terrains);
+    }
+
+    public void setTerrainType(int x, int y, int type){
+        gameMapCoordinates[x][y].setTerrainType(type);
+    }
+
+    public void setTerrainPassable(int x, int y, boolean passable){
+        gameMapCoordinates[x][y].setPassable(passable);
     }
 
     /**
      * Add neighbor to the given node. If the presumed neighbor isn't grass then it won't be added as a neighbor.
-     * @param node
      */
-    private void addNeighbors(Terrain node){
-        Vector2 vec = node.getPos();
-        int size = Config.SPRITE_SIZE;
+    public void addNeighbors(Terrain current){
+        int x = current.getX();
+        int y = current.getY();
 
         // Add left side neighbour
-        String key = "" + ((int) vec.getX() + size) + (int) vec.getY();
-        if (node.isPassable()){
-            if (grass.get(key) != null) node.addBranch(1, grass.get(key));
+        if (current.isPassable() && (x-1) > -1){
+            Terrain leftNeighbor = gameMapCoordinates[x-1][y];
+
+            if(leftNeighbor != null){
+                if(leftNeighbor.isPassable()){
+                    current.addBranch(1, leftNeighbor);
+                }
+            }
         }
 
         // Add right side neighbour
-        key = "" + ((int) vec.getX() - size) + (int) vec.getY();
-        if(node.isPassable()){
-            if (grass.get(key) != null) node.addBranch(1, grass.get(key));
+        if(current.isPassable() && (x+1) < width){
+            Terrain rightNeighbor = gameMapCoordinates[x+1][y];
+            if(rightNeighbor != null){
+                if(rightNeighbor.isPassable()) {
+                    current.addBranch(1, rightNeighbor);
+                }
+            }
         }
 
         // Add top neighbour
-        key = "" + (int) vec.getX() + ((int) vec.getY() + size);
-        if (node.isPassable()){
-            if (grass.get(key) != null) node.addBranch(1, grass.get(key));
+        if (current.isPassable() && (y-1) > -1){
+            Terrain topNeighbor = gameMapCoordinates[x][y-1];
+            if(topNeighbor != null){
+                if(topNeighbor.isPassable()){
+                    current.addBranch(1, topNeighbor);
+                }
+            }
         }
 
         // Add bottom neighbour
-        key = "" + (int) vec.getX() + ((int) vec.getY() - size);
-        if(node.isPassable()){
-            if (grass.get(key) != null) node.addBranch(1, grass.get(key));
-        }
-
-//        System.out.println("My x-pos:" + node.getPos().getX());
-//        System.out.println("My y-pos:" + node.getPos().getX());
-//        for (Terrain.Edge terrain : node.neighbors){
-//            System.out.println("Neighbour x-pos:" + terrain.node.getPos().getX() + "\nNeighbour y-pos:" + terrain.node.getPos().getY());
-//        }
-//        System.out.println("-----------------");
-
-    }
-
-    /**
-     * Creates the gamemap. Strings == W are set as obstacles, non-passable terrain, and strings == " "
-     * are set as grass, passable terrains.
-     */
-    private void createMap() {
-        tiles = new ArrayList<>();
-        grass = new HashMap<>();
-        path = new ArrayList<>();
-
-        int x = 0;
-        int y = 0;
-        for (String row : gameMap) {
-            for (char tile : row.toCharArray()) {
-                Vector2 vec = new Vector2(x, y);
-                String key = "" + x + y;
-
-                switch(tile) {
-                    case 'W':
-                        tiles.add(new Terrain(vec, false));
-                    case 'A':
-                        Terrain terrain = new Terrain(vec, true);
-                        grass.put(key, terrain);
+        if(current.isPassable() && (y+1) < height){
+            Terrain bottomNeighbor = gameMapCoordinates[x][y+1];
+            if(bottomNeighbor != null){
+                if (bottomNeighbor.isPassable()){
+                    current.addBranch(1, bottomNeighbor);
                 }
-                x += Config.SPRITE_SIZE;
             }
-            x = 0;
-            y += Config.SPRITE_SIZE;
         }
-            grass.forEach((key, tile) -> addNeighbors(tile));
-
     }
+
+    private void createBorder(){
+        int col = 0;
+        int row = 0;
+        while (col < width && row < height){
+
+            if((gameMapCoordinates[col][row].getPos().x/48)+2 > width ||
+                    (gameMapCoordinates[col][row].getPos().y/48)+2 > height ||
+                    (gameMapCoordinates[col][row].getPos().x/48)-1 < 0 ||
+                    (gameMapCoordinates[col][row].getPos().y/48)-1 < 0){
+
+                gameMapCoordinates[col][row].setTerrainType(1);
+                gameMapCoordinates[col][row].setPassable(false);
+            }
+                col ++;
+            if(col == width){
+                col = 0;
+                row++;
+            }
+        }
+    }
+
+
+    private void randomizeMap(){
+        Random random = new Random();
+        for(int i = 0; i< width; i ++){
+            for (int j = 0; j< height; j++){
+
+            }
+        }
+    }
+
 }
+
 

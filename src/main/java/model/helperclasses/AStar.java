@@ -23,32 +23,36 @@ public class AStar {
      *
      */
     public static Terrain aStar(Terrain start, Terrain target){
+
         PriorityQueue<Terrain> closedList = new PriorityQueue<>();
         PriorityQueue<Terrain> openList = new PriorityQueue<>();
 
-        start.setF(start.getG() + start.calculateHeuristic(target));
+        start.setG(0);
+        start.setF(start.calculateHeuristic(start, target));
+
         openList.add(start);
         while(!openList.isEmpty()){
             Terrain n = openList.peek(); //n = next node
+
             if(n == target){
                 return n;
             }
 
-            for(Terrain.Edge edge : n.neighbors){ // Check neighbors of n.
-                Terrain m = edge.node;
+            for(Terrain.Edge edge : n.getNeighbors()){ // Check neighbors of n.
+                Terrain m = edge.terrain;
                 double totalWeight = n.getG() + edge.weight;
 
                 if(!openList.contains(m) && !closedList.contains(m)){
                     m.setParent(n);
                     m.setG(totalWeight);
-                    m.setF(m.getG() + m.calculateHeuristic(m)); // f = g+h
+                    m.setF(m.getG() + m.calculateHeuristic(m, target)); // f = g+h
                     openList.add(m);
 
                 } else {
                     if(totalWeight < m.getG()){
                         m.setParent(n);
                         m.setG(totalWeight);
-                        m.setF(m.getG() + m.calculateHeuristic(m));
+                        m.setF(m.getG() + m.calculateHeuristic(m, target));
 
                         if(closedList.contains(m)){
                             closedList.remove(m);

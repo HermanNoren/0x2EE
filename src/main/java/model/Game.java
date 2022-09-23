@@ -1,42 +1,46 @@
 package model;
 
+import model.gameobjects.*;
+import model.gameobjects.enemies.*;
 import model.gamestates.*;
-import model.mapclasses.TerrainBorder;
-import model.mapclasses.GameMap;
-import model.mapclasses.Terrain;
+
 import model.gameobjects.IGameObject;
-import model.gameobjects.Player;
+
+import model.mapclasses.GameMap;
 import view.buttons.GameButton;
 
-import model.gameobjects.Projectile;
-import model.gameobjects.enemies.IEnemy;
 import view.IObserver;
-import view.buttons.buttonactions.MenuButtonAction;
-import view.buttons.buttonactions.QuitButtonAction;
 import view.panelstates.EPanelState;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 /**
  * This class contains the main game loop.
  * With help of the main game loop it delegates work to the active IGameState
  */
-public class Game {
+public class Game{
+    private Thread gameLoopThread;
+    private final int FPS = 120; // FRAMES PER SECOND
+    private final int UPS = 200; // UPDATES PER SECOND
     private ArrayList<IObserver> observers;
     private IGameState state;
     private Player player;
+
     private ArrayList<String> highscoreName;
     private ArrayList<IEnemy> enemies;
-    private ArrayList<Projectile> projectiles;
-    private TerrainBorder terrainBorder;
+    private ArrayList<IGameObject> terrains;
+    private ArrayList<GameButton> mainMenuButtons, backButtons, pauseButtons;
+
     private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
+
     private boolean stateChangedFlag;
+
     private GameMap gameMap;
     private File highscoreFile;
     private ArrayList<String> highscoreList;
+    private ArrayList<Projectile> projectiles;
 
     private Game() {}
 
@@ -49,11 +53,11 @@ public class Game {
 
     public void createGame(){
         player = new Player(32, 32, 0.5, 1000);
+        this.gameMap = new GameMap(100, 100);
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
-        terrainBorder = new TerrainBorder(960, 800);
+        terrains = gameMap.getTerrains();
         highscoreName = new ArrayList<>();
-        this.gameMap = new GameMap();
 
         wPressed = false;
         aPressed = false;
@@ -72,6 +76,9 @@ public class Game {
         highscoreList = getHighScoreList();
     }
 
+    public GameMap getGameMap() {
+        return gameMap;
+    }
 
     public ArrayList<String> getHighScoreList() {
         Scanner sc = null;
@@ -106,7 +113,6 @@ public class Game {
      * Handles end of the game, either new highscore or back to menu.
      */
     public void gameOver(){
-
         if (isTopFive()){
             //NEW HIGHSCORE state
         }else{
@@ -182,29 +188,16 @@ public class Game {
     public ArrayList<IEnemy> getEnemies(){
         return enemies;
     }
-    public ArrayList<Projectile> getProjectiles() { return projectiles; }
+
     /**
      * Returns an ArrayList containing all the tiles in the Game Map.
      * @return  All Game Map Tiles
      */
     public ArrayList<IGameObject> getTerrainBorder() {
-        return terrainBorder.getTerrainBorder();
+        return null;
+//        return terrainBorder.getTerrainBorder();
     }
 
-    /**
-     * Returns an ArrayList containing all the tiles in the Game Map.
-     * @return  All Game Map Tiles
-     */
-    public HashMap<String, Terrain> getGrass() {
-        return gameMap.getGrass();
-    }
-
-    public ArrayList<Terrain> getPath(){
-        return gameMap.getPath();
-    }
-    public void setPath(ArrayList<Terrain> path){
-        gameMap.setPath(path);
-    }
 
     /**
      * Used as a way for outside components to tell Game if the W key is pressed.
@@ -343,5 +336,9 @@ public class Game {
 
     public void resetSpacePressed() {
         this.spacePressed = false;
+    }
+
+    public ArrayList<Projectile> getProjectiles() {
+        return projectiles;
     }
 }

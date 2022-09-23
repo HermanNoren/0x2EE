@@ -34,7 +34,7 @@ public class InGameState implements IGameState {
         EnemyFactory enemyFactory= new NormalEnemyFactory();
         enemies.add(enemyFactory.createEnemy());
         sprites.add(game.getPlayer());
-        sprites.addAll(game.getTerrainBorder());
+//        sprites.addAll(game.getTerrainBorder());
     }
 
     /**
@@ -91,7 +91,7 @@ public class InGameState implements IGameState {
             p.update();
         }
 
-        CollisionHandler.seeIfPlayerIsOutsideBorder(player);
+//        CollisionHandler.seeIfPlayerIsOutsideBorder(player);
         
         }
     }

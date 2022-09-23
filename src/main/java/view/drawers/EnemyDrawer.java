@@ -33,14 +33,14 @@ public class EnemyDrawer implements IDrawer {
 
     private void initEnemyImages(){
         try {
-            up1 = setImage("imgs/enemy_up_1.png");
-            up2 = setImage("imgs/enemy_up_2.png");
-            left1 = setImage("imgs/enemy_left_1.png");
-            left2 = setImage("imgs/enemy_left_2.png");
-            down1 = setImage("imgs/enemy_down_1.png");
-            down2 = setImage("imgs/enemy_down_2.png");
-            right1 =setImage("imgs/enemy_right_1.png");
-            right2 =setImage("imgs/enemy_right_2.png");
+            up1 = setImage("imgs/enemy/enemy_up_1.png");
+            up2 = setImage("imgs/enemy/enemy_up_2.png");
+            left1 = setImage("imgs/enemy/enemy_left_1.png");
+            left2 = setImage("imgs/enemy/enemy_left_2.png");
+            down1 = setImage("imgs/enemy/enemy_down_1.png");
+            down2 = setImage("imgs/enemy/enemy_down_2.png");
+            right1 =setImage("imgs/enemy/enemy_right_1.png");
+            right2 =setImage("imgs/enemy/enemy_right_2.png");
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -64,6 +64,7 @@ public class EnemyDrawer implements IDrawer {
      */
     @Override
     public void draw(Graphics2D g2) {
+
         movementAnimation();
         for(IEnemy enemy: enemies){
             switch (enemy.getDirection()){
