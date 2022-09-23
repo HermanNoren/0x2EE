@@ -9,8 +9,8 @@ import java.io.IOException;
 
 public class Program {
     public static void main(String[] args) throws IOException {
-        Game game = Game.getInstance();
-        game.createGame();
+        Game game = new Game(); 
+
         GameLoopController gameLoop = new GameLoopController();
         MainPanel mainPanel = new MainPanel(game);
         game.addObserver(mainPanel);

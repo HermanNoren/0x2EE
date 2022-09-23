@@ -24,8 +24,8 @@ public class NewHighscorePanelState implements IPanelState{
     private int xpos, ypos;
     private MainPanel mainPanel;
 
-    public NewHighscorePanelState(MainPanel mainPanel){
-        this.game = Game.getInstance();
+    public NewHighscorePanelState(MainPanel mainPanel, Game game){
+        this.game = game;
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons();

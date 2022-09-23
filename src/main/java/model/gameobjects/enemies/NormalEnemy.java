@@ -5,14 +5,15 @@
 
 package model.gameobjects.enemies;
 
+import model.Game;
 import model.helperclasses.Vector2;
 
 
 class NormalEnemy extends Enemy{
 
 
-    protected NormalEnemy(int x, int y) {
-        super(x, y);
+    protected NormalEnemy(int x, int y, Game game) {
+        super(x, y, game);
         setVelX(0.3);
         setVelY(0.3);
         setHealth(100);

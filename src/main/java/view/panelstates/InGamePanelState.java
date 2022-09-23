@@ -22,12 +22,12 @@ public class InGamePanelState implements IPanelState {
     private final ArrayList<KeyListener> keyListeners;
     private MainPanel mainPanel;
 
-    public InGamePanelState(MainPanel mainPanel) {
-        this.game = Game.getInstance();
+    public InGamePanelState(MainPanel mainPanel, Game game) {
+        this.game = game;
         this.mainPanel = mainPanel;
         keyListeners = new ArrayList<>();
-        keyListeners.add(new PlayerController());
-        keyListeners.add(new KeyClickedController());
+        keyListeners.add(new PlayerController(game));
+        keyListeners.add(new KeyClickedController(game));
         hud = new HUD(game.getPlayer());
 
         camera = Camera.getInstance();

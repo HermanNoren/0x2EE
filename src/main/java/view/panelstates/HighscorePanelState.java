@@ -35,8 +35,8 @@ public class HighscorePanelState implements IPanelState {
             Arrays.asList(gold, silver,
                     bronze, Color.white, Color.white));
 
-    public HighscorePanelState(MainPanel mainPanel) {
-        this.game = Game.getInstance();
+    public HighscorePanelState(MainPanel mainPanel, Game game) {
+        this.game = game;
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons();

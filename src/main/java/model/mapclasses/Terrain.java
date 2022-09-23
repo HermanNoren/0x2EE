@@ -9,28 +9,23 @@ import model.helperclasses.Vector2;
 
 
 import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * Acts a Node class, every Terrain is a node in the map.
  */
 public class Terrain implements IGameObject, Comparable<Terrain> {
     private final int size = Config.SPRITE_SIZE*3;
-
-    private Game game = Game.getInstance();
-    private List<Entity> entities = new ArrayList<>();
+    private final ArrayList<Entity> entities;
     private Vector2 pos;
     private Rect rect;
-    private static int idCounter = 0;
     private int id;
-
+    private static int idCounter = 0;
     private double f = Double.MAX_VALUE; // Will later be equal to g + h
     private double g = Double.MAX_VALUE; // g(n), n = next node, distance from start to n.
     private ArrayList<Terrain.Edge> neighbors;
     private Terrain parent = null;
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
     private int terrainType;
     private boolean passable;
 
@@ -40,6 +35,7 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
         this.terrainType = 0;
         this.passable = true;
         this.neighbors = new ArrayList<>();
+        this.entities = new ArrayList<>();
         this.pos = new Vector2(x, y);
         this.pos.x *=48;
         this.pos.y *=48;
@@ -62,11 +58,9 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     public int getX() {
         return x;
     }
-
     public int getY() {
         return y;
     }
-
     @Override
     public int getHeight() {
         return rect.getHeight();
@@ -75,12 +69,10 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     public Vector2 getPos() {
         return new Vector2(pos);
     }
-
     @Override
     public Vector2 getCenter() {
         return null;
     }
-
     @Override
     public Rect getRect() {
         return new Rect(rect);
@@ -93,15 +85,12 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     public void setF(double f) {
         this.f = f;
     }
-
     public double getG() {
         return g;
     }
-
     public void setG(double g) {
         this.g = g;
     }
-
     public Terrain getParent() {
         return parent;
     }
@@ -132,6 +121,10 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
 
     public boolean isPassable() {
         return passable;
+    }
+
+    public void addEntity(Entity entity) {
+        entities.add(entity);
     }
 
     public static class Edge {

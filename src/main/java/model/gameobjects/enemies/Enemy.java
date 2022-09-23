@@ -3,16 +3,17 @@ package model.gameobjects.enemies;
 import config.Config;
 import model.helperclasses.AStar;
 import model.Game;
+import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import model.gameobjects.Entity;
 
 import java.util.ArrayList;
 
 public abstract class Enemy extends Entity implements IEnemy {
-    private Game game = Game.getInstance();
+
     private int size = Config.SPRITE_SIZE;
-    protected Enemy(int x, int y){
-        super(x, y);
+    protected Enemy(int x, int y, Game game){
+        super(x, y, game);
     }
 
     /**
@@ -21,17 +22,10 @@ public abstract class Enemy extends Entity implements IEnemy {
      */
     @Override
     public void update() {
-//        int size = Config.SPRITE_SIZE;
-//
-//        String keyPlayer = "" + (int) (size*(Math.round(game.getPlayer().getPos().getX()/size))) +
-//                (int) (size*(Math.round(game.getPlayer().getPos().getY()/size)));
-//        String keyEnemy = "" + (int) (size*(Math.round(this.getPos().getX()/size))) +
-//                (int) (size*(Math.round(this.getPos().getY()/size)));
-//        Terrain goal = null;
-//        if (game.getGrass().get(keyEnemy) != null)
-//            goal = AStar.aStar(game.getGrass().get(keyEnemy), game.getGrass().get(keyPlayer));
-//
-//        game.setPath(AStar.returnPath(goal));
+        Terrain goal;
+
+
+
         super.update();
 
     }

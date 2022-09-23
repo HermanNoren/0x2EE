@@ -24,8 +24,8 @@ public class MainMenuPanelState implements IPanelState {
     private final ArrayList<KeyListener> keyListeners;
     private MainPanel mainPanel;
 
-    public MainMenuPanelState(MainPanel mainPanel) {
-        this.game = Game.getInstance();
+    public MainMenuPanelState(MainPanel mainPanel, Game game) {
+        this.game = game;
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons();

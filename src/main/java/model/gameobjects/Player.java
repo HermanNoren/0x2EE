@@ -2,6 +2,7 @@
 package model.gameobjects;
 
 
+import model.Game;
 import model.armor.Armor;
 import controllers.EDirection;
 import model.helperclasses.Vector2;
@@ -28,8 +29,8 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
      * @param y, starting y-position
      * Player constructor, used to create an instance of player.
      */
-    public Player(int x, int y){
-        super(x, y);
+    public Player(int x, int y, Game game){
+        super(x, y, game);
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);
         upPressed = false;
