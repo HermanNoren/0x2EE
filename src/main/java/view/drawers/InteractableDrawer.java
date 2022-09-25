@@ -9,6 +9,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Maybe an unnecessary class?? Thought to represent the view of the interact-functionality.
+ */
+
 public class InteractableDrawer implements IDrawer{
     private BufferedImage interactable, notInteractable, currentImage;
 
@@ -47,7 +51,7 @@ public class InteractableDrawer implements IDrawer{
 
     @Override
     public void draw(Graphics2D g2) {
-        ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(player.getPos(), player.getSize(), player.getSize());
+        ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(300, 200, 16, 16);
 
 
     }
