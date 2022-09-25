@@ -84,7 +84,7 @@ public class MapDrawer implements IDrawer {
         int x = 0;
         int y = 0;
 
-        // Coordinates of tiles to paint with a 5 tile onset to guarantee visibility
+        // Coordinates of tiles to paint with a 5 tile offset to guarantee visibility
         int left = (int) (player.getPosX() - Config.SCREEN_WIDTH/2)/spriteSize - 5;
         int right = (int) (player.getPosX() + Config.SCREEN_WIDTH/2)/spriteSize + 5;
         int up = (int) (player.getPosY() - Config.SCREEN_HEIGHT/2)/spriteSize - 5;
