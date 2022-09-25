@@ -1,5 +1,7 @@
 package model.gameobjects.theShop;
 
+import model.collision.CollisionHandler;
+import model.gameobjects.Player;
 import model.helperclasses.Rect;
 import model.helperclasses.Vector2;
 import model.gameobjects.IGameObject;
@@ -13,18 +15,16 @@ import model.gameobjects.IGameObject;
 
 
 public class Shop implements IGameObject {
-    public final static int x_position = 300;
-    public final static int y_position = 100;
-    public final static int width = 64*4; // make multiple of 64
-    public final static int height = 56*4;  //multiple of 56
+    public final static int x_position = 400;
+    public final static int y_position = 200;
+    public final static int width = 64*3; // make multiple of 64
+    public final static int height = 56*3;  //multiple of 56
 
     public final static Vector2 pos = new Vector2(x_position, y_position);
 
 
-    public final static Vector2 static_position = new Vector2(x_position,y_position);
-    public final static Rect static_size = new Rect(x_position, y_position, width, height);
-
     public  Shop(){
+
     }
 
 
@@ -45,16 +45,10 @@ public class Shop implements IGameObject {
      * will be thrown and an error message will be prompted
      * on the player's screen.
      */
-    public void closeEnoughToShop(Vector2 position){
-         if(getRect().intersects(this.getPos(), position))
-             openShopPanel();
-         //throw exception not close enough
-
-    }
 
 
     public void openShopPanel(){
-
+        System.out.println("We're in boys");        //Make the shop light up!
     }
 
     @Override

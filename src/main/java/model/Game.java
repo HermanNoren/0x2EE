@@ -323,8 +323,13 @@ public class Game{
             p.update();
         }
 
+        playerInRangeOfStore();
+    }
 
-
+    private void playerInRangeOfStore() {
+        if(CollisionHandler.testCollision(player, shop)){
+            shop.openShopPanel();
+        }
     }
 
     /**
