@@ -2,7 +2,9 @@ package view.drawers;
 
 import config.Config;
 
+import model.Game;
 import model.gameobjects.IGameObject;
+import model.gameobjects.Player;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import view.Camera;
@@ -18,11 +20,13 @@ public class MapDrawer implements IDrawer {
     private final ArrayList<IGameObject> terrains;
     private final BufferedImage[] terrainImgs = new BufferedImage[10];
     private final GameMap gameMap;
+    private final Player player;
     private final int[][] mapNums;
 
-    public MapDrawer(GameMap gameMap){
+    public MapDrawer(Game game){
 
-        this.gameMap = gameMap;
+        this.gameMap = game.getGameMap();
+        this.player = game.getPlayer();
         mapNums = new int[gameMap.getWidth()][gameMap.getHeight()];
         this.terrains = gameMap.getTerrains();
         loadTerrainImages();
@@ -77,12 +81,26 @@ public class MapDrawer implements IDrawer {
     @Override
     public void draw(Graphics2D g2) {
         int spriteSize = Config.SPRITE_SIZE*3;
-        int row = 0;
-        int col = 0;
         int x = 0;
         int y = 0;
+
+        // Coordinates of tiles to paint with a 5 tile onset to guarantee visibility
+        int left = (int) (player.getPosX() - Config.SCREEN_WIDTH/2)/spriteSize - 5;
+        int right = (int) (player.getPosX() + Config.SCREEN_WIDTH/2)/spriteSize + 5;
+        int up = (int) (player.getPosY() - Config.SCREEN_HEIGHT/2)/spriteSize - 5;
+        int down = (int) (player.getPosY() + Config.SCREEN_HEIGHT/2)/spriteSize + 5;
+
+        // If out of bounds
+        if (left < 0)
+            left = 0;
+        if (up < 0)
+            up = 0;
+
+        int col = left;
+        int row = up;
         Terrain[][] gameMapCoordinates = gameMap.getGameMapCoordinates();
-        while (col < gameMap.getWidth() && row < gameMap.getHeight()) {
+
+        while (col <= right && row <= down) {
 
             ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(gameMap.getGameMapCoordinates()[col][row].getPos(),
                    gameMapCoordinates[col][row].getWidth(), gameMapCoordinates[col][row].getHeight());
@@ -95,8 +113,10 @@ public class MapDrawer implements IDrawer {
 
             col++;
 
-            if (col == gameMap.getWidth()) {
-                col = 0;
+            if (col == right || col == gameMap.getWidth()) {
+                if (row == gameMap.getHeight())
+                    break;
+                col = left;
                 x= 0;
                 y+=spriteSize;
                 row++;
