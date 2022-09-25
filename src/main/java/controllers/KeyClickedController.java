@@ -50,6 +50,7 @@ public class KeyClickedController implements KeyListener {
                 }
                 if (enterKeyDown && game.playerInRangeOfStore()){
                    // panel.changePanelState(EPanelState.SHOP);
+
                     System.out.println("yessir");
                 }
 

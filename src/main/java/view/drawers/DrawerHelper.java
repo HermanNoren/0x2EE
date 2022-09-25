@@ -26,7 +26,7 @@ public class DrawerHelper implements IDrawer {
         drawInformation.add((int) Math.ceil(newHeight));
 
         return drawInformation;
-        //Returnera inte listan utan rita direkt!
+        //Returnera inte listan utan rita direkt?
     }
 
 

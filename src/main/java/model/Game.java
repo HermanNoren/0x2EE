@@ -32,7 +32,10 @@ public class Game{
     private ArrayList<String> highscoreName;
     private ArrayList<IEnemy> enemies;
     private ArrayList<IGameObject> terrains;
+
     private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
+
+    private boolean interactableLit = false;
     private boolean stateChangedFlag;
     private GameMap gameMap;
     private File highscoreFile;
@@ -196,6 +199,7 @@ public class Game{
     }
 
 
+
     /**
      * Used as a way for outside components to tell Game if the W key is pressed.
      */
@@ -320,6 +324,10 @@ public class Game{
 
         }
 
+        if(playerInRangeOfStore()){
+            player.isInteractable =true;
+        } player.isInteractable = false;
+
         for (Projectile p : projectiles) {
             p.update();
         }
@@ -329,6 +337,12 @@ public class Game{
         return(CollisionHandler.testCollision(player, shop));
     }
 
+    public void checkIfInteractable(){
+        if(playerInRangeOfStore()){
+            interactableLit = true;
+        }
+        interactableLit = false;
+    }
     /**
      * Notifies potential observers
      */

@@ -22,6 +22,8 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     protected Armor armor;
     boolean isDamageTaken;
 
+    public boolean isInteractable = false;
+
     private boolean upPressed, downPressed, leftPressed, rightPressed;
 
     /**

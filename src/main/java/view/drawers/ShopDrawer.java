@@ -2,7 +2,6 @@ package view.drawers;
 
 
 import model.gameobjects.theShop.Shop;
-import view.Camera;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -12,7 +11,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ShopDrawer implements IDrawer{
-    Camera camera;
     private BufferedImage frame1;
 
     private Shop shopObject;
