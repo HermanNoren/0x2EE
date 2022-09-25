@@ -19,7 +19,7 @@ public class InGamePanelState implements IPanelState {
     private HUD hud;
     /**
      * Important to know in the constructor in which order the drawable objects are put in as
-     * a drawing hierarchy is created (which object is drawn over who).
+     * a drawing hierarchy is created (which object is drawn over whom).
      * The first object added to the Drawers ArrayList will be seen as under everything added after it.
      * */
     private ArrayList<IDrawer> drawers;
