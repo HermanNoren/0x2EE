@@ -2,6 +2,7 @@ package controllers;
 import model.Game;
 import view.panelstates.EPanelState;
 import view.panelstates.IPanelState;
+import view.panelstates.InGamePanelState;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -13,6 +14,7 @@ public class KeyClickedController implements KeyListener {
     private boolean sKeyDown;
     private boolean enterKeyDown;
     private boolean escapeKeyDown;
+
     private boolean spaceKeyDown;
 
     public KeyClickedController(Game game, IPanelState panel) {
@@ -46,6 +48,10 @@ public class KeyClickedController implements KeyListener {
                     enterKeyDown = true;
                     game.setEnterPressed();
                 }
+                if (enterKeyDown && game.playerInRangeOfStore()){
+                   // panel.changePanelState(EPanelState.SHOP);
+                    System.out.println("yessir");
+                }
 
             }
             case (KeyEvent.VK_ESCAPE) -> {
@@ -54,6 +60,14 @@ public class KeyClickedController implements KeyListener {
                     game.setEscapePressed();
                     panel.changePanelState(EPanelState.PAUSE);
                 }
+
+                /**
+                 *       case (KeyEvent.VK_ENTER)->{
+                 *                 if(game.playerInRangeOfStore()){
+                 *                     //TODO panel switch logic
+                 *                 }
+                 */
+
             }
 
         }

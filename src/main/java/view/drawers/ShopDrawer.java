@@ -19,7 +19,6 @@ public class ShopDrawer implements IDrawer{
 
     public ShopDrawer(Shop shopObject){
         this.shopObject = shopObject;
-        this.camera = camera;
         initShopImages();
     }
 

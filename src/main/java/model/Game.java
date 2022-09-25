@@ -2,14 +2,13 @@ package model;
 
 import model.gameobjects.*;
 import model.gameobjects.enemies.*;
-import model.collision.CollisionHandler;
+import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
 import model.gameobjects.theShop.Shop;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
-import view.buttons.GameButton;
 import model.gameobjects.IGameObject;
 
 import view.IObserver;
@@ -40,7 +39,6 @@ public class Game{
     private ArrayList<String> highscoreList;
     private ArrayList<Projectile> projectiles;
     private ArrayList<IGameObject> sprites;
-
     private Shop shop;
 
     public Game(){
@@ -258,6 +256,8 @@ public class Game{
         escapePressed = false;
     }
 
+
+
     /**
      * Used as a way for objects inside to read whether the W key is pressed
      * @return wPressed
@@ -293,6 +293,7 @@ public class Game{
     public void makePlayerShoot(){
         player.shoot(projectiles);
     }
+
     /**
      * Updates the current IGameState
      */
@@ -322,14 +323,10 @@ public class Game{
         for (Projectile p : projectiles) {
             p.update();
         }
-
-        playerInRangeOfStore();
     }
 
-    private void playerInRangeOfStore() {
-        if(CollisionHandler.testCollision(player, shop)){
-            shop.openShopPanel();
-        }
+    public boolean playerInRangeOfStore() {
+        return(CollisionHandler.testCollision(player, shop));
     }
 
     /**

@@ -1,7 +1,5 @@
 package model.gameobjects.theShop;
 
-import model.collision.CollisionHandler;
-import model.gameobjects.Player;
 import model.helperclasses.Rect;
 import model.helperclasses.Vector2;
 import model.gameobjects.IGameObject;
