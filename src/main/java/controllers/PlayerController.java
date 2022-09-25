@@ -57,12 +57,6 @@ public class PlayerController implements KeyListener {
                 setDirection(EDirection.RIGHT);
             }
 
-            case (KeyEvent.VK_SPACE) -> {
-                if (!spaceKeyDown) {
-                    spaceKeyDown = true;
-                    game.makePlayerShoot();
-                }
-            }
         }
     }
 
