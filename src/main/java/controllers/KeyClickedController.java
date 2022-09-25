@@ -49,8 +49,7 @@ public class KeyClickedController implements KeyListener {
                     game.setEnterPressed();
                 }
                 if (enterKeyDown && game.playerInRangeOfStore()){
-                   // panel.changePanelState(EPanelState.SHOP);
-                    System.out.println("yessir");
+                   // TODO panel.changePanelState(EPanelState.SHOP)
                 }
 
             }
