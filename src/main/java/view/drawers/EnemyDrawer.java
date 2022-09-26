@@ -1,7 +1,8 @@
 package view.drawers;
 
-import model.gameobjects.Entity;
+import model.gameobjects.enemies.Enemy;
 import model.gameobjects.enemies.IEnemy;
+import model.helperclasses.ImageHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -9,40 +10,32 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class EnemyDrawer implements IDrawer {
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
-    private final List<Entity> enemies;
+    private final ArrayList<IEnemy> enemies;
     private int animationCounter;
     private int imageSwitcher;
 
-    public EnemyDrawer(List<Entity> enemies){
+    private ImageHandler imageHandler;
+
+    public EnemyDrawer(ArrayList<IEnemy> enemies){
         this.enemies = enemies;
+        this.imageHandler = new ImageHandler();
         initEnemyImages();
 
     }
 
-    private BufferedImage setImage(String path){
-        BufferedImage image;
-        try {
-            image = ImageIO.read(new File(path));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return image;
-    }
-
     private void initEnemyImages(){
         try {
-            up1 = setImage("imgs/enemy/enemy_up_1.png");
-            up2 = setImage("imgs/enemy/enemy_up_2.png");
-            left1 = setImage("imgs/enemy/enemy_left_1.png");
-            left2 = setImage("imgs/enemy/enemy_left_2.png");
-            down1 = setImage("imgs/enemy/enemy_down_1.png");
-            down2 = setImage("imgs/enemy/enemy_down_2.png");
-            right1 =setImage("imgs/enemy/enemy_right_1.png");
-            right2 =setImage("imgs/enemy/enemy_right_2.png");
+            up1 = imageHandler.getImage("imgs/enemy/enemy_up_1.png");
+            up2 = imageHandler.getImage("imgs/enemy/enemy_up_2.png");
+            left1 = imageHandler.getImage("imgs/enemy/enemy_left_1.png");
+            left2 = imageHandler.getImage("imgs/enemy/enemy_left_2.png");
+            down1 = imageHandler.getImage("imgs/enemy/enemy_down_1.png");
+            down2 = imageHandler.getImage("imgs/enemy/enemy_down_2.png");
+            right1 = imageHandler.getImage("imgs/enemy/enemy_right_1.png");
+            right2 = imageHandler.getImage("imgs/enemy/enemy_right_2.png");
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -68,7 +61,7 @@ public class EnemyDrawer implements IDrawer {
     public void draw(Graphics2D g2) {
 
         movementAnimation();
-        for(Entity enemy: enemies){
+        for(IEnemy enemy: enemies){
             switch (enemy.getDirection()){
                 case UP ->{
                     if(imageSwitcher == 1){
@@ -107,7 +100,7 @@ public class EnemyDrawer implements IDrawer {
                 }
             }
 
-            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getSize(), enemy.getSize());
+            List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getSize(), enemy.getSize());
 
             if(!(prevImg == null)){
                 g2.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);

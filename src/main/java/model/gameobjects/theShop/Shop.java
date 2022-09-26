@@ -4,6 +4,7 @@ import model.helperclasses.Rect;
 import model.helperclasses.Vector2;
 import model.gameobjects.IGameObject;
 
+
 /**
  * This ISprite is the shop where weapons and armor can be
  * upgraded through the game. It will also contain logic regarding
@@ -11,37 +12,23 @@ import model.gameobjects.IGameObject;
  */
 
 
-import model.helperclasses.Rect;
-import model.helperclasses.Vector2;
-import model.gameobjects.IGameObject;
-
-
-
-
 public class Shop implements IGameObject {
+    public final static int x_position = 400;
+    public final static int y_position = 200;
+    public final static int width = 64*3; // make multiple of 64
+    public final static int height = 56*3;  //multiple of 56
 
-    public final static int x_position = 0;
-    public final static int y_position = 0;
-    private Rect shopAreaSize;
-    private Vector2 Position;
+    public final static Vector2 pos = new Vector2(x_position, y_position);
 
 
-    public final static int sizeLength = 25;
+    public  Shop(){
 
-    /**
-     * The shop will have different parameters for its location and
-     * its size. This is to make the player be able to shop and not
-     * having to stand on top of the shop to do so. (Could actually
-     * be a fun implementation maybe?)
-     * @param x_size
-     * @param y_size
-     * @param x_position
-     * @param y_position
-     */
-    public Shop(int x_size, int y_size, int x_position, int y_position) {
-        shopAreaSize = new Rect(100, 100,x_size , y_size);
-        Position = new Vector2(x_position, y_position);
     }
+
+
+    public final static Rect rect = new Rect(x_position, y_position, width, height);
+
+
 
     /**
      * will communicate through game if the player
@@ -56,16 +43,10 @@ public class Shop implements IGameObject {
      * will be thrown and an error message will be prompted
      * on the player's screen.
      */
-    public void closeEnoughToShop(Vector2 position){
-         if(getRect().intersects(this.Position, position))
-             openShopPanel();
-         //throw exception not close enough
-
-    }
 
 
     public void openShopPanel(){
-
+        System.out.println("We're in boys");        //Make the shop light up!
     }
 
     @Override
@@ -83,7 +64,7 @@ public class Shop implements IGameObject {
      */
     @Override
     public Vector2 getPos() {
-        return this.Position;
+        return this.pos;
     }
 
     @Override
@@ -93,7 +74,7 @@ public class Shop implements IGameObject {
 
     @Override
     public Rect getRect() {
-        return this.shopAreaSize;
+        return this.rect;
     }
 
     @Override

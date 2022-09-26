@@ -1,4 +1,4 @@
-package model.collision;
+package model.helperclasses.collision;
 
 import config.Config;
 import controllers.EDirection;

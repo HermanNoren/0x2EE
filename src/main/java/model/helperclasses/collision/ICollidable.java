@@ -1,4 +1,4 @@
-package model.collision;
+package model.helperclasses.collision;
 
 public interface ICollidable {
      boolean iscollidable();

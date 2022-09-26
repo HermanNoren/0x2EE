@@ -16,11 +16,15 @@ import java.util.List;
  */
 
 public class Player extends Entity implements IGameObject, IFocusableObject {
+
     private int score;
     private int money;
     protected Weapon weapon;
     protected Armor armor;
     boolean isDamageTaken;
+
+    public boolean isInteractable = false;
+
     private boolean upPressed, downPressed, leftPressed, rightPressed;
 
     /**
@@ -40,8 +44,8 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         money = 0;
         setHealth(1000);
         setMaxHp(1000);
-        setVelX(1);
-        setVelY(1);
+        setVelX(0.5);
+        setVelY(0.5);
     }
 
     public void shoot(List<Projectile> projectiles) {
@@ -75,11 +79,6 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     }
 
     @Override
-    public boolean isPassable() {
-        return false;
-    }
-
-    @Override
     public void update() {
         moveX(0.5f);
         moveY(0.5f);
@@ -87,6 +86,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
 
     public void moveX(float speed) {
         acc.x = 0;
+
 
         if (getDirection() == EDirection.RIGHT) { acc.x = speed; }
         if (getDirection() == EDirection.LEFT) { acc.x = -speed; }
@@ -98,6 +98,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
 
     public void moveY(float speed) {
         acc.y = 0;
+
 
         if (getDirection() == EDirection.DOWN) { acc.y = speed;  }
         if (getDirection() == EDirection.UP) { acc.y = -speed; }
@@ -114,9 +115,6 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         return weapon.damage;
     }
 
-    public void damageTaken(int damage) {
-        setHealth(getHealth() - damage);
-    }
 
     public boolean isDamageTaken(){
 

@@ -1,7 +1,9 @@
 package model.gameobjects.enemies;
 
 import config.Config;
+import model.helperclasses.AStar;
 import model.Game;
+import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import model.gameobjects.Entity;
 
@@ -29,7 +31,7 @@ public abstract class Enemy extends Entity implements IEnemy {
      *
      */
     private void moveToGoal(Terrain goal) {
-//          ArrayList<Terrain> path = game.getPath();
+//        ArrayList<Terrain> path = game.getPath();
 //        assert path != null;
 //        Terrain prevTerrain = null;
 //        Terrain nextTerrain = null;

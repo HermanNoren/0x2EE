@@ -4,6 +4,7 @@ import config.Config;
 
 import model.gameobjects.IGameObject;
 import model.helperclasses.Vector2;
+import model.helperclasses.ImageHandler;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import utility.ImageScaler;
@@ -23,17 +24,20 @@ public class MapDrawer implements IDrawer {
     private final GameMap gameMap;
     private int size = 48;
 
+    private ImageHandler imageHandler;
+
     public MapDrawer(GameMap gameMap){
         this.gameMap = gameMap;
         this.terrains = gameMap.getTerrains();
-        loadImgs();
+        this.imageHandler = new ImageHandler();
+        loadTerrainImages();
     }
 
-    private void loadImgs(){
-        setupImg("grass", 0);
-        setupImg("border", 1);
-        setupImg("wall", 2);
-        setupImg("tree", 3);
+    private void loadTerrainImages(){
+        terrainImgs[0] = imageHandler.getImage("imgs/tile/grass.png");
+        terrainImgs[1] = imageHandler.getImage("imgs/tile/tree.png");
+        terrainImgs[2] = imageHandler.getImage("imgs/tile/wall.png");
+        terrainImgs[3] = imageHandler.getImage("imgs/tile/border.png");
     }
 
     private void setupImg(String path, int imgIndex){
@@ -41,26 +45,6 @@ public class MapDrawer implements IDrawer {
     }
 
 
-    private BufferedImage setImage(String path){
-        BufferedImage image;
-        File file = new File(path);
-        try {
-            image = ImageIO.read(file);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        image = ImageScaler.scaleImage(image, size, size);
-        return image;
-    }
-
-
-
-
-
-    /**
-     * Draws the game map
-     * @param g2
-     */
     @Override
     public void draw(Graphics2D g2) {
         int terrainSize = Config.SPRITE_SIZE*3;
@@ -74,7 +58,7 @@ public class MapDrawer implements IDrawer {
                 newTerrainVector.x*=terrainSize;
                 newTerrainVector.y*=terrainSize;
 
-                ArrayList<Integer> drawInformation = DrawerHelper.
+                List<Integer> drawInformation = DrawerHelper.
                     calculateDrawingInformation(
                             newTerrainVector,
                             gameMapCoordinates[col][row].getWidth(),
@@ -83,6 +67,7 @@ public class MapDrawer implements IDrawer {
                 int terrainNum = gameMapCoordinates[col][row].getTerrainType();
                 g2.drawImage(terrainImgs[terrainNum], drawInformation.get(0), drawInformation.get(1), null);
             }
+
         }
 
 

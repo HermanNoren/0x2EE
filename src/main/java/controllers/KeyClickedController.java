@@ -1,19 +1,25 @@
 package controllers;
 import model.Game;
+import view.panelstates.EPanelState;
+import view.panelstates.IPanelState;
+import view.panelstates.InGamePanelState;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyClickedController implements KeyListener {
     private final Game game;
+    private final IPanelState panel;
     private boolean wKeyDown;
     private boolean sKeyDown;
     private boolean enterKeyDown;
     private boolean escapeKeyDown;
+
     private boolean spaceKeyDown;
 
-    public KeyClickedController(Game game) {
+    public KeyClickedController(Game game, IPanelState panel) {
         this.game = game;
+        this.panel = panel;
     }
 
     @Override
@@ -42,20 +48,20 @@ public class KeyClickedController implements KeyListener {
                     enterKeyDown = true;
                     game.setEnterPressed();
                 }
+                if (enterKeyDown && game.playerInRangeOfStore()){
+                    System.out.println("OpenStore");
+                }
 
             }
             case (KeyEvent.VK_ESCAPE) -> {
                 if (!escapeKeyDown) {
                     escapeKeyDown = true;
                     game.setEscapePressed();
+                    panel.changePanelState(EPanelState.PAUSE);
                 }
+
             }
-            case (KeyEvent.VK_SPACE) -> {
-                if (!spaceKeyDown) {
-                    spaceKeyDown = true;
-                    game.setSpacePressed();
-                }
-            }
+
         }
     }
 
@@ -77,10 +83,6 @@ public class KeyClickedController implements KeyListener {
             case (KeyEvent.VK_ESCAPE) -> {
                 escapeKeyDown = false;
                 game.resetEscapePressed();
-            }
-            case (KeyEvent.VK_SPACE) -> {
-                spaceKeyDown = false;
-                game.resetSpacePressed();
             }
         }
     }

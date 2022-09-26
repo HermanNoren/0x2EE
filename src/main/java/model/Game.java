@@ -1,18 +1,25 @@
 package model;
 
+import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
-import model.collision.CollisionHandler;
+import model.gameobjects.ItemSpawner.Spawner;
+import model.gameobjects.enemies.*;
+import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
+import model.gameobjects.theShop.Shop;
+import model.helperclasses.HighscoreHandler;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
+import view.buttons.GameButton;
 import model.gameobjects.IGameObject;
 
 import view.IObserver;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,7 +28,7 @@ import java.util.Scanner;
  * With help of the main game loop it delegates work to the active IGameState
  */
 public class Game{
-
+    private Thread gameLoopThread;
     private final int FPS = 120; // FRAMES PER SECOND
     private final int UPS = 200; // UPDATES PER SECOND
     private List<IObserver> observers;
@@ -38,23 +45,33 @@ public class Game{
     private List<String> highscoreList;
     private List<Projectile> projectiles;
     private List<IGameObject> sprites;
+    private Shop shop;
+    private HighscoreHandler highscoreHandler;
+
+    private Spawner spawner;
 
     public Game(){
         player = new Player(32, 32, this);
+        this.gameMap = new GameMap(100, 100);
+        shop = new Shop();
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         highscoreName = new ArrayList<>();
         this.path = new ArrayList<>();
 
         EnemyFactory enemyFactory= new NormalEnemyFactory();
-        sprites = new ArrayList<>();
-
         enemies.add(enemyFactory.createEnemy(this));
-        this.gameMap = new GameMap(100, 100);
-        terrains = gameMap.getTerrains();
-        sprites.addAll(terrains);
-        sprites.add(player);
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        spawner = new Spawner(this);
 
+        sprites = new ArrayList<>();
+        sprites.add(player);
+        sprites.add(shop);
+        sprites.addAll(terrains);
         wPressed = false;
         aPressed = false;
         sPressed = false;
@@ -62,30 +79,14 @@ public class Game{
         enterPressed = false;
         escapePressed = false;
         spacePressed = false;
-
         stateChangedFlag = false;
-
         observers = new ArrayList<>();
-        highscoreFile = new File("textfiles/highscores.txt");
-        highscoreList = getHighScoreList();
+        highscoreHandler = new HighscoreHandler();
+        highscoreList = highscoreHandler.getHighscoreList();
     }
 
     public GameMap getGameMap() {
         return gameMap;
-    }
-
-    public List<String> getHighScoreList() {
-        Scanner sc = null;
-        highscoreList = new ArrayList<>();
-        try {
-            sc = new Scanner(highscoreFile);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        while(sc.hasNext()){
-            highscoreList.add(sc.next());
-        }
-        return highscoreList;
     }
 
     public List<String> getHighscoreName(){
@@ -112,51 +113,13 @@ public class Game{
         }else{
             //GAME OVER MENU
         }
-
     }
-
-    /**
-     * Saves the new highscore to a textfile.
-     * @param list List of highscores
-     */
-
-    private void saveHighscore(List<String> list){
-        try {
-            BufferedWriter output = new BufferedWriter(new FileWriter(highscoreFile, false));
-            for (String s : highscoreList) {
-                output.write(s + " ");
-            }
-            output.close();
-
-        } catch (IOException ex1) {
-            System.out.printf("ERROR writing score to file: %s\n", ex1);
-        }
-    }
-
 
     /**
      * Updates the list containing highscores.
      */
     public void updateHighscoreList(){
-        int i = 0;
-        if (highscoreList.isEmpty()){
-            highscoreList.add(String.join("", highscoreName) + ":" + player.getScore());
-        }else {
-            for (String playerScore : highscoreList) {
-                String[] savedScore = playerScore.split(":");
-                int score = Integer.valueOf(savedScore[1]);
-                if (player.getScore() >= score) {
-                    highscoreList.add(i, String.join("", highscoreName) + ":" + player.getScore());
-                    break;
-                }
-                    i++;
-                if (i == highscoreList.size()){
-                    highscoreList.add(String.join("", highscoreName) + ":" + player.getScore());
-                    break;
-                }
-            }
-        }
-        saveHighscore(highscoreList);
+        highscoreHandler.saveHighscore(String.join("", highscoreName), player.getScore());
     }
 
 
@@ -179,18 +142,23 @@ public class Game{
     public Player getPlayer() {
         return player;
     }
-    public List<Entity> getEnemies(){
+    public List<IEnemy> getEnemies(){
         return enemies;
+    }
+
+    public List<IGameObject> getItems(){
+        return spawner.getSpawnedItems();
     }
 
     /**
      * Returns an ArrayList containing all the tiles in the Game Map.
      * @return  All Game Map Tiles
      */
-    public ArrayList<IGameObject> getTerrainBorder() {
+    public List<IGameObject> getTerrainBorder() {
         return null;
 //        return terrainBorder.getTerrainBorder();
     }
+
 
 
     /**
@@ -253,6 +221,8 @@ public class Game{
         escapePressed = false;
     }
 
+
+
     /**
      * Used as a way for objects inside to read whether the W key is pressed
      * @return wPressed
@@ -285,6 +255,10 @@ public class Game{
         observers.add(observer);
     }
 
+    public void makePlayerShoot(){
+        player.shoot(projectiles);
+    }
+
     /**
      * Updates the current IGameState
      */
@@ -298,40 +272,60 @@ public class Game{
 
          */
 
-
-        if (spacePressed) {
-            spacePressed = false;
-            player.shoot(projectiles);
-        }
-
-
         for (IGameObject sprite : sprites) {
             sprite.update();
         }
 
-        for(Entity enemy : enemies){
+        for(IEnemy enemy : enemies){
             enemy.update();
             //Check if enemy is close enough to damage player, could be done somewhere else also.
-            if (CollisionHandler.testCollision(player, enemy)) {
+            if (CollisionHandler.testCollision(player, (Entity) enemy)) {
                 player.damageTaken(1);
             }
 
-        }
-        for(IGameObject terrain: gameMap.getTerrains()){
-            if(!terrain.isPassable()){
-                if(CollisionHandler.playerCollidesWithTerrain(player, terrain)){
-                    System.out.println("yres");
-                }
+            // Check if projectile hits enemy
+            for (Projectile p : projectiles){
+                if (CollisionHandler.testCollision((Entity) enemy, p)) {
+                    ((Entity) enemy).damageTaken(10);
+                    spawner.spawnItem();
+                    projectiles.remove(p);
+                    break;
+                    }
+                    // error om man inte breakar för tar bort projectilen
+
             }
+
         }
 
+        if(playerInRangeOfStore()){
+            player.isInteractable = true;
+        }else{
+            player.isInteractable = false;
+        }
 
         for (Projectile p : projectiles) {
             p.update();
         }
+        for (IGameObject potion : spawner.getSpawnedItems()){
+            if (CollisionHandler.testCollision(potion, player)){
+                player.setHealth(getPlayer().getHealth() + 100);
+                spawner.clearPotion(potion);
+                break; // error om man inte breakar, se ovan
+            }
+
+        }
+    }
 
 
+    public boolean playerInRangeOfStore() {
+        return(CollisionHandler.testCollision(player, shop));
+    }
 
+    public void checkIfInteractable(){
+        if(playerInRangeOfStore()){
+            player.isInteractable = true;
+        }
+        player.isInteractable = false;
     }
 
     /**
@@ -347,11 +341,13 @@ public class Game{
         this.spacePressed = false;
     }
 
-    public List<Projectile> getProjectiles() {
+    public ArrayList<Projectile> getProjectiles() {
         return projectiles;
     }
 
-    public List<Terrain> getPath() {
-        return path;
+
+    public Shop getshop() {
+        return shop;
     }
+
 }

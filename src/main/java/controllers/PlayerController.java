@@ -5,17 +5,38 @@ import model.gameobjects.Player;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.*;
 
 public class PlayerController implements KeyListener {
     private final Player player;
-
+    private boolean moving, spaceKeyDown;
+    private List<EDirection> pressedOrder;
     private Game game;
 
     public PlayerController(Game game) {
-        game = game;
+        pressedOrder = new ArrayList<>();
+        this.game = game;
         this.player = game.getPlayer();
     }
 
+    private void setDirection(EDirection direction){
+        if (!pressedOrder.contains(direction)) {
+            pressedOrder.add(direction);
+            player.setDirection(direction);
+            moving = true;
+        }
+    }
+    private void releaseDirection(EDirection direction){
+        pressedOrder.remove(direction);
+        if (pressedOrder.isEmpty()) {
+            if (moving) {
+                player.setDirection(EDirection.NOT_MOVING);
+                moving = false;
+            }
+        }
+        else
+            player.setDirection(pressedOrder.get(pressedOrder.size()-1));
+    }
     @Override
     public void keyTyped(KeyEvent e) {}
 
@@ -24,20 +45,23 @@ public class PlayerController implements KeyListener {
         int code = e.getKeyCode();
         switch (code) {
             case (KeyEvent.VK_W) -> {
-                player.setUpPressed(true);
-                player.setDirection(EDirection.UP);
+                setDirection(EDirection.UP);
             }
             case (KeyEvent.VK_A) -> {
-                player.setLeftPressed(true);
-                player.setDirection(EDirection.LEFT);
+                setDirection(EDirection.LEFT);
             }
             case (KeyEvent.VK_S) -> {
-                player.setDownPressed(true);
-                player.setDirection(EDirection.DOWN);
+                setDirection(EDirection.DOWN);
             }
             case (KeyEvent.VK_D) -> {
-                player.setRightPressed(true);
-                player.setDirection(EDirection.RIGHT);
+                setDirection(EDirection.RIGHT);
+            }
+
+            case (KeyEvent.VK_SPACE) -> {
+                if (!spaceKeyDown) {
+                    spaceKeyDown = true;
+                    game.makePlayerShoot();
+                }
             }
         }
     }
@@ -46,22 +70,20 @@ public class PlayerController implements KeyListener {
     public void keyReleased(KeyEvent e) {
         switch(e.getKeyCode()) {
             case (KeyEvent.VK_W) -> {
-                player.setUpPressed(false);
-                player.setDirection(EDirection.NOT_MOVING);
+                releaseDirection(EDirection.UP);
             }
             case (KeyEvent.VK_A) -> {
-                player.setLeftPressed(false);
-                player.setDirection(EDirection.NOT_MOVING);
+                releaseDirection(EDirection.LEFT);
             }
             case (KeyEvent.VK_S) -> {
-                player.setDownPressed(false);
-                player.setDirection(EDirection.NOT_MOVING);
+                releaseDirection(EDirection.DOWN);
             }
             case (KeyEvent.VK_D) -> {
-                player.setRightPressed(false);
-                player.setDirection(EDirection.NOT_MOVING);
+                releaseDirection(EDirection.RIGHT);
+            }
+            case (KeyEvent.VK_SPACE) -> {
+                spaceKeyDown = false;
             }
         }
     }
-
 }

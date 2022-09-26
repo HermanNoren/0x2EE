@@ -41,20 +41,14 @@ public class GameLoopController {
                 deltaDrawTime--;
             }
 
-            /*
-            if (now - lastFrame >= frameTime) {
-                draw();
-                lastFrame = now;
-                frames++;
-            }
-            */
-
             if (System.currentTimeMillis() - lastFpsCheck >= 1000) {
                 lastFpsCheck = System.currentTimeMillis();
                 System.out.println("FPS: " + frames + " | UPS: " + updates);
                 frames = 0;
                 updates = 0;
             }
+
+
         }
     }
 

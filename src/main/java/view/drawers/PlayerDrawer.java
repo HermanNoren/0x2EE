@@ -1,7 +1,7 @@
 package view.drawers;
 
-import model.gameobjects.Entity;
-import utility.ImageScaler;
+import model.helperclasses.ImageHandler;
+import model.gameobjects.Player;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Strictly used to draw the player onto the screen
@@ -17,12 +18,15 @@ public class PlayerDrawer implements IDrawer {
 
     private int animationCounter;
     private int imageSwitcher;
-    private Entity player;
+    private Player player;
+
+    private ImageHandler imageHandler;
 
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
 
-    public PlayerDrawer(Entity player) {
+    public PlayerDrawer(Player player) {
         this.player = player;
+        this.imageHandler = new ImageHandler();
         initPlayerImages();
     }
 
@@ -75,31 +79,19 @@ public class PlayerDrawer implements IDrawer {
      * Initializes all the images used to draw the player
      */
     private void initPlayerImages(){
-        up1 = setImage("imgs/player/player_up_1.png");
-        up2 = setImage("imgs/player/player_up_2.png");
-        left1 = setImage("imgs/player/player_left_1.png");
-        left2 = setImage("imgs/player/player_left_2.png");
-        down1 = setImage("imgs/player/player_down_1.png");
-        down2 = setImage("imgs/player/player_down_2.png");
-        right1 = setImage("imgs/player/player_right_1.png");
-        right2 = setImage("imgs/player/player_right_2.png");
-    }
-
-    /**
-     * Fetches an image from the given path
-     * @param path path to the image
-     * @return image
-     */
-    private BufferedImage setImage(String path){
-        BufferedImage image;
         try {
-            image = ImageIO.read(new File(path));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            up1 = imageHandler.getImage("imgs/player/player_up_1.png");
+            up2 = imageHandler.getImage("imgs/player/player_up_2.png");
+            left1 = imageHandler.getImage("imgs/player/player_left_1.png");
+            left2 = imageHandler.getImage("imgs/player/player_left_2.png");
+            down1 = imageHandler.getImage("imgs/player/player_down_1.png");
+            down2 = imageHandler.getImage("imgs/player/player_down_2.png");
+            right1 = imageHandler.getImage("imgs/player/player_right_1.png");
+            right2 = imageHandler.getImage("imgs/player/player_right_2.png");
         }
-
-        image = ImageScaler.scaleImage(image, 48, 48);
-        return image;
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -122,11 +114,10 @@ public class PlayerDrawer implements IDrawer {
     public void draw(Graphics2D g) {
         movementAnimation();
         chooseActiveImage();
-        ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(player.getPos(), player.getSize(), player.getSize());
+        List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(player.getPos(), player.getSize(), player.getSize());
         if(prevImg == null){
             g.drawImage(up1, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null); // Sets default image
         }
-
         else {
             g.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
         }
