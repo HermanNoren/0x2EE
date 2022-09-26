@@ -18,7 +18,6 @@ public class InGamePanelState implements IPanelState {
 
     private Game game;
     private HUD hud;
-    private List<IDrawer> drawers;
     /**
      * Important to know in the constructor in which order the drawable objects are put in as
      * a drawing hierarchy is created (which object is drawn over whom).
@@ -34,7 +33,7 @@ public class InGamePanelState implements IPanelState {
         this.mainPanel = mainPanel;
         keyListeners = new ArrayList<>();
         keyListeners.add(new PlayerController(game));
-        keyListeners.add(new KeyClickedController(game));
+        keyListeners.add(new KeyClickedController(game, this));
         hud = new HUD(game.getPlayer());
 
         camera = Camera.getInstance();

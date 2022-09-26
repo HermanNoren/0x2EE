@@ -7,15 +7,9 @@ import model.helperclasses.Vector2;
 import model.helperclasses.ImageHandler;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
-import utility.ImageScaler;
-
-import javax.imageio.ImageIO;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
-import java.util.ArrayList;
-
 import java.util.List;
 
 public class MapDrawer implements IDrawer {
@@ -23,7 +17,7 @@ public class MapDrawer implements IDrawer {
     private final BufferedImage[] terrainImgs = new BufferedImage[10];
     private final GameMap gameMap;
     private int size = 48;
-
+    private int spriteSize = Config.SPRITE_SIZE*3;
     private ImageHandler imageHandler;
 
     public MapDrawer(GameMap gameMap){
@@ -31,17 +25,23 @@ public class MapDrawer implements IDrawer {
         this.terrains = gameMap.getTerrains();
         this.imageHandler = new ImageHandler();
         loadTerrainImages();
+        for (BufferedImage img : terrainImgs){
+
+        }
     }
 
     private void loadTerrainImages(){
-        terrainImgs[0] = imageHandler.getImage("imgs/tile/grass.png");
-        terrainImgs[1] = imageHandler.getImage("imgs/tile/tree.png");
-        terrainImgs[2] = imageHandler.getImage("imgs/tile/wall.png");
-        terrainImgs[3] = imageHandler.getImage("imgs/tile/border.png");
-    }
+        terrainImgs[0] = ImageHandler.scaleImage(imageHandler.getImage("imgs/tile/grass.png"), spriteSize, spriteSize);
+        terrainImgs[1] = ImageHandler.scaleImage(imageHandler.getImage("imgs/tile/border.png"), spriteSize, spriteSize);
+        terrainImgs[2] = ImageHandler.scaleImage(imageHandler.getImage("imgs/tile/tree.png"), spriteSize, spriteSize);
+        terrainImgs[3] = ImageHandler.scaleImage(imageHandler.getImage("imgs/tile/wall.png"), spriteSize, spriteSize);
 
-    private void setupImg(String path, int imgIndex){
-        terrainImgs[imgIndex] = setImage("imgs/tile/"+path+".png");
+
+    }
+    private void scaleImgs(){
+        for(BufferedImage img: terrainImgs){
+            ImageHandler.scaleImage(img, 48, 48);
+        }
     }
 
 

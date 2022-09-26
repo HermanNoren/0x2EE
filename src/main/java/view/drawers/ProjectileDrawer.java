@@ -16,7 +16,7 @@ public class ProjectileDrawer implements IDrawer {
     @Override
     public void draw(Graphics2D g) {
         for (Projectile p : projectiles) {
-            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(p.getPos(), p.getWidth(), p.getHeight());
+            List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(p.getPos(), p.getWidth(), p.getHeight());
             g.fillRect(drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3));
         }
     }

@@ -71,7 +71,6 @@ public class Game{
         sprites = new ArrayList<>();
         sprites.add(player);
         sprites.add(shop);
-        sprites.addAll(terrains);
         wPressed = false;
         aPressed = false;
         sPressed = false;
@@ -142,7 +141,7 @@ public class Game{
     public Player getPlayer() {
         return player;
     }
-    public List<IEnemy> getEnemies(){
+    public List<Entity> getEnemies(){
         return enemies;
     }
 
@@ -276,7 +275,7 @@ public class Game{
             sprite.update();
         }
 
-        for(IEnemy enemy : enemies){
+        for(Entity enemy : enemies){
             enemy.update();
             //Check if enemy is close enough to damage player, could be done somewhere else also.
             if (CollisionHandler.testCollision(player, (Entity) enemy)) {
@@ -341,7 +340,7 @@ public class Game{
         this.spacePressed = false;
     }
 
-    public ArrayList<Projectile> getProjectiles() {
+    public List<Projectile> getProjectiles() {
         return projectiles;
     }
 

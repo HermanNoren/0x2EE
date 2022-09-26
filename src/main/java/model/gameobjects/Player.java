@@ -79,6 +79,11 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     }
 
     @Override
+    public boolean isPassable() {
+        return false;
+    }
+
+    @Override
     public void update() {
         moveX(0.5f);
         moveY(0.5f);
