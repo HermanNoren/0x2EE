@@ -1,7 +1,7 @@
 package view.drawers;
 
-import model.gameobjects.Entity;
 import model.helperclasses.ImageHandler;
+import model.gameobjects.Player;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -17,13 +17,13 @@ public class PlayerDrawer implements IDrawer {
 
     private int animationCounter;
     private int imageSwitcher;
-    private Entity player;
+    private Player player;
 
     private ImageHandler imageHandler;
 
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
 
-    public PlayerDrawer(Entity player) {
+    public PlayerDrawer(Player player) {
         this.player = player;
         this.imageHandler = new ImageHandler();
         initPlayerImages();

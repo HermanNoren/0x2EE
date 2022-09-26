@@ -22,6 +22,8 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     protected Armor armor;
     boolean isDamageTaken;
 
+    public boolean isInteractable = false;
+
     private boolean upPressed, downPressed, leftPressed, rightPressed;
 
     /**
@@ -84,8 +86,8 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     public void moveX() {
         acc.x = 0;
 
-        if (getDirection() == EDirection.RIGHT) { acc.x = 0.5; }
-        if (getDirection() == EDirection.LEFT) { acc.x = -0.5; }
+        if (getDirection() == EDirection.RIGHT) { acc.x = 0.3; }
+        if (getDirection() == EDirection.LEFT) { acc.x = -0.3; }
 
         acc.x += vel.x * -0.1;
         vel.x += acc.x;
@@ -95,8 +97,8 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     public void moveY() {
         acc.y = 0;
 
-        if (getDirection() == EDirection.DOWN) { acc.y = 0.5;  }
-        if (getDirection() == EDirection.UP) { acc.y = -0.5; }
+        if (getDirection() == EDirection.DOWN) { acc.y = 0.3;  }
+        if (getDirection() == EDirection.UP) { acc.y = -0.3; }
 
         acc.y += vel.y * -0.1;
         vel.y += acc.y;

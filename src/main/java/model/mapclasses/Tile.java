@@ -1,5 +1,5 @@
 package model.mapclasses;
-import model.collision.CollidableObject;
+import model.helperclasses.collision.CollidableObject;
 import config.Config;
 import model.helperclasses.Rect;
 import model.helperclasses.Vector2;

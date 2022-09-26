@@ -13,31 +13,22 @@ import model.gameobjects.IGameObject;
 
 
 public class Shop implements IGameObject {
-
-    public  Shop(){}
-    public final static int x_position = 300;
-    public final static int y_position = 100;
+    public final static int x_position = 400;
+    public final static int y_position = 200;
+    public final static int width = 64*3; // make multiple of 64
+    public final static int height = 56*3;  //multiple of 56
 
     public final static Vector2 pos = new Vector2(x_position, y_position);
-    public final static int width = 160;
 
-    public final static int height = 160;
+
+    public  Shop(){
+
+    }
+
 
     public final static Rect rect = new Rect(x_position, y_position, width, height);
 
 
-    public final static Vector2 static_position = new Vector2(x_position,y_position);
-    public final static Rect static_size = new Rect(x_position, y_position, width, height);
-    /**
-     * The shop will have different parameters for its location and
-     * its size. This is to make the player be able to shop and not
-     * having to stand on top of the shop to do so. (Could actually
-     * be a fun implementation maybe?)
-     * @param x_size
-     * @param y_size
-     * @param x_position
-     * @param y_position
-     */
 
     /**
      * will communicate through game if the player
@@ -52,16 +43,10 @@ public class Shop implements IGameObject {
      * will be thrown and an error message will be prompted
      * on the player's screen.
      */
-    public void closeEnoughToShop(Vector2 position){
-         if(getRect().intersects(this.getPos(), position))
-             openShopPanel();
-         //throw exception not close enough
-
-    }
 
 
     public void openShopPanel(){
-
+        System.out.println("We're in boys");        //Make the shop light up!
     }
 
     @Override

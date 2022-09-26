@@ -9,9 +9,11 @@ public class HUD {
 
     private Player player;
 
+
     public HUD(Player player){
         this.player = player;
     }
+
 
     /**
      * Updates the HUD of the game (Player health, score & money)
