@@ -15,7 +15,6 @@ public class HighscoreHandler {
             highscoreFile = new File("textfiles/highscores.txt");
             highscoreList = getHighscoreList();
     }
-
     /**
      * Returns list of all highscores and related names
      * @return list of highscores

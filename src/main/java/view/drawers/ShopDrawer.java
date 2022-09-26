@@ -2,6 +2,7 @@ package view.drawers;
 
 
 import model.gameobjects.theShop.Shop;
+import model.helperclasses.ImageHandler;
 import view.Camera;
 
 import javax.imageio.ImageIO;
@@ -17,31 +18,22 @@ public class ShopDrawer implements IDrawer{
 
     private Shop shopObject;
 
+    private ImageHandler imageHandler;
+
     public ShopDrawer(Shop shopObject){
         this.shopObject = shopObject;
         this.camera = camera;
+        this.imageHandler = new ImageHandler();
         initShopImages();
     }
 
-
-
     private void initShopImages(){
         try{
-             frame1 = setImage("imgs/shopmovement/Shoppiskel2 copy.png"); //scale twice as large
+             frame1 = imageHandler.getImage("imgs/shopmovement/Shoppiskel2 copy.png"); //scale twice as large
         }
         catch (Exception errorMessage){
             System.out.println(errorMessage.getMessage());
         }
-    }
-
-    private BufferedImage setImage(String path){
-        BufferedImage image;
-        try {
-            image = ImageIO.read(new File(path));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return image;
     }
 
     @Override

@@ -3,6 +3,7 @@ package view.drawers;
 import config.Config;
 
 import model.gameobjects.IGameObject;
+import model.helperclasses.ImageHandler;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import view.Camera;
@@ -20,20 +21,23 @@ public class MapDrawer implements IDrawer {
     private final GameMap gameMap;
     private final int[][] mapNums;
 
+    private ImageHandler imageHandler;
+
     public MapDrawer(GameMap gameMap){
 
         this.gameMap = gameMap;
         mapNums = new int[gameMap.getWidth()][gameMap.getHeight()];
         this.terrains = gameMap.getTerrains();
+        this.imageHandler = new ImageHandler();
         loadTerrainImages();
         loadGameMap("maps/map1.txt");
     }
 
     private void loadTerrainImages(){
-        terrainImgs[0] = setImage("imgs/tile/grass.png");
-        terrainImgs[1] = setImage("imgs/tile/tree.png");
-        terrainImgs[2] = setImage("imgs/tile/wall.png");
-        terrainImgs[3] = setImage("imgs/tile/border.png");
+        terrainImgs[0] = imageHandler.getImage("imgs/tile/grass.png");
+        terrainImgs[1] = imageHandler.getImage("imgs/tile/tree.png");
+        terrainImgs[2] = imageHandler.getImage("imgs/tile/wall.png");
+        terrainImgs[3] = imageHandler.getImage("imgs/tile/border.png");
     }
 
     private void loadGameMap(String path){
@@ -62,16 +66,6 @@ public class MapDrawer implements IDrawer {
             e.printStackTrace();
         }
 
-    }
-
-    private BufferedImage setImage(String path){
-        BufferedImage image;
-        try {
-            image = ImageIO.read(new File(path));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return image;
     }
 
     @Override

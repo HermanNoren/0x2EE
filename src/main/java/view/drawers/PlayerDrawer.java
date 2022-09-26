@@ -1,6 +1,7 @@
 package view.drawers;
 
 import model.gameobjects.Entity;
+import model.helperclasses.ImageHandler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -18,10 +19,13 @@ public class PlayerDrawer implements IDrawer {
     private int imageSwitcher;
     private Entity player;
 
+    private ImageHandler imageHandler;
+
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
 
     public PlayerDrawer(Entity player) {
         this.player = player;
+        this.imageHandler = new ImageHandler();
         initPlayerImages();
     }
 
@@ -75,33 +79,18 @@ public class PlayerDrawer implements IDrawer {
      */
     private void initPlayerImages(){
         try {
-            up1 = setImage("imgs/player/player_up_1.png");
-            up2 = setImage("imgs/player/player_up_2.png");
-            left1 = setImage("imgs/player/player_left_1.png");
-            left2 = setImage("imgs/player/player_left_2.png");
-            down1 = setImage("imgs/player/player_down_1.png");
-            down2 = setImage("imgs/player/player_down_2.png");
-            right1 = setImage("imgs/player/player_right_1.png");
-            right2 = setImage("imgs/player/player_right_2.png");
+            up1 = imageHandler.getImage("imgs/player/player_up_1.png");
+            up2 = imageHandler.getImage("imgs/player/player_up_2.png");
+            left1 = imageHandler.getImage("imgs/player/player_left_1.png");
+            left2 = imageHandler.getImage("imgs/player/player_left_2.png");
+            down1 = imageHandler.getImage("imgs/player/player_down_1.png");
+            down2 = imageHandler.getImage("imgs/player/player_down_2.png");
+            right1 = imageHandler.getImage("imgs/player/player_right_1.png");
+            right2 = imageHandler.getImage("imgs/player/player_right_2.png");
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    /**
-     * Fetches an image from the given path
-     * @param path path to the image
-     * @return image
-     */
-    private BufferedImage setImage(String path){
-        BufferedImage image;
-        try {
-            image = ImageIO.read(new File(path));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return image;
     }
 
     /**

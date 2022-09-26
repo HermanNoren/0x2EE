@@ -2,6 +2,8 @@ package view.drawers;
 
 import model.gameobjects.enemies.Enemy;
 import model.gameobjects.enemies.IEnemy;
+import model.helperclasses.ImageHandler;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,32 +17,25 @@ public class EnemyDrawer implements IDrawer {
     private int animationCounter;
     private int imageSwitcher;
 
+    private ImageHandler imageHandler;
+
     public EnemyDrawer(ArrayList<IEnemy> enemies){
         this.enemies = enemies;
+        this.imageHandler = new ImageHandler();
         initEnemyImages();
 
     }
 
-    private BufferedImage setImage(String path){
-        BufferedImage image;
-        try {
-            image = ImageIO.read(new File(path));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return image;
-    }
-
     private void initEnemyImages(){
         try {
-            up1 = setImage("imgs/enemy/enemy_up_1.png");
-            up2 = setImage("imgs/enemy/enemy_up_2.png");
-            left1 = setImage("imgs/enemy/enemy_left_1.png");
-            left2 = setImage("imgs/enemy/enemy_left_2.png");
-            down1 = setImage("imgs/enemy/enemy_down_1.png");
-            down2 = setImage("imgs/enemy/enemy_down_2.png");
-            right1 =setImage("imgs/enemy/enemy_right_1.png");
-            right2 =setImage("imgs/enemy/enemy_right_2.png");
+            up1 = imageHandler.getImage("imgs/enemy/enemy_up_1.png");
+            up2 = imageHandler.getImage("imgs/enemy/enemy_up_2.png");
+            left1 = imageHandler.getImage("imgs/enemy/enemy_left_1.png");
+            left2 = imageHandler.getImage("imgs/enemy/enemy_left_2.png");
+            down1 = imageHandler.getImage("imgs/enemy/enemy_down_1.png");
+            down2 = imageHandler.getImage("imgs/enemy/enemy_down_2.png");
+            right1 = imageHandler.getImage("imgs/enemy/enemy_right_1.png");
+            right2 = imageHandler.getImage("imgs/enemy/enemy_right_2.png");
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
