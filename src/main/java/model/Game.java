@@ -1,9 +1,10 @@
 package model;
 
+import model.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.Spawner;
 import model.gameobjects.enemies.*;
-import model.collision.CollisionHandler;
+import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
@@ -41,7 +42,6 @@ public class Game{
     private ArrayList<String> highscoreList;
     private ArrayList<Projectile> projectiles;
     private ArrayList<IGameObject> sprites;
-
     private Shop shop;
     private HighscoreHandler highscoreHandler;
 
@@ -156,6 +156,7 @@ public class Game{
     }
 
 
+
     /**
      * Used as a way for outside components to tell Game if the W key is pressed.
      */
@@ -216,6 +217,8 @@ public class Game{
         escapePressed = false;
     }
 
+
+
     /**
      * Used as a way for objects inside to read whether the W key is pressed
      * @return wPressed
@@ -251,6 +254,7 @@ public class Game{
     public void makePlayerShoot(){
         player.shoot(projectiles);
     }
+
     /**
      * Updates the current IGameState
      */
@@ -289,10 +293,15 @@ public class Game{
 
         }
 
+        if(playerInRangeOfStore()){
+            player.isInteractable = true;
+        }else{
+            player.isInteractable = false;
+        }
+
         for (Projectile p : projectiles) {
             p.update();
         }
-
         for (IGameObject potion : spawner.getSpawnedItems()){
             if (CollisionHandler.testCollision(potion, player)){
                 player.setHealth(getPlayer().getHealth() + 100);
@@ -301,6 +310,18 @@ public class Game{
             }
 
         }
+    }
+
+
+    public boolean playerInRangeOfStore() {
+        return(CollisionHandler.testCollision(player, shop));
+    }
+
+    public void checkIfInteractable(){
+        if(playerInRangeOfStore()){
+            player.isInteractable = true;
+        }
+        player.isInteractable = false;
     }
 
     /**

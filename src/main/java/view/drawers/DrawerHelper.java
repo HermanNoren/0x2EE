@@ -17,6 +17,21 @@ public class DrawerHelper implements IDrawer {
 
         double x = (pos.x - camera.getOffset().x) * camera.getZoomMultiplier();
         double y = (pos.y - camera.getOffset().y) * camera.getZoomMultiplier();
+        return smellRemover(width, height, drawInformation, camera, x, y);
+    }
+
+    public static ArrayList<Integer> calculateDrawingInformation(int x_coordinate, int y_coordinate, int width, int height) {
+        ArrayList<Integer> drawInformation = new ArrayList<>();
+        Camera camera = Camera.getInstance();
+
+        double x = (x_coordinate - camera.getOffset().x) * camera.getZoomMultiplier();
+        double y = (y_coordinate - camera.getOffset().y) * camera.getZoomMultiplier();
+        return smellRemover(width, height, drawInformation, camera, x, y);
+    }
+
+
+
+    private static ArrayList<Integer> smellRemover(int width, int height, ArrayList<Integer> drawInformation, Camera camera, double x, double y) {
         double newWidth = width * camera.getZoomMultiplier();
         double newHeight = height * camera.getZoomMultiplier();
 
@@ -26,7 +41,6 @@ public class DrawerHelper implements IDrawer {
         drawInformation.add((int) Math.ceil(newHeight));
 
         return drawInformation;
-        //Returnera inte listan utan rita direkt!
     }
 
 
