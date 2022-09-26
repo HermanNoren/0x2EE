@@ -1,6 +1,7 @@
 package view.drawers;
 
 import model.gameobjects.Entity;
+import utility.ImageScaler;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -74,19 +75,14 @@ public class PlayerDrawer implements IDrawer {
      * Initializes all the images used to draw the player
      */
     private void initPlayerImages(){
-        try {
-            up1 = setImage("imgs/player/player_up_1.png");
-            up2 = setImage("imgs/player/player_up_2.png");
-            left1 = setImage("imgs/player/player_left_1.png");
-            left2 = setImage("imgs/player/player_left_2.png");
-            down1 = setImage("imgs/player/player_down_1.png");
-            down2 = setImage("imgs/player/player_down_2.png");
-            right1 = setImage("imgs/player/player_right_1.png");
-            right2 = setImage("imgs/player/player_right_2.png");
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        up1 = setImage("imgs/player/player_up_1.png");
+        up2 = setImage("imgs/player/player_up_2.png");
+        left1 = setImage("imgs/player/player_left_1.png");
+        left2 = setImage("imgs/player/player_left_2.png");
+        down1 = setImage("imgs/player/player_down_1.png");
+        down2 = setImage("imgs/player/player_down_2.png");
+        right1 = setImage("imgs/player/player_right_1.png");
+        right2 = setImage("imgs/player/player_right_2.png");
     }
 
     /**
@@ -101,6 +97,8 @@ public class PlayerDrawer implements IDrawer {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        image = ImageScaler.scaleImage(image, 48, 48);
         return image;
     }
 
@@ -128,6 +126,7 @@ public class PlayerDrawer implements IDrawer {
         if(prevImg == null){
             g.drawImage(up1, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null); // Sets default image
         }
+
         else {
             g.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
         }

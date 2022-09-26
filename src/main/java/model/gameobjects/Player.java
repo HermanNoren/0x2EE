@@ -9,19 +9,18 @@ import model.helperclasses.Vector2;
 import model.weapons.Weapon;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The player, more implementation to come.
  */
 
 public class Player extends Entity implements IGameObject, IFocusableObject {
-
     private int score;
     private int money;
     protected Weapon weapon;
     protected Armor armor;
     boolean isDamageTaken;
-
     private boolean upPressed, downPressed, leftPressed, rightPressed;
 
     /**
@@ -41,11 +40,11 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         money = 0;
         setHealth(1000);
         setMaxHp(1000);
-        setVelX(0.5);
-        setVelY(0.5);
+        setVelX(1);
+        setVelY(1);
     }
 
-    public void shoot(ArrayList<Projectile> projectiles) {
+    public void shoot(List<Projectile> projectiles) {
         EDirection dir;
         if (getDirection() == EDirection.NOT_MOVING) { dir = getLastDirection(); }
         else { dir = getDirection(); }
@@ -76,27 +75,32 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     }
 
     @Override
-    public void update() {
-        moveX();
-        moveY();
+    public boolean isPassable() {
+        return false;
     }
 
-    public void moveX() {
+    @Override
+    public void update() {
+        moveX(0.5f);
+        moveY(0.5f);
+    }
+
+    public void moveX(float speed) {
         acc.x = 0;
 
-        if (getDirection() == EDirection.RIGHT) { acc.x = 0.1; }
-        if (getDirection() == EDirection.LEFT) { acc.x = -0.1; }
+        if (getDirection() == EDirection.RIGHT) { acc.x = speed; }
+        if (getDirection() == EDirection.LEFT) { acc.x = -speed; }
 
         acc.x += vel.x * -0.1;
         vel.x += acc.x;
         pos.x += vel.x + 0.5 * acc.x;
     }
 
-    public void moveY() {
+    public void moveY(float speed) {
         acc.y = 0;
 
-        if (getDirection() == EDirection.DOWN) { acc.y = 0.1;  }
-        if (getDirection() == EDirection.UP) { acc.y = -0.1; }
+        if (getDirection() == EDirection.DOWN) { acc.y = speed;  }
+        if (getDirection() == EDirection.UP) { acc.y = -speed; }
 
         acc.y += vel.y * -0.1;
         vel.y += acc.y;

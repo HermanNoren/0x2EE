@@ -13,6 +13,7 @@ public class DrawerHelper {
 
         double x = (pos.x - camera.getOffset().x) * camera.getZoomMultiplier();
         double y = (pos.y - camera.getOffset().y) * camera.getZoomMultiplier();
+
         double newWidth = width * camera.getZoomMultiplier();
         double newHeight = height * camera.getZoomMultiplier();
 

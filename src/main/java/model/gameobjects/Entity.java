@@ -23,7 +23,7 @@ public abstract class Entity implements IGameObject {
     private int maxHp;
     private EDirection direction;
     private EDirection lastDirection;
-    private int size = Config.SPRITE_SIZE * 3;
+    private int size = Config.SPRITE_SIZE*3;
     private Rect rect;
     private Game game;
 
@@ -46,11 +46,9 @@ public abstract class Entity implements IGameObject {
     public Vector2 getVel() {
         return vel;
     }
-
     public double getVelX(){
         return vel.getX();
     }
-
     public void setVelX(double velX){
         vel.setX(velX);
     }
@@ -69,7 +67,6 @@ public abstract class Entity implements IGameObject {
     public double getVelY(){
         return vel.getY();
     }
-
     public void setVelY(double velY){
         vel.setY(velY);
     }
@@ -118,20 +115,6 @@ public abstract class Entity implements IGameObject {
         return lastDirection;
     }
 
-    /**
-     * Updates current position of entity on game screen.
-     */
-    public void updatePos(){
-        if(!(direction == EDirection.NOT_MOVING)){
-            switch (direction){
-                case UP -> pos.setY(pos.getY() - vel.getY());
-                case LEFT -> pos.setX(pos.getX() - vel.getX());
-                case DOWN -> pos.setY(pos.getY() + vel.getY());
-                case RIGHT -> pos.setX(pos.getX() + vel.getX());
-            }
-        }
-    }
-
     public void setHealth(int value) {
         if (value < 0) { health = 0; }
         health = value;
@@ -169,6 +152,7 @@ public abstract class Entity implements IGameObject {
      */
     @Override
     public void update() {
+
     }
 
     /**

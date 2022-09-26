@@ -1,5 +1,6 @@
 package view.drawers;
 
+import model.gameobjects.Entity;
 import model.gameobjects.enemies.IEnemy;
 
 import javax.imageio.ImageIO;
@@ -8,14 +9,15 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EnemyDrawer implements IDrawer {
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
-    private final ArrayList<IEnemy> enemies;
+    private final List<Entity> enemies;
     private int animationCounter;
     private int imageSwitcher;
 
-    public EnemyDrawer(ArrayList<IEnemy> enemies){
+    public EnemyDrawer(List<Entity> enemies){
         this.enemies = enemies;
         initEnemyImages();
 
@@ -66,7 +68,7 @@ public class EnemyDrawer implements IDrawer {
     public void draw(Graphics2D g2) {
 
         movementAnimation();
-        for(IEnemy enemy: enemies){
+        for(Entity enemy: enemies){
             switch (enemy.getDirection()){
                 case UP ->{
                     if(imageSwitcher == 1){

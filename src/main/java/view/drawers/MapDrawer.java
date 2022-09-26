@@ -3,105 +3,86 @@ package view.drawers;
 import config.Config;
 
 import model.gameobjects.IGameObject;
+import model.helperclasses.Vector2;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
-import view.Camera;
+import utility.ImageScaler;
 
 import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
+
+import java.util.List;
 
 public class MapDrawer implements IDrawer {
-    private final ArrayList<IGameObject> terrains;
+    private final List<IGameObject> terrains;
     private final BufferedImage[] terrainImgs = new BufferedImage[10];
     private final GameMap gameMap;
-    private final int[][] mapNums;
+    private int size = 48;
 
     public MapDrawer(GameMap gameMap){
-
         this.gameMap = gameMap;
-        mapNums = new int[gameMap.getWidth()][gameMap.getHeight()];
         this.terrains = gameMap.getTerrains();
-        loadTerrainImages();
-        loadGameMap("maps/map1.txt");
+        loadImgs();
     }
 
-    private void loadTerrainImages(){
-        terrainImgs[0] = setImage("imgs/tile/grass.png");
-        terrainImgs[1] = setImage("imgs/tile/tree.png");
-        terrainImgs[2] = setImage("imgs/tile/wall.png");
-        terrainImgs[3] = setImage("imgs/tile/border.png");
+    private void loadImgs(){
+        setupImg("grass", 0);
+        setupImg("border", 1);
+        setupImg("wall", 2);
+        setupImg("tree", 3);
     }
 
-    private void loadGameMap(String path){
-        try{
-            FileReader fr = new FileReader(path);
-            BufferedReader br = new BufferedReader(fr);
-            int col = 0;
-            int row = 0;
-            while (col<gameMap.getWidth() && row < gameMap.getHeight()){
-                String line = br.readLine();
-                System.out.println(line);
-                while (col < gameMap.getWidth()){
-                    String[] numbers = line.split(" ");
-                    int num = Integer.parseInt(numbers[col]);
-                    mapNums[col][row] = num;
-                    col++;
-                }
-                if (col == gameMap.getWidth()){
-                    col=0;
-                    row++;
-
-                }
-            }
-            br.close();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-
+    private void setupImg(String path, int imgIndex){
+        terrainImgs[imgIndex] = setImage("imgs/tile/"+path+".png");
     }
+
 
     private BufferedImage setImage(String path){
         BufferedImage image;
+        File file = new File(path);
         try {
-            image = ImageIO.read(new File(path));
+            image = ImageIO.read(file);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        image = ImageScaler.scaleImage(image, size, size);
         return image;
     }
 
+
+
+
+
+    /**
+     * Draws the game map
+     * @param g2
+     */
     @Override
     public void draw(Graphics2D g2) {
-        int spriteSize = Config.SPRITE_SIZE*3;
-        int row = 0;
-        int col = 0;
-        int x = 0;
-        int y = 0;
+        int terrainSize = Config.SPRITE_SIZE*3;
+
+        Vector2 newTerrainVector;
         Terrain[][] gameMapCoordinates = gameMap.getGameMapCoordinates();
-        while (col < gameMap.getWidth() && row < gameMap.getHeight()) {
 
-            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(gameMap.getGameMapCoordinates()[col][row].getPos(),
-                   gameMapCoordinates[col][row].getWidth(), gameMapCoordinates[col][row].getHeight());
+        for (int col = 0; col < gameMap.getWidth(); col++){
+            for(int row = 0; row < gameMap.getHeight(); row++){
+                newTerrainVector = new Vector2(gameMapCoordinates[col][row].getPos()); // For drawing in correct place.
+                newTerrainVector.x*=terrainSize;
+                newTerrainVector.y*=terrainSize;
 
-            int terrainNum = mapNums[col][row];
+                ArrayList<Integer> drawInformation = DrawerHelper.
+                    calculateDrawingInformation(
+                            newTerrainVector,
+                            gameMapCoordinates[col][row].getWidth(),
+                            gameMapCoordinates[col][row].getHeight());
 
-            g2.drawImage(terrainImgs[terrainNum], drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
-
-            x += spriteSize;
-
-            col++;
-
-            if (col == gameMap.getWidth()) {
-                col = 0;
-                x= 0;
-                y+=spriteSize;
-                row++;
+                int terrainNum = gameMapCoordinates[col][row].getTerrainType();
+                g2.drawImage(terrainImgs[terrainNum], drawInformation.get(0), drawInformation.get(1), null);
             }
-
         }
 
 

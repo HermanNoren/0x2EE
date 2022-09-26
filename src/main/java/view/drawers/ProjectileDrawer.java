@@ -4,11 +4,12 @@ import model.gameobjects.Projectile;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProjectileDrawer implements IDrawer {
-    private final ArrayList<Projectile> projectiles;
+    private final List<Projectile> projectiles;
 
-    public ProjectileDrawer(ArrayList<Projectile> projectiles) {
+    public ProjectileDrawer(List<Projectile> projectiles) {
         this.projectiles = projectiles;
     }
 

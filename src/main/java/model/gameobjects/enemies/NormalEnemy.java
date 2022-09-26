@@ -29,4 +29,9 @@ class NormalEnemy extends Enemy{
     public Vector2 getCenter() {
         return null;
     }
+
+    @Override
+    public boolean isPassable() {
+        return false;
+    }
 }

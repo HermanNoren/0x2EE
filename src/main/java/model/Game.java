@@ -1,20 +1,19 @@
 package model;
 
 import model.gameobjects.*;
-import model.gameobjects.enemies.*;
 import model.collision.CollisionHandler;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
-import view.buttons.GameButton;
 import model.gameobjects.IGameObject;
 
 import view.IObserver;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -22,38 +21,39 @@ import java.util.Scanner;
  * With help of the main game loop it delegates work to the active IGameState
  */
 public class Game{
-    private Thread gameLoopThread;
+
     private final int FPS = 120; // FRAMES PER SECOND
     private final int UPS = 200; // UPDATES PER SECOND
-    private ArrayList<IObserver> observers;
+    private List<IObserver> observers;
     private Player player;
-    private ArrayList<Terrain> path;
+    private List<Terrain> path;
 
-    private ArrayList<String> highscoreName;
-    private ArrayList<IEnemy> enemies;
-    private ArrayList<IGameObject> terrains;
+    private List<String> highscoreName;
+    private List<Entity> enemies;
+    private List<IGameObject> terrains;
     private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
     private boolean stateChangedFlag;
     private GameMap gameMap;
     private File highscoreFile;
-    private ArrayList<String> highscoreList;
-    private ArrayList<Projectile> projectiles;
-    private ArrayList<IGameObject> sprites;
+    private List<String> highscoreList;
+    private List<Projectile> projectiles;
+    private List<IGameObject> sprites;
 
     public Game(){
         player = new Player(32, 32, this);
-        this.gameMap = new GameMap(100, 100);
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
-        terrains = gameMap.getTerrains();
         highscoreName = new ArrayList<>();
         this.path = new ArrayList<>();
 
         EnemyFactory enemyFactory= new NormalEnemyFactory();
-        enemies.add(enemyFactory.createEnemy(this));
         sprites = new ArrayList<>();
-        sprites.add(player);
+
+        enemies.add(enemyFactory.createEnemy(this));
+        this.gameMap = new GameMap(100, 100);
+        terrains = gameMap.getTerrains();
         sprites.addAll(terrains);
+        sprites.add(player);
 
         wPressed = false;
         aPressed = false;
@@ -74,7 +74,7 @@ public class Game{
         return gameMap;
     }
 
-    public ArrayList<String> getHighScoreList() {
+    public List<String> getHighScoreList() {
         Scanner sc = null;
         highscoreList = new ArrayList<>();
         try {
@@ -88,7 +88,7 @@ public class Game{
         return highscoreList;
     }
 
-    public ArrayList<String> getHighscoreName(){
+    public List<String> getHighscoreName(){
         return highscoreName;
     }
 
@@ -120,7 +120,7 @@ public class Game{
      * @param list List of highscores
      */
 
-    private void saveHighscore(ArrayList<String> list){
+    private void saveHighscore(List<String> list){
         try {
             BufferedWriter output = new BufferedWriter(new FileWriter(highscoreFile, false));
             for (String s : highscoreList) {
@@ -179,7 +179,7 @@ public class Game{
     public Player getPlayer() {
         return player;
     }
-    public ArrayList<IEnemy> getEnemies(){
+    public List<Entity> getEnemies(){
         return enemies;
     }
 
@@ -309,14 +309,22 @@ public class Game{
             sprite.update();
         }
 
-        for(IEnemy enemy : enemies){
+        for(Entity enemy : enemies){
             enemy.update();
             //Check if enemy is close enough to damage player, could be done somewhere else also.
-            if (CollisionHandler.testCollision(player, (Entity) enemy)) {
+            if (CollisionHandler.testCollision(player, enemy)) {
                 player.damageTaken(1);
             }
 
         }
+        for(IGameObject terrain: gameMap.getTerrains()){
+            if(!terrain.isPassable()){
+                if(CollisionHandler.playerCollidesWithTerrain(player, terrain)){
+                    System.out.println("yres");
+                }
+            }
+        }
+
 
         for (Projectile p : projectiles) {
             p.update();
@@ -339,11 +347,11 @@ public class Game{
         this.spacePressed = false;
     }
 
-    public ArrayList<Projectile> getProjectiles() {
+    public List<Projectile> getProjectiles() {
         return projectiles;
     }
 
-    public ArrayList<Terrain> getPath() {
+    public List<Terrain> getPath() {
         return path;
     }
 }

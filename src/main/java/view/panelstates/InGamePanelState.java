@@ -12,12 +12,13 @@ import view.drawers.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class InGamePanelState implements IPanelState {
 
     private Game game;
     private HUD hud;
-    private ArrayList<IDrawer> drawers;
+    private List<IDrawer> drawers;
     private final Camera camera;
     private final ArrayList<KeyListener> keyListeners;
     private MainPanel mainPanel;
@@ -48,11 +49,13 @@ public class InGamePanelState implements IPanelState {
         for (IDrawer drawer : drawers) {
             drawer.draw(g);
         }
+
         hud.update(g);
         if (game.getEscapePressed()){
             changePanelState(EPanelState.PAUSE);
             game.resetEscapePressed();
         }
+        g.dispose();
     }
 
     @Override

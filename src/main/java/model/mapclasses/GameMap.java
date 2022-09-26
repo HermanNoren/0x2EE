@@ -1,40 +1,54 @@
 package model.mapclasses;
 
-import filehandler.WriteMapToFile;
+import utility.Noise;
 import model.gameobjects.*;
-import model.helperclasses.Vector2;
-
 import java.util.*;
-
 
 /**
  * Game map class
  */
 public class GameMap {
-    private final ArrayList<Terrain> terrains = new ArrayList<>();
-    private final ArrayList<Entity> entities;
+    private final List<Terrain> terrains = new ArrayList<>();
+    private final List<Entity> entities;
     private final Terrain[][] gameMapCoordinates;
     private final int width;
     private final int height;
 
+    /**
+     * @param width
+     * @param height
+     */
     public GameMap(int width, int height) {
         this.width = width;
         this.height = height;
         gameMapCoordinates = new Terrain[width][height];
         entities = new ArrayList<>();
         addCoordinatesAndTiles(width, height);
-        randomizeMap();
+
+        Noise n = new Noise(10, this); // Generates random terrain on the game map.
+
+        n.init();
+        n.setTerrainTypes(gameMapCoordinates);
         createBorder();
 
         terrains.forEach(this::addNeighbors);
-        WriteMapToFile wr = new WriteMapToFile("maps/map1.txt");
-        wr.writeToFile(this);
     }
 
+    /**
+     * Method which can be used to add entities to the game map.
+     * @param x x-position of entity
+     * @param y y-position of entity
+     * @param entity object of type Entity.
+     */
     public void addEntity(int x, int y, Entity entity){
         gameMapCoordinates[x][y].addEntity(entity);
     }
 
+    /**
+     * Adds terrains in a width*height matrix and into a list.
+     * @param width the width of the game map
+     * @param height the height of the game map
+     */
     private void addCoordinatesAndTiles(int width, int height) {
         for(int i = 0; i < width; i ++){
             for(int j = 0; j < height; j++){
@@ -44,26 +58,54 @@ public class GameMap {
         }
     }
 
+    /**
+     * Method used to get the value of the height variable in GameMap
+     * @return height of game map
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Method used to get the value of the width variable in GameMap
+     * @return width of the game map
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * Method used to get the reference to the gameMapCoordinates grid.
+     * @return grid of Terrains
+     */
     public Terrain[][] getGameMapCoordinates() {
         return gameMapCoordinates;
     }
 
-    public ArrayList<IGameObject> getTerrains() {
+    /**
+     * Method used to get a copy of the List of terrains.
+     * @return a copy of List<Terrain> terrains.
+     */
+    public List<IGameObject> getTerrains() {
         return new ArrayList<>(terrains);
     }
 
+    /**
+     * Method used to set specific terrain's type.
+     * @param x x-position in the coordinate grid.
+     * @param y y-position in the coordinate grid.
+     * @param type type of the terrain, type = 0, 1, 2 or 3.
+     */
     public void setTerrainType(int x, int y, int type){
         gameMapCoordinates[x][y].setTerrainType(type);
     }
 
+    /**
+     * Method used to set specific tile to be passable or not.
+     * @param x x-position in the coordinate grid.
+     * @param y y-position in the coordinate grid.
+     * @param passable boolean true if passable, false if not passable.
+     */
     public void setTerrainPassable(int x, int y, boolean passable){
         gameMapCoordinates[x][y].setPassable(passable);
     }
@@ -117,15 +159,18 @@ public class GameMap {
         }
     }
 
+    /**
+     * Method used to create a border for the game map.
+     */
     private void createBorder(){
         int col = 0;
         int row = 0;
         while (col < width && row < height){
 
-            if((gameMapCoordinates[col][row].getPos().x/48)+2 > width ||
-                    (gameMapCoordinates[col][row].getPos().y/48)+2 > height ||
-                    (gameMapCoordinates[col][row].getPos().x/48)-1 < 0 ||
-                    (gameMapCoordinates[col][row].getPos().y/48)-1 < 0){
+            if((gameMapCoordinates[col][row].getPos().x)+2 > width ||
+                    (gameMapCoordinates[col][row].getPos().y)+2 > height ||
+                    (gameMapCoordinates[col][row].getPos().x)-1 < 0 ||
+                    (gameMapCoordinates[col][row].getPos().y)-1 < 0){
 
                 gameMapCoordinates[col][row].setTerrainType(1);
                 gameMapCoordinates[col][row].setPassable(false);
@@ -139,27 +184,9 @@ public class GameMap {
     }
 
 
-    private void randomizeMap(){
-        Random random = new Random();
-        for(int i = 0; i< width; i ++){
-            for (int j = 0; j< height; j++){
 
-            }
-        }
-    }
-    private void generateWall(){
-        Terrain terrain = chooseRandomTerrain();
-        Vector2 terrainPos = terrain.getPos();
-        int x = (int) terrainPos.x/48;
-        int y = (int) terrainPos.y/48;
 
-    }
-    private Terrain chooseRandomTerrain(){
-        Random random = new Random();
-        int randowCol = random.nextInt(width-1);
-        int randomRow = random.nextInt(height-1);
-        return gameMapCoordinates[randowCol][randomRow];
-    }
+
 }
 
 
