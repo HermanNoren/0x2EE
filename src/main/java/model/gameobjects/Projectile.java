@@ -54,6 +54,11 @@ public class Projectile implements IGameObject {
     }
 
     @Override
+    public boolean isPassable() {
+        return false;
+    }
+
+    @Override
     public void update() {
         pos.x += vel.x;
         pos.y += vel.y;

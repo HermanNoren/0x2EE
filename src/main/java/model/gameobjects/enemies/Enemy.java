@@ -22,9 +22,6 @@ public abstract class Enemy extends Entity implements IEnemy {
      */
     @Override
     public void update() {
-        Terrain goal;
-
-        super.update();
 
     }
 
@@ -48,14 +45,6 @@ public abstract class Enemy extends Entity implements IEnemy {
 //            moveToTerrain(nextTerrain);
 //        }
 
-
-    }
-
-    private void moveToTerrain(Terrain nextStep) {
-
-    }
-
-    private void calculateNextStep() {
 
     }
 

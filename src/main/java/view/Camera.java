@@ -34,6 +34,10 @@ public class Camera {
         calculateCenterPos();
     }
 
+    /**
+     * Get instance method returns the current, and only, instanciation of camera.
+     * @return camera instance
+     */
     public static Camera getInstance() {
         if (camera == null){
             camera = new Camera();

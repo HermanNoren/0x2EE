@@ -5,6 +5,7 @@ import model.gameobjects.Projectile;
 import model.helperclasses.Vector2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Weapon {
 
@@ -22,7 +23,7 @@ public class Weapon {
     }
 
 
-    public void shoot(Vector2 pos, EDirection direction, ArrayList<Projectile> projectiles){
+    public void shoot(Vector2 pos, EDirection direction, List<Projectile> projectiles){
         if (ammo != 0) {
             ammo--;
             projectiles.add(new Projectile(pos, direction));

@@ -1,25 +1,26 @@
 package view.drawers;
 
-import model.gameobjects.enemies.Enemy;
+
+import model.gameobjects.Entity;
 import model.gameobjects.enemies.IEnemy;
 import model.helperclasses.ImageHandler;
 
-import javax.imageio.ImageIO;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class EnemyDrawer implements IDrawer {
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
-    private final ArrayList<IEnemy> enemies;
+    private final List<Entity> enemies;
     private int animationCounter;
     private int imageSwitcher;
 
     private ImageHandler imageHandler;
 
-    public EnemyDrawer(ArrayList<IEnemy> enemies){
+    public EnemyDrawer(List<Entity> enemies){
         this.enemies = enemies;
         this.imageHandler = new ImageHandler();
         initEnemyImages();
@@ -61,7 +62,7 @@ public class EnemyDrawer implements IDrawer {
     public void draw(Graphics2D g2) {
 
         movementAnimation();
-        for(IEnemy enemy: enemies){
+        for(Entity enemy: enemies){
             switch (enemy.getDirection()){
                 case UP ->{
                     if(imageSwitcher == 1){
@@ -100,13 +101,8 @@ public class EnemyDrawer implements IDrawer {
                 }
             }
 
-            ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getSize(), enemy.getSize());
-            if (enemy.getHealth() != ((Enemy)enemy).getMaxHp()){
-            g2.setColor(Color.red);
-            g2.fillRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / ((Enemy)enemy).getMaxHp()))), 4);
-            g2.setColor(Color.black);
-            g2.drawRoundRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / ((Enemy)enemy).getMaxHp()))), 4, 0,0);
-            }
+            List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getSize(), enemy.getSize());
+
             if(!(prevImg == null)){
                 g2.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
             }

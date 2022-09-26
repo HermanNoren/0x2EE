@@ -13,6 +13,7 @@ import view.drawers.*;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class InGamePanelState implements IPanelState {
 
@@ -23,7 +24,7 @@ public class InGamePanelState implements IPanelState {
      * a drawing hierarchy is created (which object is drawn over whom).
      * The first object added to the Drawers ArrayList will be seen as under everything added after it.
      * */
-    private ArrayList<IDrawer> drawers;
+    private List<IDrawer> drawers;
     private final Camera camera;
     private final ArrayList<KeyListener> keyListeners;
     private MainPanel mainPanel;

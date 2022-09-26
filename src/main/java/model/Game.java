@@ -12,6 +12,7 @@ import model.gameobjects.theShop.Shop;
 import model.helperclasses.HighscoreHandler;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
+import view.buttons.GameButton;
 import model.gameobjects.IGameObject;
 
 import view.IObserver;
@@ -19,6 +20,7 @@ import view.IObserver;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -29,19 +31,20 @@ public class Game{
     private Thread gameLoopThread;
     private final int FPS = 120; // FRAMES PER SECOND
     private final int UPS = 200; // UPDATES PER SECOND
-    private ArrayList<IObserver> observers;
+    private List<IObserver> observers;
     private Player player;
-    private ArrayList<Terrain> path;
+    private List<Terrain> path;
 
-    private ArrayList<String> highscoreName;
-    private ArrayList<IEnemy> enemies;
-    private ArrayList<IGameObject> terrains;
+    private List<String> highscoreName;
+    private List<Entity> enemies;
+    private List<IGameObject> terrains;
     private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
     private boolean stateChangedFlag;
     private GameMap gameMap;
-    private ArrayList<String> highscoreList;
-    private ArrayList<Projectile> projectiles;
-    private ArrayList<IGameObject> sprites;
+    private File highscoreFile;
+    private List<String> highscoreList;
+    private List<Projectile> projectiles;
+    private List<IGameObject> sprites;
     private Shop shop;
     private HighscoreHandler highscoreHandler;
 
@@ -53,9 +56,9 @@ public class Game{
         shop = new Shop();
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
-        terrains = gameMap.getTerrains();
         highscoreName = new ArrayList<>();
         this.path = new ArrayList<>();
+
         EnemyFactory enemyFactory= new NormalEnemyFactory();
         enemies.add(enemyFactory.createEnemy(this));
         enemies.add(enemyFactory.createEnemy(this));
@@ -64,10 +67,10 @@ public class Game{
         enemies.add(enemyFactory.createEnemy(this));
         enemies.add(enemyFactory.createEnemy(this));
         spawner = new Spawner(this);
+
         sprites = new ArrayList<>();
         sprites.add(player);
         sprites.add(shop);
-        sprites.addAll(terrains);
         wPressed = false;
         aPressed = false;
         sPressed = false;
@@ -85,7 +88,7 @@ public class Game{
         return gameMap;
     }
 
-    public ArrayList<String> getHighscoreName(){
+    public List<String> getHighscoreName(){
         return highscoreName;
     }
 
@@ -138,11 +141,11 @@ public class Game{
     public Player getPlayer() {
         return player;
     }
-    public ArrayList<IEnemy> getEnemies(){
+    public List<Entity> getEnemies(){
         return enemies;
     }
 
-    public ArrayList<IGameObject> getItems(){
+    public List<IGameObject> getItems(){
         return spawner.getSpawnedItems();
     }
 
@@ -150,7 +153,7 @@ public class Game{
      * Returns an ArrayList containing all the tiles in the Game Map.
      * @return  All Game Map Tiles
      */
-    public ArrayList<IGameObject> getTerrainBorder() {
+    public List<IGameObject> getTerrainBorder() {
         return null;
 //        return terrainBorder.getTerrainBorder();
     }
@@ -272,7 +275,7 @@ public class Game{
             sprite.update();
         }
 
-        for(IEnemy enemy : enemies){
+        for(Entity enemy : enemies){
             enemy.update();
             //Check if enemy is close enough to damage player, could be done somewhere else also.
             if (CollisionHandler.testCollision(player, (Entity) enemy)) {
@@ -337,13 +340,10 @@ public class Game{
         this.spacePressed = false;
     }
 
-    public ArrayList<Projectile> getProjectiles() {
+    public List<Projectile> getProjectiles() {
         return projectiles;
     }
 
-    public ArrayList<Terrain> getPath() {
-        return path;
-    }
 
     public Shop getshop() {
         return shop;

@@ -24,18 +24,12 @@ public class CollisionHandler {
      * First Check is to see if the player is to the right of the tile, second to see if
      * it is to the left
      * @param player
-     * @param tile
      */
 
-    public void playerCollidesWithTile(Player player, Terrain tile){
-        if(
-                player.getPos().x >(tile.getPos().x + tile.getHeight() + tile.getWidth())
-                || (player.getPos().x + player.getWidth()+ player.getHealth() < tile.getPos().x)
-                ||(player.getPos().y <tile.getPos().y + tile.getHeight())
-                ||(player.getPos().y + player.getHealth() > tile.getPos().y)
-        ){
-            System.out.println("yes");
-        }
+    public static boolean playerCollidesWithTerrain(Player player, IGameObject terrain){
+            if(terrain.isPassable()){
+            }
+        return false;
     }
 
     /**
@@ -52,7 +46,7 @@ public class CollisionHandler {
                 && object1.getHeight() + object1.getPos().y > object2.getPos().y;
     }
 
-    public static Map<String, Boolean> testCollisionWithDirection(Entity object1, Entity object2, String direction) {
+    public static Map<String, Boolean> testCollisionWithDirection(Entity object1, IGameObject object2, String direction) {
         Map<String, Boolean> collisionTypes = new HashMap<>(Map.of(
                 "top", false,
                 "bottom", false,

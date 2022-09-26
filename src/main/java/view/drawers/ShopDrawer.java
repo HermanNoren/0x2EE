@@ -11,6 +11,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShopDrawer implements IDrawer{
     private BufferedImage frame1, lights1, lights2, currentFrame;
@@ -41,7 +42,7 @@ public class ShopDrawer implements IDrawer{
 
     @Override
     public void draw(Graphics2D g2) {
-        ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(shopObject.getPos(), shopObject.getWidth(), shopObject.getHeight());
+        List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(shopObject.getPos(), shopObject.getWidth(), shopObject.getHeight());
         if(player.isInteractable){
             g2.drawImage(lights1, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
 

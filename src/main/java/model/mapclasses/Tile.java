@@ -43,6 +43,11 @@ public class Tile implements IGameObject {
     }
 
     @Override
+    public boolean isPassable() {
+        return false;
+    }
+
+    @Override
     public void update() {
 
     }

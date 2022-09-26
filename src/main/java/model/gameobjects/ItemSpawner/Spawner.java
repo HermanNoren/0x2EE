@@ -1,29 +1,32 @@
 package model.gameobjects.ItemSpawner;
 
 import model.Game;
+import model.gameobjects.Entity;
 import model.gameobjects.IGameObject;
+import model.gameobjects.enemies.Enemy;
 import model.gameobjects.enemies.IEnemy;
 import model.helperclasses.Vector2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Spawner {
 
     private Game game;
 
-    private ArrayList<Double> x_values, y_values;
-    private ArrayList<IEnemy> enemies;
+    private List<Double> x_values, y_values;
+    private List<Entity> enemies;
     private double avg_x, avg_y;
 
-    private ArrayList<IGameObject> spawnedItems;
+    private List<IGameObject> spawnedItems;
 
     public Spawner(Game game){
         this.game = game;
         spawnedItems = new ArrayList<>();
     }
 
-    private double getAverage(ArrayList<Double> list){
+    private double getAverage(List<Double> list){
         double sum = 0;
         for (Double x : list){
             sum+= x;
@@ -36,7 +39,7 @@ public class Spawner {
         enemies = game.getEnemies(); //Göra interface till game, med getEnemies, getPlayer osv..
         x_values = new ArrayList<>();
         y_values = new ArrayList<>();
-        for (IEnemy enemy : enemies){
+        for (Entity enemy : enemies){
             x_values.add(enemy.getPos().getX());
             y_values.add(enemy.getPos().getY());
         }
@@ -49,7 +52,7 @@ public class Spawner {
         spawnedItems.add(new Potion(getSpawnLocation()));
     }
 
-    public ArrayList<IGameObject> getSpawnedItems(){
+    public List<IGameObject> getSpawnedItems(){
         return spawnedItems;
     }
 

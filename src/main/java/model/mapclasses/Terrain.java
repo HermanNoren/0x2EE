@@ -37,8 +37,8 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
         this.neighbors = new ArrayList<>();
         this.entities = new ArrayList<>();
         this.pos = new Vector2(x, y);
-        this.pos.x *=48;
-        this.pos.y *=48;
+        this.pos.x = x;
+        this.pos.y = y;
         this.id = idCounter++;
         this.rect = new Rect(x,y, size, size);
     }
@@ -94,18 +94,20 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     public Terrain getParent() {
         return parent;
     }
-
     public void setParent(Terrain parent) {
         this.parent = parent;
     }
-
     @Override
     public int compareTo(Terrain n) {
         return Double.compare(this.g, n.getG());
     }
 
+    /**
+     *
+     * @param type : the type indicates whether the tile is passable or not. Tyles 1, 2 and 3 are not passable.
+     */
     public void setTerrainType(int type) {
-        if(type == 1){
+        if(type == 1 || type == 2 || type == 3){
             setPassable(false);
         }
         this.terrainType = type;
