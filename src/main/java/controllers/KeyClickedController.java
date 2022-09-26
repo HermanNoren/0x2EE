@@ -49,7 +49,7 @@ public class KeyClickedController implements KeyListener {
                     game.setEnterPressed();
                 }
                 if (enterKeyDown && game.playerInRangeOfStore()){
-                   // TODO panel.changePanelState(EPanelState.SHOP)
+                    System.out.println("OpenStore");
                 }
 
             }
@@ -59,13 +59,6 @@ public class KeyClickedController implements KeyListener {
                     game.setEscapePressed();
                     panel.changePanelState(EPanelState.PAUSE);
                 }
-
-                /**
-                 *       case (KeyEvent.VK_ENTER)->{
-                 *                 if(game.playerInRangeOfStore()){
-                 *                     //TODO panel switch logic
-                 *                 }
-                 */
 
             }
 
