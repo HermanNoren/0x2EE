@@ -62,7 +62,7 @@ public class Camera {
      * @return Center vector
      */
     public Vector2 getCenter() {
-        return new Vector2(relativePos.x + screenCenter.x, relativePos.y + screenCenter.y);
+        return new Vector2(absolutePos.x + screenCenter.x, absolutePos.y + screenCenter.y);
     }
     /**
      * Zoom in
