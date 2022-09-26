@@ -1,21 +1,23 @@
 package model;
 
 import model.gameobjects.*;
+import model.gameobjects.ItemSpawner.Spawner;
 import model.gameobjects.enemies.*;
 import model.collision.CollisionHandler;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
 import model.gameobjects.theShop.Shop;
+import model.helperclasses.HighscoreHandler;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
-import view.buttons.GameButton;
 import model.gameobjects.IGameObject;
 
 import view.IObserver;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -36,12 +38,14 @@ public class Game{
     private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
     private boolean stateChangedFlag;
     private GameMap gameMap;
-    private File highscoreFile;
     private ArrayList<String> highscoreList;
     private ArrayList<Projectile> projectiles;
     private ArrayList<IGameObject> sprites;
 
     private Shop shop;
+    private HighscoreHandler highscoreHandler;
+
+    private Spawner spawner;
 
     public Game(){
         player = new Player(32, 32, this);
@@ -52,14 +56,18 @@ public class Game{
         terrains = gameMap.getTerrains();
         highscoreName = new ArrayList<>();
         this.path = new ArrayList<>();
-
         EnemyFactory enemyFactory= new NormalEnemyFactory();
         enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        spawner = new Spawner(this);
         sprites = new ArrayList<>();
         sprites.add(player);
         sprites.add(shop);
         sprites.addAll(terrains);
-
         wPressed = false;
         aPressed = false;
         sPressed = false;
@@ -67,30 +75,14 @@ public class Game{
         enterPressed = false;
         escapePressed = false;
         spacePressed = false;
-
         stateChangedFlag = false;
-
         observers = new ArrayList<>();
-        highscoreFile = new File("textfiles/highscores.txt");
-        highscoreList = getHighScoreList();
+        highscoreHandler = new HighscoreHandler();
+        highscoreList = highscoreHandler.getHighscoreList();
     }
 
     public GameMap getGameMap() {
         return gameMap;
-    }
-
-    public ArrayList<String> getHighScoreList() {
-        Scanner sc = null;
-        highscoreList = new ArrayList<>();
-        try {
-            sc = new Scanner(highscoreFile);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-        while(sc.hasNext()){
-            highscoreList.add(sc.next());
-        }
-        return highscoreList;
     }
 
     public ArrayList<String> getHighscoreName(){
@@ -117,51 +109,13 @@ public class Game{
         }else{
             //GAME OVER MENU
         }
-
     }
-
-    /**
-     * Saves the new highscore to a textfile.
-     * @param list List of highscores
-     */
-
-    private void saveHighscore(ArrayList<String> list){
-        try {
-            BufferedWriter output = new BufferedWriter(new FileWriter(highscoreFile, false));
-            for (String s : highscoreList) {
-                output.write(s + " ");
-            }
-            output.close();
-
-        } catch (IOException ex1) {
-            System.out.printf("ERROR writing score to file: %s\n", ex1);
-        }
-    }
-
 
     /**
      * Updates the list containing highscores.
      */
     public void updateHighscoreList(){
-        int i = 0;
-        if (highscoreList.isEmpty()){
-            highscoreList.add(String.join("", highscoreName) + ":" + player.getScore());
-        }else {
-            for (String playerScore : highscoreList) {
-                String[] savedScore = playerScore.split(":");
-                int score = Integer.valueOf(savedScore[1]);
-                if (player.getScore() >= score) {
-                    highscoreList.add(i, String.join("", highscoreName) + ":" + player.getScore());
-                    break;
-                }
-                    i++;
-                if (i == highscoreList.size()){
-                    highscoreList.add(String.join("", highscoreName) + ":" + player.getScore());
-                    break;
-                }
-            }
-        }
-        saveHighscore(highscoreList);
+        highscoreHandler.saveHighscore(String.join("", highscoreName), player.getScore());
     }
 
 
@@ -186,6 +140,10 @@ public class Game{
     }
     public ArrayList<IEnemy> getEnemies(){
         return enemies;
+    }
+
+    public ArrayList<IGameObject> getItems(){
+        return spawner.getSpawnedItems();
     }
 
     /**
@@ -317,14 +275,32 @@ public class Game{
                 player.damageTaken(1);
             }
 
+            // Check if projectile hits enemy
+            for (Projectile p : projectiles){
+                if (CollisionHandler.testCollision((Entity) enemy, p)) {
+                    ((Entity) enemy).damageTaken(10);
+                    spawner.spawnItem();
+                    projectiles.remove(p);
+                    break;
+                    }
+                    // error om man inte breakar för tar bort projectilen
+
+            }
+
         }
 
         for (Projectile p : projectiles) {
             p.update();
         }
 
+        for (IGameObject potion : spawner.getSpawnedItems()){
+            if (CollisionHandler.testCollision(potion, player)){
+                player.setHealth(getPlayer().getHealth() + 100);
+                spawner.clearPotion(potion);
+                break; // error om man inte breakar, se ovan
+            }
 
-
+        }
     }
 
     /**
@@ -351,4 +327,5 @@ public class Game{
     public Shop getshop() {
         return shop;
     }
+
 }

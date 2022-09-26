@@ -47,7 +47,7 @@ public class ShopDrawer implements IDrawer{
     @Override
     public void draw(Graphics2D g2) {
         ArrayList<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(shopObject.getPos(), shopObject.getWidth(), shopObject.getHeight());
-        g2.drawImage(frame1, drawInformation.get(0),drawInformation.get(1),drawInformation.get(2),drawInformation.get(3), null);
+        g2.drawImage(frame1, drawInformation.get(0),drawInformation.get(1),80,80, null);
     }
 
 }

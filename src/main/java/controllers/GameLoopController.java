@@ -55,6 +55,8 @@ public class GameLoopController {
                 frames = 0;
                 updates = 0;
             }
+
+
         }
     }
 

@@ -24,8 +24,6 @@ public abstract class Enemy extends Entity implements IEnemy {
     public void update() {
         Terrain goal;
 
-
-
         super.update();
 
     }
