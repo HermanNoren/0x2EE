@@ -3,6 +3,7 @@ package view.panelstates;
 import controllers.CameraController;
 import controllers.KeyClickedController;
 import controllers.PlayerController;
+import controllers.WeaponController;
 import model.Game;
 import view.Camera;
 import view.HUD;
@@ -32,6 +33,7 @@ public class InGamePanelState implements IPanelState {
         this.mainPanel = mainPanel;
         keyListeners = new ArrayList<>();
         keyListeners.add(new PlayerController(game));
+        keyListeners.add(new WeaponController(game));
         keyListeners.add(new KeyClickedController(game, this));
         hud = new HUD(game.getPlayer());
 
@@ -40,7 +42,7 @@ public class InGamePanelState implements IPanelState {
         keyListeners.add(new CameraController());
 
         drawers = new ArrayList<>();
-        drawers.add(new MapDrawer(game.getGameMap()));
+        drawers.add(new MapDrawer(game));
         drawers.add(new ProjectileDrawer(game.getProjectiles()));
         drawers.add(new ShopDrawer(game.getshop(), game.getPlayer()));
         drawers.add(new PlayerDrawer(game.getPlayer()));

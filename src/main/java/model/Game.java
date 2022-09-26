@@ -49,7 +49,7 @@ public class Game{
 
     public Game(){
         player = new Player(32, 32, this);
-        this.gameMap = new GameMap(100, 100);
+        this.gameMap = new GameMap(200, 200);
         shop = new Shop();
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
