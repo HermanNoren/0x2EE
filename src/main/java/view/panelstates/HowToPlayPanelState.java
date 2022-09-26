@@ -69,16 +69,6 @@ public class HowToPlayPanelState implements IPanelState{
         mainPanel.changePanelState(panelState);
     }
 
-    private BufferedImage setImage(String path) {
-        BufferedImage image;
-        try {
-            image = ImageIO.read(new File(path));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return image;
-
-    }
 
     @Override
     public ArrayList<KeyListener> getKeyListeners() {

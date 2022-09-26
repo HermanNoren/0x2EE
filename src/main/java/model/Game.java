@@ -1,6 +1,7 @@
 package model;
 
 import model.gameobjects.*;
+import model.gameobjects.ItemSpawner.Spawner;
 import model.gameobjects.enemies.*;
 import model.collision.CollisionHandler;
 import model.gameobjects.Entity;
@@ -44,6 +45,8 @@ public class Game{
     private Shop shop;
     private HighscoreHandler highscoreHandler;
 
+    private Spawner spawner;
+
     public Game(){
         player = new Player(32, 32, this);
         this.gameMap = new GameMap(100, 100);
@@ -55,6 +58,12 @@ public class Game{
         this.path = new ArrayList<>();
         EnemyFactory enemyFactory= new NormalEnemyFactory();
         enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        spawner = new Spawner(this);
         sprites = new ArrayList<>();
         sprites.add(player);
         sprites.add(shop);
@@ -131,6 +140,10 @@ public class Game{
     }
     public ArrayList<IEnemy> getEnemies(){
         return enemies;
+    }
+
+    public ArrayList<IGameObject> getItems(){
+        return spawner.getSpawnedItems();
     }
 
     /**
@@ -267,13 +280,15 @@ public class Game{
             }
 
             // Check if projectile hits enemy
-            Iterator<Projectile> p = projectiles.iterator();
-            while(p.hasNext()) {
-                if (CollisionHandler.testCollision((Entity) enemy, p.next())) {
+            for (Projectile p : projectiles){
+                if (CollisionHandler.testCollision((Entity) enemy, p)) {
                     ((Entity) enemy).damageTaken(10);
-                    p.remove();
+                    spawner.spawnItem();
+                    projectiles.remove(p);
+                    break;
+                    }
+                    // error om man inte breakar för tar bort projectilen
 
-                }
             }
 
         }
@@ -282,7 +297,14 @@ public class Game{
             p.update();
         }
 
+        for (IGameObject potion : spawner.getSpawnedItems()){
+            if (CollisionHandler.testCollision(potion, player)){
+                player.setHealth(getPlayer().getHealth() + 100);
+                spawner.clearPotion(potion);
+                break; // error om man inte breakar, se ovan
+            }
 
+        }
     }
 
     /**
@@ -309,4 +331,5 @@ public class Game{
     public Shop getshop() {
         return shop;
     }
+
 }
