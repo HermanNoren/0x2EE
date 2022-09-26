@@ -71,12 +71,8 @@ public class MapDrawer implements IDrawer {
         Vector2 newTerrainVector;
         Terrain[][] gameMapCoordinates = gameMap.getGameMapCoordinates();
 
-        for (int col = left; col < right; col++){
-            if (col >= gameMap.getWidth())
-                break;
-            for(int row = up; row < down; row++){
-                if (row >= gameMap.getHeight())
-                    break;
+        for (int col = left; col < right && col < gameMap.getWidth(); col++){
+            for(int row = up; row < down && row < gameMap.getHeight(); row++){
                 newTerrainVector = new Vector2(gameMapCoordinates[col][row].getPos()); // For drawing in correct place.
                 newTerrainVector.x*=terrainSize;
                 newTerrainVector.y*=terrainSize;
