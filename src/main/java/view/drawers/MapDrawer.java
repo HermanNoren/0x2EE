@@ -20,13 +20,12 @@ public class MapDrawer implements IDrawer {
     private final ArrayList<IGameObject> terrains;
     private final BufferedImage[] terrainImgs = new BufferedImage[10];
     private final GameMap gameMap;
-    private final Player player;
+    private final Camera camera;
     private final int[][] mapNums;
 
     public MapDrawer(Game game){
-
         this.gameMap = game.getGameMap();
-        this.player = game.getPlayer();
+        camera = Camera.getInstance();
         mapNums = new int[gameMap.getWidth()][gameMap.getHeight()];
         this.terrains = gameMap.getTerrains();
         loadTerrainImages();
@@ -85,10 +84,10 @@ public class MapDrawer implements IDrawer {
         int y = 0;
 
         // Coordinates of tiles to paint with a 5 tile offset to guarantee visibility
-        int left = (int) (player.getPosX() - Config.SCREEN_WIDTH/2)/spriteSize - 5;
-        int right = (int) (player.getPosX() + Config.SCREEN_WIDTH/2)/spriteSize + 5;
-        int up = (int) (player.getPosY() - Config.SCREEN_HEIGHT/2)/spriteSize - 5;
-        int down = (int) (player.getPosY() + Config.SCREEN_HEIGHT/2)/spriteSize + 5;
+        int left = (int) (camera.getCenter().x - Config.SCREEN_WIDTH/2)/spriteSize - 5;
+        int right = (int) (camera.getCenter().x + Config.SCREEN_WIDTH/2)/spriteSize + 5;
+        int up = (int) (camera.getCenter().y - Config.SCREEN_HEIGHT/2)/spriteSize - 5;
+        int down = (int) (camera.getCenter().y + Config.SCREEN_HEIGHT/2)/spriteSize + 5;
 
         // If out of bounds
         if (left < 0)

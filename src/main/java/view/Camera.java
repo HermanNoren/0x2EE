@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Camera {
 
     private ArrayList<IFocusableObject> focusedObject;
-    private Vector2 relativePos, absolutePos, center;
+    private Vector2 relativePos, absolutePos, screenCenter;
     private int dragEffectConstant;
     private double currentZoomMultiplier;
 
@@ -57,6 +57,13 @@ public class Camera {
         return new Vector2(relativePos.x, relativePos.y);
     }
 
+    /**
+     * Returns the center position of the visible area inside the camera.
+     * @return Center vector
+     */
+    public Vector2 getCenter() {
+        return new Vector2(relativePos.x + screenCenter.x, relativePos.y + screenCenter.y);
+    }
     /**
      * Zoom in
      */
@@ -106,8 +113,8 @@ public class Camera {
 
         relativePos = new Vector2(absolutePos);
         for (IFocusableObject object : focusedObject) {
-            relativePos.x += (object.getCenter().x - (relativePos.x + center.x)) / (dragEffectConstant / currentZoomMultiplier);
-            relativePos.y += (object.getCenter().y - (relativePos.y + center.y)) / (dragEffectConstant / currentZoomMultiplier);
+            relativePos.x += (object.getCenter().x - (relativePos.x + screenCenter.x)) / (dragEffectConstant / currentZoomMultiplier);
+            relativePos.y += (object.getCenter().y - (relativePos.y + screenCenter.y)) / (dragEffectConstant / currentZoomMultiplier);
         }
         absolutePos = new Vector2(relativePos);
 
@@ -122,6 +129,6 @@ public class Camera {
     private void calculateCenterPos() {
         double x = Config.SCREEN_WIDTH / 2.0;
         double y = Config.SCREEN_HEIGHT / 2.0;
-        center = new Vector2(x, y);
+        screenCenter = new Vector2(x, y);
     }
 }
