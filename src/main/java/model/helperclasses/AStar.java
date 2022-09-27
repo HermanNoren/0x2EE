@@ -36,9 +36,9 @@ public class AStar {
             Terrain n = openList.peek(); //n = next node
 
             if(n == target){
-                while (n.getParent() != null){
+                while (n.getParent() != start){
                     n = n.getParent();
-
+                    return n;
                 }
             }
 
