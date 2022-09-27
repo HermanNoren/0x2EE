@@ -25,7 +25,6 @@ public abstract class Entity implements IGameObject {
     private EDirection lastDirection;
     private int size = Config.SPRITE_SIZE*3;
     private Rect rect;
-    private Game game;
 
     /**
      *
@@ -33,8 +32,7 @@ public abstract class Entity implements IGameObject {
      * @param y represents the entities' y-coordinate
      */
 
-    public Entity(int x, int y, Game game){
-        this.game = game;
+    public Entity(int x, int y){
         this.direction = EDirection.NOT_MOVING; // Default value
         this.lastDirection = direction;
         this.pos = new Vector2(x, y);

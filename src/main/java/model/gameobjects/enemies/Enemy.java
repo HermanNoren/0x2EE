@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public abstract class Enemy extends Entity implements IEnemy {
 
     private int size = Config.SPRITE_SIZE;
-    protected Enemy(int x, int y, Game game){
-        super(x, y, game);
+    protected Enemy(int x, int y){
+        super(x, y);
     }
 
     /**

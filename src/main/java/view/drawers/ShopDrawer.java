@@ -2,7 +2,7 @@ package view.drawers;
 
 
 import model.gameobjects.Player;
-import model.gameobjects.theShop.Shop;
+import model.gameobjects.Shop;
 import model.helperclasses.ImageHandler;
 
 import javax.imageio.ImageIO;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShopDrawer implements IDrawer{
-    private BufferedImage frame1, lights1, lights2, currentFrame;
+    private BufferedImage frame1, lights1;
 
     private Shop shopObject;
 
@@ -31,9 +31,8 @@ public class ShopDrawer implements IDrawer{
 
     private void initShopImages(){
         try{
-            frame1 = imageHandler.getImage("imgs/shopmovement/Shoppiskel2 copy.png"); //scale twice as large
+           frame1 = imageHandler.getImage("imgs/shopmovement/Shoppiskel2 copy.png"); //scale twice as large
             lights1 = imageHandler.getImage("imgs/shopmovement/flashingShop/shopLights1.png");
-            lights2 = imageHandler.getImage("imgs/shopmovement/flashingShop/shopLights2.png");
         }
         catch (Exception errorMessage){
             System.out.println(errorMessage.getMessage());

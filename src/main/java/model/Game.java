@@ -3,10 +3,11 @@ package model;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.Spawner;
+import model.gameobjects.enemies.*;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
-import model.gameobjects.theShop.Shop;
+import model.gameobjects.Shop;
 import model.helperclasses.HighscoreHandler;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
@@ -14,7 +15,7 @@ import model.gameobjects.IGameObject;
 
 import view.IObserver;
 
-import java.io.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -28,12 +28,13 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     private boolean upPressed, downPressed, leftPressed, rightPressed;
 
     /**
-     * @param x, starting x-position
-     * @param y, starting y-position
-     * Player constructor, used to create an instance of player.
+     * @param x,   starting x-position
+     * @param y,   starting y-position
+     *             Player constructor, used to create an instance of player.
+     * @param game
      */
     public Player(int x, int y, Game game){
-        super(x, y, game);
+        super(x, y);
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);
         upPressed = false;

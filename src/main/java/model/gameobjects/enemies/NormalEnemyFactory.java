@@ -15,7 +15,7 @@ public class NormalEnemyFactory extends EnemyFactory{
         Random rand = new Random();
         int x = rand.nextInt(400);
         int y = rand.nextInt(400);
-        NormalEnemy normalEnemy = new NormalEnemy(x, y, game);
+        NormalEnemy normalEnemy = new NormalEnemy(x, y);
         return normalEnemy;
     }
 }
