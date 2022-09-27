@@ -31,10 +31,9 @@ public class MapDrawer implements IDrawer {
         mapNums = new int[gameMap.getWidth()][gameMap.getHeight()];
         this.terrains = gameMap.getTerrains();
         this.imageHandler = new ImageHandler();
-        loadTerrainImages();
-        for (BufferedImage img : terrainImgs){
 
-        }
+        loadTerrainImages();
+
     }
 
     private void loadTerrainImages(){

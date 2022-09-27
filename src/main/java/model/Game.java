@@ -3,8 +3,6 @@ package model;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.Spawner;
-import model.gameobjects.enemies.*;
-import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
@@ -12,25 +10,19 @@ import model.gameobjects.theShop.Shop;
 import model.helperclasses.HighscoreHandler;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
-import view.buttons.GameButton;
 import model.gameobjects.IGameObject;
 
 import view.IObserver;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * This class contains the main game loop.
  * With help of the main game loop it delegates work to the active IGameState
  */
 public class Game{
-    private Thread gameLoopThread;
-    private final int FPS = 120; // FRAMES PER SECOND
-    private final int UPS = 200; // UPDATES PER SECOND
     private List<IObserver> observers;
     private Player player;
     private List<Terrain> path;

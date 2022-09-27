@@ -25,7 +25,6 @@ public class Noise {
     }
 
     public void init(){
-
         int xh = grid1.length - 1;
         int yh = grid1[0].length - 1;
 
@@ -50,6 +49,7 @@ public class Noise {
 
         float v = roughen(0.5f * (grid1[xm][y1] + grid1[xm][yh]), x1 + y1, yh
                 + xh);
+
         grid1[xm][ym] = v;
 
         grid1[xm][y1] = roughen(grid1[xm][y1], x1, xh);
