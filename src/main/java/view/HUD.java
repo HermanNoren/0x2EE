@@ -36,5 +36,6 @@ public class HUD {
         g2.fillRoundRect(20, Config.SCREEN_HEIGHT - 70, 200, 20, 0, 0);
         g2.setColor(Color.black);
         g2.drawRoundRect(20, Config.SCREEN_HEIGHT - 70, 200, 20, 0, 0);
+        g2.dispose();
     }
 }

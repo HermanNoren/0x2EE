@@ -1,4 +1,4 @@
-package model.gameobjects.theShop;
+package model.gameobjects;
 
 import model.helperclasses.Rect;
 import model.helperclasses.Vector2;
