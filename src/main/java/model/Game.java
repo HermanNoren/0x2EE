@@ -18,6 +18,7 @@ import view.IObserver;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -248,51 +249,57 @@ public class Game{
      */
     public void update() {
 
-        if (!(player.getHealth() < 1)){
+        if (!(player.getHealth() < 1)) {
 
             for (IGameObject sprite : sprites) {
-            sprite.update();
-        }
-
-        for(Entity enemy : enemies){
-            enemy.update();
-            //Check if enemy is close enough to damage player, could be done somewhere else also.
-            if (CollisionHandler.testCollision(player, (Entity) enemy)) {
-                player.damageTaken(1);
+                sprite.update();
             }
 
-            // Check if projectile hits enemy
-            for (Projectile p : projectiles){
-                if (CollisionHandler.testCollision((Entity) enemy, p)) {
-                    ((Entity) enemy).damageTaken(10);
-                    spawner.spawnItem();
-                    projectiles.remove(p);
-                    break;
+            Iterator<Entity> enemyIter = enemies.iterator();
+            while (enemyIter.hasNext()) {
+               Entity enemy = enemyIter.next();
+               enemy.update();
+                //Check if enemy is close enough to damage player, could be done somewhere else also.
+                if (CollisionHandler.testCollision(player, enemy)) {
+                    player.damageTaken(1);
+                }
+
+                // Check if projectile hits enemy
+                Iterator<Projectile> pIter = projectiles.iterator();
+                while (pIter.hasNext()) {
+                    Projectile p = pIter.next();
+                    if (CollisionHandler.testCollision(enemy, p)) {
+                        enemy.damageTaken(10);
+                        pIter.remove();
+                        if (enemy.getHealth() < 1) {
+                            spawner.spawnItem();
+                            enemyIter.remove();
+                        }
+
                     }
+
                     // error om man inte breakar för tar bort projectilen
+                }
 
             }
 
-        }
-
-        if(playerInRangeOfStore()){
-            player.isInteractable = true;
-        }else{
-            player.isInteractable = false;
-        }
-
-        for (Projectile p : projectiles) {
-            p.update();
-        }
-        for (IItem item : spawner.getSpawnedItems()) {
-            if (CollisionHandler.testCollision(item, player)) {
-                item.consume(player);
-                spawner.clearItem(item);
-                break; // error om man inte breakar, se ovan
+            if (playerInRangeOfStore()) {
+                player.isInteractable = true;
+            } else {
+                player.isInteractable = false;
             }
-        }
+            for (Projectile p : projectiles) {
+                p.update();
+            }
+            for (IItem item : spawner.getSpawnedItems()) {
+                if (CollisionHandler.testCollision(item, player)) {
+                    item.consume(player);
+                    spawner.clearItem(item);
+                    break; // error om man inte breakar, se ovan
+                }
+            }
 
-        }else{
+        } else {
             playerDead = true;
         }
     }
