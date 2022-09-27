@@ -4,8 +4,8 @@ import config.Config;
 
 import model.Game;
 import model.gameobjects.IGameObject;
+import model.helperclasses.DrawerHelper;
 import model.helperclasses.Vector2;
-import model.gameobjects.Player;
 import model.helperclasses.ImageHandler;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;

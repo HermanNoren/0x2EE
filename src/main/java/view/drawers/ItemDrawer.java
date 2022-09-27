@@ -1,12 +1,11 @@
 package view.drawers;
 
 import model.gameobjects.IGameObject;
+import model.helperclasses.DrawerHelper;
 import model.helperclasses.ImageHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ItemDrawer implements IDrawer{

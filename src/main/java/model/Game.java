@@ -44,9 +44,9 @@ public class Game{
     private Spawner spawner;
 
     public Game(){
-        player = new Player(32, 32, this);
+        player = new Player(32, 32);
         this.gameMap = new GameMap(200, 200);
-        shop = new Shop();
+        shop = new Shop(400, 200);
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         highscoreName = new ArrayList<>();
@@ -290,9 +290,9 @@ public class Game{
         }
 
         if(playerInRangeOfStore()){
-            player.isInteractable = true;
+            shop.isInteractable = true;
         }else{
-            player.isInteractable = false;
+            shop.isInteractable = false;
         }
 
         for (Projectile p : projectiles) {
@@ -315,9 +315,9 @@ public class Game{
 
     public void checkIfInteractable(){
         if(playerInRangeOfStore()){
-            player.isInteractable = true;
+            shop.isInteractable = true;
         }
-        player.isInteractable = false;
+        shop.isInteractable = false;
     }
 
     /**

@@ -1,9 +1,9 @@
 package view.drawers;
 
 import model.gameobjects.Projectile;
+import model.helperclasses.DrawerHelper;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectileDrawer implements IDrawer {

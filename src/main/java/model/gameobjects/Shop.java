@@ -13,20 +13,25 @@ import model.gameobjects.IGameObject;
 
 
 public class Shop implements IGameObject {
-    public final static int x_position = 400;
-    public final static int y_position = 200;
+    public int x_position;
+    public int y_position;
+    public Vector2 pos;
     public final static int width = 64*3; // make multiple of 64
     public final static int height = 56*3;  //multiple of 56
 
-    public final static Vector2 pos = new Vector2(x_position, y_position);
+    public boolean isInteractable = false;
 
 
-    public  Shop(){
-
+    public  Shop(int x_position, int y_position){
+        this.x_position = x_position;
+        this.y_position = y_position;
+        this.pos = new Vector2(x_position, y_position);
     }
 
 
-    public final static Rect rect = new Rect(x_position, y_position, width, height);
+
+
+    public final Rect rect = new Rect(x_position, y_position, width, height);
 
 
 
@@ -64,9 +69,8 @@ public class Shop implements IGameObject {
      */
     @Override
     public Vector2 getPos() {
-        return this.pos;
+        return new Vector2(pos);
     }
-
     @Override
     public Vector2 getCenter() {
         return null;
