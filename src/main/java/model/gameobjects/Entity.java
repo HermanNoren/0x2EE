@@ -5,6 +5,8 @@ import controllers.EDirection;
 import model.Game;
 import model.helperclasses.Rect;
 import model.helperclasses.Vector2;
+import model.mapclasses.GameMap;
+import model.mapclasses.Terrain;
 
 /**
  * The IEnemy class contains logic to represent the sprite,
@@ -14,7 +16,7 @@ import model.helperclasses.Vector2;
  */
 
 public abstract class Entity implements IGameObject {
-   Vector2 pos;
+    Vector2 pos;
 
     Vector2 vel;
 
@@ -25,6 +27,7 @@ public abstract class Entity implements IGameObject {
     private EDirection lastDirection;
     private int size = Config.SPRITE_SIZE*3;
     private Rect rect;
+    private Terrain currentLocation;
     private Game game;
 
     /**
@@ -82,9 +85,18 @@ public abstract class Entity implements IGameObject {
     public double getAccY(){
         return acc.getY();
     }
-
     public Vector2 getAcc() {
         return acc;
+    }
+    public void setCurrentLocation(){
+
+    }
+
+    public Terrain getMapLocation(){
+        int posX = (int) (pos.x % 48);
+        int posY = (int) (pos.y % 48);
+        currentLocation = game.getGameMap().getGameMapCoordinates()[posX][posY];
+        return currentLocation;
     }
 
     @Override

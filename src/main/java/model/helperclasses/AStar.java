@@ -4,6 +4,7 @@ import model.mapclasses.Terrain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.PriorityQueue;
 
 /**
@@ -35,8 +36,10 @@ public class AStar {
             Terrain n = openList.peek(); //n = next node
 
             if(n == target){
+                while (n.getParent() != null){
+                    n = n.getParent();
 
-                return n;
+                }
             }
 
             for(Terrain.Edge edge : n.getNeighbors()){ // Check neighbors of n.
@@ -76,22 +79,23 @@ public class AStar {
      * @return ArrayList<Terrain>
      *
      */
-    public static ArrayList<Terrain> returnPath(Terrain target){
+    public static List<Terrain> getPathToTarget(Terrain target){
 
         Terrain n = target;
+
         if(n==null)
             return null;
 
-        ArrayList<Terrain> terrains = new ArrayList<>();
+        List<Terrain> path = new ArrayList<>();
         while(n.getParent() != null){
-            terrains.add(n);
+            path.add(n);
             n = n.getParent();
         }
 
-        terrains.add(n);
+        path.add(n);
 
-        Collections.reverse(terrains);
+        Collections.reverse(path);
 
-        return terrains;
+        return path;
     }
 }

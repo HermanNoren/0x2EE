@@ -1,6 +1,7 @@
 package model.gameobjects.enemies;
 
 import config.Config;
+import model.gameobjects.Player;
 import model.helperclasses.AStar;
 import model.Game;
 import model.mapclasses.GameMap;
@@ -8,30 +9,35 @@ import model.mapclasses.Terrain;
 import model.gameobjects.Entity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Enemy extends Entity implements IEnemy {
 
     private int size = Config.SPRITE_SIZE;
+    private Game game;
     protected Enemy(int x, int y, Game game){
         super(x, y, game);
+        this.game = game;
+
+        moveToGoal();
     }
 
-    /**
-     * Updates the enemy, uses A* algorithm to find the closest path to player,
-     * then moves enemy through given path calculated by the A* algorithm
-     */
-    @Override
-    public void update() {
 
-    }
 
     /**
      * Method used to move the enemy to target goal.
-     * @param goal
      *
      */
-    private void moveToGoal(Terrain goal) {
-//        ArrayList<Terrain> path = game.getPath();
+    private void moveToGoal() {
+
+
+
+        List<Terrain> path = game.getPath();
+
+        assert path != null;
+        for (Terrain terrain: path){
+            System.out.println(terrain.getPos().x);
+        }
 //        assert path != null;
 //        Terrain prevTerrain = null;
 //        Terrain nextTerrain = null;

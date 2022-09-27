@@ -1,5 +1,6 @@
 package model;
 
+import config.Config;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.Spawner;
@@ -25,7 +26,7 @@ import java.util.List;
 public class Game{
     private List<IObserver> observers;
     private Player player;
-    private List<Terrain> path;
+    private final List<Terrain> path;
 
     private List<String> highscoreName;
     private List<Entity> enemies;
@@ -43,8 +44,8 @@ public class Game{
     private Spawner spawner;
 
     public Game(){
-        player = new Player(32, 32, this);
-        this.gameMap = new GameMap(200, 200);
+        this.gameMap = new GameMap(100, 100);
+        player = new Player(100, 100, this);
         shop = new Shop();
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
@@ -133,6 +134,7 @@ public class Game{
     public Player getPlayer() {
         return player;
     }
+
     public List<Entity> getEnemies(){
         return enemies;
     }
@@ -211,8 +213,6 @@ public class Game{
     public void resetEscapePressed() {
         escapePressed = false;
     }
-
-
 
     /**
      * Used as a way for objects inside to read whether the W key is pressed
@@ -341,4 +341,10 @@ public class Game{
         return shop;
     }
 
+    public List<Terrain> getPath() {
+        return path;
+    }
+    public void setPath(Terrain n){
+
+    }
 }

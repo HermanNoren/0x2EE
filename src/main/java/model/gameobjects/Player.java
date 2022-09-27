@@ -46,6 +46,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         setMaxHp(1000);
         setVelX(0.5);
         setVelY(0.5);
+        System.out.println("playex:"+getMapLocation().getX());
     }
 
     public void shoot(List<Projectile> projectiles) {

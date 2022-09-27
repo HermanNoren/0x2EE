@@ -15,8 +15,10 @@ public class GameMap {
     private final int height;
 
     /**
-     * @param width
-     * @param height
+     * Game map constructor, set height and width.
+     * Width and height is in number of terrains.
+     * @param width number of terrains in width
+     * @param height number of terrains in height
      */
     public GameMap(int width, int height) {
         this.width = width;
@@ -162,7 +164,7 @@ public class GameMap {
     }
 
     /**
-     * Method used to create a border for the game map.
+     * Method used to create a border on the game map.
      */
     private void createBorder(){
         int col = 0;
