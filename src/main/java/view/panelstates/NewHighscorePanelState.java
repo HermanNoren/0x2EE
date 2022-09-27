@@ -14,14 +14,15 @@ import view.drawers.IDrawer;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class NewHighscorePanelState implements IPanelState{
 
     private Game game;
     private final ButtonController bc;
-    private final ArrayList<GameButton> buttons;
-    private ArrayList<KeyListener> keyListeners;
-    private ArrayList<IDrawer> drawers;
+    private final List<GameButton> buttons;
+    private List<KeyListener> keyListeners;
+    private List<IDrawer> drawers;
 
     private int xpos, ypos;
     private MainPanel mainPanel;
@@ -83,7 +84,7 @@ public class NewHighscorePanelState implements IPanelState{
     }
 
     @Override
-    public ArrayList<KeyListener> getKeyListeners() {
+    public List<KeyListener> getKeyListeners() {
         return keyListeners;
     }
 

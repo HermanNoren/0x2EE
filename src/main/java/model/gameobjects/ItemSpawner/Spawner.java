@@ -10,6 +10,7 @@ import model.helperclasses.Vector2;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class Spawner {
 
@@ -19,7 +20,7 @@ public class Spawner {
     private List<Entity> enemies;
     private double avg_x, avg_y;
 
-    private List<IGameObject> spawnedItems;
+    private List<IItem> spawnedItems;
 
     public Spawner(Game game){
         this.game = game;
@@ -49,14 +50,20 @@ public class Spawner {
     }
 
     public void spawnItem(){
-        spawnedItems.add(new Potion(getSpawnLocation()));
+        Random rand = new Random();
+        int r = rand.nextInt(2);
+        switch (r) {
+            case 0 -> spawnedItems.add(new Coin(getSpawnLocation()));
+            case 1 -> spawnedItems.add(new Potion(getSpawnLocation()));
+        }
+
     }
 
-    public List<IGameObject> getSpawnedItems(){
+    public List<IItem> getSpawnedItems(){
         return spawnedItems;
     }
 
-    public void clearPotion(IGameObject potion){
-        spawnedItems.remove(potion);
+    public void clearItem(IGameObject item){
+        spawnedItems.remove(item);
     }
 }

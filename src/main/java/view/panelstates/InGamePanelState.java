@@ -54,13 +54,23 @@ public class InGamePanelState implements IPanelState {
 
     @Override
     public void draw(Graphics2D g) {
-        camera.update();
-        for (IDrawer drawer : drawers) {
-            drawer.draw(g);
+
+        if (game.isPlayerDead()) {
+            if (game.isTopFive()) {
+                changePanelState(EPanelState.NEWHIGHSCORE);
+            }else{
+                changePanelState(EPanelState.GAMEOVER);
+            }
+        } else {
+
+            camera.update();
+            for (IDrawer drawer : drawers) {
+                drawer.draw(g);
+            }
+
+
+            hud.update(g);
         }
-
-
-        hud.update(g);
     }
 
     @Override

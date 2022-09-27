@@ -1,5 +1,6 @@
 package model;
 
+import model.gameobjects.ItemSpawner.IItem;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.Spawner;
@@ -50,6 +51,8 @@ public class Game{
 
     private Spawner spawner;
 
+    private Boolean playerDead;
+
     public Game(){
         player = new Player(32, 32, this);
         this.gameMap = new GameMap(200, 200);
@@ -58,7 +61,7 @@ public class Game{
         projectiles = new ArrayList<>();
         highscoreName = new ArrayList<>();
         this.path = new ArrayList<>();
-
+        playerDead = false;
         EnemyFactory enemyFactory= new NormalEnemyFactory();
         enemies.add(enemyFactory.createEnemy(this));
         enemies.add(enemyFactory.createEnemy(this));
@@ -104,17 +107,6 @@ public class Game{
     }
 
     /**
-     * Handles end of the game, either new highscore or back to menu.
-     */
-    public void gameOver(){
-        if (isTopFive()){
-            //NEW HIGHSCORE state
-        }else{
-            //GAME OVER MENU
-        }
-    }
-
-    /**
      * Updates the list containing highscores.
      */
     public void updateHighscoreList(){
@@ -145,7 +137,7 @@ public class Game{
         return enemies;
     }
 
-    public List<IGameObject> getItems(){
+    public List<IItem> getItems(){
         return spawner.getSpawnedItems();
     }
 
@@ -263,15 +255,9 @@ public class Game{
      */
     public void update() {
 
+        if (!(player.getHealth() < 1)){
 
-        /* GAME OVER
-        if (player.getHealth() < 1){
-            game.setState(new MainMenuState());
-        }
-
-         */
-
-        for (IGameObject sprite : sprites) {
+            for (IGameObject sprite : sprites) {
             sprite.update();
         }
 
@@ -305,14 +291,21 @@ public class Game{
         for (Projectile p : projectiles) {
             p.update();
         }
-        for (IGameObject potion : spawner.getSpawnedItems()){
-            if (CollisionHandler.testCollision(potion, player)){
-                player.setHealth(getPlayer().getHealth() + 100);
-                spawner.clearPotion(potion);
+        for (IItem item : spawner.getSpawnedItems()) {
+            if (CollisionHandler.testCollision(item, player)) {
+                item.consume(player);
+                spawner.clearItem(item);
                 break; // error om man inte breakar, se ovan
             }
-
         }
+
+        }else{
+            playerDead = true;
+        }
+    }
+
+    public Boolean isPlayerDead(){
+        return playerDead;
     }
 
 

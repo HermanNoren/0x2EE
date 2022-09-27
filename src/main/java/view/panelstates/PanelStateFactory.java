@@ -29,6 +29,10 @@ public class PanelStateFactory {
                 return new NewHighscorePanelState(mainPanel, game);
             }
 
+            case GAMEOVER ->  {
+                return new GameOverPanelState(mainPanel, game);
+            }
+
             default -> {
                 return null;
             }

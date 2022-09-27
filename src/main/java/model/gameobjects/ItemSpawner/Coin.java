@@ -5,14 +5,14 @@ import model.gameobjects.Player;
 import model.helperclasses.Rect;
 import model.helperclasses.Vector2;
 
-public class Potion implements IItem {
+public class Coin implements IItem {
 
     private int width, height;
     private Vector2 pos;
 
-    public Potion(Vector2 pos){
+    public Coin(Vector2 pos){
         this.pos = pos;
-        width = 20;
+        width = 10;
     }
 
 
@@ -50,9 +50,8 @@ public class Potion implements IItem {
     public void update() {
 
     }
-
     @Override
     public void consume(Player player) {
-        player.setHealth(player.getHealth() + 100);
+        player.addMoney(10);
     }
 }

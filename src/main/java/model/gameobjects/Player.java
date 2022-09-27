@@ -42,8 +42,8 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         rightPressed = false;
         score = 0;
         money = 0;
-        setHealth(1000);
         setMaxHp(1000);
+        setHealth(1000);
         setVelX(0.5);
         setVelY(0.5);
     }
@@ -146,5 +146,9 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
      */
     public int getMoney(){
         return money;
+    }
+
+    public void addMoney(int amount){
+        this.money += amount;
     }
 }

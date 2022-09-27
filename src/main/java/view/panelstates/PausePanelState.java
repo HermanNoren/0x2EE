@@ -12,14 +12,15 @@ import view.drawers.IDrawer;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PausePanelState implements IPanelState {
 
     private Game game;
     private final ButtonController bc;
     private final ArrayList<GameButton> buttons;
-    private ArrayList<KeyListener> keyListeners;
-    private ArrayList<IDrawer> drawers;
+    private List<KeyListener> keyListeners;
+    private List<IDrawer> drawers;
     private MainPanel mainPanel;
 
     public PausePanelState(MainPanel mainPanel, Game game ) {
@@ -60,7 +61,7 @@ public class PausePanelState implements IPanelState {
     }
 
     @Override
-    public ArrayList<KeyListener> getKeyListeners() {
+    public List<KeyListener> getKeyListeners() {
         return keyListeners;
     }
 

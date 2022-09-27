@@ -5,13 +5,14 @@ import model.Game;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HighscoreController implements KeyListener {
 
 
     private Game game;
 
-    private ArrayList<String> name;
+    private List<String> name;
 
     private boolean enterKeyDown;
 

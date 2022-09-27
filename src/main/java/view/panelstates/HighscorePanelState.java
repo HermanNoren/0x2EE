@@ -20,7 +20,7 @@ public class HighscorePanelState implements IPanelState {
 
     private List<String> scores;
     private final ButtonController bc;
-    private final ArrayList<GameButton> buttons;
+    private final List<GameButton> buttons;
     private List<IDrawer> drawers;
     private List<KeyListener> keyListeners;
     private Game game;
@@ -33,7 +33,7 @@ public class HighscorePanelState implements IPanelState {
     private Color bronze = new Color(131, 69, 7);
 
 
-    private ArrayList<Color> rankColors = new ArrayList<>(
+    private List<Color> rankColors = new ArrayList<>(
             Arrays.asList(gold, silver,
                     bronze, Color.white, Color.white));
 

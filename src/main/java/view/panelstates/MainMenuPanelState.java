@@ -13,15 +13,17 @@ import view.drawers.IDrawer;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainMenuPanelState implements IPanelState {
 
     private final Game game;
 
     private final ButtonController bc;
-    private final ArrayList<GameButton> buttons;
-    private final ArrayList<IDrawer> drawers;
-    private final ArrayList<KeyListener> keyListeners;
+    private final List<GameButton> buttons;
+    private final List<IDrawer> drawers;
+    private final List<KeyListener> keyListeners;
     private MainPanel mainPanel;
 
     public MainMenuPanelState(MainPanel mainPanel, Game game) {
@@ -48,8 +50,6 @@ public class MainMenuPanelState implements IPanelState {
         for (IDrawer drawer : drawers) {
             drawer.draw(g2);
         }
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 12));
-
         g2.setColor(Color.white);
         g2.setFont(new Font("Public Pixel", Font.PLAIN, 64));
         String paused = "0x2EE";
@@ -62,7 +62,7 @@ public class MainMenuPanelState implements IPanelState {
     }
 
     @Override
-    public ArrayList<KeyListener> getKeyListeners() {
+    public List<KeyListener> getKeyListeners() {
         return keyListeners;
     }
 
