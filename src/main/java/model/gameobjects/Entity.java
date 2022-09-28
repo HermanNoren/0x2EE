@@ -168,7 +168,7 @@ public abstract class Entity implements IGameObject {
      * Updates the entites' location by adding its coordinate with its velocity
      */
     @Override
-    public void update() {
+    public void update(double dt) {
     }
 
     public void damageTaken(int damage) {

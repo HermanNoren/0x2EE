@@ -78,7 +78,7 @@ public class Shop implements IGameObject {
     }
 
     @Override
-    public void update() {
+    public void update(double dt) {
 
     }
 

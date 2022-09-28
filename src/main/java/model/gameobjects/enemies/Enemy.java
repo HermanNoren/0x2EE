@@ -21,10 +21,10 @@ public abstract class Enemy extends Entity implements IEnemy {
      * then moves enemy through given path calculated by the A* algorithm
      */
     @Override
-    public void update() {
+    public void update(double dt) {
         Terrain goal;
 
-        super.update();
+        super.update(dt);
 
     }
 

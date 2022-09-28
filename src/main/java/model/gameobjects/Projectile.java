@@ -18,10 +18,10 @@ public class Projectile implements IGameObject {
         this.pos = pos;
         vel = new Vector2(0, 0);
         switch (direction) {
-            case RIGHT -> vel.x = 5;
-            case LEFT -> vel.x = -5;
-            case UP -> vel.y = -5;
-            case DOWN -> vel.y = 5;
+            case RIGHT -> vel.x = 1000;
+            case LEFT -> vel.x = -1000;
+            case UP -> vel.y = -1000;
+            case DOWN -> vel.y = 1000;
         }
 
     }
@@ -54,8 +54,8 @@ public class Projectile implements IGameObject {
     }
 
     @Override
-    public void update() {
-        pos.x += vel.x;
-        pos.y += vel.y;
+    public void update(double dt) {
+        pos.x += vel.x * dt;
+        pos.y += vel.y * dt;
     }
 }

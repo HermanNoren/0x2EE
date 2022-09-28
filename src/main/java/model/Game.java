@@ -26,9 +26,6 @@ import java.util.Scanner;
  * With help of the main game loop it delegates work to the active IGameState
  */
 public class Game{
-    private Thread gameLoopThread;
-    private final int FPS = 120; // FRAMES PER SECOND
-    private final int UPS = 200; // UPDATES PER SECOND
     private ArrayList<IObserver> observers;
     private Player player;
     private ArrayList<Terrain> path;
@@ -256,9 +253,9 @@ public class Game{
     }
 
     /**
-     * Updates the current IGameState
+     * Updates the current game state
      */
-    public void update() {
+    public void update(double dt) {
 
 
         /* GAME OVER
@@ -269,11 +266,11 @@ public class Game{
          */
 
         for (IGameObject sprite : sprites) {
-            sprite.update();
+            sprite.update(dt);
         }
 
         for(IEnemy enemy : enemies){
-            enemy.update();
+            enemy.update(dt);
             //Check if enemy is close enough to damage player, could be done somewhere else also.
             if (CollisionHandler.testCollision(player, (Entity) enemy)) {
                 player.damageTaken(1);
@@ -300,7 +297,7 @@ public class Game{
         }
 
         for (Projectile p : projectiles) {
-            p.update();
+            p.update(dt);
         }
         for (IGameObject potion : spawner.getSpawnedItems()){
             if (CollisionHandler.testCollision(potion, player)){

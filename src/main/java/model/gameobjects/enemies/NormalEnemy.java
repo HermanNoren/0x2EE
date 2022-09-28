@@ -24,6 +24,11 @@ class NormalEnemy extends Enemy{
 
     }
 
+    @Override
+    public void update(double dt) {
+
+    }
+
 
     @Override
     public Vector2 getCenter() {

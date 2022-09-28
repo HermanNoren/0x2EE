@@ -21,6 +21,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     protected Weapon weapon;
     protected Armor armor;
     boolean isDamageTaken;
+    private double acceleration;
 
     public boolean isInteractable = false;
 
@@ -41,10 +42,9 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         rightPressed = false;
         score = 0;
         money = 0;
+        acceleration = 0.8;
         setHealth(1000);
         setMaxHp(1000);
-        setVelX(0.5);
-        setVelY(0.5);
     }
 
     public void shoot(ArrayList<Projectile> projectiles) {
@@ -78,31 +78,31 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     }
 
     @Override
-    public void update() {
-        moveX();
-        moveY();
+    public void update(double dt) {
+        moveX(dt);
+        moveY(dt);
     }
 
-    public void moveX() {
+    public void moveX(double dt) {
         acc.x = 0;
 
-        if (getDirection() == EDirection.RIGHT) { acc.x = 0.3; }
-        if (getDirection() == EDirection.LEFT) { acc.x = -0.3; }
+        if (getDirection() == EDirection.RIGHT) { acc.x = acceleration; }
+        if (getDirection() == EDirection.LEFT) { acc.x = -acceleration; }
 
         acc.x += vel.x * -0.1;
         vel.x += acc.x;
-        pos.x += vel.x + 0.5 * acc.x;
+        pos.x += vel.x * dt;
     }
 
-    public void moveY() {
+    public void moveY(double dt) {
         acc.y = 0;
 
-        if (getDirection() == EDirection.DOWN) { acc.y = 0.3;  }
-        if (getDirection() == EDirection.UP) { acc.y = -0.3; }
+        if (getDirection() == EDirection.DOWN) { acc.y = acceleration;  }
+        if (getDirection() == EDirection.UP) { acc.y = -acceleration; }
 
         acc.y += vel.y * -0.1;
         vel.y += acc.y;
-        pos.y += vel.y + 0.5 * acc.y;
+        pos.y += vel.y * dt;
     }
 
     /**
