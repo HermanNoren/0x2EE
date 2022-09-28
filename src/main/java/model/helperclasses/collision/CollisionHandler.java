@@ -52,7 +52,7 @@ public class CollisionHandler {
                 && object1.getHeight() + object1.getPos().y > object2.getPos().y;
     }
 
-    public static Map<String, Boolean> testCollisionWithDirection(Entity object1, Entity object2, String direction) {
+    public static Map<String, Boolean> testCollisionWithDirection(Entity object1, IGameObject object2, String direction) {
         Map<String, Boolean> collisionTypes = new HashMap<>(Map.of(
                 "top", false,
                 "bottom", false,

@@ -19,6 +19,7 @@ import view.IObserver;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -45,7 +46,7 @@ public class Game{
     private Spawner spawner;
 
     public Game(){
-        player = new Player(32, 32, this);
+        player = new Player(64, 64, this);
         this.gameMap = new GameMap(100, 100);
         shop = new Shop();
         enemies = new ArrayList<>();
@@ -62,7 +63,7 @@ public class Game{
         enemies.add(enemyFactory.createEnemy(this));
         spawner = new Spawner(this);
         sprites = new ArrayList<>();
-        sprites.add(player);
+        //sprites.add(player);
         sprites.add(shop);
         sprites.addAll(terrains);
         wPressed = false;
@@ -264,6 +265,38 @@ public class Game{
         }
 
          */
+
+        player.moveX(dt);
+        for (IGameObject t : terrains) {
+            Map<String, Boolean> collisionTypes = CollisionHandler.testCollisionWithDirection(player, t, "X");
+            if (collisionTypes.get("right")) {
+                player.setPosX(t.getPos().x - player.getWidth());
+                player.setVelX(0);
+                player.setAccX(0);
+            }
+            if (collisionTypes.get("left")) {
+                player.setPosX((t.getPos().x + t.getWidth()));
+                player.setVelX(0);
+                player.setAccX(0);
+            }
+        }
+
+        player.moveY(dt);
+        for (IGameObject t : terrains) {
+            Map<String, Boolean> collisionTypes = CollisionHandler.testCollisionWithDirection(player, t, "Y");
+            if (collisionTypes.get("top")) {
+                player.setPosY(t.getPos().y + player.getHeight());
+                player.setVelY(0);
+                player.setAccY(0);
+            }
+            if (collisionTypes.get("bottom")) {
+                player.setPosY((t.getPos().y - t.getHeight()));
+                player.setVelY(0);
+                player.setAccY(0);
+            }
+        }
+
+
 
         for (IGameObject sprite : sprites) {
             sprite.update(dt);
