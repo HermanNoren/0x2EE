@@ -20,7 +20,7 @@ public class ItemDrawer implements IDrawer{
     public ItemDrawer(List<IGameObject> objects){
         this.objects = objects;
         this.imageHandler = new ImageHandler();
-        potion = imageHandler.getImage("imgs/potion.png");
+        potion = imageHandler.getImage("imgs/drops/potion.png");
     }
 
     @Override

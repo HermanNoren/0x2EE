@@ -1,6 +1,6 @@
 package model;
 
-import config.Config;
+import controllers.EDirection;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.Spawner;
@@ -18,6 +18,7 @@ import view.IObserver;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class contains the main game loop.
@@ -42,9 +43,14 @@ public class Game{
     private HighscoreHandler highscoreHandler;
 
     private Spawner spawner;
+    private boolean collideFlag;
+
+    public boolean isCollideFlag() {
+        return collideFlag;
+    }
 
     public Game(){
-        this.gameMap = new GameMap(100, 100);
+        this.gameMap = new GameMap(50, 50);
         player = new Player(100, 100, this);
         shop = new Shop();
         enemies = new ArrayList<>();
@@ -62,7 +68,7 @@ public class Game{
         spawner = new Spawner(this);
 
         sprites = new ArrayList<>();
-        sprites.add(player);
+
         sprites.add(shop);
         wPressed = false;
         aPressed = false;
@@ -250,11 +256,11 @@ public class Game{
         player.shoot(projectiles);
     }
 
+    double speed = 0;
     /**
      * Updates the current IGameState
      */
     public void update() {
-
 
         /* GAME OVER
         if (player.getHealth() < 1){
@@ -263,15 +269,56 @@ public class Game{
 
          */
 
+
         for (IGameObject sprite : sprites) {
             sprite.update();
         }
+
+        player.moveX(speed);
+        player.moveY(speed);
+        for(IGameObject terrain: gameMap.getTerrains()){
+
+            Map<String, Boolean> collisionTypeX = CollisionHandler.testCollisionWithDirection(player, terrain, "X");
+            if(collisionTypeX.get("right")){
+                if (player.getVelX() > 0){
+                    speed =0;
+                    player.setPosX(player.getPosX()-1);
+                    break;
+                }
+            }
+
+            if(collisionTypeX.get("left")){
+                if (player.getVelX() > 0){
+                    speed = 0;
+                    player.setPosX(player.getPosX()+1);
+                    break;
+                }
+
+            }
+
+
+            Map<String, Boolean> collisionTypeY = CollisionHandler.testCollisionWithDirection(player, terrain, "Y");
+            if(collisionTypeY.get("top")){
+                speed = 0;
+                player.setPosY(player.getPosY()+1);
+                break;
+
+            }
+            if(collisionTypeY.get("bottom")){
+                speed =0;
+                player.setPosY(player.getPosY()-1);
+                break;
+            }else speed = 0.5;
+        }
+
+
 
         for(Entity enemy : enemies){
             enemy.update();
             //Check if enemy is close enough to damage player, could be done somewhere else also.
             if (CollisionHandler.testCollision(player, (Entity) enemy)) {
                 player.damageTaken(1);
+
             }
 
             // Check if projectile hits enemy
@@ -287,6 +334,7 @@ public class Game{
             }
 
         }
+
 
         if(playerInRangeOfStore()){
             player.isInteractable = true;

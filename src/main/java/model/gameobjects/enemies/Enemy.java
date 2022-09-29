@@ -1,6 +1,7 @@
 package model.gameobjects.enemies;
 
 import config.Config;
+import controllers.EDirection;
 import model.gameobjects.Player;
 import model.helperclasses.AStar;
 import model.Game;
@@ -18,8 +19,6 @@ public abstract class Enemy extends Entity implements IEnemy {
     protected Enemy(int x, int y, Game game){
         super(x, y, game);
         this.game = game;
-
-        moveToGoal();
     }
 
 
@@ -28,30 +27,31 @@ public abstract class Enemy extends Entity implements IEnemy {
      * Method used to move the enemy to target goal.
      *
      */
-    private void moveToGoal() {
+    public void moveToGoal() {
+        Player player = game.getPlayer();
+        Terrain goal = player.getMapLocation();
+        Terrain current = getMapLocation();
 
+        int goalX = goal.getX();
+        int goalY = goal.getY();
 
+        int currentX = current.getX();
+        int currentY = current.getY();
 
-        List<Terrain> path = game.getPath();
-
-        assert path != null;
-        for (Terrain terrain: path){
-            System.out.println(terrain.getPos().x);
+        if (currentX < goalX){
+            setDirection(EDirection.RIGHT);
+        }else if(currentX > goalX){
+            setDirection(EDirection.LEFT);
+        } else if (currentY < goalY) {
+            setDirection(EDirection.DOWN);
+        } else if (currentY > goalY) {
+            setDirection(EDirection.UP);
         }
-//        assert path != null;
-//        Terrain prevTerrain = null;
-//        Terrain nextTerrain = null;
-//
-//        for(int i = 0; i < path.size(); i ++){
-//            if(i > 0){
-//                prevTerrain = path.get(i-1);
-//            }
-//
-//            nextTerrain = path.get(i);
-//            moveToTerrain(nextTerrain);
-//        }
-
 
     }
 
+    @Override
+    public void update() {
+//        moveToGoal();
+    }
 }

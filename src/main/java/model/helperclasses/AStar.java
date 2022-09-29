@@ -36,10 +36,9 @@ public class AStar {
             Terrain n = openList.peek(); //n = next node
 
             if(n == target){
-                while (n.getParent() != start){
+                while (n.getParent() != start)
                     n = n.getParent();
-                    return n;
-                }
+                return n;
             }
 
             for(Terrain.Edge edge : n.getNeighbors()){ // Check neighbors of n.

@@ -25,11 +25,16 @@ public class CollisionHandler {
      * it is to the left
      * @param player
      */
-
-    public static boolean playerCollidesWithTerrain(Player player, IGameObject terrain){
-            if(terrain.isPassable()){
-            }
+    public static boolean playerCollidesWithTerrain(IGameObject player, IGameObject terrain){
+        if (!terrain.isPassable()){
+            return
+                    player.getPos().x < terrain.getPos().x*48 + terrain.getWidth()
+                            && player.getPos().x + player.getWidth() > terrain.getPos().x*48
+                            && player.getPos().y < terrain.getPos().y*48 + terrain.getHeight()
+                            && player.getHeight() + player.getPos().y > terrain.getPos().y*48;
+        }
         return false;
+
     }
 
     /**
@@ -54,11 +59,12 @@ public class CollisionHandler {
                 "left", false
         ));
 
-        if (testCollision(object1, object2)) {
+        if (playerCollidesWithTerrain(object1, object2)) {
             if (Objects.equals(direction, "X")) {
                 if (object1.getDirection() == EDirection.RIGHT) {
                     collisionTypes.replace("right", true);
                 }
+
                 if (object1.getDirection() == EDirection.LEFT) {
                     collisionTypes.replace("left", true);
                 }

@@ -27,15 +27,14 @@ public class GameMap {
         entities = new ArrayList<>();
         addCoordinatesAndTiles(width, height);
 
-        Noise n = new Noise(1, this); // Generates random terrain on the game map.
-
-        n.init();
-        n.setTerrainTypes(gameMapCoordinates);
+//        Noise n = new Noise(1, this); // Generates random terrain on the game map.
+//
+//        n.init();
+//        n.setTerrainTypes(gameMapCoordinates);
         createBorder();
 
         terrains.forEach(this::addNeighbors);
-
-        n.printTerrainGrid(gameMapCoordinates);
+//        n.printTerrainGrid(gameMapCoordinates);
     }
 
     /**
@@ -58,6 +57,7 @@ public class GameMap {
             for(int j = 0; j < height; j++){
                 gameMapCoordinates[i][j] = new Terrain(i, j);
                 terrains.add(gameMapCoordinates[i][j]);
+
             }
         }
     }

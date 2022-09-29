@@ -26,7 +26,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     public boolean isInteractable = false;
 
     private boolean upPressed, downPressed, leftPressed, rightPressed;
-
+    private Game game;
     /**
      * @param x, starting x-position
      * @param y, starting y-position
@@ -34,6 +34,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
      */
     public Player(int x, int y, Game game){
         super(x, y, game);
+        this.game = game;
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);
         upPressed = false;
@@ -46,7 +47,6 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         setMaxHp(1000);
         setVelX(0.5);
         setVelY(0.5);
-        System.out.println("playex:"+getMapLocation().getX());
     }
 
     public void shoot(List<Projectile> projectiles) {
@@ -86,28 +86,33 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
 
     @Override
     public void update() {
-        moveX(0.5f);
-        moveY(0.5f);
+
     }
 
-    public void moveX(float speed) {
+    public void moveX(double speed) {
         acc.x = 0;
-
-
-        if (getDirection() == EDirection.RIGHT) { acc.x = speed; }
-        if (getDirection() == EDirection.LEFT) { acc.x = -speed; }
-
+        if (getDirection() == EDirection.RIGHT) {
+            acc.x = speed;
+        }
+        if (getDirection() == EDirection.LEFT) {
+            acc.x = -speed;
+        }
         acc.x += vel.x * -0.1;
         vel.x += acc.x;
         pos.x += vel.x + 0.5 * acc.x;
+
     }
 
-    public void moveY(float speed) {
+    public void moveY(double speed) {
         acc.y = 0;
 
+        if (getDirection() == EDirection.DOWN) {
+            acc.y = speed;
+        }
 
-        if (getDirection() == EDirection.DOWN) { acc.y = speed;  }
-        if (getDirection() == EDirection.UP) { acc.y = -speed; }
+        if (getDirection() == EDirection.UP) {
+            acc.y = -speed;
+        }
 
         acc.y += vel.y * -0.1;
         vel.y += acc.y;

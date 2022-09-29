@@ -5,7 +5,6 @@ import controllers.EDirection;
 import model.Game;
 import model.helperclasses.Rect;
 import model.helperclasses.Vector2;
-import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 
 /**
@@ -14,7 +13,6 @@ import model.mapclasses.Terrain;
  * and health the program can determine if an entity is in range
  * to take damage thus if reduces its health.
  */
-
 public abstract class Entity implements IGameObject {
     Vector2 pos;
 
@@ -93,8 +91,8 @@ public abstract class Entity implements IGameObject {
     }
 
     public Terrain getMapLocation(){
-        int posX = (int) (pos.x % 48);
-        int posY = (int) (pos.y % 48);
+        int posX = (int) (pos.x / 48);
+        int posY = (int) (pos.y / 48);
         currentLocation = game.getGameMap().getGameMapCoordinates()[posX][posY];
         return currentLocation;
     }
@@ -103,8 +101,6 @@ public abstract class Entity implements IGameObject {
     public Vector2 getPos() {
         return new Vector2(pos);
     }
-
-
 
     /**
      * @param direction, updated direction.
@@ -158,14 +154,7 @@ public abstract class Entity implements IGameObject {
         return new Rect(this.rect);
     }
 
-    /**
-     * Method used to update the entites' position and state.
-     * Updates the entites' location by adding its coordinate with its velocity
-     */
-    @Override
-    public void update() {
 
-    }
 
     public void damageTaken(int damage) {
         setHealth(getHealth() - damage);
