@@ -2,7 +2,6 @@ package model.gameobjects;
 
 import config.Config;
 import controllers.EDirection;
-import model.Game;
 import model.helperclasses.Rect;
 import model.helperclasses.Vector2;
 

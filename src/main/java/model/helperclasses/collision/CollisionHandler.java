@@ -7,7 +7,6 @@ import model.gameobjects.IGameObject;
 import model.helperclasses.Vector2;
 import model.gameobjects.Player;
 import model.gameobjects.enemies.Enemy;
-import model.mapclasses.Terrain;
 
 import java.util.HashMap;
 import java.util.Map;

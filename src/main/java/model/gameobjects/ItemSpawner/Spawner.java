@@ -3,12 +3,9 @@ package model.gameobjects.ItemSpawner;
 import model.Game;
 import model.gameobjects.Entity;
 import model.gameobjects.IGameObject;
-import model.gameobjects.enemies.Enemy;
-import model.gameobjects.enemies.IEnemy;
 import model.helperclasses.Vector2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Spawner {

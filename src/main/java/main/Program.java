@@ -14,7 +14,5 @@ public class Program {
         Window window = new Window(mainPanel);
         gameLoop.run(game);
     }
+
 }
-
-
-
