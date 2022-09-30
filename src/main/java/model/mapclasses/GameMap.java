@@ -56,7 +56,7 @@ public class GameMap {
         return gameMapCoordinates;
     }
 
-    public ArrayList<IGameObject> getTerrains() {
+    public ArrayList<Terrain> getTerrains() {
         return new ArrayList<>(terrains);
     }
 

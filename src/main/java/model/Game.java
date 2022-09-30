@@ -33,7 +33,7 @@ public class Game{
 
     private ArrayList<String> highscoreName;
     private ArrayList<IEnemy> enemies;
-    private ArrayList<IGameObject> terrains;
+    private ArrayList<Terrain> terrains;
     private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
     private boolean stateChangedFlag;
     private GameMap gameMap;
@@ -267,32 +267,37 @@ public class Game{
          */
 
         player.moveX(dt);
-        for (IGameObject t : terrains) {
-            Map<String, Boolean> collisionTypes = CollisionHandler.testCollisionWithDirection(player, t, "X");
-            if (collisionTypes.get("right")) {
-                player.setPosX(t.getPos().x - player.getWidth());
-                player.setVelX(0);
-                player.setAccX(0);
-            }
-            if (collisionTypes.get("left")) {
-                player.setPosX((t.getPos().x + t.getWidth()));
-                player.setVelX(0);
-                player.setAccX(0);
+        ArrayList<Terrain> hitList = CollisionHandler.getSpecificTerrainCollisions(player, )
+        for (Terrain t : terrains) {
+            if (!t.isPassable()) {
+                Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, "X");
+                if (collisionTypes.get("right")) {
+                    player.setPosX(t.getPos().x - player.getWidth());
+                    player.setVelX(0);
+                    player.setAccX(0);
+                }
+                if (collisionTypes.get("left")) {
+                    player.setPosX((t.getPos().x + t.getWidth()));
+                    player.setVelX(0);
+                    player.setAccX(0);
+                }
             }
         }
 
         player.moveY(dt);
-        for (IGameObject t : terrains) {
-            Map<String, Boolean> collisionTypes = CollisionHandler.testCollisionWithDirection(player, t, "Y");
-            if (collisionTypes.get("top")) {
-                player.setPosY(t.getPos().y + player.getHeight());
-                player.setVelY(0);
-                player.setAccY(0);
-            }
-            if (collisionTypes.get("bottom")) {
-                player.setPosY((t.getPos().y - t.getHeight()));
-                player.setVelY(0);
-                player.setAccY(0);
+        for (Terrain t : terrains) {
+            if (!t.isPassable()) {
+                Map<String, Boolean> collisionTypes = CollisionHandler.testCollisionWithDirection(player, t, "Y");
+                if (collisionTypes.get("top")) {
+                    player.setPosY(t.getPos().y + player.getHeight());
+                    player.setVelY(0);
+                    player.setAccY(0);
+                }
+                if (collisionTypes.get("bottom")) {
+                    player.setPosY((t.getPos().y - t.getHeight()));
+                    player.setVelY(0);
+                    player.setAccY(0);
+                }
             }
         }
 

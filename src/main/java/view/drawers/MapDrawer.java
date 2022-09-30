@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MapDrawer implements IDrawer {
-    private final ArrayList<IGameObject> terrains;
+    private final ArrayList<Terrain> terrains;
     private final BufferedImage[] terrainImgs = new BufferedImage[10];
     private final GameMap gameMap;
     private final int[][] mapNums;

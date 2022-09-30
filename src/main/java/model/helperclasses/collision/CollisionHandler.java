@@ -9,9 +9,7 @@ import model.gameobjects.Player;
 import model.gameobjects.enemies.Enemy;
 import model.mapclasses.Terrain;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class CollisionHandler {
     private Player player;
@@ -26,7 +24,6 @@ public class CollisionHandler {
      * @param player
      * @param tile
      */
-
     public void playerCollidesWithTile(Player player, Terrain tile){
         if(
                 player.getPos().x >(tile.getPos().x + tile.getHeight() + tile.getWidth())
@@ -36,6 +33,26 @@ public class CollisionHandler {
         ){
             System.out.println("yes");
         }
+    }
+
+    /**
+     * Method for providing which specific terrain pieces an object is colliding with
+     * @param object Object to test
+     * @param terrain List of terrain pieces
+     * @return A list containing the terrain pieces that is being collided with
+     */
+    //TODO: Använd matris istället för lista med terrains för att mer effektivt kunna plocka ut vilka man ens ska testa med!
+    public static List<Terrain> getSpecificTerrainCollisions(IGameObject object, Terrain[][] terrain) {
+        List<Terrain> hitList = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            for (int j = 0; j < 100; j++) {
+                Terrain t = terrain[i][j];
+                if (testCollision(object, t)) {
+                    hitList.add(t);
+                }
+            }
+        }
+        return hitList;
     }
 
     /**
@@ -52,7 +69,7 @@ public class CollisionHandler {
                 && object1.getHeight() + object1.getPos().y > object2.getPos().y;
     }
 
-    public static Map<String, Boolean> testCollisionWithDirection(Entity object1, IGameObject object2, String direction) {
+    public static Map<String, Boolean> getCollisionDirection(Entity object1, IGameObject object2, String direction) {
         Map<String, Boolean> collisionTypes = new HashMap<>(Map.of(
                 "top", false,
                 "bottom", false,
@@ -61,20 +78,20 @@ public class CollisionHandler {
         ));
 
         if (testCollision(object1, object2)) {
-            if (Objects.equals(direction, "X")) {
-                if (object1.getDirection() == EDirection.RIGHT) {
+            if (Objects.equals(direction.toUpperCase(), "X")) {
+                if (object1.getVelX() > 0) {
                     collisionTypes.replace("right", true);
                 }
-                if (object1.getDirection() == EDirection.LEFT) {
+                if (object1.getVelX() < 0) {
                     collisionTypes.replace("left", true);
                 }
             }
 
-            if (Objects.equals(direction, "Y")) {
-                if (object1.getDirection() == EDirection.UP) {
+            if (Objects.equals(direction.toUpperCase(), "Y")) {
+                if (object1.getVelY() < 0) {
                     collisionTypes.replace("top", true);
                 }
-                if (object1.getDirection() == EDirection.DOWN) {
+                if (object1.getVelY() > 0) {
                     collisionTypes.replace("bottom", true);
                 }
             }
