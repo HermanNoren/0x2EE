@@ -41,18 +41,29 @@ public class CollisionHandler {
      * @param terrain List of terrain pieces
      * @return A list containing the terrain pieces that is being collided with
      */
-    //TODO: Använd matris istället för lista med terrains för att mer effektivt kunna plocka ut vilka man ens ska testa med!
     public static List<Terrain> getSpecificTerrainCollisions(IGameObject object, Terrain[][] terrain) {
-        List<Terrain> hitList = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
-            for (int j = 0; j < 100; j++) {
-                Terrain t = terrain[i][j];
-                if (testCollision(object, t)) {
-                    hitList.add(t);
+        List<Terrain> collidedTerrain = new ArrayList<>();
+
+        Vector2 objectPos = object.getPos();
+        int left = (int) (objectPos.x / object.getWidth() - 1);
+        int right = (int) (objectPos.x / object.getWidth() + 1);
+        int up = (int) (objectPos.y / object.getHeight() - 1);
+        int down = (int) (objectPos.y / object.getHeight() + 1);
+
+        if (left < 0) { left = 0; }
+        if (up < 0) { up = 0; }
+
+        for (int row = left; row < right && row < terrain[0].length; row++) {
+            for (int col = up; col < down && col < terrain.length; col++) {
+                Terrain t = terrain[row][col];
+                if (!t.isPassable()) {
+                    if (testCollision(object, t)) {
+                        collidedTerrain.add(t);
+                    }
                 }
             }
         }
-        return hitList;
+        return collidedTerrain;
     }
 
     /**
@@ -69,7 +80,7 @@ public class CollisionHandler {
                 && object1.getHeight() + object1.getPos().y > object2.getPos().y;
     }
 
-    public static Map<String, Boolean> getCollisionDirection(Entity object1, IGameObject object2, String direction) {
+    public static Map<String, Boolean> getCollisionDirection(Entity object1, IGameObject object2, ECollisionDirection direction) {
         Map<String, Boolean> collisionTypes = new HashMap<>(Map.of(
                 "top", false,
                 "bottom", false,
@@ -78,7 +89,7 @@ public class CollisionHandler {
         ));
 
         if (testCollision(object1, object2)) {
-            if (Objects.equals(direction.toUpperCase(), "X")) {
+            if (direction == ECollisionDirection.X_AXIS) {
                 if (object1.getVelX() > 0) {
                     collisionTypes.replace("right", true);
                 }
@@ -87,7 +98,7 @@ public class CollisionHandler {
                 }
             }
 
-            if (Objects.equals(direction.toUpperCase(), "Y")) {
+            if (direction == ECollisionDirection.Y_AXIS) {
                 if (object1.getVelY() < 0) {
                     collisionTypes.replace("top", true);
                 }

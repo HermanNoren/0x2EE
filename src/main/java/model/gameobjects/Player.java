@@ -42,7 +42,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         rightPressed = false;
         score = 0;
         money = 0;
-        acceleration = 0.8;
+        acceleration = 0.2;
         setHealth(1000);
         setMaxHp(1000);
     }
@@ -103,6 +103,11 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         acc.y += vel.y * -0.1;
         vel.y += acc.y;
         pos.y += vel.y * dt;
+    }
+
+    public void stopCurrentMovement() {
+        vel = new Vector2(0, 0);
+        acc = new Vector2(0, 0);
     }
 
     /**
