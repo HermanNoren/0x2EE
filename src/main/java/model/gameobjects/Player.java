@@ -22,10 +22,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     protected Armor armor;
     boolean isDamageTaken;
     private double acceleration;
-
     public boolean isInteractable = false;
-
-    private boolean upPressed, downPressed, leftPressed, rightPressed;
 
     /**
      * @param x, starting x-position
@@ -36,10 +33,6 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         super(x, y, game);
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);
-        upPressed = false;
-        downPressed = false;
-        leftPressed = false;
-        rightPressed = false;
         score = 0;
         money = 0;
         acceleration = 0.2;
@@ -52,22 +45,6 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         if (getDirection() == EDirection.NOT_MOVING) { dir = getLastDirection(); }
         else { dir = getDirection(); }
         weapon.shoot(getCenter(), dir, projectiles);
-    }
-
-    public void setUpPressed(boolean value) {
-        upPressed = value;
-    }
-
-    public void setDownPressed(boolean value) {
-        downPressed = value;
-    }
-
-    public void setRightPressed(boolean value) {
-        rightPressed = value;
-    }
-
-    public void setLeftPressed(boolean value) {
-        leftPressed = value;
     }
 
     @Override
