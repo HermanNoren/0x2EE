@@ -38,10 +38,15 @@ public abstract class Entity implements IGameObject {
         this.game = game;
         this.direction = EDirection.NOT_MOVING; // Default value
         this.lastDirection = direction;
+
         this.pos = new Vector2(x, y);
         this.acc = new Vector2(0, 0);
         this.rect = new Rect(x, y, size, size);
         this.vel = new Vector2(0,0);
+    }
+
+    public void setPos(Vector2 pos) {
+        this.pos = pos;
     }
 
     public Vector2 getVel() {
@@ -91,8 +96,8 @@ public abstract class Entity implements IGameObject {
     }
 
     public Terrain getMapLocation(){
-        int posX = (int) (pos.x / 48);
-        int posY = (int) (pos.y / 48);
+        int posX = (int) (getPosX() + getWidth()/2)/48;
+        int posY = (int) (getPosY() + getHeight()/2)/48;
         currentLocation = game.getGameMap().getGameMapCoordinates()[posX][posY];
         return currentLocation;
     }

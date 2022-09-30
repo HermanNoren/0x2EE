@@ -19,6 +19,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * This class contains the main game loop.
@@ -27,7 +28,7 @@ import java.util.Map;
 public class Game{
     private List<IObserver> observers;
     private Player player;
-    private final List<Terrain> path;
+    private List<Terrain> path;
 
     private List<String> highscoreName;
     private List<Entity> enemies;
@@ -51,20 +52,35 @@ public class Game{
 
     public Game(){
         this.gameMap = new GameMap(50, 50);
-        player = new Player(100, 100, this);
+        IGameObject spawn = gameMap.getPassableTerrains().get(new Random().nextInt(gameMap.getPassableTerrains().size()-1));
+        player = new Player((int) spawn.getPos().x*48, (int) spawn.getPos().y*48, this);
         shop = new Shop();
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         highscoreName = new ArrayList<>();
-        this.path = new ArrayList<>();
 
         EnemyFactory enemyFactory= new NormalEnemyFactory();
+
         enemies.add(enemyFactory.createEnemy(this));
         enemies.add(enemyFactory.createEnemy(this));
         enemies.add(enemyFactory.createEnemy(this));
         enemies.add(enemyFactory.createEnemy(this));
         enemies.add(enemyFactory.createEnemy(this));
         enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+        enemies.add(enemyFactory.createEnemy(this));
+
+
         spawner = new Spawner(this);
 
         sprites = new ArrayList<>();
@@ -274,41 +290,30 @@ public class Game{
             sprite.update();
         }
 
-        player.moveX(speed);
-        player.moveY(speed);
+        player.moveX(0.5);
+        player.moveY(0.5);
         for(IGameObject terrain: gameMap.getTerrains()){
-
             Map<String, Boolean> collisionTypeX = CollisionHandler.testCollisionWithDirection(player, terrain, "X");
             if(collisionTypeX.get("right")){
-                if (player.getVelX() > 0){
-                    speed =0;
-                    player.setPosX(player.getPosX()-1);
-                    break;
-                }
+                player.setVelX(0);
+                player.setAccX(0);
             }
 
             if(collisionTypeX.get("left")){
-                if (player.getVelX() > 0){
-                    speed = 0;
-                    player.setPosX(player.getPosX()+1);
-                    break;
-                }
-
+                player.setVelX(0);
+                player.setAccX(0);
             }
 
 
             Map<String, Boolean> collisionTypeY = CollisionHandler.testCollisionWithDirection(player, terrain, "Y");
             if(collisionTypeY.get("top")){
-                speed = 0;
-                player.setPosY(player.getPosY()+1);
-                break;
-
+                player.setVelY(0);
+                player.setAccY(0);
             }
             if(collisionTypeY.get("bottom")){
-                speed =0;
-                player.setPosY(player.getPosY()-1);
-                break;
-            }else speed = 0.5;
+                player.setVelY(0);
+                player.setAccY(0);
+            }
         }
 
 
@@ -390,9 +395,14 @@ public class Game{
     }
 
     public List<Terrain> getPath() {
-        return path;
+        if(path != null){
+            return path;
+        }
+        return null;
     }
-    public void setPath(Terrain n){
-
+    public void setPath(List<Terrain> n){
+        if(n != null) {
+            this.path = n;
+        }
     }
 }

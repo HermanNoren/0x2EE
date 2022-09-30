@@ -5,12 +5,14 @@ import controllers.EDirection;
 import model.gameobjects.Player;
 import model.helperclasses.AStar;
 import model.Game;
+import model.helperclasses.Vector2;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import model.gameobjects.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public abstract class Enemy extends Entity implements IEnemy {
 
@@ -21,37 +23,44 @@ public abstract class Enemy extends Entity implements IEnemy {
         this.game = game;
     }
 
-
-
     /**
      * Method used to move the enemy to target goal.
      *
      */
     public void moveToGoal() {
         Player player = game.getPlayer();
-        Terrain goal = player.getMapLocation();
+        Terrain target = player.getMapLocation();
+
         Terrain current = getMapLocation();
 
-        int goalX = goal.getX();
-        int goalY = goal.getY();
+        Terrain next = AStar.aStar(current, target);
+
+        assert next != null;
+        Vector2 nextPos = next.getPos();
 
         int currentX = current.getX();
         int currentY = current.getY();
 
-        if (currentX < goalX){
+        if (currentX < nextPos.x){
             setDirection(EDirection.RIGHT);
-        }else if(currentX > goalX){
-            setDirection(EDirection.LEFT);
-        } else if (currentY < goalY) {
-            setDirection(EDirection.DOWN);
-        } else if (currentY > goalY) {
-            setDirection(EDirection.UP);
+            setPosX(getPosX() +0.5);
         }
-
+        else if(currentX > nextPos.x){
+            setDirection(EDirection.LEFT);
+            setPosX(getPosX() -0.5);
+        }
+        else if (currentY < nextPos.y) {
+            setDirection(EDirection.DOWN);
+            setPosY(getPosY()+0.5);
+        }
+        else if (currentY > nextPos.y) {
+            setDirection(EDirection.UP);
+            setPosY(getPosY()-0.5);
+        }
     }
 
     @Override
     public void update() {
-//        moveToGoal();
+        moveToGoal();
     }
 }

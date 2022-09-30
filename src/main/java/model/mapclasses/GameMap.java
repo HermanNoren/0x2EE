@@ -27,10 +27,10 @@ public class GameMap {
         entities = new ArrayList<>();
         addCoordinatesAndTiles(width, height);
 
-//        Noise n = new Noise(1, this); // Generates random terrain on the game map.
-//
+//        Noise n = new Noise(10, this); // Generates random terrain on the game map.
 //        n.init();
 //        n.setTerrainTypes(gameMapCoordinates);
+
         createBorder();
 
         terrains.forEach(this::addNeighbors);
@@ -93,6 +93,17 @@ public class GameMap {
     public List<IGameObject> getTerrains() {
         return new ArrayList<>(terrains);
     }
+
+    public List<IGameObject> getPassableTerrains(){
+        List<IGameObject> passable = new ArrayList<>();
+        for(Terrain terrain: terrains){
+            if(terrain.isPassable()) {
+                passable.add(terrain);
+            }
+        }
+        return passable;
+    }
+
 
     /**
      * Method used to set specific terrain's type.

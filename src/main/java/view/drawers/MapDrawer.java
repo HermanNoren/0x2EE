@@ -24,16 +24,16 @@ public class MapDrawer implements IDrawer {
     private int size = 48;
     private int spriteSize = Config.SPRITE_SIZE*3;
     private ImageHandler imageHandler;
+    private Game game;
 
     public MapDrawer(Game game){
         this.gameMap = game.getGameMap();
+        this.game = game;
         camera = Camera.getInstance();
         mapNums = new int[gameMap.getWidth()][gameMap.getHeight()];
         this.terrains = gameMap.getTerrains();
         this.imageHandler = new ImageHandler();
-
         loadTerrainImages();
-
     }
 
     private void loadTerrainImages(){
@@ -41,13 +41,6 @@ public class MapDrawer implements IDrawer {
         terrainImgs[1] = ImageHandler.scaleImage(imageHandler.getImage("imgs/tile/border.png"), spriteSize, spriteSize);
         terrainImgs[2] = ImageHandler.scaleImage(imageHandler.getImage("imgs/tile/tree.png"), spriteSize, spriteSize);
         terrainImgs[3] = ImageHandler.scaleImage(imageHandler.getImage("imgs/tile/wall.png"), spriteSize, spriteSize);
-
-
-    }
-    private void scaleImgs(){
-        for(BufferedImage img: terrainImgs){
-            ImageHandler.scaleImage(img, 48, 48);
-        }
     }
 
 
@@ -55,16 +48,18 @@ public class MapDrawer implements IDrawer {
     public void draw(Graphics2D g2) {
 
         // Coordinates of tiles to paint with a 5 tile offset to guarantee visibility
-        int left = (int) (camera.getCenter().x - Config.SCREEN_WIDTH/2)/spriteSize - 5;
-        int right = (int) (camera.getCenter().x + Config.SCREEN_WIDTH/2)/spriteSize + 5;
-        int up = (int) (camera.getCenter().y - Config.SCREEN_HEIGHT/2)/spriteSize - 5;
-        int down = (int) (camera.getCenter().y + Config.SCREEN_HEIGHT/2)/spriteSize + 5;
+        int left = (int) (camera.getCenter().x - Config.SCREEN_WIDTH/2)/spriteSize -5;
+        int right = (int) (camera.getCenter().x + Config.SCREEN_WIDTH/2)/spriteSize +5;
+        int up = (int) (camera.getCenter().y - Config.SCREEN_HEIGHT/2)/spriteSize -5;
+        int down = (int) (camera.getCenter().y + Config.SCREEN_HEIGHT/2)/spriteSize +5;
 
         // If out of bounds
-        if (left < 0)
+        if (left < 0) {
             left = 0;
-        if (up < 0)
+        }
+        if (up < 0) {
             up = 0;
+        }
         int terrainSize = Config.SPRITE_SIZE*3;
 
         Vector2 newTerrainVector;
@@ -86,6 +81,8 @@ public class MapDrawer implements IDrawer {
                 g2.drawImage(terrainImgs[terrainNum], drawInformation.get(0), drawInformation.get(1), null);
             }
         }
+
+
     }
 }
 
