@@ -36,6 +36,21 @@ public class CollisionHandler {
     }
 
     /**
+     * Me
+     * thod for calculating if a game object is colliding with another game object
+     * @param object1 first object to compare
+     * @param object2 second object to compare
+     * @return true if objects are colliding, else false
+     */
+    public static boolean testCollision(IGameObject object1, IGameObject object2) {
+        return
+                object1.getPos().x < object2.getPos().x + object2.getWidth()
+                && object1.getPos().x + object1.getWidth() > object2.getPos().x
+                && object1.getPos().y < object2.getPos().y + object2.getHeight()
+                && object1.getHeight() + object1.getPos().y > object2.getPos().y;
+    }
+
+    /**
      * Method for providing which specific terrain pieces an object is colliding with
      * @param object Object to test
      * @param terrain List of terrain pieces
@@ -64,20 +79,6 @@ public class CollisionHandler {
             }
         }
         return collidedTerrain;
-    }
-
-    /**
-     * Method for calculating if a game object is colliding with another game object
-     * @param object1 first object to compare
-     * @param object2 second object to compare
-     * @return true if objects are colliding, else false
-     */
-    public static boolean testCollision(IGameObject object1, IGameObject object2) {
-        return
-                object1.getPos().x < object2.getPos().x + object2.getWidth()
-                && object1.getPos().x + object1.getWidth() > object2.getPos().x
-                && object1.getPos().y < object2.getPos().y + object2.getHeight()
-                && object1.getHeight() + object1.getPos().y > object2.getPos().y;
     }
 
     public static Map<String, Boolean> getCollisionDirection(Entity object1, IGameObject object2, ECollisionDirection direction) {

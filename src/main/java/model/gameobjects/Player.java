@@ -66,9 +66,9 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         if (getDirection() == EDirection.RIGHT) { acc.x = acceleration; }
         if (getDirection() == EDirection.LEFT) { acc.x = -acceleration; }
 
-        acc.x += vel.x * -0.1;
-        vel.x += acc.x;
-        pos.x += vel.x * dt;
+        acc.x += vel.x * -0.12;
+        vel.x += acc.x * dt;
+        pos.x += vel.x * dt + (acc.x * 0.5) * (dt * dt);
     }
 
     public void moveY(double dt) {
@@ -77,9 +77,9 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         if (getDirection() == EDirection.DOWN) { acc.y = acceleration;  }
         if (getDirection() == EDirection.UP) { acc.y = -acceleration; }
 
-        acc.y += vel.y * -0.1;
-        vel.y += acc.y;
-        pos.y += vel.y * dt;
+        acc.y += vel.y * -0.12;
+        vel.y += acc.y * dt;
+        pos.y += vel.y * dt + (acc.y * 0.5) * (dt * dt);
     }
 
     public void stopCurrentMovement() {
