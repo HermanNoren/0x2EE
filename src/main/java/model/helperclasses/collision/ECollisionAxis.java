@@ -1,6 +1,6 @@
 package model.helperclasses.collision;
 
-public enum ECollisionDirection {
+public enum ECollisionAxis {
 
     X_AXIS,
 

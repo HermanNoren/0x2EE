@@ -53,7 +53,7 @@ public class CollisionHandler {
     /**
      * Method for providing which specific terrain pieces an object is colliding with
      * @param object Object to test
-     * @param terrain List of terrain pieces
+     * @param terrain Matrix containing all the terrain tiles.
      * @return A list containing the terrain pieces that is being collided with
      */
     public static List<Terrain> getSpecificTerrainCollisions(IGameObject object, Terrain[][] terrain) {
@@ -81,7 +81,17 @@ public class CollisionHandler {
         return collidedTerrain;
     }
 
-    public static Map<String, Boolean> getCollisionDirection(Entity object1, IGameObject object2, ECollisionDirection direction) {
+    /**
+     * Method for calculating in which direction a collision is happening.
+     * @param object1 Object to which is colliding with a direction
+     * @param object2 Object which the first object is colliding into.
+     * @param axis The desired axis to test. If desired axis is X_AXIS the method will test if collision is happening
+     *             to the right or to the left. If desired axis is Y_AXIS the method will test if collision is happening
+     *             at the top or at the bottom.
+     * @return The method returns a map containing 4 keys; 'top', 'bottom', 'right', 'left'. Use these keys to get the
+     * boolean value of the direction. Example: map.get("top") will be true if collision is at the top.
+     */
+    public static Map<String, Boolean> getCollisionDirection(Entity object1, IGameObject object2, ECollisionAxis axis) {
         Map<String, Boolean> collisionTypes = new HashMap<>(Map.of(
                 "top", false,
                 "bottom", false,
@@ -90,7 +100,7 @@ public class CollisionHandler {
         ));
 
         if (testCollision(object1, object2)) {
-            if (direction == ECollisionDirection.X_AXIS) {
+            if (axis == ECollisionAxis.X_AXIS) {
                 if (object1.getVelX() > 0) {
                     collisionTypes.replace("right", true);
                 }
@@ -99,7 +109,7 @@ public class CollisionHandler {
                 }
             }
 
-            if (direction == ECollisionDirection.Y_AXIS) {
+            if (axis == ECollisionAxis.Y_AXIS) {
                 if (object1.getVelY() < 0) {
                     collisionTypes.replace("top", true);
                 }

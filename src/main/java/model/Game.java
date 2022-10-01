@@ -4,20 +4,18 @@ import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.Spawner;
 import model.gameobjects.enemies.*;
-import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
 import model.gameobjects.theShop.Shop;
 import model.helperclasses.HighscoreHandler;
-import model.helperclasses.collision.ECollisionDirection;
+import model.helperclasses.collision.ECollisionAxis;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import model.gameobjects.IGameObject;
 
 import view.IObserver;
 
-import java.io.*;
 import java.util.*;
 
 /**
@@ -267,7 +265,7 @@ public class Game{
         player.moveX(dt);
         List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
         for (Terrain t : collidedTerrain) {
-            Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionDirection.X_AXIS);
+            Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.X_AXIS);
             if (collisionTypes.get("right")) {
                 player.setPosX(t.getPos().x - player.getWidth());
                 player.stopCurrentMovement();
@@ -281,7 +279,7 @@ public class Game{
         player.moveY(dt);
         collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
         for (Terrain t : collidedTerrain) {
-            Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionDirection.Y_AXIS);
+            Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.Y_AXIS);
             if (collisionTypes.get("top")) {
                 player.setPosY(t.getPos().y + player.getHeight());
                 player.stopCurrentMovement();
