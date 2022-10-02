@@ -31,6 +31,9 @@ public class HowToPlayPanelState implements IPanelState{
 
     private ImageHandler imageHandler;
 
+    private final Font buttonFont = new Font("Public Pixel", Font.PLAIN, 12);
+    private final Font titleFont = new Font("Public Pixel", Font.PLAIN, 64);
+
     public HowToPlayPanelState(MainPanel mainPanel, Game game){
         this.game = game;
         this.mainPanel = mainPanel;
@@ -53,13 +56,13 @@ public class HowToPlayPanelState implements IPanelState{
 
         g2.setColor(Color.black);
         g2.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 12));
+        g2.setFont(buttonFont);
         for (IDrawer drawer : drawers){
             drawer.draw(g2);
         }
 
         g2.setColor(Color.white);
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 48));
+        g2.setFont(titleFont);
         String paused = "HOW TO PLAY";
         g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 100);
         g2.drawImage(controls, 0,80, Config.SCREEN_WIDTH*100/150, Config.SCREEN_HEIGHT, null);

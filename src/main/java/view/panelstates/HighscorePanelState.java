@@ -32,6 +32,9 @@ public class HighscorePanelState implements IPanelState {
     private Color silver = new Color(180, 215, 215);
     private Color bronze = new Color(131, 69, 7);
 
+    private final Font buttonFont = new Font("Public Pixel", Font.PLAIN, 12);
+    private final Font titleFont = new Font("Public Pixel", Font.PLAIN, 64);
+
 
     private List<Color> rankColors = new ArrayList<>(
             Arrays.asList(gold, silver,
@@ -61,13 +64,12 @@ public class HighscorePanelState implements IPanelState {
 
         g2.setColor(Color.black);
         g2.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 12));
+        g2.setFont(buttonFont);
         for (IDrawer drawer : drawers){
             drawer.draw(g2);
         }
         g2.setColor(Color.white);
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 64));
-        FontMetrics metrics = g2.getFontMetrics();
+        g2.setFont(titleFont);
         String paused = "HIGHSCORES";
         g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
         ypos = 225;
@@ -78,7 +80,7 @@ public class HighscorePanelState implements IPanelState {
             }else{
                 Color color = rankColors.get(rank - 1);
                 String[] playerscore = score.split(":");
-                String listitem = "#" + String.valueOf(rank) + " " + playerscore[0].toUpperCase() + ": " + playerscore[1];
+                String listitem = "#" + rank + " " + playerscore[0].toUpperCase() + ": " + playerscore[1];
                 g2.setFont(new Font("Public Pixel", Font.PLAIN, 32-rank));
                 g2.setColor(color);
                 g2.drawString(listitem, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(listitem)) / 2 , ypos);

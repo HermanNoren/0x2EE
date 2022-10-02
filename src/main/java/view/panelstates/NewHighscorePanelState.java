@@ -27,6 +27,11 @@ public class NewHighscorePanelState implements IPanelState{
     private int xpos, ypos;
     private MainPanel mainPanel;
 
+    private final Font buttonFont = new Font("Public Pixel", Font.PLAIN, 12);
+    private final Font titleFont = new Font("Public Pixel", Font.PLAIN, 64);
+    private final Font infoFont = new Font("Public Pixel", Font.PLAIN, 32);
+    private final Font nameFont = new Font("Public Pixel", Font.PLAIN, 56);
+
     public NewHighscorePanelState(MainPanel mainPanel, Game game){
         this.game = game;
         this.mainPanel = mainPanel;
@@ -48,7 +53,7 @@ public class NewHighscorePanelState implements IPanelState{
 
         g2.setColor(Color.black);
         g2.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 12));
+        g2.setFont(buttonFont);
         for (IDrawer drawer : drawers){
             drawer.draw(g2);
         }
@@ -64,15 +69,15 @@ public class NewHighscorePanelState implements IPanelState{
 
         xpos = 110;
         ypos = 340;
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 56));
+        g2.setFont(nameFont);
         for (String letter : game.getHighscoreName()){
             g2.drawString(letter, xpos+=100, ypos);
         }
         g2.setColor(Color.white);
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 64));
+        g2.setFont(titleFont);
         String title = "NEW HIGHSCORE";
         g2.drawString(title, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(title)) / 2 , 128);
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 32));
+        g2.setFont(infoFont);
         String action = "ENTER YOUR NAME:";
         g2.drawString(action, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(action)) / 2 , 220);
     }
