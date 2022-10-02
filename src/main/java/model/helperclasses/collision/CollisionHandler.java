@@ -28,10 +28,10 @@ public class CollisionHandler {
     public static boolean playerCollidesWithTerrain(IGameObject player, IGameObject terrain){
         if (!terrain.isPassable()){
             return
-                    player.getPos().x < terrain.getPos().x*48 + terrain.getWidth()
-                            && player.getPos().x + player.getWidth() > terrain.getPos().x*48
-                            && player.getPos().y < terrain.getPos().y*48 + terrain.getHeight()
-                            && player.getHeight() + player.getPos().y > terrain.getPos().y*48;
+                    player.getPos().x < terrain.getPos().x + terrain.getWidth()
+                            && player.getPos().x + player.getWidth() > terrain.getPos().x
+                            && player.getPos().y < terrain.getPos().y + terrain.getHeight()
+                            && player.getHeight() + player.getPos().y > terrain.getPos().y;
         }
         return false;
 

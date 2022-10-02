@@ -37,8 +37,8 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
         this.neighbors = new ArrayList<>();
         this.entities = new ArrayList<>();
         this.pos = new Vector2(x, y);
-        this.pos.x = x;
-        this.pos.y = y;
+        this.pos.x *= 48;
+        this.pos.y *= 48;
         this.id = idCounter++;
         this.rect = new Rect(x,y, size, size);
     }
@@ -69,6 +69,7 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     public Vector2 getPos() {
         return new Vector2(pos);
     }
+
     @Override
     public Vector2 getCenter() {
         return null;

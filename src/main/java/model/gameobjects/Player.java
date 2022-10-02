@@ -50,9 +50,9 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         setVelY(0.5);
     }
     public static Player createPlayer(Game game, Random rand){
-        int xPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size()-1)).getPos().x;
-        int yPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size()-1)).getPos().y;
-        return new Player(xPos*48, yPos*48, game);
+        int xPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size())).getPos().x;
+        int yPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size())).getPos().y;
+        return new Player(xPos, yPos, game);
     }
 
     public void shoot(List<Projectile> projectiles) {

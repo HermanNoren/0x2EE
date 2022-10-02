@@ -68,8 +68,8 @@ public class MapDrawer implements IDrawer {
         for (int col = left; col < right && col < gameMap.getWidth(); col++){
             for(int row = up; row < down && row < gameMap.getHeight(); row++){
                 newTerrainVector = new Vector2(gameMapCoordinates[col][row].getPos()); // For drawing in correct place.
-                newTerrainVector.x*=terrainSize;
-                newTerrainVector.y*=terrainSize;
+                newTerrainVector.x += terrainSize;
+                newTerrainVector.y += terrainSize;
 
                 List<Integer> drawInformation = DrawerHelper.
                     calculateDrawingInformation(
