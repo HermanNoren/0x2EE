@@ -17,6 +17,7 @@ public class Camera {
 
     private ArrayList<IFocusableObject> focusedObject;
     private Vector2 relativePos, absolutePos, center;
+    private int standardDragEffectConstant;
     private int dragEffectConstant;
     private double currentZoomMultiplier;
 
@@ -29,7 +30,8 @@ public class Camera {
         this.focusedObject = new ArrayList<>();
         relativePos = new Vector2(0, 0);  // Relative pos will be used when calculating zoom
         absolutePos = new Vector2(relativePos);     // Absolute pos will not take zoom into consideration
-        dragEffectConstant = 60;
+        standardDragEffectConstant = 50;
+        dragEffectConstant = standardDragEffectConstant;
         currentZoomMultiplier = 1;
         calculateCenterPos();
     }
@@ -95,7 +97,7 @@ public class Camera {
      * Resets the drag effect to its standard value
      */
     public void resetDragEffectConstant() {
-        dragEffectConstant = 60;
+        dragEffectConstant = standardDragEffectConstant;
     }
 
     /**
