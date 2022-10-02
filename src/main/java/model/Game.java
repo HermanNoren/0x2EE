@@ -44,16 +44,11 @@ public class Game{
     private HighscoreHandler highscoreHandler;
 
     private Spawner spawner;
-    private boolean collideFlag;
-
-    public boolean isCollideFlag() {
-        return collideFlag;
-    }
+    private Random random = new Random();
 
     public Game(){
         this.gameMap = new GameMap(50, 50);
-        IGameObject spawn = gameMap.getPassableTerrains().get(new Random().nextInt(gameMap.getPassableTerrains().size()-1));
-        player = new Player((int) spawn.getPos().x*48, (int) spawn.getPos().y*48, this);
+        this.player = Player.createPlayer(this, random);
         shop = new Shop();
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
@@ -61,25 +56,8 @@ public class Game{
 
         EnemyFactory enemyFactory= new NormalEnemyFactory();
 
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-        enemies.add(enemyFactory.createEnemy(this));
-
+        enemies.add(enemyFactory.createEnemy(this, random));
+        enemies.add(enemyFactory.createEnemy(this, random));
 
         spawner = new Spawner(this);
 
@@ -164,16 +142,6 @@ public class Game{
     public List<IGameObject> getItems(){
         return spawner.getSpawnedItems();
     }
-
-    /**
-     * Returns an ArrayList containing all the tiles in the Game Map.
-     * @return  All Game Map Tiles
-     */
-    public List<IGameObject> getTerrainBorder() {
-        return null;
-//        return terrainBorder.getTerrainBorder();
-    }
-
 
 
     /**
@@ -290,29 +258,34 @@ public class Game{
             sprite.update();
         }
 
-        player.moveX(0.5);
         player.moveY(0.5);
+        player.moveX(0.5);
         for(IGameObject terrain: gameMap.getTerrains()){
             Map<String, Boolean> collisionTypeX = CollisionHandler.testCollisionWithDirection(player, terrain, "X");
             if(collisionTypeX.get("right")){
                 player.setVelX(0);
                 player.setAccX(0);
+                player.setPosX(terrain.getPos().x*48 - player.getWidth());
             }
 
             if(collisionTypeX.get("left")){
                 player.setVelX(0);
                 player.setAccX(0);
+                player.setPosX(terrain.getPos().x*48 + player.getWidth());
             }
+
 
 
             Map<String, Boolean> collisionTypeY = CollisionHandler.testCollisionWithDirection(player, terrain, "Y");
             if(collisionTypeY.get("top")){
                 player.setVelY(0);
                 player.setAccY(0);
+                player.setPosY(terrain.getPos().y*48 + player.getHeight());
             }
             if(collisionTypeY.get("bottom")){
                 player.setVelY(0);
                 player.setAccY(0);
+                player.setPosY(terrain.getPos().y*48 - player.getHeight());
             }
         }
 

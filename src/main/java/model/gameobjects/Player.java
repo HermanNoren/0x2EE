@@ -10,6 +10,7 @@ import model.weapons.Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * The player, more implementation to come.
@@ -32,7 +33,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
      * @param y, starting y-position
      * Player constructor, used to create an instance of player.
      */
-    public Player(int x, int y, Game game){
+    private Player(int x, int y, Game game){
         super(x, y, game);
         this.game = game;
         this.armor = new Armor();
@@ -47,6 +48,11 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         setMaxHp(1000);
         setVelX(0.5);
         setVelY(0.5);
+    }
+    public static Player createPlayer(Game game, Random rand){
+        int xPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size()-1)).getPos().x;
+        int yPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size()-1)).getPos().y;
+        return new Player(xPos*48, yPos*48, game);
     }
 
     public void shoot(List<Projectile> projectiles) {

@@ -27,9 +27,9 @@ public class GameMap {
         entities = new ArrayList<>();
         addCoordinatesAndTiles(width, height);
 
-//        Noise n = new Noise(10, this); // Generates random terrain on the game map.
-//        n.init();
-//        n.setTerrainTypes(gameMapCoordinates);
+        Noise n = new Noise(10, this); // Generates random terrain on the game map.
+        n.init();
+        n.setTerrainTypes(gameMapCoordinates);
 
         createBorder();
 

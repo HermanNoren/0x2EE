@@ -24,38 +24,32 @@ public abstract class Enemy extends Entity implements IEnemy {
     }
 
     /**
-     * Method used to move the enemy to target goal.
+     * Method used to move the enemy towards player.
      *
      */
-    public void moveToGoal() {
-        Player player = game.getPlayer();
-        Terrain target = player.getMapLocation();
-
+    private void moveToGoal() {
         Terrain current = getMapLocation();
+        Terrain next = AStar.aStar(current, game.getPlayer().getMapLocation());
 
-        Terrain next = AStar.aStar(current, target);
-
-        assert next != null;
-        Vector2 nextPos = next.getPos();
+        Vector2 nextPos;
 
         int currentX = current.getX();
         int currentY = current.getY();
-
-        if (currentX < nextPos.x){
-            setDirection(EDirection.RIGHT);
-            setPosX(getPosX() +0.5);
-        }
-        else if(currentX > nextPos.x){
-            setDirection(EDirection.LEFT);
-            setPosX(getPosX() -0.5);
-        }
-        else if (currentY < nextPos.y) {
-            setDirection(EDirection.DOWN);
-            setPosY(getPosY()+0.5);
-        }
-        else if (currentY > nextPos.y) {
-            setDirection(EDirection.UP);
-            setPosY(getPosY()-0.5);
+        if(next != null) {
+            nextPos = next.getPos();
+            if (currentX < nextPos.x) {
+                setDirection(EDirection.RIGHT);
+                setPosX(getPosX() + 0.5);
+            } else if (currentX > nextPos.x) {
+                setDirection(EDirection.LEFT);
+                setPosX(getPosX() - 0.5);
+            } else if (currentY < nextPos.y) {
+                setDirection(EDirection.DOWN);
+                setPosY(getPosY() + 0.5);
+            } else if (currentY > nextPos.y) {
+                setDirection(EDirection.UP);
+                setPosY(getPosY() - 0.5);
+            }
         }
     }
 
@@ -63,4 +57,5 @@ public abstract class Enemy extends Entity implements IEnemy {
     public void update() {
         moveToGoal();
     }
+
 }

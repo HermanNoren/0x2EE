@@ -14,7 +14,6 @@ import java.util.List;
 public class Spawner {
 
     private Game game;
-
     private List<Double> x_values, y_values;
     private List<Entity> enemies;
     private double avg_x, avg_y;
@@ -31,7 +30,6 @@ public class Spawner {
         for (Double x : list){
             sum+= x;
         }
-
         return sum / list.size();
     }
 

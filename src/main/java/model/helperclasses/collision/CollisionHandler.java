@@ -61,28 +61,24 @@ public class CollisionHandler {
 
         if (playerCollidesWithTerrain(object1, object2)) {
             if (Objects.equals(direction, "X")) {
-                if(object1.getVelX() > 0){
-                    if (object1.getDirection() == EDirection.RIGHT) {
-                        collisionTypes.replace("right", true);
-                    }
-
-                    if (object1.getDirection() == EDirection.LEFT) {
-                        collisionTypes.replace("left", true);
-                    }
-
+                if (object1.getVelX() > 0) {
+                    collisionTypes.replace("right", true);
                 }
+
+                if (object1.getVelX() < 0) {
+                    collisionTypes.replace("left", true);
+                }
+
             }
 
             if (Objects.equals(direction, "Y")) {
-                if (object1.getVelY() > 0){
-                    if (object1.getDirection() == EDirection.UP) {
-                        collisionTypes.replace("top", true);
-                    }
-                    if (object1.getDirection() == EDirection.DOWN) {
-                        collisionTypes.replace("bottom", true);
-                    }
-
+                if (object1.getVelY() < 0) {
+                    collisionTypes.replace("top", true);
                 }
+                if (object1.getVelY() > 0) {
+                    collisionTypes.replace("bottom", true);
+                }
+
             }
         }
 
