@@ -69,7 +69,7 @@ public class InGamePanelState implements IPanelState {
             }
 
 
-            hud.update(g);
+           hud.update(g);
         }
     }
 

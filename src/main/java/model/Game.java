@@ -20,6 +20,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 /**
  * This class contains the main game loop.
@@ -248,7 +249,6 @@ public class Game{
      * Updates the current IGameState
      */
     public void update() {
-
         if (!(player.getHealth() < 1)) {
 
             for (IGameObject sprite : sprites) {
@@ -274,6 +274,7 @@ public class Game{
                         if (enemy.getHealth() < 1) {
                             spawner.spawnItem();
                             enemyIter.remove();
+                            player.addScore(100);
                         }
 
                     }

@@ -89,7 +89,7 @@ public class NewHighscorePanelState implements IPanelState{
     }
 
     private void createButtons(){
-        GameButton backButton = new GameButton("CONTINUE", 325, 575, new SaveScoreButtonAction(EPanelState.MAINMENU, this));
-        buttons.add(backButton);
+        GameButton button = new GameButton("CONTINUE", 325, 575, new SaveScoreButtonAction(EPanelState.MAINMENU, this));
+        buttons.add(button);
     }
 }

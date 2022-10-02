@@ -44,7 +44,6 @@ public class EnemyDrawer implements IDrawer {
         }
     }
 
-
     private void movementAnimation() {
         animationCounter++;
         if(animationCounter > 100){

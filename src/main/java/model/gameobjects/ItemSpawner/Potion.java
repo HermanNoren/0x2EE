@@ -53,6 +53,6 @@ public class Potion implements IItem {
 
     @Override
     public void consume(Player player) {
-        player.setHealth(player.getHealth() + 100);
+        player.setHealth(player.getHealth() + 300);
     }
 }
