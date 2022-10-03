@@ -52,6 +52,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     public static Player createPlayer(Game game, Random rand){
         int xPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size())).getPos().getX();
         int yPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size())).getPos().getY();
+
         return new Player(xPos, yPos, game);
     }
 
@@ -90,9 +91,13 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         return false;
     }
 
-    @Override
-    public void update() {
+    public void update(double dt) {
 
+    }
+
+    public void stopCurrentMovement(){
+        setVel(new Vector2(0,0));
+        setAcc(new Vector2(0,0));
     }
 
     public void moveX(double speed) {

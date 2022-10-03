@@ -12,25 +12,7 @@ import model.mapclasses.Terrain;
 import java.util.*;
 
 public class CollisionHandler {
-    /**
-     * Method for calculating if the player is overlapping/close to a wall.
-     * If so the method will return true, which makes the player unable to
-     * walk further in said direction. Now hardcoded to the player being square.
-     * First Check is to see if the player is to the right of the tile, second to see if
-     * it is to the left
-     * @param player
-     * @param tile
-     */
-    public void playerCollidesWithTile(Player player, Terrain tile){
-        if(
-                player.getPos().x >(tile.getPos().x + tile.getHeight() + tile.getWidth())
-                || (player.getPos().x + player.getWidth()+ player.getHealth() < tile.getPos().x)
-                ||(player.getPos().y <tile.getPos().y + tile.getHeight())
-                ||(player.getPos().y + player.getHealth() > tile.getPos().y)
-        ){
-            System.out.println("yes");
-        }
-    }
+
 
     /**
      * Method for calculating if a game object is colliding with another game object
@@ -61,12 +43,17 @@ public class CollisionHandler {
         int up = (int) (objectPos.getY() / object.getHeight() - 1);
         int down = (int) (objectPos.getY() / object.getHeight() + 1);
 
-        if (left < 0) { left = 0; }
-        if (up < 0) { up = 0; }
+        if (left < 0) {
+            left = 0;
+        }
+        if (up < 0) {
+            up = 0;
+        }
 
-        for (int row = left; row < right && row < terrain[0].length; row++) {
-            for (int col = up; col < down && col < terrain.length; col++) {
-                Terrain t = terrain[row][col];
+        for (int col = left; col < right && col < terrain.length; col++) {
+            for (int row = up; row < down && row < terrain[0].length; row++) {
+                Terrain t = terrain[col][row];
+                System.out.println(t.getX());
                 if (!t.isPassable()) {
                     if (testCollision(object, t)) {
                         collidedTerrain.add(t);

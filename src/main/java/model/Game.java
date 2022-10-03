@@ -47,7 +47,7 @@ public class Game{
     private Random random = new Random();
 
     public Game(){
-        this.gameMap = new GameMap(50, 50);
+        this.gameMap = new GameMap(10, 10);
         this.player = Player.createPlayer(this, random);
         shop = new Shop();
         enemies = new ArrayList<>();
@@ -56,7 +56,6 @@ public class Game{
         this.path = new ArrayList<>();
 
         EnemyFactory enemyFactory= new NormalEnemyFactory();
-
         enemies.add(enemyFactory.createEnemy(this, random));
         enemies.add(enemyFactory.createEnemy(this, random));
 
@@ -257,15 +256,16 @@ public class Game{
          */
 
         player.moveX(dt);
+
         List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
         for (Terrain t : collidedTerrain) {
             Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.X_AXIS);
             if (collisionTypes.get("right")) {
-                player.setPosX(t.getPos().x - player.getWidth());
+                player.setPosX(t.getPos().getX() - player.getWidth());
                 player.stopCurrentMovement();
             }
             if (collisionTypes.get("left")) {
-                player.setPosX((t.getPos().x + t.getWidth()));
+                player.setPosX((t.getPos().getX() + t.getWidth()));
                 player.stopCurrentMovement();
             }
         }
@@ -275,11 +275,11 @@ public class Game{
         for (Terrain t : collidedTerrain) {
             Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.Y_AXIS);
             if (collisionTypes.get("top")) {
-                player.setPosY(t.getPos().y + player.getHeight());
+                player.setPosY(t.getPos().getY() + player.getHeight());
                 player.stopCurrentMovement();
             }
             if (collisionTypes.get("bottom")) {
-                player.setPosY((t.getPos().y - t.getHeight()));
+                player.setPosY((t.getPos().getY() - t.getHeight()));
                 player.stopCurrentMovement();
             }
         }
@@ -290,10 +290,11 @@ public class Game{
             sprite.update(dt);
         }
 
-        for(Entity enemy : enemies){
+        for(IGameObject enemy : enemies){
             enemy.update(dt);
+
             //Check if enemy is close enough to damage player, could be done somewhere else also.
-            if (CollisionHandler.testCollision(player, (Entity) enemy)) {
+            if (CollisionHandler.testCollision(player, enemy)) {
                 player.damageTaken(1);
             }
 

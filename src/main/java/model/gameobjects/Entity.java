@@ -5,6 +5,7 @@ import controllers.EDirection;
 import model.Game;
 import model.helperclasses.Rect;
 import model.helperclasses.Vector2;
+import model.mapclasses.Terrain;
 
 /**
  * The IEnemy class contains logic to represent the sprite,
@@ -94,9 +95,11 @@ public abstract class Entity implements IGameObject {
     }
 
     public Terrain getMapLocation(){
+
         int posX = (int) (getPosX() + getWidth()/2)/48;
         int posY = (int) (getPosY() + getHeight()/2)/48;
         currentLocation = game.getGameMap().getGameMapCoordinates()[posX][posY];
+        System.out.println(currentLocation.getX());
         return currentLocation;
     }
 
@@ -104,8 +107,6 @@ public abstract class Entity implements IGameObject {
     public Vector2 getPos() {
         return new Vector2(pos);
     }
-
-
 
     /**
      * @param direction, updated direction.
@@ -145,16 +146,22 @@ public abstract class Entity implements IGameObject {
     }
     @Override
     public int getWidth() {
-        return getRect().getWidth();
+        return size;
     }
 
     @Override
     public int getHeight() {
-        return getRect().getHeight();
+        return size;
     }
 
 
+    public void setVel(Vector2 vel) {
+        this.vel = vel;
+    }
 
+    public void setAcc(Vector2 acc) {
+        this.acc = acc;
+    }
 
     public void damageTaken(int damage) {
         setHealth(getHealth() - damage);

@@ -1,9 +1,10 @@
 package model.gameobjects.enemies;
 
 import config.Config;
+import controllers.EDirection;
 import model.helperclasses.AStar;
 import model.Game;
-import model.mapclasses.GameMap;
+import model.helperclasses.Vector2;
 import model.mapclasses.Terrain;
 import model.gameobjects.Entity;
 
@@ -23,6 +24,7 @@ public abstract class Enemy extends Entity implements IEnemy {
      *
      */
     private void moveToGoal(double speed) {
+
         Terrain current = getMapLocation();
         Terrain next = AStar.aStar(current, game.getPlayer().getMapLocation());
 
@@ -50,13 +52,7 @@ public abstract class Enemy extends Entity implements IEnemy {
 
 
     public void update(double dt) {
+        System.out.println("ye");
         moveToGoal(0.5);
-        super.update(dt);
-
     }
-
-
-
-    }
-
 }

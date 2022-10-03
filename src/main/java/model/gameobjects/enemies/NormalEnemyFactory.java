@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class NormalEnemyFactory extends EnemyFactory{
     @Override
-    public Entity createEnemy(Game game, Random rand) {
+    public Enemy createEnemy(Game game, Random rand) {
         GameMap gameMap = game.getGameMap();
         List<IGameObject> possibleSpawnableLocations = gameMap.getPassableTerrains();
         int spawnableLocations = possibleSpawnableLocations.size();

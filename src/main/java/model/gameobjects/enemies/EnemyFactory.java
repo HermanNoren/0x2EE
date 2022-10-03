@@ -13,5 +13,5 @@ public abstract class EnemyFactory {
     public void spawnEnemies(){
 
     }
-    public abstract Entity createEnemy(Game game, Random rand);
+    public abstract Enemy createEnemy(Game game, Random rand);
 }
