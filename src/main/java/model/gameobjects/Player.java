@@ -38,6 +38,8 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         this.game = game;
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);
+        setHealth(1000);
+        setMaxHp(1000);
         upPressed = false;
         downPressed = false;
         leftPressed = false;
