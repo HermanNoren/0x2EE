@@ -276,38 +276,40 @@ public class Game {
                     player.stopCurrentMovement();
                 }
             }
-
-
             for (IGameObject sprite : sprites) {
                 sprite.update(dt);
+            }
+
+            for (Projectile p : projectiles) {
+                p.update(dt);
             }
 
             Iterator<Entity> enemyIter = enemies.iterator();
             while (enemyIter.hasNext()) {
                 Entity enemy = enemyIter.next();
+                if (enemy.getHealth() < 1){
+                    spawner.spawnItem();
+                    player.addScore(100);
+                    enemyIter.remove();
+                    break;
+                }
                 enemy.update(dt);
+
                 //Check if enemy is close enough to damage player, could be done somewhere else also.
                 if (CollisionHandler.testCollision(player, enemy)) {
-                    player.damageTaken(1);
+                    //player.damageTaken(1);
                 }
                 // Check if projectile hits enemy
-                Iterator<Projectile> pIter = projectiles.iterator();
+                Iterator<Projectile> pIter =  projectiles.iterator();
                 while (pIter.hasNext()) {
-                    Projectile p = pIter.next();
-                    if (CollisionHandler.testCollision(enemy, p)) {
+                    if (CollisionHandler.testCollision(enemy, pIter.next())) {
                         enemy.damageTaken(10);
                         pIter.remove();
                         break;
                     }
                     // error om man inte breakar för tar bort projectilen
                 }
-                if (enemy.getHealth() < 1) {
-                    spawner.spawnItem();
-                    player.addScore(100);
-                    enemyIter.remove();
-                    break;
 
-                }
 
             }
 
@@ -317,9 +319,6 @@ public class Game {
                 player.isInteractable = false;
             }
 
-            for (Projectile p : projectiles) {
-                p.update(dt);
-            }
             for (IItem item : spawner.getSpawnedItems()) {
                 if (CollisionHandler.testCollision(item, player)) {
                     item.consume(player);
