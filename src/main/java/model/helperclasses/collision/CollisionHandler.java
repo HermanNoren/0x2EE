@@ -23,7 +23,7 @@ public class CollisionHandler {
                 object1.getPos().getX() < object2.getPos().getX() + object2.getWidth()
                         && object1.getPos().getX() + object1.getWidth() > object2.getPos().getX()
                         && object1.getPos().getY() < object2.getPos().getY() + object2.getHeight()
-                        && object1.getHeight() + object1.getPos().getY() > object2.getPos().getX();
+                        && object1.getHeight() + object1.getPos().getY() > object2.getPos().getY();
     }
 
 
