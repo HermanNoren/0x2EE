@@ -12,8 +12,6 @@ import model.mapclasses.Terrain;
 import java.util.*;
 
 public class CollisionHandler {
-
-
     /**
      * Method for calculating if a game object is colliding with another game object
      * @param object1 first object to compare
@@ -23,10 +21,12 @@ public class CollisionHandler {
     public static boolean testCollision(IGameObject object1, IGameObject object2) {
         return
                 object1.getPos().getX() < object2.getPos().getX() + object2.getWidth()
-                && object1.getPos().getX() + object1.getWidth() > object2.getPos().getX()
-                && object1.getPos().getY() < object2.getPos().getY() + object2.getHeight()
-                && object1.getHeight() + object1.getPos().getY() > object2.getPos().getX();
+                        && object1.getPos().getX() + object1.getWidth() > object2.getPos().getX()
+                        && object1.getPos().getY() < object2.getPos().getY() + object2.getHeight()
+                        && object1.getHeight() + object1.getPos().getY() > object2.getPos().getX();
     }
+
+
 
     /**
      * Method for providing which specific terrain pieces an object is colliding with
@@ -39,9 +39,9 @@ public class CollisionHandler {
 
         Vector2 objectPos = object.getPos();
         int left = (int) (objectPos.getX() / object.getWidth() - 1);
-        int right = (int) (objectPos.getX() / object.getWidth() + 1);
+        int right = (int) (objectPos.getX() / object.getWidth() + 3);
         int up = (int) (objectPos.getY() / object.getHeight() - 1);
-        int down = (int) (objectPos.getY() / object.getHeight() + 1);
+        int down = (int) (objectPos.getY() / object.getHeight() + 3);
 
         if (left < 0) {
             left = 0;
@@ -50,11 +50,11 @@ public class CollisionHandler {
             up = 0;
         }
 
-        for (int col = left; col < right && col < terrain.length; col++) {
-            for (int row = up; row < down && row < terrain[0].length; row++) {
-                Terrain t = terrain[col][row];
-                System.out.println(t.getX());
+        for (int row = left; row < right && row < terrain.length; row++) {
+            for (int col = up; col < down && col < terrain[0].length; col++) {
+                Terrain t = terrain[row][col];
                 if (!t.isPassable()) {
+                    System.out.println("eyashdjahd");
                     if (testCollision(object, t)) {
                         collidedTerrain.add(t);
                     }

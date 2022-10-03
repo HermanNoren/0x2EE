@@ -25,10 +25,12 @@ public class MapDrawer implements IDrawer {
     private int spriteSize = Config.SPRITE_SIZE*3;
     private ImageHandler imageHandler;
     private Game game;
+    private Player player;
 
     public MapDrawer(Game game){
         this.gameMap = game.getGameMap();
         this.game = game;
+        player = game.getPlayer();
         camera = Camera.getInstance();
         mapNums = new int[gameMap.getWidth()][gameMap.getHeight()];
         this.terrains = gameMap.getTerrains();
@@ -48,10 +50,18 @@ public class MapDrawer implements IDrawer {
     public void draw(Graphics2D g2) {
 
         // Coordinates of tiles to paint with a 5 tile offset to guarantee visibility
+        /*
         int left = (int) (camera.getCenter().getX() - Config.SCREEN_WIDTH/2)/spriteSize -5;
         int right = (int) (camera.getCenter().getX() + Config.SCREEN_WIDTH/2)/spriteSize +5;
         int up = (int) (camera.getCenter().getY() - Config.SCREEN_HEIGHT/2)/spriteSize -5;
         int down = (int) (camera.getCenter().getY() + Config.SCREEN_HEIGHT/2)/spriteSize +5;
+
+         */
+
+        int left = (int) (player.getPosX() / player.getWidth() - 1);
+        int right = (int) (player.getPosX() / player.getWidth() + 3);
+        int up = (int) (player.getPosY() / player.getHeight() - 1);
+        int down = (int) (player.getPosY() / player.getHeight() + 3);
 
         // If out of bounds
         if (left < 0) {
@@ -77,6 +87,14 @@ public class MapDrawer implements IDrawer {
 
                 int terrainNum = gameMapCoordinates[col][row].getTerrainType();
                 g2.drawImage(terrainImgs[terrainNum], drawInformation.get(0), drawInformation.get(1), null);
+
+                g2.setColor(Color.red);
+                if (!gameMapCoordinates[col][row].isPassable()) {
+                    g2.fillRect((int) newTerrainVector.getX(), (int) newTerrainVector.getY(), gameMapCoordinates[row][col].getWidth(), gameMapCoordinates[row][col].getHeight());
+                }
+                else {
+                    g2.drawRect((int) newTerrainVector.getX(), (int) newTerrainVector.getY(), gameMapCoordinates[row][col].getWidth(), gameMapCoordinates[row][col].getHeight());
+                }
 
                 newTerrainVector.setX(newTerrainVector.getX() + terrainSize);
                 newTerrainVector.setY(newTerrainVector.getY() + terrainSize);
