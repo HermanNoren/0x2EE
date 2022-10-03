@@ -51,12 +51,12 @@ public class Shop implements IGameObject {
 
     @Override
     public int getWidth() {
-        return getRect().getWidth();
+        return width;
     }
 
     @Override
     public int getHeight() {
-        return getRect().getHeight();
+        return height;
     }
 
     /**
@@ -70,11 +70,6 @@ public class Shop implements IGameObject {
     @Override
     public Vector2 getCenter() {
         return null;
-    }
-
-    @Override
-    public Rect getRect() {
-        return this.rect;
     }
 
     @Override

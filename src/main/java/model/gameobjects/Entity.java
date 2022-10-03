@@ -14,11 +14,9 @@ import model.mapclasses.Terrain;
  * to take damage thus if reduces its health.
  */
 public abstract class Entity implements IGameObject {
-    Vector2 pos;
-
-    Vector2 vel;
-
-    Vector2 acc;
+    private Vector2 pos;
+    private Vector2 vel;
+    private Vector2 acc;
     private int health;
     private int maxHp;
     private EDirection direction;
@@ -145,19 +143,14 @@ public abstract class Entity implements IGameObject {
     }
     @Override
     public int getWidth() {
-        return getRect().getWidth();
+        return size;
     }
 
     @Override
     public int getHeight() {
-        return getRect().getHeight();
+        return size;
     }
 
-
-    @Override
-    public Rect getRect() {
-        return new Rect(this.rect);
-    }
 
 
 

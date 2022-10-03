@@ -18,10 +18,10 @@ public class Projectile implements IGameObject {
         this.pos = pos;
         vel = new Vector2(0, 0);
         switch (direction) {
-            case RIGHT -> vel.x = 5;
-            case LEFT -> vel.x = -5;
-            case UP -> vel.y = -5;
-            case DOWN -> vel.y = 5;
+            case RIGHT -> vel.setX(5);
+            case LEFT -> vel.setX(-5);
+            case UP -> vel.setY(-5);
+            case DOWN -> vel.setY(5);
         }
 
     }
@@ -43,14 +43,9 @@ public class Projectile implements IGameObject {
 
     @Override
     public Vector2 getCenter() {
-        double x = pos.x + (double) (getWidth() / 2);
-        double y = pos.y + (double) (getHeight() / 2);
+        double x = pos.getX() + (double) (getWidth() / 2);
+        double y = pos.getY() + (double) (getHeight() / 2);
         return new Vector2(x, y);
-    }
-
-    @Override
-    public Rect getRect() {
-        return null;
     }
 
     @Override
@@ -60,7 +55,9 @@ public class Projectile implements IGameObject {
 
     @Override
     public void update() {
-        pos.x += vel.x;
-        pos.y += vel.y;
+        pos.setX(pos.getX() + vel.getX());
+
+        pos.setY(pos.getY() + vel.getY());
+
     }
 }

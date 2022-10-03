@@ -27,35 +27,35 @@ public abstract class Enemy extends Entity implements IEnemy {
      * Method used to move the enemy towards player.
      *
      */
-    private void moveToGoal() {
+    private void moveToGoal(double speed) {
         Terrain current = getMapLocation();
         Terrain next = AStar.aStar(current, game.getPlayer().getMapLocation());
 
         Vector2 nextPos;
 
-        int currentX = current.getX();
-        int currentY = current.getY();
+        int currentX = (int) current.getPos().getX();
+        int currentY = (int) current.getPos().getY();
         if(next != null) {
             nextPos = next.getPos();
-            if (currentX < nextPos.x) {
+            if (currentX < nextPos.getX()) {
                 setDirection(EDirection.RIGHT);
-                setPosX(getPosX() + 0.5);
-            } else if (currentX > nextPos.x) {
+                setPosX(getPosX() + speed);
+            } else if (currentX > nextPos.getX()) {
                 setDirection(EDirection.LEFT);
-                setPosX(getPosX() - 0.5);
-            } else if (currentY < nextPos.y) {
+                setPosX(getPosX() - speed);
+            } else if (currentY < nextPos.getY()) {
                 setDirection(EDirection.DOWN);
-                setPosY(getPosY() + 0.5);
-            } else if (currentY > nextPos.y) {
+                setPosY(getPosY() + speed);
+            } else if (currentY > nextPos.getY()) {
                 setDirection(EDirection.UP);
-                setPosY(getPosY() - 0.5);
+                setPosY(getPosY() - speed);
             }
         }
     }
 
     @Override
     public void update() {
-        moveToGoal();
+        moveToGoal(0.5);
     }
 
 }

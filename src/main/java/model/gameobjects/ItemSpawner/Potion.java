@@ -33,12 +33,6 @@ public class Potion implements IGameObject {
     public Vector2 getCenter() {
         return null;
     }
-
-    @Override
-    public Rect getRect() {
-        return null;
-    }
-
     @Override
     public boolean isPassable() {
         return false;

@@ -1,8 +1,8 @@
 package model.helperclasses;
 
 public class Vector2 {
-     public double x;
-     public double y;
+     private double x;
+     private double y;
 
     public double getX() {
         return x;

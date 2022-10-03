@@ -17,42 +17,43 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     private final int size = Config.SPRITE_SIZE*3;
     private final ArrayList<Entity> entities;
     private Vector2 pos;
-    private Rect rect;
-    private int id;
-    private static int idCounter = 0;
     private double f = Double.MAX_VALUE; // Will later be equal to g + h
     private double g = Double.MAX_VALUE; // g(n), n = next node, distance from start to n.
     private ArrayList<Terrain.Edge> neighbors;
     private Terrain parent = null;
     private final int x;
     private final int y;
+    private final int width;
+    private final int height;
     private int terrainType;
     private boolean passable;
 
     public Terrain(int x, int y){
         this.x = x;
         this.y = y;
+        this.height = size;
+        this.width = size;
         this.terrainType = 0;
         this.passable = true;
         this.neighbors = new ArrayList<>();
         this.entities = new ArrayList<>();
         this.pos = new Vector2(x, y);
-        this.pos.x *= 48;
-        this.pos.y *= 48;
-        this.id = idCounter++;
-        this.rect = new Rect(x,y, size, size);
+        this.pos.setX(x*48);
+        this.pos.setY(y*48);
     }
 
-    public int getWidth(){
-        return rect.getWidth();
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
     }
 
     public ArrayList<Edge> getNeighbors() {
         return neighbors;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public int getX() {
@@ -60,10 +61,6 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     }
     public int getY() {
         return y;
-    }
-    @Override
-    public int getHeight() {
-        return rect.getHeight();
     }
 
     public Vector2 getPos() {
@@ -73,10 +70,6 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     @Override
     public Vector2 getCenter() {
         return null;
-    }
-    @Override
-    public Rect getRect() {
-        return new Rect(rect);
     }
 
     public double getF() {
@@ -130,18 +123,6 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
         entities.add(entity);
     }
 
-    public static class Edge {
-
-        public int weight;
-        public Terrain terrain;
-        Edge(int weight, Terrain terrain){
-            this.weight = weight;
-            this.terrain = terrain;
-        }
-
-
-    }
-
     /**
      * @param weight
      * @param neighbor
@@ -165,4 +146,14 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     @Override
     public void update() {
     }
+
+    public static class Edge {
+        public int weight;
+        public Terrain terrain;
+        Edge(int weight, Terrain terrain){
+            this.weight = weight;
+            this.terrain = terrain;
+        }
+    }
+
 }

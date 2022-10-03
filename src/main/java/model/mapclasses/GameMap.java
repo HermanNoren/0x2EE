@@ -9,7 +9,6 @@ import java.util.*;
  */
 public class GameMap {
     private final List<Terrain> terrains = new ArrayList<>();
-    private final List<Entity> entities;
     private final Terrain[][] gameMapCoordinates;
     private final int width;
     private final int height;
@@ -24,7 +23,6 @@ public class GameMap {
         this.width = width;
         this.height = height;
         gameMapCoordinates = new Terrain[width][height];
-        entities = new ArrayList<>();
         addCoordinatesAndTiles(width, height);
 
         Noise n = new Noise(10, this); // Generates random terrain on the game map.
@@ -37,15 +35,6 @@ public class GameMap {
 //        n.printTerrainGrid(gameMapCoordinates);
     }
 
-    /**
-     * Method which can be used to add entities to the game map.
-     * @param x x-position of entity
-     * @param y y-position of entity
-     * @param entity object of type Entity.
-     */
-    public void addEntity(int x, int y, Entity entity){
-        gameMapCoordinates[x][y].addEntity(entity);
-    }
 
     /**
      * Adds terrains in a width*height matrix and into a list.
@@ -182,10 +171,10 @@ public class GameMap {
         int row = 0;
         while (col < width && row < height){
 
-            if((gameMapCoordinates[col][row].getPos().x)+2 > width ||
-                    (gameMapCoordinates[col][row].getPos().y)+2 > height ||
-                    (gameMapCoordinates[col][row].getPos().x)-1 < 0 ||
-                    (gameMapCoordinates[col][row].getPos().y)-1 < 0){
+            if((gameMapCoordinates[col][row].getX())+2 > width ||
+                    (gameMapCoordinates[col][row].getY())+2 > height ||
+                    (gameMapCoordinates[col][row].getX())-1 < 0 ||
+                    (gameMapCoordinates[col][row].getY())-1 < 0){
 
                 gameMapCoordinates[col][row].setTerrainType(1);
                 gameMapCoordinates[col][row].setPassable(false);

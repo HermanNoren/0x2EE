@@ -48,10 +48,10 @@ public class MapDrawer implements IDrawer {
     public void draw(Graphics2D g2) {
 
         // Coordinates of tiles to paint with a 5 tile offset to guarantee visibility
-        int left = (int) (camera.getCenter().x - Config.SCREEN_WIDTH/2)/spriteSize -5;
-        int right = (int) (camera.getCenter().x + Config.SCREEN_WIDTH/2)/spriteSize +5;
-        int up = (int) (camera.getCenter().y - Config.SCREEN_HEIGHT/2)/spriteSize -5;
-        int down = (int) (camera.getCenter().y + Config.SCREEN_HEIGHT/2)/spriteSize +5;
+        int left = (int) (camera.getCenter().getX() - Config.SCREEN_WIDTH/2)/spriteSize -5;
+        int right = (int) (camera.getCenter().getX() + Config.SCREEN_WIDTH/2)/spriteSize +5;
+        int up = (int) (camera.getCenter().getY() - Config.SCREEN_HEIGHT/2)/spriteSize -5;
+        int down = (int) (camera.getCenter().getY() + Config.SCREEN_HEIGHT/2)/spriteSize +5;
 
         // If out of bounds
         if (left < 0) {
@@ -68,8 +68,6 @@ public class MapDrawer implements IDrawer {
         for (int col = left; col < right && col < gameMap.getWidth(); col++){
             for(int row = up; row < down && row < gameMap.getHeight(); row++){
                 newTerrainVector = new Vector2(gameMapCoordinates[col][row].getPos()); // For drawing in correct place.
-                newTerrainVector.x += terrainSize;
-                newTerrainVector.y += terrainSize;
 
                 List<Integer> drawInformation = DrawerHelper.
                     calculateDrawingInformation(
@@ -79,6 +77,8 @@ public class MapDrawer implements IDrawer {
 
                 int terrainNum = gameMapCoordinates[col][row].getTerrainType();
                 g2.drawImage(terrainImgs[terrainNum], drawInformation.get(0), drawInformation.get(1), null);
+                newTerrainVector.setX(newTerrainVector.getX() + terrainSize);
+                newTerrainVector.setY(newTerrainVector.getY() + terrainSize);
             }
         }
 

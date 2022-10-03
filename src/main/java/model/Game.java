@@ -265,13 +265,13 @@ public class Game{
             if(collisionTypeX.get("right")){
                 player.setVelX(0);
                 player.setAccX(0);
-                player.setPosX(terrain.getPos().x - player.getWidth());
+                player.setPosX(terrain.getPos().getX() - player.getWidth());
             }
 
             if(collisionTypeX.get("left")){
                 player.setVelX(0);
                 player.setAccX(0);
-                player.setPosX(terrain.getPos().x + player.getWidth());
+                player.setPosX(terrain.getPos().getX() + player.getWidth());
             }
 
 
@@ -280,12 +280,12 @@ public class Game{
             if(collisionTypeY.get("top")){
                 player.setVelY(0);
                 player.setAccY(0);
-                player.setPosY(terrain.getPos().y + player.getHeight());
+                player.setPosY(terrain.getPos().getY() + player.getHeight());
             }
             if(collisionTypeY.get("bottom")){
                 player.setVelY(0);
                 player.setAccY(0);
-                player.setPosY(terrain.getPos().y - terrain.getHeight());
+                player.setPosY(terrain.getPos().getY() - terrain.getHeight());
             }
         }
 

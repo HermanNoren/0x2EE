@@ -50,8 +50,8 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         setVelY(0.5);
     }
     public static Player createPlayer(Game game, Random rand){
-        int xPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size())).getPos().x;
-        int yPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size())).getPos().y;
+        int xPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size())).getPos().getX();
+        int yPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size())).getPos().getY();
         return new Player(xPos, yPos, game);
     }
 
@@ -80,8 +80,8 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
 
     @Override
     public Vector2 getCenter() {
-        double x = pos.x + (double) (getWidth() / 2);
-        double y = pos.y + (double) (getHeight() / 2);
+        double x = getPosX() + (double) (getWidth() / 2);
+        double y = getPosY() + (double) (getHeight() / 2);
         return new Vector2(x, y);
     }
 
@@ -96,33 +96,32 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     }
 
     public void moveX(double speed) {
-        acc.x = 0;
+        setAccX(0);
         if (getDirection() == EDirection.RIGHT) {
-            acc.x = speed;
+            setAccX(speed);
         }
         if (getDirection() == EDirection.LEFT) {
-            acc.x = -speed;
+            setAccX(-speed);
         }
-        acc.x += vel.x * -0.1;
-        vel.x += acc.x;
-        pos.x += vel.x + 0.5 * acc.x;
-
+        setAccX(getAccX() + getVelX()*-0.1);
+        setVelX(getVelX() + getAccX());
+        setPosX(getPosX() + getVelX() + 0.5 * getAccX());
     }
 
     public void moveY(double speed) {
-        acc.y = 0;
+        setAccY(0);
 
         if (getDirection() == EDirection.DOWN) {
-            acc.y = speed;
+            setAccY(speed);
         }
 
         if (getDirection() == EDirection.UP) {
-            acc.y = -speed;
+            setAccY(-speed);
         }
 
-        acc.y += vel.y * -0.1;
-        vel.y += acc.y;
-        pos.y += vel.y + 0.5 * acc.y;
+        setAccY(getAccY() + getVelY()*-0.1);
+        setVelY(getVelY() + getAccY());
+        setPosY(getPosY() + getVelY() + 0.5* getAccY());
     }
 
     /**

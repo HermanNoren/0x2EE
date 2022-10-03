@@ -21,10 +21,10 @@ public class Rect {
         return width;
     }
     public double getPosX(){
-        return pos.x;
+        return pos.getX();
     }
     public double getPosY(){
-        return pos.y;
+        return pos.getY();
     }
 
     public int getHeight() {

@@ -28,10 +28,7 @@ public interface IGameObject {
      */
     Vector2 getCenter();
 
-    /**
-     * Returns the sprites' rect, which is used as a hitbox
-     */
-    Rect getRect();
+
 
     boolean isPassable();
     /**

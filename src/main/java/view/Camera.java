@@ -58,7 +58,7 @@ public class Camera {
      * @return Offset vector
      */
     public Vector2 getOffset() {
-        return new Vector2(relativePos.x, relativePos.y);
+        return new Vector2(relativePos.getX(), relativePos.getY());
     }
 
     /**
@@ -66,7 +66,7 @@ public class Camera {
      * @return Center vector
      */
     public Vector2 getCenter() {
-        return new Vector2(absolutePos.x + screenCenter.x, absolutePos.y + screenCenter.y);
+        return new Vector2(absolutePos.getX() + screenCenter.getX(), absolutePos.getY() + screenCenter.getY());
     }
     /**
      * Zoom in
@@ -117,13 +117,14 @@ public class Camera {
 
         relativePos = new Vector2(absolutePos);
         for (IFocusableObject object : focusedObject) {
-            relativePos.x += (object.getCenter().x - (relativePos.x + screenCenter.x)) / (dragEffectConstant / currentZoomMultiplier);
-            relativePos.y += (object.getCenter().y - (relativePos.y + screenCenter.y)) / (dragEffectConstant / currentZoomMultiplier);
+            relativePos.setX(relativePos.getX() + (object.getCenter().getX() - (relativePos.getX() + screenCenter.getX())) / (dragEffectConstant / currentZoomMultiplier));
+            relativePos.setY(relativePos.getY() + (object.getCenter().getY() - (relativePos.getY() + screenCenter.getY())) / (dragEffectConstant / currentZoomMultiplier));
         }
         absolutePos = new Vector2(relativePos);
 
-        relativePos.x += (Config.SCREEN_WIDTH - Config.SCREEN_WIDTH / currentZoomMultiplier) / 2;
-        relativePos.y += (Config.SCREEN_HEIGHT - Config.SCREEN_HEIGHT / currentZoomMultiplier) / 2;
+        relativePos.setX(relativePos.getX() + ((Config.SCREEN_WIDTH - Config.SCREEN_WIDTH / currentZoomMultiplier) / 2));
+        relativePos.setY(relativePos.getY() + ((Config.SCREEN_HEIGHT - Config.SCREEN_HEIGHT / currentZoomMultiplier) / 2));
+
 
     }
 
