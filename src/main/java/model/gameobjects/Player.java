@@ -44,10 +44,6 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         rightPressed = false;
         score = 0;
         money = 0;
-        setHealth(1000);
-        setMaxHp(1000);
-        setVelX(0.5);
-        setVelY(0.5);
     }
     public static Player createPlayer(Game game, Random rand){
         int xPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size())).getPos().getX();

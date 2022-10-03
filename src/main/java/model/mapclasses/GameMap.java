@@ -27,13 +27,12 @@ public class GameMap {
 
         Noise n = new Noise(10, this); // Generates random terrain on the game map.
         n.init();
-//        n.setTerrainTypes(gameMapCoordinates);
+        n.setTerrainTypes(gameMapCoordinates);
 
         createBorder();
 
         terrains.forEach(this::addNeighbors);
         n.printTerrainGrid(gameMapCoordinates);
-        System.out.println(getPassableTerrains().size());
     }
 
 

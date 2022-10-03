@@ -99,7 +99,6 @@ public abstract class Entity implements IGameObject {
         int posX = (int) (getPosX() + getWidth()/2)/48;
         int posY = (int) (getPosY() + getHeight()/2)/48;
         currentLocation = game.getGameMap().getGameMapCoordinates()[posX][posY];
-        System.out.println(currentLocation.getX());
         return currentLocation;
     }
 

@@ -21,7 +21,6 @@ public abstract class Enemy extends Entity implements IEnemy {
 
     /**
      * Method used to move the enemy towards player.
-     *
      */
     private void moveToGoal(double speed) {
 
@@ -51,8 +50,8 @@ public abstract class Enemy extends Entity implements IEnemy {
     }
 
 
+    @Override
     public void update(double dt) {
-        System.out.println("ye");
         moveToGoal(0.5);
     }
 }

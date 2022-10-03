@@ -26,7 +26,7 @@ class NormalEnemy extends Enemy{
 
     @Override
     public void update(double dt) {
-
+        super.update(dt);
     }
 
 

@@ -54,7 +54,6 @@ public class CollisionHandler {
             for (int col = up; col < down && col < terrain[0].length; col++) {
                 Terrain t = terrain[row][col];
                 if (!t.isPassable()) {
-                    System.out.println("eyashdjahd");
                     if (testCollision(object, t)) {
                         collidedTerrain.add(t);
                     }

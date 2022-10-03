@@ -50,18 +50,10 @@ public class MapDrawer implements IDrawer {
     public void draw(Graphics2D g2) {
 
         // Coordinates of tiles to paint with a 5 tile offset to guarantee visibility
-        /*
         int left = (int) (camera.getCenter().getX() - Config.SCREEN_WIDTH/2)/spriteSize -5;
         int right = (int) (camera.getCenter().getX() + Config.SCREEN_WIDTH/2)/spriteSize +5;
         int up = (int) (camera.getCenter().getY() - Config.SCREEN_HEIGHT/2)/spriteSize -5;
         int down = (int) (camera.getCenter().getY() + Config.SCREEN_HEIGHT/2)/spriteSize +5;
-
-         */
-
-        int left = (int) (player.getPosX() / player.getWidth() - 1);
-        int right = (int) (player.getPosX() / player.getWidth() + 3);
-        int up = (int) (player.getPosY() / player.getHeight() - 1);
-        int down = (int) (player.getPosY() / player.getHeight() + 3);
 
         // If out of bounds
         if (left < 0) {

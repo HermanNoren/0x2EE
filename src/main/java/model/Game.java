@@ -47,7 +47,7 @@ public class Game{
     private Random random = new Random();
 
     public Game(){
-        this.gameMap = new GameMap(10, 10);
+        this.gameMap = new GameMap(50, 50);
         this.player = Player.createPlayer(this, random);
         shop = new Shop();
         enemies = new ArrayList<>();
