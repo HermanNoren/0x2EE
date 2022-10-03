@@ -275,6 +275,7 @@ public class Game{
                             spawner.spawnItem();
                             enemyIter.remove();
                             player.addScore(100);
+                            break;
                         }
 
                     }
