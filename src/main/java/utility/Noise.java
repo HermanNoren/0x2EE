@@ -68,7 +68,7 @@ public class Noise {
         int h = grid1[0].length;
         for(int i = 0;i < w;i++) {
             for(int j = 0;j < h;j++) {
-                if(grid1[i][j] < 0){
+                if(grid1[i][j] < 3){
                     terrains[i][j].setTerrainType(0);
                 }else{
                     terrains[i][j].setTerrainType(2);
@@ -125,6 +125,12 @@ public class Noise {
             }
         }
         return ret;
+    }
+
+    public static void main(String[] args) {
+        GameMap gameMap = new GameMap(30, 30);
+        Noise n = new Noise(1, gameMap);
+        n.printTerrainGrid(gameMap.getGameMapCoordinates());
     }
 
 

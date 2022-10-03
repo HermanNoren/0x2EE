@@ -65,18 +65,12 @@ public class Shop implements IGameObject {
     }
 
     @Override
-    public Rect getRect() {
-        return this.rect;
-    }
-
-    @Override
     public boolean isPassable() {
         return false;
     }
 
     @Override
-    public void update() {
+    public void update(double dt) {
 
     }
-
 }

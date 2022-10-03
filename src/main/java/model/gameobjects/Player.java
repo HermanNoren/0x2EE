@@ -2,6 +2,7 @@
 package model.gameobjects;
 
 
+import model.Game;
 import model.armor.Armor;
 import controllers.EDirection;
 import model.helperclasses.Vector2;
@@ -9,6 +10,7 @@ import model.weapons.Weapon;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * The player, more implementation to come.
@@ -22,29 +24,31 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     protected Armor armor;
     boolean isDamageTaken;
 
+    private double moveAcc;
 
-    private boolean upPressed, downPressed, leftPressed, rightPressed;
-
+    public boolean isInteractable = false;
+    private Game game;
     /**
-     * @param x,   starting x-position
-     * @param y,   starting y-position
-     *             Player constructor, used to create an instance of player.
-     * @param
+     * @param x, starting x-position
+     * @param y, starting y-position
+     * Player constructor, used to create an instance of player.
      */
-    public Player(int x, int y){
-        super(x, y);
+    private Player(int x, int y, Game game){
+        super(x, y, game);
+        this.game = game;
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);
-        upPressed = false;
-        downPressed = false;
-        leftPressed = false;
-        rightPressed = false;
+        setMaxHp(1000);
+        setHealth(1000);
+        moveAcc = 0.3;
         score = 0;
         money = 0;
-        setHealth(1000);
-        setMaxHp(1000);
-        setVelX(0.5);
-        setVelY(0.5);
+    }
+    public static Player createPlayer(Game game, Random rand){
+        int xPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size())).getPos().getX();
+        int yPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size())).getPos().getY();
+
+        return new Player(xPos, yPos, game);
     }
 
     public void shoot(List<Projectile> projectiles) {
@@ -54,26 +58,10 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         weapon.shoot(getCenter(), dir, projectiles);
     }
 
-    public void setUpPressed(boolean value) {
-        upPressed = value;
-    }
-
-    public void setDownPressed(boolean value) {
-        downPressed = value;
-    }
-
-    public void setRightPressed(boolean value) {
-        rightPressed = value;
-    }
-
-    public void setLeftPressed(boolean value) {
-        leftPressed = value;
-    }
-
     @Override
     public Vector2 getCenter() {
-        double x = pos.x + (double) (getWidth() / 2);
-        double y = pos.y + (double) (getHeight() / 2);
+        double x = getPosX() + (double) (getWidth() / 2);
+        double y = getPosY() + (double) (getHeight() / 2);
         return new Vector2(x, y);
     }
 
@@ -82,34 +70,42 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         return false;
     }
 
-    @Override
-    public void update() {
-        moveX(0.5f);
-        moveY(0.5f);
+    public void update(double dt) {
+
     }
 
-    public void moveX(float speed) {
-        acc.x = 0;
-
-
-        if (getDirection() == EDirection.RIGHT) { acc.x = speed; }
-        if (getDirection() == EDirection.LEFT) { acc.x = -speed; }
-
-        acc.x += vel.x * -0.1;
-        vel.x += acc.x;
-        pos.x += vel.x + 0.5 * acc.x;
+    public void stopCurrentMovement(){
+        setVel(new Vector2(0,0));
+        setAcc(new Vector2(0,0));
     }
 
-    public void moveY(float speed) {
-        acc.y = 0;
+    public void moveX(double dt) {
+        setAccX(0);
+        if (getDirection() == EDirection.RIGHT) {
+            setAccX(moveAcc);
+        }
+        if (getDirection() == EDirection.LEFT) {
+            setAccX(-moveAcc);
+        }
+        setAccX(getAccX() + getVelX() * -0.12);
+        setVelX(getVelX() + getAccX() * dt);
+        setPosX(getPosX() + getVelX() * dt + 0.5 * getAccX() * (dt * dt));
+    }
 
+    public void moveY(double dt) {
+        setAccY(0);
 
-        if (getDirection() == EDirection.DOWN) { acc.y = speed;  }
-        if (getDirection() == EDirection.UP) { acc.y = -speed; }
+        if (getDirection() == EDirection.DOWN) {
+            setAccY(moveAcc);
+        }
 
-        acc.y += vel.y * -0.1;
-        vel.y += acc.y;
-        pos.y += vel.y + 0.5 * acc.y;
+        if (getDirection() == EDirection.UP) {
+            setAccY(-moveAcc);
+        }
+
+        setAccY(getAccY() + getVelY() * -0.12);
+        setVelY(getVelY() + getAccY() * dt);
+        setPosY(getPosY() + getVelY() * dt + 0.5 * getAccY() * (dt * dt));
     }
 
     /**
@@ -145,5 +141,9 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
      */
     public int getMoney(){
         return money;
+    }
+
+    public void addMoney(int amount){
+        this.money += amount;
     }
 }

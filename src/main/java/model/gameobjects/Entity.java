@@ -4,6 +4,7 @@ import config.Config;
 import controllers.EDirection;
 import model.helperclasses.Rect;
 import model.helperclasses.Vector2;
+import model.mapclasses.Terrain;
 
 /**
  * The IEnemy class contains logic to represent the sprite,
@@ -13,17 +14,17 @@ import model.helperclasses.Vector2;
  */
 
 public abstract class Entity implements IGameObject {
-   Vector2 pos;
-
-    Vector2 vel;
-
-    Vector2 acc;
+    private Vector2 pos;
+    private Vector2 vel;
+    private Vector2 acc;
     private int health;
     private int maxHp;
     private EDirection direction;
     private EDirection lastDirection;
     private int size = Config.SPRITE_SIZE*3;
     private Rect rect;
+    private Terrain currentLocation;
+    private Game game;
 
     /**
      *
@@ -31,13 +32,18 @@ public abstract class Entity implements IGameObject {
      * @param y represents the entities' y-coordinate
      */
 
-    public Entity(int x, int y){
+    public Entity(int x, int y, Game game){
+        this.game = game;
         this.direction = EDirection.NOT_MOVING; // Default value
         this.lastDirection = direction;
         this.pos = new Vector2(x, y);
         this.acc = new Vector2(0, 0);
         this.rect = new Rect(x, y, size, size);
         this.vel = new Vector2(0,0);
+    }
+
+    public void setPos(Vector2 pos) {
+        this.pos = pos;
     }
 
     public Vector2 getVel() {
@@ -83,13 +89,22 @@ public abstract class Entity implements IGameObject {
     public Vector2 getAcc() {
         return acc;
     }
+    public void setCurrentLocation(){
+
+    }
+
+    public Terrain getMapLocation(){
+
+        int posX = (int) (getPosX() + getWidth()/2)/48;
+        int posY = (int) (getPosY() + getHeight()/2)/48;
+        currentLocation = game.getGameMap().getGameMapCoordinates()[posX][posY];
+        return currentLocation;
+    }
 
     @Override
     public Vector2 getPos() {
         return new Vector2(pos);
     }
-
-
 
     /**
      * @param direction, updated direction.
@@ -113,8 +128,9 @@ public abstract class Entity implements IGameObject {
     }
 
     public void setHealth(int value) {
-        if (value < 0) { health = 0; }
-        health = value;
+        if (value < 0) {
+            health = 0;
+        }else health = Math.min(value, maxHp);
     }
     public void setMaxHp(int maxHp){
         this.maxHp = maxHp;
@@ -129,27 +145,21 @@ public abstract class Entity implements IGameObject {
     }
     @Override
     public int getWidth() {
-        return getRect().getWidth();
+        return size;
     }
 
     @Override
     public int getHeight() {
-        return getRect().getHeight();
+        return size;
     }
 
 
-    @Override
-    public Rect getRect() {
-        return new Rect(this.rect);
+    public void setVel(Vector2 vel) {
+        this.vel = vel;
     }
 
-    /**
-     * Method used to update the entites' position and state.
-     * Updates the entites' location by adding its coordinate with its velocity
-     */
-    @Override
-    public void update() {
-
+    public void setAcc(Vector2 acc) {
+        this.acc = acc;
     }
 
     public void damageTaken(int damage) {

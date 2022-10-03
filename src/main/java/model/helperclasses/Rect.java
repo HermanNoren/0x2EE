@@ -20,6 +20,12 @@ public class Rect {
     public int getWidth() {
         return width;
     }
+    public double getPosX(){
+        return pos.getX();
+    }
+    public double getPosY(){
+        return pos.getY();
+    }
 
     public int getHeight() {
         return height;

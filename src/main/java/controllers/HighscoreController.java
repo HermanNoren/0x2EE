@@ -5,20 +5,18 @@ import model.Game;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HighscoreController implements KeyListener {
 
 
     private Game game;
 
-    private ArrayList<String> name;
-
     private boolean enterKeyDown;
 
 
     public HighscoreController(Game game) {
         this.game = game;
-        name = new ArrayList<>();
     }
 
     @Override
@@ -28,32 +26,17 @@ public class HighscoreController implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        int code = e.getKeyCode();
-        switch (code){
-            case (KeyEvent.VK_ENTER) -> {
-                if (!enterKeyDown){
-                    enterKeyDown = true;
-                    game.setEnterPressed();
-                }
-
-            }
-        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         int code = e.getKeyCode();
         switch (code){
-            case (KeyEvent.VK_ENTER) -> {
-                enterKeyDown = false;
-                game.resetEnterPressed();
-            }
             case (KeyEvent.VK_BACK_SPACE) ->{
                  game.deleteLetter();
             }
             default -> {
                     game.updateName(String.valueOf(e.getKeyChar()).toUpperCase());
-
 
             }
 

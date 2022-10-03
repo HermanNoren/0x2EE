@@ -9,42 +9,32 @@ import java.util.*;
  */
 public class GameMap {
     private final List<Terrain> terrains = new ArrayList<>();
-    private final List<Entity> entities;
     private final Terrain[][] gameMapCoordinates;
     private final int width;
     private final int height;
 
     /**
-     * @param width
-     * @param height
+     * Game map constructor, set height and width.
+     * Width and height is in number of terrains.
+     * @param width number of terrains in width
+     * @param height number of terrains in height
      */
     public GameMap(int width, int height) {
         this.width = width;
         this.height = height;
         gameMapCoordinates = new Terrain[width][height];
-        entities = new ArrayList<>();
         addCoordinatesAndTiles(width, height);
 
-        Noise n = new Noise(1, this); // Generates random terrain on the game map.
-
+        Noise n = new Noise(10, this); // Generates random terrain on the game map.
         n.init();
         n.setTerrainTypes(gameMapCoordinates);
+
         createBorder();
 
         terrains.forEach(this::addNeighbors);
-
         n.printTerrainGrid(gameMapCoordinates);
     }
 
-    /**
-     * Method which can be used to add entities to the game map.
-     * @param x x-position of entity
-     * @param y y-position of entity
-     * @param entity object of type Entity.
-     */
-    public void addEntity(int x, int y, Entity entity){
-        gameMapCoordinates[x][y].addEntity(entity);
-    }
 
     /**
      * Adds terrains in a width*height matrix and into a list.
@@ -56,6 +46,7 @@ public class GameMap {
             for(int j = 0; j < height; j++){
                 gameMapCoordinates[i][j] = new Terrain(i, j);
                 terrains.add(gameMapCoordinates[i][j]);
+
             }
         }
     }
@@ -88,9 +79,20 @@ public class GameMap {
      * Method used to get a copy of the List of terrains.
      * @return a copy of List<Terrain> terrains.
      */
-    public List<IGameObject> getTerrains() {
+    public List<Terrain> getTerrains() {
         return new ArrayList<>(terrains);
     }
+
+    public List<IGameObject> getPassableTerrains(){
+        List<IGameObject> passable = new ArrayList<>();
+        for(Terrain terrain: terrains){
+            if(terrain.isPassable()) {
+                passable.add(terrain);
+            }
+        }
+        return passable;
+    }
+
 
     /**
      * Method used to set specific terrain's type.
@@ -162,17 +164,17 @@ public class GameMap {
     }
 
     /**
-     * Method used to create a border for the game map.
+     * Method used to create a border on the game map.
      */
     private void createBorder(){
         int col = 0;
         int row = 0;
         while (col < width && row < height){
 
-            if((gameMapCoordinates[col][row].getPos().x)+2 > width ||
-                    (gameMapCoordinates[col][row].getPos().y)+2 > height ||
-                    (gameMapCoordinates[col][row].getPos().x)-1 < 0 ||
-                    (gameMapCoordinates[col][row].getPos().y)-1 < 0){
+            if((gameMapCoordinates[col][row].getX())+2 > width ||
+                    (gameMapCoordinates[col][row].getY())+2 > height ||
+                    (gameMapCoordinates[col][row].getX())-1 < 0 ||
+                    (gameMapCoordinates[col][row].getY())-1 < 0){
 
                 gameMapCoordinates[col][row].setTerrainType(1);
                 gameMapCoordinates[col][row].setPassable(false);

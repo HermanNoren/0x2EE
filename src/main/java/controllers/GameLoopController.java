@@ -1,9 +1,16 @@
 package controllers;
 
-import config.Config;
 import model.Game;
 
 public class GameLoopController {
+
+    private final int FPS;
+    private final int UPS;
+
+    public GameLoopController() {
+        FPS = 120;
+        UPS = 200;
+    }
 
     /**
      * Main game loop.
@@ -12,8 +19,8 @@ public class GameLoopController {
      */
     public void run(Game game) {
 
-        double timePerRender =  1000000000.0 / Config.FPS;
-        double timePerUpdate = 1000000000.0 / Config.UPS;
+        double timePerRender =  1000000000.0 / FPS;
+        double timePerUpdate = 1000000000.0 / UPS;
         double deltaUpdateTime = 0;
         double deltaDrawTime = 0;
         long currentTime;
@@ -30,7 +37,7 @@ public class GameLoopController {
             previousTime = currentTime;
 
             if (deltaUpdateTime >= 1) {
-                game.update();
+                game.update(100.0 / UPS);
                 updates++;
                 deltaUpdateTime--;
             }
@@ -51,5 +58,4 @@ public class GameLoopController {
 
         }
     }
-
 }

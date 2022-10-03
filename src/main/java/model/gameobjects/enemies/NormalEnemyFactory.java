@@ -2,20 +2,21 @@ package model.gameobjects.enemies;
 
 import model.Game;
 import model.gameobjects.Entity;
+import model.gameobjects.IGameObject;
+import model.mapclasses.GameMap;
+import model.mapclasses.Terrain;
 
-import java.util.Random;
-import model.gameobjects.Entity;
-
+import java.util.List;
 import java.util.Random;
 
 public class NormalEnemyFactory extends EnemyFactory{
     @Override
-
-    public Entity createEnemy(Game game) {
-        Random rand = new Random();
-        int x = rand.nextInt(400);
-        int y = rand.nextInt(400);
-        NormalEnemy normalEnemy = new NormalEnemy(x, y);
+    public Enemy createEnemy(Game game, Random rand) {
+        GameMap gameMap = game.getGameMap();
+        List<IGameObject> possibleSpawnableLocations = gameMap.getPassableTerrains();
+        int spawnableLocations = possibleSpawnableLocations.size();
+        IGameObject randomTerrain = possibleSpawnableLocations.get(rand.nextInt(spawnableLocations));
+        NormalEnemy normalEnemy = new NormalEnemy((int) randomTerrain.getPos().getX(), (int) randomTerrain.getPos().getY(), game);
         return normalEnemy;
     }
 }

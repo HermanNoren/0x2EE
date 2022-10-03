@@ -7,30 +7,40 @@ import model.helperclasses.Vector2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Spawner {
 
     private Game game;
-
     private List<Double> x_values, y_values;
     private List<Entity> enemies;
     private double avg_x, avg_y;
 
-    private List<IGameObject> spawnedItems;
+    private List<IItem> spawnedItems;
 
     public Spawner(Game game){
         this.game = game;
         spawnedItems = new ArrayList<>();
     }
 
+    /**
+     * Returns the average of a list of doubles
+     * @param list list of doubles
+     * @return average
+     */
+
     private double getAverage(List<Double> list){
         double sum = 0;
         for (Double x : list){
             sum+= x;
         }
-
         return sum / list.size();
     }
+
+    /**
+     * Returns a location to spawn an item, in regard to current enemy positions
+     * @return location to spawn item
+     */
 
     private Vector2 getSpawnLocation(){
         enemies = game.getEnemies(); //Göra interface till game, med getEnemies, getPlayer osv..
@@ -45,15 +55,36 @@ public class Spawner {
         return new Vector2(avg_x, avg_y);
     }
 
+    /**
+     * Either spawns a random item or does nothing
+     */
+
     public void spawnItem(){
-        spawnedItems.add(new Potion(getSpawnLocation()));
+        Random rand = new Random();
+        int r = rand.nextInt(2);
+
+        switch (r){
+            case 0 -> spawnedItems.add(new Coin(getSpawnLocation()));
+            case 1 -> spawnedItems.add(new Potion(getSpawnLocation()));
+        }
+
     }
 
-    public List<IGameObject> getSpawnedItems(){
+    /**
+     * Returns a list of all current items available on the map
+     * @return list of spawned items
+     */
+
+    public List<IItem> getSpawnedItems(){
         return spawnedItems;
     }
 
-    public void clearPotion(IGameObject potion){
-        spawnedItems.remove(potion);
+
+    /**
+     * Removes a specific item from map
+     * @param item item to remove
+     */
+    public void clearItem(IItem item){
+        spawnedItems.remove(item);
     }
 }

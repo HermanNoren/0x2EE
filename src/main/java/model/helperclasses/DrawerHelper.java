@@ -17,8 +17,8 @@ public class DrawerHelper implements IDrawer {
         ArrayList<Integer> drawInformation = new ArrayList<>();
         Camera camera = Camera.getInstance();
 
-        double x = (pos.x - camera.getOffset().x) * camera.getZoomMultiplier();
-        double y = (pos.y - camera.getOffset().y) * camera.getZoomMultiplier();
+        double x = (pos.getX() - camera.getOffset().getX()) * camera.getZoomMultiplier();
+        double y = (pos.getY() - camera.getOffset().getY()) * camera.getZoomMultiplier();
         return smellRemover(width, height, drawInformation, camera, x, y);
     }
 
@@ -26,8 +26,8 @@ public class DrawerHelper implements IDrawer {
         List<Integer> drawInformation = new ArrayList<>();
         Camera camera = Camera.getInstance();
 
-        double x = (x_coordinate - camera.getOffset().x) * camera.getZoomMultiplier();
-        double y = (y_coordinate - camera.getOffset().y) * camera.getZoomMultiplier();
+        double x = (x_coordinate - camera.getOffset().getX()) * camera.getZoomMultiplier();
+        double y = (y_coordinate - camera.getOffset().getY()) * camera.getZoomMultiplier();
         return smellRemover(width, height, drawInformation, camera, x, y);
     }
 

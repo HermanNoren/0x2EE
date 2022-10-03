@@ -17,6 +17,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HowToPlayPanelState implements IPanelState{
 
@@ -24,8 +25,8 @@ public class HowToPlayPanelState implements IPanelState{
     private BufferedImage controls;
     private final ButtonController bc;
     private final ArrayList<GameButton> buttons;
-    private ArrayList<IDrawer> drawers;
-    private ArrayList<KeyListener> keyListeners;
+    private List<IDrawer> drawers;
+    private List<KeyListener> keyListeners;
     private MainPanel mainPanel;
 
     private ImageHandler imageHandler;
@@ -52,13 +53,13 @@ public class HowToPlayPanelState implements IPanelState{
 
         g2.setColor(Color.black);
         g2.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 12));
+        g2.setFont(Config.buttonFont);
         for (IDrawer drawer : drawers){
             drawer.draw(g2);
         }
 
         g2.setColor(Color.white);
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 48));
+        g2.setFont(Config.titleFont);
         String paused = "HOW TO PLAY";
         g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 100);
         g2.drawImage(controls, 0,80, Config.SCREEN_WIDTH*100/150, Config.SCREEN_HEIGHT, null);
@@ -71,7 +72,7 @@ public class HowToPlayPanelState implements IPanelState{
 
 
     @Override
-    public ArrayList<KeyListener> getKeyListeners() {
+    public List<KeyListener> getKeyListeners() {
         return keyListeners;
     }
 

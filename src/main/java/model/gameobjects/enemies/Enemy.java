@@ -1,9 +1,10 @@
 package model.gameobjects.enemies;
 
 import config.Config;
+import controllers.EDirection;
 import model.helperclasses.AStar;
 import model.Game;
-import model.mapclasses.GameMap;
+import model.helperclasses.Vector2;
 import model.mapclasses.Terrain;
 import model.gameobjects.Entity;
 
@@ -12,40 +13,47 @@ import java.util.ArrayList;
 public abstract class Enemy extends Entity implements IEnemy {
 
     private int size = Config.SPRITE_SIZE;
-    protected Enemy(int x, int y){
-        super(x, y);
+
+    private double movementSpeed;
+    private Game game;
+    protected Enemy(int x, int y, Game game){
+        super(x, y, game);
+        this.game = game;
+        movementSpeed = 0.5;
     }
 
     /**
-     * Updates the enemy, uses A* algorithm to find the closest path to player,
-     * then moves enemy through given path calculated by the A* algorithm
+     * Method used to move the enemy towards player.
      */
+    private void moveToGoal(double speed) {
+
+    }
+
+
     @Override
-    public void update() {
+    public void update(double dt) {
+        Terrain current = getMapLocation();
+        Terrain next = AStar.aStar(current, game.getPlayer().getMapLocation());
 
+        Vector2 nextPos;
+
+        int currentX = (int) current.getPos().getX();
+        int currentY = (int) current.getPos().getY();
+        if(next != null) {
+            nextPos = next.getPos();
+            if (currentX < nextPos.getX()) {
+                setDirection(EDirection.RIGHT);
+                setPosX(getPosX() + movementSpeed * dt);
+            } else if (currentX > nextPos.getX()) {
+                setDirection(EDirection.LEFT);
+                setPosX(getPosX() - movementSpeed * dt);
+            } else if (currentY < nextPos.getY()) {
+                setDirection(EDirection.DOWN);
+                setPosY(getPosY() + movementSpeed * dt);
+            } else if (currentY > nextPos.getY()) {
+                setDirection(EDirection.UP);
+                setPosY(getPosY() - movementSpeed * dt);
+            }
+        }
     }
-
-    /**
-     * Method used to move the enemy to target goal.
-     * @param goal
-     *
-     */
-    private void moveToGoal(Terrain goal) {
-//        ArrayList<Terrain> path = game.getPath();
-//        assert path != null;
-//        Terrain prevTerrain = null;
-//        Terrain nextTerrain = null;
-//
-//        for(int i = 0; i < path.size(); i ++){
-//            if(i > 0){
-//                prevTerrain = path.get(i-1);
-//            }
-//
-//            nextTerrain = path.get(i);
-//            moveToTerrain(nextTerrain);
-//        }
-
-
-    }
-
 }
