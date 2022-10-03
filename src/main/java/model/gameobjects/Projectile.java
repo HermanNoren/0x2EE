@@ -59,8 +59,8 @@ public class Projectile implements IGameObject {
     }
 
     @Override
-    public void update() {
-        pos.x += vel.x;
-        pos.y += vel.y;
+    public void update(double dt) {
+        pos.x += vel.x * dt;
+        pos.y += vel.y * dt;
     }
 }

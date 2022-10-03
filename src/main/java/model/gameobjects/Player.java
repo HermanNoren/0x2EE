@@ -22,10 +22,8 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     protected Weapon weapon;
     protected Armor armor;
     boolean isDamageTaken;
-
+    private double acceleration;
     public boolean isInteractable = false;
-
-    private boolean upPressed, downPressed, leftPressed, rightPressed;
 
     /**
      * @param x,   starting x-position
@@ -37,16 +35,11 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         super(x, y);
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);
-        upPressed = false;
-        downPressed = false;
-        leftPressed = false;
-        rightPressed = false;
         score = 0;
         money = 0;
+        acceleration = 0.2;
         setHealth(1000);
         setMaxHp(1000);
-        setVelX(0.5);
-        setVelY(0.5);
     }
 
     public void shoot(List<Projectile> projectiles) {
@@ -54,22 +47,6 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         if (getDirection() == EDirection.NOT_MOVING) { dir = getLastDirection(); }
         else { dir = getDirection(); }
         weapon.shoot(getCenter(), dir, projectiles);
-    }
-
-    public void setUpPressed(boolean value) {
-        upPressed = value;
-    }
-
-    public void setDownPressed(boolean value) {
-        downPressed = value;
-    }
-
-    public void setRightPressed(boolean value) {
-        rightPressed = value;
-    }
-
-    public void setLeftPressed(boolean value) {
-        leftPressed = value;
     }
 
     @Override
@@ -85,33 +62,36 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     }
 
     @Override
-    public void update() {
-        moveX(0.5f);
-        moveY(0.5f);
+    public void update(double dt) {
+        moveX(dt);
+        moveY(dt);
     }
 
-    public void moveX(float speed) {
+    public void moveX(double dt) {
         acc.x = 0;
 
+        if (getDirection() == EDirection.RIGHT) { acc.x = acceleration; }
+        if (getDirection() == EDirection.LEFT) { acc.x = -acceleration; }
 
-        if (getDirection() == EDirection.RIGHT) { acc.x = speed; }
-        if (getDirection() == EDirection.LEFT) { acc.x = -speed; }
-
-        acc.x += vel.x * -0.1;
-        vel.x += acc.x;
-        pos.x += vel.x + 0.5 * acc.x;
+        acc.x += vel.x * -0.12;
+        vel.x += acc.x * dt;
+        pos.x += vel.x * dt + (acc.x * 0.5) * (dt * dt);
     }
 
-    public void moveY(float speed) {
+    public void moveY(double dt) {
         acc.y = 0;
 
+        if (getDirection() == EDirection.DOWN) { acc.y = acceleration;  }
+        if (getDirection() == EDirection.UP) { acc.y = -acceleration; }
 
-        if (getDirection() == EDirection.DOWN) { acc.y = speed;  }
-        if (getDirection() == EDirection.UP) { acc.y = -speed; }
+        acc.y += vel.y * -0.12;
+        vel.y += acc.y * dt;
+        pos.y += vel.y * dt + (acc.y * 0.5) * (dt * dt);
+    }
 
-        acc.y += vel.y * -0.1;
-        vel.y += acc.y;
-        pos.y += vel.y + 0.5 * acc.y;
+    public void stopCurrentMovement() {
+        vel = new Vector2(0, 0);
+        acc = new Vector2(0, 0);
     }
 
     /**

@@ -162,6 +162,6 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     }
 
     @Override
-    public void update() {
+    public void update(double dt) {
     }
 }

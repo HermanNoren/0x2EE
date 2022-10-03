@@ -48,7 +48,7 @@ public class Tile implements IGameObject {
     }
 
     @Override
-    public void update() {
+    public void update(double dt) {
 
     }
 }

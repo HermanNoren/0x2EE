@@ -37,5 +37,5 @@ public interface IGameObject {
     /**
      * Updates the sprite
      */
-    void update();
+    void update(double dt);
 }

@@ -9,15 +9,14 @@ import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
 import model.gameobjects.Shop;
 import model.helperclasses.HighscoreHandler;
+import model.helperclasses.collision.ECollisionAxis;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import model.gameobjects.IGameObject;
 
 import view.IObserver;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * This class contains the main game loop.
@@ -30,7 +29,7 @@ public class Game{
 
     private List<String> highscoreName;
     private List<Entity> enemies;
-    private List<IGameObject> terrains;
+    private List<Terrain> terrains;
     private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
     private boolean stateChangedFlag;
     private GameMap gameMap;
@@ -44,14 +43,13 @@ public class Game{
     private Spawner spawner;
 
     public Game(){
-        player = new Player(32, 32, this);
-        this.gameMap = new GameMap(200, 200);
+        player = new Player(64, 64, this);
+        this.gameMap = new GameMap(100, 100);
         shop = new Shop();
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         highscoreName = new ArrayList<>();
         this.path = new ArrayList<>();
-
         EnemyFactory enemyFactory= new NormalEnemyFactory();
         enemies.add(enemyFactory.createEnemy(this));
         enemies.add(enemyFactory.createEnemy(this));
@@ -60,9 +58,8 @@ public class Game{
         enemies.add(enemyFactory.createEnemy(this));
         enemies.add(enemyFactory.createEnemy(this));
         spawner = new Spawner(this);
-
         sprites = new ArrayList<>();
-        sprites.add(player);
+        //sprites.add(player);
         sprites.add(shop);
         wPressed = false;
         aPressed = false;
@@ -252,9 +249,9 @@ public class Game{
     }
 
     /**
-     * Updates the current IGameState
+     * Updates the current game state
      */
-    public void update() {
+    public void update(double dt) {
 
 
         /* GAME OVER
@@ -264,12 +261,42 @@ public class Game{
 
          */
 
+        player.moveX(dt);
+        List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
+        for (Terrain t : collidedTerrain) {
+            Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.X_AXIS);
+            if (collisionTypes.get("right")) {
+                player.setPosX(t.getPos().x - player.getWidth());
+                player.stopCurrentMovement();
+            }
+            if (collisionTypes.get("left")) {
+                player.setPosX((t.getPos().x + t.getWidth()));
+                player.stopCurrentMovement();
+            }
+        }
+
+        player.moveY(dt);
+        collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
+        for (Terrain t : collidedTerrain) {
+            Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.Y_AXIS);
+            if (collisionTypes.get("top")) {
+                player.setPosY(t.getPos().y + player.getHeight());
+                player.stopCurrentMovement();
+            }
+            if (collisionTypes.get("bottom")) {
+                player.setPosY((t.getPos().y - t.getHeight()));
+                player.stopCurrentMovement();
+            }
+        }
+
+
+
         for (IGameObject sprite : sprites) {
-            sprite.update();
+            sprite.update(dt);
         }
 
         for(Entity enemy : enemies){
-            enemy.update();
+            enemy.update(dt);
             //Check if enemy is close enough to damage player, could be done somewhere else also.
             if (CollisionHandler.testCollision(player, (Entity) enemy)) {
                 player.damageTaken(1);
@@ -296,7 +323,7 @@ public class Game{
         }
 
         for (Projectile p : projectiles) {
-            p.update();
+            p.update(dt);
         }
         for (IGameObject potion : spawner.getSpawnedItems()){
             if (CollisionHandler.testCollision(potion, player)){

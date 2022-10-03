@@ -22,6 +22,10 @@ public abstract class Enemy extends Entity implements IEnemy {
      */
     @Override
     public void update() {
+    public void update(double dt) {
+        Terrain goal;
+
+        super.update(dt);
 
     }
 

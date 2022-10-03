@@ -9,9 +9,7 @@ import model.gameobjects.Player;
 import model.gameobjects.enemies.Enemy;
 import model.mapclasses.Terrain;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class CollisionHandler {
     private Player player;
@@ -24,16 +22,22 @@ public class CollisionHandler {
      * First Check is to see if the player is to the right of the tile, second to see if
      * it is to the left
      * @param player
+     * @param tile
      */
-
-    public static boolean playerCollidesWithTerrain(Player player, IGameObject terrain){
-            if(terrain.isPassable()){
-            }
-        return false;
+    public void playerCollidesWithTile(Player player, Terrain tile){
+        if(
+                player.getPos().x >(tile.getPos().x + tile.getHeight() + tile.getWidth())
+                || (player.getPos().x + player.getWidth()+ player.getHealth() < tile.getPos().x)
+                ||(player.getPos().y <tile.getPos().y + tile.getHeight())
+                ||(player.getPos().y + player.getHealth() > tile.getPos().y)
+        ){
+            System.out.println("yes");
+        }
     }
 
     /**
-     * Method for calculating if a game object is colliding with another game object
+     * Me
+     * thod for calculating if a game object is colliding with another game object
      * @param object1 first object to compare
      * @param object2 second object to compare
      * @return true if objects are colliding, else false
@@ -46,7 +50,48 @@ public class CollisionHandler {
                 && object1.getHeight() + object1.getPos().y > object2.getPos().y;
     }
 
-    public static Map<String, Boolean> testCollisionWithDirection(Entity object1, IGameObject object2, String direction) {
+    /**
+     * Method for providing which specific terrain pieces an object is colliding with
+     * @param object Object to test
+     * @param terrain Matrix containing all the terrain tiles.
+     * @return A list containing the terrain pieces that is being collided with
+     */
+    public static List<Terrain> getSpecificTerrainCollisions(IGameObject object, Terrain[][] terrain) {
+        List<Terrain> collidedTerrain = new ArrayList<>();
+
+        Vector2 objectPos = object.getPos();
+        int left = (int) (objectPos.x / object.getWidth() - 1);
+        int right = (int) (objectPos.x / object.getWidth() + 1);
+        int up = (int) (objectPos.y / object.getHeight() - 1);
+        int down = (int) (objectPos.y / object.getHeight() + 1);
+
+        if (left < 0) { left = 0; }
+        if (up < 0) { up = 0; }
+
+        for (int row = left; row < right && row < terrain[0].length; row++) {
+            for (int col = up; col < down && col < terrain.length; col++) {
+                Terrain t = terrain[row][col];
+                if (!t.isPassable()) {
+                    if (testCollision(object, t)) {
+                        collidedTerrain.add(t);
+                    }
+                }
+            }
+        }
+        return collidedTerrain;
+    }
+
+    /**
+     * Method for calculating in which direction a collision is happening.
+     * @param object1 Object to which is colliding with a direction
+     * @param object2 Object which the first object is colliding into.
+     * @param axis The desired axis to test. If desired axis is X_AXIS the method will test if collision is happening
+     *             to the right or to the left. If desired axis is Y_AXIS the method will test if collision is happening
+     *             at the top or at the bottom.
+     * @return The method returns a map containing 4 keys; 'top', 'bottom', 'right', 'left'. Use these keys to get the
+     * boolean value of the direction. Example: map.get("top") will be true if collision is at the top.
+     */
+    public static Map<String, Boolean> getCollisionDirection(Entity object1, IGameObject object2, ECollisionAxis axis) {
         Map<String, Boolean> collisionTypes = new HashMap<>(Map.of(
                 "top", false,
                 "bottom", false,
@@ -55,20 +100,20 @@ public class CollisionHandler {
         ));
 
         if (testCollision(object1, object2)) {
-            if (Objects.equals(direction, "X")) {
-                if (object1.getDirection() == EDirection.RIGHT) {
+            if (axis == ECollisionAxis.X_AXIS) {
+                if (object1.getVelX() > 0) {
                     collisionTypes.replace("right", true);
                 }
-                if (object1.getDirection() == EDirection.LEFT) {
+                if (object1.getVelX() < 0) {
                     collisionTypes.replace("left", true);
                 }
             }
 
-            if (Objects.equals(direction, "Y")) {
-                if (object1.getDirection() == EDirection.UP) {
+            if (axis == ECollisionAxis.Y_AXIS) {
+                if (object1.getVelY() < 0) {
                     collisionTypes.replace("top", true);
                 }
-                if (object1.getDirection() == EDirection.DOWN) {
+                if (object1.getVelY() > 0) {
                     collisionTypes.replace("bottom", true);
                 }
             }
