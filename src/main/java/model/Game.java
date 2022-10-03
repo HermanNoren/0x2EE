@@ -267,7 +267,6 @@ public class Game{
                 if (CollisionHandler.testCollision(player, enemy)) {
                     player.damageTaken(1);
                 }
-
                 // Check if projectile hits enemy
                 Iterator<Projectile> pIter = projectiles.iterator();
                 while (pIter.hasNext()) {
@@ -280,6 +279,7 @@ public class Game{
                             enemyIter.remove();
                             player.addScore(100);
                         }
+                        break;
                     }
 
                 }

@@ -67,8 +67,6 @@ public class InGamePanelState implements IPanelState {
             for (IDrawer drawer : drawers) {
                 drawer.draw(g);
             }
-
-
            hud.update(g);
         }
     }
