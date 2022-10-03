@@ -36,10 +36,6 @@ public class Coin implements IItem {
         return null;
     }
 
-    @Override
-    public Rect getRect() {
-        return null;
-    }
 
     @Override
     public boolean isPassable() {
@@ -47,7 +43,7 @@ public class Coin implements IItem {
     }
 
     @Override
-    public void update() {
+    public void update(double dt) {
 
     }
     @Override
