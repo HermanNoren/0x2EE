@@ -31,7 +31,7 @@ public class HUD {
         g2.setColor(Color.black);
         g2.setFont(Config.inGameTextFont);
         g2.drawString("" + player.getScore(), Config.SCREEN_WIDTH/2, 32);
-        g2.drawImage(imageHandler.getImage("imgs/coin_front.png"), Config.SCREEN_WIDTH - 150, Config.SCREEN_HEIGHT-80, 30, 30, null);
+        g2.drawImage(imageHandler.getImage("imgs/drops/coin_front.png"), Config.SCREEN_WIDTH - 150, Config.SCREEN_HEIGHT-80, 30, 30, null);
         g2.setColor(goldColor);
         g2.drawString("" + player.getMoney(),Config.SCREEN_WIDTH - 90, Config.SCREEN_HEIGHT-55);
         g2.setColor(Color.red);

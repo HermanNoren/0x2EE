@@ -29,7 +29,7 @@ import java.util.Random;
  * This class contains the main game loop.
  * With help of the main game loop it delegates work to the active IGameState
  */
-public class Game{
+public class Game {
     private List<IObserver> observers;
     private Player player;
     private List<Terrain> path;
@@ -52,7 +52,7 @@ public class Game{
 
     private Boolean playerDead;
 
-    public Game(){
+    public Game() {
         this.gameMap = new GameMap(50, 50);
         this.player = Player.createPlayer(this, random);
         shop = new Shop();
@@ -61,7 +61,7 @@ public class Game{
         highscoreName = new ArrayList<>();
         this.path = new ArrayList<>();
         playerDead = false;
-        EnemyFactory enemyFactory= new NormalEnemyFactory();
+        EnemyFactory enemyFactory = new NormalEnemyFactory();
         enemies.add(enemyFactory.createEnemy(this, random));
         enemies.add(enemyFactory.createEnemy(this, random));
 
@@ -87,15 +87,15 @@ public class Game{
         return gameMap;
     }
 
-    public List<String> getHighscoreName(){
+    public List<String> getHighscoreName() {
         return highscoreName;
     }
 
-    public boolean isTopFive(){
+    public boolean isTopFive() {
         int oldScore;
-        for (String playerScore : highscoreList){
+        for (String playerScore : highscoreList) {
             oldScore = Integer.valueOf(playerScore.split(":")[1]);
-            if (player.getScore() >= oldScore){
+            if (player.getScore() >= oldScore) {
                 return true;
             }
         }
@@ -105,18 +105,18 @@ public class Game{
     /**
      * Updates the list containing highscores.
      */
-    public void updateHighscoreList(){
+    public void updateHighscoreList() {
         highscoreHandler.saveHighscore(String.join("", highscoreName), player.getScore());
     }
 
 
-    public void deleteLetter(){
-        if (highscoreName.size() > 0){
-            highscoreName.remove(highscoreName.size()-1);
+    public void deleteLetter() {
+        if (highscoreName.size() > 0) {
+            highscoreName.remove(highscoreName.size() - 1);
         }
     }
 
-    public void updateName(String letter){
+    public void updateName(String letter) {
         if (highscoreName.size() < 6) {
             highscoreName.add(letter);
         }
@@ -124,16 +124,18 @@ public class Game{
 
     /**
      * Returns the instance of the player
+     *
      * @return Player
      */
     public Player getPlayer() {
         return player;
     }
-    public List<Entity> getEnemies(){
+
+    public List<Entity> getEnemies() {
         return enemies;
     }
 
-    public List<IItem> getItems(){
+    public List<IItem> getItems() {
         return spawner.getSpawnedItems();
     }
 
@@ -199,9 +201,9 @@ public class Game{
     }
 
 
-
     /**
      * Used as a way for objects inside to read whether the W key is pressed
+     *
      * @return wPressed
      */
     public boolean getWPressed() {
@@ -226,17 +228,19 @@ public class Game{
 
     /**
      * Add an observer. Observers will be notified 120 times per second
+     *
      * @param observer observer
      */
     public void addObserver(IObserver observer) {
         observers.add(observer);
     }
 
-    public void makePlayerShoot(){
+    public void makePlayerShoot() {
         player.shoot(projectiles);
     }
 
     double speed = 0;
+
     /**
      * Updates the current game state
      */
@@ -244,44 +248,44 @@ public class Game{
     public void update(double dt) {
         if (!(player.getHealth() < 1)) {
 
-        player.moveX(dt);
+            player.moveX(dt);
 
-        List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
-        for (Terrain t : collidedTerrain) {
-            Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.X_AXIS);
-            if (collisionTypes.get("right")) {
-                player.setPosX(t.getPos().getX() - player.getWidth());
-                player.stopCurrentMovement();
+            List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
+            for (Terrain t : collidedTerrain) {
+                Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.X_AXIS);
+                if (collisionTypes.get("right")) {
+                    player.setPosX(t.getPos().getX() - player.getWidth());
+                    player.stopCurrentMovement();
+                }
+                if (collisionTypes.get("left")) {
+                    player.setPosX((t.getPos().getX() + t.getWidth()));
+                    player.stopCurrentMovement();
+                }
             }
-            if (collisionTypes.get("left")) {
-                player.setPosX((t.getPos().getX() + t.getWidth()));
-                player.stopCurrentMovement();
-            }
-        }
 
-        player.moveY(dt);
-        collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
-        for (Terrain t : collidedTerrain) {
-            Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.Y_AXIS);
-            if (collisionTypes.get("top")) {
-                player.setPosY(t.getPos().getY() + player.getHeight());
-                player.stopCurrentMovement();
+            player.moveY(dt);
+            collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
+            for (Terrain t : collidedTerrain) {
+                Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.Y_AXIS);
+                if (collisionTypes.get("top")) {
+                    player.setPosY(t.getPos().getY() + player.getHeight());
+                    player.stopCurrentMovement();
+                }
+                if (collisionTypes.get("bottom")) {
+                    player.setPosY((t.getPos().getY() - t.getHeight()));
+                    player.stopCurrentMovement();
+                }
             }
-            if (collisionTypes.get("bottom")) {
-                player.setPosY((t.getPos().getY() - t.getHeight()));
-                player.stopCurrentMovement();
-            }
-        }
 
 
-        for (IGameObject sprite : sprites) {
-            sprite.update(dt);
-        }
+            for (IGameObject sprite : sprites) {
+                sprite.update(dt);
+            }
 
             Iterator<Entity> enemyIter = enemies.iterator();
             while (enemyIter.hasNext()) {
-               Entity enemy = enemyIter.next();
-               enemy.update(dt);
+                Entity enemy = enemyIter.next();
+                enemy.update(dt);
                 //Check if enemy is close enough to damage player, could be done somewhere else also.
                 if (CollisionHandler.testCollision(player, enemy)) {
                     player.damageTaken(1);
@@ -293,28 +297,29 @@ public class Game{
                     if (CollisionHandler.testCollision(enemy, p)) {
                         enemy.damageTaken(10);
                         pIter.remove();
-                        if (enemy.getHealth() < 1) {
-                            spawner.spawnItem();
-                            enemyIter.remove();
-                            player.addScore(100);
-                        }
                         break;
                     }
                     // error om man inte breakar för tar bort projectilen
+                }
+                if (enemy.getHealth() < 1) {
+                    spawner.spawnItem();
+                    player.addScore(100);
+                    enemyIter.remove();
+                    break;
 
                 }
 
             }
 
-        if(playerInRangeOfStore()){
-            player.isInteractable = true;
-        }else{
-            player.isInteractable = false;
-        }
+            if (playerInRangeOfStore()) {
+                player.isInteractable = true;
+            } else {
+                player.isInteractable = false;
+            }
 
-        for (Projectile p : projectiles) {
-            p.update(dt);
-        }
+            for (Projectile p : projectiles) {
+                p.update(dt);
+            }
             for (IItem item : spawner.getSpawnedItems()) {
                 if (CollisionHandler.testCollision(item, player)) {
                     item.consume(player);
@@ -328,17 +333,17 @@ public class Game{
         }
     }
 
-    public Boolean isPlayerDead(){
+    public Boolean isPlayerDead() {
         return playerDead;
     }
 
 
     public boolean playerInRangeOfStore() {
-        return(CollisionHandler.testCollision(player, shop));
+        return (CollisionHandler.testCollision(player, shop));
     }
 
-    public void checkIfInteractable(){
-        if(playerInRangeOfStore()){
+    public void checkIfInteractable() {
+        if (playerInRangeOfStore()) {
             player.isInteractable = true;
         }
         player.isInteractable = false;
@@ -367,13 +372,14 @@ public class Game{
     }
 
     public List<Terrain> getPath() {
-        if(path != null){
+        if (path != null) {
             return path;
         }
         return null;
     }
-    public void setPath(List<Terrain> n){
-        if(n != null) {
+
+    public void setPath(List<Terrain> n) {
+        if (n != null) {
             this.path = n;
         }
     }
