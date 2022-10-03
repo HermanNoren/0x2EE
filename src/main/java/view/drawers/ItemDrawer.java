@@ -46,11 +46,11 @@ public class ItemDrawer implements IDrawer{
                 } else {
                     counter = 0;
                 }
-                counter++;
             }else {
                 g2.drawImage(potion, drawInformation.get(0), drawInformation.get(1), 30, 30, null);
 
             }
         }
+        counter++;
     }
 }
