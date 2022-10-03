@@ -80,14 +80,6 @@ public class MapDrawer implements IDrawer {
                 int terrainNum = gameMapCoordinates[col][row].getTerrainType();
                 g2.drawImage(terrainImgs[terrainNum], drawInformation.get(0), drawInformation.get(1), null);
 
-                g2.setColor(Color.red);
-                if (!gameMapCoordinates[col][row].isPassable()) {
-                    g2.fillRect((int) newTerrainVector.getX(), (int) newTerrainVector.getY(), gameMapCoordinates[row][col].getWidth(), gameMapCoordinates[row][col].getHeight());
-                }
-                else {
-                    g2.drawRect((int) newTerrainVector.getX(), (int) newTerrainVector.getY(), gameMapCoordinates[row][col].getWidth(), gameMapCoordinates[row][col].getHeight());
-                }
-
                 newTerrainVector.setX(newTerrainVector.getX() + terrainSize);
                 newTerrainVector.setY(newTerrainVector.getY() + terrainSize);
             }

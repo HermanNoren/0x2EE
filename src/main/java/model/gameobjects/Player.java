@@ -24,9 +24,9 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     protected Armor armor;
     boolean isDamageTaken;
 
-    public boolean isInteractable = false;
+    private double moveAcc;
 
-    private boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean isInteractable = false;
     private Game game;
     /**
      * @param x, starting x-position
@@ -40,10 +40,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         this.weapon = new Weapon(10, 10);
         setHealth(1000);
         setMaxHp(1000);
-        upPressed = false;
-        downPressed = false;
-        leftPressed = false;
-        rightPressed = false;
+        moveAcc = 0.3;
         score = 0;
         money = 0;
     }
@@ -59,22 +56,6 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         if (getDirection() == EDirection.NOT_MOVING) { dir = getLastDirection(); }
         else { dir = getDirection(); }
         weapon.shoot(getCenter(), dir, projectiles);
-    }
-
-    public void setUpPressed(boolean value) {
-        upPressed = value;
-    }
-
-    public void setDownPressed(boolean value) {
-        downPressed = value;
-    }
-
-    public void setRightPressed(boolean value) {
-        rightPressed = value;
-    }
-
-    public void setLeftPressed(boolean value) {
-        leftPressed = value;
     }
 
     @Override
@@ -98,33 +79,33 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         setAcc(new Vector2(0,0));
     }
 
-    public void moveX(double speed) {
+    public void moveX(double dt) {
         setAccX(0);
         if (getDirection() == EDirection.RIGHT) {
-            setAccX(speed);
+            setAccX(moveAcc);
         }
         if (getDirection() == EDirection.LEFT) {
-            setAccX(-speed);
+            setAccX(-moveAcc);
         }
-        setAccX(getAccX() + getVelX()*-0.1);
-        setVelX(getVelX() + getAccX());
-        setPosX(getPosX() + getVelX() + 0.5 * getAccX());
+        setAccX(getAccX() + getVelX() * -0.12);
+        setVelX(getVelX() + getAccX() * dt);
+        setPosX(getPosX() + getVelX() * dt + 0.5 * getAccX() * (dt * dt));
     }
 
-    public void moveY(double speed) {
+    public void moveY(double dt) {
         setAccY(0);
 
         if (getDirection() == EDirection.DOWN) {
-            setAccY(speed);
+            setAccY(moveAcc);
         }
 
         if (getDirection() == EDirection.UP) {
-            setAccY(-speed);
+            setAccY(-moveAcc);
         }
 
-        setAccY(getAccY() + getVelY()*-0.1);
-        setVelY(getVelY() + getAccY());
-        setPosY(getPosY() + getVelY() + 0.5* getAccY());
+        setAccY(getAccY() + getVelY() * -0.12);
+        setVelY(getVelY() + getAccY() * dt);
+        setPosY(getPosY() + getVelY() * dt + 0.5 * getAccY() * (dt * dt));
     }
 
     /**

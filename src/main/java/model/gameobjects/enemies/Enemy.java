@@ -13,10 +13,13 @@ import java.util.ArrayList;
 public abstract class Enemy extends Entity implements IEnemy {
 
     private int size = Config.SPRITE_SIZE;
+
+    private double movementSpeed;
     private Game game;
     protected Enemy(int x, int y, Game game){
         super(x, y, game);
         this.game = game;
+        movementSpeed = 0.5;
     }
 
     /**
@@ -24,6 +27,11 @@ public abstract class Enemy extends Entity implements IEnemy {
      */
     private void moveToGoal(double speed) {
 
+    }
+
+
+    @Override
+    public void update(double dt) {
         Terrain current = getMapLocation();
         Terrain next = AStar.aStar(current, game.getPlayer().getMapLocation());
 
@@ -35,23 +43,17 @@ public abstract class Enemy extends Entity implements IEnemy {
             nextPos = next.getPos();
             if (currentX < nextPos.getX()) {
                 setDirection(EDirection.RIGHT);
-                setPosX(getPosX() + speed);
+                setPosX(getPosX() + movementSpeed * dt);
             } else if (currentX > nextPos.getX()) {
                 setDirection(EDirection.LEFT);
-                setPosX(getPosX() - speed);
+                setPosX(getPosX() - movementSpeed * dt);
             } else if (currentY < nextPos.getY()) {
                 setDirection(EDirection.DOWN);
-                setPosY(getPosY() + speed);
+                setPosY(getPosY() + movementSpeed * dt);
             } else if (currentY > nextPos.getY()) {
                 setDirection(EDirection.UP);
-                setPosY(getPosY() - speed);
+                setPosY(getPosY() - movementSpeed * dt);
             }
         }
-    }
-
-
-    @Override
-    public void update(double dt) {
-        moveToGoal(0.5);
     }
 }

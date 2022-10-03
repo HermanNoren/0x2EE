@@ -1,12 +1,8 @@
 package model.helperclasses.collision;
 
-import config.Config;
-import controllers.EDirection;
 import model.gameobjects.Entity;
 import model.gameobjects.IGameObject;
 import model.helperclasses.Vector2;
-import model.gameobjects.Player;
-import model.gameobjects.enemies.Enemy;
 import model.mapclasses.Terrain;
 
 import java.util.*;
