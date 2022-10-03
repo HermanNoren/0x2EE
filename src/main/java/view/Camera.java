@@ -5,6 +5,7 @@ import model.gameobjects.IFocusableObject;
 import model.helperclasses.Vector2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The camera class is used to simulate a camera that follows a chosen object. What object the camera is to follow
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  */
 public class Camera {
 
-    private ArrayList<IFocusableObject> focusedObject;
+    private List<IFocusableObject> focusedObject;
     private Vector2 relativePos, absolutePos, center;
     private int standardDragEffectConstant;
     private int dragEffectConstant;
@@ -36,6 +37,11 @@ public class Camera {
         calculateCenterPos();
     }
 
+    /**
+     * Provides Singleton Pattern. If the camera hasn't been instantiated yet this method will create a new instance,
+     * otherwise it will return the current instance.
+     * @return Camera
+     */
     public static Camera getInstance() {
         if (camera == null){
             camera = new Camera();
