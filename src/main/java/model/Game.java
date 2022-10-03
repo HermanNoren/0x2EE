@@ -1,5 +1,6 @@
 package model;
 
+import model.gameobjects.ItemSpawner.IItem;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.Spawner;
@@ -18,7 +19,9 @@ import view.IObserver;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.Map;
 import java.util.Random;
 
@@ -37,6 +40,7 @@ public class Game{
     private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
     private boolean stateChangedFlag;
     private GameMap gameMap;
+    private File highscoreFile;
     private List<String> highscoreList;
     private List<Projectile> projectiles;
     private List<IGameObject> sprites;
@@ -46,6 +50,8 @@ public class Game{
     private Spawner spawner;
     private Random random = new Random();
 
+    private Boolean playerDead;
+
     public Game(){
         this.gameMap = new GameMap(50, 50);
         this.player = Player.createPlayer(this, random);
@@ -54,7 +60,7 @@ public class Game{
         projectiles = new ArrayList<>();
         highscoreName = new ArrayList<>();
         this.path = new ArrayList<>();
-
+        playerDead = false;
         EnemyFactory enemyFactory= new NormalEnemyFactory();
         enemies.add(enemyFactory.createEnemy(this, random));
         enemies.add(enemyFactory.createEnemy(this, random));
@@ -97,17 +103,6 @@ public class Game{
     }
 
     /**
-     * Handles end of the game, either new highscore or back to menu.
-     */
-    public void gameOver(){
-        if (isTopFive()){
-            //NEW HIGHSCORE state
-        }else{
-            //GAME OVER MENU
-        }
-    }
-
-    /**
      * Updates the list containing highscores.
      */
     public void updateHighscoreList(){
@@ -138,7 +133,7 @@ public class Game{
         return enemies;
     }
 
-    public List<IGameObject> getItems(){
+    public List<IItem> getItems(){
         return spawner.getSpawnedItems();
     }
 
@@ -245,15 +240,9 @@ public class Game{
     /**
      * Updates the current game state
      */
+
     public void update(double dt) {
-
-
-        /* GAME OVER
-        if (player.getHealth() < 1){
-            game.setState(new MainMenuState());
-        }
-
-         */
+        if (!(player.getHealth() < 1)) {
 
         player.moveX(dt);
 
@@ -285,32 +274,37 @@ public class Game{
         }
 
 
-
         for (IGameObject sprite : sprites) {
             sprite.update(dt);
         }
 
-        for(IGameObject enemy : enemies){
-            enemy.update(dt);
-
-            //Check if enemy is close enough to damage player, could be done somewhere else also.
-            if (CollisionHandler.testCollision(player, enemy)) {
-                player.damageTaken(1);
-            }
-
-            // Check if projectile hits enemy
-            for (Projectile p : projectiles){
-                if (CollisionHandler.testCollision((Entity) enemy, p)) {
-                    ((Entity) enemy).damageTaken(10);
-                    spawner.spawnItem();
-                    projectiles.remove(p);
-                    break;
+            Iterator<Entity> enemyIter = enemies.iterator();
+            while (enemyIter.hasNext()) {
+               Entity enemy = enemyIter.next();
+               enemy.update(dt);
+                //Check if enemy is close enough to damage player, could be done somewhere else also.
+                if (CollisionHandler.testCollision(player, enemy)) {
+                    player.damageTaken(1);
+                }
+                // Check if projectile hits enemy
+                Iterator<Projectile> pIter = projectiles.iterator();
+                while (pIter.hasNext()) {
+                    Projectile p = pIter.next();
+                    if (CollisionHandler.testCollision(enemy, p)) {
+                        enemy.damageTaken(10);
+                        pIter.remove();
+                        if (enemy.getHealth() < 1) {
+                            spawner.spawnItem();
+                            enemyIter.remove();
+                            player.addScore(100);
+                        }
+                        break;
                     }
                     // error om man inte breakar för tar bort projectilen
 
-            }
+                }
 
-        }
+            }
 
         if(playerInRangeOfStore()){
             player.isInteractable = true;
@@ -321,14 +315,21 @@ public class Game{
         for (Projectile p : projectiles) {
             p.update(dt);
         }
-        for (IGameObject potion : spawner.getSpawnedItems()){
-            if (CollisionHandler.testCollision(potion, player)){
-                player.setHealth(getPlayer().getHealth() + 100);
-                spawner.clearPotion(potion);
-                break; // error om man inte breakar, se ovan
+            for (IItem item : spawner.getSpawnedItems()) {
+                if (CollisionHandler.testCollision(item, player)) {
+                    item.consume(player);
+                    spawner.clearItem(item);
+                    break; // error om man inte breakar, se ovan
+                }
             }
 
+        } else {
+            playerDead = true;
         }
+    }
+
+    public Boolean isPlayerDead(){
+        return playerDead;
     }
 
 

@@ -2,6 +2,7 @@ package view;
 
 import config.Config;
 import model.gameobjects.Player;
+import model.helperclasses.ImageHandler;
 
 import java.awt.*;
 
@@ -9,33 +10,42 @@ public class HUD {
 
     private Player player;
 
+    private ImageHandler imageHandler;
+
+    private Color goldColor = new Color(255,221,67);
+    private Color manaColor = new Color(0,102,255);
+    private BasicStroke outline = new BasicStroke(3);
+
 
     public HUD(Player player){
         this.player = player;
-    }
+        this.imageHandler = new ImageHandler();
 
+    }
 
     /**
      * Updates the HUD of the game (Player health, score & money)
      * @param g2
      */
-    public void update(Graphics2D g2){
-        g2.setFont(new Font("Public Pixel", Font.BOLD, 24));
+   public void update(Graphics2D g2){
+        g2.setColor(Color.black);
+        g2.setFont(Config.inGameTextFont);
         g2.drawString("" + player.getScore(), Config.SCREEN_WIDTH/2, 32);
-        g2.drawString("$ " + player.getMoney(),Config.SCREEN_WIDTH - 220, Config.SCREEN_HEIGHT-80);
-        g2.drawString("EXP: 500", Config.SCREEN_WIDTH - 220, Config.SCREEN_HEIGHT-50);
-        Color mana = new Color(0, 102, 255);
-        g2.setStroke(new BasicStroke(3));
+        g2.drawImage(imageHandler.getImage("imgs/coin_front.png"), Config.SCREEN_WIDTH - 150, Config.SCREEN_HEIGHT-80, 30, 30, null);
+        g2.setColor(goldColor);
+        g2.drawString("" + player.getMoney(),Config.SCREEN_WIDTH - 90, Config.SCREEN_HEIGHT-55);
         g2.setColor(Color.red);
         g2.fillRoundRect(20, Config.SCREEN_HEIGHT - 100, 200, 20, 0, 0);
         g2.setColor(Color.green);
         g2.fillRoundRect(20, Config.SCREEN_HEIGHT - 100, (int) (200 - (200 * (1 - player.getHealth() / player.getMaxHp()))), 20, 0, 0);
         g2.setColor(Color.black);
+        g2.setStroke(outline);
         g2.drawRoundRect(20, Config.SCREEN_HEIGHT - 100, 200, 20, 0, 0);
-        g2.setColor(mana);
+        g2.setColor(manaColor);
         g2.fillRoundRect(20, Config.SCREEN_HEIGHT - 70, 200, 20, 0, 0);
         g2.setColor(Color.black);
         g2.drawRoundRect(20, Config.SCREEN_HEIGHT - 70, 200, 20, 0, 0);
-        g2.dispose();
+        g2.drawString("10/15", 20, Config.SCREEN_HEIGHT - 120);
     }
+
 }

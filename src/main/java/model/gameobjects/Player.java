@@ -142,4 +142,8 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     public int getMoney(){
         return money;
     }
+
+    public void addMoney(int amount){
+        this.money += amount;
+    }
 }
