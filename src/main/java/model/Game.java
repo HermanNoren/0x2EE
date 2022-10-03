@@ -36,7 +36,6 @@ public class Game{
     private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
     private boolean stateChangedFlag;
     private GameMap gameMap;
-    private File highscoreFile;
     private List<String> highscoreList;
     private List<Projectile> projectiles;
     private List<IGameObject> sprites;

@@ -53,9 +53,15 @@ public abstract class Enemy extends Entity implements IEnemy {
         }
     }
 
-    @Override
-    public void update() {
+
+    public void update(double dt) {
         moveToGoal(0.5);
+        super.update(dt);
+
+    }
+
+
+
     }
 
 }
