@@ -23,9 +23,6 @@ public class PausePanelState implements IPanelState {
     private List<IDrawer> drawers;
     private MainPanel mainPanel;
 
-    private final Font buttonFont = new Font("Public Pixel", Font.PLAIN, 12);
-    private final Font titleFont = new Font("Public Pixel", Font.PLAIN, 64);
-
     public PausePanelState(MainPanel mainPanel, Game game ) {
         this.game = game;
         this.mainPanel = mainPanel;
@@ -46,12 +43,12 @@ public class PausePanelState implements IPanelState {
         bc.update();
         g2.setColor(Color.black);
         g2.fillRect(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        g2.setFont(buttonFont);
+        g2.setFont(Config.buttonFont);
         for (IDrawer drawer : drawers){
             drawer.draw(g2);
         }
         g2.setColor(Color.WHITE);
-        g2.setFont(titleFont);
+        g2.setFont(Config.titleFont);
         String paused = "PAUSED";
         g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
 

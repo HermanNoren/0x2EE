@@ -255,6 +255,10 @@ public class Game{
                 sprite.update();
             }
 
+            for (Projectile p : projectiles) {
+                p.update();
+            }
+
             Iterator<Entity> enemyIter = enemies.iterator();
             while (enemyIter.hasNext()) {
                Entity enemy = enemyIter.next();
@@ -275,12 +279,9 @@ public class Game{
                             spawner.spawnItem();
                             enemyIter.remove();
                             player.addScore(100);
-                            break;
                         }
-
                     }
 
-                    // error om man inte breakar för tar bort projectilen
                 }
 
             }
@@ -290,9 +291,7 @@ public class Game{
             } else {
                 player.isInteractable = false;
             }
-            for (Projectile p : projectiles) {
-                p.update();
-            }
+
             for (IItem item : spawner.getSpawnedItems()) {
                 if (CollisionHandler.testCollision(item, player)) {
                     item.consume(player);

@@ -1,5 +1,7 @@
 package config;
 
+import java.awt.*;
+
 public class Config {
     public static final int FPS = 120;
     public static final int UPS = 200;
@@ -10,4 +12,9 @@ public class Config {
     public static final int SCREEN_WIDTH_IN_GAME = SCREEN_WIDTH * 5;
     public static final int SCREEN_HEIGHT_IN_GAME = SCREEN_HEIGHT * 4;
 
+    public static final Font buttonFont = new Font("Public Pixel", Font.PLAIN, 12);
+    public static final Font inGameTextFont = new Font("Public Pixel", Font.BOLD, 24);
+    public static final Font titleFont = new Font("Public Pixel", Font.PLAIN, 64);
+    public static final Font  infoFont = new Font("Public Pixel", Font.PLAIN, 32);
+    public static  final Font nameFont = new Font("Public Pixel", Font.PLAIN, 56);
 }

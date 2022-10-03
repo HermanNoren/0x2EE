@@ -27,8 +27,6 @@ public class GameOverPanelState implements IPanelState{
     private final List<IDrawer> drawers;
     private final List<KeyListener> keyListeners;
 
-    private final Font buttonFont = new Font("Public Pixel", Font.PLAIN, 12);
-    private final Font titleFont = new Font("Public Pixel", Font.PLAIN, 64);
 
     public GameOverPanelState(MainPanel mainPanel, Game game){
         this.mainPanel = mainPanel;
@@ -50,12 +48,12 @@ public class GameOverPanelState implements IPanelState{
 
         g2.setColor(Color.black);
         g2.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        g2.setFont(buttonFont);
+        g2.setFont(Config.buttonFont);
         for (IDrawer drawer : drawers) {
             drawer.draw(g2);
         }
         g2.setColor(Color.white);
-        g2.setFont(titleFont);
+        g2.setFont(Config.titleFont);
         String paused = "GAME OVER";
         g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
 

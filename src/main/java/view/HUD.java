@@ -12,7 +12,6 @@ public class HUD {
 
     private ImageHandler imageHandler;
 
-    private Font textFont = new Font("Public Pixel", Font.BOLD, 24);
     private Color goldColor = new Color(255,221,67);
     private Color manaColor = new Color(0,102,255);
     private BasicStroke outline = new BasicStroke(3);
@@ -30,7 +29,7 @@ public class HUD {
      */
    public void update(Graphics2D g2){
         g2.setColor(Color.black);
-        g2.setFont(textFont);
+        g2.setFont(Config.inGameTextFont);
         g2.drawString("" + player.getScore(), Config.SCREEN_WIDTH/2, 32);
         g2.drawImage(imageHandler.getImage("imgs/coin_front.png"), Config.SCREEN_WIDTH - 150, Config.SCREEN_HEIGHT-80, 30, 30, null);
         g2.setColor(goldColor);
