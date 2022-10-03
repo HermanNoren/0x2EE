@@ -53,7 +53,7 @@ public class Game {
     private Boolean playerDead;
 
     public Game() {
-        this.gameMap = new GameMap(50, 50);
+        this.gameMap = new GameMap(10, 10);
         this.player = Player.createPlayer(this, random);
         shop = new Shop();
         enemies = new ArrayList<>();

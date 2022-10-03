@@ -6,7 +6,6 @@ import model.helperclasses.ImageHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +15,7 @@ public class ItemDrawer implements IDrawer{
 
     private ImageHandler imageHandler;
 
-    private BufferedImage potion, coinFront, coinBack, coinSide;
+    private BufferedImage potion, coinFront, coinBack, coinSide1, coinSide2;
 
     private int counter;
 
@@ -32,13 +31,14 @@ public class ItemDrawer implements IDrawer{
         potion = imageHandler.getImage("imgs/drops/potion.png");
         coinFront = imageHandler.getImage("imgs/drops/coin_front.png");
         coinBack = imageHandler.getImage("imgs/drops/coin_back.png");
-        coinSide = imageHandler.getImage("imgs/drops/coin_side.png");
+        coinSide1 = imageHandler.getImage("imgs/drops/coin_side_1.png");
+        coinSide2 = imageHandler.getImage("imgs/drops/coin_side_2.png");
         counter = 0;
         imageList = new ArrayList<>();
         imageList.add(coinFront);
-        imageList.add(coinSide);
+        imageList.add(coinSide1);
         imageList.add(coinBack);
-        imageList.add(coinSide);
+        imageList.add(coinSide2);
         coinImage = coinFront;
     }
 
