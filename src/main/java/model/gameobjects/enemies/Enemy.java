@@ -1,18 +1,13 @@
 package model.gameobjects.enemies;
 
 import config.Config;
-import controllers.EDirection;
-import model.gameobjects.Player;
 import model.helperclasses.AStar;
 import model.Game;
-import model.helperclasses.Vector2;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import model.gameobjects.Entity;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
 
 public abstract class Enemy extends Entity implements IEnemy {
 

@@ -24,10 +24,14 @@ public class PlayerDrawer implements IDrawer {
 
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
 
+    private double previousImageSwitchTime, currentTime;
+
     public PlayerDrawer(Player player) {
         this.player = player;
         this.imageHandler = new ImageHandler();
         initPlayerImages();
+        currentTime = System.currentTimeMillis();
+        previousImageSwitchTime = System.currentTimeMillis();
     }
 
     /**
@@ -98,12 +102,11 @@ public class PlayerDrawer implements IDrawer {
      * Clock for switching image, gives an animation effect
      */
     private void movementAnimation() {
-        animationCounter++;
-        if(animationCounter > 100){
-            imageSwitcher = 1;
-            animationCounter = 0;
-        }else if(animationCounter == 50){
-            imageSwitcher = 2;
+        currentTime = System.currentTimeMillis();
+        if(currentTime >= previousImageSwitchTime + 250){
+            previousImageSwitchTime = currentTime;
+            if (imageSwitcher == 1) { imageSwitcher = 2; }
+            else { imageSwitcher = 1; }
         }
     }
 

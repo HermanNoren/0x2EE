@@ -15,5 +15,6 @@ public class Window {
         jframe.setTitle("0x2EE");
         jframe.add(this.mainPanel);
         jframe.setVisible(true);
+        jframe.setLocationRelativeTo(null);
     }
 }

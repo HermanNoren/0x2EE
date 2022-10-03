@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 
 public class MapDrawer implements IDrawer {
-    private final List<IGameObject> terrains;
+    private final List<Terrain> terrains;
     private final BufferedImage[] terrainImgs = new BufferedImage[10];
     private final GameMap gameMap;
     private final Camera camera;

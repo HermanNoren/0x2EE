@@ -5,7 +5,6 @@ import controllers.EDirection;
 import model.Game;
 import model.helperclasses.Rect;
 import model.helperclasses.Vector2;
-import model.mapclasses.Terrain;
 
 /**
  * The IEnemy class contains logic to represent the sprite,
@@ -13,6 +12,7 @@ import model.mapclasses.Terrain;
  * and health the program can determine if an entity is in range
  * to take damage thus if reduces its health.
  */
+
 public abstract class Entity implements IGameObject {
     private Vector2 pos;
     private Vector2 vel;
@@ -36,7 +36,6 @@ public abstract class Entity implements IGameObject {
         this.game = game;
         this.direction = EDirection.NOT_MOVING; // Default value
         this.lastDirection = direction;
-
         this.pos = new Vector2(x, y);
         this.acc = new Vector2(0, 0);
         this.rect = new Rect(x, y, size, size);
@@ -86,6 +85,7 @@ public abstract class Entity implements IGameObject {
     public double getAccY(){
         return acc.getY();
     }
+
     public Vector2 getAcc() {
         return acc;
     }
@@ -104,6 +104,8 @@ public abstract class Entity implements IGameObject {
     public Vector2 getPos() {
         return new Vector2(pos);
     }
+
+
 
     /**
      * @param direction, updated direction.
@@ -143,12 +145,12 @@ public abstract class Entity implements IGameObject {
     }
     @Override
     public int getWidth() {
-        return size;
+        return getRect().getWidth();
     }
 
     @Override
     public int getHeight() {
-        return size;
+        return getRect().getHeight();
     }
 
 

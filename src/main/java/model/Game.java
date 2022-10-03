@@ -1,14 +1,15 @@
 package model;
 
-import controllers.EDirection;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.Spawner;
+import model.gameobjects.enemies.*;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
-import model.gameobjects.theShop.Shop;
+import model.gameobjects.Shop;
 import model.helperclasses.HighscoreHandler;
+import model.helperclasses.collision.ECollisionAxis;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import model.gameobjects.IGameObject;
@@ -52,6 +53,7 @@ public class Game{
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         highscoreName = new ArrayList<>();
+        this.path = new ArrayList<>();
 
         EnemyFactory enemyFactory= new NormalEnemyFactory();
 
@@ -133,7 +135,6 @@ public class Game{
     public Player getPlayer() {
         return player;
     }
-
     public List<Entity> getEnemies(){
         return enemies;
     }
@@ -203,6 +204,8 @@ public class Game{
         escapePressed = false;
     }
 
+
+
     /**
      * Used as a way for objects inside to read whether the W key is pressed
      * @return wPressed
@@ -241,9 +244,10 @@ public class Game{
 
     double speed = 0;
     /**
-     * Updates the current IGameState
+     * Updates the current game state
      */
-    public void update() {
+    public void update(double dt) {
+
 
         /* GAME OVER
         if (player.getHealth() < 1){
@@ -252,50 +256,45 @@ public class Game{
 
          */
 
+        player.moveX(dt);
+        List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
+        for (Terrain t : collidedTerrain) {
+            Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.X_AXIS);
+            if (collisionTypes.get("right")) {
+                player.setPosX(t.getPos().x - player.getWidth());
+                player.stopCurrentMovement();
+            }
+            if (collisionTypes.get("left")) {
+                player.setPosX((t.getPos().x + t.getWidth()));
+                player.stopCurrentMovement();
+            }
+        }
+
+        player.moveY(dt);
+        collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
+        for (Terrain t : collidedTerrain) {
+            Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.Y_AXIS);
+            if (collisionTypes.get("top")) {
+                player.setPosY(t.getPos().y + player.getHeight());
+                player.stopCurrentMovement();
+            }
+            if (collisionTypes.get("bottom")) {
+                player.setPosY((t.getPos().y - t.getHeight()));
+                player.stopCurrentMovement();
+            }
+        }
+
+
 
         for (IGameObject sprite : sprites) {
-            sprite.update();
+            sprite.update(dt);
         }
-
-        player.moveY(0.5);
-        player.moveX(0.5);
-        for(IGameObject terrain: gameMap.getTerrains()){
-            Map<String, Boolean> collisionTypeX = CollisionHandler.testCollisionWithDirection(player, terrain, "X");
-            if(collisionTypeX.get("right")){
-                player.setVelX(0);
-                player.setAccX(0);
-                player.setPosX(terrain.getPos().getX() - player.getWidth());
-            }
-
-            if(collisionTypeX.get("left")){
-                player.setVelX(0);
-                player.setAccX(0);
-                player.setPosX(terrain.getPos().getX() + player.getWidth());
-            }
-
-
-
-            Map<String, Boolean> collisionTypeY = CollisionHandler.testCollisionWithDirection(player, terrain, "Y");
-            if(collisionTypeY.get("top")){
-                player.setVelY(0);
-                player.setAccY(0);
-                player.setPosY(terrain.getPos().getY() + player.getHeight());
-            }
-            if(collisionTypeY.get("bottom")){
-                player.setVelY(0);
-                player.setAccY(0);
-                player.setPosY(terrain.getPos().getY() - terrain.getHeight());
-            }
-        }
-
-
 
         for(Entity enemy : enemies){
-            enemy.update();
+            enemy.update(dt);
             //Check if enemy is close enough to damage player, could be done somewhere else also.
             if (CollisionHandler.testCollision(player, (Entity) enemy)) {
                 player.damageTaken(1);
-
             }
 
             // Check if projectile hits enemy
@@ -312,7 +311,6 @@ public class Game{
 
         }
 
-
         if(playerInRangeOfStore()){
             player.isInteractable = true;
         }else{
@@ -320,7 +318,7 @@ public class Game{
         }
 
         for (Projectile p : projectiles) {
-            p.update();
+            p.update(dt);
         }
         for (IGameObject potion : spawner.getSpawnedItems()){
             if (CollisionHandler.testCollision(potion, player)){

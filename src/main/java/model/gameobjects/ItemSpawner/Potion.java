@@ -39,7 +39,7 @@ public class Potion implements IGameObject {
     }
 
     @Override
-    public void update() {
+    public void update(double dt) {
 
     }
 }

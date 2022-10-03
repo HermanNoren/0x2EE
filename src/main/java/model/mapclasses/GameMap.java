@@ -79,7 +79,7 @@ public class GameMap {
      * Method used to get a copy of the List of terrains.
      * @return a copy of List<Terrain> terrains.
      */
-    public List<IGameObject> getTerrains() {
+    public List<Terrain> getTerrains() {
         return new ArrayList<>(terrains);
     }
 

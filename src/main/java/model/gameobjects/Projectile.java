@@ -54,7 +54,7 @@ public class Projectile implements IGameObject {
     }
 
     @Override
-    public void update() {
+    public void update(double dt) {
         pos.setX(pos.getX() + vel.getX());
 
         pos.setY(pos.getY() + vel.getY());
