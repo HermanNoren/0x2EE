@@ -1,5 +1,6 @@
 package view.panelstates;
 
+import com.sun.tools.javac.Main;
 import config.Config;
 import controllers.ButtonController;
 import model.Game;
@@ -15,21 +16,21 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
+public class GameOverPanelState implements IPanelState{
 
-public class MainMenuPanelState implements IPanelState {
+    private MainPanel mainPanel;
 
-    private final Game game;
+    private Game game;
 
     private final ButtonController bc;
     private final List<GameButton> buttons;
     private final List<IDrawer> drawers;
     private final List<KeyListener> keyListeners;
-    private MainPanel mainPanel;
 
 
-    public MainMenuPanelState(MainPanel mainPanel, Game game) {
-        this.game = game;
+    public GameOverPanelState(MainPanel mainPanel, Game game){
         this.mainPanel = mainPanel;
+        this.game = game;
         buttons = new ArrayList<>();
         createButtons();
         bc = new ButtonController(buttons);
@@ -37,8 +38,8 @@ public class MainMenuPanelState implements IPanelState {
         keyListeners.add(bc);
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(buttons));
-    }
 
+    }
 
     @Override
     public void draw(Graphics2D g2) {
@@ -53,8 +54,9 @@ public class MainMenuPanelState implements IPanelState {
         }
         g2.setColor(Color.white);
         g2.setFont(Config.titleFont);
-        String paused = "0x2EE";
+        String paused = "GAME OVER";
         g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
+
     }
 
     @Override
@@ -67,15 +69,12 @@ public class MainMenuPanelState implements IPanelState {
         return keyListeners;
     }
 
-
     private void createButtons() {
-        GameButton mainMenuButton1 = new GameButton("PLAY", 325, 200, new MenuButtonAction(EPanelState.INGAME, this));
-        GameButton mainMenuButton2 = new GameButton("HIGHSCORES", 325, 300, new MenuButtonAction(EPanelState.HIGHSCORES, this));
-        GameButton mainMenuButton3 = new GameButton("HOW TO PLAY", 325, 400, new MenuButtonAction(EPanelState.HOWTOPLAY, this));
-        GameButton mainMenuButton4 = new GameButton("QUIT", 325, 500, new QuitButtonAction());
-        buttons.add(mainMenuButton1);
-        buttons.add(mainMenuButton2);
-        buttons.add(mainMenuButton3);
-        buttons.add(mainMenuButton4);
+        GameButton button1 = new GameButton("RESTART", 325, 200, new MenuButtonAction(EPanelState.MAINMENU, this));
+        GameButton button2 = new GameButton("MAIN MENU", 325, 300, new MenuButtonAction(EPanelState.MAINMENU, this));
+        GameButton button3 = new GameButton("QUIT", 325, 400, new QuitButtonAction());
+        buttons.add(button1);
+        buttons.add(button2);
+        buttons.add(button3);
     }
 }

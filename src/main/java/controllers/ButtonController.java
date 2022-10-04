@@ -5,14 +5,15 @@ import view.buttons.GameButton;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ButtonController implements KeyListener {
 
     private int activePos;
-    private final ArrayList<GameButton> buttons;
+    private final List<GameButton> buttons;
     private boolean wKeyDown, sKeyDown, enterKeyDown, escapeKeyDown, wClicked, sClicked, enterClicked, escapeClicked;
 
-    public ButtonController(ArrayList<GameButton> buttons) {
+    public ButtonController(List<GameButton> buttons) {
         this.buttons = buttons;
         activePos = 0;
         wKeyDown = false;

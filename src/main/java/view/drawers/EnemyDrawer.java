@@ -2,6 +2,7 @@ package view.drawers;
 
 
 import model.gameobjects.Entity;
+import model.gameobjects.enemies.Enemy;
 import model.gameobjects.enemies.IEnemy;
 import model.helperclasses.ImageHandler;
 
@@ -42,7 +43,6 @@ public class EnemyDrawer implements IDrawer {
             System.out.println(e.getMessage());
         }
     }
-
 
     private void movementAnimation() {
         animationCounter++;
@@ -102,7 +102,12 @@ public class EnemyDrawer implements IDrawer {
             }
 
             List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getSize(), enemy.getSize());
-
+            if (enemy.getHealth() != enemy.getMaxHp()){
+                g2.setColor(Color.red);
+                g2.fillRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / ((Enemy)enemy).getMaxHp()))), 4);
+                g2.setColor(Color.black);
+                g2.drawRoundRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / ((Enemy)enemy).getMaxHp()))), 4, 0,0);
+            }
             if(!(prevImg == null)){
                 g2.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
             }

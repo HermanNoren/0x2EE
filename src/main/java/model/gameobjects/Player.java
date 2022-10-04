@@ -38,8 +38,8 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         this.game = game;
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);
-        setHealth(1000);
         setMaxHp(1000);
+        setHealth(1000);
         moveAcc = 0.3;
         score = 0;
         money = 0;
@@ -141,5 +141,9 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
      */
     public int getMoney(){
         return money;
+    }
+
+    public void addMoney(int amount){
+        this.money += amount;
     }
 }

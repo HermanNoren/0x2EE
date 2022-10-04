@@ -12,14 +12,15 @@ import view.drawers.IDrawer;
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PausePanelState implements IPanelState {
 
     private Game game;
     private final ButtonController bc;
     private final ArrayList<GameButton> buttons;
-    private ArrayList<KeyListener> keyListeners;
-    private ArrayList<IDrawer> drawers;
+    private List<KeyListener> keyListeners;
+    private List<IDrawer> drawers;
     private MainPanel mainPanel;
 
     public PausePanelState(MainPanel mainPanel, Game game ) {
@@ -32,6 +33,7 @@ public class PausePanelState implements IPanelState {
         keyListeners.add(bc);
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(buttons));
+
     }
 
 
@@ -39,16 +41,14 @@ public class PausePanelState implements IPanelState {
     public void draw(Graphics2D g2) {
 
         bc.update();
-
         g2.setColor(Color.black);
-        g2.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 12));
+        g2.fillRect(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
+        g2.setFont(Config.buttonFont);
         for (IDrawer drawer : drawers){
             drawer.draw(g2);
         }
-
         g2.setColor(Color.WHITE);
-        g2.setFont(new Font("Public Pixel", Font.PLAIN, 64));
+        g2.setFont(Config.titleFont);
         String paused = "PAUSED";
         g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
 
@@ -60,7 +60,7 @@ public class PausePanelState implements IPanelState {
     }
 
     @Override
-    public ArrayList<KeyListener> getKeyListeners() {
+    public List<KeyListener> getKeyListeners() {
         return keyListeners;
     }
 
