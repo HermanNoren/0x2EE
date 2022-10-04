@@ -2,6 +2,7 @@ package view.drawers;
 
 import model.gameobjects.IGameObject;
 import model.gameobjects.ItemSpawner.IItem;
+import model.helperclasses.DrawerHelper;
 import model.helperclasses.ImageHandler;
 
 import java.awt.*;

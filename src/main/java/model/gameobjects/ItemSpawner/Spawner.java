@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Spawner {
+public class Spawner{
 
     private Game game;
     private List<Double> x_values, y_values;

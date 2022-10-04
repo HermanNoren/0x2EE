@@ -14,7 +14,7 @@ import java.util.List;
  * provides the ability to zoom in and out using a zoom multiplier that objects relative to the camera also should take
  * into consideration when being drawn.
  */
-public class Camera {
+public class Camera{
 
     private List<IFocusableObject> focusedObject;
     private Vector2 relativePos, absolutePos, screenCenter;

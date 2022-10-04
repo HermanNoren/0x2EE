@@ -8,7 +8,6 @@ import controllers.EDirection;
 import model.helperclasses.Vector2;
 import model.weapons.Weapon;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 

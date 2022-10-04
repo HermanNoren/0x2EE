@@ -3,23 +3,23 @@ package view.drawers;
 import config.Config;
 
 import model.Game;
-import model.gameobjects.IGameObject;
+import model.gameobjects.Player;
 import model.helperclasses.DrawerHelper;
 import model.helperclasses.Vector2;
 import model.helperclasses.ImageHandler;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
-import view.Camera;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import view.Camera;
 
 public class MapDrawer implements IDrawer {
     private final List<Terrain> terrains;
     private final BufferedImage[] terrainImgs = new BufferedImage[10];
     private final GameMap gameMap;
-    private final Camera camera;
+    private  Camera camera;
     private final int[][] mapNums;
     private int size = 48;
     private int spriteSize = Config.SPRITE_SIZE*3;

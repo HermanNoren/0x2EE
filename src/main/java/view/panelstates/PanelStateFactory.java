@@ -16,6 +16,9 @@ public class PanelStateFactory {
             case HIGHSCORES -> {
                 return new HighscorePanelState(mainPanel, game);
             }
+            case SHOP -> {
+                return new ShopPanelState(mainPanel, game);
+            }
 
             case PAUSE -> {
                 return new PausePanelState(mainPanel, game);

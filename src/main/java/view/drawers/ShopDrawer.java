@@ -52,13 +52,13 @@ public class ShopDrawer implements IDrawer{
             return new Vector2(shop.getPos());
         }
         else if (topRight.equals(image)) {
-            return new Vector2(shop.getPos().x + shop.getWidth()/2, shop.getPos().y);
+            return new Vector2(shop.getPos().getX() + shop.getWidth()/2, shop.getPos().getY());
         }
         else if (bottomRight.equals(image)){
-            return new Vector2(shop.getPos().x + shop.getWidth()/2, shop.getPos().y +  shop.getHeight()/2);
+            return new Vector2(shop.getPos().getX() + shop.getWidth()/2, shop.getPos().getY() +  shop.getHeight()/2);
         }
         else if (bottomLeft.equals(image)){
-            return new Vector2(shop.getPos().x, shop.getPos().y  + shop.getHeight()/2);
+            return new Vector2(shop.getPos().getX(), shop.getPos().getY()  + shop.getHeight()/2);
         }
         return null;
     }
