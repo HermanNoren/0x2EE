@@ -288,12 +288,11 @@ public class Game {
             for (IGameObject sprite : sprites) {
                 sprite.update(dt);
             }
-            ListIterator<Projectile> p = projectiles.listIterator();
             if (newBullet){
-                p.add(pendingBullet);
+                projectiles.add(pendingBullet);
                 newBullet = false;
             }
-            
+
             for (Projectile projectile : projectiles){
                 projectile.update(dt);
             }
@@ -314,7 +313,7 @@ public class Game {
                     //player.damageTaken(1);
                 }
                 // Check if projectile hits enemy
-                ListIterator<Projectile> pIter = projectiles.listIterator();
+                Iterator<Projectile> pIter = projectiles.iterator();
                 while (pIter.hasNext()) {
                     Projectile pr = pIter.next();
                     if (CollisionHandler.testCollision(enemy, pr)) {
