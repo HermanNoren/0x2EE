@@ -1,6 +1,6 @@
 package controllers;
 
-import View.buttons.GameButton;
+import view.buttons.GameButton;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

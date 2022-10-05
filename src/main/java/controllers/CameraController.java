@@ -1,5 +1,5 @@
 package controllers;
-import View.Camera;
+import view.Camera;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

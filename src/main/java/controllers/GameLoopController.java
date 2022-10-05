@@ -1,6 +1,6 @@
 package controllers;
 
-import Model.Game;
+import model.Game;
 
 public class GameLoopController {
 

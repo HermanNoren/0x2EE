@@ -1,0 +1,57 @@
+package model.gameobjects.enemies;
+
+import config.Config;
+import controllers.EDirection;
+import model.helperclasses.AStar;
+import model.Game;
+import model.helperclasses.Vector2;
+import model.mapclasses.Terrain;
+import model.gameobjects.Entity;
+
+public abstract class Enemy extends Entity implements IEnemy {
+
+    private int size = Config.SPRITE_SIZE;
+
+    private double movementSpeed;
+    private Game game;
+    protected Enemy(int x, int y, Game game){
+        super(x, y, game);
+        this.game = game;
+        movementSpeed = 0.5;
+    }
+
+    /**
+     * Method used to move the enemy towards player.
+     */
+    private void moveToGoal(double speed) {
+
+    }
+
+
+    @Override
+    public void update(double dt) {
+        Terrain current = getMapLocation();
+        Terrain next = AStar.aStar(current, game.getPlayer().getMapLocation());
+
+        Vector2 nextPos;
+
+        int currentX = (int) current.getPos().getX();
+        int currentY = (int) current.getPos().getY();
+        if(next != null) {
+            nextPos = next.getPos();
+            if (currentX < nextPos.getX()) {
+                setDirection(EDirection.RIGHT);
+                setPosX(getPosX() + movementSpeed * dt);
+            } else if (currentX > nextPos.getX()) {
+                setDirection(EDirection.LEFT);
+                setPosX(getPosX() - movementSpeed * dt);
+            } else if (currentY < nextPos.getY()) {
+                setDirection(EDirection.DOWN);
+                setPosY(getPosY() + movementSpeed * dt);
+            } else if (currentY > nextPos.getY()) {
+                setDirection(EDirection.UP);
+                setPosY(getPosY() - movementSpeed * dt);
+            }
+        }
+    }
+}

@@ -1,7 +1,7 @@
 package controllers;
-import Model.Game;
-import View.panelstates.EPanelState;
-import View.panelstates.IPanelState;
+import model.Game;
+import view.panelstates.EPanelState;
+import view.panelstates.IPanelState;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
