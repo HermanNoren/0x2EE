@@ -12,8 +12,7 @@ import java.util.ArrayList;
  * Acts a Node class, every Terrain is a node in the map.
  */
 public class Terrain implements IGameObject, Comparable<Terrain> {
-    private final int size = Config.SPRITE_SIZE*3;
-    private final ArrayList<Entity> entities;
+    private final int size = Config.TERRAIN_SIZE;
     private Vector2 pos;
     private double f = Double.MAX_VALUE; // Will later be equal to g + h
     private double g = Double.MAX_VALUE; // g(n), n = next node, distance from start to n.
@@ -34,10 +33,9 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
         this.terrainType = 0;
         this.passable = true;
         this.neighbors = new ArrayList<>();
-        this.entities = new ArrayList<>();
         this.pos = new Vector2(x, y);
-        this.pos.setX(x*48);
-        this.pos.setY(y*48);
+        this.pos.setX(x*size);
+        this.pos.setY(y*size);
     }
 
     @Override
@@ -69,11 +67,6 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     public Vector2 getCenter() {
         return null;
     }
-
-    public double getF() {
-        return f;
-    }
-
     public void setF(double f) {
         this.f = f;
     }
@@ -115,10 +108,6 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
 
     public boolean isPassable() {
         return passable;
-    }
-
-    public void addEntity(Entity entity) {
-        entities.add(entity);
     }
 
     /**

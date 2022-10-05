@@ -33,7 +33,6 @@ public class Game {
     private List<IObserver> observers;
     private Player player;
     private List<Terrain> path;
-
     private List<String> highscoreName;
     private List<Entity> enemies;
     private List<IGameObject> terrains;
@@ -46,18 +45,14 @@ public class Game {
     private List<IGameObject> sprites;
     private Shop shop;
     private HighscoreHandler highscoreHandler;
-
     private Spawner spawner;
     private Random random = new Random();
-
     private Boolean playerDead;
-
     private Projectile pendingBullet;
-
 
     public Game() {
         this.gameMap = new GameMap(10, 10);
-        this.player = Player.createPlayer(this, random);
+        this.player = new Player(48, 48, this);
         shop = new Shop(200, 100);
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
