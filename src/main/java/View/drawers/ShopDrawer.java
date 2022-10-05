@@ -68,8 +68,8 @@ public class ShopDrawer implements IDrawer{
     public void draw(Graphics2D g2) {
         List<BufferedImage> pictures = new ArrayList<>(Arrays.asList(topLeft, topRight, bottomLeft, bottomRight));
         for(BufferedImage image : pictures) {
-            List<Integer> drawInformationTopLeft = DrawerHelper.calculateDrawingInformation(pictureOffsetCorrector(image), shop.getWidth()/2, shop.getHeight()/2);
-            g2.drawImage(image, drawInformationTopLeft.get(0), drawInformationTopLeft.get(1), drawInformationTopLeft.get(2), drawInformationTopLeft.get(3), null);
+            List<Integer> currentPictureInformationRepresentation = DrawerHelper.calculateDrawingInformation(pictureOffsetCorrector(image), shop.getWidth()/2, shop.getHeight()/2);
+            g2.drawImage(image, currentPictureInformationRepresentation.get(0), currentPictureInformationRepresentation.get(1), currentPictureInformationRepresentation.get(2), currentPictureInformationRepresentation.get(3), null);
         }
     }
 }
