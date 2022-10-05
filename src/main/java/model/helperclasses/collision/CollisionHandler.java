@@ -22,8 +22,6 @@ public class CollisionHandler {
                         && object1.getHeight() + object1.getPos().getY() > object2.getPos().getY();
     }
 
-
-
     /**
      * Method for providing which specific terrain pieces an object is colliding with
      * @param object Object to test
@@ -96,8 +94,6 @@ public class CollisionHandler {
                 }
             }
         }
-
         return collisionTypes;
     }
-
 }
