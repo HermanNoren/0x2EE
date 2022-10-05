@@ -1,7 +1,7 @@
-import model.Game;
-import model.gameobjects.ItemSpawner.IItem;
-import model.gameobjects.ItemSpawner.Spawner;
-import model.gameobjects.Player;
+import Model.Game;
+import Model.gameobjects.ItemSpawner.IItem;
+import Model.gameobjects.ItemSpawner.Spawner;
+import Model.gameobjects.Player;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

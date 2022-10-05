@@ -1,7 +1,7 @@
 package utility;
 
-import model.mapclasses.GameMap;
-import model.mapclasses.Terrain;
+import Model.mapclasses.GameMap;
+import Model.mapclasses.Terrain;
 
 import java.util.Random;
 

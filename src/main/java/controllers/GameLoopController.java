@@ -1,6 +1,6 @@
 package controllers;
 
-import model.Game;
+import Model.Game;
 
 public class GameLoopController {
 
@@ -54,8 +54,6 @@ public class GameLoopController {
                 frames = 0;
                 updates = 0;
             }
-
-
         }
     }
 }

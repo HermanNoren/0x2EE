@@ -1,10 +1,9 @@
 package controllers;
 
-import view.buttons.GameButton;
+import View.buttons.GameButton;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ButtonController implements KeyListener {

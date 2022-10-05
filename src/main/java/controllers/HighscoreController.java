@@ -1,11 +1,9 @@
 package controllers;
 
-import model.Game;
+import Model.Game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.List;
 
 public class HighscoreController implements KeyListener {
 

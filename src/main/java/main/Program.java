@@ -1,9 +1,9 @@
 package main;
 
 import controllers.GameLoopController;
-import model.Game;
-import view.MainPanel;
-import view.Window;
+import Model.Game;
+import View.MainPanel;
+import View.Window;
 
 public class Program {
     public static void main(String[] args){

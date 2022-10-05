@@ -1,8 +1,7 @@
 package controllers;
-import model.Game;
-import view.panelstates.EPanelState;
-import view.panelstates.IPanelState;
-import view.panelstates.InGamePanelState;
+import Model.Game;
+import View.panelstates.EPanelState;
+import View.panelstates.IPanelState;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -47,11 +46,10 @@ public class KeyClickedController implements KeyListener {
                 if (!enterKeyDown) {
                     enterKeyDown = true;
                     game.setEnterPressed();
+                    if (enterKeyDown && game.isPlayerInRangeOfShop()){
+                        panel.changePanelState(EPanelState.SHOP);
+                    }
                 }
-                if (enterKeyDown && game.playerInRangeOfStore()){
-                    System.out.println("OpenStore");
-                }
-
             }
             case (KeyEvent.VK_ESCAPE) -> {
                 if (!escapeKeyDown) {

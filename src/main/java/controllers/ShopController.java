@@ -1,6 +1,6 @@
 package controllers;
 
-import model.Game;
+import Model.Game;
 
 public class ShopController {
     private boolean dIsPressed;

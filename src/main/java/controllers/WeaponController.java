@@ -1,11 +1,9 @@
 package controllers;
 
-import model.Game;
-import model.weapons.Weapon;
+import Model.Game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 public class WeaponController implements KeyListener {
 

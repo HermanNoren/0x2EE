@@ -1,7 +1,7 @@
 package controllers;
 
-import model.Game;
-import model.gameobjects.Player;
+import Model.Game;
+import Model.gameobjects.Player;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -56,7 +56,6 @@ public class PlayerController implements KeyListener {
             case (KeyEvent.VK_D) -> {
                 setDirection(EDirection.RIGHT);
             }
-
         }
     }
 
