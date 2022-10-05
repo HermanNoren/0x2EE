@@ -374,7 +374,7 @@ public class Game {
     }
 
     public List<Projectile> getProjectiles() {
-        return projectiles;
+        return new ArrayList<>(projectiles);
     }
 
 
