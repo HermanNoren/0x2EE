@@ -1,6 +1,7 @@
 package model.weapons;
 
 import controllers.EDirection;
+import model.Game;
 import model.gameobjects.Projectile;
 import model.helperclasses.Vector2;
 
@@ -12,20 +13,24 @@ public class Weapon {
     public int ammo;
     public boolean reloading;
 
+    private Game game;
+
     /**
      * The main weapon of the
      */
-    public Weapon(int damage, int ammo){
+    public Weapon(int damage, int ammo, Game game){
         this.damage = damage;
         this.ammo = ammo;
         reloading = false;
+        this.game = game;
+
     }
 
 
     public void shoot(Vector2 pos, EDirection direction, List<Projectile> projectiles){
         if (ammo != 0) {
             ammo--;
-            projectiles.add(new Projectile(pos, direction));
+            game.addProjectile(new Projectile(pos, direction));
         }
         else reload();
     }

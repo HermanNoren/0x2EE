@@ -36,7 +36,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         super(x, y, game);
         this.game = game;
         this.armor = new Armor();
-        this.weapon = new Weapon(10, 10);
+        this.weapon = new Weapon(10, 10, game);
         setMaxHp(1000);
         setHealth(1000);
         moveAcc = 0.3;
@@ -86,9 +86,11 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         if (getDirection() == EDirection.LEFT) {
             setAccX(-moveAcc);
         }
+
         setAccX(getAccX() + getVelX() * -0.12);
         setVelX(getVelX() + getAccX() * dt);
         setPosX(getPosX() + getVelX() * dt + 0.5 * getAccX() * (dt * dt));
+
     }
 
     public void moveY(double dt) {

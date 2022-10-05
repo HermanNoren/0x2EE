@@ -20,7 +20,8 @@ public class WeaponController implements KeyListener {
             case (KeyEvent.VK_SPACE) -> {
                 if (!spaceKeyDown) {
                     spaceKeyDown = true;
-                    game.makePlayerShoot();
+                        game.makePlayerShoot();
+
                 }
             }
         }
