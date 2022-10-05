@@ -30,10 +30,10 @@ public class ShopDrawer implements IDrawer{
      */
     private void initShopImages(){
         try{
-           topLeft = imageHandler.getImage("imgs/ShoppingPNGS/shoptopleft.png");
-           topRight = imageHandler.getImage("imgs/ShoppingPNGS/shoptopright.png");
-           bottomLeft = imageHandler.getImage("imgs/ShoppingPNGS/shopbottomleft.png");
-           bottomRight = imageHandler.getImage("imgs/ShoppingPNGS/shopbottomright.png");
+           topLeft = imageHandler.getImage("imgs/shop/ShoppingPNGS/shoptopleft.png");
+           topRight = imageHandler.getImage("imgs/shop/ShoppingPNGS/shoptopright.png");
+           bottomLeft = imageHandler.getImage("imgs/shop/ShoppingPNGS/shopbottomleft.png");
+           bottomRight = imageHandler.getImage("imgs/shop/ShoppingPNGS/shopbottomright.png");
         }
         catch (Exception errorMessage){
             System.out.println(errorMessage.getMessage());

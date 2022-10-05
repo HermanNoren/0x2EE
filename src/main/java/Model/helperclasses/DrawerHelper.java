@@ -2,6 +2,7 @@ package Model.helperclasses;
 
 import View.Camera;
 import View.drawers.IDrawer;
+import config.Config;
 
 import java.awt.*;
 import java.util.ArrayList;

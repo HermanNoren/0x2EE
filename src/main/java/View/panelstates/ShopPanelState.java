@@ -6,10 +6,9 @@ import View.buttons.GameButton;
 import View.buttons.buttonactions.MenuButtonAction;
 import View.drawers.ButtonDrawer;
 import View.drawers.IDrawer;
+import View.drawers.InShopDrawer;
 import config.Config;
 import controllers.ButtonController;
-import org.w3c.dom.css.RGBColor;
-
 import java.awt.*;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -35,6 +34,7 @@ public class ShopPanelState implements IPanelState{
         keyListeners.add(bc);
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(buttons));
+        drawers.add(new InShopDrawer(game.getPlayer().getMoney()));
 
     }
 
@@ -50,6 +50,7 @@ public class ShopPanelState implements IPanelState{
         g2.setColor(Color.WHITE);
         g2.setFont(Config.titleFont);
         g2.drawString(headerText, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(headerText)) / 2 , Config.SCREEN_HEIGHT/5);
+
     }
     private void createButtons(){
         GameButton upgradeArmorButton = new GameButton("UPGRADE ARMOR", 325, 200, new MenuButtonAction(EPanelState.SHOP, this));

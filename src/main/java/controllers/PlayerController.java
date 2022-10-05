@@ -9,7 +9,7 @@ import java.util.*;
 
 public class PlayerController implements KeyListener {
     private final Player player;
-    private boolean moving, spaceKeyDown;
+    private boolean moving;
     private List<EDirection> pressedOrder;
     private Game game;
 
@@ -75,7 +75,6 @@ public class PlayerController implements KeyListener {
                 releaseDirection(EDirection.RIGHT);
             }
             case (KeyEvent.VK_SPACE) -> {
-                spaceKeyDown = false;
             }
         }
     }
