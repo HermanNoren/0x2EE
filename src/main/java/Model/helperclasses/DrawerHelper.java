@@ -1,8 +1,7 @@
-package Model.helperclasses;
+package model.helperclasses;
 
-import View.Camera;
-import View.drawers.IDrawer;
-import config.Config;
+import view.Camera;
+import view.drawers.IDrawer;
 
 import java.awt.*;
 import java.util.ArrayList;
