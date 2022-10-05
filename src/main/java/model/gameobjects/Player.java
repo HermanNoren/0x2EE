@@ -87,9 +87,11 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         if (getDirection() == EDirection.LEFT) {
             setAccX(-moveAcc);
         }
+
         setAccX(getAccX() + getVelX() * -0.12);
         setVelX(getVelX() + getAccX() * dt);
         setPosX(getPosX() + getVelX() * dt + 0.5 * getAccX() * (dt * dt));
+
     }
 
     public void moveY(double dt) {
