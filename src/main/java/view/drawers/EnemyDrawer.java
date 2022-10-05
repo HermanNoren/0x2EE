@@ -2,7 +2,6 @@ package view.drawers;
 
 
 import model.gameobjects.Entity;
-import model.helperclasses.DrawerHelper;
 import model.gameobjects.enemies.Enemy;
 import model.helperclasses.ImageHandler;
 

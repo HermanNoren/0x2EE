@@ -1,6 +1,5 @@
 package view.drawers;
 
-import model.helperclasses.DrawerHelper;
 import model.helperclasses.ImageHandler;
 import model.gameobjects.Player;
 

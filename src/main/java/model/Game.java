@@ -36,7 +36,6 @@ public class Game {
     private List<String> highscoreName;
     private List<Entity> enemies;
     private List<IGameObject> terrains;
-    private boolean wPressed, aPressed, sPressed, dPressed, enterPressed, escapePressed, spacePressed;
     private boolean stateChangedFlag;
     private GameMap gameMap;
     private File highscoreFile;
@@ -63,17 +62,8 @@ public class Game {
         enemies.add(enemyFactory.createEnemy(this, random));
         enemies.add(enemyFactory.createEnemy(this, random));
         spawner = new Spawner(this);
-
         sprites = new ArrayList<>();
-
         sprites.add(shop);
-        wPressed = false;
-        aPressed = false;
-        sPressed = false;
-        dPressed = false;
-        enterPressed = false;
-        escapePressed = false;
-        spacePressed = false;
         stateChangedFlag = false;
         observers = new ArrayList<>();
         highscoreHandler = new HighscoreHandler();
@@ -136,93 +126,6 @@ public class Game {
         return spawner.getSpawnedItems();
     }
 
-
-    /**
-     * Used as a way for outside components to tell Game if the W key is pressed.
-     */
-    public void setWPressed() {
-        wPressed = true;
-    }
-
-    /**
-     * Used as a way for outside components to tell Game if the W key is released.
-     */
-    public void resetWPressed() {
-        wPressed = false;
-    }
-
-    /**
-     * Used as a way for outside components to tell Game if the S key is pressed.
-     */
-    public void setSPressed() {
-        sPressed = true;
-    }
-
-    /**
-     * Used as a way for outside components to tell Game if the S key is released.
-     */
-    public void resetSPressed() {
-        sPressed = false;
-    }
-
-    /**
-     * Used as a way for outside components to tell Game if the Enter key is pressed.
-     */
-    public void setEnterPressed() {
-        enterPressed = true;
-    }
-
-    public void setSpacePressed() {
-        spacePressed = true;
-    }
-
-    /**
-     * Used as a way for outside components to tell Game if the Enter key is released.
-     */
-    public void resetEnterPressed() {
-        enterPressed = false;
-    }
-
-    /**
-     * Used as a way for outside components to tell Game if the Escape key is pressed.
-     */
-    public void setEscapePressed() {
-        escapePressed = true;
-    }
-
-    /**
-     * Used as a way for outside components to tell Game if the Escape key is released.
-     */
-    public void resetEscapePressed() {
-        escapePressed = false;
-    }
-
-
-    /**
-     * Used as a way for objects inside to read whether the W key is pressed
-     *
-     * @return wPressed
-     */
-    public boolean getWPressed() {
-        return wPressed;
-    }
-
-    public boolean getSPressed() {
-        return sPressed;
-    }
-
-    public boolean getEnterPressed() {
-        return enterPressed;
-    }
-
-    public boolean getEscapePressed() {
-        return escapePressed;
-    }
-
-    public boolean getSpacePressed() {
-        return spacePressed;
-    }
-
     private boolean newBullet;
 
     /**
@@ -238,7 +141,6 @@ public class Game {
         player.shoot(projectiles);
     }
 
-    double speed = 0;
     public void addProjectile(Projectile p) {
         newBullet = true;
         pendingBullet = p;
@@ -356,14 +258,9 @@ public class Game {
         }
     }
 
-    public void resetSpacePressed() {
-        this.spacePressed = false;
-    }
-
     public List<Projectile> getProjectiles() {
         return projectiles;
     }
-
 
     public Shop getShop() {
         return shop;
