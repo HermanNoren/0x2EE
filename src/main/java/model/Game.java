@@ -1,6 +1,8 @@
 package model;
 
+import controllers.EDirection;
 import model.gameobjects.ItemSpawner.IItem;
+import model.helperclasses.Vector2;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.Spawner;
@@ -17,12 +19,10 @@ import model.gameobjects.IGameObject;
 
 import view.IObserver;
 
+import javax.sound.sampled.Port;
+import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import java.util.Map;
+import java.util.*;
 import java.util.Random;
 
 /**
@@ -52,6 +52,9 @@ public class Game {
 
     private Boolean playerDead;
 
+    private Projectile pendingBullet;
+
+
     public Game() {
         this.gameMap = new GameMap(10, 10);
         this.player = Player.createPlayer(this, random);
@@ -64,7 +67,6 @@ public class Game {
         EnemyFactory enemyFactory = new NormalEnemyFactory();
         enemies.add(enemyFactory.createEnemy(this, random));
         enemies.add(enemyFactory.createEnemy(this, random));
-
         spawner = new Spawner(this);
 
         sprites = new ArrayList<>();
@@ -226,6 +228,8 @@ public class Game {
         return spacePressed;
     }
 
+    private boolean newBullet;
+
     /**
      * Add an observer. Observers will be notified 120 times per second
      *
@@ -240,10 +244,15 @@ public class Game {
     }
 
     double speed = 0;
+    public void addProjectile(Projectile p) {
+        newBullet = true;
+        pendingBullet = p;
+    }
 
     /**
      * Updates the current game state
      */
+
 
     public void update(double dt) {
         if (!(player.getHealth() < 1)) {
@@ -279,15 +288,19 @@ public class Game {
             for (IGameObject sprite : sprites) {
                 sprite.update(dt);
             }
+            if (newBullet){
+                projectiles.add(pendingBullet);
+                newBullet = false;
+            }
 
-            for (Projectile p : projectiles) {
-                p.update(dt);
+            for (Projectile projectile : projectiles){
+                projectile.update(dt);
             }
 
             Iterator<Entity> enemyIter = enemies.iterator();
             while (enemyIter.hasNext()) {
                 Entity enemy = enemyIter.next();
-                if (enemy.getHealth() < 1){
+                if (enemy.getHealth() < 1) {
                     spawner.spawnItem();
                     player.addScore(100);
                     enemyIter.remove();
@@ -300,16 +313,15 @@ public class Game {
                     //player.damageTaken(1);
                 }
                 // Check if projectile hits enemy
-                Iterator<Projectile> pIter =  projectiles.iterator();
+                Iterator<Projectile> pIter = projectiles.iterator();
                 while (pIter.hasNext()) {
-                    if (CollisionHandler.testCollision(enemy, pIter.next())) {
+                    Projectile pr = pIter.next();
+                    if (CollisionHandler.testCollision(enemy, pr)) {
                         enemy.damageTaken(10);
                         pIter.remove();
                         break;
                     }
-                    // error om man inte breakar för tar bort projectilen
                 }
-
 
             }
 
@@ -323,7 +335,7 @@ public class Game {
                 if (CollisionHandler.testCollision(item, player)) {
                     item.consume(player);
                     spawner.clearItem(item);
-                    break; // error om man inte breakar, se ovan
+                    break;
                 }
             }
 

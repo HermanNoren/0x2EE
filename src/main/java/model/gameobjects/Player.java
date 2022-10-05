@@ -37,7 +37,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         super(x, y, game);
         this.game = game;
         this.armor = new Armor();
-        this.weapon = new Weapon(10, 10);
+        this.weapon = new Weapon(10, 10, game);
         setMaxHp(1000);
         setHealth(1000);
         moveAcc = 0.3;
