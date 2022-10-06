@@ -37,7 +37,6 @@ public class InGamePanelState implements IPanelState {
         keyListeners.add(new WeaponController(game));
         keyListeners.add(new KeyClickedController(game, this));
         hud = new HUD(game.getPlayer());
-
         camera = Camera.getInstance();
         camera.setFocusedObject(game.getPlayer());
         keyListeners.add(new CameraController());
@@ -66,6 +65,7 @@ public class InGamePanelState implements IPanelState {
 
             camera.update();
             for (IDrawer drawer : drawers) {
+
                 drawer.draw(g);
             }
            hud.update(g);

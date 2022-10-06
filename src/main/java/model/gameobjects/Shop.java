@@ -62,7 +62,7 @@ public class Shop implements IGameObject {
 
     @Override
     public boolean isPassable() {
-        return false;
+        return true;
     }
 
     @Override
