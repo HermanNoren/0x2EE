@@ -37,14 +37,13 @@ public class InGamePanelState implements IPanelState {
         keyListeners.add(new WeaponController(game));
         keyListeners.add(new KeyClickedController(game, this));
         hud = new HUD(game.getPlayer());
-
         camera = Camera.getInstance();
         camera.setFocusedObject(game.getPlayer());
         keyListeners.add(new CameraController());
 
         drawers = new ArrayList<>();
         drawers.add(new MapDrawer(game));
-        drawers.add(new ProjectileDrawer(game.getProjectiles()));
+        drawers.add(new ProjectileDrawer(game));
         drawers.add(new ShopDrawer(game.getShop()));
         drawers.add(new PlayerDrawer(game.getPlayer()));
         drawers.add(new EnemyDrawer(game.getEnemies()));
@@ -66,6 +65,7 @@ public class InGamePanelState implements IPanelState {
 
             camera.update();
             for (IDrawer drawer : drawers) {
+
                 drawer.draw(g);
             }
            hud.update(g);

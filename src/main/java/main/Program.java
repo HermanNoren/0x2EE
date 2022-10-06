@@ -9,7 +9,6 @@ import view.Window;
 
 public class Program {
     public static void main(String[] args){
-        GameMap gameMap = new GameMap(10, 10);
         Game game = new Game();
         GameLoopController gameLoop = new GameLoopController();
         MainPanel mainPanel = new MainPanel(game);
