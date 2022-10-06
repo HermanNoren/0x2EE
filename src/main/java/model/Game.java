@@ -50,7 +50,7 @@ public class Game {
     private Projectile pendingBullet;
 
     public Game() {
-        this.gameMap = new GameMap(10, 10);
+        this.gameMap = new GameMap(100, 100);
         this.player = new Player(48, 48, this);
         shop = new Shop(200, 100);
         enemies = new ArrayList<>();

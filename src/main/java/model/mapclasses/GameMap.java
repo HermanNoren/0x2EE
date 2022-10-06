@@ -102,43 +102,35 @@ public class GameMap {
         int y = current.getY();
 
         // Add left side neighbour
-        if (current.isPassable() && (x-1) > -1){
+        if (x-1 > -1){
             Terrain leftNeighbor = gameMapCoordinates[x-1][y];
 
             if(leftNeighbor != null){
-                if(leftNeighbor.isPassable()){
-                    current.addBranch(1, leftNeighbor);
-                }
+                current.addBranch(1, leftNeighbor);
             }
         }
 
         // Add right side neighbour
-        if(current.isPassable() && (x+1) < width){
+        if(x+1 < width){
             Terrain rightNeighbor = gameMapCoordinates[x+1][y];
             if(rightNeighbor != null){
-                if(rightNeighbor.isPassable()) {
-                    current.addBranch(1, rightNeighbor);
-                }
+                current.addBranch(1, rightNeighbor);
             }
         }
 
         // Add top neighbour
-        if (current.isPassable() && (y-1) > -1){
+        if (y-1 > -1){
             Terrain topNeighbor = gameMapCoordinates[x][y-1];
             if(topNeighbor != null){
-                if(topNeighbor.isPassable()){
-                    current.addBranch(1, topNeighbor);
-                }
+                current.addBranch(1, topNeighbor);
             }
         }
 
         // Add bottom neighbour
-        if(current.isPassable() && (y+1) < height){
+        if(y+1 < height){
             Terrain bottomNeighbor = gameMapCoordinates[x][y+1];
             if(bottomNeighbor != null){
-                if (bottomNeighbor.isPassable()){
-                    current.addBranch(1, bottomNeighbor);
-                }
+                current.addBranch(1, bottomNeighbor);
             }
         }
     }

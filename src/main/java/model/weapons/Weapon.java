@@ -37,7 +37,7 @@ public class Weapon {
 
     public void reload(){
         reloading = true;
-        // TODO: Add some kind of delay (might need threading?)
+        // TODO: Add some kind of delay
         reloading = false;
         ammo = 7;
     }
