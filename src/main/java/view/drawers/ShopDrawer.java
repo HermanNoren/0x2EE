@@ -2,7 +2,6 @@ package view.drawers;
 
 
 import model.gameobjects.Shop;
-import model.helperclasses.DrawerHelper;
 import model.helperclasses.ImageHandler;
 import model.helperclasses.Vector2;
 

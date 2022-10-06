@@ -1,5 +1,6 @@
 package model.mapclasses;
 
+import config.Config;
 import utility.Noise;
 import model.gameobjects.*;
 import java.util.*;
@@ -22,7 +23,9 @@ public class GameMap {
     public GameMap(int width, int height) {
         this.width = width;
         this.height = height;
-        gameMapCoordinates = new Terrain[width][height];
+
+        this.gameMapCoordinates = new Terrain[width][height];
+
         addCoordinatesAndTiles(width, height);
 
         Noise n = new Noise(10, this); // Generates random terrain on the game map.
@@ -46,7 +49,6 @@ public class GameMap {
             for(int j = 0; j < height; j++){
                 gameMapCoordinates[i][j] = new Terrain(i, j);
                 terrains.add(gameMapCoordinates[i][j]);
-
             }
         }
     }
@@ -92,28 +94,6 @@ public class GameMap {
         }
         return passable;
     }
-
-
-    /**
-     * Method used to set specific terrain's type.
-     * @param x x-position in the coordinate grid.
-     * @param y y-position in the coordinate grid.
-     * @param type type of the terrain, type = 0, 1, 2 or 3.
-     */
-    public void setTerrainType(int x, int y, int type){
-        gameMapCoordinates[x][y].setTerrainType(type);
-    }
-
-    /**
-     * Method used to set specific tile to be passable or not.
-     * @param x x-position in the coordinate grid.
-     * @param y y-position in the coordinate grid.
-     * @param passable boolean true if passable, false if not passable.
-     */
-    public void setTerrainPassable(int x, int y, boolean passable){
-        gameMapCoordinates[x][y].setPassable(passable);
-    }
-
     /**
      * Add neighbor to the given node. If the presumed neighbor isn't grass then it won't be added as a neighbor.
      */
@@ -186,10 +166,6 @@ public class GameMap {
             }
         }
     }
-
-
-
-
 
 }
 

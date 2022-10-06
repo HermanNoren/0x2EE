@@ -1,7 +1,6 @@
 package view.drawers;
 
 import model.gameobjects.Shop;
-import model.helperclasses.DrawerHelper;
 import config.Config;
 import java.awt.*;
 import java.util.List;

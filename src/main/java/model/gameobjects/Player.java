@@ -32,7 +32,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
      * @param y, starting y-position
      * Player constructor, used to create an instance of player.
      */
-    private Player(int x, int y, Game game){
+    public Player(int x, int y, Game game){
         super(x, y, game);
         this.game = game;
         this.armor = new Armor();
@@ -42,12 +42,6 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         moveAcc = 0.3;
         score = 0;
         money = 0;
-    }
-    public static Player createPlayer(Game game, Random rand){
-        int xPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size())).getPos().getX();
-        int yPos = (int) game.getGameMap().getPassableTerrains().get(rand.nextInt(game.getGameMap().getPassableTerrains().size())).getPos().getY();
-
-        return new Player(xPos, yPos, game);
     }
 
     public void shoot(List<Projectile> projectiles) {

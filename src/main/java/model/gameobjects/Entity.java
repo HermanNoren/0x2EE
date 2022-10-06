@@ -47,9 +47,6 @@ public abstract class Entity implements IGameObject {
         this.pos = pos;
     }
 
-    public Vector2 getVel() {
-        return vel;
-    }
     public double getVelX(){
         return vel.getX();
     }
@@ -86,16 +83,7 @@ public abstract class Entity implements IGameObject {
     public double getAccY(){
         return acc.getY();
     }
-
-    public Vector2 getAcc() {
-        return acc;
-    }
-    public void setCurrentLocation(){
-
-    }
-
     public Terrain getMapLocation(){
-
         int posX = (int) (getPosX() + getWidth()/2)/48;
         int posY = (int) (getPosY() + getHeight()/2)/48;
         currentLocation = game.getGameMap().getGameMapCoordinates()[posX][posY];
@@ -153,7 +141,6 @@ public abstract class Entity implements IGameObject {
     public int getHeight() {
         return size;
     }
-
 
     public void setVel(Vector2 vel) {
         this.vel = vel;

@@ -4,7 +4,6 @@ import config.Config;
 
 import model.Game;
 import model.gameobjects.Player;
-import model.helperclasses.DrawerHelper;
 import model.helperclasses.Vector2;
 import model.helperclasses.ImageHandler;
 import model.mapclasses.GameMap;

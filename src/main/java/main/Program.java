@@ -2,6 +2,8 @@ package main;
 
 import controllers.GameLoopController;
 import model.Game;
+import model.gameobjects.Player;
+import model.mapclasses.GameMap;
 import view.MainPanel;
 import view.Window;
 
