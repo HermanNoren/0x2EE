@@ -10,7 +10,7 @@ public class Armor implements IArmor {
 
     /**
      * @param damageTaken reduces damage
-     * @return
+     * @return the damage that the armor absorbs
      */
     @Override
     public double damageReduction(int damageTaken) {

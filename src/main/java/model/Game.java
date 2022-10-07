@@ -42,7 +42,6 @@ public class Game {
     private Spawner spawner;
     private Random random = new Random();
     private Boolean playerDead;
-    private Projectile pendingBullet;
 
     public Game() {
         this.gameMap = new GameMap(50, 50);
