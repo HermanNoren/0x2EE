@@ -18,7 +18,7 @@ public class Camera{
 
     private List<IFocusableObject> focusedObject;
     private Vector2 relativePos, absolutePos, screenCenter;
-    private int standardDragEffectConstant;
+    private final int standardDragEffectConstant;
     private int dragEffectConstant;
     private double currentZoomMultiplier;
 
@@ -114,11 +114,9 @@ public class Camera{
     }
 
     /**
-     * Updates the cameras position in regard to the object in focus
+     * Updates the camera offset in regard to the object in focus
      */
     public void update() {
-        calculateCenterPos();
-
         relativePos = new Vector2(absolutePos);
         for (IFocusableObject object : focusedObject) {
             relativePos.setX(relativePos.getX() + (object.getCenter().getX() - (relativePos.getX() + screenCenter.getX())) / (dragEffectConstant / currentZoomMultiplier));
@@ -128,8 +126,6 @@ public class Camera{
 
         relativePos.setX(relativePos.getX() + ((Config.SCREEN_WIDTH - Config.SCREEN_WIDTH / currentZoomMultiplier) / 2));
         relativePos.setY(relativePos.getY() + ((Config.SCREEN_HEIGHT - Config.SCREEN_HEIGHT / currentZoomMultiplier) / 2));
-
-
     }
 
     /**
