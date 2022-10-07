@@ -1,8 +1,10 @@
 package model.gameobjects;
 
+import java.util.List;
+
 public interface IPlayer {
 
-    void shoot();
+    void shoot(List<Projectile> projectiles);
     void stopCurrentMovement();
     void moveX(double dt);
     void moveY(double dt);

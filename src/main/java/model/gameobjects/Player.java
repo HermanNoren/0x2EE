@@ -1,15 +1,13 @@
 
 package model.gameobjects;
 
-
-import model.Game;
 import model.armor.Armor;
 import controllers.EDirection;
 import model.helperclasses.Vector2;
+import model.mapclasses.Terrain;
 import model.weapons.Weapon;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * The player, more implementation to come.
@@ -21,17 +19,15 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
     protected Weapon weapon;
     protected Armor armor;
     private double moveAcc;
-    private Game game;
     /**
      * @param x, starting x-position
      * @param y, starting y-position
      * Player constructor, used to create an instance of player.
      */
-    public Player(int x, int y, Game game){
-        super(x, y, game);
-        this.game = game;
+    public Player(int x, int y, Terrain[][] coordinates){
+        super(x, y, coordinates);
         this.armor = new Armor();
-        this.weapon = new Weapon(10, 10, game);
+        this.weapon = new Weapon(10, 10);
         setMaxHp(1000);
         setHealth(1000);
         moveAcc = 0.3;
@@ -39,7 +35,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
         money = 0;
     }
 
-    public void shoot() {
+    public void shoot(List<Projectile> projectiles) {
         EDirection dir;
 
         if (getDirection() == EDirection.NOT_MOVING) {
@@ -49,7 +45,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
         else {
             dir = getDirection();
         }
-        weapon.shoot(getCenter(), dir);
+        weapon.shoot(getCenter(), dir, projectiles);
     }
     public void stopCurrentMovement(){
         setVel(new Vector2(0,0));

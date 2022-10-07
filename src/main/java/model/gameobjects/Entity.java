@@ -23,9 +23,8 @@ public abstract class Entity implements IGameObject {
     private EDirection direction;
     private EDirection lastDirection;
     private int size = Config.SPRITE_SIZE*3;
-    private Rect rect;
+    private Terrain[][] coordinates;
     private Terrain currentLocation;
-    private Game game;
 
     /**
      *
@@ -33,13 +32,12 @@ public abstract class Entity implements IGameObject {
      * @param y represents the entities' y-coordinate
      */
 
-    public Entity(int x, int y, Game game){
-        this.game = game;
+    public Entity(int x, int y, Terrain[][] coordinates){
+        this.coordinates = coordinates;
         this.direction = EDirection.NOT_MOVING; // Default value
         this.lastDirection = direction;
         this.pos = new Vector2(x, y);
         this.acc = new Vector2(0, 0);
-        this.rect = new Rect(x, y, size, size);
         this.vel = new Vector2(0,0);
     }
 
@@ -94,7 +92,7 @@ public abstract class Entity implements IGameObject {
         int posX = (int)getCenter().getX()/48;
         int posY = (int)getCenter().getY()/48;
 
-        currentLocation = game.getGameMap().getGameMapCoordinates()[posX][posY];
+        currentLocation = coordinates[posX][posY];
         return currentLocation;
     }
 

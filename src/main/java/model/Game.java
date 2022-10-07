@@ -46,7 +46,7 @@ public class Game {
 
     public Game() {
         this.gameMap = new GameMap(50, 50);
-        this.player = new Player(48, 48, this);
+        this.player = new Player(48, 48, gameMap.getGameMapCoordinates());
         shop = new Shop(200, 100);
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
@@ -121,8 +121,6 @@ public class Game {
         return spawner.getSpawnedItems();
     }
 
-    private boolean newBullet;
-
     /**
      * Add an observer. Observers will be notified 120 times per second
      *
@@ -133,12 +131,7 @@ public class Game {
     }
 
     public void makePlayerShoot() {
-        player.shoot();
-    }
-
-    public void addProjectile(Projectile p) {
-        newBullet = true;
-        pendingBullet = p;
+        player.shoot(projectiles);
     }
 
     /**
@@ -179,12 +172,7 @@ public class Game {
                 gameObject.update(dt);
             }
 
-            if (newBullet){
-                projectiles.add(pendingBullet);
-                newBullet = false;
-            }
-
-            for (Projectile projectile : projectiles){
+            for (Projectile projectile : getProjectiles()){
                 projectile.update(dt);
             }
 

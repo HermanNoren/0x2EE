@@ -1,7 +1,6 @@
 package gameobjects.Player;
 
 import controllers.EDirection;
-import model.Game;
 import model.gameobjects.Player;
 import model.gameobjects.Projectile;
 import model.helperclasses.Vector2;
@@ -9,6 +8,7 @@ import model.mapclasses.GameMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -17,11 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PlayerTest {
     private Player player;
-    private Game game;
     @BeforeEach
     void init(){
-        this.game = new Game();
-        this.player = new Player(48, 48, game);
+        GameMap gameMap = new GameMap(20, 20);
+        this.player = new Player(48, 48, gameMap.getGameMapCoordinates());
     }
     @Test
     void test_getPosX_returns_player_current_x_position(){
@@ -202,15 +201,15 @@ public class PlayerTest {
 
     @Test
     void test_shoot_adds_new_projectile_to_list_in_game(){
-        player.shoot();
-        game.update(1);
-        List<Projectile> projectileList = game.getProjectiles();
-        assertEquals(1, projectileList.size());
+        List<Projectile> projectiles = new ArrayList<>();
+        player.shoot(projectiles);
+        assertEquals(1, projectiles.size());
     }
     @Test
     void test_shoot_gets_current_direction_if_direction_does_not_equal_not_moving(){
         player.setDirection(EDirection.UP);
-        player.shoot();
+        List<Projectile> projectiles = new ArrayList<>();
+        player.shoot(projectiles);
     }
 
 }

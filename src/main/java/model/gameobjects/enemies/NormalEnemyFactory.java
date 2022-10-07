@@ -14,7 +14,7 @@ public class NormalEnemyFactory extends EnemyFactory{
         List<IGameObject> possibleSpawnableLocations = gameMap.getPassableTerrains();
         int spawnableLocations = possibleSpawnableLocations.size();
         IGameObject randomTerrain = possibleSpawnableLocations.get(rand.nextInt(spawnableLocations));
-        NormalEnemy normalEnemy = new NormalEnemy((int) randomTerrain.getPos().getX(), (int) randomTerrain.getPos().getY(), game);
+        NormalEnemy normalEnemy = new NormalEnemy((int) randomTerrain.getPos().getX(), (int) randomTerrain.getPos().getY(), gameMap.getGameMapCoordinates(), game.getPlayer());
         return normalEnemy;
     }
 }
