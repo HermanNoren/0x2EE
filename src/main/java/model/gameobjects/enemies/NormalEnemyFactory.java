@@ -1,6 +1,5 @@
 package model.gameobjects.enemies;
 
-import model.Game;
 import model.gameobjects.Entity;
 import model.gameobjects.IGameObject;
 import model.mapclasses.GameMap;

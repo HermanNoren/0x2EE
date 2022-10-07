@@ -1,9 +1,7 @@
 package model.gameobjects;
 
-import model.Game;
 import config.Config;
 import controllers.EDirection;
-import model.helperclasses.Rect;
 import model.helperclasses.Vector2;
 import model.mapclasses.Terrain;
 

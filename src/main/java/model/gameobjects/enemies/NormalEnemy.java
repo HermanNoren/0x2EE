@@ -5,9 +5,7 @@
 
 package model.gameobjects.enemies;
 
-import model.Game;
 import model.gameobjects.Entity;
-import model.helperclasses.Vector2;
 import model.mapclasses.Terrain;
 
 

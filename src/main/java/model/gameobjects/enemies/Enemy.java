@@ -3,7 +3,6 @@ package model.gameobjects.enemies;
 import config.Config;
 import controllers.EDirection;
 import model.helperclasses.AStar;
-import model.Game;
 import model.helperclasses.Vector2;
 import model.mapclasses.Terrain;
 import model.gameobjects.Entity;
@@ -12,8 +11,7 @@ public abstract class Enemy extends Entity implements IEnemy {
 
     private int size = Config.SPRITE_SIZE;
     private double movementSpeed;
-    private Game game;
-    Entity targetEntity;
+    private Entity targetEntity;
     protected Enemy(int x, int y, Terrain[][] coordinates, Entity targetEntity){
         super(x, y, coordinates);
         this.targetEntity = targetEntity;
