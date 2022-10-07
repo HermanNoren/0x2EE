@@ -4,7 +4,7 @@ import controllers.EDirection;
 import model.gameobjects.Player;
 import model.gameobjects.Projectile;
 import model.helperclasses.Vector2;
-import model.mapclasses.GameMap;
+import model.mapclasses.Terrain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,8 +19,7 @@ public class PlayerTest {
     private Player player;
     @BeforeEach
     void init(){
-        GameMap gameMap = new GameMap(20, 20);
-        this.player = new Player(48, 48, gameMap.getGameMapCoordinates());
+        this.player = new Player(48, 48, new Terrain[0][0]);
     }
     @Test
     void test_getPosX_returns_player_current_x_position(){
