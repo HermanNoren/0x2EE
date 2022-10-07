@@ -54,8 +54,8 @@ public class Game {
         this.path = new ArrayList<>();
         playerDead = false;
         EnemyFactory enemyFactory = new NormalEnemyFactory();
-        enemies.add(enemyFactory.createEnemy(this, random));
-        enemies.add(enemyFactory.createEnemy(this, random));
+        enemies.add(enemyFactory.createEnemy(gameMap, player, random));
+        enemies.add(enemyFactory.createEnemy(gameMap, player, random));
         spawner = new Spawner(this);
         gameObjects = new ArrayList<>();
         gameObjects.add(shop);

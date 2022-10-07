@@ -3,6 +3,8 @@ package model.gameobjects.enemies;
 
 
 import model.Game;
+import model.gameobjects.Entity;
+import model.mapclasses.GameMap;
 
 import java.util.Random;
 
@@ -11,5 +13,5 @@ public abstract class EnemyFactory {
 
     }
 
-    public abstract Enemy createEnemy(Game game, Random rand);
+    public abstract Enemy createEnemy(GameMap gameMap, Entity targetEntity, Random rand);
 }
