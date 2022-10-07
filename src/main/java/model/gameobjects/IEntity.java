@@ -6,6 +6,7 @@ import model.mapclasses.Terrain;
 
 public interface IEntity {
     Vector2 getVel();
+    Vector2 getPos();
     Vector2 getAcc();
     void setVel(Vector2 vel);
     void setAcc(Vector2 acc);
@@ -22,7 +23,7 @@ public interface IEntity {
     double getPosY();
     void setAccY(double accY);
     double getAccY();
-    Terrain getMapLocation();
+    Terrain getMapLocation(Terrain[][] coordinates);
     EDirection getDirection();
     EDirection getLastDirection();
     void setDirection(EDirection direction);

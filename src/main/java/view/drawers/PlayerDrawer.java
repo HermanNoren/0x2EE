@@ -111,7 +111,7 @@ public class PlayerDrawer implements IDrawer {
     public void draw(Graphics2D g) {
         movementAnimation();
         chooseActiveImage();
-        List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(player.getPos(), player.getSize(), player.getSize());
+        List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(player.getPos(), player.getWidth(), player.getWidth());
         if(prevImg == null){
             g.drawImage(up1, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null); // Sets default image
         }

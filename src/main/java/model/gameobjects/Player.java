@@ -6,6 +6,7 @@ import model.Game;
 import model.armor.Armor;
 import controllers.EDirection;
 import model.helperclasses.Vector2;
+import model.mapclasses.Terrain;
 import model.weapons.Weapon;
 
 import java.util.List;
@@ -27,9 +28,8 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
      * @param y, starting y-position
      * Player constructor, used to create an instance of player.
      */
-    public Player(int x, int y, Game game){
-        super(x, y, game);
-        this.game = game;
+    public Player(int x, int y, Terrain[][] coordinates){
+        super(x, y, coordinates);
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10, game);
         setMaxHp(1000);

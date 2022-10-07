@@ -15,13 +15,10 @@ public interface IGameObject {
      * Returns the width of the sprite
      */
     int getWidth();
-
     /**
      * Returns the height of the sprite
      */
     int getHeight();
-
-    int getSize();
     /**
      * Returns the position of the upper left corner
      * of the sprite.

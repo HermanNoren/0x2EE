@@ -25,11 +25,6 @@ public class Coin implements IItem {
     }
 
     @Override
-    public int getSize() {
-        return 0;
-    }
-
-    @Override
     public Vector2 getPos() {
         return pos;
     }

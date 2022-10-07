@@ -40,17 +40,12 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     }
 
     @Override
-    public int getWidth() {
-        return width;
-    }
-
-    @Override
     public int getHeight() {
         return height;
     }
 
     @Override
-    public int getSize() {
+    public int getWidth() {
         return size;
     }
 

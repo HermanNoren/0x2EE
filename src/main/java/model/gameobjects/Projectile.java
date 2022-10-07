@@ -23,10 +23,6 @@ public class Projectile implements IGameObject, IProjectile {
 
     }
 
-    @Override
-    public int getWidth() {
-        return size;
-    }
 
     @Override
     public int getHeight() {
@@ -34,7 +30,7 @@ public class Projectile implements IGameObject, IProjectile {
     }
 
     @Override
-    public int getSize() {
+    public int getWidth() {
         return size;
     }
 

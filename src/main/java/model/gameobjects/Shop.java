@@ -46,10 +46,6 @@ public class Shop implements IGameObject {
         return height;
     }
 
-    @Override
-    public int getSize() {
-        return 0;
-    }
 
 
     /**

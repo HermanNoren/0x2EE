@@ -21,7 +21,7 @@ public class PlayerTest {
     @BeforeEach
     void init(){
         this.game = new Game();
-        this.player = new Player(48, 48, game);
+        this.player = new Player(48, 48, game.getGameMap().getGameMapCoordinates());
     }
     @Test
     void test_stopCurrentMovement_sets_acc_and_vel_to_zero(){

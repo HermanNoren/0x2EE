@@ -23,10 +23,6 @@ public class Potion implements IItem {
         return height;
     }
 
-    @Override
-    public int getSize() {
-        return 0;
-    }
 
     @Override
     public Vector2 getPos() {

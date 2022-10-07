@@ -1,6 +1,5 @@
 package model.gameobjects;
 
-import model.Game;
 import config.Config;
 import controllers.EDirection;
 import model.helperclasses.Rect;
@@ -22,10 +21,11 @@ public abstract class Entity implements IEntity, IGameObject {
     private int maxHp;
     private EDirection direction;
     private EDirection lastDirection;
-    private int size = Config.SPRITE_SIZE*3;
+    private int width = Config.ENTITY_WIDTH;
+    private int height = Config.ENTITY_HEIGHT;
     private Rect rect;
     private Terrain currentLocation;
-    private Game game;
+    private Terrain[][] coordinates;
 
     /**
      *
@@ -33,13 +33,13 @@ public abstract class Entity implements IEntity, IGameObject {
      * @param y represents the entities' y-coordinate
      */
 
-    public Entity(int x, int y, Game game){
-        this.game = game;
+    public Entity(int x, int y, Terrain[][] coordinates){
+        this.coordinates = coordinates;
         this.direction = EDirection.NOT_MOVING; // Default value
         this.lastDirection = direction;
         this.pos = new Vector2(x, y);
         this.acc = new Vector2(0, 0);
-        this.rect = new Rect(x, y, size, size);
+        this.rect = new Rect(x, y, width, height);
         this.vel = new Vector2(0,0);
     }
 
@@ -102,11 +102,12 @@ public abstract class Entity implements IEntity, IGameObject {
         double y = pos.getY() + (double) (getHeight() / 2);
         return new Vector2(x, y);
     }
+
     @Override
-    public Terrain getMapLocation(){
+    public Terrain getMapLocation(Terrain[][] coordinates){
         int posX = (int)getCenter().getX()/48;
         int posY = (int)getCenter().getY()/48;
-        currentLocation = game.getGameMap().getGameMapCoordinates()[posX][posY];
+        currentLocation = coordinates[posX][posY];
         return currentLocation;
     }
 
@@ -161,11 +162,11 @@ public abstract class Entity implements IEntity, IGameObject {
     }
     @Override
     public int getWidth() {
-        return size;
+        return width;
     }
     @Override
     public int getHeight() {
-        return size;
+        return height;
     }
     @Override
     public void setVel(Vector2 vel) {
@@ -186,13 +187,6 @@ public abstract class Entity implements IEntity, IGameObject {
     @Override
     public void damageTaken(int damage) {
         setHealth(getHealth() - damage);
-    }
-    /**
-     * @return size of entity
-     */
-    @Override
-    public int getSize() {
-        return size;
     }
 }
 

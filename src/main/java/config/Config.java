@@ -13,5 +13,7 @@ public class Config {
     public static final Font titleFont = new Font("Public Pixel", Font.PLAIN, 64);
     public static final Font  infoFont = new Font("Public Pixel", Font.PLAIN, 32);
     public static  final Font nameFont = new Font("Public Pixel", Font.PLAIN, 56);
+    public static final int ENTITY_WIDTH = 48;
+    public static final int ENTITY_HEIGHT = 48;
 }
 

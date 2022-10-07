@@ -47,7 +47,7 @@ public class Game {
 
     public Game() {
         this.gameMap = new GameMap(10, 50);
-        this.player = new Player(48, 48, this);
+        this.player = new Player(48, 48, gameMap.getGameMapCoordinates());
         shop = new Shop(200, 100);
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
@@ -55,8 +55,8 @@ public class Game {
         this.path = new ArrayList<>();
         playerDead = false;
         EnemyFactory enemyFactory = new NormalEnemyFactory();
-        enemies.add(enemyFactory.createEnemy(this, random));
-        enemies.add(enemyFactory.createEnemy(this, random));
+        enemies.add(enemyFactory.createEnemy(gameMap.getGameMapCoordinates(), random));
+        enemies.add(enemyFactory.createEnemy(gameMap.getGameMapCoordinates(), random));
         spawner = new Spawner(this);
         gameObjects = new ArrayList<>();
         gameObjects.add(shop);
