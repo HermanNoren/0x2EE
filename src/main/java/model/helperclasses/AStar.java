@@ -61,10 +61,10 @@ public class AStar {
                         m.setG(totalWeight);
                         m.setF(m.getG() + m.calculateHeuristic(m, target));
 
-                        if(closedList.contains(m)){
-                            closedList.remove(m);
-                            openList.add(m);
-                        }
+//                        if(closedList.contains(m)){
+//                            closedList.remove(m);
+//                            openList.add(m);
+//                        }
                     }
                 }
                  */

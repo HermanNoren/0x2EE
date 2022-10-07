@@ -49,6 +49,11 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
         return height;
     }
 
+    @Override
+    public int getSize() {
+        return size;
+    }
+
     public List<Edge> getNeighbors() {
         return neighbors;
     }
@@ -134,10 +139,6 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
         double dx = Math.abs(current.x - goal.x);
         double dy = Math.abs(current.y - goal.y);
         return D*(dx + dy);
-    }
-
-    @Override
-    public void update(double dt) {
     }
 
     public static class Edge {

@@ -25,6 +25,11 @@ public class Coin implements IItem {
     }
 
     @Override
+    public int getSize() {
+        return 0;
+    }
+
+    @Override
     public Vector2 getPos() {
         return pos;
     }
@@ -34,16 +39,6 @@ public class Coin implements IItem {
         return null;
     }
 
-
-    @Override
-    public boolean isPassable() {
-        return false;
-    }
-
-    @Override
-    public void update(double dt) {
-
-    }
     @Override
     public void consume(Player player) {
         player.addMoney(10);

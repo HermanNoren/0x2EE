@@ -1,6 +1,8 @@
 package model;
 
 import model.gameobjects.ItemSpawner.IItem;
+import model.gameobjects.enemies.Enemy;
+import model.gameobjects.enemies.IEnemy;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.Spawner;
@@ -29,8 +31,7 @@ public class Game {
     private Player player;
     private List<Terrain> path;
     private List<String> highscoreName;
-    private List<Entity> enemies;
-    private List<IGameObject> terrains;
+    private List<Enemy> enemies;
     private boolean stateChangedFlag;
     private GameMap gameMap;
     private File highscoreFile;
@@ -45,7 +46,7 @@ public class Game {
     private Projectile pendingBullet;
 
     public Game() {
-        this.gameMap = new GameMap(50, 50);
+        this.gameMap = new GameMap(10, 50);
         this.player = new Player(48, 48, this);
         shop = new Shop(200, 100);
         enemies = new ArrayList<>();
@@ -113,7 +114,7 @@ public class Game {
         return player;
     }
 
-    public List<Entity> getEnemies() {
+    public List<Enemy> getEnemies() {
         return enemies;
     }
 
@@ -176,7 +177,7 @@ public class Game {
             }
 
             for (IGameObject gameObject : gameObjects) {
-                gameObject.update(dt);
+//                gameObject.update(dt);
             }
 
             if (newBullet){
@@ -184,13 +185,13 @@ public class Game {
                 newBullet = false;
             }
 
-            for (Projectile projectile : projectiles){
+            for (IProjectile projectile : projectiles){
                 projectile.update(dt);
             }
 
-            Iterator<Entity> enemyIter = enemies.iterator();
+            Iterator<Enemy> enemyIter = enemies.iterator();
             while (enemyIter.hasNext()) {
-                Entity enemy = enemyIter.next();
+                Enemy enemy = enemyIter.next();
                 if (enemy.getHealth() < 1) {
                     spawner.spawnItem();
                     player.addScore(100);

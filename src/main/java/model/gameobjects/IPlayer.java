@@ -1,7 +1,6 @@
 package model.gameobjects;
 
 public interface IPlayer {
-
     void shoot();
     void stopCurrentMovement();
     void moveX(double dt);
@@ -10,4 +9,5 @@ public interface IPlayer {
     void addScore(int score);
     void addMoney(int money);
     int getMoney();
+
 }

@@ -29,9 +29,4 @@ class NormalEnemy extends Enemy{
         super.update(dt);
     }
 
-
-    @Override
-    public boolean isPassable() {
-        return false;
-    }
 }

@@ -18,8 +18,4 @@ public class BossEnemy extends Enemy{
     public void specialAbility() {
 
     }
-    @Override
-    public boolean isPassable() {
-        return false;
-    }
 }

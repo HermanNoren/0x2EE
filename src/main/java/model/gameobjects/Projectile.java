@@ -6,9 +6,7 @@ import controllers.EDirection;
 import model.helperclasses.Vector2;
 
 
-public class Projectile implements IGameObject {
-
-
+public class Projectile implements IGameObject, IProjectile {
     private final int size = Config.SPRITE_SIZE / 2;
     private final Vector2 pos;
     private final Vector2 vel;
@@ -36,6 +34,11 @@ public class Projectile implements IGameObject {
     }
 
     @Override
+    public int getSize() {
+        return size;
+    }
+
+    @Override
     public Vector2 getPos() {
         return new Vector2(pos);
     }
@@ -48,14 +51,8 @@ public class Projectile implements IGameObject {
     }
 
     @Override
-    public boolean isPassable() {
-        return false;
-    }
-
-    @Override
     public void update(double dt) {
         pos.setX(pos.getX() + vel.getX() * dt);
-
         pos.setY(pos.getY() + vel.getY() * dt);
 
     }

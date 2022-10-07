@@ -13,7 +13,6 @@ public class Potion implements IItem {
         width = 20;
     }
 
-
     @Override
     public int getWidth() {
         return width;
@@ -25,6 +24,11 @@ public class Potion implements IItem {
     }
 
     @Override
+    public int getSize() {
+        return 0;
+    }
+
+    @Override
     public Vector2 getPos() {
         return pos;
     }
@@ -32,15 +36,6 @@ public class Potion implements IItem {
     @Override
     public Vector2 getCenter() {
         return null;
-    }
-    @Override
-    public boolean isPassable() {
-        return false;
-    }
-
-    @Override
-    public void update(double dt) {
-
     }
 
     @Override
