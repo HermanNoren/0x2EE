@@ -11,7 +11,7 @@ import java.util.List;
 public class InteractShopTextDrawer implements IDrawer{
     public int passableValue;
     private final Shop shop;
-    String popUpText = "Arthur's shop";
+    String popUpText = "Press Enter to enter!";
 
     public InteractShopTextDrawer(Shop shop){
         this.shop = shop;
@@ -22,9 +22,7 @@ public class InteractShopTextDrawer implements IDrawer{
         g2.setFont(Config.buttonFont);
         if(shop.playerOnShop){
             List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(shop.getPos(), passableValue, passableValue);
-            final int x_offset = -30;
-            final int y_offset = -10;
-            g2.drawString(popUpText, drawInformation.get(0) + x_offset, drawInformation.get(1) + y_offset);
+            g2.drawString(popUpText, drawInformation.get(0)  - (g2.getFontMetrics().stringWidth(popUpText)/2) + shop.getWidth()/2, drawInformation.get(1) -10);
         }
     }
 }

@@ -3,7 +3,7 @@ package view.buttons.buttonactions;
 import view.panelstates.EPanelState;
 import view.panelstates.IPanelState;
 
-public class MenuButtonAction implements  IButtonAction{
+public class MenuButtonAction implements IButtonAction{
 
     private EPanelState panelState;
     private IPanelState currentState;

@@ -3,13 +3,20 @@ package view.drawers;
 import view.buttons.GameButton;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ButtonDrawer implements IDrawer {
-    private final List<GameButton> buttons;
+    private List<GameButton> buttons;
 
     public ButtonDrawer(List<GameButton> buttons) {
         this.buttons = buttons;
+    }
+
+    public ButtonDrawer(GameButton button) {
+        List<GameButton> newButtons = new ArrayList<>();
+        newButtons.add(button);
+        this.buttons = newButtons;
     }
 
     @Override

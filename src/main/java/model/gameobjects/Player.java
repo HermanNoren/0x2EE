@@ -17,9 +17,10 @@ import java.util.Random;
 
 public class Player extends Entity implements IGameObject, IFocusableObject {
 
+
     private int score;
     private int money;
-    protected Weapon weapon;
+    public Weapon weapon;
     protected Armor armor;
     boolean isDamageTaken;
 
@@ -137,8 +138,11 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     public int getMoney(){
         return money;
     }
+    public void setMoney( int newAmount) {
+        money = newAmount;
+    }
 
     public void addMoney(int amount){
-        this.money += amount;
+        money += amount;
     }
 }

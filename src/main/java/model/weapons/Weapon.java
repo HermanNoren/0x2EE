@@ -10,6 +10,8 @@ import java.util.List;
 public class Weapon {
 
     public int damage;
+
+    private int currentLevel;
     public int ammo;
     public boolean reloading;
 
@@ -26,6 +28,20 @@ public class Weapon {
 
     }
 
+    public void levelUpWeapon(){
+        currentLevel++;
+        upgradeWeapon();
+    }
+
+    private void upgradeWeapon() {
+        ++damage;
+        ++ammo;
+    }
+
+    public int getLevel(){
+        return currentLevel;
+    }
+
 
     public void shoot(Vector2 pos, EDirection direction, List<Projectile> projectiles){
         if (ammo != 0) {
@@ -39,7 +55,7 @@ public class Weapon {
         reloading = true;
         // TODO: Add some kind of delay (might need threading?)
         reloading = false;
-        ammo = 7;
+        ammo = ammo;
     }
 
     /**

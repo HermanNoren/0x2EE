@@ -2,6 +2,7 @@ package controllers;
 
 import view.buttons.GameButton;
 
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
@@ -9,11 +10,11 @@ import java.util.List;
 public class ButtonController implements KeyListener {
 
     private int activePos;
-    private final List<GameButton> buttons;
+    private  List<GameButton> stringButtons;
     private boolean wKeyDown, sKeyDown, enterKeyDown, escapeKeyDown, wClicked, sClicked, enterClicked, escapeClicked;
 
     public ButtonController(List<GameButton> buttons) {
-        this.buttons = buttons;
+        this.stringButtons = buttons;
         activePos = 0;
         wKeyDown = false;
         sKeyDown = false;
@@ -30,24 +31,24 @@ public class ButtonController implements KeyListener {
         if (sClicked) {
             sClicked = false;
             activePos += 1;
-            activePos %= buttons.size();
+            activePos %= stringButtons.size();
         }
 
         if (wClicked) {
             wClicked = false;
             activePos -= 1;
             if (activePos < 0) {
-                activePos = buttons.size() - 1;
+                activePos = stringButtons.size() - 1;
             }
         }
 
-        for (int i = 0; i < buttons.size(); i++) {
-            buttons.get(i).setIsSelected(i == activePos);
+        for (int i = 0; i < stringButtons.size(); i++) {
+            stringButtons.get(i).setIsSelected(i == activePos);
         }
 
         if (enterClicked) {
             enterClicked = false;
-            buttons.get(activePos).isClicked();
+            stringButtons.get(activePos).isClicked();
         }
     }
 

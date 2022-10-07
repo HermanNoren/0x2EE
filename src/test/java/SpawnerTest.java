@@ -26,7 +26,7 @@ public class SpawnerTest {
         int money = player.getMoney();
         IItem item = spawner.getSpawnedItems().get(0);
         item.consume(player);
-        assertTrue(player.getHealth() > health || player.getMoney() > money);
+        assertTrue(player.getHealth() > health && player.getMoney() > money);
 
     }
 }

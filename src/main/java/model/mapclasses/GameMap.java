@@ -27,15 +27,16 @@ public class GameMap {
         this.gameMapCoordinates = new Terrain[width][height];
 
         addCoordinatesAndTiles(width, height);
-
+    /**
         Noise n = new Noise(10, this); // Generates random terrain on the game map.
         n.init();
         n.setTerrainTypes(gameMapCoordinates);
 
         createBorder();
+     */
 
         terrains.forEach(this::addNeighbors);
-        n.printTerrainGrid(gameMapCoordinates);
+       // n.printTerrainGrid(gameMapCoordinates);
     }
 
 
