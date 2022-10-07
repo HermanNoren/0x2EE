@@ -57,6 +57,5 @@ public class Projectile implements IGameObject {
         pos.setX(pos.getX() + vel.getX() * dt);
 
         pos.setY(pos.getY() + vel.getY() * dt);
-
     }
 }
