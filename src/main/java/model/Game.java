@@ -1,12 +1,9 @@
 package model;
 
-import controllers.EDirection;
 import model.gameobjects.ItemSpawner.IItem;
-import model.helperclasses.Vector2;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.Spawner;
-import model.gameobjects.enemies.*;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
@@ -19,8 +16,6 @@ import model.gameobjects.IGameObject;
 
 import view.IObserver;
 
-import javax.sound.sampled.Port;
-import javax.swing.plaf.basic.BasicOptionPaneUI;
 import java.io.*;
 import java.util.*;
 import java.util.Random;
@@ -41,7 +36,7 @@ public class Game {
     private File highscoreFile;
     private List<String> highscoreList;
     private List<Projectile> projectiles;
-    private List<IGameObject> sprites;
+    private List<IGameObject> gameObjects;
     private Shop shop;
     private HighscoreHandler highscoreHandler;
     private Spawner spawner;
@@ -50,7 +45,7 @@ public class Game {
     private Projectile pendingBullet;
 
     public Game() {
-        this.gameMap = new GameMap(100, 100);
+        this.gameMap = new GameMap(50, 50);
         this.player = new Player(48, 48, this);
         shop = new Shop(200, 100);
         enemies = new ArrayList<>();
@@ -62,8 +57,8 @@ public class Game {
         enemies.add(enemyFactory.createEnemy(this, random));
         enemies.add(enemyFactory.createEnemy(this, random));
         spawner = new Spawner(this);
-        sprites = new ArrayList<>();
-        sprites.add(shop);
+        gameObjects = new ArrayList<>();
+        gameObjects.add(shop);
         stateChangedFlag = false;
         observers = new ArrayList<>();
         highscoreHandler = new HighscoreHandler();
@@ -138,7 +133,7 @@ public class Game {
     }
 
     public void makePlayerShoot() {
-        player.shoot(projectiles);
+        player.shoot();
     }
 
     public void addProjectile(Projectile p) {
@@ -149,13 +144,10 @@ public class Game {
     /**
      * Updates the current game state
      */
-
-
     public void update(double dt) {
         if (!(player.getHealth() < 1)) {
 
             player.moveX(dt);
-
             List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
             for (Terrain t : collidedTerrain) {
                 Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.X_AXIS);
@@ -182,9 +174,11 @@ public class Game {
                     player.stopCurrentMovement();
                 }
             }
-            for (IGameObject sprite : sprites) {
-                sprite.update(dt);
+
+            for (IGameObject gameObject : gameObjects) {
+                gameObject.update(dt);
             }
+
             if (newBullet){
                 projectiles.add(pendingBullet);
                 newBullet = false;
@@ -207,7 +201,7 @@ public class Game {
 
                 //Check if enemy is close enough to damage player, could be done somewhere else also.
                 if (CollisionHandler.testCollision(player, enemy)) {
-                    //player.damageTaken(1);
+                    player.damageTaken(1);
                 }
                 // Check if projectile hits enemy
                 Iterator<Projectile> pIter = projectiles.iterator();
@@ -219,7 +213,6 @@ public class Game {
                         break;
                     }
                 }
-
             }
 
             /**
@@ -266,16 +259,4 @@ public class Game {
         return shop;
     }
 
-    public List<Terrain> getPath() {
-        if (path != null) {
-            return path;
-        }
-        return null;
-    }
-
-    public void setPath(List<Terrain> n) {
-        if (n != null) {
-            this.path = n;
-        }
-    }
 }

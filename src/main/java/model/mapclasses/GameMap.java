@@ -35,7 +35,7 @@ public class GameMap {
         createBorder();
 
         terrains.forEach(this::addNeighbors);
-        n.printTerrainGrid(gameMapCoordinates);
+//        n.printTerrainGrid(gameMapCoordinates);
     }
 
 
@@ -94,6 +94,8 @@ public class GameMap {
         }
         return passable;
     }
+
+
     /**
      * Add neighbor to the given node. If the presumed neighbor isn't grass then it won't be added as a neighbor.
      */
@@ -147,7 +149,6 @@ public class GameMap {
                     (gameMapCoordinates[col][row].getY())+2 > height ||
                     (gameMapCoordinates[col][row].getX())-1 < 0 ||
                     (gameMapCoordinates[col][row].getY())-1 < 0){
-
                 gameMapCoordinates[col][row].setTerrainType(1);
                 gameMapCoordinates[col][row].setPassable(false);
             }

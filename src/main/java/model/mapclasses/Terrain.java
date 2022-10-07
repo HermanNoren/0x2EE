@@ -7,16 +7,17 @@ import model.helperclasses.Vector2;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Acts a Node class, every Terrain is a node in the map.
+ * Terrain is the node representation for the gamemap
  */
 public class Terrain implements IGameObject, Comparable<Terrain> {
     private final int size = Config.TERRAIN_SIZE;
-    private Vector2 pos;
+    private final Vector2 pos;
     private double f = Double.MAX_VALUE; // Will later be equal to g + h
     private double g = Double.MAX_VALUE; // g(n), n = next node, distance from start to n.
-    private ArrayList<Terrain.Edge> neighbors;
+    private final List<Edge> neighbors;
     private Terrain parent = null;
     private final int x;
     private final int y;
@@ -48,7 +49,7 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
         return height;
     }
 
-    public ArrayList<Edge> getNeighbors() {
+    public List<Edge> getNeighbors() {
         return neighbors;
     }
 
@@ -58,14 +59,16 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     public int getY() {
         return y;
     }
-
+    @Override
     public Vector2 getPos() {
         return new Vector2(pos);
     }
 
     @Override
     public Vector2 getCenter() {
-        return null;
+        double x = pos.getX() + (double) (getWidth() / 2);
+        double y = pos.getY() + (double) (getHeight() / 2);
+        return new Vector2(x, y);
     }
     public void setF(double f) {
         this.f = f;

@@ -27,7 +27,7 @@ public class Weapon {
     }
 
 
-    public void shoot(Vector2 pos, EDirection direction, List<Projectile> projectiles){
+    public void shoot(Vector2 pos, EDirection direction){
         if (ammo != 0) {
             ammo--;
             game.addProjectile(new Projectile(pos, direction));

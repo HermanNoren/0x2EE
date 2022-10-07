@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import java.util.List;
+import java.util.Objects;
 
 public class EnemyDrawer implements IDrawer {
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
@@ -19,27 +20,41 @@ public class EnemyDrawer implements IDrawer {
 
     private ImageHandler imageHandler;
 
-    public EnemyDrawer(List<Entity> enemies){
+    public EnemyDrawer(List<Entity> enemies, String type){
         this.enemies = enemies;
         this.imageHandler = new ImageHandler();
-        initEnemyImages();
+        initEnemyImages(type);
 
     }
 
-    private void initEnemyImages(){
-        try {
-            up1 = imageHandler.getImage("imgs/enemy/enemy_up_1.png");
-            up2 = imageHandler.getImage("imgs/enemy/enemy_up_2.png");
-            left1 = imageHandler.getImage("imgs/enemy/enemy_left_1.png");
-            left2 = imageHandler.getImage("imgs/enemy/enemy_left_2.png");
-            down1 = imageHandler.getImage("imgs/enemy/enemy_down_1.png");
-            down2 = imageHandler.getImage("imgs/enemy/enemy_down_2.png");
-            right1 = imageHandler.getImage("imgs/enemy/enemy_right_1.png");
-            right2 = imageHandler.getImage("imgs/enemy/enemy_right_2.png");
+    private void initEnemyImages(String type){
+        if(Objects.equals(type, "normal")){
+            try {
+                up1 = imageHandler.getImage("imgs/enemy/normal/enemy_up_1.png");
+                up2 = imageHandler.getImage("imgs/enemy/normal/enemy_up_2.png");
+                left1 = imageHandler.getImage("imgs/enemy/normal/enemy_left_1.png");
+                left2 = imageHandler.getImage("imgs/enemy/normal/enemy_left_2.png");
+                down1 = imageHandler.getImage("imgs/enemy/normal/enemy_down_1.png");
+                down2 = imageHandler.getImage("imgs/enemy/normal/enemy_down_2.png");
+                right1 = imageHandler.getImage("imgs/enemy/normal/enemy_right_1.png");
+                right2 = imageHandler.getImage("imgs/enemy/normal/enemy_right_2.png");
+            }
+            catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
+
+        else if(Objects.equals(type, "boss")){
+            up1 = imageHandler.getImage("imgs/enemy/boss/amog_up_1.png");
+            up2 = imageHandler.getImage("imgs/enemy/boss/amog_up_2.png");
+            left1 = imageHandler.getImage("imgs/enemy/boss/amog_left_1.png");
+            left2 = imageHandler.getImage("imgs/enemy/boss/amog_left_2.png");
+            down1 = imageHandler.getImage("imgs/enemy/boss/amog_down_1.png");
+            down2 = imageHandler.getImage("imgs/enemy/boss/amog_down_2.png");
+            right1 = imageHandler.getImage("imgs/enemy/boss/amog_right_1.png");
+            right2 = imageHandler.getImage("imgs/enemy/boss/amog_right_2.png");
         }
+
     }
 
     private void movementAnimation() {

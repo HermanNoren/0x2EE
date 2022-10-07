@@ -27,13 +27,11 @@ public class Noise {
     public void init(){
         int xh = grid1.length - 1;
         int yh = grid1[0].length - 1;
-
         //Setting corners
         grid1[0][0] = random.nextFloat() - 0.5f;
         grid1[xh][0] = random.nextFloat() - 0.5f;
         grid1[0][yh] = random.nextFloat() - 0.5f;
         grid1[xh][yh] = random.nextFloat() - 0.5f;
-
         generateFractal(0, 0, xh, yh);
     }
 
@@ -42,12 +40,12 @@ public class Noise {
         int ym = (y1 + yh) /2;
         if((x1 == xm) && (y1 == ym)) return;
 
-        grid1[xm][y1] = (grid1[x1][y1] + grid1[xh][y1]) * 0.5f;
-        grid1[xm][yh] = (grid1[x1][yh] + grid1[xh][yh]) *0.5f;
-        grid1[x1][ym] = (grid1[x1][y1] + grid1[x1][yh]) * 0.5f;
-        grid1[xh][ym] = (grid1[xh][y1] + grid1[xh][yh]) * 0.5f;
+        grid1[xm][y1] = (grid1[x1][y1] + grid1[xh][y1]) * 0.2f;
+        grid1[xm][yh] = (grid1[x1][yh] + grid1[xh][yh]) * 0.2f;
+        grid1[x1][ym] = (grid1[x1][y1] + grid1[x1][yh]) * 0.2f;
+        grid1[xh][ym] = (grid1[xh][y1] + grid1[xh][yh]) * 0.2f;
 
-        float v = roughen(0.5f * (grid1[xm][y1] + grid1[xm][yh]), x1 + y1, yh
+        float v = roughen(0.2f * (grid1[xm][y1] + grid1[xm][yh]), x1 + y1, yh
                 + xh);
 
         grid1[xm][ym] = v;
@@ -72,6 +70,7 @@ public class Noise {
                     terrains[i][j].setTerrainType(0);
                 }else{
                     terrains[i][j].setTerrainType(2);
+                    terrains[i][j].setPassable(false);
                 }
             }
         }

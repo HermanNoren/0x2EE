@@ -83,9 +83,17 @@ public abstract class Entity implements IGameObject {
     public double getAccY(){
         return acc.getY();
     }
+    @Override
+    public Vector2 getCenter() {
+        double x = pos.getX() + (double) (getWidth() / 2);
+        double y = pos.getY() + (double) (getHeight() / 2);
+        return new Vector2(x, y);
+    }
+
     public Terrain getMapLocation(){
-        int posX = (int) (getPosX() + getWidth()/2)/48;
-        int posY = (int) (getPosY() + getHeight()/2)/48;
+        int posX = (int)getCenter().getX()/48;
+        int posY = (int)getCenter().getY()/48;
+
         currentLocation = game.getGameMap().getGameMapCoordinates()[posX][posY];
         return currentLocation;
     }
@@ -145,6 +153,12 @@ public abstract class Entity implements IGameObject {
     public void setVel(Vector2 vel) {
         this.vel = vel;
     }
+    public Vector2 getVel(){
+        return new Vector2(vel);
+    }
+    public Vector2 getAcc(){
+        return new Vector2(acc);
+    }
 
     public void setAcc(Vector2 acc) {
         this.acc = acc;
@@ -153,12 +167,19 @@ public abstract class Entity implements IGameObject {
     public void damageTaken(int damage) {
         setHealth(getHealth() - damage);
     }
-
     /**
      * @return size of entity
      */
     public int getSize() {
         return size;
+    }
+
+    @Override
+    public boolean isPassable() {
+        return false;
+    }
+    public void update(double dt){
+
     }
 }
 

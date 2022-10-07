@@ -11,8 +11,6 @@ import java.util.List;
  * Strictly used to draw the player onto the screen
  */
 public class PlayerDrawer implements IDrawer {
-
-    private int animationCounter;
     private int imageSwitcher;
     private Player player;
 
@@ -80,14 +78,14 @@ public class PlayerDrawer implements IDrawer {
      */
     private void initPlayerImages(){
         try {
-            up1 = imageHandler.getImage("imgs/player/player_up_1.png");
-            up2 = imageHandler.getImage("imgs/player/player_up_2.png");
-            left1 = imageHandler.getImage("imgs/player/player_left_1.png");
-            left2 = imageHandler.getImage("imgs/player/player_left_2.png");
-            down1 = imageHandler.getImage("imgs/player/player_down_1.png");
-            down2 = imageHandler.getImage("imgs/player/player_down_2.png");
-            right1 = imageHandler.getImage("imgs/player/player_right_1.png");
-            right2 = imageHandler.getImage("imgs/player/player_right_2.png");
+            up1 = imageHandler.getImage("imgs/player/player2_up_1.png");
+            up2 = imageHandler.getImage("imgs/player/player2_up_2.png");
+            left1 = imageHandler.getImage("imgs/player/player2_left_1.png");
+            left2 = imageHandler.getImage("imgs/player/player2_left_2.png");
+            down1 = imageHandler.getImage("imgs/player/player2_down_1.png");
+            down2 = imageHandler.getImage("imgs/player/player2_down_2.png");
+            right1 = imageHandler.getImage("imgs/player/player2_right_1.png");
+            right2 = imageHandler.getImage("imgs/player/player2_right_2.png");
         }
         catch (Exception e) {
             System.out.println(e.getMessage());

@@ -15,17 +15,12 @@ import java.util.Random;
  * The player, more implementation to come.
  */
 
-public class Player extends Entity implements IGameObject, IFocusableObject {
-
+public class Player extends Entity implements IPlayer, IFocusableObject {
     private int score;
     private int money;
     protected Weapon weapon;
     protected Armor armor;
-    boolean isDamageTaken;
-
     private double moveAcc;
-
-    public boolean isInteractable = false;
     private Game game;
     /**
      * @param x, starting x-position
@@ -44,29 +39,18 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         money = 0;
     }
 
-    public void shoot(List<Projectile> projectiles) {
+    public void shoot() {
         EDirection dir;
-        if (getDirection() == EDirection.NOT_MOVING) { dir = getLastDirection(); }
-        else { dir = getDirection(); }
-        weapon.shoot(getCenter(), dir, projectiles);
+
+        if (getDirection() == EDirection.NOT_MOVING) {
+            dir = getLastDirection();
+        }
+
+        else {
+            dir = getDirection();
+        }
+        weapon.shoot(getCenter(), dir);
     }
-
-    @Override
-    public Vector2 getCenter() {
-        double x = getPosX() + (double) (getWidth() / 2);
-        double y = getPosY() + (double) (getHeight() / 2);
-        return new Vector2(x, y);
-    }
-
-    @Override
-    public boolean isPassable() {
-        return false;
-    }
-
-    public void update(double dt) {
-
-    }
-
     public void stopCurrentMovement(){
         setVel(new Vector2(0,0));
         setAcc(new Vector2(0,0));
@@ -102,27 +86,12 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         setVelY(getVelY() + getAccY() * dt);
         setPosY(getPosY() + getVelY() * dt + 0.5 * getAccY() * (dt * dt));
     }
-
-    /**
-     * add the weapon object into the attack.
-     */
-    public int damageDelt() {
-        return weapon.damage;
-    }
-
-
-    public boolean isDamageTaken(){
-
-        return isDamageTaken;
-    }
-
     /**
      * @return score acquired during game
      */
     public int getScore(){
         return score;
     }
-
     /**
      * Adds score to total
      * @param score to add
@@ -130,7 +99,6 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     public void addScore(int score){
         this.score += score;
     }
-
     /**
      * @return currency acquired during game
      */
