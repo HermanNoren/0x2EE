@@ -1,11 +1,12 @@
 package helperclasses.collision;
 
 import model.Game;
-import model.gameobjects.IGameObject;
 import model.gameobjects.Player;
+import model.helperclasses.Vector2;
 import model.helperclasses.collision.CollisionHandler;
 import model.helperclasses.collision.ECollisionAxis;
 import model.mapclasses.Terrain;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -16,8 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CollisionHandlerTest {
 
     Game game;
-    Player player1;
-    IGameObject player2;
+    Player player1, player2;
 
     /*
         Tests for CollisionHandler.testCollision(). Testing collision on all sides and corners of an object when
@@ -25,131 +25,122 @@ public class CollisionHandlerTest {
         colliding.
      */
 
-    @Test
-    void test_test_collision_true_left_side() {
+    @BeforeEach
+    void before_tests() {
         game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64 - player1.getWidth() + 1, 64, game);
+        player1 = new Player(0, 0, game);
+        player2 = new Player(0, 0, game);
+    }
+
+    @Test
+    void test_test_collision_intersect_left_side() {
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX() - player2.getWidth() + 1, player1.getPosY()));
         assertTrue(CollisionHandler.testCollision(player1, player2));
     }
 
     @Test
-    void test_test_collision_true_right_side() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64 + player1.getWidth() - 1, 64, game);
+    void test_test_collision_intersect_right_side() {
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX() + player1.getWidth() - 1, player1.getPosY()));
         assertTrue(CollisionHandler.testCollision(player1, player2));
     }
 
     @Test
-    void test_test_collision_true_top_side() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64, 64 - player1.getHeight() + 1, game);
+    void test_test_collision_intersect_top_side() {
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX(), player1.getPosY() - player2.getHeight() + 1));
         assertTrue(CollisionHandler.testCollision(player1, player2));
     }
 
     @Test
-    void test_test_collision_true_bottom_side() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64, 64 + player1.getHeight() - 1, game);
+    void test_test_collision_intersect_bottom_side() {
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX(), player1.getPosY() + player1.getHeight() - 1));
         assertTrue(CollisionHandler.testCollision(player1, player2));
     }
 
     @Test
-    void test_test_collision_true_top_left_corner() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64 - player1.getWidth() + 1, 64 - player1.getHeight() + 1, game);
+    void test_test_collision_intersect_top_left_corner() {
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX() - player2.getWidth() + 1, player1.getPosY() - player2.getHeight() + 1));
         assertTrue(CollisionHandler.testCollision(player1, player2));
     }
 
     @Test
-    void test_test_collision_true_top_right_corner() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64 + player1.getWidth() - 1, 64 - player1.getHeight() + 1, game);
+    void test_test_collision_intersect_top_right_corner() {
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX() + player1.getWidth() - 1, player1.getPosY() - player2.getHeight() + 1));
         assertTrue(CollisionHandler.testCollision(player1, player2));
     }
 
     @Test
-    void test_test_collision_true_bottom_left_corner() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64 - player1.getWidth() + 1, 64 + player1.getHeight() - 1, game);
+    void test_test_collision_intersect_bottom_left_corner() {
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX() - player2.getWidth() + 1, player1.getPosY() + player1.getHeight() - 1));
         assertTrue(CollisionHandler.testCollision(player1, player2));
     }
 
     @Test
-    void test_test_collision_true_bottom_right_corner() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64 + player1.getWidth() - 1, 64 + player1.getHeight() - 1, game);
+    void test_test_collision_intersect_bottom_right_corner() {
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX() + player1.getWidth() - 1, player1.getPosY() + player1.getHeight() - 1));
         assertTrue(CollisionHandler.testCollision(player1, player2));
     }
 
     @Test
     void test_test_collision_false_left() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64 - player1.getWidth(), 64, game);
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX() - player2.getWidth(), player1.getPosY()));
         assertFalse(CollisionHandler.testCollision(player1, player2));
     }
 
     @Test
     void test_test_collision_false_right() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64 + player1.getWidth(), 64, game);
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX() + player1.getWidth(), player1.getPosY()));
         assertFalse(CollisionHandler.testCollision(player1, player2));
     }
 
     @Test
     void test_test_collision_false_top() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64, 64 - player1.getHeight(), game);
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX(), player1.getPosY() - player2.getHeight()));
         assertFalse(CollisionHandler.testCollision(player1, player2));
     }
 
     @Test
     void test_test_collision_false_bottom() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64, 64 + player1.getHeight(), game);
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX(), player1.getPosY() + player1.getHeight()));
         assertFalse(CollisionHandler.testCollision(player1, player2));
     }
 
     @Test
     void test_test_collision_false_top_left() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64 - player1.getWidth(), 64 - player1.getHeight(), game);
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX() - player2.getWidth(), player1.getPosY() - player2.getHeight()));
         assertFalse(CollisionHandler.testCollision(player1, player2));
     }
 
     @Test
     void test_test_collision_false_top_right() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64 + player1.getWidth(), 64 - player1.getHeight(), game);
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX() + player1.getWidth(), player1.getPosY() - player2.getHeight()));
         assertFalse(CollisionHandler.testCollision(player1, player2));
     }
 
     @Test
     void test_test_collision_false_bottom_left() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64 - player1.getWidth(), 64 + player1.getHeight(), game);
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX() - player2.getWidth(), player1.getPosY() + player1.getHeight()));
         assertFalse(CollisionHandler.testCollision(player1, player2));
     }
 
     @Test
     void test_test_collision_false_bottom_right() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64 + player1.getWidth(), 64 + player1.getHeight(), game);
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX() + player1.getWidth(), player1.getPosY() + player1.getHeight()));
         assertFalse(CollisionHandler.testCollision(player1, player2));
     }
 
@@ -161,9 +152,8 @@ public class CollisionHandlerTest {
 
     @Test
     void test_directional_collision_X_AXIS_left() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64 - player1.getWidth(), 64, game);
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX() - player2.getWidth(), player1.getPosY()));
         player1.setVelX(-1);
         player1.moveX(1);
         Map<String, Boolean> collisionDirection = CollisionHandler.getCollisionDirection(player1, player2, ECollisionAxis.X_AXIS);
@@ -175,9 +165,8 @@ public class CollisionHandlerTest {
 
     @Test
     void test_directional_collision_X_AXIS_right() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64 + player1.getWidth(), 64, game);
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX() + player1.getWidth(), player1.getPosY()));
         player1.setVelX(1);
         player1.moveX(1);
         Map<String, Boolean> collisionDirection = CollisionHandler.getCollisionDirection(player1, player2, ECollisionAxis.X_AXIS);
@@ -189,9 +178,8 @@ public class CollisionHandlerTest {
 
     @Test
     void test_directional_collision_Y_AXIS_top() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64, 64 - player1.getHeight(), game);
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX(), player1.getPosY() - player2.getHeight()));
         player1.setVelY(-1);
         player1.moveY(1);
         Map<String, Boolean> collisionDirection = CollisionHandler.getCollisionDirection(player1, player2, ECollisionAxis.Y_AXIS);
@@ -203,9 +191,8 @@ public class CollisionHandlerTest {
 
     @Test
     void test_directional_collision_Y_AXIS_bottom() {
-        game = new Game();
-        player1 = new Player(64, 64, game);
-        player2 = new Player(64, 64 + player1.getHeight(), game);
+        player1.setPos(new Vector2(64, 64));
+        player2.setPos(new Vector2(player1.getPosX(), player1.getPosY() + player1.getHeight()));
         player1.setVelY(1);
         player1.moveY(1);
         Map<String, Boolean> collisionDirection = CollisionHandler.getCollisionDirection(player1, player2, ECollisionAxis.Y_AXIS);
@@ -230,16 +217,14 @@ public class CollisionHandlerTest {
 
     @Test
     void test_specific_terrain_collisions_no_collision() {
-        game = new Game();
-        player1 = new Player(48, 48, game);
+        player1.setPos(new Vector2(48, 48));
         List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player1, createSmallTerrainMatrix());
         assertEquals(0, collidedTerrain.size());
     }
 
     @Test
     void test_specific_terrain_collisions_with_collision_to_one_terrain_piece() {
-        game = new Game();
-        player1 = new Player(48, 48, game);
+        player1.setPos(new Vector2(48, 48));
         player1.setVelX(-1);
         player1.moveX(1);
         List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player1, createSmallTerrainMatrix());
@@ -248,8 +233,7 @@ public class CollisionHandlerTest {
 
     @Test
     void test_specific_terrain_collisions_with_collision_with_top_left_three_terrain_pieces() {
-        game = new Game();
-        player1 = new Player(48, 48, game);
+        player1.setPos(new Vector2(48, 48));
         player1.setVelX(-1);
         player1.moveX(1);
         player1.setVelY(-1);
