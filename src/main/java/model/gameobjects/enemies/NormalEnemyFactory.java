@@ -11,7 +11,8 @@ import java.util.Random;
 public class NormalEnemyFactory extends EnemyFactory{
     @Override
     public Enemy createEnemy(Terrain[][] coordinates, Random rand) {
-        NormalEnemy normalEnemy = new NormalEnemy(rand.nextInt(10),rand.nextInt(10), coordinates);
+
+        NormalEnemy normalEnemy = new NormalEnemy(rand.nextInt(480),rand.nextInt(480), coordinates);
         return normalEnemy;
     }
 }

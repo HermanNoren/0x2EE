@@ -11,7 +11,15 @@ import java.util.PriorityQueue;
  * AStar class contains a static method with the AStar algorithm.
  */
 public class AStar {
-
+    /**
+     * Manhattan heuristic
+     * @return
+     */
+    private static double calculateHeuristic(Terrain current, Terrain goal){
+        double dx = Math.abs(current.getX() - goal.getX());
+        double dy = Math.abs(current.getY() - goal.getY());
+        return (dx + dy);
+    }
     /**
      * Static method with A* algorithm, used to find the shortest path between two nodes
      * by using a heuristic to approximate the shortest distance from the start to target to make the algorithm
@@ -54,7 +62,7 @@ public class AStar {
                 }
 
                 // TODO: Remove if unnecessary
-                /*
+
                 else {
                     if(totalWeight < m.getG() && m.isPassable()){
                         m.setParent(n);
@@ -67,7 +75,7 @@ public class AStar {
 //                        }
                     }
                 }
-                 */
+
             }
 
             openList.remove(n);

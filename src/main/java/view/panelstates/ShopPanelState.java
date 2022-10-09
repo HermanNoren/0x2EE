@@ -35,7 +35,6 @@ public class ShopPanelState implements IPanelState{
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(buttons));
         drawers.add(new InShopDrawer(game.getPlayer().getMoney()));
-
     }
 
     @Override
@@ -53,9 +52,12 @@ public class ShopPanelState implements IPanelState{
 
     }
     private void createButtons(){
-        GameButton upgradeArmorButton = new GameButton("UPGRADE ARMOR", 325, 200, new MenuButtonAction(EPanelState.SHOP, this));
-        GameButton upgradeWeaponButton = new GameButton("UPGRADE WEAPON", 325, 300, new MenuButtonAction(EPanelState.SHOP, this));
-        GameButton leaveShopButton = new GameButton("LEAVE", 325, 400, new MenuButtonAction(EPanelState.INGAME, this));
+        GameButton upgradeArmorButton = new GameButton("UPGRADE ARMOR", 325, 200,
+                new MenuButtonAction(EPanelState.SHOP, this));
+        GameButton upgradeWeaponButton = new GameButton("UPGRADE WEAPON", 325, 300,
+                new MenuButtonAction(EPanelState.SHOP, this));
+        GameButton leaveShopButton = new GameButton("LEAVE", 325, 400,
+                new MenuButtonAction(EPanelState.INGAME, this));
         buttons.add(upgradeArmorButton);
         buttons.add(upgradeWeaponButton);
         buttons.add(leaveShopButton);

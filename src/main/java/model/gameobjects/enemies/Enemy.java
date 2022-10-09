@@ -12,9 +12,9 @@ public abstract class Enemy extends Entity implements IEnemy {
     private int size = Config.SPRITE_SIZE;
     private double movementSpeed;
     private Terrain[][] coordinates;
-    protected Enemy(int x, int y, Terrain[][] coordiantes){
-        super(x, y, coordiantes);
-        this.coordinates = coordiantes;
+    protected Enemy(int x, int y, Terrain[][] coordinates){
+        super(x, y, coordinates);
+        this.coordinates = coordinates;
         movementSpeed = 0.5;
     }
 
@@ -30,6 +30,7 @@ public abstract class Enemy extends Entity implements IEnemy {
         Vector2 nextPos;
 
         double currentX = current.getCenter().getX();
+        System.out.println(goal.getX());
         double currentY = current.getCenter().getY();
 
         if(next != null) {
@@ -39,7 +40,6 @@ public abstract class Enemy extends Entity implements IEnemy {
             if (currentX < nextX) {
                 setDirection(EDirection.RIGHT);
                 setPosX(getPosX() + movementSpeed * dt);
-
             }else if (currentX > nextX) {
                 setDirection(EDirection.LEFT);
                 setPosX(getPosX() - movementSpeed * dt);

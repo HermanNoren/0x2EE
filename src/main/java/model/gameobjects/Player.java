@@ -22,7 +22,6 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
     protected Weapon weapon;
     protected Armor armor;
     private double moveAcc;
-    private Game game;
     /**
      * @param x, starting x-position
      * @param y, starting y-position
@@ -31,7 +30,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
     public Player(int x, int y, Terrain[][] coordinates){
         super(x, y, coordinates);
         this.armor = new Armor();
-        this.weapon = new Weapon(10, 10, game);
+        this.weapon = new Weapon(10, 10);
         setMaxHp(1000);
         setHealth(1000);
         moveAcc = 0.3;

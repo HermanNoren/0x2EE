@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Terrain is the node representation for the gamemap
  */
-public class Terrain implements IGameObject, Comparable<Terrain> {
+public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
     private final int size = Config.TERRAIN_SIZE;
     private final Vector2 pos;
     private double f = Double.MAX_VALUE; // Will later be equal to g + h
@@ -29,8 +29,10 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     public Terrain(int x, int y){
         this.x = x;
         this.y = y;
+
         this.height = size;
         this.width = size;
+
         this.terrainType = 0;
         this.passable = true;
         this.neighbors = new ArrayList<>();
@@ -49,16 +51,20 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
         return size;
     }
 
-    public List<Edge> getNeighbors() {
+    @Override
+    public List<Terrain.Edge> getNeighbors() {
         return neighbors;
     }
 
+    @Override
     public int getX() {
         return x;
     }
+    @Override
     public int getY() {
         return y;
     }
+
     @Override
     public Vector2 getPos() {
         return new Vector2(pos);
@@ -70,6 +76,7 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
         double y = pos.getY() + (double) (getHeight() / 2);
         return new Vector2(x, y);
     }
+
     public void setF(double f) {
         this.f = f;
     }
@@ -85,6 +92,7 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     public void setParent(Terrain parent) {
         this.parent = parent;
     }
+
     @Override
     public int compareTo(Terrain n) {
         return Double.compare(this.g, n.getG());
@@ -130,10 +138,9 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
      * @return
      */
     public double calculateHeuristic(Terrain current, Terrain goal){
-        int D = 1;
         double dx = Math.abs(current.x - goal.x);
         double dy = Math.abs(current.y - goal.y);
-        return D*(dx + dy);
+        return (dx + dy);
     }
 
     public static class Edge {
