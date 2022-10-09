@@ -26,7 +26,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
 
     private double moveAcc;
 
-    public boolean isInteractable = false;
+    public boolean isOnShop = false;
     private Game game;
     /**
      * @param x, starting x-position
@@ -51,6 +51,7 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         else { dir = getDirection(); }
         weapon.shoot(getCenter(), dir, projectiles);
     }
+
 
     @Override
     public Vector2 getCenter() {

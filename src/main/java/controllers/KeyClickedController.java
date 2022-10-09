@@ -28,7 +28,7 @@ public class KeyClickedController implements KeyListener {
             case (KeyEvent.VK_ENTER) -> {
                 if (!enterKeyDown) {
                     enterKeyDown = true;
-                    if (game.isPlayerInRangeOfShop()){
+                    if (game.getPlayer().isOnShop){
                         panel.changePanelState(EPanelState.SHOP);
                     }
                 }

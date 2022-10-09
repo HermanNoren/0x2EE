@@ -21,6 +21,7 @@ import view.IObserver;
 
 import javax.sound.sampled.Port;
 import javax.swing.plaf.basic.BasicOptionPaneUI;
+import javax.xml.crypto.dsig.TransformService;
 import java.io.*;
 import java.util.*;
 import java.util.Random;
@@ -48,11 +49,13 @@ public class Game {
     private Random random = new Random();
     private Boolean playerDead;
     private Projectile pendingBullet;
+    private ShopTransaction shopTransaction;
 
     public Game() {
         this.gameMap = new GameMap(10, 10);
         this.player = new Player(48, 48, this);
         shop = new Shop(200, 100);
+        this.shopTransaction = new ShopTransaction(getPlayer());
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         highscoreName = new ArrayList<>();
@@ -223,10 +226,10 @@ public class Game {
             }
 
             /**
-             * See if the player is close enough to shop.
+             * See if player is on shop, first for controller second for shop drawer
              */
-            shop.playerOnShop = isPlayerInRangeOfShop();
-
+           player.isOnShop = isPlayerInRangeOfShop();
+           shop.playerOnShop = player.isOnShop;
             for (IItem item : spawner.getSpawnedItems()) {
                 if (CollisionHandler.testCollision(item, player)) {
                     item.consume(player);
@@ -264,6 +267,9 @@ public class Game {
 
     public Shop getShop() {
         return shop;
+    }
+    public ShopTransaction getShopTransaction(){
+        return shopTransaction;
     }
 
     public List<Terrain> getPath() {

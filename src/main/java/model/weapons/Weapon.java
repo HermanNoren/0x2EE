@@ -35,7 +35,6 @@ public class Weapon {
 
     private void upgradeWeapon() {
         ++damage;
-        ++ammo;
     }
 
     public int getLevel(){
@@ -55,7 +54,7 @@ public class Weapon {
         reloading = true;
         // TODO: Add some kind of delay (might need threading?)
         reloading = false;
-        ammo = ammo;
+        ammo = 7;
     }
 
     /**
