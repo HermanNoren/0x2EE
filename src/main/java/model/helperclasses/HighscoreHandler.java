@@ -30,6 +30,11 @@ public class HighscoreHandler {
         writeToFile(oldVersion);
     }
 
+    public int getScore(String fileitem){
+        String[] savedScore = fileitem.split(":");
+        return Integer.valueOf(savedScore[1]);
+    }
+
     /**
      * Returns list of all highscores and related names
      * @return list of highscores
@@ -74,8 +79,7 @@ public class HighscoreHandler {
             highscoreList.add(name + ":" + newScore);
         } else {
             for (String playerScore : highscoreList) {
-                String[] savedScore = playerScore.split(":");
-                int score = Integer.valueOf(savedScore[1]);
+                int score = getScore(playerScore);
                 if (newScore >= score) {
                     highscoreList.add(i, name + ":" + newScore);
                     break;

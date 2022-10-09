@@ -19,31 +19,38 @@ public class HighscoreHandlerTest {
     }
 
     @Test
-    void if_the_file_is_cleared_the_file_should_be_empty(){
+    void test_if_the_file_is_cleared_the_file_should_be_empty(){
         highscoreHandler.clearFile();
-        assertTrue(highscoreHandler.getHighscoreList().size() == 0);
+        assertEquals(0, highscoreHandler.getHighscoreList().size());
     }
 
     @Test
-    void if_a_highscore_is_saved_the_file_should_have_updated(){
+    void test_if_a_highscore_is_saved_the_file_should_have_update(){
         highscoreHandler.saveHighscore("Test40", 5000);
-        assertTrue(highscores != highscoreHandler.getHighscoreList());
+        assertNotSame(highscores, highscoreHandler.getHighscoreList());
     }
 
     @Test
-    void if_the_file_is_empty_and_new_highscores_are_saved_it_should_have_updated(){
+    void test_if_the_file_is_empty_and_new_highscores_are_saved_it_should_update(){
         highscoreHandler.clearFile();
         highscoreHandler.saveHighscore("Test40", 5000);
         highscoreHandler.saveHighscore("Test40", 4500);
-        assertTrue(highscoreHandler.getHighscoreList().size() == 2);
+        assertEquals(2, highscoreHandler.getHighscoreList().size());
     }
 
-    @Test
-    void if_the_saved_it_should_have_updated(){
+   @Test
+    void test_if_the_biggest_score_gets_placed_first(){
         highscoreHandler.clearFile();
-        highscoreHandler.saveHighscore("Test40", 5000);
-        assertTrue(highscoreHandler.getHighscoreList().size() == 1);
-    }
+        int lowScore = 100;
+        int midScore = 500;
+        int highScore = 2000;
+        highscoreHandler.saveHighscore("TEST34", lowScore);
+        highscoreHandler.saveHighscore("TEST23", highScore);
+        highscoreHandler.saveHighscore("TEST11", midScore);
+        String firstPlacement = highscoreHandler.getHighscoreList().get(0);
+        assertEquals(highscoreHandler.getScore(firstPlacement), highScore);
+
+   }
 
 
 }
