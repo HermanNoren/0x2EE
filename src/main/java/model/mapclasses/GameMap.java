@@ -32,7 +32,7 @@ public class GameMap implements IGameMap{
 //        n.init();
 //        n.setTerrainTypes(gameMapCoordinates);
 //
-//        createBorder();
+        createBorder();
 
         terrains.forEach(this::addNeighbors);
 //        n.printTerrainGrid(gameMapCoordinates);

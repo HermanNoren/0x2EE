@@ -18,7 +18,7 @@ public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
     private double f = Double.MAX_VALUE; // Will later be equal to g + h
     private double g = Double.MAX_VALUE; // g(n), n = next node, distance from start to n.
     private final List<Edge> neighbors;
-    private Terrain parent = null;
+    private Terrain parent;
     private final int x;
     private final int y;
     private final int width;
@@ -32,7 +32,7 @@ public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
 
         this.height = size;
         this.width = size;
-
+        this.parent = null;
         this.terrainType = 0;
         this.passable = true;
         this.neighbors = new ArrayList<>();
@@ -80,12 +80,16 @@ public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
     public void setF(double f) {
         this.f = f;
     }
+    public double getF(){
+        return this.f;
+    }
     public double getG() {
         return g;
     }
     public void setG(double g) {
         this.g = g;
     }
+
     public Terrain getParent() {
         return parent;
     }
@@ -106,9 +110,6 @@ public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
         if(type == 1 || type == 2 || type == 3){
             setPassable(false);
         }
-        else{
-            setPassable(true);
-        }
         this.terrainType = type;
     }
 
@@ -119,11 +120,9 @@ public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
     public void setPassable(boolean passable){
         this.passable = passable;
     }
-
     public boolean isPassable() {
         return passable;
     }
-
     /**
      * @param weight
      * @param neighbor
@@ -131,16 +130,6 @@ public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
     public void addBranch(int weight, Terrain neighbor){
         Terrain.Edge newEdge = new Terrain.Edge(weight, neighbor);
         neighbors.add(newEdge);
-    }
-
-    /**
-     * Manhattan heuristic
-     * @return
-     */
-    public double calculateHeuristic(Terrain current, Terrain goal){
-        double dx = Math.abs(current.x - goal.x);
-        double dy = Math.abs(current.y - goal.y);
-        return (dx + dy);
     }
 
     public static class Edge {
@@ -151,5 +140,4 @@ public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
             this.terrain = terrain;
         }
     }
-
 }

@@ -12,8 +12,10 @@ public abstract class Enemy extends Entity implements IEnemy {
     private int size = Config.SPRITE_SIZE;
     private double movementSpeed;
     private Terrain[][] coordinates;
-    protected Enemy(int x, int y, Terrain[][] coordinates){
+    private Entity targetEntity;
+    protected Enemy(int x, int y, Entity targetEntity, Terrain[][] coordinates){
         super(x, y, coordinates);
+        this.targetEntity = targetEntity;
         this.coordinates = coordinates;
         movementSpeed = 0.5;
     }
@@ -23,14 +25,13 @@ public abstract class Enemy extends Entity implements IEnemy {
      */
     private void moveToGoal(double dt) {
         Terrain current = getMapLocation(coordinates);
-        Terrain goal = getMapLocation(coordinates);
+        Terrain goal = targetEntity.getMapLocation(coordinates);
 
         Terrain next = AStar.aStar(current, goal);
 
         Vector2 nextPos;
 
         double currentX = current.getCenter().getX();
-        System.out.println(goal.getX());
         double currentY = current.getCenter().getY();
 
         if(next != null) {
