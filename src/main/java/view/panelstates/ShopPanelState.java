@@ -19,6 +19,7 @@ import java.util.List;
 
 public class ShopPanelState implements IPanelState{
     private final MainPanel mainPanel;
+    private ShopTransaction shopTransaction;
     private final ButtonController stringButtonController;
     private final List<GameButton> buttons;
     private final List<GameButton> pictureButtons;
@@ -29,12 +30,13 @@ public class ShopPanelState implements IPanelState{
     private final String headerText = "Shop";
 
 
-    public ShopPanelState(MainPanel mainPanel, Game game) {
+    public ShopPanelState(MainPanel mainPanel, ShopTransaction shopTransaction) {
         this.mainPanel = mainPanel;
+        this.shopTransaction = shopTransaction;
         buttons = new ArrayList<>();
         keyListeners = new ArrayList<>();
         pictureButtons = new ArrayList<>();
-        createShopButtons(game.getShopTransaction());
+        createShopButtons(shopTransaction);
 
         stringButtonController = new ButtonController(buttons);
         keyListeners.add(stringButtonController);
@@ -64,10 +66,19 @@ public class ShopPanelState implements IPanelState{
         stringButtonController.update();
         g2.setColor(panelColor);
         g2.fillRect(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        g2.setFont(Config.buttonFont);
+        drawPlayerMoney(g2, shopTransaction.getPlayerMoneyAmount());
+        g2.setFont(Config.buttonFont); //the font which the button will be drawn in
     }
-    private void drawPlayerMoney(Graphics2D g2){
+
+    /**
+     * represents the money the player has, shown in the top right corner.
+     * @param g2 is what is to be drawn
+     * @param playerMoney is player money
+     */
+    private void drawPlayerMoney(Graphics2D g2, int playerMoney){
         g2.setColor(Color.WHITE);
+        g2.setFont(Config.infoFont);
+        g2.drawString((playerMoney + "$"),(Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(playerMoney + "$")), Config.SCREEN_HEIGHT/15);
     }
 
     private void createShopButtons(ShopTransaction shopTransaction) {

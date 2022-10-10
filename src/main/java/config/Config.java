@@ -17,4 +17,3 @@ public class Config {
     public static final int ENTITY_WIDTH = 48;
     public static final int ENTITY_HEIGHT = 48;
 }
-

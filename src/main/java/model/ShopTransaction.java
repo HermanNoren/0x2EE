@@ -28,6 +28,9 @@ public class ShopTransaction {
             player.getArmor().upgradeArmor();
         }
     }
+    public int getPlayerMoneyAmount(){
+        return player.getMoney();
+    }
 
     private void newPlayerMoneyAmount(int amountAfterTransaction) {
         player.setMoney(amountAfterTransaction);
