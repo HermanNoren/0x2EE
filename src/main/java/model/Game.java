@@ -57,8 +57,8 @@ public class Game {
         playerDead = false;
         EnemyFactory enemyFactory = new NormalEnemyFactory();
 
-       // enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-       // enemies.add(enemyFactory.createEnemy(player, gameMap, random));
+       enemies.add(enemyFactory.createEnemy(player, gameMap, random));
+       enemies.add(enemyFactory.createEnemy(player, gameMap, random));
 
         spawner = new Spawner(this);
         gameObjects = new ArrayList<>();
