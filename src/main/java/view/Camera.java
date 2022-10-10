@@ -82,7 +82,7 @@ public class Camera{
      * @return Center vector
      */
     public Vector2 getCenter() {
-        return new Vector2(absolutePos.getX() + screenCenter.getX(), absolutePos.getY() + screenCenter.getY());
+        return new Vector2(relativePos.getX() + screenCenter.getX() / currentZoomMultiplier, relativePos.getY() + screenCenter.getY() / currentZoomMultiplier);
     }
     /**
      * Zoom in
@@ -135,10 +135,7 @@ public class Camera{
             relativePos.setX(relativePos.getX() + (object.getCenter().getX() - (relativePos.getX() + screenCenter.getX())) / (dragEffectConstant / currentZoomMultiplier));
             relativePos.setY(relativePos.getY() + (object.getCenter().getY() - (relativePos.getY() + screenCenter.getY())) / (dragEffectConstant / currentZoomMultiplier));
         }
-
         absolutePos = new Vector2(relativePos);
-
-        // cameraBoundaries(absolutePos);
 
         relativePos.setX(relativePos.getX() + ((Config.SCREEN_WIDTH - Config.SCREEN_WIDTH / currentZoomMultiplier) / 2));
         relativePos.setY(relativePos.getY() + ((Config.SCREEN_HEIGHT - Config.SCREEN_HEIGHT / currentZoomMultiplier) / 2));

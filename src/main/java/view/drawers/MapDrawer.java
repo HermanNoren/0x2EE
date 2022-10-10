@@ -38,10 +38,10 @@ public class MapDrawer implements IDrawer {
     }
 
     private void loadTerrainImages(){
-        terrainImgs[0] = ImageHandler.scaleImage(imageHandler.getImage("imgs/tile/grass.png"), spriteSize, spriteSize);
-        terrainImgs[1] = ImageHandler.scaleImage(imageHandler.getImage("imgs/tile/border.png"), spriteSize, spriteSize);
-        terrainImgs[2] = ImageHandler.scaleImage(imageHandler.getImage("imgs/tile/tree.png"), spriteSize, spriteSize);
-        terrainImgs[3] = ImageHandler.scaleImage(imageHandler.getImage("imgs/tile/wall.png"), spriteSize, spriteSize);
+        terrainImgs[0] = imageHandler.getImage("imgs/tile/grass.png");
+        terrainImgs[1] = imageHandler.getImage("imgs/tile/border.png");
+        terrainImgs[2] = imageHandler.getImage("imgs/tile/tree.png");
+        terrainImgs[3] = imageHandler.getImage("imgs/tile/wall.png");
     }
 
 
@@ -77,7 +77,7 @@ public class MapDrawer implements IDrawer {
                             gameMapCoordinates[col][row].getHeight());
 
                 int terrainNum = gameMapCoordinates[col][row].getTerrainType();
-                g2.drawImage(terrainImgs[terrainNum], drawInformation.get(0), drawInformation.get(1), null);
+                g2.drawImage(terrainImgs[terrainNum], drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
 
                 newTerrainVector.setX(newTerrainVector.getX() + terrainSize);
                 newTerrainVector.setY(newTerrainVector.getY() + terrainSize);
