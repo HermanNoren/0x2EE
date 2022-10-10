@@ -47,7 +47,7 @@ public class MainPanel extends JPanel implements IObserver {
     }
 
     @Override
-    public void draw() {
+    public void update() {
         repaint();
     }
 }

@@ -36,6 +36,7 @@ public class KeyClickedController implements KeyListener {
             case (KeyEvent.VK_ESCAPE) -> {
                 if (!escapeKeyDown) {
                     escapeKeyDown = true;
+                    game.pause();
                     panel.changePanelState(EPanelState.PAUSE);
                 }
 

@@ -1,15 +1,37 @@
 package controllers;
 
 import model.Game;
+import view.IObserver;
 
-public class GameLoopController {
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+public class GameLoopController implements ActionListener {
 
     private final int FPS;
     private final int UPS;
+    Timer timer;
 
-    public GameLoopController() {
+    private List<IObserver> gameObservers;
+
+    Game game;
+
+    public GameLoopController(Game game) {
         FPS = 120;
         UPS = 200;
+        gameObservers = new ArrayList<>();
+        this.game = game;
+    }
+
+    /**
+     * Add an observer.
+     * @param observer observer
+     */
+    public void addObserver(IObserver observer) {
+        gameObservers.add(observer);
     }
 
     /**
@@ -17,8 +39,12 @@ public class GameLoopController {
      * Handles logic of when to update the internal game
      * classes and when to notify potential observers.
      */
-    public void run(Game game) {
+    public void run() {
 
+        timer = new Timer(1000 / UPS, this);
+        timer.start();
+
+        /*
         double timePerRender =  1000000000.0 / FPS;
         double timePerUpdate = 1000000000.0 / UPS;
         double deltaUpdateTime = 0;
@@ -29,6 +55,7 @@ public class GameLoopController {
         int frames = 0;
         int updates = 0;
         long lastFpsCheck = System.currentTimeMillis();
+
 
         while(true) {
             currentTime = System.nanoTime();
@@ -54,6 +81,16 @@ public class GameLoopController {
                 frames = 0;
                 updates = 0;
             }
+        }
+         */
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        game.update(100.0 / UPS);
+
+        for (IObserver observer : gameObservers) {
+            observer.update();
         }
     }
 }

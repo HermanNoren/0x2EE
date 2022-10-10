@@ -16,6 +16,5 @@ public class MenuButtonAction implements  IButtonAction{
     @Override
     public void performAction() {
         currentState.changePanelState(panelState);
-
     }
 }

@@ -48,6 +48,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
         weapon.shoot(getCenter(), dir, projectiles);
     }
     public void stopCurrentMovement(){
+        setDirection(EDirection.NOT_MOVING);
         setVel(new Vector2(0,0));
         setAcc(new Vector2(0,0));
     }
