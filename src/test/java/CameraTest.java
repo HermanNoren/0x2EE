@@ -18,7 +18,7 @@ public class CameraTest {
     @Test
     void test_camera_not_moving_when_not_focusing_object() {
         game = new Game();
-        player = new Player(0, 0, game);
+        player = new Player(0, 0, game.getGameMap().getGameMapCoordinates());
         Vector2 offsetWhenPlayerAt0x0 = camera.getOffset();
         player.setPos(new Vector2(50, 50));
         Vector2 offsetWhenPlayerAt50x50 = camera.getOffset();
@@ -29,7 +29,7 @@ public class CameraTest {
     @Test
     void test_camera_moving_when_focusing_object() {
         game = new Game();
-        player = new Player(0, 0, game);
+        player = new Player(0, 0, game.getGameMap().getGameMapCoordinates());
         camera.setFocusedObject(player);
         camera.setDragEffectConstant(1);
         camera.update();
@@ -83,7 +83,7 @@ public class CameraTest {
     @Test
     void test_camera_drag_effect() {
         game = new Game();
-        player = new Player(0, 0, game);
+        player = new Player(0, 0, game.getGameMap().getGameMapCoordinates());
         camera.reset();
         camera.setFocusedObject(player);
         camera.setDragEffectConstant(1);
@@ -103,7 +103,7 @@ public class CameraTest {
     @Test
     void test_camera_drag_effect_boundaries() {
         game = new Game();
-        player = new Player(0, 0, game);
+        player = new Player(0, 0, game.getGameMap().getGameMapCoordinates());
         camera.reset();
         camera.setFocusedObject(player);
         camera.setDragEffectConstant(1);

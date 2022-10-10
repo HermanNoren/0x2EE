@@ -28,8 +28,8 @@ public class CollisionHandlerTest {
     @BeforeEach
     void before_tests() {
         game = new Game();
-        player1 = new Player(0, 0, game);
-        player2 = new Player(0, 0, game);
+        player1 = new Player(0, 0, game.getGameMap().getGameMapCoordinates());
+        player2 = new Player(0, 0, game.getGameMap().getGameMapCoordinates());
     }
 
     @Test
