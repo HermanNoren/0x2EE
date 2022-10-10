@@ -18,7 +18,7 @@ public class Camera{
 
     private List<IFocusableObject> focusedObject;
     private Vector2 relativePos, absolutePos, screenCenter;
-    private int standardDragEffectConstant;
+    private final int standardDragEffectConstant;
     private int dragEffectConstant;
     private double currentZoomMultiplier;
 
@@ -46,6 +46,18 @@ public class Camera{
         if (camera == null){
             camera = new Camera();
         } return camera;
+    }
+
+    /**
+     * Resets the camera; removes the focused object, resets the offset to 0x0, resets the drag effect constant
+     * and resets the zoom multiplier.
+     */
+    public void reset() {
+        this.focusedObject = new ArrayList<>();
+        relativePos = new Vector2(0, 0);
+        absolutePos = new Vector2(relativePos);
+        dragEffectConstant = standardDragEffectConstant;
+        currentZoomMultiplier = 1;
     }
 
     /**
@@ -98,8 +110,9 @@ public class Camera{
 
     /**
      * Provides the ability to change how much the camera is "dragging" after the focused object. A higher value
-     * will result in more drag effect. Values below 1 is not accepted and will automatically turn off the drag effect.
-     * @param value drag effect
+     * will result in more drag effect. 1 equals no drag effect. Values below 1 is not accepted and will
+     * automatically turn off the drag effect.
+     * @param value drag effect >= 1
      */
     public void setDragEffectConstant(int value) {
         if (value < 1) { value = 1; }
@@ -107,18 +120,16 @@ public class Camera{
     }
 
     /**
-     * Resets the drag effect to its standard value
+     * Resets the drag effect to its standard value. The standard value is 50
      */
     public void resetDragEffectConstant() {
         dragEffectConstant = standardDragEffectConstant;
     }
 
     /**
-     * Updates the cameras position in regard to the object in focus
+     * Updates the camera offset in regard to the object in focus
      */
     public void update() {
-        calculateCenterPos();
-
         relativePos = new Vector2(absolutePos);
         for (IFocusableObject object : focusedObject) {
             relativePos.setX(relativePos.getX() + (object.getCenter().getX() - (relativePos.getX() + screenCenter.getX())) / (dragEffectConstant / currentZoomMultiplier));
@@ -128,8 +139,6 @@ public class Camera{
 
         relativePos.setX(relativePos.getX() + ((Config.SCREEN_WIDTH - Config.SCREEN_WIDTH / currentZoomMultiplier) / 2));
         relativePos.setY(relativePos.getY() + ((Config.SCREEN_HEIGHT - Config.SCREEN_HEIGHT / currentZoomMultiplier) / 2));
-
-
     }
 
     /**
