@@ -7,9 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Vector;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -65,11 +64,20 @@ public class TerrainTest {
     void test_getParent_returns_null_on_new_Terrain(){
         assertNull(terrain.getParent());
     }
+
     @Test
     void test_setParent_sets_parent_Terrain_to_Terrain(){
         Terrain testTerrain = new Terrain(11, 11);
         terrain.setParent(testTerrain);
         assertEquals(testTerrain, terrain.getParent());
+    }
+
+    @Test
+    void test_getParent_returns_parent_of_Terrain(){
+        Terrain testTerrain = new Terrain(11, 11);
+        terrain.setParent(testTerrain);
+        boolean test = terrain.getParent() == testTerrain;
+        assertTrue(test);
     }
 
     @Test
@@ -116,7 +124,7 @@ public class TerrainTest {
         Terrain testTerrain = new Terrain(11, 11);
         terrain.addBranch(1, testTerrain);
 
-        assertEquals(testTerrain, terrain.getNeighbors().get(0).terrain);
+        assertEquals(testTerrain, terrain.getNeighbors().get(0).getTerrain());
     }
     @Test
     void test_compareTo_compares_two_terrains_f_values_1_if_larger(){
@@ -164,4 +172,11 @@ public class TerrainTest {
         assertEquals(testVector.getY(), testTerrain.getCenter().getY());
     }
 
+    @Test
+    void test_Edge_class_in_Terrain_creates_new_Edge(){
+        Terrain neighbor = new Terrain(1, 1);
+        terrain.addBranch(1 , neighbor);
+        Terrain.Edge edge  = terrain.getNeighbors().get(0);
+        assertSame(Terrain.Edge.class, edge.getClass());
+    }
 }

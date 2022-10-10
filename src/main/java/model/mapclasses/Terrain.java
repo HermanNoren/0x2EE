@@ -157,7 +157,7 @@ public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
      */
     @Override
     public int compareTo(Terrain n) {
-        return Double.compare(this.g, n.getG());
+        return Double.compare(this.f, n.getF());
     }
 
     /**
@@ -205,14 +205,22 @@ public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
     }
 
     /**
-     *
+     * Static Edge class, used to add a neighbor to a specific terrain.
      */
     public static class Edge {
-        public int weight;
-        public Terrain terrain;
+        private int weight;
+        private Terrain terrain;
         Edge(int weight, Terrain terrain){
             this.weight = weight;
             this.terrain = terrain;
+        }
+
+        public Terrain getTerrain() {
+            return terrain;
+        }
+
+        public int getWeight() {
+            return weight;
         }
     }
 }

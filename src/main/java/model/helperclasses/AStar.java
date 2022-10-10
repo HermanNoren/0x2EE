@@ -16,9 +16,11 @@ public class AStar {
      * @return double value.
      */
     private static double calculateHeuristic(Terrain current, Terrain goal){
+        int D = 1;
         double dx = Math.abs(current.getX() - goal.getX());
         double dy = Math.abs(current.getY() - goal.getY());
-        return (dx + dy);
+        double prio = Math.abs(dx-dy)*0.0001;
+        return D*(dx + dy + prio);
     }
     /**
      * Static method with A* algorithm, used to find the shortest path between two nodes
@@ -50,8 +52,8 @@ public class AStar {
             }
 
             for(Terrain.Edge edge : n.getNeighbors()){ // Check neighbors of n.
-                Terrain m = edge.terrain;
-                double totalWeight = n.getG() + edge.weight;
+                Terrain m = edge.getTerrain();
+                double totalWeight = n.getG() + edge.getWeight();
 
                 if(!openList.contains(m) && !closedList.contains(m) && m.isPassable()){
                     m.setParent(n);
@@ -61,7 +63,6 @@ public class AStar {
                 }
 
                 // TODO: Remove if unnecessary
-
                 else {
                     if(totalWeight < m.getG() && m.isPassable()){
                         m.setParent(n);
