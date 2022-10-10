@@ -2,7 +2,6 @@
 package model.gameobjects.enemies;
 
 
-import model.Game;
 import model.gameobjects.Entity;
 import model.mapclasses.Terrain;
 
@@ -13,5 +12,6 @@ public abstract class EnemyFactory {
 
     }
 
-    public abstract Enemy createEnemy(Entity targetEntity, Terrain[][] coordinates, Random rand);
+    public abstract Enemy createEnemyRandom(Entity targetEntity, Terrain[][] coordinates, Random rand);
+    public abstract Enemy createEnemy(Entity targetEntity, Terrain[][] coordinates, int x, int y);
 }

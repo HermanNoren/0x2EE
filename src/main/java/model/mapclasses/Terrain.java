@@ -41,35 +41,62 @@ public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
         this.pos.setY(y*size);
     }
 
+    /**
+     * Method used to get the height of the terrain
+     * @return Height of terrain
+     */
     @Override
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Used to get the width of terrain.
+     * @return Width of terrain
+     */
     @Override
     public int getWidth() {
-        return size;
+        return width;
     }
 
+    /**
+     * Method used to get the neighbors of terrain.
+     * List containing Edge, every edge has a terrain.
+     * @return List with Edges
+     */
     @Override
     public List<Terrain.Edge> getNeighbors() {
         return neighbors;
     }
 
+    /**
+     * @return X-position
+     */
     @Override
     public int getX() {
         return x;
     }
+
+    /**
+     * @return Y-position
+     */
     @Override
     public int getY() {
         return y;
     }
 
+    /**
+     * Used to get the position of terrain.
+     * @return new Vector2
+     */
     @Override
     public Vector2 getPos() {
         return new Vector2(pos);
     }
 
+    /**
+     * @return center of the terrain
+     */
     @Override
     public Vector2 getCenter() {
         double x = pos.getX() + (double) (getWidth() / 2);
@@ -77,26 +104,57 @@ public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
         return new Vector2(x, y);
     }
 
+    /**
+     * Sets the f-value for the terrain, used in A*
+     * @param f new f-value
+     */
     public void setF(double f) {
         this.f = f;
     }
+
+    /**
+     * Used in A*
+     * @return f-value
+     */
     public double getF(){
         return this.f;
     }
+
+    /**
+     * Returns g-value, used in A*.
+     * @return g-value
+     */
     public double getG() {
         return g;
     }
+
+    /**
+     * Sets g-value of the terrain, used in A* algorithm
+     * @param g value
+     */
     public void setG(double g) {
         this.g = g;
     }
 
+    /**
+     * @return the parent of the terrain. Null if none.
+     */
     public Terrain getParent() {
         return parent;
     }
+
+    /**
+     * Sets the parent terrain, used to remember previous terrain in search algorithm.
+     * @param parent parent terrain
+     */
     public void setParent(Terrain parent) {
         this.parent = parent;
     }
 
+    /**
+     * @param n the object to be compared.
+     * @return -1 if this.g is less than parameter g value.
+     */
     @Override
     public int compareTo(Terrain n) {
         return Double.compare(this.g, n.getG());
@@ -113,25 +171,42 @@ public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
         this.terrainType = type;
     }
 
+    /**
+     * Method used to get the type of terrain
+     * @return type of terrain, returns an int.
+     */
     public int getTerrainType() {
         return terrainType;
     }
 
+    /**
+     * Method used to set the boolean passable. If false, should act as an obstacle.
+     * @param passable boolean to set.
+     */
     public void setPassable(boolean passable){
         this.passable = passable;
     }
+
+    /**
+     * Method used to get the
+     * @return if terrain is passable.
+     */
     public boolean isPassable() {
         return passable;
     }
     /**
-     * @param weight
-     * @param neighbor
+     * Method used to add branch and neighbor to terrain.
+     * @param weight weight of the branch.
+     * @param neighbor neighbor terrain.
      */
     public void addBranch(int weight, Terrain neighbor){
         Terrain.Edge newEdge = new Terrain.Edge(weight, neighbor);
         neighbors.add(newEdge);
     }
 
+    /**
+     *
+     */
     public static class Edge {
         public int weight;
         public Terrain terrain;

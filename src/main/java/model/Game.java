@@ -2,11 +2,9 @@ package model;
 
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.Enemy;
-import model.gameobjects.enemies.IEnemy;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.Spawner;
-import model.gameobjects.Entity;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
 import model.gameobjects.Shop;
@@ -56,8 +54,8 @@ public class Game {
         playerDead = false;
         EnemyFactory enemyFactory = new NormalEnemyFactory();
 
-        enemies.add(enemyFactory.createEnemy(player, gameMap.getGameMapCoordinates(), random));
-        enemies.add(enemyFactory.createEnemy(player, gameMap.getGameMapCoordinates(), random));
+        enemies.add(enemyFactory.createEnemyRandom(player, gameMap.getGameMapCoordinates(), random));
+        enemies.add(enemyFactory.createEnemyRandom(player, gameMap.getGameMapCoordinates(), random));
 
         spawner = new Spawner(this);
         gameObjects = new ArrayList<>();
