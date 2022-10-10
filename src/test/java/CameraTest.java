@@ -115,7 +115,7 @@ public class CameraTest {
         camera.setDragEffectConstant(-10);
         camera.update();
         Vector2 offsetAfterOneUpdateWhenDragIsLessThan1 = camera.getOffset();
-        
+
         assertEquals(offsetAfterOneUpdateWhenDragIs1.getX(), offsetAfterOneUpdateWhenDragIsLessThan1.getX());
         assertEquals(offsetAfterOneUpdateWhenDragIs1.getY(), offsetAfterOneUpdateWhenDragIsLessThan1.getY());
     }

@@ -110,7 +110,8 @@ public class Camera{
 
     /**
      * Provides the ability to change how much the camera is "dragging" after the focused object. A higher value
-     * will result in more drag effect. Values below 1 is not accepted and will automatically turn off the drag effect.
+     * will result in more drag effect. 1 equals no drag effect. Values below 1 is not accepted and will
+     * automatically turn off the drag effect.
      * @param value drag effect >= 1
      */
     public void setDragEffectConstant(int value) {
