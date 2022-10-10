@@ -1,35 +1,56 @@
 package model;
 
+import model.armor.Armor;
+import model.gameobjects.IUpgradable;
 import model.gameobjects.Player;
+import model.weapons.Weapon;
 
 public class ShopTransaction {
 
-    private int weaponStartPrize = 10;
-    private int armorStartPrize = 10;
-    private Player player;
+    public int currentWeaponPrize = 10;
+    public int currentArmorPrize = 10;
+    private final Player player; //Kolla om final inte fuckade upp något
 
 
 
     public ShopTransaction(Player player){
         this.player = player;
     }
+    public boolean isPurchasePossible(int currentPrize, IUpgradable current){
+        return (player.getMoney() - currentPrize * current.getCurrentLevel()) >= 0;
 
+    }
     public void upgradeWeapon(){
-       int cost = player.getWeapon().getLevel() * weaponStartPrize;
-       if((player.getMoney() -cost) >= 0){
-           newPlayerMoneyAmount(player.getMoney() - cost);
-           player.getWeapon().levelUpWeapon();
+       if(isPurchasePossible(currentWeaponPrize, getWeapon())){
+           this.currentWeaponPrize *= getWeapon().getLevel();
+           newPlayerMoneyAmount(player.getMoney() - currentWeaponPrize);
+           getWeapon().levelUp();
        }
     }
+
     public void upgradeArmor(){
-        int cost = player.getArmor().getLevel() * armorStartPrize;
-        if((player.getMoney() - cost) >= 0){
-            newPlayerMoneyAmount(player.getMoney() - cost);
-            player.getArmor().upgradeArmor();
+        if(isPurchasePossible(currentArmorPrize, getArmor())){
+            this.currentArmorPrize *= getArmor().getLevel();
+            newPlayerMoneyAmount(player.getMoney() - currentArmorPrize);
+            getArmor().levelUp();
         }
     }
+
     public int getPlayerMoneyAmount(){
         return player.getMoney();
+    }
+    public int getCurrentWeaponPrize(){
+        return currentWeaponPrize;
+    }
+    public int getCurrentArmorPrize(){
+        return currentArmorPrize;
+    }
+
+    public Armor getArmor(){
+        return player.getArmor();
+    }
+    public Weapon getWeapon(){
+        return player.getWeapon();
     }
 
     private void newPlayerMoneyAmount(int amountAfterTransaction) {

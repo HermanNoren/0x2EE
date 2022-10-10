@@ -1,13 +1,13 @@
 package model.weapons;
 
 import controllers.EDirection;
-import model.Game;
+import model.gameobjects.IUpgradable;
 import model.gameobjects.Projectile;
 import model.helperclasses.Vector2;
 
 import java.util.List;
 
-public class Weapon {
+public class Weapon implements IUpgradable {
     public int damage;
     private int currentLevel;
     public int ammo;
@@ -22,11 +22,6 @@ public class Weapon {
         this.ammo = ammo;
         reloading = false;
         currentLevel = 1;
-    }
-
-    public void levelUpWeapon(){
-        this.currentLevel++;
-        this.damage *=1.5;
     }
 
 
@@ -58,4 +53,14 @@ public class Weapon {
         return reloading;
     }
 
+    @Override
+    public void levelUp() {
+        this.currentLevel++;
+        this.damage++;
+    }
+
+    @Override
+    public int getCurrentLevel() {
+        return currentLevel;
+    }
 }

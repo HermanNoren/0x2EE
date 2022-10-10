@@ -1,6 +1,8 @@
 package model.armor;
 
-public class Armor implements IArmor {
+import model.gameobjects.IUpgradable;
+
+public class Armor implements IArmor, IUpgradable {
 
     public Armor(){
 
@@ -30,7 +32,16 @@ public class Armor implements IArmor {
      */
     @Override
     public void upgradeArmor() {
-        currentLevel++;
         //Upgrades armorLevel
+    }
+
+    @Override
+    public void levelUp() {
+        currentLevel++;
+    }
+
+    @Override
+    public int getCurrentLevel() {
+        return currentLevel;
     }
 }

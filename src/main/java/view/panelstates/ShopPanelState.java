@@ -2,7 +2,6 @@ package view.panelstates;
 
 import controllers.ButtonController;
 import controllers.buttonactions.UpgradeArmorButton;
-import model.Game;
 import model.ShopTransaction;
 import view.MainPanel;
 import view.buttons.GameButton;
@@ -67,6 +66,7 @@ public class ShopPanelState implements IPanelState{
         g2.setColor(panelColor);
         g2.fillRect(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         drawPlayerMoney(g2, shopTransaction.getPlayerMoneyAmount());
+        drawWeaponCost(g2, shopTransaction.getCurrentWeaponPrize());
         g2.setFont(Config.buttonFont); //the font which the button will be drawn in
     }
 
@@ -79,6 +79,12 @@ public class ShopPanelState implements IPanelState{
         g2.setColor(Color.WHITE);
         g2.setFont(Config.infoFont);
         g2.drawString((playerMoney + "$"),(Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(playerMoney + "$")), Config.SCREEN_HEIGHT/15);
+    }
+    private void drawWeaponCost(Graphics2D g2, int weaponCost){
+        g2.setColor(Color.WHITE);
+        g2.setFont(Config.inGameTextFont);
+        g2.drawString(("Upgrade cost is " + weaponCost + "$"),(Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth("Upgrade cost is " + weaponCost + "$")), Config.SCREEN_HEIGHT/4);
+
     }
 
     private void createShopButtons(ShopTransaction shopTransaction) {
