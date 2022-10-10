@@ -30,10 +30,6 @@ public class Armor implements IArmor, IUpgradable {
     /**
      * Used to increase armorLevel attribute.
      */
-    @Override
-    public void upgradeArmor() {
-        //Upgrades armorLevel
-    }
 
     @Override
     public void levelUp() {
