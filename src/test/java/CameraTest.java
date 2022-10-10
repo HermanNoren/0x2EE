@@ -100,6 +100,7 @@ public class CameraTest {
         assertTrue(offsetAfterOneUpdateWhenDragIs1.getY() < offsetAfterOneUpdateWhenDragIs100.getY());
     }
 
+    @Test
     void test_camera_reset_drag_effect() {
         game = new Game();
         player = new Player(0, 0, game.getGameMap().getGameMapCoordinates());
