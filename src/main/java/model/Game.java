@@ -1,5 +1,4 @@
 package model;
-
 import controllers.EDirection;
 import model.gameobjects.ItemSpawner.IItem;
 import model.helperclasses.Vector2;
@@ -224,7 +223,6 @@ public class Game {
                 }
 
             }
-
             /**
              * See if player is on shop, first for controller second for shop drawer
              */

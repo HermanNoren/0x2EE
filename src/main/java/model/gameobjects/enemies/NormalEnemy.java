@@ -9,7 +9,7 @@ import model.Game;
 import model.helperclasses.Vector2;
 
 
-class NormalEnemy extends Enemy{
+class  NormalEnemy extends Enemy{
 
 
     protected NormalEnemy(int x, int y, Game game) {

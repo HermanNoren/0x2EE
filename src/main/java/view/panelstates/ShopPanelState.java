@@ -25,7 +25,7 @@ public class ShopPanelState implements IPanelState{
     private final List<KeyListener> keyListeners;
     private final List<IDrawer> drawers;
 
-    Color panelColor = new Color(111, 78, 55);
+    Color panelColor = new Color(0, 0, 0);
     private final String headerText = "Shop";
 
 
@@ -44,13 +44,20 @@ public class ShopPanelState implements IPanelState{
     }
 
 
-
     /**
-     * draws the background of the shop!
+     * draws everything on the shop panel
      * @param g2
      */
     @Override
     public void draw(Graphics2D g2) {
+        // draws the screen
+        drawPanel(g2);
+        for (IDrawer drawer : drawers){
+            drawer.draw(g2);
+        }
+    }
+
+    private void drawPanel(Graphics2D g2) {
         g2.setColor(Color.WHITE);
         g2.setFont(Config.titleFont);
         g2.drawString(headerText, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(headerText)) / 2 , Config.SCREEN_HEIGHT/5);
@@ -58,11 +65,9 @@ public class ShopPanelState implements IPanelState{
         g2.setColor(panelColor);
         g2.fillRect(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         g2.setFont(Config.buttonFont);
-
-
-        for (IDrawer drawer : drawers){
-            drawer.draw(g2);
-        }
+    }
+    private void drawPlayerMoney(Graphics2D g2){
+        g2.setColor(Color.WHITE);
     }
 
 
@@ -76,6 +81,7 @@ public class ShopPanelState implements IPanelState{
         buttons.add(upgradeWeaponButton);
         buttons.add(leaveShopButton);
     }
+
     @Override
     public void changePanelState(EPanelState panelState) {
         mainPanel.changePanelState(panelState);
