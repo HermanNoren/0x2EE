@@ -1,11 +1,11 @@
 package model;
 
 import model.gameobjects.ItemSpawner.IItem;
-import model.gameobjects.enemies.Enemy;
+import model.gameobjects.enemies.*;
+import model.gameobjects.enemies.IEnemy;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
-
-import model.gameobjects.Entity;
+import model.gameobjects.ItemSpawner.*;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
 import model.gameobjects.Shop;
@@ -45,7 +45,7 @@ public class Game {
     private Projectile pendingBullet;
 
     public Game() {
-        this.gameMap = new GameMap(10, 50);
+        this.gameMap = new GameMap(100, 100);
         this.player = new Player(48, 48, gameMap.getGameMapCoordinates());
         shop = new Shop(200, 100);
         enemies = new ArrayList<>();
@@ -55,8 +55,8 @@ public class Game {
         playerDead = false;
         EnemyFactory enemyFactory = new NormalEnemyFactory();
 
-        enemies.add(enemyFactory.createEnemyRandom(player, gameMap.getGameMapCoordinates(), random));
-        enemies.add(enemyFactory.createEnemyRandom(player, gameMap.getGameMapCoordinates(), random));
+        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
+        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
 
         spawner = new Spawner(this);
         gameObjects = new ArrayList<>();
@@ -138,6 +138,11 @@ public class Game {
         player.shoot(projectiles);
     }
 
+    public void addProjectile(Projectile p) {
+        newBullet = true;
+        pendingBullet = p;
+    }
+
     /**
      * Updates the current game state
      */
@@ -173,7 +178,7 @@ public class Game {
             }
 
             for (IGameObject gameObject : gameObjects) {
-                gameObject.update(dt);
+//                gameObject.update(dt);
             }
 
             if (newBullet){
@@ -181,7 +186,7 @@ public class Game {
                 newBullet = false;
             }
 
-            for (Projectile projectile : projectiles){
+            for (IProjectile projectile : projectiles){
                 projectile.update(dt);
             }
 

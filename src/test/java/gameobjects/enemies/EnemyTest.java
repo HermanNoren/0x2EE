@@ -24,7 +24,7 @@ public class EnemyTest {
         gameMap = new GameMap(10, 10);
         player = new Player(1, 1, gameMap.getGameMapCoordinates());
         enemyFactory = new NormalEnemyFactory();
-        enemy = enemyFactory.createEnemy(player, gameMap.getGameMapCoordinates(), 10, 10);
+        enemy = enemyFactory.createEnemy(player, gameMap, new Random());
     }
     @Test
     void test_update_moves_enemy_towards_target_entity(){

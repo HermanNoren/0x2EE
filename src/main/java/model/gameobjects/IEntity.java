@@ -23,7 +23,6 @@ public interface IEntity {
     double getPosY();
     void setAccY(double accY);
     double getAccY();
-    Terrain getMapLocation(Terrain[][] coordinates);
     EDirection getDirection();
     EDirection getLastDirection();
     void setDirection(EDirection direction);
@@ -32,5 +31,5 @@ public interface IEntity {
     int getHealth();
     double getMaxHp();
     void damageTaken(int damage);
-
+    Terrain getMapLocation();
 }

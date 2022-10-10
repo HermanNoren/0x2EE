@@ -9,7 +9,7 @@ import java.util.Random;
 public class BossEnemyFactory extends EnemyFactory{
 
     @Override
-    public Enemy createEnemy(GameMap gameMap, Entity targetEntity, Random random) {
+    public Enemy createEnemy( Entity targetEntity, GameMap gameMap, Random random) {
         BossEnemy bossEnemy = new BossEnemy(100, 100, gameMap.getGameMapCoordinates(), targetEntity);
         return bossEnemy;
     }

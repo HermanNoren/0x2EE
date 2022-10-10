@@ -8,11 +8,9 @@ import model.helperclasses.Vector2;
 import java.util.List;
 
 public class Weapon {
-
     public int damage;
     public int ammo;
     public boolean reloading;
-
 
     /**
      * The main weapon of the

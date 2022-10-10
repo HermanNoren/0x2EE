@@ -1,17 +1,9 @@
-
-
-
-
-
 package model.gameobjects.enemies;
 
 import model.gameobjects.Entity;
 import model.mapclasses.Terrain;
 
-
 class NormalEnemy extends Enemy{
-
-
     protected NormalEnemy(int x, int y, Terrain[][] coordinates, Entity targetEntity) {
         super(x, y, coordinates, targetEntity);
         setVelX(0.3);
@@ -19,6 +11,7 @@ class NormalEnemy extends Enemy{
         setMaxHp(100);
         setHealth(100);
     }
+
     @Override
     public void specialAbility() {
 
@@ -29,9 +22,4 @@ class NormalEnemy extends Enemy{
         super.update(dt);
     }
 
-
-    @Override
-    public boolean isPassable() {
-        return false;
-    }
 }

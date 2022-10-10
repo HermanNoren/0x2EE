@@ -13,6 +13,17 @@ import java.util.PriorityQueue;
 public class AStar {
 
     /**
+     * Manhattan heuristic
+     * @return
+     */
+    private static double calculateHeuristic(Terrain current, Terrain goal){
+        int D = 1;
+        double dx = Math.abs(current.getX() - goal.getX());
+        double dy = Math.abs(current.getY() - goal.getY());
+        double prio = Math.abs(dx-dy)*0.0001;
+        return D*(dx + dy + prio);
+    }
+    /**
      * Static method with A* algorithm, used to find the shortest path between two nodes
      * by using a heuristic to approximate the shortest distance from the start to target to make the algorithm
      * more accurate and efficient. Like the Djikastra algorithm except more efficient since A* uses the
@@ -29,7 +40,7 @@ public class AStar {
         PriorityQueue<Terrain> openList = new PriorityQueue<>();
 
         start.setG(0);
-        start.setF(start.calculateHeuristic(start, target));
+        start.setF(calculateHeuristic(start, target));
 
         openList.add(start);
         while(!openList.isEmpty()){
@@ -42,13 +53,13 @@ public class AStar {
             }
 
             for(Terrain.Edge edge : n.getNeighbors()){ // Check neighbors of n.
-                Terrain m = edge.terrain;
-                double totalWeight = n.getG() + edge.weight;
+                Terrain m = edge.getTerrain();
+                double totalWeight = n.getG() + edge.getWeight();
 
                 if(!openList.contains(m) && !closedList.contains(m) && m.isPassable()){
                     m.setParent(n);
                     m.setG(totalWeight);
-                    m.setF(m.getG() + m.calculateHeuristic(m, target)); // f = g+h
+                    m.setF(m.getG() + calculateHeuristic(m, target)); // f = g+h
                     openList.add(m);
 
                 }
@@ -56,7 +67,7 @@ public class AStar {
                     if(totalWeight < m.getG() && m.isPassable()){
                         m.setParent(n);
                         m.setG(totalWeight);
-                        m.setF(m.getG() + m.calculateHeuristic(m, target));
+                        m.setF(m.getG() + calculateHeuristic(m, target));
 
                         if(closedList.contains(m)){
                             closedList.remove(m);

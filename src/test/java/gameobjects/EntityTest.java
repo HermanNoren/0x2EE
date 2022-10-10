@@ -210,8 +210,8 @@ public class EntityTest {
             }
         }
 
-        assertEquals(1, entity.getMapLocation(testCoords).getX());
-        assertEquals(1, entity.getMapLocation(testCoords).getY());
+        assertEquals(1, entity.getMapLocation().getX());
+        assertEquals(1, entity.getMapLocation().getY());
 
     }
 
