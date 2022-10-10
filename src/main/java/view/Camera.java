@@ -50,7 +50,7 @@ public class Camera{
 
     /**
      * Resets the camera; removes the focused object, resets the offset to 0x0, resets the drag effect constant
-     * and resets the zoom multiplier. Mainly used for testing.
+     * and resets the zoom multiplier.
      */
     public void reset() {
         this.focusedObject = new ArrayList<>();
