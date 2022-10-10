@@ -1,10 +1,11 @@
 package model;
 
 import model.gameobjects.ItemSpawner.IItem;
+import model.gameobjects.enemies.*;
+import model.gameobjects.enemies.IEnemy;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
-import model.gameobjects.ItemSpawner.Spawner;
-import model.gameobjects.Entity;
+import model.gameobjects.ItemSpawner.*;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
 import model.gameobjects.Shop;
@@ -29,8 +30,7 @@ public class Game {
     private Player player;
     private List<Terrain> path;
     private List<String> highscoreName;
-    private List<Entity> enemies;
-    private List<IGameObject> terrains;
+    private List<Enemy> enemies;
     private boolean stateChangedFlag;
     private GameMap gameMap;
     private File highscoreFile;
@@ -42,11 +42,11 @@ public class Game {
     private Spawner spawner;
     private Random random = new Random();
     private Boolean playerDead;
-    private Projectile pendingBullet;
     private ShopTransaction shopTransaction;
+    private Projectile pendingBullet;
 
     public Game() {
-        this.gameMap = new GameMap(50, 50);
+        this.gameMap = new GameMap(100, 100);
         this.player = new Player(48, 48, gameMap.getGameMapCoordinates());
         shop = new Shop(200, 100);
         this.shopTransaction = new ShopTransaction(this.getPlayer());
@@ -56,8 +56,10 @@ public class Game {
         this.path = new ArrayList<>();
         playerDead = false;
         EnemyFactory enemyFactory = new NormalEnemyFactory();
-        enemies.add(enemyFactory.createEnemy(gameMap, player, random));
-        enemies.add(enemyFactory.createEnemy(gameMap, player, random));
+
+        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
+        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
+
         spawner = new Spawner(this);
         gameObjects = new ArrayList<>();
         gameObjects.add(shop);
@@ -115,13 +117,15 @@ public class Game {
         return player;
     }
 
-    public List<Entity> getEnemies() {
+    public List<Enemy> getEnemies() {
         return enemies;
     }
 
     public List<IItem> getItems() {
         return spawner.getSpawnedItems();
     }
+
+    private boolean newBullet;
 
     /**
      * Add an observer. Observers will be notified 120 times per second
@@ -134,6 +138,11 @@ public class Game {
 
     public void makePlayerShoot() {
         player.shoot(projectiles);
+    }
+
+    public void addProjectile(Projectile p) {
+        newBullet = true;
+        pendingBullet = p;
     }
 
     /**
@@ -171,16 +180,21 @@ public class Game {
             }
 
             for (IGameObject gameObject : gameObjects) {
-                gameObject.update(dt);
+//                gameObject.update(dt);
             }
 
-            for (Projectile projectile : getProjectiles()){
+            if (newBullet){
+                projectiles.add(pendingBullet);
+                newBullet = false;
+            }
+
+            for (IProjectile projectile : projectiles){
                 projectile.update(dt);
             }
 
-            Iterator<Entity> enemyIter = enemies.iterator();
+            Iterator<Enemy> enemyIter = enemies.iterator();
             while (enemyIter.hasNext()) {
-                Entity enemy = enemyIter.next();
+                Enemy enemy = enemyIter.next();
                 if (enemy.getHealth() < 1) {
                     spawner.spawnItem();
                     player.addScore(100);

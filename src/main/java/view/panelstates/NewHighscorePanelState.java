@@ -49,11 +49,11 @@ public class NewHighscorePanelState implements IPanelState{
         g2.setColor(Color.black);
         g2.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         g2.setFont(Config.buttonFont);
+        xpos = 100;
+        ypos = 350;
         for (IDrawer drawer : drawers){
             drawer.draw(g2);
         }
-        xpos = 100;
-        ypos = 350;
         g2.setColor(Color.white);
         g2.fillRect(xpos+=100, ypos, 70, 2);
         g2.fillRect(xpos+= 100, ypos, 70, 2);

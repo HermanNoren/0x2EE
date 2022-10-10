@@ -49,24 +49,6 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
         }
         weapon.shoot(getCenter(), dir, projectiles);
     }
-
-
-    @Override
-    public Vector2 getCenter() {
-        double x = getPosX() + (double) (getWidth() / 2);
-        double y = getPosY() + (double) (getHeight() / 2);
-        return new Vector2(x, y);
-    }
-
-    @Override
-    public boolean isPassable() {
-        return false;
-    }
-
-    public void update(double dt) {
-
-    }
-
     public void stopCurrentMovement(){
         setVel(new Vector2(0,0));
         setAcc(new Vector2(0,0));
@@ -134,6 +116,6 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
     }
 
     public void addMoney(int amount){
-        money += amount;
+        this.money += amount;
     }
 }

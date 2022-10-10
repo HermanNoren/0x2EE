@@ -1,13 +1,13 @@
 package model.weapons;
 
 import controllers.EDirection;
+import model.Game;
 import model.gameobjects.Projectile;
 import model.helperclasses.Vector2;
 
 import java.util.List;
 
 public class Weapon {
-
     public int damage;
     private int currentLevel;
     public int ammo;

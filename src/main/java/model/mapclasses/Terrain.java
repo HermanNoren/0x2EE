@@ -125,28 +125,24 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
         neighbors.add(newEdge);
     }
 
-    /**
-     * Manhattan heuristic
-     * @return
-     */
-    public double calculateHeuristic(Terrain current, Terrain goal){
-        int D = 1;
-        double dx = Math.abs(current.x - goal.x);
-        double dy = Math.abs(current.y - goal.y);
-        double prio = Math.abs(dx-dy)*0.0001;
-        return D*(dx + dy + prio);
-    }
-
-    @Override
-    public void update(double dt) {
+    public double getF() {
+        return f;
     }
 
     public static class Edge {
-        public int weight;
-        public Terrain terrain;
+        private int weight;
+        private Terrain terrain;
         Edge(int weight, Terrain terrain){
             this.weight = weight;
             this.terrain = terrain;
+        }
+
+        public Terrain getTerrain() {
+            return terrain;
+        }
+
+        public int getWeight() {
+            return weight;
         }
     }
 

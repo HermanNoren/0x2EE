@@ -17,15 +17,12 @@ import java.util.List;
 
 
 public class MainMenuPanelState implements IPanelState {
-
     private final Game game;
-
     private final ButtonController bc;
     private final List<GameButton> buttons;
     private final List<IDrawer> drawers;
     private final List<KeyListener> keyListeners;
     private MainPanel mainPanel;
-
 
     public MainMenuPanelState(MainPanel mainPanel, Game game) {
         this.game = game;
@@ -38,7 +35,6 @@ public class MainMenuPanelState implements IPanelState {
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(buttons));
     }
-
 
     @Override
     public void draw(Graphics2D g2) {

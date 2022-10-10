@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * Game map class
  */
-public class GameMap {
+public class GameMap implements IGameMap{
     private final List<Terrain> terrains = new ArrayList<>();
     private final Terrain[][] gameMapCoordinates;
     private final int width;
@@ -29,15 +29,14 @@ public class GameMap {
         addCoordinatesAndTiles(width, height);
 
         Noise n = new Noise(10, this); // Generates random terrain on the game map.
-        n.init();
-        n.setTerrainTypes(gameMapCoordinates);
-
+//        n.init();
+//        n.setTerrainTypes(gameMapCoordinates);
+//
         createBorder();
 
         terrains.forEach(this::addNeighbors);
        // n.printTerrainGrid(gameMapCoordinates);
     }
-
 
     /**
      * Adds terrains in a width*height matrix and into a list.
@@ -85,21 +84,10 @@ public class GameMap {
         return new ArrayList<>(terrains);
     }
 
-    public List<IGameObject> getPassableTerrains(){
-        List<IGameObject> passable = new ArrayList<>();
-        for(Terrain terrain: terrains){
-            if(terrain.isPassable()) {
-                passable.add(terrain);
-            }
-        }
-        return passable;
-    }
-
-
     /**
      * Add neighbor to the given node. If the presumed neighbor isn't grass then it won't be added as a neighbor.
      */
-    public void addNeighbors(Terrain current){
+    private void addNeighbors(Terrain current){
         int x = current.getX();
         int y = current.getY();
 
@@ -144,7 +132,6 @@ public class GameMap {
         int col = 0;
         int row = 0;
         while (col < width && row < height){
-
             if((gameMapCoordinates[col][row].getX())+2 > width ||
                     (gameMapCoordinates[col][row].getY())+2 > height ||
                     (gameMapCoordinates[col][row].getX())-1 < 0 ||

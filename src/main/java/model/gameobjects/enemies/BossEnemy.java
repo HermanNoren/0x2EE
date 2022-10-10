@@ -3,6 +3,7 @@ package model.gameobjects.enemies;
 
 
 import model.gameobjects.Entity;
+
 import model.mapclasses.Terrain;
 
 public class BossEnemy extends Enemy{
@@ -18,8 +19,5 @@ public class BossEnemy extends Enemy{
     public void specialAbility() {
 
     }
-    @Override
-    public boolean isPassable() {
-        return false;
-    }
+
 }

@@ -46,11 +46,6 @@ public class ProjectileTest {
         assertEquals(4, projectile.getCenter().getY());
     }
 
-    @Test
-    void test_is_passable() {
-        projectile = new Projectile(new Vector2(0, 0), EDirection.NOT_MOVING);
-        assertFalse(projectile.isPassable());
-    }
 
     @Test
     void test_move_projectile_left() {

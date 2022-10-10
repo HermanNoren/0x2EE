@@ -70,7 +70,6 @@ public class ShopPanelState implements IPanelState{
         g2.setColor(Color.WHITE);
     }
 
-
     private void createShopButtons(ShopTransaction shopTransaction) {
         GameButton upgradeArmorButton = new GameButton("armor", Config.SCREEN_WIDTH / 8, Config.SCREEN_HEIGHT / 6, new UpgradeArmorButton(shopTransaction));
         GameButton upgradeWeaponButton = new GameButton("weapon", Config.SCREEN_WIDTH / 8, Config.SCREEN_HEIGHT / 2, new UpgradeWeaponAction(shopTransaction));

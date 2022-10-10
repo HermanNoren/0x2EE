@@ -12,5 +12,6 @@ public abstract class EnemyFactory {
 
     }
 
-    public abstract Enemy createEnemy(GameMap gameMap, Entity targetEntity, Random rand);
+    public abstract Enemy createEnemy(Entity targetEntity,GameMap gameMap, Random rand);
+
 }

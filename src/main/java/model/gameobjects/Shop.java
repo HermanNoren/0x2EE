@@ -60,13 +60,4 @@ public class Shop implements IGameObject {
         return null;
     }
 
-    @Override
-    public boolean isPassable() {
-        return true;
-    }
-
-    @Override
-    public void update(double dt) {
-
-    }
 }
