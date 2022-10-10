@@ -45,14 +45,15 @@ public class AStar {
                 Terrain m = edge.terrain;
                 double totalWeight = n.getG() + edge.weight;
 
-                if(!openList.contains(m) && !closedList.contains(m)){
+                if(!openList.contains(m) && !closedList.contains(m) && m.isPassable()){
                     m.setParent(n);
                     m.setG(totalWeight);
                     m.setF(m.getG() + m.calculateHeuristic(m, target)); // f = g+h
                     openList.add(m);
 
-                } else {
-                    if(totalWeight < m.getG()){
+                }
+                else {
+                    if(totalWeight < m.getG() && m.isPassable()){
                         m.setParent(n);
                         m.setG(totalWeight);
                         m.setF(m.getG() + m.calculateHeuristic(m, target));
@@ -70,31 +71,5 @@ public class AStar {
 
         }
         return null;
-    }
-
-    /**
-     * Returns the path from start to target in a ArrayList
-     * @param target
-     * @return ArrayList<Terrain>
-     *
-     */
-    public static List<Terrain> getPathToTarget(Terrain target){
-
-        Terrain n = target;
-
-        if(n==null)
-            return null;
-
-        List<Terrain> path = new ArrayList<>();
-        while(n.getParent() != null){
-            path.add(n);
-            n = n.getParent();
-        }
-
-        path.add(n);
-
-        Collections.reverse(path);
-
-        return path;
     }
 }

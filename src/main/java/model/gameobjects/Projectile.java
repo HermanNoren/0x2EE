@@ -40,6 +40,9 @@ public class Projectile implements IGameObject {
         return new Vector2(pos);
     }
 
+    /**
+     * @return the coordinates for the center of the projectile as a vector.
+     */
     @Override
     public Vector2 getCenter() {
         double x = pos.getX() + (double) (getWidth() / 2);
@@ -47,16 +50,21 @@ public class Projectile implements IGameObject {
         return new Vector2(x, y);
     }
 
+    /**
+     * @return false - projectiles collides with entities.
+     */
     @Override
     public boolean isPassable() {
         return false;
     }
 
+    /**
+     * Updates the position of the projectile
+     * @param dt passed time since last update
+     */
     @Override
     public void update(double dt) {
         pos.setX(pos.getX() + vel.getX() * dt);
-
         pos.setY(pos.getY() + vel.getY() * dt);
-
     }
 }

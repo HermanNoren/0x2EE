@@ -1,5 +1,6 @@
 package controllers;
 
+import model.Game;
 import model.gameobjects.Player;
 
 import java.awt.event.KeyEvent;
@@ -10,7 +11,6 @@ public class PlayerController implements KeyListener {
     private final Player player;
     private boolean moving;
     private List<EDirection> pressedOrder;
-
 
     public PlayerController(Player player) {
         pressedOrder = new ArrayList<>();

@@ -21,14 +21,11 @@ public interface IGameObject {
      * Returns the position of the upper left corner
      * of the sprite.
      */
-
     /**
      * Returns the center position of the sprite
      * @return Center position
      */
     Vector2 getCenter();
-
-
 
     boolean isPassable();
     /**

@@ -5,15 +5,15 @@
 
 package model.gameobjects.enemies;
 
-import model.Game;
-import model.helperclasses.Vector2;
+import model.gameobjects.Entity;
+import model.mapclasses.Terrain;
 
 
 class  NormalEnemy extends Enemy{
 
 
-    protected NormalEnemy(int x, int y, Game game) {
-        super(x, y, game);
+    protected NormalEnemy(int x, int y, Terrain[][] coordinates, Entity targetEntity) {
+        super(x, y, coordinates, targetEntity);
         setVelX(0.3);
         setVelY(0.3);
         setMaxHp(100);
@@ -29,11 +29,6 @@ class  NormalEnemy extends Enemy{
         super.update(dt);
     }
 
-
-    @Override
-    public Vector2 getCenter() {
-        return null;
-    }
 
     @Override
     public boolean isPassable() {

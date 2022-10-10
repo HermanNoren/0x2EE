@@ -19,7 +19,7 @@ import java.util.List;
 public class HowToPlayPanelState implements IPanelState{
 
     private Game game;
-    private BufferedImage controls;
+    private BufferedImage controls, instructions;
     private final ButtonController bc;
     private final ArrayList<GameButton> buttons;
     private List<IDrawer> drawers;
@@ -27,6 +27,7 @@ public class HowToPlayPanelState implements IPanelState{
     private MainPanel mainPanel;
 
     private ImageHandler imageHandler;
+
 
     public HowToPlayPanelState(MainPanel mainPanel, Game game){
         this.game = game;
@@ -38,6 +39,7 @@ public class HowToPlayPanelState implements IPanelState{
         keyListeners.add(bc);
         imageHandler = new ImageHandler();
         controls = imageHandler.getImage("imgs/menus/h2p.png");
+        instructions = imageHandler.getImage("imgs/menus/instructions.png");
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(buttons));
     }
@@ -60,6 +62,7 @@ public class HowToPlayPanelState implements IPanelState{
         String paused = "HOW TO PLAY";
         g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 100);
         g2.drawImage(controls, 0,80, Config.SCREEN_WIDTH*100/150, Config.SCREEN_HEIGHT, null);
+        g2.drawImage(instructions, 575,130, 350, 400, null);
     }
 
     @Override

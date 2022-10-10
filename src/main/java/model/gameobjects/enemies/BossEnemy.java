@@ -2,13 +2,13 @@
 package model.gameobjects.enemies;
 
 
-import model.Game;
-import model.helperclasses.Vector2;
+import model.gameobjects.Entity;
+import model.mapclasses.Terrain;
 
 public class BossEnemy extends Enemy{
 
-    public BossEnemy(int x, int y, Game game) {
-        super(x, y, game);
+    public BossEnemy(int x, int y, Terrain[][] coordinates, Entity targetEntity) {
+        super(x, y, coordinates, targetEntity);
         setVelX(1);
         setVelY(1);
         setHealth(500);
@@ -18,12 +18,6 @@ public class BossEnemy extends Enemy{
     public void specialAbility() {
 
     }
-
-    @Override
-    public Vector2 getCenter() {
-        return null;
-    }
-
     @Override
     public boolean isPassable() {
         return false;

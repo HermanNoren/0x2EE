@@ -27,13 +27,12 @@ public class GameMap {
         this.gameMapCoordinates = new Terrain[width][height];
 
         addCoordinatesAndTiles(width, height);
-    /**
+
         Noise n = new Noise(10, this); // Generates random terrain on the game map.
         n.init();
         n.setTerrainTypes(gameMapCoordinates);
 
         createBorder();
-     */
 
         terrains.forEach(this::addNeighbors);
        // n.printTerrainGrid(gameMapCoordinates);
@@ -95,6 +94,8 @@ public class GameMap {
         }
         return passable;
     }
+
+
     /**
      * Add neighbor to the given node. If the presumed neighbor isn't grass then it won't be added as a neighbor.
      */
@@ -103,43 +104,35 @@ public class GameMap {
         int y = current.getY();
 
         // Add left side neighbour
-        if (current.isPassable() && (x-1) > -1){
+        if (x-1 > -1){
             Terrain leftNeighbor = gameMapCoordinates[x-1][y];
 
             if(leftNeighbor != null){
-                if(leftNeighbor.isPassable()){
-                    current.addBranch(1, leftNeighbor);
-                }
+                current.addBranch(1, leftNeighbor);
             }
         }
 
         // Add right side neighbour
-        if(current.isPassable() && (x+1) < width){
+        if(x+1 < width){
             Terrain rightNeighbor = gameMapCoordinates[x+1][y];
             if(rightNeighbor != null){
-                if(rightNeighbor.isPassable()) {
-                    current.addBranch(1, rightNeighbor);
-                }
+                current.addBranch(1, rightNeighbor);
             }
         }
 
         // Add top neighbour
-        if (current.isPassable() && (y-1) > -1){
+        if (y-1 > -1){
             Terrain topNeighbor = gameMapCoordinates[x][y-1];
             if(topNeighbor != null){
-                if(topNeighbor.isPassable()){
-                    current.addBranch(1, topNeighbor);
-                }
+                current.addBranch(1, topNeighbor);
             }
         }
 
         // Add bottom neighbour
-        if(current.isPassable() && (y+1) < height){
+        if(y+1 < height){
             Terrain bottomNeighbor = gameMapCoordinates[x][y+1];
             if(bottomNeighbor != null){
-                if (bottomNeighbor.isPassable()){
-                    current.addBranch(1, bottomNeighbor);
-                }
+                current.addBranch(1, bottomNeighbor);
             }
         }
     }
@@ -156,7 +149,6 @@ public class GameMap {
                     (gameMapCoordinates[col][row].getY())+2 > height ||
                     (gameMapCoordinates[col][row].getX())-1 < 0 ||
                     (gameMapCoordinates[col][row].getY())-1 < 0){
-
                 gameMapCoordinates[col][row].setTerrainType(1);
                 gameMapCoordinates[col][row].setPassable(false);
             }

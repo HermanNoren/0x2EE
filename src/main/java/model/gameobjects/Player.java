@@ -1,43 +1,35 @@
 
 package model.gameobjects;
 
-
-import model.Game;
 import model.armor.Armor;
 import controllers.EDirection;
 import model.helperclasses.Vector2;
+import model.mapclasses.Terrain;
 import model.weapons.Weapon;
 
 import java.util.List;
-import java.util.Random;
 
 /**
  * The player, more implementation to come.
  */
 
-public class Player extends Entity implements IGameObject, IFocusableObject {
-
-
+public class Player extends Entity implements IPlayer, IFocusableObject {
     private int score;
     private int money;
     private Weapon weapon;
     private Armor armor;
-    boolean isDamageTaken;
-
     private double moveAcc;
 
     public boolean isOnShop = false;
-    private Game game;
     /**
      * @param x, starting x-position
      * @param y, starting y-position
      * Player constructor, used to create an instance of player.
      */
-    public Player(int x, int y, Game game){
-        super(x, y, game);
-        this.game = game;
+    public Player(int x, int y, Terrain[][] coordinates){
+        super(x, y, coordinates);
         this.armor = new Armor();
-        this.weapon = new Weapon(10, 10, game);
+        this.weapon = new Weapon(10, 10);
         setMaxHp(1000);
         setHealth(1000);
         moveAcc = 0.3;
@@ -47,8 +39,14 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
 
     public void shoot(List<Projectile> projectiles) {
         EDirection dir;
-        if (getDirection() == EDirection.NOT_MOVING) { dir = getLastDirection(); }
-        else { dir = getDirection(); }
+
+        if (getDirection() == EDirection.NOT_MOVING) {
+            dir = getLastDirection();
+        }
+
+        else {
+            dir = getDirection();
+        }
         weapon.shoot(getCenter(), dir, projectiles);
     }
 
@@ -104,27 +102,12 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
         setVelY(getVelY() + getAccY() * dt);
         setPosY(getPosY() + getVelY() * dt + 0.5 * getAccY() * (dt * dt));
     }
-
-    /**
-     * add the weapon object into the attack.
-     */
-    public int damageDelt() {
-        return weapon.damage;
-    }
-
-
-    public boolean isDamageTaken(){
-
-        return isDamageTaken;
-    }
-
     /**
      * @return score acquired during game
      */
     public int getScore(){
         return score;
     }
-
     /**
      * Adds score to total
      * @param score to add
@@ -132,7 +115,6 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
     public void addScore(int score){
         this.score += score;
     }
-
     /**
      * @return currency acquired during game
      */
