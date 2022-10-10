@@ -134,7 +134,7 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
         double dx = Math.abs(current.x - goal.x);
         double dy = Math.abs(current.y - goal.y);
         double prio = Math.abs(dx-dy)*0.0001;
-        return D*((dx + dy) + prio);
+        return D*(dx + dy + prio);
     }
 
     @Override
