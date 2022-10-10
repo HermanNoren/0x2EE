@@ -25,10 +25,6 @@ public class Weapon implements IUpgradable {
     }
 
 
-    public int getLevel(){
-        return currentLevel;
-    }
-
 
     public void shoot(Vector2 pos, EDirection direction, List<Projectile> projectiles){
         if (ammo != 0) {

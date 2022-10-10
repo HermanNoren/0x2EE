@@ -66,7 +66,8 @@ public class ShopPanelState implements IPanelState{
         g2.setColor(panelColor);
         g2.fillRect(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         drawPlayerMoney(g2, shopTransaction.getPlayerMoneyAmount());
-        drawWeaponCost(g2, shopTransaction.getCurrentWeaponPrize());
+        drawWeaponCost(g2, shopTransaction.getWeaponUpgradeCost());
+        drawArmorCost(g2, shopTransaction.getArmorUpgradeCost());
         g2.setFont(Config.buttonFont); //the font which the button will be drawn in
     }
 
@@ -83,8 +84,12 @@ public class ShopPanelState implements IPanelState{
     private void drawWeaponCost(Graphics2D g2, int weaponCost){
         g2.setColor(Color.WHITE);
         g2.setFont(Config.inGameTextFont);
-        g2.drawString(("Upgrade cost is " + weaponCost + "$"),(Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth("Upgrade cost is " + weaponCost + "$")), Config.SCREEN_HEIGHT/4);
-
+        g2.drawString(("Upgrade cost is " + weaponCost + "$"), (int) ((Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth("Upgrade cost is " + weaponCost + "$"))/1.2), (int) ((Config.SCREEN_HEIGHT)/1.5));
+    }
+    private void drawArmorCost(Graphics2D g2, int armorCost){
+        g2.setColor(Color.WHITE);
+        g2.setFont(Config.inGameTextFont);
+        g2.drawString(("Upgrade cost is " + armorCost + "$"), (int) ((Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth("Upgrade cost is " + armorCost + "$"))/1.2), (int) ((Config.SCREEN_HEIGHT)/3.5));
     }
 
     private void createShopButtons(ShopTransaction shopTransaction) {

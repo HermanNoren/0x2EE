@@ -20,20 +20,9 @@ public class Armor implements IArmor, IUpgradable {
         return damageTaken * reduction;
     }
 
-    public int getLevel(){
-        return currentLevel;
-    }
-
-    public void levelUpArmor(){
-        this.currentLevel++;
-    }
-    /**
-     * Used to increase armorLevel attribute.
-     */
-
     @Override
     public void levelUp() {
-        currentLevel++;
+        this.currentLevel++;
     }
 
     @Override

@@ -38,9 +38,7 @@ public class KeyClickedController implements KeyListener {
                     escapeKeyDown = true;
                     panel.changePanelState(EPanelState.PAUSE);
                 }
-
             }
-
         }
     }
 

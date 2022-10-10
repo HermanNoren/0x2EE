@@ -17,12 +17,12 @@ public class ShopTransaction {
         this.player = player;
     }
     public boolean isPurchasePossible(int currentPrize, IUpgradable current){
-        return (player.getMoney() - currentPrize * current.getCurrentLevel()) >= 0;
+        return ((player.getMoney() - currentPrize * current.getCurrentLevel()) >= 0);
 
     }
     public void upgradeWeapon(){
        if(isPurchasePossible(currentWeaponPrize, getWeapon())){
-           this.currentWeaponPrize *= getWeapon().getLevel();
+           currentWeaponPrize *= getWeapon().getCurrentLevel();
            newPlayerMoneyAmount(player.getMoney() - currentWeaponPrize);
            getWeapon().levelUp();
        }
@@ -30,10 +30,16 @@ public class ShopTransaction {
 
     public void upgradeArmor(){
         if(isPurchasePossible(currentArmorPrize, getArmor())){
-            this.currentArmorPrize *= getArmor().getLevel();
+            this.currentArmorPrize *= getArmor().getCurrentLevel();
             newPlayerMoneyAmount(player.getMoney() - currentArmorPrize);
             getArmor().levelUp();
         }
+    }
+    public int getWeaponUpgradeCost(){
+        return currentWeaponPrize * getWeapon().getCurrentLevel();
+    }
+    public int getArmorUpgradeCost(){
+        return currentArmorPrize * getArmor().getCurrentLevel();
     }
 
     public int getPlayerMoneyAmount(){
