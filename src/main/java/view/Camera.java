@@ -56,7 +56,7 @@ public class Camera{
         this.focusedObject = new ArrayList<>();
         relativePos = new Vector2(0, 0);
         absolutePos = new Vector2(relativePos);
-        dragEffectConstant = standardDragEffectConstant;
+        resetDragEffectConstant();
         currentZoomMultiplier = 1;
     }
 

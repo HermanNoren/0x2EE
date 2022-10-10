@@ -100,6 +100,25 @@ public class CameraTest {
         assertTrue(offsetAfterOneUpdateWhenDragIs1.getY() < offsetAfterOneUpdateWhenDragIs100.getY());
     }
 
+    void test_camera_reset_drag_effect() {
+        game = new Game();
+        player = new Player(0, 0, game.getGameMap().getGameMapCoordinates());
+        camera.reset();
+        camera.setFocusedObject(player);
+        camera.update();
+        Vector2 offsetAfterOneUpdateWhenDragIs50 = camera.getOffset();
+
+        camera.reset();
+        camera.setFocusedObject(player);
+        camera.setDragEffectConstant(100);
+        camera.resetDragEffectConstant();
+        camera.update();
+        Vector2 offsetAfterOneUpdateWhenDragIsReset = camera.getOffset();
+
+        assertEquals(offsetAfterOneUpdateWhenDragIs50.getX(), offsetAfterOneUpdateWhenDragIsReset.getX());
+        assertEquals(offsetAfterOneUpdateWhenDragIs50.getY(), offsetAfterOneUpdateWhenDragIsReset.getY());
+    }
+
     @Test
     void test_camera_drag_effect_boundaries() {
         game = new Game();
