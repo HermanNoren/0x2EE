@@ -15,7 +15,7 @@ public class Weapon {
     public int ammo;
     public boolean reloading;
 
-    private Game game;
+    private final Game game;
 
     /**
      * The main weapon of the
@@ -25,17 +25,15 @@ public class Weapon {
         this.ammo = ammo;
         reloading = false;
         this.game = game;
+        currentLevel = 1;
 
     }
 
     public void levelUpWeapon(){
-        currentLevel++;
-        upgradeWeapon();
+        this.currentLevel++;
+        this.damage *=1.5;
     }
 
-    private void upgradeWeapon() {
-        ++damage;
-    }
 
     public int getLevel(){
         return currentLevel;

@@ -62,7 +62,7 @@ public class Spawner{
         Random rand = new Random();
         int r = rand.nextInt(2);
 
-        switch (r){
+        switch (0){
             case 0 -> spawnedItems.add(new Coin(getSpawnLocation()));
             case 1 -> spawnedItems.add(new Potion(getSpawnLocation()));
         }

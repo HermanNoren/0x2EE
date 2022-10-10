@@ -5,8 +5,8 @@ import controllers.ButtonController;
 import model.Game;
 import view.MainPanel;
 import view.buttons.GameButton;
-import view.buttons.buttonactions.MenuButtonAction;
-import view.buttons.buttonactions.QuitButtonAction;
+import controllers.buttonactions.MenuButtonAction;
+import controllers.buttonactions.QuitButtonAction;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 

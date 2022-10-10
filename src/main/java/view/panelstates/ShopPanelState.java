@@ -1,12 +1,13 @@
 package view.panelstates;
 
 import controllers.ButtonController;
-import controllers.ShopController;
+import controllers.buttonactions.UpgradeArmorButton;
 import model.Game;
+import model.ShopTransaction;
 import view.MainPanel;
 import view.buttons.GameButton;
-import view.buttons.buttonactions.BuyWeaponAction;
-import view.buttons.buttonactions.MenuButtonAction;
+import controllers.buttonactions.UpgradeWeaponAction;
+import controllers.buttonactions.MenuButtonAction;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 import view.drawers.InShopDrawer;
@@ -33,11 +34,10 @@ public class ShopPanelState implements IPanelState{
         buttons = new ArrayList<>();
         keyListeners = new ArrayList<>();
         pictureButtons = new ArrayList<>();
-        createShopButtons();
+        createShopButtons(game.getShopTransaction());
 
         stringButtonController = new ButtonController(buttons);
         keyListeners.add(stringButtonController);
-        keyListeners.add(new ShopController(game.getShopTransaction(), buttons));
         drawers = new ArrayList<>();
         drawers.add(new InShopDrawer(pictureButtons));
         drawers.add(new ButtonDrawer(buttons.get(2))); //only paint the leave-button
@@ -66,9 +66,9 @@ public class ShopPanelState implements IPanelState{
     }
 
 
-    private void createShopButtons() {
-        GameButton upgradeArmorButton = new GameButton("armor", Config.SCREEN_WIDTH / 8, Config.SCREEN_HEIGHT / 6, new MenuButtonAction(EPanelState.SHOP, this));
-        GameButton upgradeWeaponButton = new GameButton("weapon", Config.SCREEN_WIDTH / 8, Config.SCREEN_HEIGHT / 2, new BuyWeaponAction());
+    private void createShopButtons(ShopTransaction shopTransaction) {
+        GameButton upgradeArmorButton = new GameButton("armor", Config.SCREEN_WIDTH / 8, Config.SCREEN_HEIGHT / 6, new UpgradeArmorButton(shopTransaction));
+        GameButton upgradeWeaponButton = new GameButton("weapon", Config.SCREEN_WIDTH / 8, Config.SCREEN_HEIGHT / 2, new UpgradeWeaponAction(shopTransaction));
         GameButton leaveShopButton = new GameButton("LEAVE", Config.SCREEN_WIDTH / 3, (int) (Config.SCREEN_HEIGHT * 0.8), new MenuButtonAction(EPanelState.INGAME, this));
         pictureButtons.add(upgradeWeaponButton);
         pictureButtons.add(upgradeArmorButton);

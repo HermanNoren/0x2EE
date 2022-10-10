@@ -1,4 +1,4 @@
-package view.buttons.buttonactions;
+package controllers.buttonactions;
 
 import view.panelstates.EPanelState;
 import view.panelstates.IPanelState;
@@ -12,6 +12,7 @@ public class MenuButtonAction implements IButtonAction{
         this.panelState = panelState;
         this.currentState = currentState;
     }
+
 
     @Override
     public void performAction() {

@@ -6,7 +6,7 @@ import model.Game;
 import model.helperclasses.HighscoreHandler;
 import view.MainPanel;
 import view.buttons.GameButton;
-import view.buttons.buttonactions.MenuButtonAction;
+import controllers.buttonactions.MenuButtonAction;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 
@@ -51,7 +51,6 @@ public class HighscorePanelState implements IPanelState {
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(buttons));
         scores = highscoreHandler.getHighscoreList();
-
     }
 
     @Override

@@ -6,7 +6,7 @@ import controllers.HighscoreController;
 import model.Game;
 import view.MainPanel;
 import view.buttons.GameButton;
-import view.buttons.buttonactions.SaveScoreButtonAction;
+import controllers.buttonactions.SaveScoreButtonAction;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 

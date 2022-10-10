@@ -1,7 +1,7 @@
 package view.buttons;
 import model.helperclasses.Vector2;
 import config.Config;
-import view.buttons.buttonactions.IButtonAction;
+import controllers.buttonactions.IButtonAction;
 
 public class GameButton {
 

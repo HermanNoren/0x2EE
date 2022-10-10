@@ -6,7 +6,7 @@ public class Armor implements IArmor {
 
     }
 
-    public double armorLevel = 0;
+    public int currentLevel = 1;
 
     /**
      * @param damageTaken reduces damage
@@ -14,16 +14,23 @@ public class Armor implements IArmor {
      */
     @Override
     public double damageReduction(int damageTaken) {
-        double reduction = armorLevel/100;
+        double reduction = (double) currentLevel /100;
         return damageTaken * reduction;
     }
 
+    public int getLevel(){
+        return currentLevel;
+    }
+
+    public void levelUpArmor(){
+        this.currentLevel++;
+    }
     /**
      * Used to increase armorLevel attribute.
      */
     @Override
     public void upgradeArmor() {
-        armorLevel++;
+        currentLevel++;
         //Upgrades armorLevel
     }
 }

@@ -20,8 +20,8 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
 
     private int score;
     private int money;
-    public Weapon weapon;
-    protected Armor armor;
+    private Weapon weapon;
+    private Armor armor;
     boolean isDamageTaken;
 
     private double moveAcc;
@@ -138,6 +138,14 @@ public class Player extends Entity implements IGameObject, IFocusableObject {
      */
     public int getMoney(){
         return money;
+    }
+
+    public Weapon getWeapon(){
+        return this.weapon;
+    }
+
+    public Armor getArmor(){
+        return this.armor;
     }
     public void setMoney( int newAmount) {
         money = newAmount;

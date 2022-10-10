@@ -55,7 +55,7 @@ public class Game {
         this.gameMap = new GameMap(10, 10);
         this.player = new Player(48, 48, this);
         shop = new Shop(200, 100);
-        this.shopTransaction = new ShopTransaction(getPlayer());
+        this.shopTransaction = new ShopTransaction(this.getPlayer());
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         highscoreName = new ArrayList<>();
