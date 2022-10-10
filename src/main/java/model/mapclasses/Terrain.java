@@ -87,7 +87,7 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     }
     @Override
     public int compareTo(Terrain n) {
-        return Double.compare(this.g, n.getG());
+        return Double.compare(this.f, n.f);
     }
 
     /**
@@ -133,7 +133,8 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
         int D = 1;
         double dx = Math.abs(current.x - goal.x);
         double dy = Math.abs(current.y - goal.y);
-        return D*(dx + dy);
+        double prio = Math.abs(dx-dy)*0.0001;
+        return D*(dx + dy + prio);
     }
 
     @Override
