@@ -2,6 +2,7 @@ package model.gameobjects.ItemSpawner;
 
 import model.Game;
 import model.gameobjects.Entity;
+import model.gameobjects.enemies.Enemy;
 import model.helperclasses.Vector2;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class Spawner{
 
     private Game game;
     private List<Double> x_values, y_values;
-    private List<Entity> enemies;
+    private List<Enemy> enemies;
     private double avg_x, avg_y;
 
     private List<IItem> spawnedItems;

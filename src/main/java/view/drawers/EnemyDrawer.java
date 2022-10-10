@@ -14,13 +14,13 @@ import java.util.Objects;
 
 public class EnemyDrawer implements IDrawer {
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
-    private final List<Entity> enemies;
+    private final List<Enemy> enemies;
     private int animationCounter;
     private int imageSwitcher;
 
     private ImageHandler imageHandler;
 
-    public EnemyDrawer(List<Entity> enemies, String type){
+    public EnemyDrawer(List<Enemy> enemies, String type){
         this.enemies = enemies;
         this.imageHandler = new ImageHandler();
         initEnemyImages(type);
@@ -114,7 +114,7 @@ public class EnemyDrawer implements IDrawer {
                 }
             }
 
-            List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getSize(), enemy.getSize());
+            List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getWidth(), enemy.getWidth());
             if (enemy.getHealth() != enemy.getMaxHp()){
                 g2.setColor(Color.red);
                 g2.fillRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / ((Enemy)enemy).getMaxHp()))), 4);

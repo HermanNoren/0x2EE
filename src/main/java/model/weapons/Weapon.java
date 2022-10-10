@@ -1,6 +1,7 @@
 package model.weapons;
 
 import controllers.EDirection;
+import model.Game;
 import model.gameobjects.Projectile;
 import model.helperclasses.Vector2;
 
@@ -11,6 +12,7 @@ public class Weapon {
     public int damage;
     public int ammo;
     public boolean reloading;
+
 
     /**
      * The main weapon of the

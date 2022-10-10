@@ -34,16 +34,6 @@ public class Coin implements IItem {
         return null;
     }
 
-
-    @Override
-    public boolean isPassable() {
-        return false;
-    }
-
-    @Override
-    public void update(double dt) {
-
-    }
     @Override
     public void consume(Player player) {
         player.addMoney(10);
