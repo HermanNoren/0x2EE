@@ -49,6 +49,18 @@ public class Camera{
     }
 
     /**
+     * Resets the camera; removes the focused object, resets the offset to 0x0, resets the drag effect constant
+     * and resets the zoom multiplier. Mainly used for testing.
+     */
+    public void reset() {
+        this.focusedObject = new ArrayList<>();
+        relativePos = new Vector2(0, 0);
+        absolutePos = new Vector2(relativePos);
+        dragEffectConstant = standardDragEffectConstant;
+        currentZoomMultiplier = 1;
+    }
+
+    /**
      * Used for changing what object the camera is focusing
      * @param object Object the camera will focus
      */
@@ -99,7 +111,7 @@ public class Camera{
     /**
      * Provides the ability to change how much the camera is "dragging" after the focused object. A higher value
      * will result in more drag effect. Values below 1 is not accepted and will automatically turn off the drag effect.
-     * @param value drag effect
+     * @param value drag effect >= 1
      */
     public void setDragEffectConstant(int value) {
         if (value < 1) { value = 1; }
@@ -107,7 +119,7 @@ public class Camera{
     }
 
     /**
-     * Resets the drag effect to its standard value
+     * Resets the drag effect to its standard value. The standard value is 50
      */
     public void resetDragEffectConstant() {
         dragEffectConstant = standardDragEffectConstant;

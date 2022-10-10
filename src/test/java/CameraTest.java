@@ -17,6 +17,7 @@ public class CameraTest {
 
     @Test
     void test_camera_not_moving_when_not_focusing_object() {
+        game = new Game();
         player = new Player(0, 0, game);
         Vector2 offsetWhenPlayerAt0x0 = camera.getOffset();
         player.setPos(new Vector2(50, 50));
@@ -27,21 +28,19 @@ public class CameraTest {
 
     @Test
     void test_camera_moving_when_focusing_object() {
+        game = new Game();
         player = new Player(0, 0, game);
         camera.setFocusedObject(player);
-        for (int i = 0; i < 20; i++) {
-            camera.update();
-        }
+        camera.setDragEffectConstant(1);
+        camera.update();
         Vector2 offsetWhenPlayerAt0x0 = camera.getOffset();
 
         player.setPos(new Vector2(50, 50));
-        for (int i = 0; i < 20; i++) {
-            camera.update();
-        }
+        camera.update();
         Vector2 offsetWhenPlayerAt50x50 = camera.getOffset();
 
-        assertNotEquals(offsetWhenPlayerAt0x0.getX(), offsetWhenPlayerAt50x50.getX());
-        assertNotEquals(offsetWhenPlayerAt0x0.getY(), offsetWhenPlayerAt50x50.getY());
+        assertTrue(offsetWhenPlayerAt0x0.getX() < offsetWhenPlayerAt50x50.getX());
+        assertTrue(offsetWhenPlayerAt0x0.getY() < offsetWhenPlayerAt50x50.getY());
     }
 
     @Test
@@ -79,5 +78,45 @@ public class CameraTest {
             camera.zoomOut();
         }
         assertEquals(1, camera.getZoomMultiplier());
+    }
+
+    @Test
+    void test_camera_drag_effect() {
+        game = new Game();
+        player = new Player(0, 0, game);
+        camera.reset();
+        camera.setFocusedObject(player);
+        camera.setDragEffectConstant(1);
+        camera.update();
+        Vector2 offsetAfterOneUpdateWhenDragIs1 = camera.getOffset();
+
+        camera.reset();
+        camera.setFocusedObject(player);
+        camera.setDragEffectConstant(100);
+        camera.update();
+        Vector2 offsetAfterOneUpdateWhenDragIs100 = camera.getOffset();
+
+        assertTrue(offsetAfterOneUpdateWhenDragIs1.getX() < offsetAfterOneUpdateWhenDragIs100.getX());
+        assertTrue(offsetAfterOneUpdateWhenDragIs1.getY() < offsetAfterOneUpdateWhenDragIs100.getY());
+    }
+
+    @Test
+    void test_camera_drag_effect_boundaries() {
+        game = new Game();
+        player = new Player(0, 0, game);
+        camera.reset();
+        camera.setFocusedObject(player);
+        camera.setDragEffectConstant(1);
+        camera.update();
+        Vector2 offsetAfterOneUpdateWhenDragIs1 = camera.getOffset();
+
+        camera.reset();
+        camera.setFocusedObject(player);
+        camera.setDragEffectConstant(-10);
+        camera.update();
+        Vector2 offsetAfterOneUpdateWhenDragIsLessThan1 = camera.getOffset();
+        
+        assertEquals(offsetAfterOneUpdateWhenDragIs1.getX(), offsetAfterOneUpdateWhenDragIsLessThan1.getX());
+        assertEquals(offsetAfterOneUpdateWhenDragIs1.getY(), offsetAfterOneUpdateWhenDragIsLessThan1.getY());
     }
 }
