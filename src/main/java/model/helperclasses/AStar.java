@@ -52,9 +52,6 @@ public class AStar {
                     openList.add(m);
 
                 }
-
-                // TODO: Remove if unnecessary
-                /*
                 else {
                     if(totalWeight < m.getG() && m.isPassable()){
                         m.setParent(n);
@@ -67,7 +64,6 @@ public class AStar {
                         }
                     }
                 }
-                 */
             }
 
             openList.remove(n);
