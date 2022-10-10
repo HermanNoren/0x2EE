@@ -83,8 +83,6 @@ public class MapDrawer implements IDrawer {
                 newTerrainVector.setY(newTerrainVector.getY() + terrainSize);
             }
         }
-
-
     }
 }
 

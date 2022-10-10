@@ -135,7 +135,7 @@ public class Game {
     }
 
     public void newGame() {
-        this.gameMap = new GameMap(50, 50);
+        this.gameMap = new GameMap(Config.MAP_SIZE, Config.MAP_SIZE);
         this.player = new Player(48, 48, gameMap.getGameMapCoordinates());
         shop = new Shop(200, 100);
         enemies = new ArrayList<>();

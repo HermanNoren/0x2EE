@@ -82,7 +82,8 @@ public class Camera{
      * @return Center vector
      */
     public Vector2 getCenter() {
-        return new Vector2(relativePos.getX() + screenCenter.getX() / currentZoomMultiplier, relativePos.getY() + screenCenter.getY() / currentZoomMultiplier);
+        return new Vector2(relativePos.getX() + screenCenter.getX() / currentZoomMultiplier,
+                           relativePos.getY() + screenCenter.getY() / currentZoomMultiplier);
     }
     /**
      * Zoom in
@@ -140,21 +141,21 @@ public class Camera{
         relativePos.setX(relativePos.getX() + ((Config.SCREEN_WIDTH - Config.SCREEN_WIDTH / currentZoomMultiplier) / 2));
         relativePos.setY(relativePos.getY() + ((Config.SCREEN_HEIGHT - Config.SCREEN_HEIGHT / currentZoomMultiplier) / 2));
 
-        cameraBoundaries(relativePos);
+        cameraBoundaries();
     }
 
-    private void cameraBoundaries(Vector2 absolutePos) {
-        if (absolutePos.getX() < 0) {
-            absolutePos.setX(0);
+    private void cameraBoundaries() {
+        if (relativePos.getX() < 0) {
+            relativePos.setX(0);
         }
-        if (absolutePos.getX() + Config.SCREEN_WIDTH > Config.MAP_SIZE * Config.TERRAIN_SIZE) {
-            absolutePos.setX(Config.MAP_SIZE * Config.TERRAIN_SIZE - Config.SCREEN_WIDTH);
+        if (relativePos.getX() + Config.SCREEN_WIDTH / currentZoomMultiplier > Config.MAP_SIZE * Config.TERRAIN_SIZE) {
+            relativePos.setX(Config.MAP_SIZE * Config.TERRAIN_SIZE - Config.SCREEN_WIDTH / currentZoomMultiplier);
         }
-        if (absolutePos.getY() < 0) {
-            absolutePos.setY(0);
+        if (relativePos.getY() < 0) {
+            relativePos.setY(0);
         }
-        if (absolutePos.getY() + Config.SCREEN_HEIGHT > Config.MAP_SIZE * Config.TERRAIN_SIZE) {
-            absolutePos.setY(Config.MAP_SIZE * Config.TERRAIN_SIZE - Config.SCREEN_HEIGHT);
+        if (relativePos.getY() + Config.SCREEN_HEIGHT / currentZoomMultiplier > Config.MAP_SIZE * Config.TERRAIN_SIZE) {
+            relativePos.setY(Config.MAP_SIZE * Config.TERRAIN_SIZE - Config.SCREEN_HEIGHT / currentZoomMultiplier);
         }
     }
 
