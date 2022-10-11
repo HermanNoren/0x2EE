@@ -7,11 +7,9 @@ import model.weapons.Weapon;
 
 public class ShopTransaction {
 
-    public int currentWeaponPrize = 10;
-    public int currentArmorPrize = 10;
-    private final Player player; //Kolla om final inte fuckade upp något
-
-
+    private int currentWeaponPrize = 10;
+    private int currentArmorPrize = 10;
+    private final Player player;
 
     public ShopTransaction(Player player){
         this.player = player;
@@ -38,8 +36,14 @@ public class ShopTransaction {
     public int getWeaponUpgradeCost(){
         return currentWeaponPrize * getWeapon().getCurrentLevel();
     }
-    public int getArmorUpgradeCost(){
-        return currentArmorPrize * getArmor().getCurrentLevel();
+    public double getArmorUpgradeCost(){
+        return (currentArmorPrize * getArmor().getCurrentLevel());
+    }
+    public double getArmorReductionAfterUpgrade(){
+        return (getArmor().getCurrentLevel() ) * getArmor().getCurrentDamageReduction();
+    }
+    public double getArmorCurrentReduction(){
+        return getArmor().getCurrentDamageReduction();
     }
 
     public int getPlayerMoneyAmount(){

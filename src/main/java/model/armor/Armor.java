@@ -16,9 +16,13 @@ public class Armor implements IArmor, IUpgradable {
      */
     @Override
     public double damageReduction(int damageTaken) {
-        double reduction = (double) currentLevel /100;
+        double reduction =  currentLevel /100;
         return damageTaken * reduction;
     }
+    public double getCurrentDamageReduction() {
+        return currentLevel;
+    }
+
 
     @Override
     public void levelUp() {

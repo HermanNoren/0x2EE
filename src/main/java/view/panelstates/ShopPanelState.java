@@ -28,14 +28,12 @@ public class ShopPanelState implements IPanelState{
     Color panelColor = new Color(0, 0, 0);
     private final String headerText = "Shop";
 
-    private String currentCostText;
-
+    private final static String currentCostText =  "UPGRADE COSTS ";
 
     public ShopPanelState(MainPanel mainPanel, ShopTransaction shopTransaction) {
         this.mainPanel = mainPanel;
         this.shopTransaction = shopTransaction;
         buttons = new ArrayList<>();
-        currentCostText = "UPGRADE COSTS ";
         keyListeners = new ArrayList<>();
         pictureButtons = new ArrayList<>();
         createShopButtons(shopTransaction);
@@ -72,6 +70,7 @@ public class ShopPanelState implements IPanelState{
         drawPlayerMoney(g2, shopTransaction.getPlayerMoneyAmount());
         drawWeaponCost(g2, shopTransaction.getWeaponUpgradeCost());
         drawArmorCost(g2, shopTransaction.getArmorUpgradeCost());
+        drawArmorUpgradePerks(g2, shopTransaction.getArmorCurrentReduction(), shopTransaction.getArmorReductionAfterUpgrade());
         g2.setFont(Config.buttonFont); //the font which the button will be drawn in
     }
 
@@ -95,12 +94,22 @@ public class ShopPanelState implements IPanelState{
     private void drawWeaponCost(Graphics2D g2, int weaponCost){
         g2.setColor(Color.WHITE);
         g2.setFont(Config.inGameTextFont);
-        g2.drawString(( currentCostText + weaponCost +"$"), (int) ((Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(currentCostText +weaponCost + "$"))/2.1), (int) ((Config.SCREEN_HEIGHT)/1.8));
+        String textToBeRepresented = currentCostText + weaponCost +"$";
+        g2.drawString((textToBeRepresented), Config.SCREEN_WIDTH/3, (int) ((Config.SCREEN_HEIGHT)/1.7));
     }
-    private void drawArmorCost(Graphics2D g2, int armorCost){
+    private void drawArmorCost(Graphics2D g2, double armorCost){
         g2.setColor(Color.WHITE);
         g2.setFont(Config.inGameTextFont);
-        g2.drawString(( currentCostText + armorCost +"$"), (int) ((Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(currentCostText +armorCost + "$"))/2.1), (int) ((Config.SCREEN_HEIGHT)/4));
+        String textToBeRepresented = currentCostText + armorCost + "$";
+        g2.drawString(textToBeRepresented, Config.SCREEN_WIDTH/3, (Config.SCREEN_HEIGHT)/4);
+    }
+
+    private void drawArmorUpgradePerks(Graphics2D g2, double currentDamageReduction, double armorReductionAfterUpgrade){
+        g2.setColor(Color.WHITE);
+        g2.setFont(Config.inGameTextFont);
+        String currentDamageString = "REDUCTION %" + (int)currentDamageReduction;
+        String damageAfterUpdate = " -> %" + (int) armorReductionAfterUpgrade;
+        g2.drawString(currentDamageString + damageAfterUpdate,Config.SCREEN_WIDTH/3, Config.SCREEN_HEIGHT/3);
     }
 
     /**
@@ -110,8 +119,8 @@ public class ShopPanelState implements IPanelState{
      * @param shopTransaction The object which handles the logic behind the transactions of upgrades.
      */
     private void createShopButtons(ShopTransaction shopTransaction) {
-        GameButton upgradeArmorButton = new GameButton("armor", Config.SCREEN_WIDTH / 8, Config.SCREEN_HEIGHT / 6, new UpgradeArmorButton(shopTransaction));
-        GameButton upgradeWeaponButton = new GameButton("weapon", Config.SCREEN_WIDTH / 8, Config.SCREEN_HEIGHT / 2, new UpgradeWeaponAction(shopTransaction));
+        GameButton upgradeArmorButton = new GameButton("armor", Config.SCREEN_WIDTH / 10, Config.SCREEN_HEIGHT / 6, new UpgradeArmorButton(shopTransaction));
+        GameButton upgradeWeaponButton = new GameButton("weapon", Config.SCREEN_WIDTH / 10, Config.SCREEN_HEIGHT / 2, new UpgradeWeaponAction(shopTransaction));
         GameButton leaveShopButton = new GameButton("LEAVE", Config.SCREEN_WIDTH / 3, (int) (Config.SCREEN_HEIGHT * 0.8), new MenuButtonAction(EPanelState.INGAME, this));
         buttons.add(upgradeArmorButton);
         buttons.add(upgradeWeaponButton);
