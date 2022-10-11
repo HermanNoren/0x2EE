@@ -1,10 +1,7 @@
 package model.gameobjects.enemies;
-
 import model.gameobjects.Entity;
-import model.gameobjects.IGameObject;
 import model.mapclasses.GameMap;
 
-import java.util.List;
 import java.util.Random;
 
 public class NormalEnemyFactory extends EnemyFactory{

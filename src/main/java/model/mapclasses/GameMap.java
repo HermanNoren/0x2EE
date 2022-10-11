@@ -23,15 +23,14 @@ public class GameMap implements IGameMap{
     public GameMap(int width, int height) {
         this.width = width;
         this.height = height;
-
         this.gameMapCoordinates = new Terrain[width][height];
 
         addCoordinatesAndTiles(width, height);
 
         Noise n = new Noise(10, this); // Generates random terrain on the game map.
-//        n.init();
-//        n.setTerrainTypes(gameMapCoordinates);
-//
+        n.init();
+        n.setTerrainTypes(gameMapCoordinates);
+
         createBorder();
 
         terrains.forEach(this::addNeighbors);
@@ -56,6 +55,7 @@ public class GameMap implements IGameMap{
      * Method used to get the value of the height variable in GameMap
      * @return height of game map
      */
+    @Override
     public int getHeight() {
         return height;
     }
@@ -64,6 +64,7 @@ public class GameMap implements IGameMap{
      * Method used to get the value of the width variable in GameMap
      * @return width of the game map
      */
+    @Override
     public int getWidth() {
         return width;
     }
@@ -72,6 +73,7 @@ public class GameMap implements IGameMap{
      * Method used to get the reference to the gameMapCoordinates grid.
      * @return grid of Terrains
      */
+    @Override
     public Terrain[][] getGameMapCoordinates() {
         return gameMapCoordinates;
     }
@@ -80,8 +82,22 @@ public class GameMap implements IGameMap{
      * Method used to get a copy of the List of terrains.
      * @return a copy of List<Terrain> terrains.
      */
+    @Override
     public List<Terrain> getTerrains() {
         return new ArrayList<>(terrains);
+    }
+
+    /**
+     * @return List containing all terrains which are passable.
+     */
+    public List<Terrain> getPassableTerrains(){
+        List<Terrain> passableTerrains = new ArrayList<>();
+        for (Terrain terrain : terrains){
+            if(terrain.isPassable()){
+                passableTerrains.add(terrain);
+            }
+        }
+        return passableTerrains;
     }
 
     /**
@@ -146,6 +162,7 @@ public class GameMap implements IGameMap{
             }
         }
     }
+
 
 }
 

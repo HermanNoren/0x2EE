@@ -2,7 +2,6 @@ package model;
 
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
-import model.gameobjects.enemies.IEnemy;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.*;

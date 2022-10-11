@@ -187,12 +187,6 @@ public abstract class Entity implements IGameObject, IEntity {
     public void damageTaken(int damage) {
         setHealth(getHealth() - damage);
     }
-    /**
-     * @return size of entity
-     */
-    public int getSize() {
-        return size;
-    }
 }
 
 

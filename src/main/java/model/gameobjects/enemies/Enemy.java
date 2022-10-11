@@ -14,7 +14,6 @@ public abstract class Enemy extends Entity implements IEnemy {
         this.targetEntity = targetEntity;
         movementSpeed = 0.5;
     }
-
     /**
      * Method used to move the enemy towards player.
      */
