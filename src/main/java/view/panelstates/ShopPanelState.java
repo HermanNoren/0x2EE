@@ -28,14 +28,18 @@ public class ShopPanelState implements IPanelState{
     Color panelColor = new Color(0, 0, 0);
     private final String headerText = "Shop";
 
+    private String currentCostText;
+
 
     public ShopPanelState(MainPanel mainPanel, ShopTransaction shopTransaction) {
         this.mainPanel = mainPanel;
         this.shopTransaction = shopTransaction;
         buttons = new ArrayList<>();
+        currentCostText = "UPGRADE COSTS ";
         keyListeners = new ArrayList<>();
         pictureButtons = new ArrayList<>();
         createShopButtons(shopTransaction);
+
 
         stringButtonController = new ButtonController(buttons);
         keyListeners.add(stringButtonController);
@@ -91,12 +95,12 @@ public class ShopPanelState implements IPanelState{
     private void drawWeaponCost(Graphics2D g2, int weaponCost){
         g2.setColor(Color.WHITE);
         g2.setFont(Config.inGameTextFont);
-        g2.drawString(( "UPGRADE COSTS " + weaponCost +"$"), (int) ((Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth("UPGRADE: " +weaponCost + "$"))/2.1), (int) ((Config.SCREEN_HEIGHT)/1.8));
+        g2.drawString(( currentCostText + weaponCost +"$"), (int) ((Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(currentCostText +weaponCost + "$"))/2.1), (int) ((Config.SCREEN_HEIGHT)/1.8));
     }
     private void drawArmorCost(Graphics2D g2, int armorCost){
         g2.setColor(Color.WHITE);
         g2.setFont(Config.inGameTextFont);
-        g2.drawString(( "UPGRADE COSTS " + armorCost +"$"), (int) ((Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth("UPGRADE: " +armorCost + "$"))/2.1), (int) ((Config.SCREEN_HEIGHT)/4));
+        g2.drawString(( currentCostText + armorCost +"$"), (int) ((Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(currentCostText +armorCost + "$"))/2.1), (int) ((Config.SCREEN_HEIGHT)/4));
     }
 
     /**
