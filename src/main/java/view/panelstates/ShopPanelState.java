@@ -81,26 +81,40 @@ public class ShopPanelState implements IPanelState{
         g2.setFont(Config.infoFont);
         g2.drawString((playerMoney + "$"),(Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(playerMoney + "$")), Config.SCREEN_HEIGHT/15);
     }
+
+    /**
+     * This and the method below do the same thing just that this represents the cost of upgrading the weapon
+     * while the other part represents the cost of upgrading the weapon.
+     * @param g2 to be drawn
+     * @param weaponCost the cost, taken from shopTransaction.getWeaponUpgradeCost()
+     */
     private void drawWeaponCost(Graphics2D g2, int weaponCost){
         g2.setColor(Color.WHITE);
         g2.setFont(Config.inGameTextFont);
-        g2.drawString(("Upgrade cost is " + weaponCost + "$"), (int) ((Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth("Upgrade cost is " + weaponCost + "$"))/1.2), (int) ((Config.SCREEN_HEIGHT)/1.5));
+        g2.drawString(( "UPGRADE COSTS " + weaponCost +"$"), (int) ((Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth("UPGRADE: " +weaponCost + "$"))/2.1), (int) ((Config.SCREEN_HEIGHT)/1.8));
     }
     private void drawArmorCost(Graphics2D g2, int armorCost){
         g2.setColor(Color.WHITE);
         g2.setFont(Config.inGameTextFont);
-        g2.drawString(("Upgrade cost is " + armorCost + "$"), (int) ((Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth("Upgrade cost is " + armorCost + "$"))/1.2), (int) ((Config.SCREEN_HEIGHT)/3.5));
+        g2.drawString(( "UPGRADE COSTS " + armorCost +"$"), (int) ((Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth("UPGRADE: " +armorCost + "$"))/2.1), (int) ((Config.SCREEN_HEIGHT)/4));
     }
 
+    /**
+     * Creates a list of buttons, the first buttons are drawn in the InShopDrawer which draws pictures
+     * representing buttons and the last button, the leave-button, is taken in at ButtonDrawer as a single GameButton
+     * instance to be painted respectively.
+     * @param shopTransaction The object which handles the logic behind the transactions of upgrades.
+     */
     private void createShopButtons(ShopTransaction shopTransaction) {
         GameButton upgradeArmorButton = new GameButton("armor", Config.SCREEN_WIDTH / 8, Config.SCREEN_HEIGHT / 6, new UpgradeArmorButton(shopTransaction));
         GameButton upgradeWeaponButton = new GameButton("weapon", Config.SCREEN_WIDTH / 8, Config.SCREEN_HEIGHT / 2, new UpgradeWeaponAction(shopTransaction));
         GameButton leaveShopButton = new GameButton("LEAVE", Config.SCREEN_WIDTH / 3, (int) (Config.SCREEN_HEIGHT * 0.8), new MenuButtonAction(EPanelState.INGAME, this));
-        pictureButtons.add(upgradeWeaponButton);
-        pictureButtons.add(upgradeArmorButton);
         buttons.add(upgradeArmorButton);
         buttons.add(upgradeWeaponButton);
         buttons.add(leaveShopButton);
+        pictureButtons.add(upgradeWeaponButton);
+        pictureButtons.add(upgradeArmorButton);
+
     }
 
     @Override

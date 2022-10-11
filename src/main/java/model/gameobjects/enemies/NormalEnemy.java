@@ -8,8 +8,8 @@ class NormalEnemy extends Enemy{
         super(x, y, coordinates, targetEntity);
         setVelX(0.3);
         setVelY(0.3);
-        setMaxHp(10);
-        setHealth(10);
+        setMaxHp(11);
+        setHealth(20);
     }
 
     @Override

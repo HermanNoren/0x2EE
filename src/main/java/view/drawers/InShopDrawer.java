@@ -1,5 +1,6 @@
 package view.drawers;
 
+import config.Config;
 import model.helperclasses.ImageHandler;
 import view.buttons.GameButton;
 
@@ -15,9 +16,6 @@ public class InShopDrawer implements IDrawer{
     private final List<GameButton> buttons;
 
     private final int pictureScaling = 3;
-
-    private boolean enoughMoneyWeapon, enoughMoneyArmor; //to show the correct image
-
     private static BufferedImage weaponActive, weaponInactive, armorActive, armorInactive;
 
     //See which one is hovered
@@ -39,6 +37,8 @@ public class InShopDrawer implements IDrawer{
         }
     }
 
+
+
     @Override
     public void draw(Graphics2D g2) {
         List<BufferedImage> activePictures = new ArrayList<>(Arrays.asList(weaponActive, armorActive));
@@ -46,10 +46,17 @@ public class InShopDrawer implements IDrawer{
         for(GameButton button : buttons) {
             int currentButtonIteration = buttons.indexOf(button);
             BufferedImage currentPicture = activePictures.get(currentButtonIteration);
-                g2.drawImage( inactivePictures.get(currentButtonIteration), (int)button.getPos().getX(), (int)button.getPos().getY(), currentPicture.getWidth() * pictureScaling ,currentPicture.getHeight() * pictureScaling, null);
+            g2.setStroke(new BasicStroke(8));
+            g2.drawImage( inactivePictures.get(currentButtonIteration), (int)button.getPos().getX(), (int)button.getPos().getY(), currentPicture.getWidth() * pictureScaling ,currentPicture.getHeight() * pictureScaling, null);
+            g2.setColor(Color.gray);
+            g2.drawRect((int)button.getPos().getX(), (int)button.getPos().getY(), currentPicture.getWidth() * pictureScaling * 4,currentPicture.getHeight() * pictureScaling); //Draws border surrounding weapon and armor
                 if(button.getIsSelected()){
+                    g2.setColor(Color.green); // draw border green and button selected
                     g2.drawImage(currentPicture, (int)button.getPos().getX(), (int)button.getPos().getY(), currentPicture.getWidth() * pictureScaling ,currentPicture.getHeight() * pictureScaling, null);
+                    g2.drawRect((int)button.getPos().getX(), (int)button.getPos().getY(), currentPicture.getWidth() * pictureScaling * 4,currentPicture.getHeight() * pictureScaling); //Draws border surrounding weapon and armor
                 }
+
+
         }
     }
 }

@@ -57,7 +57,7 @@ public class Game {
         playerDead = false;
         EnemyFactory enemyFactory = new NormalEnemyFactory();
 
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
+        //enemies.add(enemyFactory.createEnemy(player, gameMap, random));
         enemies.add(enemyFactory.createEnemy(player, gameMap, random));
 
         spawner = new Spawner(this);
@@ -212,7 +212,7 @@ public class Game {
                 while (pIter.hasNext()) {
                     Projectile pr = pIter.next();
                     if (CollisionHandler.testCollision(enemy, pr)) {
-                        enemy.damageTaken(10);
+                        enemy.damageTaken(player.getWeapon().damage);
                         pIter.remove();
                         break;
                     }
