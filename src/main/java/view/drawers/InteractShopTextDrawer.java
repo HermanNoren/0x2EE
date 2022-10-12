@@ -6,16 +6,23 @@ import java.awt.*;
 import java.util.List;
 
 /**
- * Drawer that represents a pop-up text to communicate to the player that the shop is can be interacted with.
+ * Drawer that represents a pop-up text to communicate to the player that the shop is
+ * close enough to be interacted with.
  */
 public class InteractShopTextDrawer implements IDrawer{
     public int passableValue;
     private final Shop shop;
-    String popUpText = "Press Enter to enter!";
+    String popUpText = "The game";
 
     public InteractShopTextDrawer(Shop shop){
         this.shop = shop;
     }
+
+    /**
+     * Calculations done to center the text,g2.FontMetrics().StringWidth() is
+     * used to center the length of the string above the store.
+     * @param g2
+     */
     @Override
     public void draw(Graphics2D g2) {
         g2.setColor(Color.white);

@@ -33,6 +33,7 @@ public class Game implements IProjectileAddable{
     private List<Enemy> enemies;
     private boolean stateChangedFlag;
     private GameMap gameMap;
+
     private File highscoreFile;
     private List<String> highscoreList;
     private List<Projectile> projectiles;
