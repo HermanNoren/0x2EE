@@ -1,6 +1,6 @@
 package model.gameobjects;
 
-import controllers.EDirection;
+import model.helperclasses.EDirection;
 import model.helperclasses.Vector2;
 import model.mapclasses.Terrain;
 
@@ -31,5 +31,5 @@ public interface IEntity {
     int getHealth();
     double getMaxHp();
     void damageTaken(int damage);
-    Terrain getMapLocation();
+    Terrain getTerrainStandingOn();
 }

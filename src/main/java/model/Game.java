@@ -1,5 +1,6 @@
 package model;
 
+import config.Config;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
 import model.helperclasses.collision.CollisionHandler;
@@ -18,11 +19,9 @@ import view.IObserver;
 
 import java.io.*;
 import java.util.*;
-import java.util.Random;
 
 /**
- * This class contains the main game loop.
- * With help of the main game loop it delegates work to the active IGameState
+ * This class represents the whole model class.
  */
 public class Game {
     private List<IObserver> observers;
@@ -39,12 +38,12 @@ public class Game {
     private Shop shop;
     private HighscoreHandler highscoreHandler;
     private Spawner spawner;
-    private Random random = new Random();
     private Boolean playerDead;
     private Projectile pendingBullet;
 
+    private EnemyFactory enemyFactory;
     public Game() {
-        this.gameMap = new GameMap(100, 100);
+        this.gameMap = new GameMap(Config.MAP_WIDTH, Config.MAP_HEIGHT);
         this.player = new Player(48, 48, gameMap.getGameMapCoordinates());
         shop = new Shop(200, 100);
         enemies = new ArrayList<>();
@@ -52,11 +51,6 @@ public class Game {
         highscoreName = new ArrayList<>();
         this.path = new ArrayList<>();
         playerDead = false;
-        EnemyFactory enemyFactory = new NormalEnemyFactory();
-
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-
         spawner = new Spawner(this);
         gameObjects = new ArrayList<>();
         gameObjects.add(shop);
@@ -91,7 +85,6 @@ public class Game {
     public void updateHighscoreList() {
         highscoreHandler.saveHighscore(String.join("", highscoreName), player.getScore());
     }
-
 
     public void deleteLetter() {
         if (highscoreName.size() > 0) {
@@ -137,9 +130,15 @@ public class Game {
         player.shoot(projectiles);
     }
 
-    public void addProjectile(Projectile p) {
-        newBullet = true;
-        pendingBullet = p;
+
+    public void spawnEnemy(int counter){
+        if((counter % 10) == 0 && counter != 0){
+            enemyFactory = new BossEnemyFactory();
+            System.out.println("boss");
+        }else{
+            enemyFactory = new NormalEnemyFactory();
+        }
+        enemies.add(enemyFactory.createEnemy(player, gameMap));
     }
 
     /**
@@ -259,5 +258,4 @@ public class Game {
     public Shop getShop() {
         return shop;
     }
-
 }

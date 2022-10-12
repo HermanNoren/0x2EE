@@ -1,8 +1,7 @@
 package model.mapclasses;
 
-import config.Config;
 import utility.Noise;
-import model.gameobjects.*;
+
 import java.util.*;
 
 /**
@@ -28,13 +27,11 @@ public class GameMap implements IGameMap{
         addCoordinatesAndTiles(width, height);
 
         Noise n = new Noise(10, this); // Generates random terrain on the game map.
-        n.init();
-        n.setTerrainTypes(gameMapCoordinates);
+        n.setNoise(gameMapCoordinates, 1, 2);
 
         createBorder();
-
         terrains.forEach(this::addNeighbors);
-//        n.printTerrainGrid(gameMapCoordinates);
+        n.printTerrainGrid(gameMapCoordinates);
     }
 
     /**
@@ -108,35 +105,24 @@ public class GameMap implements IGameMap{
         int y = current.getY();
 
         // Add left side neighbour
-        if (x-1 > -1){
-            Terrain leftNeighbor = gameMapCoordinates[x-1][y];
+        addNeighbor(x - 1 > -1, x - 1, y, current);
+
+        // Add right side neighbour
+        addNeighbor(x + 1 < width, x + 1, y, current);
+
+        // Add top neighbour
+        addNeighbor(y - 1 > -1, x, y - 1, current);
+
+        // Add bottom neighbour
+        addNeighbor(y + 1 < height, x, y + 1, current);
+    }
+
+    private void addNeighbor(boolean x, int x1, int y, Terrain current) {
+        if (x){
+            Terrain leftNeighbor = gameMapCoordinates[x1][y];
 
             if(leftNeighbor != null){
                 current.addBranch(1, leftNeighbor);
-            }
-        }
-
-        // Add right side neighbour
-        if(x+1 < width){
-            Terrain rightNeighbor = gameMapCoordinates[x+1][y];
-            if(rightNeighbor != null){
-                current.addBranch(1, rightNeighbor);
-            }
-        }
-
-        // Add top neighbour
-        if (y-1 > -1){
-            Terrain topNeighbor = gameMapCoordinates[x][y-1];
-            if(topNeighbor != null){
-                current.addBranch(1, topNeighbor);
-            }
-        }
-
-        // Add bottom neighbour
-        if(y+1 < height){
-            Terrain bottomNeighbor = gameMapCoordinates[x][y+1];
-            if(bottomNeighbor != null){
-                current.addBranch(1, bottomNeighbor);
             }
         }
     }
@@ -152,7 +138,7 @@ public class GameMap implements IGameMap{
                     (gameMapCoordinates[col][row].getY())+2 > height ||
                     (gameMapCoordinates[col][row].getX())-1 < 0 ||
                     (gameMapCoordinates[col][row].getY())-1 < 0){
-                gameMapCoordinates[col][row].setTerrainType(1);
+                gameMapCoordinates[col][row].setTerrainType(0);
                 gameMapCoordinates[col][row].setPassable(false);
             }
                 col ++;

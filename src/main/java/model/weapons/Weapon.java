@@ -1,7 +1,6 @@
 package model.weapons;
 
-import controllers.EDirection;
-import model.Game;
+import model.helperclasses.EDirection;
 import model.gameobjects.Projectile;
 import model.helperclasses.Vector2;
 

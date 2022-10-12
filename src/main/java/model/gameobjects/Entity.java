@@ -1,7 +1,7 @@
 package model.gameobjects;
 
 import config.Config;
-import controllers.EDirection;
+import model.helperclasses.EDirection;
 import model.helperclasses.Vector2;
 import model.mapclasses.Terrain;
 
@@ -98,12 +98,13 @@ public abstract class Entity implements IGameObject, IEntity {
     }
 
     @Override
-    public Terrain getMapLocation(){
+    public Terrain getTerrainStandingOn(){
         int posX = (int)getCenter().getX()/48;
         int posY = (int)getCenter().getY()/48;
         currentLocation = coordinates[posX][posY];
         return currentLocation;
     }
+
 
     @Override
     public Vector2 getPos() {

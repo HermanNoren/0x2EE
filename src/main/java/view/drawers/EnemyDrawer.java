@@ -73,7 +73,6 @@ public class EnemyDrawer implements IDrawer {
      */
     @Override
     public void draw(Graphics2D g2) {
-
         movementAnimation();
         for(Entity enemy: enemies){
             switch (enemy.getDirection()){

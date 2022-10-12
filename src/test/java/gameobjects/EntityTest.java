@@ -1,10 +1,9 @@
 package gameobjects;
 
 import config.Config;
-import controllers.EDirection;
+import model.helperclasses.EDirection;
 import model.Game;
 import model.gameobjects.IEntity;
-import model.gameobjects.Entity;
 import model.gameobjects.IGameObject;
 import model.gameobjects.Player;
 import model.helperclasses.Vector2;
@@ -210,8 +209,8 @@ public class EntityTest {
             }
         }
 
-        assertEquals(1, entity.getMapLocation().getX());
-        assertEquals(1, entity.getMapLocation().getY());
+        assertEquals(1, entity.getTerrainStandingOn().getX());
+        assertEquals(1, entity.getTerrainStandingOn().getY());
 
     }
 
