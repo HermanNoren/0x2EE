@@ -31,7 +31,6 @@ public class Game implements IProjectileAddable{
     private List<Terrain> path;
     private List<String> highscoreName;
     private List<Enemy> enemies;
-    private boolean stateChangedFlag;
     private GameMap gameMap;
 
     private File highscoreFile;
@@ -63,7 +62,6 @@ public class Game implements IProjectileAddable{
 
 
         spawner = new Spawner(this);
-        stateChangedFlag = false;
         observers = new ArrayList<>();
         highscoreHandler = new HighscoreHandler();
         highscoreList = highscoreHandler.getHighscoreList();
@@ -168,6 +166,10 @@ public class Game implements IProjectileAddable{
         }
     }
 
+    /**
+     * Updates player position and checks for collisions with terrain
+     * @param dt time passed since last update
+     */
     private void updatePlayer(double dt){
         player.moveX(dt);
         collisionCheck(ECollisionAxis.X_AXIS);
@@ -175,6 +177,10 @@ public class Game implements IProjectileAddable{
         collisionCheck(ECollisionAxis.Y_AXIS);
     }
 
+    /**
+     * Updates enemy states and provides necessary logic for death and collisions with projectiles
+     * @param dt time passed since last update
+     */
     private void updateEnemies(double dt){
         Iterator<Enemy> enemyIter = enemies.iterator();
         while (enemyIter.hasNext()) {
@@ -203,6 +209,9 @@ public class Game implements IProjectileAddable{
         }
     }
 
+    /**
+     * Checks if spawned items are picked up/consumed by the player
+     */
     private void updateItems(){
         for (IItem item : spawner.getSpawnedItems()) {
             if (CollisionHandler.testCollision(item, player)) {
@@ -213,6 +222,10 @@ public class Game implements IProjectileAddable{
         }
     }
 
+    /**
+     * Checks for collisions with terrain and corrects position if collision occurs
+     * @param axis tells the method which axis to consider
+     */
     private void collisionCheck(ECollisionAxis axis){
         List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
         for (Terrain t : collidedTerrain) {
