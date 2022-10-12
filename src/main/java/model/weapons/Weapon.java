@@ -59,16 +59,6 @@ public class Weapon implements IUpgradable {
     }
 
     @Override
-    public int currentLevel() {
-        return currentLevel;
-    }
-
-    @Override
-    public int currentPrice() {
-        return currentWeaponPrize;
-    }
-
-    @Override
     public int statsIfUpgraded() {
         return currentLevel + 1;
     }

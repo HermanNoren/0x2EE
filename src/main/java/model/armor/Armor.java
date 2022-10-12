@@ -30,16 +30,6 @@ public class Armor implements IArmor, IUpgradable {
     }
 
     @Override
-    public int currentLevel() {
-        return currentLevel;
-    }
-
-    @Override
-    public int currentPrice() {
-        return currentArmorPrize;
-    }
-
-    @Override
     public int statsIfUpgraded() {
         return currentLevel + 1;
     }
