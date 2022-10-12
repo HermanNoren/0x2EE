@@ -70,7 +70,7 @@ public class Spawner{
     }
 
     /**
-     * Returns a list of all current items available on the map
+     * Returns a list of all current spawned items
      * @return list of spawned items
      */
 
@@ -80,7 +80,7 @@ public class Spawner{
 
 
     /**
-     * Removes a specific item from map
+     * Removes a specific spawned item
      * @param item item to remove
      */
     public void clearItem(IItem item){

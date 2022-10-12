@@ -42,6 +42,11 @@ public class Potion implements IItem {
         return "potion";
     }
 
+
+    /**
+     * Handles the interaction between the player and a certain item.
+     * @param player the player that uses an item
+     */
     @Override
     public void consume(Player player) {
         player.setHealth(player.getHealth() + 300);
