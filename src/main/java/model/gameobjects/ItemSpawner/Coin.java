@@ -1,27 +1,27 @@
 package model.gameobjects.ItemSpawner;
 
+import config.Config;
 import model.gameobjects.Player;
 import model.helperclasses.Vector2;
 
 public class Coin implements IItem {
 
-    private int width, height;
     private Vector2 pos;
+
+    private int size = Config.SPRITE_SIZE*2;
 
     public Coin(Vector2 pos){
         this.pos = pos;
-        width = 10;
     }
-
 
     @Override
     public int getWidth() {
-        return width;
+        return size;
     }
 
     @Override
     public int getHeight() {
-        return height;
+        return size;
     }
 
     @Override
@@ -31,7 +31,15 @@ public class Coin implements IItem {
 
     @Override
     public Vector2 getCenter() {
-        return null;
+        double x = pos.getX() + (double) (getWidth() / 2);
+        double y = pos.getY() + (double) (getHeight() / 2);
+        return new Vector2(x, y);
+    }
+
+
+    @Override
+    public String getType() {
+        return "coin";
     }
 
     @Override

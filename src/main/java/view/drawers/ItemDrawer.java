@@ -54,12 +54,11 @@ public class ItemDrawer implements IDrawer{
     @Override
     public void draw(Graphics2D g2) {
         updateTime();
-        for (IGameObject object : objects){
-            List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(object.getPos(), 10, 10);
-            if (object.getWidth() == 10) {
-                g2.drawImage(coinImage, drawInformation.get(0), drawInformation.get(1), 30, 30, null);
-            }else {
-                g2.drawImage(potion, drawInformation.get(0), drawInformation.get(1), 30, 30, null);
+        for (IItem object : objects){
+            List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(object.getPos(), object.getWidth(), object.getHeight());
+            switch (object.getType()){
+                case "coin" -> g2.drawImage(coinImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
+                case "potion" -> g2.drawImage(potion, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
 
             }
         }
