@@ -2,6 +2,11 @@ package model.gameobjects;
 
 public interface IUpgradable {
     void levelUp();
-     int getCurrentLevel();
+     int currentLevel();
+     int currentPrice();
+
+     int statsIfUpgraded();
+
+     int upgradeCost();
 }
 

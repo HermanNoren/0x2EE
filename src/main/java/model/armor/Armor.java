@@ -8,7 +8,8 @@ public class Armor implements IArmor, IUpgradable {
 
     }
 
-    public int currentLevel = 1;
+    private int currentLevel = 1;
+    private int currentArmorPrize = 10;
 
     /**
      * @param damageTaken reduces damage
@@ -16,21 +17,36 @@ public class Armor implements IArmor, IUpgradable {
      */
     @Override
     public double damageReduction(int damageTaken) {
-        double reduction =  currentLevel /100;
+        double reduction = currentLevel/100;
         return damageTaken * reduction;
     }
-    public double getCurrentDamageReduction() {
+    public double currentDamageReduction() {
         return currentLevel;
     }
-
 
     @Override
     public void levelUp() {
-        this.currentLevel++;
+        currentLevel++;
+        currentArmorPrize *= currentLevel;
     }
 
     @Override
-    public int getCurrentLevel() {
+    public int currentLevel() {
         return currentLevel;
+    }
+
+    @Override
+    public int currentPrice() {
+        return currentArmorPrize;
+    }
+
+    @Override
+    public int statsIfUpgraded() {
+        return currentLevel + 1;
+    }
+
+    @Override
+    public int upgradeCost() {
+        return currentArmorPrize * (currentLevel + 1);
     }
 }

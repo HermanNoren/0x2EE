@@ -67,10 +67,10 @@ public class ShopPanelState implements IPanelState{
         stringButtonController.update();
         g2.setColor(panelColor);
         g2.fillRect(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        drawPlayerMoney(g2, shopTransaction.getPlayerMoneyAmount());
+        drawPlayerMoney(g2, shopTransaction.getMoney());
         drawWeaponCost(g2, shopTransaction.getWeaponUpgradeCost());
         drawArmorCost(g2, shopTransaction.getArmorUpgradeCost());
-        drawArmorUpgradePerks(g2, shopTransaction.getArmorCurrentReduction(), shopTransaction.getArmorReductionAfterUpgrade());
+        drawArmorUpgradePerks(g2, shopTransaction.CurrentArmorReduction(), shopTransaction.ArmorReductionAfterUpgrade());
         g2.setFont(Config.buttonFont); //the font which the button will be drawn in
     }
 
@@ -97,7 +97,7 @@ public class ShopPanelState implements IPanelState{
         String textToBeRepresented = currentCostText + weaponCost +"$";
         g2.drawString((textToBeRepresented), Config.SCREEN_WIDTH/3, (int) ((Config.SCREEN_HEIGHT)/1.7));
     }
-    private void drawArmorCost(Graphics2D g2, double armorCost){
+    private void drawArmorCost(Graphics2D g2, int armorCost){
         g2.setColor(Color.WHITE);
         g2.setFont(Config.inGameTextFont);
         String textToBeRepresented = currentCostText + armorCost + "$";

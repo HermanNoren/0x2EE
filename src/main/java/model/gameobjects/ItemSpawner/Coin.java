@@ -36,6 +36,6 @@ public class Coin implements IItem {
 
     @Override
     public void consume(Player player) {
-        player.addMoney(10);
+        player.addMoney(1000);
     }
 }

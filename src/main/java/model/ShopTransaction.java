@@ -8,59 +8,84 @@ import model.weapons.Weapon;
 public class ShopTransaction {
 
     private int currentWeaponPrize = 10;
-    private int currentArmorPrize = 10;
+
     private final Player player;
+    private final Weapon weapon;
+    private final Armor armor;
+
 
     public ShopTransaction(Player player){
         this.player = player;
-    }
-    public boolean isPurchasePossible(int currentPrize, IUpgradable current){
-        return ((player.getMoney() - currentPrize * current.getCurrentLevel()) >= 0);
-
-    }
-    public void upgradeWeapon(){
-       if(isPurchasePossible(currentWeaponPrize, getWeapon())){
-           currentWeaponPrize *= getWeapon().getCurrentLevel();
-           newPlayerMoneyAmount(player.getMoney() - currentWeaponPrize);
-           getWeapon().levelUp();
-       }
+        this.weapon = player.getWeapon();
+        this.armor = player.getArmor();
     }
 
-    public void upgradeArmor(){
-        if(isPurchasePossible(currentArmorPrize, getArmor())){
-            this.currentArmorPrize *= getArmor().getCurrentLevel();
-            newPlayerMoneyAmount(player.getMoney() - currentArmorPrize);
-            getArmor().levelUp();
-        }
-    }
-    public int getWeaponUpgradeCost(){
-        return currentWeaponPrize * getWeapon().getCurrentLevel();
-    }
-    public double getArmorUpgradeCost(){
-        return (currentArmorPrize * getArmor().getCurrentLevel());
-    }
-    public double getArmorReductionAfterUpgrade(){
-        return (getArmor().getCurrentLevel() ) * getArmor().getCurrentDamageReduction();
-    }
-    public double getArmorCurrentReduction(){
-        return getArmor().getCurrentDamageReduction();
+
+
+    public boolean purchasePossible(int currentPrize){
+        return ((player.getMoney() - currentPrize) >= 0);
     }
 
-    public int getPlayerMoneyAmount(){
+    public int getMoney(){
         return player.getMoney();
     }
+
+
+    public void upgradeWeapon(){
+       if(purchasePossible(currentWeaponPrize)){
+           currentWeaponPrize *= weapon.currentLevel();
+           newPlayerMoneyAmount(player.getMoney() - currentWeaponPrize);
+           weapon.levelUp();
+       }
+    }
+    public int getWeaponUpgradeCost(){
+        return currentWeaponPrize * weapon.currentLevel();
+    }
+
     public int getCurrentWeaponPrize(){
         return currentWeaponPrize;
     }
-    public int getCurrentArmorPrize(){
-        return currentArmorPrize;
+
+    /**
+     * Method which takes the interface of the upgradable thing in question.
+     * The method implements this upgrade in the method "upgradeArmor" (below).
+     * @param toBeUpgraded The thing to be upgraded.
+     */
+    public void upgrade(IUpgradable toBeUpgraded){
+        newPlayerMoneyAmount(player.getMoney() - toBeUpgraded.upgradeCost());
+        toBeUpgraded.levelUp();
     }
 
-    public Armor getArmor(){
-        return player.getArmor();
+    /**
+     * Checks if the player has enough money, will upgrade armor if enough.
+     */
+    public void upgradeArmor(){
+        if(purchasePossible(armor.upgradeCost())) upgrade(armor);
     }
-    public Weapon getWeapon(){
-        return player.getWeapon();
+
+    /**
+     * Inspected by the view to see the amount of armor reduction after the upgrade.
+     * @return What the armor reduction will be after an upgrade.
+     */
+    public double ArmorReductionAfterUpgrade(){
+        return armor.statsIfUpgraded();
+    }
+
+    /**
+     * Viewed by the view to see how large the current
+     * armor reduction is.
+     * @return The current armor reduction.
+     */
+    public double CurrentArmorReduction(){
+        return armor.currentDamageReduction();
+    }
+
+    /**
+     * Used by the view to see the cost of upgrading the weapon.
+     * @return The cost to upgrade the weapon.
+     */
+    public int getArmorUpgradeCost(){
+        return armor.upgradeCost();
     }
 
     private void newPlayerMoneyAmount(int amountAfterTransaction) {

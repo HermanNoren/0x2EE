@@ -13,6 +13,8 @@ public class Weapon implements IUpgradable {
     public int ammo;
     public boolean reloading;
 
+    private int currentWeaponPrize;
+
 
     /**
      * The main weapon of the
@@ -22,6 +24,7 @@ public class Weapon implements IUpgradable {
         this.ammo = ammo;
         reloading = false;
         currentLevel = 1;
+        this.currentWeaponPrize = 10;
     }
 
 
@@ -56,7 +59,22 @@ public class Weapon implements IUpgradable {
     }
 
     @Override
-    public int getCurrentLevel() {
+    public int currentLevel() {
         return currentLevel;
+    }
+
+    @Override
+    public int currentPrice() {
+        return 0; //TODO
+    }
+
+    @Override
+    public int statsIfUpgraded() {
+        return 0; //TODO
+    }
+
+    @Override
+    public int upgradeCost() {
+        return 0; //TODO
     }
 }
