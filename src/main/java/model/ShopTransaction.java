@@ -6,9 +6,6 @@ import model.gameobjects.Player;
 import model.weapons.Weapon;
 
 public class ShopTransaction {
-
-    private int currentWeaponPrize = 10;
-
     private final Player player;
     private final Weapon weapon;
     private final Armor armor;
@@ -31,19 +28,15 @@ public class ShopTransaction {
     }
 
 
-    public void upgradeWeapon(){
-       if(purchasePossible(currentWeaponPrize)){
-           currentWeaponPrize *= weapon.currentLevel();
-           newPlayerMoneyAmount(player.getMoney() - currentWeaponPrize);
-           weapon.levelUp();
-       }
-    }
     public int getWeaponUpgradeCost(){
-        return currentWeaponPrize * weapon.currentLevel();
+        return weapon.upgradeCost();
     }
 
-    public int getCurrentWeaponPrize(){
-        return currentWeaponPrize;
+    public int getCurrentWeaponDamage(){
+        return weapon.damage;
+    }
+    public int getUpgradedWeaponDamage(){
+        return weapon.statsIfUpgraded();
     }
 
     /**
@@ -62,12 +55,15 @@ public class ShopTransaction {
     public void upgradeArmor(){
         if(purchasePossible(armor.upgradeCost())) upgrade(armor);
     }
+    public void upgradeWeapon(){
+        if(purchasePossible(weapon.upgradeCost())) upgrade(weapon);
+    }
 
     /**
      * Inspected by the view to see the amount of armor reduction after the upgrade.
      * @return What the armor reduction will be after an upgrade.
      */
-    public double ArmorReductionAfterUpgrade(){
+    public int ArmorReductionAfterUpgrade(){
         return armor.statsIfUpgraded();
     }
 
@@ -76,7 +72,7 @@ public class ShopTransaction {
      * armor reduction is.
      * @return The current armor reduction.
      */
-    public double CurrentArmorReduction(){
+    public int CurrentArmorReduction(){
         return armor.currentDamageReduction();
     }
 
@@ -88,6 +84,11 @@ public class ShopTransaction {
         return armor.upgradeCost();
     }
 
+    /**
+     * Sets the new amount of money the player has after a transaction.
+     * @param amountAfterTransaction is taken as an argument in player.setMoney, which will be
+     *                               the new amount of money for the player.
+     */
     private void newPlayerMoneyAmount(int amountAfterTransaction) {
         player.setMoney(amountAfterTransaction);
     }

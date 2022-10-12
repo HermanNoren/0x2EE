@@ -13,7 +13,7 @@ public class Weapon implements IUpgradable {
     public int ammo;
     public boolean reloading;
 
-    private int currentWeaponPrize;
+    private int currentWeaponPrize = 10;
 
 
     /**
@@ -24,7 +24,6 @@ public class Weapon implements IUpgradable {
         this.ammo = ammo;
         reloading = false;
         currentLevel = 1;
-        this.currentWeaponPrize = 10;
     }
 
 
@@ -56,6 +55,7 @@ public class Weapon implements IUpgradable {
     public void levelUp() {
         this.currentLevel++;
         this.damage++;
+        currentWeaponPrize *= currentLevel;
     }
 
     @Override
@@ -65,16 +65,16 @@ public class Weapon implements IUpgradable {
 
     @Override
     public int currentPrice() {
-        return 0; //TODO
+        return currentWeaponPrize;
     }
 
     @Override
     public int statsIfUpgraded() {
-        return 0; //TODO
+        return currentLevel + 1;
     }
 
     @Override
     public int upgradeCost() {
-        return 0; //TODO
+        return currentWeaponPrize * (currentLevel + 1);
     }
 }

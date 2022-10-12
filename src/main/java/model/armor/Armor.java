@@ -7,7 +7,6 @@ public class Armor implements IArmor, IUpgradable {
     public Armor(){
 
     }
-
     private int currentLevel = 1;
     private int currentArmorPrize = 10;
 
@@ -20,7 +19,7 @@ public class Armor implements IArmor, IUpgradable {
         double reduction = currentLevel/100;
         return damageTaken * reduction;
     }
-    public double currentDamageReduction() {
+    public int currentDamageReduction() {
         return currentLevel;
     }
 

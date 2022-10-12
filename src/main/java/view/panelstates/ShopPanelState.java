@@ -69,6 +69,7 @@ public class ShopPanelState implements IPanelState{
         g2.fillRect(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         drawPlayerMoney(g2, shopTransaction.getMoney());
         drawWeaponCost(g2, shopTransaction.getWeaponUpgradeCost());
+        drawWeaponUpgradePerks(g2, shopTransaction.getCurrentWeaponDamage(), shopTransaction.getUpgradedWeaponDamage());
         drawArmorCost(g2, shopTransaction.getArmorUpgradeCost());
         drawArmorUpgradePerks(g2, shopTransaction.CurrentArmorReduction(), shopTransaction.ArmorReductionAfterUpgrade());
         g2.setFont(Config.buttonFont); //the font which the button will be drawn in
@@ -81,8 +82,8 @@ public class ShopPanelState implements IPanelState{
      */
     private void drawPlayerMoney(Graphics2D g2, int playerMoney){
         g2.setColor(Color.WHITE);
-        g2.setFont(Config.infoFont);
-        g2.drawString((playerMoney + "$"),(Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(playerMoney + "$")), Config.SCREEN_HEIGHT/15);
+        g2.setFont(Config.nameFont);
+        g2.drawString((playerMoney + "$"),(Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(playerMoney + "$")), Config.SCREEN_HEIGHT/12);
     }
 
     /**
@@ -104,12 +105,22 @@ public class ShopPanelState implements IPanelState{
         g2.drawString(textToBeRepresented, Config.SCREEN_WIDTH/3, (Config.SCREEN_HEIGHT)/4);
     }
 
-    private void drawArmorUpgradePerks(Graphics2D g2, double currentDamageReduction, double armorReductionAfterUpgrade){
+    private void drawArmorUpgradePerks(Graphics2D g2, int currentDamageReduction, int armorReductionAfterUpgrade){
         g2.setColor(Color.WHITE);
         g2.setFont(Config.inGameTextFont);
-        String currentDamageString = "REDUCTION %" + (int)currentDamageReduction;
-        String damageAfterUpdate = " -> %" + (int) armorReductionAfterUpgrade;
-        g2.drawString(currentDamageString + damageAfterUpdate,Config.SCREEN_WIDTH/3, Config.SCREEN_HEIGHT/3);
+        String currentDamageReductionText = "ARMOR %" + currentDamageReduction;
+        String damageReductionAfterUpgradeText = " -> %" +  armorReductionAfterUpgrade;
+        g2.drawString(currentDamageReductionText + damageReductionAfterUpgradeText,Config.SCREEN_WIDTH/3, Config.SCREEN_HEIGHT/3);
+    }
+
+
+    private void drawWeaponUpgradePerks(Graphics2D g2, int currentWeaponDamage, int weaponDamageAfterUpgrade){
+        g2.setColor(Color.WHITE);
+        g2.setFont(Config.inGameTextFont);
+        String currentDamageText = "DAMAGE " + currentWeaponDamage;
+        String damageAfterUpgradeText = " -> " + weaponDamageAfterUpgrade;
+        g2.drawString(currentDamageText + damageAfterUpgradeText,Config.SCREEN_WIDTH/3, (int)(Config.SCREEN_HEIGHT/1.5));
+
     }
 
     /**
