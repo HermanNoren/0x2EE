@@ -128,8 +128,6 @@ public class Game implements IProjectileAddable{
         return spawner.getSpawnedItems();
     }
 
-    private boolean newBullet;
-
     /**
      * Add an observer. Observers will be notified 120 times per second
      *
@@ -154,19 +152,8 @@ public class Game implements IProjectileAddable{
     public void update(double dt) {
         if (!(player.getHealth() < 1)) {
 
-            player.moveX(dt);
-            List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
-            for (Terrain t : collidedTerrain) {
-                Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.X_AXIS);
-                if (collisionTypes.get("right")) {
-                    player.setPosX(t.getPos().getX() - player.getWidth());
-                    player.stopCurrentMovement();
-                }
-                if (collisionTypes.get("left")) {
-                    player.setPosX((t.getPos().getX() + t.getWidth()));
-                    player.stopCurrentMovement();
-                }
-            }
+
+
 
             player.moveY(dt);
             collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
@@ -231,6 +218,26 @@ public class Game implements IProjectileAddable{
 
         } else {
             playerDead = true;
+        }
+    }
+
+    private void updatePlayer(double dt){
+        player.moveX(dt);
+
+    }
+
+    private void sideCollisionCheck(){
+        List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
+        for (Terrain t : collidedTerrain) {
+            Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.X_AXIS);
+            if (collisionTypes.get("right")) {
+                player.setPosX(t.getPos().getX() - player.getWidth());
+                player.stopCurrentMovement();
+            }
+            if (collisionTypes.get("left")) {
+                player.setPosX((t.getPos().getX() + t.getWidth()));
+                player.stopCurrentMovement();
+            }
         }
     }
 
