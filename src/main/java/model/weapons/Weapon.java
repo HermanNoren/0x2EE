@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Weapon implements IUpgradable {
     public int damage;
-    private int currentLevel;
+    private int currentLevel = 1;
     public int ammo;
     public boolean reloading;
 
@@ -23,7 +23,6 @@ public class Weapon implements IUpgradable {
         this.damage = damage;
         this.ammo = ammo;
         reloading = false;
-        currentLevel = 1;
     }
 
 
@@ -53,18 +52,20 @@ public class Weapon implements IUpgradable {
 
     @Override
     public void levelUp() {
-        this.currentLevel++;
         this.damage++;
+        this.currentLevel++;
         currentWeaponPrize *= currentLevel;
     }
 
     @Override
     public int statsIfUpgraded() {
-        return currentLevel + 1;
+        return damage + 1;
     }
 
     @Override
     public int upgradeCost() {
         return currentWeaponPrize * (currentLevel + 1);
     }
+
+
 }
