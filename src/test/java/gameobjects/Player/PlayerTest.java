@@ -1,6 +1,7 @@
 package gameobjects.Player;
 
 import controllers.EDirection;
+import model.Game;
 import model.gameobjects.Player;
 import model.gameobjects.Projectile;
 import model.helperclasses.Vector2;
@@ -200,15 +201,16 @@ public class PlayerTest {
 
     @Test
     void test_shoot_adds_new_projectile_to_list_in_game(){
-        List<Projectile> projectiles = new ArrayList<>();
-        player.shoot(projectiles);
-        assertEquals(1, projectiles.size());
+        Game game = new Game();
+        game.getPlayer().shoot(game);
+        assertEquals(1, game.getProjectiles().size());
     }
     @Test
     void test_shoot_gets_current_direction_if_direction_does_not_equal_not_moving(){
-        player.setDirection(EDirection.UP);
+        Game game = new Game();
+        game.getPlayer().setDirection(EDirection.UP);
         List<Projectile> projectiles = new ArrayList<>();
-        player.shoot(projectiles);
+        game.getPlayer().shoot(game);
     }
 
 }

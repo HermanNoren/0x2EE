@@ -16,33 +16,29 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class WeaponTest {
     Game game;
-    Player player;
 
     @BeforeEach
     void init(){
         game = new Game();
-        player = game.getPlayer();
     }
 
     @Test
     void test_if_shoot_creates_projectile(){
         for (int i = 0; i < 3; i++) {
             game.makePlayerShoot();
-            game.update(1);
         }
 
-        assertTrue(game.getProjectiles().size() == 3);
+        assertEquals(3, game.getProjectiles().size());
     }
 
     @Test
     void test_if_reload_when_out_of_ammo(){
         for (int i = 0; i < 11; i++) {
             game.makePlayerShoot();
-            game.update(1);
         }
 
         // TODO: Will change as we change player logic
-        assertTrue(game.getProjectiles().size() == 10);
+        assertEquals(10, game.getProjectiles().size());
     }
 
     @Test

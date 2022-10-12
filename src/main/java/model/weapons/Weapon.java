@@ -1,6 +1,7 @@
 package model.weapons;
 
 import controllers.EDirection;
+import model.gameobjects.IProjectileAddable;
 import model.gameobjects.IUpgradable;
 import model.gameobjects.Projectile;
 import model.helperclasses.Vector2;
@@ -27,10 +28,10 @@ public class Weapon implements IUpgradable {
 
 
 
-    public void shoot(Vector2 pos, EDirection direction, List<Projectile> projectiles){
+    public void shoot(Vector2 pos, EDirection direction, IProjectileAddable addable){
         if (ammo != 0) {
             ammo--;
-            projectiles.add(new Projectile(pos, direction));
+            addable.addProjectile(new Projectile(pos, direction));
         }
         else reload();
     }

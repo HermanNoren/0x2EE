@@ -37,7 +37,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
         money = 0;
     }
 
-    public void shoot(List<Projectile> projectiles) {
+    public void shoot(IProjectileAddable addable) {
         EDirection dir;
 
         if (getDirection() == EDirection.NOT_MOVING) {
@@ -47,7 +47,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
         else {
             dir = getDirection();
         }
-        weapon.shoot(getCenter(), dir, projectiles);
+        weapon.shoot(getCenter(), dir, addable);
     }
     public void stopCurrentMovement(){
         setVel(new Vector2(0,0));

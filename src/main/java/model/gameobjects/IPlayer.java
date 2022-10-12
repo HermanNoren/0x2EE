@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IPlayer {
 
-    void shoot(List<Projectile> projectiles);
+    void shoot(IProjectileAddable addable);
     void stopCurrentMovement();
     void moveX(double dt);
     void moveY(double dt);

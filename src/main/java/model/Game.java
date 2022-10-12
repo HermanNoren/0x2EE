@@ -25,7 +25,7 @@ import java.util.Random;
  * This class contains the main game loop.
  * With help of the main game loop it delegates work to the active IGameState
  */
-public class Game {
+public class Game implements IProjectileAddable{
     private List<IObserver> observers;
     private Player player;
     private List<Terrain> path;
@@ -43,7 +43,6 @@ public class Game {
     private Random random = new Random();
     private Boolean playerDead;
     private ShopTransaction shopTransaction;
-    private Projectile pendingBullet;
 
     public Game() {
         this.gameMap = new GameMap(100, 100);
@@ -140,12 +139,12 @@ public class Game {
     }
 
     public void makePlayerShoot() {
-        player.shoot(projectiles);
+        player.shoot((IProjectileAddable) this);
     }
 
+    @Override
     public void addProjectile(Projectile p) {
-        newBullet = true;
-        pendingBullet = p;
+        projectiles.add(p);
     }
 
     /**
@@ -186,12 +185,7 @@ public class Game {
 //                gameObject.update(dt);
             }
 
-            if (newBullet){
-                projectiles.add(pendingBullet);
-                newBullet = false;
-            }
-
-            for (IProjectile projectile : projectiles){
+            for (IProjectile projectile : getProjectiles()){
                 projectile.update(dt);
             }
 
