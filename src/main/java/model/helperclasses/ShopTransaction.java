@@ -1,4 +1,4 @@
-package model;
+package model.helperclasses;
 
 import model.armor.Armor;
 import model.gameobjects.IUpgradable;

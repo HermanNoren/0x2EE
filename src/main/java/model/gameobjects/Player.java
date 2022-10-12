@@ -114,6 +114,10 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
     public void setMoney( int newAmount) {
         money = newAmount;
     }
+    @Override
+    public void damageTaken(int damage){
+       setHealth((int) (getHealth() - armor.damageReduction(damage)));
+    }
 
     public void addMoney(int amount){
         this.money += amount;

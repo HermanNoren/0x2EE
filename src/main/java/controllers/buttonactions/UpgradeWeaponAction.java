@@ -1,6 +1,6 @@
 package controllers.buttonactions;
 
-import model.ShopTransaction;
+import model.helperclasses.ShopTransaction;
 
 public class UpgradeWeaponAction implements IButtonAction {
 

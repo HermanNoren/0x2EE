@@ -13,8 +13,8 @@ import model.helperclasses.Vector2;
 
 
 public class Shop implements IGameObject {
-    public int x_position;
-    public int y_position;
+    private int x_position;
+    private int y_position;
 
     public Vector2 position;
 

@@ -2,7 +2,7 @@ package model;
 
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
-import model.gameobjects.enemies.IEnemy;
+import model.helperclasses.ShopTransaction;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.*;
@@ -59,6 +59,9 @@ public class Game {
 
        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
+        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
+        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
+
 
         spawner = new Spawner(this);
         gameObjects = new ArrayList<>();
@@ -205,7 +208,7 @@ public class Game {
 
                 //Check if enemy is close enough to damage player, could be done somewhere else also.
                 if (CollisionHandler.testCollision(player, enemy)) {
-                    player.damageTaken(1);
+                    this.player.damageTaken(1);
                 }
                 // Check if projectile hits enemy
                 Iterator<Projectile> pIter = projectiles.iterator();

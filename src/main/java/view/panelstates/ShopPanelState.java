@@ -2,7 +2,7 @@ package view.panelstates;
 
 import controllers.ButtonController;
 import controllers.buttonactions.UpgradeArmorButton;
-import model.ShopTransaction;
+import model.helperclasses.ShopTransaction;
 import view.MainPanel;
 import view.buttons.GameButton;
 import controllers.buttonactions.UpgradeWeaponAction;

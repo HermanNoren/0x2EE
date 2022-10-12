@@ -20,7 +20,7 @@ public abstract class Entity implements IGameObject, IEntity {
     private int maxHp;
     private EDirection direction;
     private EDirection lastDirection;
-    private int size = Config.SPRITE_SIZE*3;
+    private int size = Config.SPRITE_SIZE * 3;
     private Terrain[][] coordinates;
     private Terrain currentLocation;
 
