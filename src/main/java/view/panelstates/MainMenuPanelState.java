@@ -6,6 +6,7 @@ import model.Game;
 import view.MainPanel;
 import view.buttons.GameButton;
 import view.buttons.buttonactions.MenuButtonAction;
+import view.buttons.buttonactions.NewGameButtonAction;
 import view.buttons.buttonactions.QuitButtonAction;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
@@ -18,8 +19,7 @@ import java.util.List;
 
 public class MainMenuPanelState implements IPanelState {
 
-    private final Game game;
-
+    Game game;
     private final ButtonController bc;
     private final List<GameButton> buttons;
     private final List<IDrawer> drawers;
@@ -69,7 +69,7 @@ public class MainMenuPanelState implements IPanelState {
 
 
     private void createButtons() {
-        GameButton mainMenuButton1 = new GameButton("PLAY", 325, 200, new MenuButtonAction(EPanelState.INGAME, this));
+        GameButton mainMenuButton1 = new GameButton("PLAY", 325, 200, new NewGameButtonAction(EPanelState.INGAME, this, game));
         GameButton mainMenuButton2 = new GameButton("HIGHSCORES", 325, 300, new MenuButtonAction(EPanelState.HIGHSCORES, this));
         GameButton mainMenuButton3 = new GameButton("HOW TO PLAY", 325, 400, new MenuButtonAction(EPanelState.HOWTOPLAY, this));
         GameButton mainMenuButton4 = new GameButton("QUIT", 325, 500, new QuitButtonAction());

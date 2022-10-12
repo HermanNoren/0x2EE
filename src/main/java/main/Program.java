@@ -1,9 +1,7 @@
 package main;
 
-import controllers.GameLoopController;
+import controllers.MainLoopController;
 import model.Game;
-import model.gameobjects.Player;
-import model.mapclasses.GameMap;
 import view.MainPanel;
 import view.Window;
 
@@ -12,9 +10,10 @@ public class Program {
         Game game = new Game();
         MainPanel mainPanel = new MainPanel(game);
         Window window = new Window(mainPanel);
-        GameLoopController gameLoopController = new GameLoopController(game);
-        gameLoopController.addObserver(mainPanel);
-        gameLoopController.run();
+        MainLoopController loopController = MainLoopController.getInstance();
+        loopController.addModel(game);
+        loopController.addObserver(mainPanel);
+        loopController.run();
     }
 
 }

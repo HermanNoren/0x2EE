@@ -1,6 +1,7 @@
 package model;
 
 import config.Config;
+import controllers.EDirection;
 import model.gameobjects.ItemSpawner.IItem;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
@@ -14,8 +15,6 @@ import model.helperclasses.collision.ECollisionAxis;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import model.gameobjects.IGameObject;
-
-import view.IObserver;
 
 import java.io.*;
 import java.util.*;
@@ -31,7 +30,6 @@ public class Game {
     private List<String> highscoreName;
     private List<Entity> enemies;
     private List<IGameObject> terrains;
-    private boolean stateChangedFlag;
     private GameMap gameMap;
     private File highscoreFile;
     private List<String> highscoreList;
@@ -45,6 +43,12 @@ public class Game {
     private Boolean paused;
 
     public Game() {
+        newGame();
+        highscoreHandler = new HighscoreHandler();
+        highscoreList = highscoreHandler.getHighscoreList();
+    }
+
+    public void newGame() {
         this.gameMap = new GameMap(Config.MAP_SIZE, Config.MAP_SIZE);
         this.player = new Player(48, 48, gameMap.getGameMapCoordinates());
         shop = new Shop(200, 100);
@@ -59,9 +63,6 @@ public class Game {
         spawner = new Spawner(this);
         gameObjects = new ArrayList<>();
         gameObjects.add(shop);
-        stateChangedFlag = false;
-        highscoreHandler = new HighscoreHandler();
-        highscoreList = highscoreHandler.getHighscoreList();
         paused = false;
     }
 
@@ -126,7 +127,7 @@ public class Game {
     }
 
     public void pause() {
-        player.stopCurrentMovement();
+        player.setDirection(EDirection.NOT_MOVING);
         paused = true;
     }
 
@@ -134,30 +135,17 @@ public class Game {
         paused = false;
     }
 
-    public void newGame() {
-        this.gameMap = new GameMap(Config.MAP_SIZE, Config.MAP_SIZE);
-        this.player = new Player(48, 48, gameMap.getGameMapCoordinates());
-        shop = new Shop(200, 100);
-        enemies = new ArrayList<>();
-        projectiles = new ArrayList<>();
-        highscoreName = new ArrayList<>();
-        this.path = new ArrayList<>();
-        playerDead = false;
-        EnemyFactory enemyFactory = new NormalEnemyFactory();
-        enemies.add(enemyFactory.createEnemy(gameMap, player, random));
-        enemies.add(enemyFactory.createEnemy(gameMap, player, random));
-        spawner = new Spawner(this);
-        gameObjects = new ArrayList<>();
-        gameObjects.add(shop);
-        stateChangedFlag = false;
-        paused = false;
+    public boolean isPaused() {
+        return paused;
     }
 
     /**
      * Updates the current game state
      */
     public void update(double dt) {
+        /*
         if (paused) { return; }
+         */
 
         if ((player.getHealth() < 1)) {
             playerDead = true;
@@ -225,11 +213,11 @@ public class Game {
             Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.X_AXIS);
             if (collisionTypes.get("right")) {
                 player.setPosX(t.getPos().getX() - player.getWidth());
-                player.stopCurrentMovement();
+                player.stopCurrentXMovement();
             }
             if (collisionTypes.get("left")) {
                 player.setPosX((t.getPos().getX() + t.getWidth()));
-                player.stopCurrentMovement();
+                player.stopCurrentXMovement();
             }
         }
     }
@@ -240,11 +228,11 @@ public class Game {
             Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.Y_AXIS);
             if (collisionTypes.get("top")) {
                 player.setPosY(t.getPos().getY() + player.getHeight());
-                player.stopCurrentMovement();
+                player.stopCurrentYMovement();
             }
             if (collisionTypes.get("bottom")) {
                 player.setPosY((t.getPos().getY() - t.getHeight()));
-                player.stopCurrentMovement();
+                player.stopCurrentYMovement();
             }
         }
     }

@@ -17,8 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HowToPlayPanelState implements IPanelState{
-
-    private Game game;
     private BufferedImage controls, instructions;
     private final ButtonController bc;
     private final ArrayList<GameButton> buttons;
@@ -29,8 +27,7 @@ public class HowToPlayPanelState implements IPanelState{
     private ImageHandler imageHandler;
 
 
-    public HowToPlayPanelState(MainPanel mainPanel, Game game){
-        this.game = game;
+    public HowToPlayPanelState(MainPanel mainPanel){
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons();

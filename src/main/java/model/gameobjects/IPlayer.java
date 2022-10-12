@@ -5,7 +5,9 @@ import java.util.List;
 public interface IPlayer {
 
     void shoot(List<Projectile> projectiles);
-    void stopCurrentMovement();
+    void stopCurrentXMovement();
+    void stopCurrentYMovement();
+    void stopAllCurrentMovement();
     void moveX(double dt);
     void moveY(double dt);
     int getScore();

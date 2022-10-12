@@ -7,6 +7,7 @@ import view.MainPanel;
 import view.buttons.GameButton;
 import view.buttons.buttonactions.MenuButtonAction;
 import view.buttons.buttonactions.QuitButtonAction;
+import view.buttons.buttonactions.NewGameButtonAction;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 
@@ -69,7 +70,7 @@ public class GameOverPanelState implements IPanelState{
     }
 
     private void createButtons() {
-        GameButton button1 = new GameButton("RESTART", 325, 200, new MenuButtonAction(EPanelState.MAINMENU, this));
+        GameButton button1 = new GameButton("RESTART", 325, 200, new NewGameButtonAction(EPanelState.INGAME, this, game));
         GameButton button2 = new GameButton("MAIN MENU", 325, 300, new MenuButtonAction(EPanelState.MAINMENU, this));
         GameButton button3 = new GameButton("QUIT", 325, 400, new QuitButtonAction());
         buttons.add(button1);

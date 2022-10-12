@@ -6,7 +6,7 @@ import model.Game;
 import view.MainPanel;
 import view.buttons.GameButton;
 import view.buttons.buttonactions.MenuButtonAction;
-import view.buttons.buttonactions.RestartGameButtonAction;
+import view.buttons.buttonactions.NewGameButtonAction;
 import view.buttons.buttonactions.ResumeGameButtonAction;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
@@ -25,7 +25,7 @@ public class PausePanelState implements IPanelState {
     private List<IDrawer> drawers;
     private MainPanel mainPanel;
 
-    public PausePanelState(MainPanel mainPanel, Game game ) {
+    public PausePanelState(MainPanel mainPanel, Game game) {
         this.game = game;
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
@@ -67,7 +67,7 @@ public class PausePanelState implements IPanelState {
 
     private void createButtons(){
         GameButton pauseButton1 = new GameButton("RESUME", 325, 200, new ResumeGameButtonAction(EPanelState.INGAME, this, game));
-        GameButton pauseButton2 = new GameButton("RESTART", 325, 300, new RestartGameButtonAction(EPanelState.INGAME, this, game));
+        GameButton pauseButton2 = new GameButton("RESTART", 325, 300, new NewGameButtonAction(EPanelState.INGAME, this, game));
         GameButton pauseButton3 = new GameButton("MAIN MENU", 325, 400, new MenuButtonAction(EPanelState.MAINMENU, this));
         buttons.add(pauseButton1);
         buttons.add(pauseButton2);

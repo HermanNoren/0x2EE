@@ -25,7 +25,7 @@ public class PanelStateFactory {
             }
 
             case HOWTOPLAY -> {
-                return new HowToPlayPanelState(mainPanel, game);
+                return new HowToPlayPanelState(mainPanel);
             }
 
             case NEWHIGHSCORE -> {

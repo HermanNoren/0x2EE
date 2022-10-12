@@ -1,9 +1,6 @@
 package view.panelstates;
 
-import controllers.CameraController;
-import controllers.KeyClickedController;
-import controllers.PlayerController;
-import controllers.WeaponController;
+import controllers.*;
 import model.Game;
 import view.Camera;
 import view.HUD;
@@ -25,6 +22,12 @@ public class InGamePanelState implements IPanelState {
      * The first object added to the Drawers ArrayList will be seen as under everything added after it.
      * */
     private List<IDrawer> drawers;
+
+    private PlayerDrawer playerDrawer;
+    private EnemyDrawer enemyDrawer;
+    private ItemDrawer itemDrawer;
+
+    private ImageSwitcherController imageSwitcherController;
     private final Camera camera;
     private final ArrayList<KeyListener> keyListeners;
     private MainPanel mainPanel;
@@ -41,14 +44,24 @@ public class InGamePanelState implements IPanelState {
         camera.setFocusedObject(game.getPlayer());
         keyListeners.add(new CameraController());
 
+        playerDrawer = new PlayerDrawer(game.getPlayer());
+        enemyDrawer = new EnemyDrawer(game.getEnemies(), "boss");
+        itemDrawer = new ItemDrawer(game.getItems());
+
         drawers = new ArrayList<>();
         drawers.add(new MapDrawer(game));
         drawers.add(new ProjectileDrawer(game));
         drawers.add(new ShopDrawer(game.getShop()));
-        drawers.add(new PlayerDrawer(game.getPlayer()));
-        drawers.add(new EnemyDrawer(game.getEnemies(), "boss"));
-        drawers.add(new ItemDrawer(game.getItems()));
+        drawers.add(playerDrawer);
+        drawers.add(enemyDrawer);
+        drawers.add(itemDrawer);
         drawers.add(new InteractShopTextDrawer(game.getShop()));
+
+        imageSwitcherController = new ImageSwitcherController(250);
+        imageSwitcherController.addImageDrawer(playerDrawer);
+        imageSwitcherController.addImageDrawer(enemyDrawer);
+        imageSwitcherController.addImageDrawer(itemDrawer);
+        imageSwitcherController.start();
     }
 
 
