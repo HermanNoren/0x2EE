@@ -68,11 +68,14 @@ public class ShopPanelState implements IPanelState{
         g2.setColor(panelColor);
         g2.fillRect(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
         drawPlayerMoney(g2, shopTransaction.getMoney());
+
         drawWeaponCost(g2, shopTransaction.getWeaponUpgradeCost());
         drawWeaponUpgradePerks(g2, shopTransaction.getCurrentWeaponDamage(), shopTransaction.getUpgradedWeaponDamage());
+
         drawArmorCost(g2, shopTransaction.getArmorUpgradeCost());
         drawArmorUpgradePerks(g2, shopTransaction.CurrentArmorReduction(), shopTransaction.ArmorReductionAfterUpgrade());
-        g2.setFont(Config.buttonFont); //the font which the button will be drawn in
+
+        g2.setFont(Config.buttonFont); //the font which the button are drawn in
     }
 
     /**

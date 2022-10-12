@@ -2,6 +2,8 @@ package view.drawers;
 
 import model.gameobjects.Shop;
 import config.Config;
+import model.helperclasses.Vector2;
+
 import java.awt.*;
 import java.util.List;
 
@@ -12,10 +14,12 @@ import java.util.List;
 public class InteractShopTextDrawer implements IDrawer{
     /**
      * A throw away int which is never used. Static to be as fast as possible. Would need
-     * Work around in DrawerHelper which seems unnecessary for this project although
+     * Work around in DrawerHelper which seems unnecessary for this project, although it
      * would be good in a larger OOP project.
      */
     public static int passableValue;
+    private final Vector2 shopPosition;
+    private final int shopWidth;
     private final Shop shop;
     /**
      * String used to determine the text above the shop.
@@ -23,6 +27,8 @@ public class InteractShopTextDrawer implements IDrawer{
     String popUpText = "The game";
 
     public InteractShopTextDrawer(Shop shop){
+        this.shopPosition = shop.getPos();
+        this.shopWidth = shop.getWidth();
         this.shop = shop;
     }
 
@@ -37,9 +43,9 @@ public class InteractShopTextDrawer implements IDrawer{
         g2.setColor(Color.white);
         g2.setFont(Config.buttonFont);
         if(shop.playerOnShop){
-            List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(shop.getPos(), passableValue, passableValue);
+            List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(shopPosition, passableValue, passableValue);
             int heightOffset = -10;
-            g2.drawString(popUpText, drawInformation.get(0) - (g2.getFontMetrics().stringWidth(popUpText)/2) + shop.getWidth()/2, drawInformation.get(1) + heightOffset);
+            g2.drawString(popUpText, drawInformation.get(0) - (g2.getFontMetrics().stringWidth(popUpText)/2) + shopWidth/2, drawInformation.get(1) + heightOffset);
         }
     }
 }
