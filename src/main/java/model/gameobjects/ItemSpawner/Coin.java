@@ -36,7 +36,6 @@ public class Coin implements IItem {
         return new Vector2(x, y);
     }
 
-
     @Override
     public String getType() {
         return "coin";
