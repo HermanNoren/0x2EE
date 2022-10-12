@@ -96,8 +96,11 @@ public abstract class Entity implements IGameObject {
         return new Vector2(x, y);
     }
 
+    /**
+     * @return current location based on the terrain grid of GameMap
+     */
     public Terrain getMapLocation(){
-        int posX = (int)getCenter().getX()/48;
+        int posX = (int)getCenter().getX()/48; // 48 is terrain size
         int posY = (int)getCenter().getY()/48;
         currentLocation = coordinates[posX][posY];
         return currentLocation;
@@ -132,7 +135,10 @@ public abstract class Entity implements IGameObject {
         return lastDirection;
     }
 
-
+    /**
+     * Sets the health of the entity. Cannot be higher than maxHP.
+     * @param value of new health
+     */
     public void setHealth(int value) {
         if (value < 0) {
             health = 0;
@@ -180,6 +186,10 @@ public abstract class Entity implements IGameObject {
         this.acc = acc;
     }
 
+    /**
+     * Sets a new health according to how much damage is taken
+     * @param damage taken
+     */
     public void damageTaken(int damage) {
         setHealth(getHealth() - damage);
     }
