@@ -98,9 +98,6 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
         if(type == 1 || type == 2 || type == 3){
             setPassable(false);
         }
-        else{
-            setPassable(true);
-        }
         this.terrainType = type;
     }
 

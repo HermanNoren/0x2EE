@@ -31,13 +31,11 @@ public class Game implements IProjectileAddable{
     private List<Terrain> path;
     private List<String> highscoreName;
     private List<Enemy> enemies;
-    private boolean stateChangedFlag;
     private GameMap gameMap;
 
     private File highscoreFile;
     private List<String> highscoreList;
     private List<Projectile> projectiles;
-    private List<IGameObject> gameObjects;
     private Shop shop;
     private HighscoreHandler highscoreHandler;
     private Spawner spawner;
@@ -57,16 +55,13 @@ public class Game implements IProjectileAddable{
         playerDead = false;
         EnemyFactory enemyFactory = new NormalEnemyFactory();
 
-       enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-       enemies.add(enemyFactory.createEnemy(player, gameMap, random));
+        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
+        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
         enemies.add(enemyFactory.createEnemy(player, gameMap, random));
         enemies.add(enemyFactory.createEnemy(player, gameMap, random));
 
 
         spawner = new Spawner(this);
-        gameObjects = new ArrayList<>();
-        gameObjects.add(shop);
-        stateChangedFlag = false;
         observers = new ArrayList<>();
         highscoreHandler = new HighscoreHandler();
         highscoreList = highscoreHandler.getHighscoreList();
@@ -128,8 +123,6 @@ public class Game implements IProjectileAddable{
         return spawner.getSpawnedItems();
     }
 
-    private boolean newBullet;
-
     /**
      * Add an observer. Observers will be notified 120 times per second
      *
@@ -140,7 +133,7 @@ public class Game implements IProjectileAddable{
     }
 
     public void makePlayerShoot() {
-        player.shoot((IProjectileAddable) this);
+        player.shoot(this);
     }
 
     @Override
@@ -150,87 +143,109 @@ public class Game implements IProjectileAddable{
 
     /**
      * Updates the current game state
+     * @param dt time passed since last update
      */
     public void update(double dt) {
         if (!(player.getHealth() < 1)) {
-
-            player.moveX(dt);
-            List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
-            for (Terrain t : collidedTerrain) {
-                Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.X_AXIS);
-                if (collisionTypes.get("right")) {
-                    player.setPosX(t.getPos().getX() - player.getWidth());
-                    player.stopCurrentMovement();
-                }
-                if (collisionTypes.get("left")) {
-                    player.setPosX((t.getPos().getX() + t.getWidth()));
-                    player.stopCurrentMovement();
-                }
-            }
-
-            player.moveY(dt);
-            collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
-            for (Terrain t : collidedTerrain) {
-                Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, ECollisionAxis.Y_AXIS);
-                if (collisionTypes.get("top")) {
-                    player.setPosY(t.getPos().getY() + player.getHeight());
-                    player.stopCurrentMovement();
-                }
-                if (collisionTypes.get("bottom")) {
-                    player.setPosY((t.getPos().getY() - t.getHeight()));
-                    player.stopCurrentMovement();
-                }
-            }
-
-            for (IGameObject gameObject : gameObjects) {
-//                gameObject.update(dt);
-            }
+            updatePlayer(dt);
+            updateEnemies(dt);
+            updateItems();
 
             for (IProjectile projectile : getProjectiles()){
                 projectile.update(dt);
             }
 
-            Iterator<Enemy> enemyIter = enemies.iterator();
-            while (enemyIter.hasNext()) {
-                Enemy enemy = enemyIter.next();
-                if (enemy.getHealth() < 1) {
-                    spawner.spawnItem();
-                    player.addScore(100);
-                    enemyIter.remove();
-                    break;
-                }
-                enemy.update(dt);
-
-                //Check if enemy is close enough to damage player, could be done somewhere else also.
-                if (CollisionHandler.testCollision(player, enemy)) {
-                    this.player.damageTaken(1);
-                }
-                // Check if projectile hits enemy
-                Iterator<Projectile> pIter = getProjectiles().iterator();
-                while (pIter.hasNext()) {
-                    Projectile pr = pIter.next();
-                    if (CollisionHandler.testCollision(enemy, pr)) {
-                        enemy.damageTaken(player.getWeapon().damage);
-                        projectiles.remove(pr);
-                        break;
-                    }
-                }
-            }
             /**
              * See if player is on shop, first for controller second for shop drawer
              */
-           player.isOnShop = isPlayerInRangeOfShop();
-           shop.playerOnShop = player.isOnShop;
-            for (IItem item : spawner.getSpawnedItems()) {
-                if (CollisionHandler.testCollision(item, player)) {
-                    item.consume(player);
-                    spawner.clearItem(item);
+            player.isOnShop = isPlayerInRangeOfShop();
+            shop.playerOnShop = player.isOnShop;
+        }
+        else {
+            playerDead = true;
+        }
+    }
+
+    /**
+     * Updates player position and checks for collisions with terrain
+     * @param dt time passed since last update
+     */
+    private void updatePlayer(double dt){
+        player.moveX(dt);
+        collisionCheck(ECollisionAxis.X_AXIS);
+        player.moveY(dt);
+        collisionCheck(ECollisionAxis.Y_AXIS);
+    }
+
+    /**
+     * Updates enemy states and provides necessary logic for death and collisions with projectiles
+     * @param dt time passed since last update
+     */
+    private void updateEnemies(double dt){
+        Iterator<Enemy> enemyIter = enemies.iterator();
+        while (enemyIter.hasNext()) {
+            Enemy enemy = enemyIter.next();
+            if (enemy.getHealth() < 1) {
+                spawner.spawnItem();
+                player.addScore(100);
+                enemyIter.remove();
+                break;
+            }
+            enemy.update(dt);
+            //Check if enemy is close enough to damage player, could be done somewhere else also.
+            if (CollisionHandler.testCollision(player, enemy)) {
+                this.player.damageTaken(1);
+            }
+            // Check if projectile hits enemy
+            Iterator<Projectile> pIter = projectiles.iterator();
+            while (pIter.hasNext()) {
+                Projectile pr = pIter.next();
+                if (CollisionHandler.testCollision(enemy, pr)) {
+                    enemy.damageTaken(player.getWeapon().damage);
+                    pIter.remove();
                     break;
                 }
             }
+        }
+    }
 
-        } else {
-            playerDead = true;
+    /**
+     * Checks if spawned items are picked up/consumed by the player
+     */
+    private void updateItems(){
+        for (IItem item : spawner.getSpawnedItems()) {
+            if (CollisionHandler.testCollision(item, player)) {
+                item.consume(player);
+                spawner.clearItem(item);
+                break;
+            }
+        }
+    }
+
+    /**
+     * Checks for collisions with terrain and corrects position if collision occurs
+     * @param axis tells the method which axis to consider
+     */
+    private void collisionCheck(ECollisionAxis axis){
+        List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
+        for (Terrain t : collidedTerrain) {
+            Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, axis);
+            if (collisionTypes.get("right")) {
+                player.setPosX(t.getPos().getX() - player.getWidth());
+                player.stopCurrentMovement();
+            }
+            if (collisionTypes.get("left")) {
+                player.setPosX((t.getPos().getX() + t.getWidth()));
+                player.stopCurrentMovement();
+            }
+            if (collisionTypes.get("top")) {
+                player.setPosY(t.getPos().getY() + player.getHeight());
+                player.stopCurrentMovement();
+            }
+            if (collisionTypes.get("bottom")) {
+                player.setPosY((t.getPos().getY() - t.getHeight()));
+                player.stopCurrentMovement();
+            }
         }
     }
 
