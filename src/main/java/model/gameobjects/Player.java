@@ -57,7 +57,6 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
         setAccY(0);
     }
 
-
     public void stopAllCurrentMovement(){
         stopCurrentXMovement();
         stopCurrentYMovement();

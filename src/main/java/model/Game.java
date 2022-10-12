@@ -42,15 +42,18 @@ public class Game {
     private Boolean playerDead;
     private Boolean paused;
 
+    private final int mapSize;
+
     public Game() {
+        mapSize = 100;
         newGame();
         highscoreHandler = new HighscoreHandler();
         highscoreList = highscoreHandler.getHighscoreList();
     }
 
     public void newGame() {
-        this.gameMap = new GameMap(Config.MAP_SIZE, Config.MAP_SIZE);
-        this.player = new Player(48, 48, gameMap.getGameMapCoordinates());
+        this.gameMap = new GameMap(mapSize, mapSize);
+        this.player = new Player(500, 500, gameMap.getGameMapCoordinates());
         shop = new Shop(200, 100);
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
@@ -70,8 +73,10 @@ public class Game {
         return gameMap;
     }
 
+    public int getMapSize() { return mapSize; }
+
     public List<String> getHighscoreName() {
-        return highscoreName;
+        return new ArrayList<>(highscoreName);
     }
 
     public boolean isTopFive() {

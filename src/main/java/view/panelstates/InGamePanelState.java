@@ -1,5 +1,6 @@
 package view.panelstates;
 
+import config.Config;
 import controllers.*;
 import model.Game;
 import view.Camera;
@@ -42,6 +43,8 @@ public class InGamePanelState implements IPanelState {
         hud = new HUD(game.getPlayer());
         camera = Camera.getInstance();
         camera.setFocusedObject(game.getPlayer());
+        camera.setBorderLimit(0, game.getMapSize() * Config.TERRAIN_SIZE,
+                              0, game.getMapSize() * Config.TERRAIN_SIZE);
         keyListeners.add(new CameraController());
 
         playerDrawer = new PlayerDrawer(game.getPlayer());

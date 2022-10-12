@@ -17,10 +17,15 @@ import java.util.List;
 public class Camera{
 
     private List<IFocusableObject> focusedObject;
-    private Vector2 relativePos, absolutePos, screenCenter;
+    private Vector2 relativePos, absolutePos;
+
+    private int width, height;
+    private final Vector2 screenCenter;
     private final int standardDragEffectConstant;
     private int dragEffectConstant;
     private double currentZoomMultiplier;
+    private boolean borderLimited;
+    private int leftBorderLimit, rightBorderLimit, topBorderLimit, bottomBorderLimit;
 
     private static Camera camera;
 
@@ -34,7 +39,10 @@ public class Camera{
         standardDragEffectConstant = 50;
         dragEffectConstant = standardDragEffectConstant;
         currentZoomMultiplier = 1;
-        calculateCenterPos();
+        borderLimited = false;
+        screenCenter = new Vector2(Config.SCREEN_WIDTH / 2.0, Config.SCREEN_HEIGHT / 2.0);
+        width = Config.SCREEN_WIDTH;
+        height = Config.SCREEN_HEIGHT;
     }
 
     /**
@@ -49,8 +57,8 @@ public class Camera{
     }
 
     /**
-     * Resets the camera; removes the focused object, resets the offset to 0x0, resets the drag effect constant
-     * and resets the zoom multiplier.
+     * Resets the camera; removes the focused object, resets the offset to 0x0, resets the drag effect constant,
+     * resets the zoom multiplier and removes any border limitations.
      */
     public void reset() {
         this.focusedObject = new ArrayList<>();
@@ -58,6 +66,7 @@ public class Camera{
         absolutePos = new Vector2(relativePos);
         resetDragEffectConstant();
         currentZoomMultiplier = 1;
+        borderLimited = false;
     }
 
     /**
@@ -128,43 +137,77 @@ public class Camera{
     }
 
     /**
-     * Updates the camera offset in regard to the object in focus
+     * Allows the possibility to make the camera movement limited by a border. The difference between the left border
+     * limit and the right border limit must be equal to or larger than the screen width. Likewise, the difference
+     * between top and bottom border limits must be equal to or larger than the screen height. Violation of this will
+     * automatically set the right or bottom border to minimal accepted number.
+     * @param leftBorderLimit any integer
+     * @param rightBorderLimit any integer >= leftBorderLimit + screenWidth
+     * @param topBorderLimit any integer
+     * @param bottomBorderLimit any integer >= topBorderLimit + screenHeight
      */
-    public void update() {
-        relativePos = new Vector2(absolutePos);
-        for (IFocusableObject object : focusedObject) {
-            relativePos.setX(relativePos.getX() + (object.getCenter().getX() - (relativePos.getX() + screenCenter.getX())) / (dragEffectConstant / currentZoomMultiplier));
-            relativePos.setY(relativePos.getY() + (object.getCenter().getY() - (relativePos.getY() + screenCenter.getY())) / (dragEffectConstant / currentZoomMultiplier));
+    public void setBorderLimit(int leftBorderLimit, int rightBorderLimit, int topBorderLimit, int bottomBorderLimit) {
+        if (Math.abs(leftBorderLimit - rightBorderLimit) < width) {
+            rightBorderLimit = leftBorderLimit + width;
         }
-        absolutePos = new Vector2(relativePos);
+        if (Math.abs(topBorderLimit - bottomBorderLimit) < height) {
+            bottomBorderLimit = topBorderLimit + height;
+        }
 
-        relativePos.setX(relativePos.getX() + ((Config.SCREEN_WIDTH - Config.SCREEN_WIDTH / currentZoomMultiplier) / 2));
-        relativePos.setY(relativePos.getY() + ((Config.SCREEN_HEIGHT - Config.SCREEN_HEIGHT / currentZoomMultiplier) / 2));
-
-        cameraBoundaries();
-    }
-
-    private void cameraBoundaries() {
-        if (relativePos.getX() < 0) {
-            relativePos.setX(0);
-        }
-        if (relativePos.getX() + Config.SCREEN_WIDTH / currentZoomMultiplier > Config.MAP_SIZE * Config.TERRAIN_SIZE) {
-            relativePos.setX(Config.MAP_SIZE * Config.TERRAIN_SIZE - Config.SCREEN_WIDTH / currentZoomMultiplier);
-        }
-        if (relativePos.getY() < 0) {
-            relativePos.setY(0);
-        }
-        if (relativePos.getY() + Config.SCREEN_HEIGHT / currentZoomMultiplier > Config.MAP_SIZE * Config.TERRAIN_SIZE) {
-            relativePos.setY(Config.MAP_SIZE * Config.TERRAIN_SIZE - Config.SCREEN_HEIGHT / currentZoomMultiplier);
-        }
+        borderLimited = true;
+        this.leftBorderLimit = leftBorderLimit;
+        this.rightBorderLimit = rightBorderLimit;
+        this.topBorderLimit = topBorderLimit;
+        this.bottomBorderLimit = bottomBorderLimit;
     }
 
     /**
-     * Calculates the center point of the window
+     * Removes any border limitations
      */
-    private void calculateCenterPos() {
-        double x = Config.SCREEN_WIDTH / 2.0;
-        double y = Config.SCREEN_HEIGHT / 2.0;
-        screenCenter = new Vector2(x, y);
+    public void removeBorderLimit() {
+        borderLimited = false;
+    }
+    /**
+     * Updates the camera offset in regard to the object in focus
+     */
+    public void update() {
+        for (IFocusableObject object : focusedObject) {
+            absolutePos.setX(absolutePos.getX() + (object.getCenter().getX() - (absolutePos.getX() + screenCenter.getX())) / (dragEffectConstant / currentZoomMultiplier));
+            absolutePos.setY(absolutePos.getY() + (object.getCenter().getY() - (absolutePos.getY() + screenCenter.getY())) / (dragEffectConstant / currentZoomMultiplier));
+        }
+
+        relativePos.setX(absolutePos.getX() + ((Config.SCREEN_WIDTH - Config.SCREEN_WIDTH / currentZoomMultiplier) / 2));
+        relativePos.setY(absolutePos.getY() + ((Config.SCREEN_HEIGHT - Config.SCREEN_HEIGHT / currentZoomMultiplier) / 2));
+
+        if (borderLimited) {
+            if (absolutePos.getX() < leftBorderLimit - (Config.SCREEN_WIDTH - Config.SCREEN_WIDTH / currentZoomMultiplier) / 2) {
+                absolutePos.setX(leftBorderLimit - (Config.SCREEN_WIDTH - Config.SCREEN_WIDTH / currentZoomMultiplier) / 2);
+            }
+            if (absolutePos.getY() < topBorderLimit - (Config.SCREEN_HEIGHT - Config.SCREEN_HEIGHT / currentZoomMultiplier) / 2) {
+                absolutePos.setY(topBorderLimit - (Config.SCREEN_HEIGHT - Config.SCREEN_HEIGHT / currentZoomMultiplier) / 2);
+            }
+            cameraBoundaries();
+        }
+    }
+
+    private boolean testCameraIsAtBorder() {
+        return
+                relativePos.getX() == leftBorderLimit
+             || relativePos.getY() == topBorderLimit;
+    }
+
+    private void cameraBoundaries() {
+        if (relativePos.getX() < leftBorderLimit) {
+            relativePos.setX(leftBorderLimit);
+        }
+        if (relativePos.getX() + Config.SCREEN_WIDTH / currentZoomMultiplier > rightBorderLimit) {
+            relativePos.setX(rightBorderLimit - Config.SCREEN_WIDTH / currentZoomMultiplier);
+        }
+        if (relativePos.getY() < topBorderLimit) {
+            relativePos.setY(topBorderLimit);
+        }
+        if (relativePos.getY() + Config.SCREEN_HEIGHT / currentZoomMultiplier > bottomBorderLimit) {
+            relativePos.setY(bottomBorderLimit - Config.SCREEN_HEIGHT / currentZoomMultiplier);
+        }
     }
 }

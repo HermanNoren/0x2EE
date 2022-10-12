@@ -149,7 +149,7 @@ public class GameMap {
                     (gameMapCoordinates[col][row].getY())+2 > height ||
                     (gameMapCoordinates[col][row].getX())-1 < 0 ||
                     (gameMapCoordinates[col][row].getY())-1 < 0){
-                gameMapCoordinates[col][row].setTerrainType(1);
+                gameMapCoordinates[col][row].setTerrainType(2);
                 gameMapCoordinates[col][row].setPassable(false);
             }
                 col ++;
