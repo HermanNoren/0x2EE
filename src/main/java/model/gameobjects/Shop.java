@@ -33,8 +33,8 @@ public class Shop implements IGameObject {
     public boolean playerOnShop = false;
 
     public  Shop(int x_position, int y_position){
-        this.x_position = x_position - width * 2;
-        this.y_position = y_position - height * 2;
+        this.x_position = x_position;
+        this.y_position = y_position;
         this.position = new Vector2(x_position, y_position);
     }
 

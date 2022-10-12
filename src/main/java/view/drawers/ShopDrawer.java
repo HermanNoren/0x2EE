@@ -15,10 +15,19 @@ public class ShopDrawer implements IDrawer{
     private static BufferedImage topLeft, topRight, bottomLeft, bottomRight;
     private final Shop shop;
 
+    private final double xCoordinate;
+    private final double yCoordinate;
+    private final double shopWidth;
+    private final double shopHeight;
+    private final int amountOfPicturesOffset = (int) Math.sqrt(4);
 
     private final ImageHandler imageHandler;
     public ShopDrawer(Shop shop){
         this.shop = shop;
+        xCoordinate = shop.getPos().getX();
+        yCoordinate = shop.getPos().getY();
+        shopWidth = shop.getWidth();
+        shopHeight = shop.getHeight();
         this.imageHandler = new ImageHandler();
         initShopImages();
     }
@@ -41,28 +50,42 @@ public class ShopDrawer implements IDrawer{
 
 
     /**
-     * To make the view depend on the model and not the model on the view, the view has been adapted to fit the model.
+     * To make the view depend on the model and not the model on the view,
+     * the view has been adapted to fit the model.
      * This implements some calculating in the view as to correct the offset.
-     * @param image
-     * @return
+     * @param image The image being processed, could be a switch case also but
+     *              if equals is a boolean expression.
+     * @return The correct image, throw error if not found
+     *
      */
     public Vector2 pictureOffsetCorrector(BufferedImage image){
-        if (topLeft.equals(image)) {
-            return new Vector2(shop.getPos());
-        }
-        else if (topRight.equals(image)) {
-            return new Vector2(shop.getPos().getX() + shop.getWidth()/2, shop.getPos().getY());
-        }
-        else if (bottomRight.equals(image)){
-            return new Vector2(shop.getPos().getX() + shop.getWidth()/2, shop.getPos().getY() +  shop.getHeight()/2);
-        }
-        else if (bottomLeft.equals(image)){
-            return new Vector2(shop.getPos().getX(), shop.getPos().getY()  + shop.getHeight()/2);
-        }
-        return null;
+    try{
+            if (topLeft.equals(image))
+                return new Vector2(shop.getPos());
+
+            else if (topRight.equals(image))
+                return new Vector2(xCoordinate + (shopWidth/amountOfPicturesOffset), yCoordinate);
+
+            else if (bottomRight.equals(image))
+                return new Vector2(xCoordinate + (shopWidth/amountOfPicturesOffset), yCoordinate+  shopHeight/amountOfPicturesOffset);
+
+            else if (bottomLeft.equals(image))
+                return new Vector2(xCoordinate, yCoordinate  + shopHeight/amountOfPicturesOffset);
+
+        }   catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+    return null;
     }
 
-    // create an offset function which aligns the PNGs correctly, must be done more dynamically than hardcoded.
+    /**
+     * Iterates through the list consisting of the pictures. They are then passed through the
+     * PictureOffsetCorrector, which aligns the pictures correctly. See the DrawHelper method
+     * calculateDrawingInformation to see how the is used to align the picture representation
+     * with the camera.
+     * @param g2 The interface for which rendering 2D logic is done through,
+     *           see more at the Java Graphics2D documentation.
+     */
     @Override
     public void draw(Graphics2D g2) {
         List<BufferedImage> pictures = new ArrayList<>(Arrays.asList(topLeft, topRight, bottomLeft, bottomRight));
