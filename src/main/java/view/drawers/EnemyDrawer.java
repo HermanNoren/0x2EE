@@ -1,18 +1,21 @@
 package view.drawers;
 
 
+import controllers.ImageSwitcherController;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.Enemy;
 import model.helperclasses.ImageHandler;
 
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import java.util.List;
 import java.util.Objects;
 
-public class EnemyDrawer implements IDrawer {
+public class EnemyDrawer implements IDrawer, IIteratedImageDrawer {
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
     private final List<Enemy> enemies;
     private int animationCounter;
@@ -24,7 +27,6 @@ public class EnemyDrawer implements IDrawer {
         this.enemies = enemies;
         this.imageHandler = new ImageHandler();
         initEnemyImages(type);
-
     }
 
     private void initEnemyImages(String type){
@@ -57,15 +59,6 @@ public class EnemyDrawer implements IDrawer {
 
     }
 
-    private void movementAnimation() {
-        animationCounter++;
-        if(animationCounter > 100){
-            imageSwitcher = 1;
-            animationCounter = 0;
-        }else if(animationCounter == 50){
-            imageSwitcher = 2;
-        }
-    }
     /**
      * Draws/updates enemy images on screen.
      * @param g2
@@ -73,8 +66,6 @@ public class EnemyDrawer implements IDrawer {
      */
     @Override
     public void draw(Graphics2D g2) {
-
-        movementAnimation();
         for(Entity enemy: enemies){
             switch (enemy.getDirection()){
                 case UP ->{
@@ -129,5 +120,11 @@ public class EnemyDrawer implements IDrawer {
                 g2.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
             }
         }
+    }
+
+    @Override
+    public void switchImage() {
+        if (imageSwitcher == 1) { imageSwitcher = 2; }
+        else { imageSwitcher = 1; }
     }
 }

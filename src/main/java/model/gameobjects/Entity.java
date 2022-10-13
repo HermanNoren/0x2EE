@@ -11,7 +11,6 @@ import model.mapclasses.Terrain;
  * and health the program can determine if an entity is in range
  * to take damage thus if reduces its health.
  */
-
 public abstract class Entity implements IGameObject {
     private Vector2 pos;
     private Vector2 vel;
@@ -193,6 +192,7 @@ public abstract class Entity implements IGameObject {
     public void damageTaken(int damage) {
         setHealth(getHealth() - damage);
     }
+
     /**
      * @return size of entity
      */
