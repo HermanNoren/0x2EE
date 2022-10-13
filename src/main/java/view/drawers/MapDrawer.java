@@ -38,7 +38,7 @@ public class MapDrawer implements IDrawer {
     }
 
     private void loadTerrainImages(){
-        terrainImgs[0] = imageHandler.getImage("imgs/tile/border.png");
+        terrainImgs[0] = imageHandler.getImage("imgs/tile/tree.png");
         terrainImgs[1] = imageHandler.getImage("imgs/tile/grass.png");
         terrainImgs[2] = imageHandler.getImage("imgs/tile/tree.png");
         terrainImgs[3] = imageHandler.getImage("imgs/tile/wall.png");
