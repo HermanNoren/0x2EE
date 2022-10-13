@@ -1,6 +1,6 @@
 package gameobjects.Player;
 
-import controllers.EDirection;
+import model.helperclasses.EDirection;
 import model.Game;
 import model.gameobjects.Player;
 import model.gameobjects.Projectile;

@@ -1,7 +1,7 @@
 package gameobjects;
 
 import config.Config;
-import controllers.EDirection;
+import model.helperclasses.EDirection;
 import model.Game;
 import model.gameobjects.Entity;
 import model.gameobjects.IGameObject;
