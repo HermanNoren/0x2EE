@@ -116,7 +116,7 @@ public class Game implements IProjectileAddable{
     }
 
     public List<Enemy> getEnemies() {
-        return enemies;
+        return new ArrayList<>(enemies);
     }
 
     public List<IItem> getItems() {
@@ -182,13 +182,13 @@ public class Game implements IProjectileAddable{
      * @param dt time passed since last update
      */
     private void updateEnemies(double dt){
-        Iterator<Enemy> enemyIter = enemies.iterator();
+        Iterator<Enemy> enemyIter = getEnemies().iterator();
         while (enemyIter.hasNext()) {
             Enemy enemy = enemyIter.next();
             if (enemy.getHealth() < 1) {
                 spawner.spawnItem();
                 player.addScore(100);
-                enemyIter.remove();
+                enemies.remove(enemy);
                 break;
             }
             enemy.update(dt);
