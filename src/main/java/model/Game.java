@@ -116,7 +116,7 @@ public class Game implements IProjectileAddable{
     }
 
     public List<Enemy> getEnemies() {
-        return new ArrayList<>(enemies);
+        return Collections.unmodifiableList(enemies);
     }
 
     public List<IItem> getItems() {
@@ -268,7 +268,7 @@ public class Game implements IProjectileAddable{
     }
 
     public List<Projectile> getProjectiles() {
-        return new ArrayList<>(projectiles);
+        return Collections.unmodifiableList(projectiles);
     }
 
     public Shop getShop() {
