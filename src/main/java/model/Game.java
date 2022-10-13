@@ -197,12 +197,12 @@ public class Game implements IProjectileAddable{
                 this.player.damageTaken(1);
             }
             // Check if projectile hits enemy
-            Iterator<Projectile> pIter = projectiles.iterator();
+            Iterator<Projectile> pIter = getProjectiles().iterator();
             while (pIter.hasNext()) {
                 Projectile pr = pIter.next();
                 if (CollisionHandler.testCollision(enemy, pr)) {
                     enemy.damageTaken(player.getWeapon().damage);
-                    pIter.remove();
+                    projectiles.remove(pr);
                     break;
                 }
             }
