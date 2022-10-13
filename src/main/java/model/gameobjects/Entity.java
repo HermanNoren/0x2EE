@@ -21,11 +21,10 @@ public abstract class Entity implements IGameObject{
     private EDirection direction;
     private EDirection lastDirection;
     private int size = Config.SPRITE_SIZE*3;
-    private Terrain[][] coordinates;
+    private final Terrain[][] coordinates;
     private Terrain currentLocation;
 
     /**
-     *
      * @param x represents the entities' x-coordinate
      * @param y represents the entities' y-coordinate
      */
@@ -179,11 +178,9 @@ public abstract class Entity implements IGameObject{
         return new Vector2(acc);
     }
 
-
     public void setAcc(Vector2 acc) {
         this.acc = acc;
     }
-
 
     public void damageTaken(int damage) {
         setHealth(getHealth() - damage);

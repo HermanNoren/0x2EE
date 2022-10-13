@@ -23,11 +23,12 @@ public class EnemyDrawer implements IDrawer {
     public EnemyDrawer(List<Enemy> enemies){
         this.enemies = enemies;
         this.imageHandler = new ImageHandler();
+        initImages("boss");
     }
 
     private void initImages(String type){
         up1 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_up_1.png");
-        up2 = imageHandler.getImage("imgs/enemy/"+type +"/enemy_up_2.png");
+        up2 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_up_2.png");
         left1 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_left_1.png");
         left2 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_left_2.png");
         down1 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_down_1.png");
