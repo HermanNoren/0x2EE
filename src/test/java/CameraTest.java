@@ -55,7 +55,7 @@ public class CameraTest {
     void test_camera_zoom() {
         assertEquals(1, camera.getZoomMultiplier());
         camera.zoomIn();
-        assertEquals(1.2, camera.getZoomMultiplier());
+        assertEquals(1.05, camera.getZoomMultiplier());
         camera.zoomOut();
         assertEquals(1, camera.getZoomMultiplier());
     }
@@ -66,7 +66,7 @@ public class CameraTest {
             camera.zoomOut();
         }
         assertEquals(1, camera.getZoomMultiplier());
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 40; i++) {
             camera.zoomIn();
         }
         assertEquals(4, camera.getZoomMultiplier());
