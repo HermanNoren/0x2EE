@@ -13,6 +13,7 @@ public class BossEnemy extends Enemy{
         setVelX(1);
         setVelY(1);
         setHealth(500);
+        setMaxHp(500);
     }
 
     @Override

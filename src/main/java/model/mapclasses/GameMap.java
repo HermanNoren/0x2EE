@@ -13,7 +13,7 @@ public class GameMap implements IGameMap{
     private final int width;
     private final int height;
 
-    /**
+     /**
      * Game map constructor, set height and width.
      * Width and height is in number of tiles.
      * @param width number of tiles in width
@@ -81,7 +81,7 @@ public class GameMap implements IGameMap{
      */
     @Override
     public List<Tile> getTiles() {
-        return new ArrayList<>(tiles);
+        return Collections.unmodifiableList(tiles);
     }
 
     /**
@@ -96,16 +96,6 @@ public class GameMap implements IGameMap{
         }
         return passableTiles;
     }
-    public List<Tile> getNotPassableTiles(){
-        List<Tile> notPassableTiles = new ArrayList<>();
-        for (Tile tile : tiles){
-            if(!tile.isPassable()){
-                notPassableTiles.add(tile);
-            }
-        }
-        return notPassableTiles;
-    }
-
     /**
      * Add neighbor to the given node. If the presumed neighbor isn't grass then it won't be added as a neighbor.
      */
@@ -147,7 +137,6 @@ public class GameMap implements IGameMap{
                     (gameMapCoordinates[col][row].getY())+2 > height ||
                     (gameMapCoordinates[col][row].getX())-1 < 0 ||
                     (gameMapCoordinates[col][row].getY())-1 < 0){
-                gameMapCoordinates[col][row].setTileType(0);
                 gameMapCoordinates[col][row].setPassable(false);
             }
                 col ++;

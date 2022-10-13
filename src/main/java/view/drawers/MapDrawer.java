@@ -14,25 +14,16 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import view.Camera;
 
-public class MapDrawer implements IDrawer {
-    private final List<Tile> tiles;
+public class MapDrawer implements IDrawer, IIteratedImageDrawer {
     private final BufferedImage[] tileImgs = new BufferedImage[10];
-    private final GameMap gameMap;
+    private Tile[][] map;
     private  Camera camera;
-    private final int[][] mapNums;
-    private int size = 48;
     private int spriteSize = Config.SPRITE_SIZE*3;
     private ImageHandler imageHandler;
-    private Game game;
-    private Player player;
 
-    public MapDrawer(Game game){
-        this.gameMap = game.getGameMap();
-        this.game = game;
-        player = game.getPlayer();
+    public MapDrawer(Tile[][] map){
+        this.map = map;
         camera = Camera.getInstance();
-        mapNums = new int[gameMap.getWidth()][gameMap.getHeight()];
-        this.tiles = gameMap.getTiles();
         this.imageHandler = new ImageHandler();
         initTileImgs();
     }
@@ -66,29 +57,37 @@ public class MapDrawer implements IDrawer {
         if (up < 0) {
             up = 0;
         }
-        int terrainSize = Config.SPRITE_SIZE*3;
 
         Vector2 newTerrainVector;
-        Tile[][] gameMapCoordinates = gameMap.getGameMapCoordinates();
 
-        for (int col = left; col < right && col < gameMap.getWidth(); col++){
-            for(int row = up; row < down && row < gameMap.getHeight(); row++){
-                newTerrainVector = new Vector2(gameMapCoordinates[col][row].getPos()); // For drawing in correct place.
-
+        for (int col = left; col < right && col < Config.MAP_WIDTH; col++){
+            for(int row = up; row < down && row < Config.MAP_HEIGHT; row++){
+                newTerrainVector = new Vector2(map[col][row].getPos()); // For drawing in correct place.
 
                 List<Integer> drawInformation = DrawerHelper.
                     calculateDrawingInformation(
                             newTerrainVector,
-                            gameMapCoordinates[col][row].getWidth(),
-                            gameMapCoordinates[col][row].getHeight());
+                            map[col][row].getWidth(),
+                            map[col][row].getHeight());
 
-                int terrainNum = gameMapCoordinates[col][row].getTileType();
-                g2.drawImage(tileImgs[terrainNum], drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
+                int terrainNum;
+                if(map[col][row].isPassable()){
+                    terrainNum = 3;
+                }else {
+                    terrainNum = 0;
+                }
+                g2.drawImage(tileImgs[terrainNum], drawInformation.get(0), drawInformation.get(1),
+                        drawInformation.get(2), drawInformation.get(3), null);
 
-                newTerrainVector.setX(newTerrainVector.getX() + terrainSize);
-                newTerrainVector.setY(newTerrainVector.getY() + terrainSize);
+                newTerrainVector.setX(newTerrainVector.getX() + Config.TILE_SIZE);
+                newTerrainVector.setY(newTerrainVector.getY() + Config.TILE_SIZE);
             }
         }
+
+    }
+
+    @Override
+    public void switchImage() {
 
     }
 }

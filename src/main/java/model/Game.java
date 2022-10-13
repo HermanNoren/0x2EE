@@ -1,5 +1,6 @@
 package model;
 
+import config.Config;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
 import model.helperclasses.EDirection;
@@ -53,7 +54,7 @@ public class Game implements IProjectileAddable{
     }
 
     public void newGame() {
-        this.gameMap = new GameMap(mapSize, mapSize);
+        this.gameMap = new GameMap(Config.MAP_WIDTH, Config.MAP_HEIGHT);
         this.player = new Player(500, 500, gameMap.getGameMapCoordinates());
         shop = new Shop(200, 100);
         this.shopTransaction = new ShopTransaction(this.getPlayer());
