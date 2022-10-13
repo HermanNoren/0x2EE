@@ -62,12 +62,12 @@ public class Noise {
 
     }
 
-    public void setNoise(Terrain[][] terrains, int passableType, int nonPassableType){
+    public void setNoise(Terrain[][] terrains, int passableType, int nonPassableType, float crowding){
         int w = grid.length;
         int h = grid[0].length;
         for(int i = 0;i < w;i++) {
             for(int j = 0;j < h;j++) {
-                if(grid[i][j] < 0.8){
+                if(grid[i][j] < crowding){
                     terrains[i][j].setTerrainType(passableType);
                 }else{
                     terrains[i][j].setTerrainType(nonPassableType);

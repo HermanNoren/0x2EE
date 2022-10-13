@@ -27,7 +27,7 @@ public class GameMap implements IGameMap{
         addCoordinatesAndTiles(width, height);
 
         Noise n = new Noise(10, this); // Generates random terrain on the game map.
-        n.setNoise(gameMapCoordinates, 1, 2);
+        n.setNoise(gameMapCoordinates, 1, 2, 2);
 
         createBorder();
         terrains.forEach(this::addNeighbors);
