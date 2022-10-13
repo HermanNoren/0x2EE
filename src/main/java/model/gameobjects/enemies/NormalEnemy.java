@@ -8,13 +8,18 @@ class NormalEnemy extends Enemy{
         super(x, y, coordinates, targetEntity);
         setVelX(0.3);
         setVelY(0.3);
-        setMaxHp(11);
+        setMaxHp(20);
         setHealth(20);
     }
 
     @Override
     public void specialAbility() {
 
+    }
+
+    @Override
+    public int getKillReward() {
+        return 100;
     }
 
     @Override

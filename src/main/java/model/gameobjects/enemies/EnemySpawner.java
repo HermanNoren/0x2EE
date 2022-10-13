@@ -31,7 +31,6 @@ public class EnemySpawner implements IEnemySpawner {
         double spawnPosX = targetPosX + radius;
         double spawnPosY = targetPosY + radius;
 
-
     }
 
     public Vector2 chooseRandomLocation(){

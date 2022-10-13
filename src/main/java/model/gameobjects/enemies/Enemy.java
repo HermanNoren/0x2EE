@@ -59,5 +59,7 @@ public abstract class Enemy extends Entity implements IEnemy {
     @Override
     public void update(double dt) {
         moveToGoal(dt);
+
+
     }
 }

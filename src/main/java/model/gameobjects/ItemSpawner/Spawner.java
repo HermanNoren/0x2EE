@@ -4,6 +4,7 @@ import model.Game;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.Enemy;
 import model.helperclasses.Vector2;
+import model.mapclasses.Terrain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class Spawner{
     private double avg_x, avg_y;
 
     private List<IItem> spawnedItems;
+    private Random rand = new Random();
 
     public Spawner(Game game){
         this.game = game;
@@ -42,17 +44,27 @@ public class Spawner{
      * @return location to spawn item
      */
 
-    private Vector2 getSpawnLocation(){
+    private Vector2 getSpawnLocation() {
         enemies = game.getEnemies(); //Göra interface till game, med getEnemies, getPlayer osv..
-        x_values = new ArrayList<>();
-        y_values = new ArrayList<>();
-        for (Entity enemy : enemies){
-            x_values.add(enemy.getPos().getX());
-            y_values.add(enemy.getPos().getY());
+        List<Terrain> locations = game.getGameMap().getPassableTerrains();
+        if (enemies.size() <= 1) {
+            int nrPossibleSpawnLocations = locations.size();
+            Terrain randomSpawnableTerrain = locations.get(rand.nextInt(nrPossibleSpawnLocations-1));
+            double posX = randomSpawnableTerrain.getPos().getX();
+            double posY = randomSpawnableTerrain.getPos().getY();
+            return new Vector2(posX, posY);
+
+        } else {
+            x_values = new ArrayList<>();
+            y_values = new ArrayList<>();
+            for (Entity enemy : enemies) {
+                x_values.add(enemy.getPos().getX());
+                y_values.add(enemy.getPos().getY());
+            }
+            avg_x = getAverage(x_values);
+            avg_y = getAverage(y_values);
+            return new Vector2(avg_x, avg_y);
         }
-        avg_x = getAverage(x_values);
-        avg_y = getAverage(y_values);
-        return new Vector2(avg_x, avg_y);
     }
 
     /**
@@ -60,7 +72,6 @@ public class Spawner{
      */
 
     public void spawnItem(){
-        Random rand = new Random();
         int r = rand.nextInt(2);
         switch (r){
             case 0 -> spawnedItems.add(new Coin(getSpawnLocation()));
