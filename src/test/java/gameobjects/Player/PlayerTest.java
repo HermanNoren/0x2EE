@@ -5,7 +5,7 @@ import model.Game;
 import model.gameobjects.Player;
 import model.gameobjects.Projectile;
 import model.helperclasses.Vector2;
-import model.mapclasses.Terrain;
+import model.mapclasses.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ public class PlayerTest {
     private Player player;
     @BeforeEach
     void init(){
-        this.player = new Player(48, 48, new Terrain[0][0]);
+        this.player = new Player(48, 48, new Tile[0][0]);
     }
     @Test
     void test_getPosX_returns_player_current_x_position(){

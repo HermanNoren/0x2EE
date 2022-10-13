@@ -1,7 +1,7 @@
 package mapclasses;
 
 import model.mapclasses.GameMap;
-import model.mapclasses.Terrain;
+import model.mapclasses.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,10 +27,10 @@ public class GameMapTest {
     }
     @Test
     void test_getGameMapCoordinates_returns_array_of_arrays_with_Terrains(){
-        Terrain[][] testCoordinates = new Terrain[20][10];
+        Tile[][] testCoordinates = new Tile[20][10];
         for(int i = 0; i < gameMap.getWidth(); i++){
             for(int j = 0; j < gameMap.getHeight(); j++) {
-                testCoordinates[i][j] = new Terrain(i, j);
+                testCoordinates[i][j] = new Tile(i, j);
             }
         }
         assertEquals(testCoordinates.getClass(), gameMap.getGameMapCoordinates().getClass());
@@ -38,7 +38,7 @@ public class GameMapTest {
 
     @Test
     void test_getTerrains_returns_list_containing_Terrains(){
-        List<Terrain> testList = new ArrayList<>();
+        List<Tile> testList = new ArrayList<>();
         assertEquals(testList.getClass(), gameMap.getTerrains().getClass());
     }
 }

@@ -1,7 +1,7 @@
 package utility;
 
 import model.mapclasses.GameMap;
-import model.mapclasses.Terrain;
+import model.mapclasses.Tile;
 
 import java.util.Random;
 
@@ -62,18 +62,26 @@ public class Noise {
 
     }
 
-    public void setNoise(Terrain[][] terrains, int passableType, int nonPassableType, float crowding){
+    public void setNoise(Tile[][] tiles, float crowding){
         int w = grid.length;
         int h = grid[0].length;
         for(int i = 0;i < w;i++) {
             for(int j = 0;j < h;j++) {
                 if(grid[i][j] < crowding){
-                    terrains[i][j].setTerrainType(passableType);
-                }else{
-                    terrains[i][j].setTerrainType(nonPassableType);
-                    terrains[i][j].setPassable(false);
-
+                    tiles[i][j].setTileType(3);
+                }else if(grid[i][j] < crowding + 1){
+                    tiles[i][j].setTileType(2);
+                    tiles[i][j].setPassable(false);
                 }
+                else if(grid[i][j] < crowding + 2){
+                    tiles[i][j].setTileType(0);
+                    tiles[i][j].setPassable(false);
+                }
+                else {
+                    tiles[i][j].setTileType(1);
+                    tiles[i][j].setPassable(false);
+                }
+
             }
         }
     }
@@ -83,13 +91,13 @@ public class Noise {
     }
 
     /**
-     * Method used to print grid containing terrains.
-     * @param terrains grid of type Terrain.
+     * Method used to print grid containing tiles.
+     * @param tiles grid of type Tile.
      */
-    public void printTerrainGrid(Terrain[][] terrains){
-        for(int i = 0; i < terrains.length; i++){
-            for(int j = 0; j < terrains[0].length; j++){
-                System.out.print(terrains[i][j].getTerrainType());
+    public void printTileGrid(Tile[][] tiles){
+        for(int i = 0; i < tiles.length; i++){
+            for(int j = 0; j < tiles[0].length; j++){
+                System.out.print(tiles[i][j].getTileType());
                 System.out.print(",");
             }
             System.out.println();
