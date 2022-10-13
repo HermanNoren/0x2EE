@@ -45,7 +45,7 @@ public class Game {
     private final int mapSize;
 
     public Game() {
-        mapSize = 100;
+        mapSize = 25;
         newGame();
         highscoreHandler = new HighscoreHandler();
         highscoreList = highscoreHandler.getHighscoreList();

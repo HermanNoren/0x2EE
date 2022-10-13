@@ -1,6 +1,6 @@
 package main;
 
-import controllers.MainLoopController;
+import controllers.GameLoopController;
 import model.Game;
 import view.MainPanel;
 import view.Window;
@@ -10,8 +10,7 @@ public class Program {
         Game game = new Game();
         MainPanel mainPanel = new MainPanel(game);
         Window window = new Window(mainPanel);
-        MainLoopController loopController = MainLoopController.getInstance();
-        loopController.addModel(game);
+        GameLoopController loopController = new GameLoopController(game, 120);
         loopController.addObserver(mainPanel);
         loopController.run();
     }

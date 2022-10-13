@@ -19,7 +19,7 @@ public class Camera{
     private List<IFocusableObject> focusedObject;
     private Vector2 relativePos, absolutePos;
 
-    private int width, height;
+    private final int width, height;
     private final Vector2 screenCenter;
     private final int standardDragEffectConstant;
     private int dragEffectConstant;
@@ -98,7 +98,7 @@ public class Camera{
      * Zoom in
      */
     public void zoomIn() {
-        currentZoomMultiplier += 0.2;
+        currentZoomMultiplier *= 1.05;
         if (currentZoomMultiplier >= 4) { currentZoomMultiplier = 4; }
     }
 
@@ -106,7 +106,7 @@ public class Camera{
      * Zoom out
      */
     public void zoomOut() {
-        currentZoomMultiplier -= 0.2;
+        currentZoomMultiplier *= 0.95;
         if (currentZoomMultiplier <= 1) { currentZoomMultiplier = 1; }
     }
 
@@ -167,47 +167,56 @@ public class Camera{
     public void removeBorderLimit() {
         borderLimited = false;
     }
+
     /**
      * Updates the camera offset in regard to the object in focus
      */
     public void update() {
         for (IFocusableObject object : focusedObject) {
-            absolutePos.setX(absolutePos.getX() + (object.getCenter().getX() - (absolutePos.getX() + screenCenter.getX())) / (dragEffectConstant / currentZoomMultiplier));
-            absolutePos.setY(absolutePos.getY() + (object.getCenter().getY() - (absolutePos.getY() + screenCenter.getY())) / (dragEffectConstant / currentZoomMultiplier));
+            absolutePos.setX(absolutePos.getX() + (object.getCenter().getX() -
+                    (absolutePos.getX() + screenCenter.getX())) / (dragEffectConstant / currentZoomMultiplier));
+            absolutePos.setY(absolutePos.getY() + (object.getCenter().getY() -
+                    (absolutePos.getY() + screenCenter.getY())) / (dragEffectConstant / currentZoomMultiplier));
         }
 
-        relativePos.setX(absolutePos.getX() + ((Config.SCREEN_WIDTH - Config.SCREEN_WIDTH / currentZoomMultiplier) / 2));
-        relativePos.setY(absolutePos.getY() + ((Config.SCREEN_HEIGHT - Config.SCREEN_HEIGHT / currentZoomMultiplier) / 2));
+        relativePos.setX(absolutePos.getX() + ((width - width / currentZoomMultiplier) / 2));
+        relativePos.setY(absolutePos.getY() + ((height - height / currentZoomMultiplier) / 2));
 
         if (borderLimited) {
-            if (absolutePos.getX() < leftBorderLimit - (Config.SCREEN_WIDTH - Config.SCREEN_WIDTH / currentZoomMultiplier) / 2) {
-                absolutePos.setX(leftBorderLimit - (Config.SCREEN_WIDTH - Config.SCREEN_WIDTH / currentZoomMultiplier) / 2);
-            }
-            if (absolutePos.getY() < topBorderLimit - (Config.SCREEN_HEIGHT - Config.SCREEN_HEIGHT / currentZoomMultiplier) / 2) {
-                absolutePos.setY(topBorderLimit - (Config.SCREEN_HEIGHT - Config.SCREEN_HEIGHT / currentZoomMultiplier) / 2);
-            }
-            cameraBoundaries();
+            fixCameraBoundariesAbsolutePos();
+            fixCameraBoundariesRelativePos();
         }
     }
 
-    private boolean testCameraIsAtBorder() {
-        return
-                relativePos.getX() == leftBorderLimit
-             || relativePos.getY() == topBorderLimit;
+    private void fixCameraBoundariesAbsolutePos() {
+        if (absolutePos.getX() < leftBorderLimit - (width - width / currentZoomMultiplier) / 2) {
+            absolutePos.setX(leftBorderLimit - (width - width / currentZoomMultiplier) / 2);
+        }
+        if (absolutePos.getX() + width >
+            rightBorderLimit + (width - width / currentZoomMultiplier) / 2) {
+            absolutePos.setX(rightBorderLimit - width + (width - width / currentZoomMultiplier) / 2);
+        }
+        if (absolutePos.getY() < topBorderLimit - (height - height / currentZoomMultiplier) / 2) {
+            absolutePos.setY(topBorderLimit - (height - height / currentZoomMultiplier) / 2);
+        }
+        if (absolutePos.getY() + height >
+            bottomBorderLimit + (height - height / currentZoomMultiplier) / 2) {
+            absolutePos.setY(bottomBorderLimit - height + (height - height / currentZoomMultiplier) / 2);
+        }
     }
 
-    private void cameraBoundaries() {
+    private void fixCameraBoundariesRelativePos() {
         if (relativePos.getX() < leftBorderLimit) {
             relativePos.setX(leftBorderLimit);
         }
-        if (relativePos.getX() + Config.SCREEN_WIDTH / currentZoomMultiplier > rightBorderLimit) {
-            relativePos.setX(rightBorderLimit - Config.SCREEN_WIDTH / currentZoomMultiplier);
+        if (relativePos.getX() + width / currentZoomMultiplier > rightBorderLimit) {
+            relativePos.setX(rightBorderLimit - width / currentZoomMultiplier);
         }
         if (relativePos.getY() < topBorderLimit) {
             relativePos.setY(topBorderLimit);
         }
-        if (relativePos.getY() + Config.SCREEN_HEIGHT / currentZoomMultiplier > bottomBorderLimit) {
-            relativePos.setY(bottomBorderLimit - Config.SCREEN_HEIGHT / currentZoomMultiplier);
+        if (relativePos.getY() + height / currentZoomMultiplier > bottomBorderLimit) {
+            relativePos.setY(bottomBorderLimit - height / currentZoomMultiplier);
         }
     }
 }
