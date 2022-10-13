@@ -30,7 +30,7 @@ public class CameraTest {
         game = new Game();
         player = new Player(0, 0, game.getGameMap().getGameMapCoordinates());
         camera.setFocusedObject(player);
-        camera.setDragEffectConstant(1);
+        camera.setGlideConstant(1);
         camera.update();
         Vector2 offsetWhenPlayerAt0x0 = camera.getOffset();
 
@@ -85,13 +85,13 @@ public class CameraTest {
         player = new Player(0, 0, game.getGameMap().getGameMapCoordinates());
         camera.reset();
         camera.setFocusedObject(player);
-        camera.setDragEffectConstant(1);
+        camera.setGlideConstant(1);
         camera.update();
         Vector2 offsetAfterOneUpdateWhenDragIs1 = camera.getOffset();
 
         camera.reset();
         camera.setFocusedObject(player);
-        camera.setDragEffectConstant(100);
+        camera.setGlideConstant(100);
         camera.update();
         Vector2 offsetAfterOneUpdateWhenDragIs100 = camera.getOffset();
 
@@ -110,8 +110,8 @@ public class CameraTest {
 
         camera.reset();
         camera.setFocusedObject(player);
-        camera.setDragEffectConstant(100);
-        camera.resetDragEffectConstant();
+        camera.setGlideConstant(100);
+        camera.resetGlideConstant();
         camera.update();
         Vector2 offsetAfterOneUpdateWhenDragIsReset = camera.getOffset();
 
@@ -125,13 +125,13 @@ public class CameraTest {
         player = new Player(0, 0, game.getGameMap().getGameMapCoordinates());
         camera.reset();
         camera.setFocusedObject(player);
-        camera.setDragEffectConstant(1);
+        camera.setGlideConstant(1);
         camera.update();
         Vector2 offsetAfterOneUpdateWhenDragIs1 = camera.getOffset();
 
         camera.reset();
         camera.setFocusedObject(player);
-        camera.setDragEffectConstant(-10);
+        camera.setGlideConstant(-10);
         camera.update();
         Vector2 offsetAfterOneUpdateWhenDragIsLessThan1 = camera.getOffset();
 
@@ -145,7 +145,7 @@ public class CameraTest {
         player = new Player(0, 0, game.getGameMap().getGameMapCoordinates());
         camera.reset();
         camera.setFocusedObject(player);
-        camera.setDragEffectConstant(1);
+        camera.setGlideConstant(1);
         camera.setBorderLimit(0, Config.SCREEN_WIDTH * 2, 0, Config.SCREEN_HEIGHT * 2);
         camera.update();
         Vector2 offset = camera.getOffset();
@@ -159,7 +159,7 @@ public class CameraTest {
         player = new Player(Config.SCREEN_WIDTH * 2, 0, game.getGameMap().getGameMapCoordinates());
         camera.reset();
         camera.setFocusedObject(player);
-        camera.setDragEffectConstant(1);
+        camera.setGlideConstant(1);
         camera.setBorderLimit(0, Config.SCREEN_WIDTH * 2, 0, Config.SCREEN_HEIGHT * 2);
         camera.update();
         Vector2 offset = camera.getOffset();
@@ -173,7 +173,7 @@ public class CameraTest {
         player = new Player(0, Config.SCREEN_HEIGHT * 2, game.getGameMap().getGameMapCoordinates());
         camera.reset();
         camera.setFocusedObject(player);
-        camera.setDragEffectConstant(1);
+        camera.setGlideConstant(1);
         camera.setBorderLimit(0, Config.SCREEN_WIDTH * 2, 0, Config.SCREEN_HEIGHT * 2);
         camera.update();
         Vector2 offset = camera.getOffset();
@@ -187,7 +187,7 @@ public class CameraTest {
         player = new Player(Config.SCREEN_WIDTH * 2, Config.SCREEN_HEIGHT * 2, game.getGameMap().getGameMapCoordinates());
         camera.reset();
         camera.setFocusedObject(player);
-        camera.setDragEffectConstant(1);
+        camera.setGlideConstant(1);
         camera.setBorderLimit(0, Config.SCREEN_WIDTH * 2, 0, Config.SCREEN_HEIGHT * 2);
         camera.update();
         Vector2 offset = camera.getOffset();
@@ -201,7 +201,7 @@ public class CameraTest {
         player = new Player(0, 0, game.getGameMap().getGameMapCoordinates());
         camera.reset();
         camera.setFocusedObject(player);
-        camera.setDragEffectConstant(1);
+        camera.setGlideConstant(1);
         camera.setBorderLimit(0, Config.SCREEN_WIDTH * 2, 0, Config.SCREEN_HEIGHT * 2);
         camera.update();
         Vector2 offsetWithBorderLimit = camera.getOffset();

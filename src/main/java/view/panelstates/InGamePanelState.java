@@ -43,8 +43,8 @@ public class InGamePanelState implements IPanelState {
         hud = new HUD(game.getPlayer());
         camera = Camera.getInstance();
         camera.setFocusedObject(game.getPlayer());
-        camera.setBorderLimit(0, game.getMapSize() * Config.TERRAIN_SIZE,
-                              0, game.getMapSize() * Config.TERRAIN_SIZE);
+        camera.setBorderLimit(0, game.getMapSize() * Config.TILE_SIZE,
+                              0, game.getMapSize() * Config.TILE_SIZE);
         keyListeners.add(new CameraController());
 
         playerDrawer = new PlayerDrawer(game.getPlayer());
@@ -94,7 +94,7 @@ public class InGamePanelState implements IPanelState {
     }
 
     @Override
-    public ArrayList<KeyListener> getKeyListeners() {
+    public List<KeyListener> getKeyListeners() {
         return keyListeners;
     }
 }

@@ -4,7 +4,7 @@ package model.gameobjects;
 import model.armor.Armor;
 
 import model.helperclasses.EDirection;
-import model.mapclasses.Terrain;
+import model.mapclasses.Tile;
 import model.weapons.Weapon;
 
 /**
@@ -24,7 +24,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
      * @param y, starting y-position
      * Player constructor, used to create an instance of player.
      */
-    public Player(int x, int y, Terrain[][] coordinates){
+    public Player(int x, int y, Tile[][] coordinates){
         super(x, y, coordinates);
         this.armor = new Armor();
         this.weapon = new Weapon(10, 10);

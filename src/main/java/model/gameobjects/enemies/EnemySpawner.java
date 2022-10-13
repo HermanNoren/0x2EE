@@ -3,7 +3,7 @@ package model.gameobjects.enemies;
 import model.gameobjects.Entity;
 import model.helperclasses.Vector2;
 import model.mapclasses.GameMap;
-import model.mapclasses.Terrain;
+import model.mapclasses.Tile;
 
 import java.util.List;
 import java.util.Random;
@@ -11,17 +11,17 @@ import java.util.Random;
 public class EnemySpawner implements IEnemySpawner {
     private final GameMap gameMap;
     private EnemyFactory enemyFactory;
-    private List<Terrain> spawnableLocations;
+    private List<Tile> spawnableLocations;
 
     public EnemySpawner(EnemyFactory enemyFactory, GameMap gameMap){
         this.enemyFactory = enemyFactory;
         this.gameMap = gameMap;
-        this.spawnableLocations = gameMap.getPassableTerrains();
+        this.spawnableLocations = gameMap.getPassableTiles();
     }
 
     private void chooseLocation(IEnemy enemy, int radius){
         Entity target = enemy.getTargetEntity();
-        Terrain targetLocation = target.getMapLocation();
+        Tile targetLocation = target.getMapLocation();
 
         double targetPosX = targetLocation.getPos().getX();
         double targetPosY = targetLocation.getPos().getY();
@@ -36,9 +36,9 @@ public class EnemySpawner implements IEnemySpawner {
     public Vector2 chooseRandomLocation(){
         int nrPossibleSpawnLocations = spawnableLocations.size();
         Random random = new Random();
-        Terrain randomSpawnableTerrain = spawnableLocations.get(random.nextInt(nrPossibleSpawnLocations-1));
-        double posX = randomSpawnableTerrain.getPos().getX();
-        double posY = randomSpawnableTerrain.getPos().getY();
+        Tile randomSpawnableTile = spawnableLocations.get(random.nextInt(nrPossibleSpawnLocations-1));
+        double posX = randomSpawnableTile.getPos().getX();
+        double posY = randomSpawnableTile.getPos().getY();
         return new Vector2(posX, posY);
     }
 

@@ -2,7 +2,6 @@ package model;
 
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
-import model.gameobjects.enemies.IEnemy;
 import model.helperclasses.EDirection;
 import model.helperclasses.ShopTransaction;
 import model.helperclasses.collision.CollisionHandler;
@@ -14,10 +13,8 @@ import model.gameobjects.Shop;
 import model.helperclasses.HighscoreHandler;
 import model.helperclasses.collision.ECollisionAxis;
 import model.mapclasses.GameMap;
-import model.mapclasses.Terrain;
+import model.mapclasses.Tile;
 import model.gameobjects.IGameObject;
-
-import view.IObserver;
 
 import java.io.*;
 import java.util.*;
@@ -29,9 +26,9 @@ import java.util.Random;
  */
 public class Game implements IProjectileAddable{
     private Player player;
-    private List<Terrain> path;
+    private List<Tile> path;
     private List<String> highscoreName;
-    private List<IGameObject> terrains;
+    private List<IGameObject> tiles;
     private List<Enemy> enemies;
     private GameMap gameMap;
     private File highscoreFile;
@@ -159,10 +156,8 @@ public class Game implements IProjectileAddable{
         updatePlayer(dt);
         updateEnemies(dt);
         updateItems();
-
-        for (IProjectile projectile : getProjectiles()){
-            projectile.update(dt);
-        }
+        updateProjectile(dt);
+        checkIfProjectileHitsTerrain();
 
         /**
          * See if player is on shop, first for controller second for shop drawer
@@ -170,6 +165,27 @@ public class Game implements IProjectileAddable{
         player.isOnShop = isPlayerInRangeOfShop();
         shop.playerOnShop = player.isOnShop;
     }
+
+    private void updateProjectile(double dt) {
+        for (Projectile projectile : getProjectiles()){
+            projectile.update(dt);
+        }
+    }
+
+    private void checkIfProjectileHitsTerrain(){
+        Iterator<Projectile> pIter = getProjectiles().iterator();
+        while (pIter.hasNext()){
+            Projectile p = pIter.next();
+            List<Tile> collidedTiles = CollisionHandler.getSpecificTerrainCollisions(p, gameMap.getGameMapCoordinates());
+            if (collidedTiles.size() > 0){
+                projectiles.remove(p);
+                break;
+            }
+
+        }
+
+    }
+
 
     /**
      * Updates player position and checks for collisions with terrain
@@ -196,20 +212,24 @@ public class Game implements IProjectileAddable{
                 enemies.remove(enemy);
                 break;
             }
+
             enemy.update(dt);
             //Check if enemy is close enough to damage player, could be done somewhere else also.
             if (CollisionHandler.testCollision(player, enemy)) {
                 this.player.damageTaken(1);
             }
-            // Check if projectile hits enemy
-            Iterator<Projectile> pIter = getProjectiles().iterator();
-            while (pIter.hasNext()) {
-                Projectile pr = pIter.next();
-                if (CollisionHandler.testCollision(enemy, pr)) {
-                    enemy.damageTaken(player.getWeapon().damage);
-                    projectiles.remove(pr);
-                    break;
-                }
+            checkIfProjectileHitsEnemy(enemy);
+        }
+    }
+
+    private void checkIfProjectileHitsEnemy(Enemy enemy) {
+        Iterator<Projectile> pIter = getProjectiles().iterator();
+        while (pIter.hasNext()) {
+            Projectile pr = pIter.next();
+            if (CollisionHandler.testCollision(enemy, pr)) {
+                enemy.damageTaken(player.getWeapon().damage);
+                projectiles.remove(pr);
+                break;
             }
         }
     }
@@ -232,8 +252,8 @@ public class Game implements IProjectileAddable{
      * @param axis tells the method which axis to consider
      */
     private void collisionCheck(ECollisionAxis axis){
-        List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
-        for (Terrain t : collidedTerrain) {
+        List<Tile> collidedTile = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
+        for (Tile t : collidedTile) {
             Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, axis);
             if (collisionTypes.get("right")) {
                 player.setPosX(t.getPos().getX() - player.getWidth());

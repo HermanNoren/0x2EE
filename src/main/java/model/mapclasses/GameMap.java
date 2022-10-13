@@ -8,42 +8,42 @@ import java.util.*;
  * Game map class
  */
 public class GameMap implements IGameMap{
-    private final List<Terrain> terrains = new ArrayList<>();
-    private final Terrain[][] gameMapCoordinates;
+    private final List<Tile> tiles = new ArrayList<>();
+    private final Tile[][] gameMapCoordinates;
     private final int width;
     private final int height;
 
     /**
      * Game map constructor, set height and width.
-     * Width and height is in number of terrains.
-     * @param width number of terrains in width
-     * @param height number of terrains in height
+     * Width and height is in number of tiles.
+     * @param width number of tiles in width
+     * @param height number of tiles in height
      */
     public GameMap(int width, int height) {
         this.width = width;
         this.height = height;
-        this.gameMapCoordinates = new Terrain[width][height];
+        this.gameMapCoordinates = new Tile[width][height];
 
         addCoordinatesAndTiles(width, height);
 
-        Noise n = new Noise(10, this); // Generates random terrain on the game map.
-        n.setNoise(gameMapCoordinates, 1, 2, 2);
+        Noise n = new Noise(10, this); // Generates random tile on the game map.
+        n.setNoise(gameMapCoordinates,  2);
 
         createBorder();
-        terrains.forEach(this::addNeighbors);
-        n.printTerrainGrid(gameMapCoordinates);
+        tiles.forEach(this::addNeighbors);
+        n.printTileGrid(gameMapCoordinates);
     }
 
     /**
-     * Adds terrains in a width*height matrix and into a list.
+     * Adds tiles in a width*height matrix and into a list.
      * @param width the width of the game map
      * @param height the height of the game map
      */
     private void addCoordinatesAndTiles(int width, int height) {
         for(int i = 0; i < width; i ++){
             for(int j = 0; j < height; j++){
-                gameMapCoordinates[i][j] = new Terrain(i, j);
-                terrains.add(gameMapCoordinates[i][j]);
+                gameMapCoordinates[i][j] = new Tile(i, j);
+                tiles.add(gameMapCoordinates[i][j]);
             }
         }
     }
@@ -68,39 +68,48 @@ public class GameMap implements IGameMap{
 
     /**
      * Method used to get the reference to the gameMapCoordinates grid.
-     * @return grid of Terrains
+     * @return grid of tiles
      */
     @Override
-    public Terrain[][] getGameMapCoordinates() {
+    public Tile[][] getGameMapCoordinates() {
         return gameMapCoordinates;
     }
 
     /**
-     * Method used to get a copy of the List of terrains.
-     * @return a copy of List<Terrain> terrains.
+     * Method used to get a copy of the List of tiles.
+     * @return a copy of List<Tile> tiles.
      */
     @Override
-    public List<Terrain> getTerrains() {
-        return new ArrayList<>(terrains);
+    public List<Tile> getTiles() {
+        return new ArrayList<>(tiles);
     }
 
     /**
-     * @return List containing all terrains which are passable.
+     * @return List containing all tiles which are passable.
      */
-    public List<Terrain> getPassableTerrains(){
-        List<Terrain> passableTerrains = new ArrayList<>();
-        for (Terrain terrain : terrains){
-            if(terrain.isPassable()){
-                passableTerrains.add(terrain);
+    public List<Tile> getPassableTiles(){
+        List<Tile> passableTiles = new ArrayList<>();
+        for (Tile tile : tiles){
+            if(tile.isPassable()){
+                passableTiles.add(tile);
             }
         }
-        return passableTerrains;
+        return passableTiles;
+    }
+    public List<Tile> getNotPassableTiles(){
+        List<Tile> notPassableTiles = new ArrayList<>();
+        for (Tile tile : tiles){
+            if(!tile.isPassable()){
+                notPassableTiles.add(tile);
+            }
+        }
+        return notPassableTiles;
     }
 
     /**
      * Add neighbor to the given node. If the presumed neighbor isn't grass then it won't be added as a neighbor.
      */
-    private void addNeighbors(Terrain current){
+    private void addNeighbors(Tile current){
         int x = current.getX();
         int y = current.getY();
 
@@ -117,9 +126,9 @@ public class GameMap implements IGameMap{
         addNeighbor(y + 1 < height, x, y + 1, current);
     }
 
-    private void addNeighbor(boolean x, int x1, int y, Terrain current) {
+    private void addNeighbor(boolean x, int x1, int y, Tile current) {
         if (x){
-            Terrain leftNeighbor = gameMapCoordinates[x1][y];
+            Tile leftNeighbor = gameMapCoordinates[x1][y];
 
             if(leftNeighbor != null){
                 current.addBranch(1, leftNeighbor);
@@ -138,7 +147,7 @@ public class GameMap implements IGameMap{
                     (gameMapCoordinates[col][row].getY())+2 > height ||
                     (gameMapCoordinates[col][row].getX())-1 < 0 ||
                     (gameMapCoordinates[col][row].getY())-1 < 0){
-                gameMapCoordinates[col][row].setTerrainType(0);
+                gameMapCoordinates[col][row].setTileType(0);
                 gameMapCoordinates[col][row].setPassable(false);
             }
                 col ++;
