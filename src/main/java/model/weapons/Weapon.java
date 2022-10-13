@@ -13,8 +13,9 @@ public class Weapon implements IUpgradable {
     private int currentLevel = 1;
     public int ammo;
     public boolean reloading;
+    private int growth = 40;
 
-    private int currentWeaponPrize = 10;
+    private int currentWeaponPrize = 20;
 
     /**
      * The main weapon of the
@@ -51,7 +52,7 @@ public class Weapon implements IUpgradable {
     public void levelUp() {
         this.damage++;
         this.currentLevel++;
-        currentWeaponPrize *= currentLevel;
+        currentWeaponPrize = (currentLevel * growth);
     }
 
     @Override
@@ -61,6 +62,6 @@ public class Weapon implements IUpgradable {
 
     @Override
     public int upgradeCost() {
-        return currentWeaponPrize * (currentLevel + 1);
+        return (currentLevel * growth);
     }
 }

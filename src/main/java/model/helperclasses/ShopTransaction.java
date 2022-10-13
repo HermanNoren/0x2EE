@@ -7,13 +7,13 @@ import model.gameobjects.Player;
 import model.weapons.Weapon;
 
 public class ShopTransaction {
-    private final Player player;
+    private final IPlayer player;
     private final Weapon weapon;
     private final Armor armor;
 
 
     public ShopTransaction(IPlayer player){
-        this.player = (Player) player;
+        this.player = player;
         this.weapon =  player.getWeapon();
         this.armor =  player.getArmor();
     }

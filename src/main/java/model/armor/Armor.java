@@ -9,6 +9,7 @@ public class Armor implements IArmor, IUpgradable {
     private int currentLevel = 1;
     private int currentArmorPrize = 10;
     private final double armorReductionConstant = 0.08;
+    private int growth = 40;
 
     /**
      * Method to determine how much damage reduction the player can receive,
@@ -27,7 +28,7 @@ public class Armor implements IArmor, IUpgradable {
     @Override
     public void levelUp() {
         currentLevel++;
-        currentArmorPrize *= currentLevel;
+        currentArmorPrize =(currentLevel * growth);
     }
 
     @Override
@@ -37,6 +38,6 @@ public class Armor implements IArmor, IUpgradable {
 
     @Override
     public int upgradeCost() {
-        return currentArmorPrize * (currentLevel + 1);
+        return currentLevel * growth;
     }
 }
