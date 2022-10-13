@@ -7,7 +7,7 @@ import model.gameobjects.Entity;
 import model.gameobjects.IGameObject;
 import model.gameobjects.Player;
 import model.helperclasses.Vector2;
-import model.mapclasses.Terrain;
+import model.mapclasses.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -201,10 +201,10 @@ public class EntityTest {
 
     @Test
     void test_getMapLocation_returns_Entity_location_on_map(){
-        Terrain[][] testCoords = new Terrain[10][10];
+        Tile[][] testCoords = new Tile[10][10];
         for(int i = 0 ; i < 10; i ++){
             for(int j = 0 ; j < 10; j ++){
-                testCoords[i][j] = new Terrain(i, j);
+                testCoords[i][j] = new Tile(i, j);
             }
         }
 

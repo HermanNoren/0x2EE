@@ -3,7 +3,7 @@ package model.gameobjects;
 import config.Config;
 import model.helperclasses.EDirection;
 import model.helperclasses.Vector2;
-import model.mapclasses.Terrain;
+import model.mapclasses.Tile;
 
 /**
  * The IEnemy class contains logic to represent the sprite,
@@ -20,15 +20,15 @@ public abstract class Entity implements IGameObject {
     private EDirection direction;
     private EDirection lastDirection;
     private int size = Config.SPRITE_SIZE * 3;
-    private Terrain[][] coordinates;
-    private Terrain currentLocation;
+    private Tile[][] coordinates;
+    private Tile currentLocation;
 
     /**
      *
      * @param x represents the entities' x-coordinate
      * @param y represents the entities' y-coordinate
      */
-    public Entity(int x, int y, Terrain[][] coordinates){
+    public Entity(int x, int y, Tile[][] coordinates){
         this.coordinates = coordinates;
         this.direction = EDirection.NOT_MOVING; // Default value
         this.lastDirection = direction;
@@ -97,7 +97,7 @@ public abstract class Entity implements IGameObject {
     /**
      * @return current location based on the terrain grid of GameMap
      */
-    public Terrain getMapLocation(){
+    public Tile getMapLocation(){
         int posX = (int)getCenter().getX()/48; // 48 is terrain size
         int posY = (int)getCenter().getY()/48;
         currentLocation = coordinates[posX][posY];

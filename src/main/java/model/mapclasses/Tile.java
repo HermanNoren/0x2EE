@@ -1,7 +1,6 @@
 package model.mapclasses;
 
 import config.Config;
-import model.gameobjects.Entity;
 import model.gameobjects.IGameObject;
 import model.helperclasses.Vector2;
 
@@ -10,28 +9,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Terrain is the node representation for the gamemap
+ * Tile is the node representation for the gamemap
  */
-public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
-    private final int size = Config.TERRAIN_SIZE;
+public class Tile implements IGameObject, ITile, Comparable<Tile> {
+    private final int size = Config.TILE_SIZE;
     private final Vector2 pos;
     private double f = Double.MAX_VALUE; // Will later be equal to g + h
     private double g = Double.MAX_VALUE; // g(n), n = next node, distance from start to n.
     private final List<Edge> neighbors;
-    private Terrain parent = null;
+    private Tile parent = null;
     private final int x;
     private final int y;
     private final int width;
     private final int height;
-    private int terrainType;
+    private int tileType;
     private boolean passable;
 
-    public Terrain(int x, int y){
+    public Tile(int x, int y){
         this.x = x;
         this.y = y;
         this.height = size;
         this.width = size;
-        this.terrainType = 0;
+        this.tileType = 0;
         this.passable = true;
         this.neighbors = new ArrayList<>();
         this.pos = new Vector2(x, y);
@@ -84,15 +83,15 @@ public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
         return f;
     }
     @Override
-    public Terrain getParent() {
+    public Tile getParent() {
         return parent;
     }
-    @Override public void setParent(Terrain parent) {
+    @Override public void setParent(Tile parent) {
         this.parent = parent;
     }
 
     @Override
-    public int compareTo(Terrain n) {
+    public int compareTo(Tile n) {
         return Double.compare(this.f, n.f);
     }
 
@@ -100,12 +99,12 @@ public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
      *
      * @param type the type indicates whether the tile is passable or not.
      */
-    public void setTerrainType(int type) {
-        this.terrainType = type;
+    public void setTileType(int type) {
+        this.tileType = type;
     }
 
-    public int getTerrainType() {
-        return terrainType;
+    public int getTileType() {
+        return tileType;
     }
 
     public void setPassable(boolean passable){
@@ -120,21 +119,21 @@ public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
      * @param weight
      * @param neighbor
      */
-    public void addBranch(int weight, Terrain neighbor){
-        Terrain.Edge newEdge = new Terrain.Edge(weight, neighbor);
+    public void addBranch(int weight, Tile neighbor){
+        Tile.Edge newEdge = new Tile.Edge(weight, neighbor);
         neighbors.add(newEdge);
     }
 
     public static class Edge {
         private int weight;
-        private Terrain terrain;
-        Edge(int weight, Terrain terrain){
+        private Tile tile;
+        Edge(int weight, Tile tile){
             this.weight = weight;
-            this.terrain = terrain;
+            this.tile = tile;
         }
 
-        public Terrain getTerrain() {
-            return terrain;
+        public Tile getTile() {
+            return tile;
         }
 
         public int getWeight() {

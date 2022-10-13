@@ -7,7 +7,7 @@ import model.gameobjects.Player;
 import model.helperclasses.Vector2;
 import model.helperclasses.ImageHandler;
 import model.mapclasses.GameMap;
-import model.mapclasses.Terrain;
+import model.mapclasses.Tile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -15,8 +15,8 @@ import java.util.List;
 import view.Camera;
 
 public class MapDrawer implements IDrawer {
-    private final List<Terrain> terrains;
-    private final BufferedImage[] terrainImgs = new BufferedImage[10];
+    private final List<Tile> tiles;
+    private final BufferedImage[] tileImgs = new BufferedImage[10];
     private final GameMap gameMap;
     private  Camera camera;
     private final int[][] mapNums;
@@ -32,16 +32,21 @@ public class MapDrawer implements IDrawer {
         player = game.getPlayer();
         camera = Camera.getInstance();
         mapNums = new int[gameMap.getWidth()][gameMap.getHeight()];
-        this.terrains = gameMap.getTerrains();
+        this.tiles = gameMap.getTiles();
         this.imageHandler = new ImageHandler();
-        loadTerrainImages();
+        initTileImgs();
     }
 
-    private void loadTerrainImages(){
-        terrainImgs[0] = imageHandler.getImage("imgs/tile/tree.png");
-        terrainImgs[1] = imageHandler.getImage("imgs/tile/grass.png");
-        terrainImgs[2] = imageHandler.getImage("imgs/tile/tree.png");
-        terrainImgs[3] = imageHandler.getImage("imgs/tile/wall.png");
+    private void initTileImgs(){
+        tileImgs[0] = imageHandler.getImage("imgs/tile/tree/tree1.png");
+        tileImgs[1] = imageHandler.getImage("imgs/tile/tree/tree2.png");
+        tileImgs[2] = imageHandler.getImage("imgs/tile/tree/tree3.png");
+
+        tileImgs[3] = imageHandler.getImage("imgs/tile/grass/grass1.png");
+        tileImgs[4] = imageHandler.getImage("imgs/tile/grass/grass2.png");
+        tileImgs[5] = imageHandler.getImage("imgs/tile/grass/grass3.png");
+
+        tileImgs[6] = imageHandler.getImage("imgs/tile/border.png");
     }
 
 
@@ -64,7 +69,7 @@ public class MapDrawer implements IDrawer {
         int terrainSize = Config.SPRITE_SIZE*3;
 
         Vector2 newTerrainVector;
-        Terrain[][] gameMapCoordinates = gameMap.getGameMapCoordinates();
+        Tile[][] gameMapCoordinates = gameMap.getGameMapCoordinates();
 
         for (int col = left; col < right && col < gameMap.getWidth(); col++){
             for(int row = up; row < down && row < gameMap.getHeight(); row++){
@@ -77,8 +82,8 @@ public class MapDrawer implements IDrawer {
                             gameMapCoordinates[col][row].getWidth(),
                             gameMapCoordinates[col][row].getHeight());
 
-                int terrainNum = gameMapCoordinates[col][row].getTerrainType();
-                g2.drawImage(terrainImgs[terrainNum], drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
+                int terrainNum = gameMapCoordinates[col][row].getTileType();
+                g2.drawImage(tileImgs[terrainNum], drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
 
                 newTerrainVector.setX(newTerrainVector.getX() + terrainSize);
                 newTerrainVector.setY(newTerrainVector.getY() + terrainSize);
