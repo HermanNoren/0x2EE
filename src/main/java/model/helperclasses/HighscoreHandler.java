@@ -67,6 +67,7 @@ public class HighscoreHandler {
         while(sc.hasNext()){
             highscoreList.add(sc.next());
         }
+        sc.close();
         return new ArrayList<>(highscoreList);
     }
 
