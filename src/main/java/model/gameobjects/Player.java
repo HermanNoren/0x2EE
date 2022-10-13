@@ -7,8 +7,6 @@ import model.helperclasses.Vector2;
 import model.mapclasses.Terrain;
 import model.weapons.Weapon;
 
-import java.util.List;
-
 /**
  * The player, more implementation to come.
  */
@@ -16,9 +14,9 @@ import java.util.List;
 public class Player extends Entity implements IPlayer, IFocusableObject {
     private int score;
     private int money;
-    private Weapon weapon;
-    private Armor armor;
-    private double moveAcc;
+    private final Weapon weapon;
+    private final Armor armor;
+    private final double moveAcc;
 
     public boolean isOnShop = false;
     /**
@@ -29,7 +27,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
     public Player(int x, int y, Terrain[][] coordinates){
         super(x, y, coordinates);
         this.armor = new Armor();
-        this.weapon = new Weapon(10, 10);
+        this.weapon = new Weapon(10, 7);
         setMaxHp(1000);
         setHealth(1000);
         moveAcc = 0.3;
@@ -104,7 +102,8 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
         return money;
     }
 
-    public Weapon getWeapon(){
+    @Override
+    public Weapon getWeapon() {
         return this.weapon;
     }
 

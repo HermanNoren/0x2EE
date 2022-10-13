@@ -55,16 +55,20 @@ public class Game implements IProjectileAddable{
         playerDead = false;
         EnemyFactory enemyFactory = new NormalEnemyFactory();
 
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
+        addEnemies(enemyFactory);
 
 
         spawner = new Spawner(this);
         observers = new ArrayList<>();
         highscoreHandler = new HighscoreHandler();
         highscoreList = highscoreHandler.getHighscoreList();
+    }
+
+    private void addEnemies(EnemyFactory enemyFactory) {
+        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
+        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
+        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
+        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
     }
 
     public GameMap getGameMap() {
@@ -87,7 +91,7 @@ public class Game implements IProjectileAddable{
     }
 
     /**
-     * Updates the list containing highscores.
+     * Updates the list containing highScores.
      */
     public void updateHighscoreList() {
         highscoreHandler.saveHighscore(String.join("", highscoreName), player.getScore());
@@ -156,14 +160,18 @@ public class Game implements IProjectileAddable{
             }
 
             /**
-             * See if player is on shop, first for controller second for shop drawer
+             * See if player is on shop.
              */
-            player.isOnShop = isPlayerInRangeOfShop();
-            shop.playerOnShop = player.isOnShop;
+            setBooleansForShop();
         }
         else {
             playerDead = true;
         }
+    }
+
+    private void setBooleansForShop() {
+        player.isOnShop = isPlayerInRangeOfShop();
+        shop.playerOnShop = player.isOnShop;
     }
 
     /**

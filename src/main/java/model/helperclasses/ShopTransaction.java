@@ -1,6 +1,7 @@
 package model.helperclasses;
 
 import model.armor.Armor;
+import model.gameobjects.IPlayer;
 import model.gameobjects.IUpgradable;
 import model.gameobjects.Player;
 import model.weapons.Weapon;
@@ -11,12 +12,11 @@ public class ShopTransaction {
     private final Armor armor;
 
 
-    public ShopTransaction(Player player){
-        this.player = player;
-        this.weapon = player.getWeapon();
-        this.armor = player.getArmor();
+    public ShopTransaction(IPlayer player){
+        this.player = (Player) player;
+        this.weapon =  player.getWeapon();
+        this.armor =  player.getArmor();
     }
-
 
 
     public boolean purchasePossible(int currentPrize){
@@ -26,7 +26,6 @@ public class ShopTransaction {
     public int getMoney(){
         return player.getMoney();
     }
-
 
     public int getWeaponUpgradeCost(){
         return weapon.upgradeCost();

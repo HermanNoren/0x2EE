@@ -16,7 +16,6 @@ public class Weapon implements IUpgradable {
 
     private int currentWeaponPrize = 10;
 
-
     /**
      * The main weapon of the
      */
@@ -25,8 +24,6 @@ public class Weapon implements IUpgradable {
         this.ammo = ammo;
         reloading = false;
     }
-
-
 
     public void shoot(Vector2 pos, EDirection direction, IProjectileAddable addable){
         if (ammo != 0) {
@@ -44,7 +41,6 @@ public class Weapon implements IUpgradable {
     }
 
     /**
-     *
      * @return true if weapon is reloading
      */
     public boolean isReloading(){
@@ -67,6 +63,4 @@ public class Weapon implements IUpgradable {
     public int upgradeCost() {
         return currentWeaponPrize * (currentLevel + 1);
     }
-
-
 }
