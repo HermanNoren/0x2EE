@@ -13,5 +13,8 @@ public interface ITerrain {
     void addBranch(int weight, Terrain neighbor);
     void setParent(Terrain parent);
     Terrain getParent();
+    double getF();
+    double getG();
+    void setF(double f);
 
 }

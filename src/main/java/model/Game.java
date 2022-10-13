@@ -1,9 +1,8 @@
 package model;
 
-import controllers.EDirection;
-import model.helperclasses.ShopTransaction;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
+import model.gameobjects.enemies.IEnemy;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.*;
@@ -15,6 +14,8 @@ import model.helperclasses.collision.ECollisionAxis;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import model.gameobjects.IGameObject;
+
+import view.IObserver;
 
 import java.io.*;
 import java.util.*;
@@ -61,14 +62,6 @@ public class Game implements IProjectileAddable{
         highscoreName = new ArrayList<>();
         this.path = new ArrayList<>();
         playerDead = false;
-        EnemyFactory enemyFactory = new NormalEnemyFactory();
-
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-
-
         spawner = new Spawner(this);
         paused = false;
     }
@@ -80,7 +73,7 @@ public class Game implements IProjectileAddable{
     public int getMapSize() { return mapSize; }
 
     public List<String> getHighscoreName() {
-        return new ArrayList<>(highscoreName);
+        return Collections.unmodifiableList(highscoreName);
     }
 
     public boolean isTopFive() {
@@ -155,7 +148,6 @@ public class Game implements IProjectileAddable{
 
     /**
      * Updates the current game state
-     * @param dt time passed since last update
      */
     public void update(double dt) {
         if (player.getHealth() < 1) {

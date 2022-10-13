@@ -1,6 +1,6 @@
 package gameobjects;
 
-import controllers.EDirection;
+import model.helperclasses.EDirection;
 import model.gameobjects.Projectile;
 import model.helperclasses.Vector2;
 import org.junit.jupiter.api.Test;

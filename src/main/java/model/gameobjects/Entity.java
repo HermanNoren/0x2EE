@@ -37,6 +37,7 @@ public abstract class Entity implements IGameObject {
         this.vel = new Vector2(0,0);
     }
 
+    @Override
     public void setPos(Vector2 pos) {
         this.pos = pos;
     }
@@ -88,7 +89,7 @@ public abstract class Entity implements IGameObject {
     public double getAccY(){
         return acc.getY();
     }
-
+    @Override
     public Vector2 getCenter() {
         double x = pos.getX() + (double) (getWidth() / 2);
         double y = pos.getY() + (double) (getHeight() / 2);
@@ -163,7 +164,7 @@ public abstract class Entity implements IGameObject {
         return size;
     }
 
-
+    @Override
     public int getHeight() {
         return size;
     }
@@ -192,7 +193,6 @@ public abstract class Entity implements IGameObject {
     public void damageTaken(int damage) {
         setHealth(getHealth() - damage);
     }
-
     /**
      * @return size of entity
      */

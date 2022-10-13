@@ -1,6 +1,6 @@
 package model.gameobjects.enemies;
 
-import controllers.EDirection;
+import model.helperclasses.EDirection;
 import model.helperclasses.AStar;
 import model.helperclasses.Vector2;
 import model.mapclasses.Terrain;
@@ -8,19 +8,22 @@ import model.gameobjects.Entity;
 
 public abstract class Enemy extends Entity implements IEnemy {
     private double movementSpeed;
-    private Entity targetEntity;
+    private final Entity targetEntity;
     protected Enemy(int x, int y, Terrain[][] coordinates, Entity targetEntity){
         super(x, y, coordinates);
         this.targetEntity = targetEntity;
-        movementSpeed = 0.5;
+        movementSpeed = 2;
     }
-
+    @Override
+    public Entity getTargetEntity(){
+        return this.targetEntity;
+    }
     /**
      * Method used to move the enemy towards player.
      */
     private void moveToGoal(double dt) {
-        Terrain current = getMapLocation();
-        Terrain goal = targetEntity.getMapLocation();
+        Terrain current = getTerrainStandingOn();
+        Terrain goal = targetEntity.getTerrainStandingOn();
 
         Terrain next = AStar.aStar(current, goal);
 
