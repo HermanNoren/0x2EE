@@ -207,9 +207,9 @@ public class Game implements IProjectileAddable{
         Iterator<Enemy> enemyIter = getEnemies().iterator();
         while (enemyIter.hasNext()) {
             Enemy enemy = enemyIter.next();
-            if (enemy.getHealth() < 1) {
+            if (enemy.getHealth() <= 0) {
                 spawner.spawnItem();
-                player.addScore(100);
+                player.addScore(enemy.getKillReward());
                 enemies.remove(enemy);
                 break;
             }

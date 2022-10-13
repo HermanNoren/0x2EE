@@ -12,13 +12,19 @@ public class BossEnemy extends Enemy{
         super(x, y, coordinates, targetEntity);
         setVelX(1);
         setVelY(1);
-        setHealth(500);
         setMaxHp(500);
+        setHealth(500);
+
     }
 
     @Override
     public void specialAbility() {
 
+    }
+
+    @Override
+    public int getKillReward() {
+        return 500;
     }
 
 }
