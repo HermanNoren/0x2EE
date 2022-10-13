@@ -4,7 +4,7 @@ import model.Game;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.Enemy;
 import model.helperclasses.Vector2;
-import model.mapclasses.Terrain;
+import model.mapclasses.Tile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,12 +46,12 @@ public class Spawner{
 
     private Vector2 getSpawnLocation() {
         enemies = game.getEnemies(); //Göra interface till game, med getEnemies, getPlayer osv..
-        List<Terrain> locations = game.getGameMap().getPassableTerrains();
+        List<Tile> locations = game.getGameMap().getPassableTiles();
         if (enemies.size() <= 1) {
             int nrPossibleSpawnLocations = locations.size();
-            Terrain randomSpawnableTerrain = locations.get(rand.nextInt(nrPossibleSpawnLocations-1));
-            double posX = randomSpawnableTerrain.getPos().getX();
-            double posY = randomSpawnableTerrain.getPos().getY();
+            Tile randomSpawnableTile = locations.get(rand.nextInt(nrPossibleSpawnLocations-1));
+            double posX = randomSpawnableTile.getPos().getX();
+            double posY = randomSpawnableTile.getPos().getY();
             return new Vector2(posX, posY);
 
         } else {
