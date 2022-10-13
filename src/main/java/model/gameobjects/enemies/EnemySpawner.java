@@ -21,7 +21,7 @@ public class EnemySpawner implements IEnemySpawner {
 
     private void chooseLocation(IEnemy enemy, int radius){
         Entity target = enemy.getTargetEntity();
-        Terrain targetLocation = target.getTerrainStandingOn();
+        Terrain targetLocation = target.getMapLocation();
 
         double targetPosX = targetLocation.getPos().getX();
         double targetPosY = targetLocation.getPos().getY();

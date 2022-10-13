@@ -2,7 +2,8 @@
 package model.gameobjects;
 
 import model.armor.Armor;
-import controllers.EDirection;
+
+import model.helperclasses.EDirection;
 import model.helperclasses.Vector2;
 import model.mapclasses.Terrain;
 import model.weapons.Weapon;

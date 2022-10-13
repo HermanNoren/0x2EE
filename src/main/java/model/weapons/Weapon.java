@@ -1,9 +1,9 @@
 package model.weapons;
 
-import controllers.EDirection;
 import model.gameobjects.IProjectileAddable;
 import model.gameobjects.IUpgradable;
 import model.gameobjects.Projectile;
+import model.helperclasses.EDirection;
 import model.helperclasses.Vector2;
 
 import java.util.List;

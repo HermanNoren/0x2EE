@@ -1,7 +1,7 @@
 package model.gameobjects;
 
 import config.Config;
-import controllers.EDirection;
+import model.helperclasses.EDirection;
 import model.helperclasses.Vector2;
 import model.mapclasses.Terrain;
 
@@ -36,8 +36,6 @@ public abstract class Entity implements IGameObject {
         this.acc = new Vector2(0, 0);
         this.vel = new Vector2(0,0);
     }
-
-    @Override
     public void setPos(Vector2 pos) {
         this.pos = pos;
     }

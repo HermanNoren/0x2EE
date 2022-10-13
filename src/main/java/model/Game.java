@@ -3,6 +3,8 @@ package model;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
 import model.gameobjects.enemies.IEnemy;
+import model.helperclasses.EDirection;
+import model.helperclasses.ShopTransaction;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.*;
@@ -44,6 +46,7 @@ public class Game implements IProjectileAddable{
 
     private final int mapSize;
     private ShopTransaction shopTransaction;
+    private EnemyFactory enemyFactory;
 
     public Game() {
         mapSize = 25;
@@ -269,6 +272,18 @@ public class Game implements IProjectileAddable{
     }
     public ShopTransaction getShopTransaction(){
         return shopTransaction;
+    }
+
+    /**
+     * @param counter adds Enemy to enemies.
+     */
+    public void spawnEnemy(int counter){
+        if((counter % 10) == 0 && counter != 0){
+            enemyFactory = new BossEnemyFactory();
+        }else{
+            enemyFactory = new NormalEnemyFactory();
+        }
+        enemies.add(enemyFactory.createEnemy(player, gameMap));
     }
 
 }

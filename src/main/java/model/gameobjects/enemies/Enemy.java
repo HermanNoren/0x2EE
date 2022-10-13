@@ -22,8 +22,8 @@ public abstract class Enemy extends Entity implements IEnemy {
      * Method used to move the enemy towards player.
      */
     private void moveToGoal(double dt) {
-        Terrain current = getTerrainStandingOn();
-        Terrain goal = targetEntity.getTerrainStandingOn();
+        Terrain current = getMapLocation();
+        Terrain goal = targetEntity.getMapLocation();
 
         Terrain next = AStar.aStar(current, goal);
 
