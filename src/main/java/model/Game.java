@@ -269,7 +269,7 @@ public class Game implements IProjectileAddable{
     }
 
     public List<Projectile> getProjectiles() {
-        return new ArrayList<>(projectiles);
+        return Collections.unmodifiableList(projectiles);
     }
 
     public Shop getShop() {
