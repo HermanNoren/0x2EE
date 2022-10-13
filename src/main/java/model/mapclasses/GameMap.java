@@ -96,6 +96,15 @@ public class GameMap implements IGameMap{
         }
         return passableTerrains;
     }
+    public List<Terrain> getNotPassableTerrains(){
+        List<Terrain> notPassableTerrains = new ArrayList<>();
+        for (Terrain terrain : terrains){
+            if(!terrain.isPassable()){
+                notPassableTerrains.add(terrain);
+            }
+        }
+        return notPassableTerrains;
+    }
 
     /**
      * Add neighbor to the given node. If the presumed neighbor isn't grass then it won't be added as a neighbor.
