@@ -38,10 +38,10 @@ public class MapDrawer implements IDrawer {
     }
 
     private void loadTerrainImages(){
-        terrainImgs[0] = ImageHandler.scaleImage(imageHandler.getImage("imgs/tile/grass.png"), spriteSize, spriteSize);
-        terrainImgs[1] = ImageHandler.scaleImage(imageHandler.getImage("imgs/tile/border.png"), spriteSize, spriteSize);
-        terrainImgs[2] = ImageHandler.scaleImage(imageHandler.getImage("imgs/tile/tree.png"), spriteSize, spriteSize);
-        terrainImgs[3] = ImageHandler.scaleImage(imageHandler.getImage("imgs/tile/wall.png"), spriteSize, spriteSize);
+        terrainImgs[0] = imageHandler.getImage("imgs/tile/grass.png");
+        terrainImgs[1] = imageHandler.getImage("imgs/tile/border.png");
+        terrainImgs[2] = imageHandler.getImage("imgs/tile/tree.png");
+        terrainImgs[3] = imageHandler.getImage("imgs/tile/wall.png");
     }
 
 
@@ -49,10 +49,10 @@ public class MapDrawer implements IDrawer {
     public void draw(Graphics2D g2) {
 
         // Coordinates of tiles to paint with a 5 tile offset to guarantee visibility
-        int left = (int) (camera.getCenter().getX() - Config.SCREEN_WIDTH/2)/spriteSize -5;
-        int right = (int) (camera.getCenter().getX() + Config.SCREEN_WIDTH/2)/spriteSize +5;
-        int up = (int) (camera.getCenter().getY() - Config.SCREEN_HEIGHT/2)/spriteSize -5;
-        int down = (int) (camera.getCenter().getY() + Config.SCREEN_HEIGHT/2)/spriteSize +5;
+        int left = (int) (camera.getCenter().getX() - Config.SCREEN_WIDTH/2)/spriteSize - 2;
+        int right = (int) (camera.getCenter().getX() + Config.SCREEN_WIDTH/2)/spriteSize + 2;
+        int up = (int) (camera.getCenter().getY() - Config.SCREEN_HEIGHT/2)/spriteSize - 2;
+        int down = (int) (camera.getCenter().getY() + Config.SCREEN_HEIGHT/2)/spriteSize + 2;
 
         // If out of bounds
         if (left < 0) {
@@ -78,7 +78,8 @@ public class MapDrawer implements IDrawer {
                             gameMapCoordinates[col][row].getHeight());
 
                 int terrainNum = gameMapCoordinates[col][row].getTerrainType();
-                g2.drawImage(terrainImgs[terrainNum], drawInformation.get(0), drawInformation.get(1), null);
+                g2.drawImage(terrainImgs[terrainNum], drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
+
                 newTerrainVector.setX(newTerrainVector.getX() + terrainSize);
                 newTerrainVector.setY(newTerrainVector.getY() + terrainSize);
             }

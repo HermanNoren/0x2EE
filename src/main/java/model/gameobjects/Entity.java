@@ -1,7 +1,7 @@
 package model.gameobjects;
 
 import config.Config;
-import controllers.EDirection;
+import model.helperclasses.EDirection;
 import model.helperclasses.Vector2;
 import model.mapclasses.Terrain;
 
@@ -36,7 +36,6 @@ public abstract class Entity implements IGameObject {
         this.acc = new Vector2(0, 0);
         this.vel = new Vector2(0,0);
     }
-
     public void setPos(Vector2 pos) {
         this.pos = pos;
     }
@@ -88,7 +87,7 @@ public abstract class Entity implements IGameObject {
     public double getAccY(){
         return acc.getY();
     }
-
+    @Override
     public Vector2 getCenter() {
         double x = pos.getX() + (double) (getWidth() / 2);
         double y = pos.getY() + (double) (getHeight() / 2);
@@ -163,7 +162,7 @@ public abstract class Entity implements IGameObject {
         return size;
     }
 
-
+    @Override
     public int getHeight() {
         return size;
     }
@@ -192,7 +191,6 @@ public abstract class Entity implements IGameObject {
     public void damageTaken(int damage) {
         setHealth(getHealth() - damage);
     }
-
     /**
      * @return size of entity
      */

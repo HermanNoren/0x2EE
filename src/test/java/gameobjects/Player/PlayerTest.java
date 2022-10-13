@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -140,7 +139,7 @@ public class PlayerTest {
         player.setAcc(new Vector2(1, 1));
         player.setVel(new Vector2(1, 1));
 
-        player.stopCurrentMovement();
+        player.stopAllCurrentMovement();
         assertEquals(0, player.getAcc().getX());
         assertEquals(0, player.getAcc().getY());
         assertEquals(0, player.getVel().getY());

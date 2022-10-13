@@ -2,7 +2,8 @@
 package model.gameobjects;
 
 import model.armor.Armor;
-import controllers.EDirection;
+
+import model.helperclasses.EDirection;
 import model.helperclasses.Vector2;
 import model.mapclasses.Terrain;
 import model.weapons.Weapon;
@@ -49,11 +50,26 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
         }
         weapon.shoot(getCenter(), dir, addable);
     }
-    public void stopCurrentMovement(){
-        setVel(new Vector2(0,0));
-        setAcc(new Vector2(0,0));
+
+    @Override
+    public void stopCurrentXMovement() {
+        setVelX(0);
+        setAccX(0);
     }
 
+    @Override
+    public void stopCurrentYMovement() {
+        setVelY(0);
+        setAccY(0);
+    }
+
+    @Override
+    public void stopAllCurrentMovement(){
+        stopCurrentXMovement();
+        stopCurrentYMovement();
+    }
+
+    @Override
     public void moveX(double dt) {
         setAccX(0);
         if (getDirection() == EDirection.RIGHT) {
@@ -69,6 +85,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
 
     }
 
+    @Override
     public void moveY(double dt) {
         setAccY(0);
 
@@ -84,22 +101,28 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
         setVelY(getVelY() + getAccY() * dt);
         setPosY(getPosY() + getVelY() * dt + 0.5 * getAccY() * (dt * dt));
     }
+
     /**
      * @return score acquired during game
      */
+    @Override
     public int getScore(){
         return score;
     }
+
     /**
      * Adds score to total
      * @param score to add
      */
+    @Override
     public void addScore(int score){
         this.score += score;
     }
+
     /**
      * @return currency acquired during game
      */
+    @Override
     public int getMoney(){
         return money;
     }
@@ -119,6 +142,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
        setHealth((int) (getHealth() - armor.damageReduction(damage)));
     }
 
+    @Override
     public void addMoney(int amount){
         this.money += amount;
     }

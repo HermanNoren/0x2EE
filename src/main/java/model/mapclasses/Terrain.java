@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Terrain is the node representation for the gamemap
  */
-public class Terrain implements IGameObject, Comparable<Terrain> {
+public class Terrain implements IGameObject, ITerrain, Comparable<Terrain> {
     private final int size = Config.TERRAIN_SIZE;
     private final Vector2 pos;
     private double f = Double.MAX_VALUE; // Will later be equal to g + h
@@ -79,12 +79,18 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     public void setG(double g) {
         this.g = g;
     }
+    @Override
+    public double getF() {
+        return f;
+    }
+    @Override
     public Terrain getParent() {
         return parent;
     }
-    public void setParent(Terrain parent) {
+    @Override public void setParent(Terrain parent) {
         this.parent = parent;
     }
+
     @Override
     public int compareTo(Terrain n) {
         return Double.compare(this.f, n.f);
@@ -92,12 +98,9 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
 
     /**
      *
-     * @param type : the type indicates whether the tile is passable or not. Tyles 1, 2 and 3 are not passable.
+     * @param type the type indicates whether the tile is passable or not.
      */
     public void setTerrainType(int type) {
-        if(type == 1 || type == 2 || type == 3){
-            setPassable(false);
-        }
         this.terrainType = type;
     }
 
@@ -120,10 +123,6 @@ public class Terrain implements IGameObject, Comparable<Terrain> {
     public void addBranch(int weight, Terrain neighbor){
         Terrain.Edge newEdge = new Terrain.Edge(weight, neighbor);
         neighbors.add(newEdge);
-    }
-
-    public double getF() {
-        return f;
     }
 
     public static class Edge {

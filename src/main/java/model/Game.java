@@ -2,6 +2,8 @@ package model;
 
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
+import model.gameobjects.enemies.IEnemy;
+import model.helperclasses.EDirection;
 import model.helperclasses.ShopTransaction;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
@@ -26,13 +28,12 @@ import java.util.Random;
  * With help of the main game loop it delegates work to the active IGameState
  */
 public class Game implements IProjectileAddable{
-    private List<IObserver> observers;
     private Player player;
     private List<Terrain> path;
     private List<String> highscoreName;
+    private List<IGameObject> terrains;
     private List<Enemy> enemies;
     private GameMap gameMap;
-
     private File highscoreFile;
     private List<String> highscoreList;
     private List<Projectile> projectiles;
@@ -41,11 +42,22 @@ public class Game implements IProjectileAddable{
     private Spawner spawner;
     private Random random = new Random();
     private Boolean playerDead;
+    private Boolean paused;
+
+    private final int mapSize;
     private ShopTransaction shopTransaction;
+    private EnemyFactory enemyFactory;
 
     public Game() {
-        this.gameMap = new GameMap(100, 100);
-        this.player = new Player(48, 48, gameMap.getGameMapCoordinates());
+        mapSize = 25;
+        newGame();
+        highscoreHandler = new HighscoreHandler();
+        highscoreList = highscoreHandler.getHighscoreList();
+    }
+
+    public void newGame() {
+        this.gameMap = new GameMap(mapSize, mapSize);
+        this.player = new Player(500, 500, gameMap.getGameMapCoordinates());
         shop = new Shop(200, 100);
         this.shopTransaction = new ShopTransaction(this.getPlayer());
         enemies = new ArrayList<>();
@@ -53,26 +65,18 @@ public class Game implements IProjectileAddable{
         highscoreName = new ArrayList<>();
         this.path = new ArrayList<>();
         playerDead = false;
-        EnemyFactory enemyFactory = new NormalEnemyFactory();
-
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-
-
         spawner = new Spawner(this);
-        observers = new ArrayList<>();
-        highscoreHandler = new HighscoreHandler();
-        highscoreList = highscoreHandler.getHighscoreList();
+        paused = false;
     }
 
     public GameMap getGameMap() {
         return gameMap;
     }
 
+    public int getMapSize() { return mapSize; }
+
     public List<String> getHighscoreName() {
-        return highscoreName;
+        return Collections.unmodifiableList(highscoreName);
     }
 
     public boolean isTopFive() {
@@ -116,20 +120,11 @@ public class Game implements IProjectileAddable{
     }
 
     public List<Enemy> getEnemies() {
-        return new ArrayList<>(enemies);
+        return Collections.unmodifiableList(enemies);
     }
 
     public List<IItem> getItems() {
         return spawner.getSpawnedItems();
-    }
-
-    /**
-     * Add an observer. Observers will be notified 120 times per second
-     *
-     * @param observer observer
-     */
-    public void addObserver(IObserver observer) {
-        observers.add(observer);
     }
 
     public void makePlayerShoot() {
@@ -141,29 +136,39 @@ public class Game implements IProjectileAddable{
         projectiles.add(p);
     }
 
+    public void pause() {
+        player.setDirection(EDirection.NOT_MOVING);
+        paused = true;
+    }
+
+    public void resume() {
+        paused = false;
+    }
+
+    public boolean isPaused() {
+        return paused;
+    }
+
     /**
      * Updates the current game state
-     * @param dt time passed since last update
      */
     public void update(double dt) {
-        if (!(player.getHealth() < 1)) {
-            updatePlayer(dt);
-            updateEnemies(dt);
-            updateItems();
-
-            for (IProjectile projectile : getProjectiles()){
-                projectile.update(dt);
-            }
-
-            /**
-             * See if player is on shop, first for controller second for shop drawer
-             */
-            player.isOnShop = isPlayerInRangeOfShop();
-            shop.playerOnShop = player.isOnShop;
-        }
-        else {
+        if (player.getHealth() < 1) {
             playerDead = true;
         }
+        updatePlayer(dt);
+        updateEnemies(dt);
+        updateItems();
+
+        for (IProjectile projectile : getProjectiles()){
+            projectile.update(dt);
+        }
+
+        /**
+         * See if player is on shop, first for controller second for shop drawer
+         */
+        player.isOnShop = isPlayerInRangeOfShop();
+        shop.playerOnShop = player.isOnShop;
     }
 
     /**
@@ -232,19 +237,19 @@ public class Game implements IProjectileAddable{
             Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, axis);
             if (collisionTypes.get("right")) {
                 player.setPosX(t.getPos().getX() - player.getWidth());
-                player.stopCurrentMovement();
+                player.stopCurrentXMovement();
             }
             if (collisionTypes.get("left")) {
                 player.setPosX((t.getPos().getX() + t.getWidth()));
-                player.stopCurrentMovement();
+                player.stopCurrentXMovement();
             }
             if (collisionTypes.get("top")) {
                 player.setPosY(t.getPos().getY() + player.getHeight());
-                player.stopCurrentMovement();
+                player.stopCurrentYMovement();
             }
             if (collisionTypes.get("bottom")) {
                 player.setPosY((t.getPos().getY() - t.getHeight()));
-                player.stopCurrentMovement();
+                player.stopCurrentYMovement();
             }
         }
     }
@@ -258,17 +263,8 @@ public class Game implements IProjectileAddable{
         return (CollisionHandler.testCollision(player, shop));
     }
 
-    /**
-     * Notifies potential observers
-     */
-    public void notifyObservers() {
-        for (IObserver o : observers) {
-            o.draw();
-        }
-    }
-
     public List<Projectile> getProjectiles() {
-        return new ArrayList<>(projectiles);
+        return Collections.unmodifiableList(projectiles);
     }
 
     public Shop getShop() {
@@ -276,6 +272,18 @@ public class Game implements IProjectileAddable{
     }
     public ShopTransaction getShopTransaction(){
         return shopTransaction;
+    }
+
+    /**
+     * @param counter adds Enemy to enemies.
+     */
+    public void spawnEnemy(int counter){
+        if((counter % 10) == 0 && counter != 0){
+            enemyFactory = new BossEnemyFactory();
+        }else{
+            enemyFactory = new NormalEnemyFactory();
+        }
+        enemies.add(enemyFactory.createEnemy(player, gameMap));
     }
 
 }
