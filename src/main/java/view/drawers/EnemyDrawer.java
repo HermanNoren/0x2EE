@@ -20,41 +20,20 @@ public class EnemyDrawer implements IDrawer {
 
     private ImageHandler imageHandler;
 
-    public EnemyDrawer(List<Enemy> enemies, String type){
+    public EnemyDrawer(List<Enemy> enemies){
         this.enemies = enemies;
         this.imageHandler = new ImageHandler();
-        initEnemyImages(type);
-
     }
 
-    private void initEnemyImages(String type){
-        if(Objects.equals(type, "normal")){
-            try {
-                up1 = imageHandler.getImage("imgs/enemy/normal/enemy_up_1.png");
-                up2 = imageHandler.getImage("imgs/enemy/normal/enemy_up_2.png");
-                left1 = imageHandler.getImage("imgs/enemy/normal/enemy_left_1.png");
-                left2 = imageHandler.getImage("imgs/enemy/normal/enemy_left_2.png");
-                down1 = imageHandler.getImage("imgs/enemy/normal/enemy_down_1.png");
-                down2 = imageHandler.getImage("imgs/enemy/normal/enemy_down_2.png");
-                right1 = imageHandler.getImage("imgs/enemy/normal/enemy_right_1.png");
-                right2 = imageHandler.getImage("imgs/enemy/normal/enemy_right_2.png");
-            }
-            catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
-
-        else if(Objects.equals(type, "boss")){
-            up1 = imageHandler.getImage("imgs/enemy/boss/amog_up_1.png");
-            up2 = imageHandler.getImage("imgs/enemy/boss/amog_up_2.png");
-            left1 = imageHandler.getImage("imgs/enemy/boss/amog_left_1.png");
-            left2 = imageHandler.getImage("imgs/enemy/boss/amog_left_2.png");
-            down1 = imageHandler.getImage("imgs/enemy/boss/amog_down_1.png");
-            down2 = imageHandler.getImage("imgs/enemy/boss/amog_down_2.png");
-            right1 = imageHandler.getImage("imgs/enemy/boss/amog_right_1.png");
-            right2 = imageHandler.getImage("imgs/enemy/boss/amog_right_2.png");
-        }
-
+    private void initImages(String type){
+        up1 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_up_1.png");
+        up2 = imageHandler.getImage("imgs/enemy/"+type +"/enemy_up_2.png");
+        left1 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_left_1.png");
+        left2 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_left_2.png");
+        down1 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_down_1.png");
+        down2 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_down_2.png");
+        right1 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_right_1.png");
+        right2 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_right_2.png");
     }
 
     private void movementAnimation() {
@@ -116,9 +95,9 @@ public class EnemyDrawer implements IDrawer {
             List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getWidth(), enemy.getWidth());
             if (enemy.getHealth() != enemy.getMaxHp()){
                 g2.setColor(Color.red);
-                g2.fillRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / ((Enemy)enemy).getMaxHp()))), 4);
+                g2.fillRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / enemy.getMaxHp()))), 4);
                 g2.setColor(Color.black);
-                g2.drawRoundRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / ((Enemy)enemy).getMaxHp()))), 4, 0,0);
+                g2.drawRoundRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / enemy.getMaxHp()))), 4, 0,0);
             }
             if(!(prevImg == null)){
                 g2.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);

@@ -1,9 +1,9 @@
 package gameobjects;
 
 import config.Config;
+import model.gameobjects.Entity;
 import model.helperclasses.EDirection;
 import model.Game;
-import model.gameobjects.IEntity;
 import model.gameobjects.IGameObject;
 import model.gameobjects.Player;
 import model.helperclasses.Vector2;
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EntityTest {
-    private IEntity entity;
+    private Entity entity;
     @BeforeEach
     void init(){
         //Creating player since Entity is abstract, and Player is an Entity.

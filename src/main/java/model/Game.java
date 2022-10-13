@@ -131,10 +131,12 @@ public class Game {
     }
 
 
+    /**
+     * @param counter adds Enemy to enemies.
+     */
     public void spawnEnemy(int counter){
         if((counter % 10) == 0 && counter != 0){
             enemyFactory = new BossEnemyFactory();
-            System.out.println("boss");
         }else{
             enemyFactory = new NormalEnemyFactory();
         }

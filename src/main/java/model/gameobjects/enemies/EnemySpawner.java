@@ -1,7 +1,6 @@
 package model.gameobjects.enemies;
 
-import config.Config;
-import model.gameobjects.IEntity;
+import model.gameobjects.Entity;
 import model.helperclasses.Vector2;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
@@ -21,7 +20,7 @@ public class EnemySpawner implements IEnemySpawner {
     }
 
     private void chooseLocation(IEnemy enemy, int radius){
-        IEntity target = enemy.getTargetEntity();
+        Entity target = enemy.getTargetEntity();
         Terrain targetLocation = target.getTerrainStandingOn();
 
         double targetPosX = targetLocation.getPos().getX();
