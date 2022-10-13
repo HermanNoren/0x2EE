@@ -1,8 +1,10 @@
 package model;
 
+import config.Config;
+import controllers.EDirection;
+import model.helperclasses.ShopTransaction;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
-import model.helperclasses.ShopTransaction;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.*;
@@ -15,8 +17,6 @@ import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import model.gameobjects.IGameObject;
 
-import view.IObserver;
-
 import java.io.*;
 import java.util.*;
 import java.util.Random;
@@ -26,13 +26,12 @@ import java.util.Random;
  * With help of the main game loop it delegates work to the active IGameState
  */
 public class Game implements IProjectileAddable{
-    private List<IObserver> observers;
     private Player player;
     private List<Terrain> path;
     private List<String> highscoreName;
+    private List<IGameObject> terrains;
     private List<Enemy> enemies;
     private GameMap gameMap;
-
     private File highscoreFile;
     private List<String> highscoreList;
     private List<Projectile> projectiles;
@@ -41,11 +40,21 @@ public class Game implements IProjectileAddable{
     private Spawner spawner;
     private Random random = new Random();
     private Boolean playerDead;
+    private Boolean paused;
+
+    private final int mapSize;
     private ShopTransaction shopTransaction;
 
     public Game() {
-        this.gameMap = new GameMap(100, 100);
-        this.player = new Player(48, 48, gameMap.getGameMapCoordinates());
+        mapSize = 25;
+        newGame();
+        highscoreHandler = new HighscoreHandler();
+        highscoreList = highscoreHandler.getHighscoreList();
+    }
+
+    public void newGame() {
+        this.gameMap = new GameMap(mapSize, mapSize);
+        this.player = new Player(500, 500, gameMap.getGameMapCoordinates());
         shop = new Shop(200, 100);
         this.shopTransaction = new ShopTransaction(this.getPlayer());
         enemies = new ArrayList<>();
@@ -62,17 +71,17 @@ public class Game implements IProjectileAddable{
 
 
         spawner = new Spawner(this);
-        observers = new ArrayList<>();
-        highscoreHandler = new HighscoreHandler();
-        highscoreList = highscoreHandler.getHighscoreList();
+        paused = false;
     }
 
     public GameMap getGameMap() {
         return gameMap;
     }
 
+    public int getMapSize() { return mapSize; }
+
     public List<String> getHighscoreName() {
-        return highscoreName;
+        return new ArrayList<>(highscoreName);
     }
 
     public boolean isTopFive() {
@@ -123,15 +132,6 @@ public class Game implements IProjectileAddable{
         return spawner.getSpawnedItems();
     }
 
-    /**
-     * Add an observer. Observers will be notified 120 times per second
-     *
-     * @param observer observer
-     */
-    public void addObserver(IObserver observer) {
-        observers.add(observer);
-    }
-
     public void makePlayerShoot() {
         player.shoot(this);
     }
@@ -141,29 +141,40 @@ public class Game implements IProjectileAddable{
         projectiles.add(p);
     }
 
+    public void pause() {
+        player.setDirection(EDirection.NOT_MOVING);
+        paused = true;
+    }
+
+    public void resume() {
+        paused = false;
+    }
+
+    public boolean isPaused() {
+        return paused;
+    }
+
     /**
      * Updates the current game state
      * @param dt time passed since last update
      */
     public void update(double dt) {
-        if (!(player.getHealth() < 1)) {
-            updatePlayer(dt);
-            updateEnemies(dt);
-            updateItems();
-
-            for (IProjectile projectile : getProjectiles()){
-                projectile.update(dt);
-            }
-
-            /**
-             * See if player is on shop, first for controller second for shop drawer
-             */
-            player.isOnShop = isPlayerInRangeOfShop();
-            shop.playerOnShop = player.isOnShop;
-        }
-        else {
+        if (player.getHealth() < 1) {
             playerDead = true;
         }
+        updatePlayer(dt);
+        updateEnemies(dt);
+        updateItems();
+
+        for (IProjectile projectile : getProjectiles()){
+            projectile.update(dt);
+        }
+
+        /**
+         * See if player is on shop, first for controller second for shop drawer
+         */
+        player.isOnShop = isPlayerInRangeOfShop();
+        shop.playerOnShop = player.isOnShop;
     }
 
     /**
@@ -256,15 +267,6 @@ public class Game implements IProjectileAddable{
 
     public boolean isPlayerInRangeOfShop() {
         return (CollisionHandler.testCollision(player, shop));
-    }
-
-    /**
-     * Notifies potential observers
-     */
-    public void notifyObservers() {
-        for (IObserver o : observers) {
-            o.draw();
-        }
     }
 
     public List<Projectile> getProjectiles() {

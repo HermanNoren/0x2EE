@@ -1,5 +1,6 @@
 package view.drawers;
 
+import controllers.ImageSwitcherController;
 import model.helperclasses.ImageHandler;
 import model.gameobjects.Player;
 
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Strictly used to draw the player onto the screen
  */
-public class PlayerDrawer implements IDrawer {
+public class PlayerDrawer implements IDrawer, IIteratedImageDrawer {
     private int imageSwitcher;
     private Player player;
 
@@ -18,14 +19,10 @@ public class PlayerDrawer implements IDrawer {
 
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
 
-    private double previousImageSwitchTime, currentTime;
-
     public PlayerDrawer(Player player) {
         this.player = player;
         this.imageHandler = new ImageHandler();
         initPlayerImages();
-        currentTime = System.currentTimeMillis();
-        previousImageSwitchTime = System.currentTimeMillis();
     }
 
     /**
@@ -93,23 +90,10 @@ public class PlayerDrawer implements IDrawer {
     }
 
     /**
-     * Clock for switching image, gives an animation effect
-     */
-    private void movementAnimation() {
-        currentTime = System.currentTimeMillis();
-        if(currentTime >= previousImageSwitchTime + 250){
-            previousImageSwitchTime = currentTime;
-            if (imageSwitcher == 1) { imageSwitcher = 2; }
-            else { imageSwitcher = 1; }
-        }
-    }
-
-    /**
      * Draws the player onto the screen in the correct position
      * @param g
      */
     public void draw(Graphics2D g) {
-        movementAnimation();
         chooseActiveImage();
         List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(player.getPos(), player.getWidth(), player.getWidth());
         if(prevImg == null){
@@ -119,5 +103,11 @@ public class PlayerDrawer implements IDrawer {
             g.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
         }
         g.setColor(Color.red);
+    }
+
+    @Override
+    public void switchImage() {
+        if (imageSwitcher == 1) { imageSwitcher = 2; }
+        else { imageSwitcher = 1; }
     }
 }

@@ -2,6 +2,6 @@ package view;
 
 public interface IObserver {
 
-    void draw();
+    void update();
 
 }
