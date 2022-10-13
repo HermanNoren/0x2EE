@@ -4,11 +4,8 @@ package model.gameobjects;
 import model.armor.Armor;
 
 import model.helperclasses.EDirection;
-import model.helperclasses.Vector2;
 import model.mapclasses.Terrain;
 import model.weapons.Weapon;
-
-import java.util.List;
 
 /**
  * The player, more implementation to come.

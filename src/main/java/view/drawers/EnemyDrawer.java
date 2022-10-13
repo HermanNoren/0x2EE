@@ -7,12 +7,9 @@ import model.helperclasses.ImageHandler;
 
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 import java.util.List;
-import java.util.Objects;
 
 public class EnemyDrawer implements IDrawer, IIteratedImageDrawer {
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
