@@ -11,7 +11,6 @@ public class CameraTest {
 
     Game game;
     Player player;
-
     Camera camera = Camera.getInstance();
 
 
@@ -138,5 +137,78 @@ public class CameraTest {
 
         assertEquals(offsetAfterOneUpdateWhenDragIs1.getX(), offsetAfterOneUpdateWhenDragIsLessThan1.getX());
         assertEquals(offsetAfterOneUpdateWhenDragIs1.getY(), offsetAfterOneUpdateWhenDragIsLessThan1.getY());
+    }
+
+    @Test
+    void test_camera_border_limitation_top_left() {
+        game = new Game();
+        player = new Player(0, 0, game.getGameMap().getGameMapCoordinates());
+        camera.reset();
+        camera.setFocusedObject(player);
+        camera.setDragEffectConstant(1);
+        camera.setBorderLimit(0, Config.SCREEN_WIDTH * 2, 0, Config.SCREEN_HEIGHT * 2);
+        camera.update();
+        Vector2 offset = camera.getOffset();
+        assertEquals(0, offset.getX());
+        assertEquals(0, offset.getY());
+    }
+
+    @Test
+    void test_camera_border_limitation_top_right() {
+        game = new Game();
+        player = new Player(Config.SCREEN_WIDTH * 2, 0, game.getGameMap().getGameMapCoordinates());
+        camera.reset();
+        camera.setFocusedObject(player);
+        camera.setDragEffectConstant(1);
+        camera.setBorderLimit(0, Config.SCREEN_WIDTH * 2, 0, Config.SCREEN_HEIGHT * 2);
+        camera.update();
+        Vector2 offset = camera.getOffset();
+        assertEquals(Config.SCREEN_WIDTH, offset.getX());
+        assertEquals(0, offset.getY());
+    }
+
+    @Test
+    void test_camera_border_limitation_bottom_left() {
+        game = new Game();
+        player = new Player(0, Config.SCREEN_HEIGHT * 2, game.getGameMap().getGameMapCoordinates());
+        camera.reset();
+        camera.setFocusedObject(player);
+        camera.setDragEffectConstant(1);
+        camera.setBorderLimit(0, Config.SCREEN_WIDTH * 2, 0, Config.SCREEN_HEIGHT * 2);
+        camera.update();
+        Vector2 offset = camera.getOffset();
+        assertEquals(0, offset.getX());
+        assertEquals(Config.SCREEN_HEIGHT, offset.getY());
+    }
+
+    @Test
+    void test_camera_border_limitation_bottom_right() {
+        game = new Game();
+        player = new Player(Config.SCREEN_WIDTH * 2, Config.SCREEN_HEIGHT * 2, game.getGameMap().getGameMapCoordinates());
+        camera.reset();
+        camera.setFocusedObject(player);
+        camera.setDragEffectConstant(1);
+        camera.setBorderLimit(0, Config.SCREEN_WIDTH * 2, 0, Config.SCREEN_HEIGHT * 2);
+        camera.update();
+        Vector2 offset = camera.getOffset();
+        assertEquals(Config.SCREEN_WIDTH, offset.getX());
+        assertEquals(Config.SCREEN_HEIGHT, offset.getY());
+    }
+
+    @Test
+    void test_camera_border_limitation_remove_border() {
+        game = new Game();
+        player = new Player(0, 0, game.getGameMap().getGameMapCoordinates());
+        camera.reset();
+        camera.setFocusedObject(player);
+        camera.setDragEffectConstant(1);
+        camera.setBorderLimit(0, Config.SCREEN_WIDTH * 2, 0, Config.SCREEN_HEIGHT * 2);
+        camera.update();
+        Vector2 offsetWithBorderLimit = camera.getOffset();
+        camera.removeBorderLimit();
+        camera.update();
+        Vector2 offsetWithoutBorderLimit = camera.getOffset();
+        assertTrue(offsetWithoutBorderLimit.getX() < offsetWithBorderLimit.getX());
+        assertTrue(offsetWithoutBorderLimit.getY() < offsetWithBorderLimit.getY());
     }
 }

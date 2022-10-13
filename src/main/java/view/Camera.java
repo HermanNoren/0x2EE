@@ -65,8 +65,8 @@ public class Camera{
         relativePos = new Vector2(0, 0);
         absolutePos = new Vector2(relativePos);
         resetDragEffectConstant();
+        removeBorderLimit();
         currentZoomMultiplier = 1;
-        borderLimited = false;
     }
 
     /**
