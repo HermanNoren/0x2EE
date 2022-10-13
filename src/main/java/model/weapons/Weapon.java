@@ -6,20 +6,23 @@ import model.gameobjects.IUpgradable;
 import model.gameobjects.Projectile;
 import model.helperclasses.Vector2;
 
-import java.util.List;
-
- public class Weapon implements IUpgradable {
-    private int damage = 10;
-    private int currentLevel = 1;
-    private int ammo = 7;
+public class Weapon implements IUpgradable {
+    private int damage;
+    private int currentLevel;
+    private int ammo;
     private boolean reloading;
-    private int growth = 40;
+    private final int growth;
+    private int currentPrice;
 
     /**
      * The main weapon of the
      */
     public Weapon() {
         reloading = false;
+        damage = 10;
+        currentLevel = 1;
+        ammo = 7;
+        growth = 40;
     }
 
     public void shoot(Vector2 pos, EDirection direction, IProjectileAddable addable){
@@ -45,7 +48,7 @@ import java.util.List;
     }
 
     @Override
-    public void levelUp() {
+    public void upgrade() {
         this.damage++;
         this.currentLevel++;
 
@@ -58,11 +61,19 @@ import java.util.List;
 
     @Override
     public int upgradeCost() {
-        return (currentLevel * growth);
+        currentPrice = currentLevel * growth;
+        return currentPrice;
     }
 
      @Override
      public int currentStat() {
          return damage;
      }
- }
+
+    @Override
+    public int currentPrice() {
+        currentPrice = currentLevel * growth;
+        return currentPrice;
+    }
+
+}

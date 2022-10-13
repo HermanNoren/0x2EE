@@ -66,7 +66,7 @@ public class TransactionHandler {
      */
     private void upgrade(IUpgradable toBeUpgraded){
         newPlayerMoneyAmount(player.getMoney() - toBeUpgraded.upgradeCost());
-        toBeUpgraded.levelUp();
+        toBeUpgraded.upgrade();
     }
 
     /**
@@ -96,7 +96,7 @@ public class TransactionHandler {
      * armor reduction is.
      * @return The current armor reduction.
      */
-    public int CurrentArmorReduction(){
+    public int getCurrentArmorReduction(){
         return armor.currentStat();
     }
 

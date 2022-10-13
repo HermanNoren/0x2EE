@@ -73,7 +73,7 @@ public class ShopPanelState implements IPanelState{
         drawWeaponUpgradePerks(g2, transactionHandler.getCurrentWeaponDamage(), transactionHandler.getUpgradedWeaponDamage());
 
         drawArmorCost(g2, transactionHandler.getArmorUpgradeCost());
-        drawArmorUpgradePerks(g2, transactionHandler.CurrentArmorReduction(), transactionHandler.ArmorReductionAfterUpgrade());
+        drawArmorUpgradePerks(g2, transactionHandler.getCurrentArmorReduction(), transactionHandler.ArmorReductionAfterUpgrade());
 
         g2.setFont(Config.buttonFont); //the font which the button are drawn in
     }

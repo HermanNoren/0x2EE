@@ -25,7 +25,7 @@ public class Armor implements IArmor, IUpgradable {
     }
 
     @Override
-    public void levelUp() {
+    public void upgrade() {
         currentLevel++;
     }
 
@@ -42,5 +42,10 @@ public class Armor implements IArmor, IUpgradable {
     @Override
     public int currentStat() {
         return currentLevel;
+    }
+
+    @Override
+    public int currentPrice() {
+        return 0;
     }
 }

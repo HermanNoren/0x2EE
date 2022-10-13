@@ -4,7 +4,7 @@ public interface IUpgradable {
     /**
      * Levels up the thing in question.
      */
-    void levelUp();
+    void upgrade();
 
     /**
      * Used to see how the upgradable would look like
@@ -24,5 +24,6 @@ public interface IUpgradable {
       * and armor-reduction in armor.
       */
      int currentStat();
+     int currentPrice();
 }
 
