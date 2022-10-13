@@ -11,6 +11,7 @@ public class Window {
         this.mainPanel = mainPanel;
         jframe = new JFrame();
         jframe.setSize(Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
+        jframe.setResizable(false);
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jframe.setTitle("0x2EE");
         jframe.add(this.mainPanel);

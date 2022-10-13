@@ -17,8 +17,6 @@ import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
 import model.gameobjects.IGameObject;
 
-import view.IObserver;
-
 import java.io.*;
 import java.util.*;
 import java.util.Random;

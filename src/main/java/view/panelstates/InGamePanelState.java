@@ -94,7 +94,7 @@ public class InGamePanelState implements IPanelState {
     }
 
     @Override
-    public ArrayList<KeyListener> getKeyListeners() {
+    public List<KeyListener> getKeyListeners() {
         return keyListeners;
     }
 }

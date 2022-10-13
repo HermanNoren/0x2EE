@@ -5,24 +5,23 @@ import model.gameobjects.IFocusableObject;
 import model.helperclasses.Vector2;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The camera class is used to simulate a camera that follows a chosen object. What object the camera is to follow
  * can be dynamically changed. Using the chosen object the camera class then calculates an offset which every
  * object being drawn should take into consideration if they have positions relative to the camera. The camera also
- * provides the ability to zoom in and out using a zoom multiplier that objects relative to the camera also should take
+ * provides the ability to zoom in and out by using a zoom multiplier that objects relative to the camera also should take
  * into consideration when being drawn.
  */
 public class Camera{
 
-    private List<IFocusableObject> focusedObject;
+    private IFocusableObject focusedObject;
+    private boolean hasFocusedObject;
     private Vector2 relativePos, absolutePos;
-
     private final int width, height;
     private final Vector2 screenCenter;
-    private final int standardDragEffectConstant;
-    private int dragEffectConstant;
+    private final int standardGlideConstant;
+    private int glideConstant;
     private double currentZoomMultiplier;
     private boolean borderLimited;
     private int leftBorderLimit, rightBorderLimit, topBorderLimit, bottomBorderLimit;
@@ -33,13 +32,14 @@ public class Camera{
      * Instantiates a camera object
      */
     private Camera() {
-        this.focusedObject = new ArrayList<>();
+        this.focusedObject = null;
         relativePos = new Vector2(0, 0);  // Relative pos will be used when calculating zoom
         absolutePos = new Vector2(relativePos);     // Absolute pos will not take zoom into consideration
-        standardDragEffectConstant = 50;
-        dragEffectConstant = standardDragEffectConstant;
+        standardGlideConstant = 50;
+        glideConstant = standardGlideConstant;
         currentZoomMultiplier = 1;
         borderLimited = false;
+        hasFocusedObject = false;
         screenCenter = new Vector2(Config.SCREEN_WIDTH / 2.0, Config.SCREEN_HEIGHT / 2.0);
         width = Config.SCREEN_WIDTH;
         height = Config.SCREEN_HEIGHT;
@@ -61,11 +61,12 @@ public class Camera{
      * resets the zoom multiplier and removes any border limitations.
      */
     public void reset() {
-        this.focusedObject = new ArrayList<>();
+        focusedObject = null;
         relativePos = new Vector2(0, 0);
         absolutePos = new Vector2(relativePos);
-        resetDragEffectConstant();
+        resetGlideConstant();
         removeBorderLimit();
+        hasFocusedObject = false;
         currentZoomMultiplier = 1;
     }
 
@@ -74,8 +75,8 @@ public class Camera{
      * @param object Object the camera will focus
      */
     public void setFocusedObject(IFocusableObject object) {
-        focusedObject = new ArrayList<>();
-        focusedObject.add(object);
+        hasFocusedObject = true;
+        focusedObject = object;
     }
 
     /**
@@ -119,21 +120,21 @@ public class Camera{
     }
 
     /**
-     * Provides the ability to change how much the camera is "dragging" after the focused object. A higher value
-     * will result in more drag effect. 1 equals no drag effect. Values below 1 is not accepted and will
-     * automatically turn off the drag effect.
+     * Provides the ability to change how much the camera is "gliding" after the focused object. A higher value
+     * will result in more glide effect. 1 equals no glide effect. Values below 1 is not accepted and will
+     * automatically turn off the glide effect.
      * @param value drag effect >= 1
      */
-    public void setDragEffectConstant(int value) {
+    public void setGlideConstant(int value) {
         if (value < 1) { value = 1; }
-        dragEffectConstant = value;
+        glideConstant = value;
     }
 
     /**
-     * Resets the drag effect to its standard value. The standard value is 50
+     * Resets the glide effect to its standard value. The standard value is 50
      */
-    public void resetDragEffectConstant() {
-        dragEffectConstant = standardDragEffectConstant;
+    public void resetGlideConstant() {
+        glideConstant = standardGlideConstant;
     }
 
     /**
@@ -172,11 +173,11 @@ public class Camera{
      * Updates the camera offset in regard to the object in focus
      */
     public void update() {
-        for (IFocusableObject object : focusedObject) {
-            absolutePos.setX(absolutePos.getX() + (object.getCenter().getX() -
-                    (absolutePos.getX() + screenCenter.getX())) / (dragEffectConstant / currentZoomMultiplier));
-            absolutePos.setY(absolutePos.getY() + (object.getCenter().getY() -
-                    (absolutePos.getY() + screenCenter.getY())) / (dragEffectConstant / currentZoomMultiplier));
+        if (hasFocusedObject) {
+            absolutePos.setX(absolutePos.getX() + (focusedObject.getCenter().getX() -
+                    (absolutePos.getX() + screenCenter.getX())) / (glideConstant / currentZoomMultiplier));
+            absolutePos.setY(absolutePos.getY() + (focusedObject.getCenter().getY() -
+                    (absolutePos.getY() + screenCenter.getY())) / (glideConstant / currentZoomMultiplier));
         }
 
         relativePos.setX(absolutePos.getX() + ((width - width / currentZoomMultiplier) / 2));
