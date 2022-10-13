@@ -1,16 +1,10 @@
 package weapons;
 
-import controllers.EDirection;
 import model.Game;
 import model.gameobjects.Player;
-import model.gameobjects.Projectile;
-import model.helperclasses.Vector2;
 import model.weapons.Weapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

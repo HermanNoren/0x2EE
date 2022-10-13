@@ -70,6 +70,7 @@ public class MapDrawer implements IDrawer {
             for(int row = up; row < down && row < gameMap.getHeight(); row++){
                 newTerrainVector = new Vector2(gameMapCoordinates[col][row].getPos()); // For drawing in correct place.
 
+
                 List<Integer> drawInformation = DrawerHelper.
                     calculateDrawingInformation(
                             newTerrainVector,
@@ -83,6 +84,7 @@ public class MapDrawer implements IDrawer {
                 newTerrainVector.setY(newTerrainVector.getY() + terrainSize);
             }
         }
+
     }
 }
 
