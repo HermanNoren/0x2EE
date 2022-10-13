@@ -68,7 +68,7 @@ public class HighscoreHandler {
             highscoreList.add(sc.next());
         }
         sc.close();
-        return new ArrayList<>(highscoreList);
+        return highscoreList;
     }
 
     /**

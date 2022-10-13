@@ -27,7 +27,7 @@ public class HighscoreHandlerTest {
     @Test
     void test_if_a_highscore_is_saved_the_file_should_have_update(){
         highscoreHandler.saveHighscore("Test40", 5000);
-        assertNotSame(highscores, highscoreHandler.getHighscoreList());
+        assertTrue(highscoreHandler.getHighscoreList().size() > highscores.size());
     }
 
     @Test
