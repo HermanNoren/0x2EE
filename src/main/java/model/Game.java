@@ -13,7 +13,6 @@ import model.helperclasses.HighscoreHandler;
 import model.helperclasses.collision.ECollisionAxis;
 import model.mapclasses.GameMap;
 import model.mapclasses.Terrain;
-import model.gameobjects.IGameObject;
 
 import view.IObserver;
 
@@ -209,7 +208,7 @@ public class Game implements IProjectileAddable{
             while (pIter.hasNext()) {
                 Projectile pr = pIter.next();
                 if (CollisionHandler.testCollision(enemy, pr)) {
-                    enemy.damageTaken(player.getWeapon().damage);
+                    enemy.damageTaken(player.getWeapon().currentStat());
                     pIter.remove();
                     break;
                 }

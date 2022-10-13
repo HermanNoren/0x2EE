@@ -1,21 +1,22 @@
 package model.helperclasses;
 
-import model.armor.Armor;
+
 import model.gameobjects.IPlayer;
 import model.gameobjects.IUpgradable;
-import model.gameobjects.Player;
-import model.weapons.Weapon;
+
 
 public class ShopTransaction {
     private final IPlayer player;
-    private final Weapon weapon;
-    private final Armor armor;
+    private final IUpgradable armor;
+    private final IUpgradable weapon;
+
 
 
     public ShopTransaction(IPlayer player){
         this.player = player;
-        this.weapon =  player.getWeapon();
         this.armor =  player.getArmor();
+        this.weapon = player.getWeapon();
+
     }
 
 
@@ -32,7 +33,7 @@ public class ShopTransaction {
     }
 
     public int getCurrentWeaponDamage(){
-        return weapon.damage;
+        return weapon.currentStat();
     }
     public int getUpgradedWeaponDamage(){
         return weapon.statsIfUpgraded();
@@ -55,7 +56,7 @@ public class ShopTransaction {
         if(purchasePossible(armor.upgradeCost())) upgrade(armor);
     }
     public void upgradeWeapon(){
-        if(purchasePossible(weapon.upgradeCost())) upgrade(weapon);
+        if(purchasePossible(weapon.upgradeCost())) upgrade(player.getWeapon());
     }
 
     /**
@@ -72,7 +73,7 @@ public class ShopTransaction {
      * @return The current armor reduction.
      */
     public int CurrentArmorReduction(){
-        return armor.currentDamageReduction();
+        return armor.currentStat();
     }
 
     /**
@@ -91,5 +92,4 @@ public class ShopTransaction {
     private void newPlayerMoneyAmount(int amountAfterTransaction) {
         player.setMoney(amountAfterTransaction);
     }
-
 }

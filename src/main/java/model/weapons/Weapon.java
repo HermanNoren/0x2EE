@@ -8,21 +8,17 @@ import model.helperclasses.Vector2;
 
 import java.util.List;
 
-public class Weapon implements IUpgradable {
-    public int damage;
+ public class Weapon implements IUpgradable {
+    private int damage = 10;
     private int currentLevel = 1;
-    public int ammo;
-    public boolean reloading;
+    private int ammo = 7;
+    private boolean reloading;
     private int growth = 40;
-
-    private int currentWeaponPrize = 20;
 
     /**
      * The main weapon of the
      */
-    public Weapon(int damage, int ammo) {
-        this.damage = damage;
-        this.ammo = ammo;
+    public Weapon() {
         reloading = false;
     }
 
@@ -52,7 +48,7 @@ public class Weapon implements IUpgradable {
     public void levelUp() {
         this.damage++;
         this.currentLevel++;
-        currentWeaponPrize = (currentLevel * growth);
+
     }
 
     @Override
@@ -64,4 +60,9 @@ public class Weapon implements IUpgradable {
     public int upgradeCost() {
         return (currentLevel * growth);
     }
-}
+
+     @Override
+     public int currentStat() {
+         return damage;
+     }
+ }

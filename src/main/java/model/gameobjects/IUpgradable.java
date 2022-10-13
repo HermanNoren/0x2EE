@@ -4,5 +4,7 @@ public interface IUpgradable {
     void levelUp();
      int statsIfUpgraded();
      int upgradeCost();
+
+     int currentStat();
 }
 

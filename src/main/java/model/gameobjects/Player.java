@@ -27,7 +27,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
     public Player(int x, int y, Terrain[][] coordinates){
         super(x, y, coordinates);
         this.armor = new Armor();
-        this.weapon = new Weapon(10, 7);
+        this.weapon = new Weapon();
         setMaxHp(1000);
         setHealth(1000);
         moveAcc = 0.3;
@@ -102,7 +102,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
         return money;
     }
 
-    @Override
+
     public Weapon getWeapon() {
         return this.weapon;
     }

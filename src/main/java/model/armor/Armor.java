@@ -21,9 +21,6 @@ public class Armor implements IArmor, IUpgradable {
     public double damageReduction(int damageTaken) {
         return damageTaken - (currentLevel * armorReductionConstant);
     }
-    public int currentDamageReduction() {
-        return currentLevel;
-    }
 
     @Override
     public void levelUp() {
@@ -39,5 +36,10 @@ public class Armor implements IArmor, IUpgradable {
     @Override
     public int upgradeCost() {
         return currentLevel * growth;
+    }
+
+    @Override
+    public int currentStat() {
+        return currentLevel;
     }
 }
