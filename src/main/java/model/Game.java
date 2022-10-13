@@ -2,7 +2,7 @@ package model;
 
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
-import model.helperclasses.ShopTransaction;
+import model.helperclasses.TransactionHandler;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
 import model.gameobjects.ItemSpawner.*;
@@ -40,13 +40,13 @@ public class Game implements IProjectileAddable{
     private Spawner spawner;
     private Random random = new Random();
     private Boolean playerDead;
-    private ShopTransaction shopTransaction;
+    private TransactionHandler transactionHandler;
 
     public Game() {
         this.gameMap = new GameMap(100, 100);
         this.player = new Player(48, 48, gameMap.getGameMapCoordinates());
         shop = new Shop(200, 100);
-        this.shopTransaction = new ShopTransaction(this.getPlayer());
+        this.transactionHandler = new TransactionHandler(this.getPlayer());
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         highscoreName = new ArrayList<>();
@@ -158,9 +158,6 @@ public class Game implements IProjectileAddable{
                 projectile.update(dt);
             }
 
-            /**
-             * See if player is on shop.
-             */
             setBooleansForShop();
         }
         else {
@@ -168,6 +165,9 @@ public class Game implements IProjectileAddable{
         }
     }
 
+    /**
+     * see if the player is on the shop.
+     */
     private void setBooleansForShop() {
         player.isOnShop = isPlayerInRangeOfShop();
         shop.playerOnShop = player.isOnShop;
@@ -281,8 +281,8 @@ public class Game implements IProjectileAddable{
     public Shop getShop() {
         return shop;
     }
-    public ShopTransaction getShopTransaction(){
-        return shopTransaction;
+    public TransactionHandler getShopTransaction(){
+        return transactionHandler;
     }
 
 }

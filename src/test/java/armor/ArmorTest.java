@@ -10,6 +10,6 @@ public class ArmorTest {
         Armor armor = new Armor();
         armor.levelUp();
         armor.levelUp();
-        assertEquals(3, armor.currentDamageReduction(), 0);
+        assertEquals(3, armor.currentStat(), 0);
     }
 }

@@ -21,10 +21,12 @@ public class MainPanel extends JPanel implements IObserver {
         setFocusable(true);
     }
 
-    public Game getGame() {
-        return game;
-    }
 
+    /**
+     * See override description to see Graphics g draw implementation. This method
+     * is used to draw all logic of the game.
+     * @param g the <code>Graphics</code> object to protect
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;

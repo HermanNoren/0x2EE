@@ -1,15 +1,15 @@
 package controllers.buttonactions;
 
-import model.helperclasses.ShopTransaction;
+import model.helperclasses.TransactionHandler;
 
 public class UpgradeArmorButton implements IButtonAction{
-    private ShopTransaction shopTransaction;
+    private TransactionHandler transactionHandler;
 
-    public UpgradeArmorButton(ShopTransaction shopTransaction){
-            this.shopTransaction = shopTransaction;
+    public UpgradeArmorButton(TransactionHandler transactionHandler){
+            this.transactionHandler = transactionHandler;
     }
     @Override
     public void performAction() {
-        shopTransaction.upgradeArmor();
+        transactionHandler.upgradeArmor();
     }
 }
