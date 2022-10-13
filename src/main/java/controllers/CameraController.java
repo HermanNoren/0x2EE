@@ -23,17 +23,10 @@ public class CameraController implements KeyListener {
         int code = e.getKeyCode();
         switch (code) {
             case (KeyEvent.VK_UP) -> {
-                if (!upKeyDown) {
-                    upKeyDown = true;
-                    camera.zoomIn();
-                }
+                camera.zoomIn();
             }
             case (KeyEvent.VK_DOWN) -> {
-                if (!downKeyDown) {
-                    downKeyDown = true;
-                    camera.zoomOut();
-                }
-
+                camera.zoomOut();
             }
         }
     }

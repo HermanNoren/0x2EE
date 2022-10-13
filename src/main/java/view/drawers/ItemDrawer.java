@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemDrawer implements IDrawer{
+public class ItemDrawer implements IDrawer, IIteratedImageDrawer {
 
     private List<IItem> objects;
 
@@ -22,7 +22,6 @@ public class ItemDrawer implements IDrawer{
     private List<BufferedImage> imageList;
     private BufferedImage coinImage;
 
-    private double previousImageSwitchTime, currentTime;
     private int index;
 
     public ItemDrawer(List<IItem> objects){
@@ -42,18 +41,8 @@ public class ItemDrawer implements IDrawer{
         coinImage = coinFront;
     }
 
-    private void updateTime(){
-        currentTime = System.currentTimeMillis();
-        if (currentTime >= previousImageSwitchTime + 750){
-            previousImageSwitchTime = currentTime;
-            coinImage = imageList.get(index % 4);
-            index++;
-        }
-    }
-
     @Override
     public void draw(Graphics2D g2) {
-        updateTime();
         for (IItem object : objects){
             List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(object.getPos(), object.getWidth(), object.getHeight());
             switch (object.getType()){
@@ -62,6 +51,11 @@ public class ItemDrawer implements IDrawer{
 
             }
         }
+    }
 
+    @Override
+    public void switchImage() {
+        coinImage = imageList.get(index % 4);
+        index++;
     }
 }

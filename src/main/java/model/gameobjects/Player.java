@@ -3,7 +3,6 @@ package model.gameobjects;
 
 import model.armor.Armor;
 import controllers.EDirection;
-import model.helperclasses.Vector2;
 import model.mapclasses.Terrain;
 import model.weapons.Weapon;
 
@@ -49,9 +48,20 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
         }
         weapon.shoot(getCenter(), dir, addable);
     }
-    public void stopCurrentMovement(){
-        setVel(new Vector2(0,0));
-        setAcc(new Vector2(0,0));
+
+    public void stopCurrentXMovement() {
+        setVelX(0);
+        setAccX(0);
+    }
+
+    public void stopCurrentYMovement() {
+        setVelY(0);
+        setAccY(0);
+    }
+
+    public void stopAllCurrentMovement(){
+        stopCurrentXMovement();
+        stopCurrentYMovement();
     }
 
     public void moveX(double dt) {
