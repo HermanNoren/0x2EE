@@ -2,12 +2,12 @@ package view.panelstates;
 
 import config.Config;
 import controllers.ButtonController;
+import controllers.buttonactions.NewGameButtonAction;
 import model.Game;
 import view.MainPanel;
 import view.buttons.GameButton;
-import view.buttons.buttonactions.MenuButtonAction;
-import view.buttons.buttonactions.QuitButtonAction;
-import view.buttons.buttonactions.NewGameButtonAction;
+import controllers.buttonactions.MenuButtonAction;
+import controllers.buttonactions.QuitButtonAction;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 

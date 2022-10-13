@@ -1,6 +1,5 @@
 package model;
 
-import config.Config;
 import controllers.EDirection;
 import model.helperclasses.ShopTransaction;
 import model.gameobjects.ItemSpawner.IItem;
@@ -125,7 +124,7 @@ public class Game implements IProjectileAddable{
     }
 
     public List<Enemy> getEnemies() {
-        return new ArrayList<>(enemies);
+        return Collections.unmodifiableList(enemies);
     }
 
     public List<IItem> getItems() {
@@ -243,19 +242,19 @@ public class Game implements IProjectileAddable{
             Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, axis);
             if (collisionTypes.get("right")) {
                 player.setPosX(t.getPos().getX() - player.getWidth());
-                player.stopCurrentMovement();
+                player.stopCurrentXMovement();
             }
             if (collisionTypes.get("left")) {
                 player.setPosX((t.getPos().getX() + t.getWidth()));
-                player.stopCurrentMovement();
+                player.stopCurrentXMovement();
             }
             if (collisionTypes.get("top")) {
                 player.setPosY(t.getPos().getY() + player.getHeight());
-                player.stopCurrentMovement();
+                player.stopCurrentYMovement();
             }
             if (collisionTypes.get("bottom")) {
                 player.setPosY((t.getPos().getY() - t.getHeight()));
-                player.stopCurrentMovement();
+                player.stopCurrentYMovement();
             }
         }
     }

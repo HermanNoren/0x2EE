@@ -1,4 +1,4 @@
-package view.buttons.buttonactions;
+package controllers.buttonactions;
 
 import model.Game;
 import view.panelstates.EPanelState;

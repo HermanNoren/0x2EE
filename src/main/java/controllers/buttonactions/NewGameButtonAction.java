@@ -1,10 +1,10 @@
-package view.buttons.buttonactions;
+package controllers.buttonactions;
 
 import model.Game;
 import view.panelstates.EPanelState;
 import view.panelstates.IPanelState;
 
-public class NewGameButtonAction implements IButtonAction{
+public class NewGameButtonAction implements IButtonAction {
 
     Game game;
     IPanelState currentState;
