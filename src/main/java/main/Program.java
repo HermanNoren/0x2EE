@@ -17,7 +17,7 @@ public class Program {
         Window window = new Window(mainPanel);
 
         Timer timer = new Timer();
-        timer.schedule(new SpawnTimerController(game), 5,5000);
+        timer.schedule(new SpawnTimerController(game), 5000,5000);
         gameLoop.run(game);
     }
 

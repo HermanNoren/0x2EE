@@ -13,7 +13,6 @@ public class SpawnTimerController extends TimerTask {
     @Override
     public void run() {
         game.spawnEnemy(counter);
-        System.out.println("enemy spawned");
         counter++;
     }
 
