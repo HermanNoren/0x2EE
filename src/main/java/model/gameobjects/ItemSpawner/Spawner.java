@@ -39,21 +39,42 @@ public class Spawner{
         return sum / list.size();
     }
 
+    private Vector2 getRandomPassableLocation(List<Tile> locations){
+        int nrPossibleSpawnLocations = locations.size();
+        Tile randomSpawnableTile = locations.get(rand.nextInt(nrPossibleSpawnLocations-1));
+        double posX = randomSpawnableTile.getPos().getX();
+        double posY = randomSpawnableTile.getPos().getY();
+        return new Vector2(posX, posY);
+    }
+
+    private Vector2 getClosestLocation(double x, double y) {
+        List<Tile> locations = game.getGameMap().getPassableTiles();
+        double tile_x, tile_y;
+        double difference = 1000000;
+        double current_difference = 0;
+        Tile closest_tile = new Tile(0,0);
+        for (Tile tile : locations) {
+            tile_x = tile.getPos().getX();
+            tile_y = tile.getPos().getY();
+            current_difference = Math.abs(tile_x - x) + Math.abs(tile_y - y);
+            if (current_difference <= difference) {
+                difference = current_difference;
+                closest_tile = tile;
+            }
+        }
+        return closest_tile.getPos();
+    }
+
     /**
      * Returns a location to spawn an item, in regard to current enemy positions
      * @return location to spawn item
      */
 
     private Vector2 getSpawnLocation() {
-        enemies = game.getEnemies(); //Göra interface till game, med getEnemies, getPlayer osv..
         List<Tile> locations = game.getGameMap().getPassableTiles();
+        enemies = game.getEnemies(); //Göra interface till game, med getEnemies, getPlayer osv..
         if (enemies.size() <= 1) {
-            int nrPossibleSpawnLocations = locations.size();
-            Tile randomSpawnableTile = locations.get(rand.nextInt(nrPossibleSpawnLocations-1));
-            double posX = randomSpawnableTile.getPos().getX();
-            double posY = randomSpawnableTile.getPos().getY();
-            return new Vector2(posX, posY);
-
+           return getRandomPassableLocation(locations);
         } else {
             x_values = new ArrayList<>();
             y_values = new ArrayList<>();
@@ -63,7 +84,7 @@ public class Spawner{
             }
             avg_x = getAverage(x_values);
             avg_y = getAverage(y_values);
-            return new Vector2(avg_x, avg_y);
+            return getClosestLocation(avg_x,avg_y);
         }
     }
 
@@ -86,7 +107,7 @@ public class Spawner{
      */
 
     public List<IItem> getSpawnedItems(){
-        return new ArrayList<>(spawnedItems);
+        return spawnedItems;
     }
 
 
