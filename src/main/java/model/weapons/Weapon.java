@@ -1,12 +1,10 @@
 package model.weapons;
 
-import model.gameobjects.IProjectileAddable;
+import model.gameinterfaces.IProjectileAddable;
 import model.gameobjects.IUpgradable;
 import model.gameobjects.Projectile;
 import model.helperclasses.EDirection;
 import model.helperclasses.Vector2;
-
-import java.util.List;
 
 public class Weapon implements IUpgradable {
     public int damage;

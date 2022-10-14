@@ -1,6 +1,8 @@
 package model;
 
 import config.Config;
+import model.gameinterfaces.IGame;
+import model.gameinterfaces.IProjectileAddable;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
 import model.helperclasses.EDirection;
@@ -25,7 +27,7 @@ import java.util.Random;
  * This class contains the main game loop.
  * With help of the main game loop it delegates work to the active IGameState
  */
-public class Game implements IProjectileAddable{
+public class Game implements IGame {
     private Player player;
     private List<Tile> path;
     private List<String> highscoreName;
@@ -74,7 +76,7 @@ public class Game implements IProjectileAddable{
     public int getMapSize() { return mapSize; }
 
     public List<String> getHighscoreName() {
-        return Collections.unmodifiableList(highscoreName);
+        return new ArrayList<>(highscoreName);
     }
 
     public boolean isTopFive() {
@@ -117,10 +119,12 @@ public class Game implements IProjectileAddable{
         return player;
     }
 
+    @Override
     public List<Enemy> getEnemies() {
-        return Collections.unmodifiableList(enemies);
+        return new ArrayList<>(enemies);
     }
 
+    @Override
     public List<IItem> getItems() {
         return spawner.getSpawnedItems();
     }
@@ -174,7 +178,7 @@ public class Game implements IProjectileAddable{
     }
 
     private void checkIfProjectileHitsTerrain(){
-        Iterator<Projectile> pIter = (new ArrayList<>(projectiles)).iterator();
+        Iterator<Projectile> pIter = getProjectiles().iterator();
         while (pIter.hasNext()){
             Projectile p = pIter.next();
             List<Tile> collidedTiles = CollisionHandler.getSpecificTerrainCollisions(p, gameMap.getGameMapCoordinates());
@@ -204,7 +208,7 @@ public class Game implements IProjectileAddable{
      * @param dt time passed since last update
      */
     private void updateEnemies(double dt){
-        Iterator<Enemy> enemyIter = (new ArrayList<>(enemies)).iterator();
+        Iterator<Enemy> enemyIter = getEnemies().iterator();
         while (enemyIter.hasNext()) {
             Enemy enemy = enemyIter.next();
             if (enemy.getHealth() <= 0) {
@@ -224,7 +228,7 @@ public class Game implements IProjectileAddable{
     }
 
     private void checkIfProjectileHitsEnemy(Enemy enemy) {
-        Iterator<Projectile> pIter = (new ArrayList<>(projectiles)).iterator();
+        Iterator<Projectile> pIter = getProjectiles().iterator();
         while (pIter.hasNext()) {
             Projectile pr = pIter.next();
             if (CollisionHandler.testCollision(enemy, pr)) {
@@ -284,13 +288,15 @@ public class Game implements IProjectileAddable{
         return (CollisionHandler.testCollision(player, shop));
     }
 
+    @Override
     public List<Projectile> getProjectiles() {
-        return Collections.unmodifiableList(projectiles);
+        return new ArrayList<>(projectiles);
     }
 
     public Shop getShop() {
         return shop;
     }
+
     public ShopTransaction getShopTransaction(){
         return shopTransaction;
     }

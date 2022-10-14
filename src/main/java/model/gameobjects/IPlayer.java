@@ -1,6 +1,6 @@
 package model.gameobjects;
 
-import java.util.List;
+import model.gameinterfaces.IProjectileAddable;
 
 public interface IPlayer {
 

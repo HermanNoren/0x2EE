@@ -1,6 +1,7 @@
 package view.drawers;
 
 
+import model.gameinterfaces.IEnemiesGettable;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.Enemy;
 import model.helperclasses.ImageHandler;
@@ -13,12 +14,12 @@ import java.util.List;
 
 public class EnemyDrawer implements IDrawer, IIteratedImageDrawer {
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
-    private final List<Enemy> enemies;
+    private final IEnemiesGettable game;
     private int imageSwitcher;
     private ImageHandler imageHandler;
 
-    public EnemyDrawer(List<Enemy> enemies, String type){
-        this.enemies = enemies;
+    public EnemyDrawer(IEnemiesGettable game, String type){
+        this.game = game;
         this.imageHandler = new ImageHandler();
         initImages(type);
     }
@@ -41,7 +42,7 @@ public class EnemyDrawer implements IDrawer, IIteratedImageDrawer {
      */
     @Override
     public void draw(Graphics2D g2) {
-        for(Entity enemy: enemies){
+        for(Entity enemy: game.getEnemies()){
             switch (enemy.getDirection()){
                 case UP ->{
                     if(imageSwitcher == 1){

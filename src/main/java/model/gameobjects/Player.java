@@ -3,6 +3,7 @@ package model.gameobjects;
 
 import model.armor.Armor;
 
+import model.gameinterfaces.IProjectileAddable;
 import model.helperclasses.EDirection;
 import model.mapclasses.Tile;
 import model.weapons.Weapon;
