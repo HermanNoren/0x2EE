@@ -174,7 +174,7 @@ public class Game implements IProjectileAddable{
     }
 
     private void checkIfProjectileHitsTerrain(){
-        Iterator<Projectile> pIter = getProjectiles().iterator();
+        Iterator<Projectile> pIter = (new ArrayList<>(projectiles)).iterator();
         while (pIter.hasNext()){
             Projectile p = pIter.next();
             List<Tile> collidedTiles = CollisionHandler.getSpecificTerrainCollisions(p, gameMap.getGameMapCoordinates());
@@ -204,7 +204,7 @@ public class Game implements IProjectileAddable{
      * @param dt time passed since last update
      */
     private void updateEnemies(double dt){
-        Iterator<Enemy> enemyIter = getEnemies().iterator();
+        Iterator<Enemy> enemyIter = (new ArrayList<>(enemies)).iterator();
         while (enemyIter.hasNext()) {
             Enemy enemy = enemyIter.next();
             if (enemy.getHealth() <= 0) {
@@ -224,7 +224,7 @@ public class Game implements IProjectileAddable{
     }
 
     private void checkIfProjectileHitsEnemy(Enemy enemy) {
-        Iterator<Projectile> pIter = getProjectiles().iterator();
+        Iterator<Projectile> pIter = (new ArrayList<>(projectiles)).iterator();
         while (pIter.hasNext()) {
             Projectile pr = pIter.next();
             if (CollisionHandler.testCollision(enemy, pr)) {

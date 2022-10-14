@@ -86,7 +86,7 @@ public class Spawner{
      */
 
     public List<IItem> getSpawnedItems(){
-        return spawnedItems;
+        return new ArrayList<>(spawnedItems);
     }
 
 
