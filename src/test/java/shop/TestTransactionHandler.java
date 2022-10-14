@@ -33,38 +33,38 @@ public class TestTransactionHandler {
      */
     @Test
     void the_upgraded_armor_should_be_the_current_value_plus_one(){
-        assertEquals(armor.currentStat() + 1, armor.statsIfUpgraded());
+        assertEquals(armor.currentStats() + 1, armor.statsIfUpgraded());
     }
 
     @Test
     void the_upgraded_weapon_should_be_the_current_value_plus_one(){
-        assertEquals(weapon.currentStat() + 1, weapon.statsIfUpgraded());
+        assertEquals(weapon.currentStats() + 1, weapon.statsIfUpgraded());
     }
     @Test
     void the_weapon_stats_if_they_were_to_be_updated_should_match_the_updated_values(){
         int temporaryValue = weapon.statsIfUpgraded();
         weapon.upgrade();
-        assertEquals(temporaryValue, weapon.currentStat());
+        assertEquals(temporaryValue, weapon.currentStats());
 
     }
     @Test
     void the_armor_stats_if_they_were_to_be_updated_should_match_the_updated_values(){
         int temporaryValue = armor.statsIfUpgraded();
         armor.upgrade();
-        assertEquals(temporaryValue, armor.currentStat());
+        assertEquals(temporaryValue, armor.currentStats());
 
     }
     @Test
     void weapon_stats_should_be_one_more_after_update(){
-        int temporaryValue = weapon.currentStat();
+        int temporaryValue = weapon.currentStats();
         weapon.upgrade();
-        assertEquals(temporaryValue + 1, weapon.currentStat());
+        assertEquals(temporaryValue + 1, weapon.currentStats());
     }
     @Test
     void armor_stats_should_be_one_more_after_update(){
-        int temporaryValue = armor.currentStat();
+        int temporaryValue = armor.currentStats();
         armor.upgrade();
-        assertEquals(temporaryValue + 1, armor.currentStat());
+        assertEquals(temporaryValue + 1, armor.currentStats());
     }
 
     /**
@@ -125,13 +125,13 @@ public class TestTransactionHandler {
     }
     @Test
     void the_current_damage_from_the_weapon_should_be_the_same_in_the_IUpgradable_interface_and_the_TransactionHandler(){
-        int currentDamageWeaponIUpgradable = weapon.currentStat();
+        int currentDamageWeaponIUpgradable = weapon.currentStats();
         int currentDamageWeaponTransactionHandler = transactionHandler.getCurrentWeaponDamage();
         assertEquals(currentDamageWeaponIUpgradable, currentDamageWeaponTransactionHandler);
     }
     @Test
     void the_current_armor_reduction_from__armor_should_be_the_same_in_the_IUpgradable_interface_and_the_TransactionHandler(){
-        int currentDamageWeaponIUpgradable = armor.currentStat();
+        int currentDamageWeaponIUpgradable = armor.currentStats();
         int currentDamageWeaponTransactionHandler = transactionHandler.getCurrentArmorReduction(); //have not implemented current
         assertEquals(currentDamageWeaponIUpgradable, currentDamageWeaponTransactionHandler);
     }
@@ -139,14 +139,14 @@ public class TestTransactionHandler {
     @Test
     void the_current_damage_from_the_weapon_should_be_the_same_in_the_IUpgradable_interface_and_the_TransactionHandler_when_upgraded(){
         weapon.upgrade();
-        int currentDamageWeaponIUpgradable = weapon.currentStat();
+        int currentDamageWeaponIUpgradable = weapon.currentStats();
         int currentDamageWeaponTransactionHandler = transactionHandler.getCurrentWeaponDamage();
         assertEquals(currentDamageWeaponIUpgradable, currentDamageWeaponTransactionHandler);
     }
     @Test
     void the_current_armor_reduction_from_armor_should_be_the_same_in_the_IUpgradable_interface_and_the_TransactionHandler_when_upgraded(){
         armor.upgrade();
-        int currentDamageWeaponIUpgradable = armor.currentStat();
+        int currentDamageWeaponIUpgradable = armor.currentStats();
         int currentDamageWeaponTransactionHandler = transactionHandler.getCurrentArmorReduction();
         assertEquals(currentDamageWeaponIUpgradable, currentDamageWeaponTransactionHandler);
     }

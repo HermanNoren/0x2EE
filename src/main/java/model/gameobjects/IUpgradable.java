@@ -1,6 +1,7 @@
 package model.gameobjects;
 
 public interface IUpgradable {
+    int growth = 40;
     /**
      * Levels up the thing in question.
      */
@@ -23,7 +24,7 @@ public interface IUpgradable {
       * The current state of the upgradable, for example damage in weapon
       * and armor-reduction in armor.
       */
-     int currentStat();
+     int currentStats();
      int currentPrice();
 }
 

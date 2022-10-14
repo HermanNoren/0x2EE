@@ -10,6 +10,6 @@ public class ArmorTest {
         Armor armor = new Armor();
         armor.upgrade();
         armor.upgrade();
-        assertEquals(3, armor.currentStat(), 0);
+        assertEquals(3, armor.currentStats(), 0);
     }
 }

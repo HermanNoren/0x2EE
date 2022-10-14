@@ -208,7 +208,7 @@ public class Game implements IProjectileAddable{
             while (pIter.hasNext()) {
                 Projectile pr = pIter.next();
                 if (CollisionHandler.testCollision(enemy, pr)) {
-                    enemy.damageTaken(player.getWeapon().currentStat());
+                    enemy.damageTaken(player.getWeapon().currentStats());
                     pIter.remove();
                     break;
                 }

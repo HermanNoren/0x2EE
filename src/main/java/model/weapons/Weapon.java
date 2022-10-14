@@ -10,19 +10,17 @@ public class Weapon implements IUpgradable {
     private int damage;
     private int currentLevel;
     private int ammo;
-    private boolean reloading;
-    private final int growth;
     private int currentPrice;
+    private boolean reloading;
 
     /**
      * The main weapon of the
      */
     public Weapon() {
-        reloading = false;
         damage = 10;
         currentLevel = 1;
         ammo = 7;
-        growth = 40;
+        reloading = false;
     }
 
     public void shoot(Vector2 pos, EDirection direction, IProjectileAddable addable){
@@ -66,7 +64,7 @@ public class Weapon implements IUpgradable {
     }
 
      @Override
-     public int currentStat() {
+     public int currentStats() {
          return damage;
      }
 

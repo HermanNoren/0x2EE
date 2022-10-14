@@ -49,7 +49,7 @@ public class TransactionHandler {
      * @return the current damage the weapon deals.
      */
     public int getCurrentWeaponDamage(){
-        return weapon.currentStat();
+        return weapon.currentStats();
     }
 
     /**
@@ -97,7 +97,7 @@ public class TransactionHandler {
      * @return The current armor reduction.
      */
     public int getCurrentArmorReduction(){
-        return armor.currentStat();
+        return armor.currentStats();
     }
 
     /**

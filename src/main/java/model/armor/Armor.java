@@ -4,13 +4,11 @@ import model.gameobjects.IUpgradable;
 
 public class Armor implements IArmor, IUpgradable {
     private final double armorReductionConstant;
-    private final int growth;
+    private int currentLevel = 1;
 
     public Armor(){
         armorReductionConstant = 0.08;
-        growth = 40;
     }
-    private int currentLevel = 1;
 
 
     /**
@@ -40,7 +38,7 @@ public class Armor implements IArmor, IUpgradable {
     }
 
     @Override
-    public int currentStat() {
+    public int currentStats() {
         return currentLevel;
     }
 
