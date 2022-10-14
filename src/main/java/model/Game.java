@@ -6,7 +6,6 @@ import model.gameinterfaces.IProjectileAddable;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
 import model.helperclasses.EDirection;
-import model.helperclasses.ShopTransaction;
 import model.helperclasses.TransactionHandler;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
@@ -17,7 +16,6 @@ import model.gameobjects.Shop;
 import model.helperclasses.HighscoreHandler;
 import model.helperclasses.collision.ECollisionAxis;
 import model.mapclasses.GameMap;
-import model.mapclasses.Terrain;
 import model.mapclasses.Tile;
 import model.gameobjects.IGameObject;
 
@@ -48,7 +46,6 @@ public class Game implements IGame {
     private Boolean paused;
 
     private final int mapSize;
-    private ShopTransaction shopTransaction;
     private EnemyFactory enemyFactory;
 
     public Game() {
@@ -68,21 +65,15 @@ public class Game implements IGame {
         highscoreName = new ArrayList<>();
         this.path = new ArrayList<>();
         playerDead = false;
-        EnemyFactory enemyFactory = new NormalEnemyFactory();
 
-        addEnemies(enemyFactory);
+
 
 
         spawner = new Spawner(this);
         paused = false;
     }
 
-    private void addEnemies(EnemyFactory enemyFactory) {
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-        enemies.add(enemyFactory.createEnemy(player, gameMap, random));
-    }
+
 
     public GameMap getGameMap() {
         return gameMap;
