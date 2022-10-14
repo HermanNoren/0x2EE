@@ -2,7 +2,6 @@ package model;
 
 import config.Config;
 import model.gameinterfaces.IGame;
-import model.gameinterfaces.IProjectileAddable;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
 import model.helperclasses.EDirection;
@@ -17,11 +16,7 @@ import model.helperclasses.HighscoreHandler;
 import model.helperclasses.collision.ECollisionAxis;
 import model.mapclasses.GameMap;
 import model.mapclasses.Tile;
-import model.gameobjects.IGameObject;
-
-import java.io.*;
 import java.util.*;
-import java.util.Random;
 
 /**
  * This class contains the main game loop.
@@ -29,18 +24,17 @@ import java.util.Random;
  */
 public class Game implements IGame {
     private Player player;
-    private List<Tile> path;
     private List<String> highscoreName;
-    private List<IGameObject> tiles;
+
     private List<Enemy> enemies;
     private GameMap gameMap;
-    private File highscoreFile;
+
     private List<String> highscoreList;
     private List<Projectile> projectiles;
     private Shop shop;
     private HighscoreHandler highscoreHandler;
     private Spawner spawner;
-    private Random random = new Random();
+
     private Boolean playerDead;
     private TransactionHandler transactionHandler;
     private Boolean paused;
@@ -63,12 +57,7 @@ public class Game implements IGame {
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         highscoreName = new ArrayList<>();
-        this.path = new ArrayList<>();
         playerDead = false;
-
-
-
-
         spawner = new Spawner(this);
         paused = false;
     }
@@ -169,11 +158,7 @@ public class Game implements IGame {
         updateItems();
         updateProjectile(dt);
         checkIfProjectileHitsTerrain();
-
-        /**
-         * See if player is on shop, first for controller second for shop drawer
-         */
-        setBooleansForShop();
+        isPlayerOnShop();
     }
 
     private void updateProjectile(double dt) {
@@ -199,14 +184,14 @@ public class Game implements IGame {
 
 
     /**
-     * see if the player is on the shop.
+     * Call method to see if the player is on the shop.
      */
-    private void setBooleansForShop() {
-        player.isOnShop = isPlayerInRangeOfShop();
-        shop.playerOnShop = player.isOnShop;
+    private void isPlayerOnShop() {
+        shop.playerOnShop = CollisionHandler.testCollision(player, shop);
     }
 
     /**
+     *
      * Updates player position and checks for collisions with terrain
      * @param dt time passed since last update
      */
@@ -297,11 +282,6 @@ public class Game implements IGame {
         return playerDead;
     }
 
-
-    public boolean isPlayerInRangeOfShop() {
-        return (CollisionHandler.testCollision(player, shop));
-    }
-
     @Override
     public List<Projectile> getProjectiles() {
         return new ArrayList<>(projectiles);
@@ -328,4 +308,8 @@ public class Game implements IGame {
         enemies.add(enemyFactory.createEnemy(player, gameMap));
     }
 
+    @Override
+    public boolean playerOnShop() {
+        return shop.playerOnShop;
+    }
 }

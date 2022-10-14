@@ -1,15 +1,14 @@
-package model.armor;
+package model.upgradables.armor;
 
-import model.gameobjects.IUpgradable;
+import model.upgradables.IUpgradable;
 
-public class Armor implements IArmor, IUpgradable {
-    private final double armorReductionConstant;
+
+public class Armor implements IArmor, IUpgradable  {
+    private final double armorReductionConstant  = 0.08;
     private int currentLevel = 1;
 
     public Armor(){
-        armorReductionConstant = 0.08;
     }
-
 
     /**
      * Method to determine how much damage reduction the player can receive,

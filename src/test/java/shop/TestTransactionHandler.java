@@ -1,11 +1,12 @@
 package shop;
 
 
-import model.armor.Armor;
+import model.mapclasses.Tile;
+import model.upgradables.armor.Armor;
 import model.gameobjects.Player;
 import model.helperclasses.TransactionHandler;
-import model.mapclasses.Terrain;
-import model.weapons.Weapon;
+
+import model.upgradables.weapon.Weapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,10 +22,10 @@ public class TestTransactionHandler {
 
     @BeforeEach
     void init(){
-        player = new Player(48, 48, new Terrain[0][0]);
+        player = new Player(48, 48, new Tile[0][0]);
         transactionHandler = new TransactionHandler(player);
-        weapon = new Weapon();
-        armor = new Armor();
+        weapon = player.getWeapon();
+        armor = player.getArmor();
     }
 
 

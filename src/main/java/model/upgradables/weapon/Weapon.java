@@ -1,7 +1,7 @@
-package model.weapons;
+package model.upgradables.weapon;
 
 import model.gameinterfaces.IProjectileAddable;
-import model.gameobjects.IUpgradable;
+import model.upgradables.IUpgradable;
 import model.gameobjects.Projectile;
 import model.helperclasses.EDirection;
 import model.helperclasses.Vector2;

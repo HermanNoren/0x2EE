@@ -22,12 +22,12 @@ public class TileTest {
 
     @Test
     void test_getHeight_returns_height_of_Terrain(){
-        assertEquals(Config.TERRAIN_SIZE, tile.getHeight());
+        assertEquals(Config.TILE_SIZE, tile.getHeight());
     }
 
     @Test
     void test_getWidth_returns_height_of_Terrain(){
-        assertEquals(Config.TERRAIN_SIZE, tile.getWidth());
+        assertEquals(Config.TILE_SIZE, tile.getWidth());
     }
 
     @Test
@@ -82,13 +82,13 @@ public class TileTest {
 
     @Test
     void test_getTerrainType_returns_0_for_new_Terrain(){
-        assertEquals(0, tile.getTerrainType());
+        assertEquals(0, tile.getTileType());
     }
 
     @Test
     void test_setTerrainType_sets_TerrainType_of_Terrain(){
-        tile.setTerrainType(1);
-        assertEquals(1, tile.getTerrainType());
+        tile.setTileType(1);
+        assertEquals(1, tile.getTileType());
     }
 
     @Test
@@ -124,7 +124,7 @@ public class TileTest {
         Tile testTile = new Tile(11, 11);
         tile.addBranch(1, testTile);
 
-        assertEquals(testTile, tile.getNeighbors().get(0).getTerrain());
+        assertEquals(testTile, tile.getNeighbors().get(0).getTile());
     }
     @Test
     void test_compareTo_compares_two_terrains_f_values_1_if_larger(){

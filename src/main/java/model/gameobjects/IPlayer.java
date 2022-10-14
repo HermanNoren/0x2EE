@@ -1,9 +1,8 @@
 package model.gameobjects;
 
-import model.armor.Armor;
-import model.weapons.Weapon;
+import model.upgradables.armor.Armor;
+import model.upgradables.weapon.Weapon;
 
-import java.util.List;
 import model.gameinterfaces.IProjectileAddable;
 
 public interface IPlayer {
