@@ -1,20 +1,23 @@
 package main;
 
 import controllers.GameLoopController;
+import controllers.SpawnTimerController;
 import model.Game;
-import model.gameobjects.Player;
-import model.mapclasses.GameMap;
 import view.MainPanel;
 import view.Window;
+
+import java.util.Timer;
 
 public class Program {
     public static void main(String[] args){
         Game game = new Game();
-        GameLoopController gameLoop = new GameLoopController();
         MainPanel mainPanel = new MainPanel(game);
-        game.addObserver(mainPanel);
         Window window = new Window(mainPanel);
-        gameLoop.run(game);
+        GameLoopController loopController = new GameLoopController(game, 120);
+        Timer enemySpawnTimer = new Timer();
+        enemySpawnTimer.schedule(new SpawnTimerController(game), 5000, 5000);
+        loopController.addObserver(mainPanel);
+        loopController.run();
     }
 
 }

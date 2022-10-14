@@ -1,7 +1,7 @@
 package utility;
 
 import model.mapclasses.GameMap;
-import model.mapclasses.Terrain;
+import model.mapclasses.Tile;
 
 import java.util.Random;
 
@@ -12,26 +12,26 @@ import java.util.Random;
 public class Noise {
     private final Random random;
     private final float roughness;
-    private Terrain[][] grid;
-    private float[][] grid1;
-
+    private final float[][] grid;
     public Noise(float roughness, GameMap gameMap){
-
         this.random = new Random();
-        int width = gameMap.getWidth();
-        int height = gameMap.getHeight();
-        this.roughness = roughness/width;
-        this.grid1 = new float[width][height];
+        this.roughness = roughness/gameMap.getWidth();
+        this.grid = new float[gameMap.getWidth()][gameMap.getHeight()];
+        init();
     }
 
-    public void init(){
-        int xh = grid1.length - 1;
-        int yh = grid1[0].length - 1;
-        //Setting corners
-        grid1[0][0] = random.nextFloat() - 0.5f;
-        grid1[xh][0] = random.nextFloat() - 0.5f;
-        grid1[0][yh] = random.nextFloat() - 0.5f;
-        grid1[xh][yh] = random.nextFloat() - 0.5f;
+    /**
+     *
+     */
+    private void init(){
+        int xh = grid.length - 1;
+        int yh = grid[0].length - 1;
+
+        grid[0][0] = random.nextFloat() - 0.5f;
+        grid[xh][0] = random.nextFloat() - 0.5f;
+        grid[0][yh] = random.nextFloat() - 0.5f;
+        grid[xh][yh] = random.nextFloat() - 0.5f;
+
         generateFractal(0, 0, xh, yh);
     }
 
@@ -40,38 +40,45 @@ public class Noise {
         int ym = (y1 + yh) /2;
         if((x1 == xm) && (y1 == ym)) return;
 
-        grid1[xm][y1] = (grid1[x1][y1] + grid1[xh][y1]) * 0.2f;
-        grid1[xm][yh] = (grid1[x1][yh] + grid1[xh][yh]) * 0.2f;
-        grid1[x1][ym] = (grid1[x1][y1] + grid1[x1][yh]) * 0.2f;
-        grid1[xh][ym] = (grid1[xh][y1] + grid1[xh][yh]) * 0.2f;
 
-        float v = roughen(0.2f * (grid1[xm][y1] + grid1[xm][yh]), x1 + y1, yh
-                + xh);
+        grid[xm][y1] = (grid[x1][y1] + grid[xh][y1]) * 0.2f;
+        grid[xm][yh] = (grid[x1][yh] + grid[xh][yh]) * 0.2f;
+        grid[x1][ym] = (grid[x1][y1] + grid[x1][yh]) * 0.2f;
+        grid[xh][ym] = (grid[xh][y1] + grid[xh][yh]) * 0.2f;
 
-        grid1[xm][ym] = v;
+        float v = roughen(0.2f * (grid[xm][y1] + grid[xm][yh]), x1 + y1, yh + xh);
 
-        grid1[xm][y1] = roughen(grid1[xm][y1], x1, xh);
-        grid1[xm][yh] = roughen(grid1[xm][yh], x1, xh);
-        grid1[x1][ym] = roughen(grid1[x1][ym], y1, yh);
-        grid1[xh][ym] = roughen(grid1[xh][ym], y1, yh);
+        grid[xm][ym] = v;
+
+        grid[xm][y1] = roughen(grid[xm][y1], x1, xh);
+        grid[xm][yh] = roughen(grid[xm][yh], x1, xh);
+        grid[x1][ym] = roughen(grid[x1][ym], y1, yh);
+        grid[xh][ym] = roughen(grid[xh][ym], y1, yh);
 
         generateFractal(x1, y1, xm, ym);
         generateFractal(xm, y1, xh, ym);
         generateFractal(x1, ym, xm, yh);
         generateFractal(xm, ym, xh, yh);
+
     }
 
-    public void setTerrainTypes(Terrain[][] terrains){
-        int w = grid1.length;
-        int h = grid1[0].length;
+    public void setNoise(Tile[][] tiles, float crowding){
+        int w = grid.length;
+        int h = grid[0].length;
         for(int i = 0;i < w;i++) {
             for(int j = 0;j < h;j++) {
-                if(grid1[i][j] < 3){
-                    terrains[i][j].setTerrainType(0);
-                }else{
-                    terrains[i][j].setTerrainType(2);
-                    terrains[i][j].setPassable(false);
+                if(grid[i][j] < crowding){
+                    tiles[i][j].setPassable(true);
+                }else if(grid[i][j] < crowding + 1){
+                    tiles[i][j].setPassable(false);
                 }
+                else if(grid[i][j] < crowding + 2){
+                    tiles[i][j].setPassable(false);
+                }
+                else {
+                    tiles[i][j].setPassable(false);
+                }
+
             }
         }
     }
@@ -81,13 +88,13 @@ public class Noise {
     }
 
     /**
-     * Method used to print grid containing terrains.
-     * @param terrains grid of type Terrain.
+     * Method used to print grid containing tiles.
+     * @param tiles grid of type Tile.
      */
-    public void printTerrainGrid(Terrain[][] terrains){
-        for(int i = 0; i < terrains.length; i++){
-            for(int j = 0; j < terrains[0].length; j++){
-                System.out.print(terrains[i][j].getTerrainType());
+    public void printTileGrid(Tile[][] tiles){
+        for(int i = 0; i < tiles.length; i++){
+            for(int j = 0; j < tiles[0].length; j++){
+                System.out.print(tiles[i][j].isPassable());
                 System.out.print(",");
             }
             System.out.println();
@@ -114,23 +121,16 @@ public class Noise {
      * @return Returns a new grid containing booleans.
      */
     public boolean[][] toBooleans(float v) {
-        int w = grid.length;
-        int h = grid[0].length;
+        int width = grid.length;
+        int height= grid[0].length;
 
-        boolean[][] ret = new boolean[w][h];
-        for(int i = 0;i < w;i++) {
-            for(int j = 0;j < h;j++) {
-                ret[i][j] = grid[i][j].getTerrainType() < v;
+        boolean[][] booleans = new boolean[width][height];
+        for(int i = 0; i < width; i++) {
+            for(int j = 0; j < height;j++) {
+                booleans[i][j] = grid[i][j] < v;
             }
         }
-        return ret;
+
+        return booleans;
     }
-
-    public static void main(String[] args) {
-        GameMap gameMap = new GameMap(30, 30);
-        Noise n = new Noise(1, gameMap);
-        n.printTerrainGrid(gameMap.getGameMapCoordinates());
-    }
-
-
 }

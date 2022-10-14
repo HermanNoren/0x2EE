@@ -1,5 +1,6 @@
 package controllers;
 
+import controllers.sound.SoundEffect;
 import model.Game;
 
 import java.awt.event.KeyEvent;
@@ -10,8 +11,11 @@ public class WeaponController implements KeyListener {
     private final Game game;
     private boolean spaceKeyDown;
 
+    SoundEffect se = new SoundEffect();
+
     public WeaponController(Game game) {
         this.game = game;
+        se.setSoundFile("sound/laserShoot.wav");
     }
 
     @Override
@@ -19,9 +23,10 @@ public class WeaponController implements KeyListener {
         switch (e.getKeyCode()) {
             case (KeyEvent.VK_SPACE) -> {
                 if (!spaceKeyDown) {
-                    spaceKeyDown = true;
-                        game.makePlayerShoot();
 
+                    se.play();
+                    spaceKeyDown = true;
+                    game.makePlayerShoot();
                 }
             }
         }
@@ -32,6 +37,7 @@ public class WeaponController implements KeyListener {
         switch (e.getKeyCode()){
             case (KeyEvent.VK_SPACE) -> {
                 spaceKeyDown = false;
+
             }
         }
     }

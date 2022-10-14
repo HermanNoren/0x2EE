@@ -1,9 +1,9 @@
 package model.gameobjects;
 
 import config.Config;
-import controllers.EDirection;
+import model.helperclasses.EDirection;
 import model.helperclasses.Vector2;
-import model.mapclasses.Terrain;
+import model.mapclasses.Tile;
 
 /**
  * The IEnemy class contains logic to represent the sprite,
@@ -11,7 +11,6 @@ import model.mapclasses.Terrain;
  * and health the program can determine if an entity is in range
  * to take damage thus if reduces its health.
  */
-
 public abstract class Entity implements IGameObject {
     private Vector2 pos;
     private Vector2 vel;
@@ -21,15 +20,15 @@ public abstract class Entity implements IGameObject {
     private EDirection direction;
     private EDirection lastDirection;
     private int size = Config.SPRITE_SIZE * 3;
-    private Terrain[][] coordinates;
-    private Terrain currentLocation;
+    private Tile[][] coordinates;
+    private Tile currentLocation;
 
     /**
      *
      * @param x represents the entities' x-coordinate
      * @param y represents the entities' y-coordinate
      */
-    public Entity(int x, int y, Terrain[][] coordinates){
+    public Entity(int x, int y, Tile[][] coordinates){
         this.coordinates = coordinates;
         this.direction = EDirection.NOT_MOVING; // Default value
         this.lastDirection = direction;
@@ -37,7 +36,6 @@ public abstract class Entity implements IGameObject {
         this.acc = new Vector2(0, 0);
         this.vel = new Vector2(0,0);
     }
-
     public void setPos(Vector2 pos) {
         this.pos = pos;
     }
@@ -89,7 +87,7 @@ public abstract class Entity implements IGameObject {
     public double getAccY(){
         return acc.getY();
     }
-
+    @Override
     public Vector2 getCenter() {
         double x = pos.getX() + (double) (getWidth() / 2);
         double y = pos.getY() + (double) (getHeight() / 2);
@@ -99,7 +97,7 @@ public abstract class Entity implements IGameObject {
     /**
      * @return current location based on the terrain grid of GameMap
      */
-    public Terrain getMapLocation(){
+    public Tile getMapLocation(){
         int posX = (int)getCenter().getX()/48; // 48 is terrain size
         int posY = (int)getCenter().getY()/48;
         currentLocation = coordinates[posX][posY];
@@ -164,7 +162,7 @@ public abstract class Entity implements IGameObject {
         return size;
     }
 
-
+    @Override
     public int getHeight() {
         return size;
     }

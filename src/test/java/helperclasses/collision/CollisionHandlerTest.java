@@ -5,7 +5,7 @@ import model.gameobjects.Player;
 import model.helperclasses.Vector2;
 import model.helperclasses.collision.CollisionHandler;
 import model.helperclasses.collision.ECollisionAxis;
-import model.mapclasses.Terrain;
+import model.mapclasses.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -218,8 +218,8 @@ public class CollisionHandlerTest {
     @Test
     void test_specific_terrain_collisions_no_collision() {
         player1.setPos(new Vector2(48, 48));
-        List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player1, createSmallTerrainMatrix());
-        assertEquals(0, collidedTerrain.size());
+        List<Tile> collidedTile = CollisionHandler.getSpecificTerrainCollisions(player1, createSmallTerrainMatrix());
+        assertEquals(0, collidedTile.size());
     }
 
     @Test
@@ -227,8 +227,8 @@ public class CollisionHandlerTest {
         player1.setPos(new Vector2(48, 48));
         player1.setVelX(-1);
         player1.moveX(1);
-        List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player1, createSmallTerrainMatrix());
-        assertEquals(1, collidedTerrain.size());
+        List<Tile> collidedTile = CollisionHandler.getSpecificTerrainCollisions(player1, createSmallTerrainMatrix());
+        assertEquals(1, collidedTile.size());
     }
 
     @Test
@@ -238,30 +238,30 @@ public class CollisionHandlerTest {
         player1.moveX(1);
         player1.setVelY(-1);
         player1.moveY(1);
-        List<Terrain> collidedTerrain = CollisionHandler.getSpecificTerrainCollisions(player1, createSmallTerrainMatrix());
-        assertEquals(3, collidedTerrain.size());
+        List<Tile> collidedTile = CollisionHandler.getSpecificTerrainCollisions(player1, createSmallTerrainMatrix());
+        assertEquals(3, collidedTile.size());
     }
 
     /**
-     * Creates a 4x4 matrix containing terrain pieces. Terrain in the top row and the left column are non-passable.
+     * Creates a 4x4 matrix containing terrain pieces. Tile in the top row and the left column are non-passable.
      * @return 4x4 terrain matrix
      */
-    private static Terrain[][] createSmallTerrainMatrix() {
-        Terrain[][] terrain = {
-                {new Terrain(0, 0), new Terrain(1, 0), new Terrain(2, 0), new Terrain(3, 0)},
-                {new Terrain(0, 1), new Terrain(1, 1), new Terrain(2, 1), new Terrain(3, 1)},
-                {new Terrain(0, 2), new Terrain(1, 2), new Terrain(2, 2), new Terrain(3, 2)},
-                {new Terrain(0, 3), new Terrain(1, 3), new Terrain(2, 3), new Terrain(3, 3)}
+    private static Tile[][] createSmallTerrainMatrix() {
+        Tile[][] tile = {
+                {new Tile(0, 0), new Tile(1, 0), new Tile(2, 0), new Tile(3, 0)},
+                {new Tile(0, 1), new Tile(1, 1), new Tile(2, 1), new Tile(3, 1)},
+                {new Tile(0, 2), new Tile(1, 2), new Tile(2, 2), new Tile(3, 2)},
+                {new Tile(0, 3), new Tile(1, 3), new Tile(2, 3), new Tile(3, 3)}
         };
 
-        for (int row = 0; row < terrain.length; row++) {
-            for (int col = 0; col < terrain[row].length; col++) {
+        for (int row = 0; row < tile.length; row++) {
+            for (int col = 0; col < tile[row].length; col++) {
                 if (row == 0 || col == 0) {
-                    terrain[row][col].setPassable(false);
+                    tile[row][col].setPassable(false);
                 }
             }
         }
 
-        return terrain;
+        return tile;
     }
 }

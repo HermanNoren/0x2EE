@@ -41,6 +41,11 @@ public class Coin implements IItem {
         return "coin";
     }
 
+
+    /**
+     * Handles the interaction between the player and a certain item.
+     * @param player the player that uses an item
+     */
     @Override
     public void consume(Player player) {
         player.addMoney(1000);

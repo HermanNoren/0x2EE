@@ -1,9 +1,10 @@
 package model.helperclasses.collision;
 
+import config.Config;
 import model.gameobjects.Entity;
 import model.gameobjects.IGameObject;
 import model.helperclasses.Vector2;
-import model.mapclasses.Terrain;
+import model.mapclasses.Tile;
 
 import java.util.*;
 
@@ -23,21 +24,21 @@ public class CollisionHandler {
     }
 
     /**
-     * Method for providing which specific terrain pieces an object is colliding with
+     * Method for providing which specific tile pieces an object is colliding with
      * @param object Object to test
-     * @param terrain Matrix containing all the terrain tiles.
-     * @return A list containing the terrain pieces that is being collided with
+     * @param tile Matrix containing all the tile tiles.
+     * @return A list containing the tile pieces that is being collided with
      */
-    public static List<Terrain> getSpecificTerrainCollisions(IGameObject object, Terrain[][] terrain) {
-        List<Terrain> collidedTerrain = new ArrayList<>();
+    public static List<Tile> getSpecificTerrainCollisions(IGameObject object, Tile[][] tile) {
+        List<Tile> collidedTile = new ArrayList<>();
 
         // Defining the bounds of how many tiles to iterate through.
         // No need to look further away than just around the object!
         Vector2 objectPos = object.getPos();
-        int left = (int) (objectPos.getX() / object.getWidth() - 1);
-        int right = (int) (objectPos.getX() / object.getWidth() + 2);
-        int up = (int) (objectPos.getY() / object.getHeight() - 1);
-        int down = (int) (objectPos.getY() / object.getHeight() + 2);
+        int left = (int) (objectPos.getX() / Config.TILE_SIZE - 1);
+        int right = (int) (objectPos.getX() / Config.TILE_SIZE + 2);
+        int up = (int) (objectPos.getY() / Config.TILE_SIZE - 1);
+        int down = (int) (objectPos.getY() / Config.TILE_SIZE + 2);
 
         if (left < 0) {
             left = 0;
@@ -46,17 +47,17 @@ public class CollisionHandler {
             up = 0;
         }
 
-        for (int row = left; row < right && row < terrain.length; row++) {
-            for (int col = up; col < down && col < terrain[row].length; col++) {
-                Terrain t = terrain[row][col];
+        for (int row = left; row < right && row < tile.length; row++) {
+            for (int col = up; col < down && col < tile[row].length; col++) {
+                Tile t = tile[row][col];
                 if (!t.isPassable()) {
                     if (testCollision(object, t)) {
-                        collidedTerrain.add(t);
+                        collidedTile.add(t);
                     }
                 }
             }
         }
-        return collidedTerrain;
+        return collidedTile;
     }
 
     /**

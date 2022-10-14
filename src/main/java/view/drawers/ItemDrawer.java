@@ -1,5 +1,6 @@
 package view.drawers;
 
+import model.gameinterfaces.IItemsGettable;
 import model.gameobjects.IGameObject;
 import model.gameobjects.ItemSpawner.IItem;
 import model.helperclasses.ImageHandler;
@@ -9,9 +10,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemDrawer implements IDrawer{
+public class ItemDrawer implements IDrawer, IIteratedImageDrawer {
 
-    private List<IItem> objects;
+    private IItemsGettable game;
 
     private ImageHandler imageHandler;
 
@@ -22,11 +23,10 @@ public class ItemDrawer implements IDrawer{
     private List<BufferedImage> imageList;
     private BufferedImage coinImage;
 
-    private double previousImageSwitchTime, currentTime;
     private int index;
 
-    public ItemDrawer(List<IItem> objects){
-        this.objects = objects;
+    public ItemDrawer(IItemsGettable game){
+        this.game = game;
         this.imageHandler = new ImageHandler();
         potion = imageHandler.getImage("imgs/drops/potion.png");
         coinFront = imageHandler.getImage("imgs/drops/coin_front.png");
@@ -42,19 +42,9 @@ public class ItemDrawer implements IDrawer{
         coinImage = coinFront;
     }
 
-    private void updateTime(){
-        currentTime = System.currentTimeMillis();
-        if (currentTime >= previousImageSwitchTime + 750){
-            previousImageSwitchTime = currentTime;
-            coinImage = imageList.get(index % 4);
-            index++;
-        }
-    }
-
     @Override
     public void draw(Graphics2D g2) {
-        updateTime();
-        for (IItem object : objects){
+        for (IItem object : game.getItems()){
             List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(object.getPos(), object.getWidth(), object.getHeight());
             switch (object.getType()){
                 case "coin" -> g2.drawImage(coinImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
@@ -62,6 +52,11 @@ public class ItemDrawer implements IDrawer{
 
             }
         }
+    }
 
+    @Override
+    public void switchImage() {
+        coinImage = imageList.get(index % 4);
+        index++;
     }
 }

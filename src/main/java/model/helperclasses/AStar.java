@@ -1,10 +1,7 @@
 package model.helperclasses;
 
-import model.mapclasses.Terrain;
+import model.mapclasses.Tile;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.PriorityQueue;
 
 /**
@@ -16,7 +13,7 @@ public class AStar {
      * Manhattan heuristic
      * @return
      */
-    private static double calculateHeuristic(Terrain current, Terrain goal){
+    private static double calculateHeuristic(Tile current, Tile goal){
         int D = 1;
         double dx = Math.abs(current.getX() - goal.getX());
         double dy = Math.abs(current.getY() - goal.getY());
@@ -34,17 +31,17 @@ public class AStar {
      * @return The node which is the target, gets returned once the target has been reached.
      *
      */
-    public static Terrain aStar(Terrain start, Terrain target){
+    public static Tile aStar(Tile start, Tile target){
 
-        PriorityQueue<Terrain> closedList = new PriorityQueue<>();
-        PriorityQueue<Terrain> openList = new PriorityQueue<>();
+        PriorityQueue<Tile> closedList = new PriorityQueue<>();
+        PriorityQueue<Tile> openList = new PriorityQueue<>();
 
         start.setG(0);
         start.setF(calculateHeuristic(start, target));
 
         openList.add(start);
         while(!openList.isEmpty()){
-            Terrain n = openList.peek(); //n = next node
+            Tile n = openList.peek(); //n = next node
 
             if(n == target){
                 while (n.getParent() != start && n != start)
@@ -52,8 +49,8 @@ public class AStar {
                 return n;
             }
 
-            for(Terrain.Edge edge : n.getNeighbors()){ // Check neighbors of n.
-                Terrain m = edge.getTerrain();
+            for(Tile.Edge edge : n.getNeighbors()){ // Check neighbors of n.
+                Tile m = edge.getTile();
                 double totalWeight = n.getG() + edge.getWeight();
 
                 if(!openList.contains(m) && !closedList.contains(m) && m.isPassable()){

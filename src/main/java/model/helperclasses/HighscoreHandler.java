@@ -16,6 +16,9 @@ public class HighscoreHandler {
             highscoreList = getHighscoreList();
     }
 
+    /**
+     * Clears all content of the highscore file
+     */
     public void clearFile(){
         highscoreFile.delete();
         try {
@@ -25,14 +28,27 @@ public class HighscoreHandler {
         }
     }
 
+    /**
+     * Modifies the highscore file to an exact state
+     * @param oldVersion data to replace current file
+     */
     public void rollBackFile(List<String> oldVersion) {
         clearFile();
         writeToFile(oldVersion);
     }
 
+    /**
+     * Returns the actual score of a certain saved string containing name and score
+     * @param fileitem string to extract score from
+     * @return score as an integer
+     */
+
     public int getScore(String fileitem){
-        String[] savedScore = fileitem.split(":");
-        return Integer.valueOf(savedScore[1]);
+        if (fileitem.contains(":")) {
+            String[] savedScore = fileitem.split(":");
+            return Integer.valueOf(savedScore[1]);
+        }
+        return 0;
     }
 
     /**
@@ -51,8 +67,14 @@ public class HighscoreHandler {
         while(sc.hasNext()){
             highscoreList.add(sc.next());
         }
-        return new ArrayList<>(highscoreList);
+        sc.close();
+        return highscoreList;
     }
+
+    /**
+     * Writes given data to the highscore-file.
+     * @param content - data to be stored in a file
+     */
 
     private void writeToFile(List<String> content){
         try {
@@ -68,7 +90,7 @@ public class HighscoreHandler {
     }
 
     /**
-     * Saves highscore to file
+     * Handles new incoming highscores, by updating and sorting the highscore list.
      * @param name name of player
      * @param newScore score achieved during game
      */

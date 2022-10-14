@@ -1,15 +1,40 @@
 package controllers;
 
 import model.Game;
+import view.IObserver;
 
-public class GameLoopController {
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
-    private final int FPS;
-    private final int UPS;
+public class GameLoopController implements ActionListener {
 
-    public GameLoopController() {
-        FPS = 120;
-        UPS = 200;
+    private final int UPS; // UpdatesPerSecond
+    private final Timer timer;
+    private final Game game;
+    private final List<IObserver> gameObservers;
+
+    /**
+     * Instantiates a GameLoopController. The controller will run at given tick rate.
+     * @param game model class to update every tick.
+     * @param updatesPerSecond tick rate. How often the controller updates the given model class and notifies
+     *                         potential observers per second.
+     */
+    public GameLoopController(Game game, int updatesPerSecond) {
+        UPS = updatesPerSecond;
+        this.game = game;
+        timer = new Timer(1000 / UPS, this);
+        gameObservers = new ArrayList<>();
+    }
+
+    /**
+     * Add an observer.
+     * @param observer observer
+     */
+    public void addObserver(IObserver observer) {
+        gameObservers.add(observer);
     }
 
     /**
@@ -17,43 +42,23 @@ public class GameLoopController {
      * Handles logic of when to update the internal game
      * classes and when to notify potential observers.
      */
-    public void run(Game game) {
+    public void run() {
+        timer.start();
+    }
 
-        double timePerRender =  1000000000.0 / FPS;
-        double timePerUpdate = 1000000000.0 / UPS;
-        double deltaUpdateTime = 0;
-        double deltaDrawTime = 0;
-        long currentTime;
-        long previousTime = System.nanoTime();
+    /**
+     * This method is called automatically by the internal timer. It updates the given model class and
+     * then notifies potential observers to update.
+     * @param e the event to be processed
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (!game.isPaused()) {
+            game.update(100.0 / UPS);
+        }
 
-        int frames = 0;
-        int updates = 0;
-        long lastFpsCheck = System.currentTimeMillis();
-
-        while(true) {
-            currentTime = System.nanoTime();
-            deltaUpdateTime += (currentTime - previousTime) / timePerUpdate;
-            deltaDrawTime += (currentTime - previousTime) / timePerRender;
-            previousTime = currentTime;
-
-            if (deltaUpdateTime >= 1) {
-                game.update(100.0 / UPS);
-                updates++;
-                deltaUpdateTime--;
-            }
-
-            if (deltaDrawTime >= 1) {
-                game.notifyObservers(); //DRAW
-                frames++;
-                deltaDrawTime--;
-            }
-
-            if (System.currentTimeMillis() - lastFpsCheck >= 1000) {
-                lastFpsCheck = System.currentTimeMillis();
-                System.out.println("FPS: " + frames + " | UPS: " + updates);
-                frames = 0;
-                updates = 0;
-            }
+        for (IObserver observer : gameObservers) {
+            observer.update();
         }
     }
 }

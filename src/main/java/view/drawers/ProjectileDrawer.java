@@ -1,6 +1,6 @@
 package view.drawers;
 
-import model.Game;
+import model.gameinterfaces.IProjectilesGettable;
 import model.gameobjects.Projectile;
 
 import java.awt.*;
@@ -8,11 +8,11 @@ import java.util.List;
 
 public class ProjectileDrawer implements IDrawer {
 
-    private Game game;
+    private IProjectilesGettable game;
 
     private List<Projectile> projectiles;
 
-    public ProjectileDrawer(Game game) {
+    public ProjectileDrawer(IProjectilesGettable game) {
         this.game = game;
     }
 

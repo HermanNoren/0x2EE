@@ -8,6 +8,9 @@ import view.panelstates.PanelStateFactory;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MainPanel extends JPanel implements IObserver {
 
@@ -16,9 +19,20 @@ public class MainPanel extends JPanel implements IObserver {
 
     public MainPanel(Game game) {
         this.game = game;
-        state = PanelStateFactory.createPanelState(EPanelState.INGAME, this, game);
+        state = PanelStateFactory.createPanelState(EPanelState.MAINMENU, this, game);
         changeKeyListeners();
         setFocusable(true);
+        initFonts();
+    }
+
+    private void initFonts(){
+        try {
+            Font gameDefaultFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/view/Font/GameFont.ttf"));
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(gameDefaultFont);
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -49,7 +63,7 @@ public class MainPanel extends JPanel implements IObserver {
     }
 
     @Override
-    public void draw() {
+    public void update() {
         repaint();
     }
 }

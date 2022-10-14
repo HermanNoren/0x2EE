@@ -5,22 +5,26 @@ import model.gameobjects.IFocusableObject;
 import model.helperclasses.Vector2;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * The camera class is used to simulate a camera that follows a chosen object. What object the camera is to follow
  * can be dynamically changed. Using the chosen object the camera class then calculates an offset which every
  * object being drawn should take into consideration if they have positions relative to the camera. The camera also
- * provides the ability to zoom in and out using a zoom multiplier that objects relative to the camera also should take
+ * provides the ability to zoom in and out by using a zoom multiplier that objects relative to the camera also should take
  * into consideration when being drawn.
  */
 public class Camera{
 
-    private List<IFocusableObject> focusedObject;
-    private Vector2 relativePos, absolutePos, screenCenter;
-    private final int standardDragEffectConstant;
-    private int dragEffectConstant;
+    private IFocusableObject focusedObject;
+    private boolean hasFocusedObject;
+    private Vector2 relativePos, absolutePos;
+    private final int width, height;
+    private final Vector2 screenCenter;
+    private final int standardGlideConstant;
+    private int glideConstant;
     private double currentZoomMultiplier;
+    private boolean borderLimited;
+    private int leftBorderLimit, rightBorderLimit, topBorderLimit, bottomBorderLimit;
 
     private static Camera camera;
 
@@ -28,13 +32,17 @@ public class Camera{
      * Instantiates a camera object
      */
     private Camera() {
-        this.focusedObject = new ArrayList<>();
+        this.focusedObject = null;
         relativePos = new Vector2(0, 0);  // Relative pos will be used when calculating zoom
         absolutePos = new Vector2(relativePos);     // Absolute pos will not take zoom into consideration
-        standardDragEffectConstant = 50;
-        dragEffectConstant = standardDragEffectConstant;
+        standardGlideConstant = 50;
+        glideConstant = standardGlideConstant;
         currentZoomMultiplier = 1;
-        calculateCenterPos();
+        borderLimited = false;
+        hasFocusedObject = false;
+        screenCenter = new Vector2(Config.SCREEN_WIDTH / 2.0, Config.SCREEN_HEIGHT / 2.0);
+        width = Config.SCREEN_WIDTH;
+        height = Config.SCREEN_HEIGHT;
     }
 
     /**
@@ -49,14 +57,16 @@ public class Camera{
     }
 
     /**
-     * Resets the camera; removes the focused object, resets the offset to 0x0, resets the drag effect constant
-     * and resets the zoom multiplier.
+     * Resets the camera; removes the focused object, resets the offset to 0x0, resets the drag effect constant,
+     * resets the zoom multiplier and removes any border limitations.
      */
     public void reset() {
-        this.focusedObject = new ArrayList<>();
+        focusedObject = null;
         relativePos = new Vector2(0, 0);
         absolutePos = new Vector2(relativePos);
-        resetDragEffectConstant();
+        resetGlideConstant();
+        removeBorderLimit();
+        hasFocusedObject = false;
         currentZoomMultiplier = 1;
     }
 
@@ -65,8 +75,8 @@ public class Camera{
      * @param object Object the camera will focus
      */
     public void setFocusedObject(IFocusableObject object) {
-        focusedObject = new ArrayList<>();
-        focusedObject.add(object);
+        hasFocusedObject = true;
+        focusedObject = object;
     }
 
     /**
@@ -82,13 +92,14 @@ public class Camera{
      * @return Center vector
      */
     public Vector2 getCenter() {
-        return new Vector2(absolutePos.getX() + screenCenter.getX(), absolutePos.getY() + screenCenter.getY());
+        return new Vector2(relativePos.getX() + screenCenter.getX() / currentZoomMultiplier,
+                           relativePos.getY() + screenCenter.getY() / currentZoomMultiplier);
     }
     /**
      * Zoom in
      */
     public void zoomIn() {
-        currentZoomMultiplier += 0.2;
+        currentZoomMultiplier *= 1.05;
         if (currentZoomMultiplier >= 4) { currentZoomMultiplier = 4; }
     }
 
@@ -96,7 +107,7 @@ public class Camera{
      * Zoom out
      */
     public void zoomOut() {
-        currentZoomMultiplier -= 0.2;
+        currentZoomMultiplier *= 0.95;
         if (currentZoomMultiplier <= 1) { currentZoomMultiplier = 1; }
     }
 
@@ -109,44 +120,104 @@ public class Camera{
     }
 
     /**
-     * Provides the ability to change how much the camera is "dragging" after the focused object. A higher value
-     * will result in more drag effect. 1 equals no drag effect. Values below 1 is not accepted and will
-     * automatically turn off the drag effect.
+     * Provides the ability to change how much the camera is "gliding" after the focused object. A higher value
+     * will result in more glide effect. 1 equals no glide effect. Values below 1 is not accepted and will
+     * automatically turn off the glide effect.
      * @param value drag effect >= 1
      */
-    public void setDragEffectConstant(int value) {
+    public void setGlideConstant(int value) {
         if (value < 1) { value = 1; }
-        dragEffectConstant = value;
+        glideConstant = value;
     }
 
     /**
-     * Resets the drag effect to its standard value. The standard value is 50
+     * Resets the glide effect to its standard value. The standard value is 50
      */
-    public void resetDragEffectConstant() {
-        dragEffectConstant = standardDragEffectConstant;
+    public void resetGlideConstant() {
+        glideConstant = standardGlideConstant;
+    }
+
+    /**
+     * Allows the possibility to make the camera movement limited by a border. The difference between the left border
+     * limit and the right border limit must be equal to or larger than the screen width. Likewise, the difference
+     * between top and bottom border limits must be equal to or larger than the screen height. Violation of this will
+     * automatically set the right or bottom border to minimal accepted number.
+     * @param leftBorderLimit any integer
+     * @param rightBorderLimit any integer >= leftBorderLimit + screenWidth
+     * @param topBorderLimit any integer
+     * @param bottomBorderLimit any integer >= topBorderLimit + screenHeight
+     */
+    public void setBorderLimit(int leftBorderLimit, int rightBorderLimit, int topBorderLimit, int bottomBorderLimit) {
+        if (Math.abs(leftBorderLimit - rightBorderLimit) < width) {
+            rightBorderLimit = leftBorderLimit + width;
+        }
+        if (Math.abs(topBorderLimit - bottomBorderLimit) < height) {
+            bottomBorderLimit = topBorderLimit + height;
+        }
+
+        borderLimited = true;
+        this.leftBorderLimit = leftBorderLimit;
+        this.rightBorderLimit = rightBorderLimit;
+        this.topBorderLimit = topBorderLimit;
+        this.bottomBorderLimit = bottomBorderLimit;
+    }
+
+    /**
+     * Removes any border limitations
+     */
+    public void removeBorderLimit() {
+        borderLimited = false;
     }
 
     /**
      * Updates the camera offset in regard to the object in focus
      */
     public void update() {
-        relativePos = new Vector2(absolutePos);
-        for (IFocusableObject object : focusedObject) {
-            relativePos.setX(relativePos.getX() + (object.getCenter().getX() - (relativePos.getX() + screenCenter.getX())) / (dragEffectConstant / currentZoomMultiplier));
-            relativePos.setY(relativePos.getY() + (object.getCenter().getY() - (relativePos.getY() + screenCenter.getY())) / (dragEffectConstant / currentZoomMultiplier));
+        if (hasFocusedObject) {
+            absolutePos.setX(absolutePos.getX() + (focusedObject.getCenter().getX() -
+                    (absolutePos.getX() + screenCenter.getX())) / (glideConstant / currentZoomMultiplier));
+            absolutePos.setY(absolutePos.getY() + (focusedObject.getCenter().getY() -
+                    (absolutePos.getY() + screenCenter.getY())) / (glideConstant / currentZoomMultiplier));
         }
-        absolutePos = new Vector2(relativePos);
 
-        relativePos.setX(relativePos.getX() + ((Config.SCREEN_WIDTH - Config.SCREEN_WIDTH / currentZoomMultiplier) / 2));
-        relativePos.setY(relativePos.getY() + ((Config.SCREEN_HEIGHT - Config.SCREEN_HEIGHT / currentZoomMultiplier) / 2));
+        relativePos.setX(absolutePos.getX() + ((width - width / currentZoomMultiplier) / 2));
+        relativePos.setY(absolutePos.getY() + ((height - height / currentZoomMultiplier) / 2));
+
+        if (borderLimited) {
+            fixCameraBoundariesAbsolutePos();
+            fixCameraBoundariesRelativePos();
+        }
     }
 
-    /**
-     * Calculates the center point of the window
-     */
-    private void calculateCenterPos() {
-        double x = Config.SCREEN_WIDTH / 2.0;
-        double y = Config.SCREEN_HEIGHT / 2.0;
-        screenCenter = new Vector2(x, y);
+    private void fixCameraBoundariesAbsolutePos() {
+        if (absolutePos.getX() < leftBorderLimit - (width - width / currentZoomMultiplier) / 2) {
+            absolutePos.setX(leftBorderLimit - (width - width / currentZoomMultiplier) / 2);
+        }
+        if (absolutePos.getX() + width >
+            rightBorderLimit + (width - width / currentZoomMultiplier) / 2) {
+            absolutePos.setX(rightBorderLimit - width + (width - width / currentZoomMultiplier) / 2);
+        }
+        if (absolutePos.getY() < topBorderLimit - (height - height / currentZoomMultiplier) / 2) {
+            absolutePos.setY(topBorderLimit - (height - height / currentZoomMultiplier) / 2);
+        }
+        if (absolutePos.getY() + height >
+            bottomBorderLimit + (height - height / currentZoomMultiplier) / 2) {
+            absolutePos.setY(bottomBorderLimit - height + (height - height / currentZoomMultiplier) / 2);
+        }
+    }
+
+    private void fixCameraBoundariesRelativePos() {
+        if (relativePos.getX() < leftBorderLimit) {
+            relativePos.setX(leftBorderLimit);
+        }
+        if (relativePos.getX() + width / currentZoomMultiplier > rightBorderLimit) {
+            relativePos.setX(rightBorderLimit - width / currentZoomMultiplier);
+        }
+        if (relativePos.getY() < topBorderLimit) {
+            relativePos.setY(topBorderLimit);
+        }
+        if (relativePos.getY() + height / currentZoomMultiplier > bottomBorderLimit) {
+            relativePos.setY(bottomBorderLimit - height / currentZoomMultiplier);
+        }
     }
 }
