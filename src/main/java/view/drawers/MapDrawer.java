@@ -2,11 +2,8 @@ package view.drawers;
 
 import config.Config;
 
-import model.Game;
-import model.gameobjects.Player;
 import model.helperclasses.Vector2;
 import model.helperclasses.ImageHandler;
-import model.mapclasses.GameMap;
 import model.mapclasses.Tile;
 
 import java.awt.*;

@@ -2,7 +2,6 @@ package view.panelstates;
 
 import config.Config;
 import controllers.ButtonController;
-import model.Game;
 import model.gameinterfaces.INewGamable;
 import view.MainPanel;
 import view.buttons.GameButton;

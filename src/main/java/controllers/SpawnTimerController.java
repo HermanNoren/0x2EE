@@ -1,13 +1,13 @@
 package controllers;
 
-import model.Game;
+import model.gameinterfaces.ISpawnable;
 
 import java.util.TimerTask;
 
 public class SpawnTimerController extends TimerTask {
-    private Game game;
+    private ISpawnable game;
     private int counter = 0;
-    public SpawnTimerController(Game game){
+    public SpawnTimerController(ISpawnable game){
         this.game = game;
     }
     @Override

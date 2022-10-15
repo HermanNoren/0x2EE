@@ -1,6 +1,5 @@
 package view.drawers;
 
-import controllers.ImageSwitcherController;
 import model.helperclasses.ImageHandler;
 import model.gameobjects.Player;
 

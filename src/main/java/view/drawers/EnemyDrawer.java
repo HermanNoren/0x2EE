@@ -3,7 +3,6 @@ package view.drawers;
 
 import model.gameinterfaces.IEnemiesGettable;
 import model.gameobjects.Entity;
-import model.gameobjects.enemies.Enemy;
 import model.helperclasses.ImageHandler;
 
 

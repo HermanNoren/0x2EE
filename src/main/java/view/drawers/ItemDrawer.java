@@ -1,7 +1,6 @@
 package view.drawers;
 
 import model.gameinterfaces.IItemsGettable;
-import model.gameobjects.IGameObject;
 import model.gameobjects.ItemSpawner.IItem;
 import model.helperclasses.ImageHandler;
 

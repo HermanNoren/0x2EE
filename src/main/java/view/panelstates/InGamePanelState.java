@@ -2,7 +2,6 @@ package view.panelstates;
 
 import config.Config;
 import controllers.*;
-import model.Game;
 import model.gameinterfaces.IGame;
 import view.Camera;
 import view.HUD;

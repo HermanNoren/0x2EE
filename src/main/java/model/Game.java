@@ -2,7 +2,6 @@ package model;
 
 import config.Config;
 import model.gameinterfaces.IGame;
-import model.gameinterfaces.IProjectileAddable;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
 import model.helperclasses.EDirection;
@@ -17,7 +16,6 @@ import model.helperclasses.HighscoreHandler;
 import model.helperclasses.collision.ECollisionAxis;
 import model.mapclasses.GameMap;
 import model.mapclasses.Tile;
-import model.gameobjects.IGameObject;
 
 import java.io.*;
 import java.util.*;
