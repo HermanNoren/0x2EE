@@ -27,6 +27,7 @@ public class InGamePanelState implements IPanelState {
     private PlayerDrawer playerDrawer;
     private EnemyDrawer enemyDrawer;
     private ItemDrawer itemDrawer;
+    private MapDrawer mapDrawer;
 
     private ImageSwitcherController imageSwitcherController;
     private final Camera camera;
@@ -50,9 +51,10 @@ public class InGamePanelState implements IPanelState {
         playerDrawer = new PlayerDrawer(game.getPlayer());
         enemyDrawer = new EnemyDrawer(game.getEnemies(), "boss");
         itemDrawer = new ItemDrawer(game.getItems());
+        mapDrawer = new MapDrawer(game);
 
         drawers = new ArrayList<>();
-        drawers.add(new MapDrawer(game));
+        drawers.add(mapDrawer);
         drawers.add(new ProjectileDrawer(game));
         drawers.add(new ShopDrawer(game.getShop()));
         drawers.add(playerDrawer);
@@ -60,10 +62,11 @@ public class InGamePanelState implements IPanelState {
         drawers.add(itemDrawer);
         drawers.add(new InteractShopTextDrawer(game.getShop()));
 
-        imageSwitcherController = new ImageSwitcherController(250);
+        imageSwitcherController = new ImageSwitcherController(200);
         imageSwitcherController.addImageDrawer(playerDrawer);
         imageSwitcherController.addImageDrawer(enemyDrawer);
         imageSwitcherController.addImageDrawer(itemDrawer);
+        imageSwitcherController.addImageDrawer(mapDrawer);
         imageSwitcherController.start();
     }
 

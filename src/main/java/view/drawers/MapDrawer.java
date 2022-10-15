@@ -12,11 +12,18 @@ import model.mapclasses.Tile;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.Random;
+
 import view.Camera;
 
-public class MapDrawer implements IDrawer {
+public class MapDrawer implements IDrawer, IIteratedImageDrawer {
     private final List<Tile> tiles;
-    private final BufferedImage[] tileImgs = new BufferedImage[10];
+    private final BufferedImage[] tileImgs = new BufferedImage[3];
+    private final BufferedImage[] treeImgs = new BufferedImage[3];
+
+    private Random rand;
+    private BufferedImage activeTreeImg;
+    int index;
     private final GameMap gameMap;
     private  Camera camera;
     private final int[][] mapNums;
@@ -34,19 +41,23 @@ public class MapDrawer implements IDrawer {
         mapNums = new int[gameMap.getWidth()][gameMap.getHeight()];
         this.tiles = gameMap.getTiles();
         this.imageHandler = new ImageHandler();
+        index = 0;
         initTileImgs();
+        initTreeImgs();
+        activeTreeImg = treeImgs[index];
+        rand = new Random();
     }
 
     private void initTileImgs(){
-        tileImgs[0] = imageHandler.getImage("imgs/tile/tree/tree1.png");
-        tileImgs[1] = imageHandler.getImage("imgs/tile/tree/tree2.png");
-        tileImgs[2] = imageHandler.getImage("imgs/tile/tree/tree3.png");
+        tileImgs[0] = imageHandler.getImage("imgs/tile/grass/grass1.png");
+        tileImgs[1] = imageHandler.getImage("imgs/tile/grass/grass2.png");
+        tileImgs[2] = imageHandler.getImage("imgs/tile/grass/grass3.png");
+    }
 
-        tileImgs[3] = imageHandler.getImage("imgs/tile/grass/grass1.png");
-        tileImgs[4] = imageHandler.getImage("imgs/tile/grass/grass2.png");
-        tileImgs[5] = imageHandler.getImage("imgs/tile/grass/grass3.png");
-
-        tileImgs[6] = imageHandler.getImage("imgs/tile/border.png");
+    private void initTreeImgs() {
+        treeImgs[0] = imageHandler.getImage("imgs/tile/tree/tree1.png");
+        treeImgs[1] = imageHandler.getImage("imgs/tile/tree/tree2.png");
+        treeImgs[2] = imageHandler.getImage("imgs/tile/tree/tree3.png");
     }
 
 
@@ -83,13 +94,24 @@ public class MapDrawer implements IDrawer {
                             gameMapCoordinates[col][row].getHeight());
 
                 int terrainNum = gameMapCoordinates[col][row].getTileType();
-                g2.drawImage(tileImgs[terrainNum], drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
+                if (terrainNum == 3) {
+                    g2.drawImage(tileImgs[0], drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
+                } else {
+                    g2.drawImage(activeTreeImg, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
+                }
 
                 newTerrainVector.setX(newTerrainVector.getX() + terrainSize);
                 newTerrainVector.setY(newTerrainVector.getY() + terrainSize);
             }
         }
 
+    }
+
+    @Override
+    public void switchImage() {
+        activeTreeImg = treeImgs[index];
+        index++;
+        index %= 3;
     }
 }
 
