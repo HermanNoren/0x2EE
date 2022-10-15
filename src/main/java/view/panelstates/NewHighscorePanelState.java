@@ -79,8 +79,10 @@ public class NewHighscorePanelState implements IPanelState{
 
     @Override
     public void changePanelState(EPanelState panelState) {
-        game.updateHighscoreList();
-        mainPanel.changePanelState(panelState);
+        if (game.getHighscoreName().size() == 6) {
+            game.updateHighscoreList();
+            mainPanel.changePanelState(panelState);
+        }
     }
 
     @Override

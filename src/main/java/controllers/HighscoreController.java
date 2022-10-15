@@ -34,8 +34,10 @@ public class HighscoreController implements KeyListener {
                  game.deleteLetter();
             }
             default -> {
+                // Only accept letters and numbers
+                if ((code >= 65 && code <= 90) || (code >= 48 && code <=57)) {
                     game.updateName(String.valueOf(e.getKeyChar()).toUpperCase());
-
+                }
             }
 
         }
