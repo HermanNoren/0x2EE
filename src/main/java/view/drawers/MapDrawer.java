@@ -75,9 +75,8 @@ public class MapDrawer implements IDrawer, IIteratedImageDrawer {
                             newTerrainVector,
                             map[col][row].getWidth(),
                             map[col][row].getHeight());
-
-                int terrainNum = map[col][row].getTileType();
-                if (terrainNum == 3) {
+                
+                if (map[col][row].isPassable()) {
                     g2.drawImage(tileImgs[0], drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
                 } else {
                     g2.drawImage(activeTreeImg, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
