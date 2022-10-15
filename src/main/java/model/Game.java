@@ -30,7 +30,6 @@ public class Game implements IGame {
     private List<String> highscoreName;
     private List<Enemy> enemies;
     private GameMap gameMap;
-    private File highscoreFile;
     private List<String> highscoreList;
     private List<Projectile> projectiles;
     private Shop shop;
@@ -321,6 +320,7 @@ public class Game implements IGame {
     /**
      * @param counter adds Enemy to enemies.
      */
+    @Override
     public void spawnEnemy(int counter){
         if((counter % 10) == 0 && counter != 0){
             enemyFactory = new BossEnemyFactory();
