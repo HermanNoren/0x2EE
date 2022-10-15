@@ -1,6 +1,7 @@
 package view;
 
 import model.Game;
+import model.gameinterfaces.IGame;
 import view.panelstates.EPanelState;
 import view.panelstates.IPanelState;
 import view.panelstates.PanelStateFactory;
@@ -14,10 +15,10 @@ import java.io.InputStream;
 
 public class MainPanel extends JPanel implements IObserver {
 
-    private final Game game;
+    private final IGame game;
     private IPanelState state;
 
-    public MainPanel(Game game) {
+    public MainPanel(IGame game) {
         this.game = game;
         state = PanelStateFactory.createPanelState(EPanelState.MAINMENU, this, game);
         changeKeyListeners();

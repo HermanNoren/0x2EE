@@ -1,6 +1,6 @@
 package controllers;
 
-import model.Game;
+import model.gameinterfaces.IHighscorable;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -8,12 +8,12 @@ import java.awt.event.KeyListener;
 public class HighscoreController implements KeyListener {
 
 
-    private Game game;
+    private IHighscorable game;
 
     private boolean enterKeyDown;
 
 
-    public HighscoreController(Game game) {
+    public HighscoreController(IHighscorable game) {
         this.game = game;
     }
 
@@ -31,11 +31,10 @@ public class HighscoreController implements KeyListener {
         int code = e.getKeyCode();
         switch (code){
             case (KeyEvent.VK_BACK_SPACE) ->{
-                 game.deleteLetter();
+                game.deleteLetter();
             }
             default -> {
-                    game.updateName(String.valueOf(e.getKeyChar()).toUpperCase());
-
+                game.updateName(String.valueOf(e.getKeyChar()).toUpperCase());
             }
 
         }

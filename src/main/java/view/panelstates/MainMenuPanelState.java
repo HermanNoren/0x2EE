@@ -3,6 +3,7 @@ package view.panelstates;
 import config.Config;
 import controllers.ButtonController;
 import model.Game;
+import model.gameinterfaces.INewGamable;
 import view.MainPanel;
 import view.buttons.GameButton;
 import controllers.buttonactions.MenuButtonAction;
@@ -18,18 +19,16 @@ import java.util.List;
 
 
 public class MainMenuPanelState implements IPanelState {
-    private final Game game;
     private final ButtonController bc;
     private final List<GameButton> buttons;
     private final List<IDrawer> drawers;
     private final List<KeyListener> keyListeners;
     private MainPanel mainPanel;
 
-    public MainMenuPanelState(MainPanel mainPanel, Game game) {
-        this.game = game;
+    public MainMenuPanelState(MainPanel mainPanel, INewGamable game) {
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
-        createButtons();
+        createButtons(game);
         bc = new ButtonController(buttons);
         keyListeners = new ArrayList<>();
         keyListeners.add(bc);
@@ -63,7 +62,7 @@ public class MainMenuPanelState implements IPanelState {
     }
 
 
-    private void createButtons() {
+    private void createButtons(INewGamable game) {
         GameButton mainMenuButton1 = new GameButton("PLAY", 325, 200, new NewGameButtonAction(EPanelState.INGAME, this, game));
         GameButton mainMenuButton2 = new GameButton("HIGHSCORES", 325, 300, new MenuButtonAction(EPanelState.HIGHSCORES, this));
         GameButton mainMenuButton3 = new GameButton("HOW TO PLAY", 325, 400, new MenuButtonAction(EPanelState.HOWTOPLAY, this));

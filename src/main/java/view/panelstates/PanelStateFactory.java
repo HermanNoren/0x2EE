@@ -1,11 +1,11 @@
 package view.panelstates;
 
-import model.Game;
+import model.gameinterfaces.IGame;
 import view.MainPanel;
 
 public class PanelStateFactory {
 
-    public static IPanelState createPanelState(EPanelState state, MainPanel mainPanel, Game game)  {
+    public static IPanelState createPanelState(EPanelState state, MainPanel mainPanel, IGame game)  {
         switch (state) {
             case INGAME -> {
                 return new InGamePanelState(mainPanel, game);
@@ -14,7 +14,7 @@ public class PanelStateFactory {
                 return new MainMenuPanelState(mainPanel, game);
             }
             case HIGHSCORES -> {
-                return new HighscorePanelState(mainPanel, game);
+                return new HighscorePanelState(mainPanel);
             }
             case SHOP -> {
                 return new ShopPanelState(mainPanel, game.getShopTransaction());

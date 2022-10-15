@@ -23,7 +23,6 @@ public class HighscorePanelState implements IPanelState {
     private final List<GameButton> buttons;
     private List<IDrawer> drawers;
     private List<KeyListener> keyListeners;
-    private Game game;
     private MainPanel mainPanel;
 
     private int rank, ypos;
@@ -39,8 +38,7 @@ public class HighscorePanelState implements IPanelState {
 
     private HighscoreHandler highscoreHandler;
 
-    public HighscorePanelState(MainPanel mainPanel, Game game) {
-        this.game = game;
+    public HighscorePanelState(MainPanel mainPanel) {
         this.mainPanel = mainPanel;
         this.highscoreHandler = new HighscoreHandler();
         buttons = new ArrayList<>();

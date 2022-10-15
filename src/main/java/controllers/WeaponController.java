@@ -2,18 +2,19 @@ package controllers;
 
 import controllers.sound.SoundEffect;
 import model.Game;
+import model.gameinterfaces.IShootable;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class WeaponController implements KeyListener {
 
-    private final Game game;
+    private final IShootable game;
     private boolean spaceKeyDown;
 
     SoundEffect se = new SoundEffect();
 
-    public WeaponController(Game game) {
+    public WeaponController(IShootable game) {
         this.game = game;
         se.setSoundFile("sound/laserShoot.wav");
     }
