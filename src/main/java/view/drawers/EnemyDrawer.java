@@ -1,6 +1,7 @@
 package view.drawers;
 
 
+import model.gameinterfaces.IEnemiesGettable;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.Enemy;
 import model.helperclasses.ImageHandler;
@@ -13,12 +14,12 @@ import java.util.List;
 
 public class EnemyDrawer implements IDrawer, IIteratedImageDrawer {
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
-    private final List<Enemy> enemies;
+    private final IEnemiesGettable game;
     private int imageSwitcher;
     private ImageHandler imageHandler;
 
-    public EnemyDrawer(List<Enemy> enemies, String type){
-        this.enemies = enemies;
+    public EnemyDrawer(IEnemiesGettable game, String type){
+        this.game = game;
         this.imageHandler = new ImageHandler();
         initImages(type);
     }
@@ -41,7 +42,7 @@ public class EnemyDrawer implements IDrawer, IIteratedImageDrawer {
      */
     @Override
     public void draw(Graphics2D g2) {
-        for(Entity enemy: enemies){
+        for(Entity enemy: game.getEnemies()){
             switch (enemy.getDirection()){
                 case UP ->{
                     if(imageSwitcher == 1){
@@ -83,9 +84,9 @@ public class EnemyDrawer implements IDrawer, IIteratedImageDrawer {
             List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getWidth(), enemy.getWidth());
             if (enemy.getHealth() != enemy.getMaxHp()){
                 g2.setColor(Color.red);
-                g2.fillRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / ((Enemy)enemy).getMaxHp()))), 4);
+                g2.fillRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / (enemy).getMaxHp()))), 4);
                 g2.setColor(Color.black);
-                g2.drawRoundRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / ((Enemy)enemy).getMaxHp()))), 4, 0,0);
+                g2.drawRoundRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / (enemy).getMaxHp()))), 4, 0,0);
             }
             if(!(prevImg == null)){
                 g2.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);

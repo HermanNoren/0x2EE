@@ -3,31 +3,28 @@ package model.armor;
 import model.gameobjects.IUpgradable;
 
 public class Armor implements IArmor, IUpgradable {
+    private final double armorReductionConstant;
+    private int currentLevel = 1;
 
     public Armor(){
+        armorReductionConstant = 0.08;
     }
-    private int currentLevel = 1;
-    private int currentArmorPrize = 10;
-    private final double armorReductionConstant = 0.08;
+
 
     /**
      * Method to determine how much damage reduction the player can receive,
      * determined by the player's level and an armor constant.
-     * @param damageTaken
-     * @return
+     * @param damageTaken the amount of damage taken
+     * @return the reduced amount of damage taken
      */
     @Override
     public double damageReduction(int damageTaken) {
         return damageTaken - (currentLevel * armorReductionConstant);
     }
-    public int currentDamageReduction() {
-        return currentLevel;
-    }
 
     @Override
-    public void levelUp() {
+    public void upgrade() {
         currentLevel++;
-        currentArmorPrize *= currentLevel;
     }
 
     @Override
@@ -37,6 +34,16 @@ public class Armor implements IArmor, IUpgradable {
 
     @Override
     public int upgradeCost() {
-        return currentArmorPrize * (currentLevel + 1);
+        return currentLevel * growth;
+    }
+
+    @Override
+    public int currentStats() {
+        return currentLevel;
+    }
+
+    @Override
+    public int currentPrice() {
+        return 0;
     }
 }

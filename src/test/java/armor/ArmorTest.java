@@ -8,8 +8,8 @@ public class ArmorTest {
     @Test
     void test_armor_upgrades(){
         Armor armor = new Armor();
-        armor.levelUp();
-        armor.levelUp();
-        assertEquals(3, armor.currentDamageReduction(), 0);
+        armor.upgrade();
+        armor.upgrade();
+        assertEquals(3, armor.currentStats(), 0);
     }
 }

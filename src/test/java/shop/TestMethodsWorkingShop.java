@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * (Config.SPRITE_SIZE * 3) wide and tall. The shops size is 96*96 pixels,
  * twice as wide and tall as the player.
  */
-public class ShopMethodsWorking {
+public class TestMethodsWorkingShop {
     public Shop shop;
    @BeforeEach
    void init(){

@@ -2,7 +2,7 @@ package model.helperclasses;
 
 public class Vector2 {
     private double x;
-     private double y;
+    private double y;
 
     public Vector2(double x, double y) {
         this.x = x;

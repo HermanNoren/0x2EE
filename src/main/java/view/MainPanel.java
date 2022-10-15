@@ -8,6 +8,9 @@ import view.panelstates.PanelStateFactory;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MainPanel extends JPanel implements IObserver {
 
@@ -19,12 +22,25 @@ public class MainPanel extends JPanel implements IObserver {
         state = PanelStateFactory.createPanelState(EPanelState.MAINMENU, this, game);
         changeKeyListeners();
         setFocusable(true);
+        initFonts();
     }
 
-    public Game getGame() {
-        return game;
+    private void initFonts(){
+        try {
+            Font gameDefaultFont = Font.createFont(Font.TRUETYPE_FONT, new File("src/main/java/view/Font/GameFont.ttf"));
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(gameDefaultFont);
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+        }
     }
 
+
+    /**
+     * See override description to see Graphics g draw implementation. This method
+     * is used to draw all logic of the game.
+     * @param g the <code>Graphics</code> object to protect
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;

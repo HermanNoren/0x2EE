@@ -19,7 +19,7 @@ public class CollisionHandlerTest {
     Game game;
     Player player1, player2;
 
-    /*
+    /**
         Tests for CollisionHandler.testCollision(). Testing collision on all sides and corners of an object when
         a width / height of 1 unit is intersecting and testing when the objects are perfectly aligned but not actually
         colliding.
@@ -145,7 +145,7 @@ public class CollisionHandlerTest {
     }
 
 
-    /*
+    /**
         Tests for CollisionHandler.getCollisionDirection() with player1 as the moving object and player2 as the
         object that player1 is colliding into.
      */

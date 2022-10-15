@@ -38,7 +38,7 @@ public class WeaponTest {
     @Test
     void test_if_reloading(){
         // TODO: Will change as we implement reloading logic
-        Weapon weapon = new Weapon(1, 1);
+        Weapon weapon = new Weapon();
         assertFalse(weapon.isReloading());
     }
 }

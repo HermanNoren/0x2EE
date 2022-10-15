@@ -12,40 +12,26 @@ import model.mapclasses.Tile;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.List;
-import java.util.Random;
-
 import view.Camera;
 
 public class MapDrawer implements IDrawer, IIteratedImageDrawer {
-    private final List<Tile> tiles;
     private final BufferedImage[] tileImgs = new BufferedImage[3];
     private final BufferedImage[] treeImgs = new BufferedImage[3];
-
-    private Random rand;
     private BufferedImage activeTreeImg;
     int index;
-    private final GameMap gameMap;
+    private Tile[][] map;
     private  Camera camera;
-    private final int[][] mapNums;
-    private int size = 48;
     private int spriteSize = Config.SPRITE_SIZE*3;
     private ImageHandler imageHandler;
-    private Game game;
-    private Player player;
 
-    public MapDrawer(Game game){
-        this.gameMap = game.getGameMap();
-        this.game = game;
-        player = game.getPlayer();
+    public MapDrawer(Tile[][] map){
+        this.map = map;
         camera = Camera.getInstance();
-        mapNums = new int[gameMap.getWidth()][gameMap.getHeight()];
-        this.tiles = gameMap.getTiles();
         this.imageHandler = new ImageHandler();
         index = 0;
         initTileImgs();
         initTreeImgs();
         activeTreeImg = treeImgs[index];
-        rand = new Random();
     }
 
     private void initTileImgs(){
@@ -77,34 +63,30 @@ public class MapDrawer implements IDrawer, IIteratedImageDrawer {
         if (up < 0) {
             up = 0;
         }
-        int terrainSize = Config.SPRITE_SIZE*3;
 
         Vector2 newTerrainVector;
-        Tile[][] gameMapCoordinates = gameMap.getGameMapCoordinates();
 
-        for (int col = left; col < right && col < gameMap.getWidth(); col++){
-            for(int row = up; row < down && row < gameMap.getHeight(); row++){
-                newTerrainVector = new Vector2(gameMapCoordinates[col][row].getPos()); // For drawing in correct place.
-
+        for (int col = left; col < right && col < Config.MAP_WIDTH; col++){
+            for(int row = up; row < down && row < Config.MAP_HEIGHT; row++){
+                newTerrainVector = new Vector2(map[col][row].getPos()); // For drawing in correct place.
 
                 List<Integer> drawInformation = DrawerHelper.
                     calculateDrawingInformation(
                             newTerrainVector,
-                            gameMapCoordinates[col][row].getWidth(),
-                            gameMapCoordinates[col][row].getHeight());
+                            map[col][row].getWidth(),
+                            map[col][row].getHeight());
 
-                int terrainNum = gameMapCoordinates[col][row].getTileType();
+                int terrainNum = map[col][row].getTileType();
                 if (terrainNum == 3) {
                     g2.drawImage(tileImgs[0], drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
                 } else {
                     g2.drawImage(activeTreeImg, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
                 }
 
-                newTerrainVector.setX(newTerrainVector.getX() + terrainSize);
-                newTerrainVector.setY(newTerrainVector.getY() + terrainSize);
+                newTerrainVector.setX(newTerrainVector.getX() + Config.TILE_SIZE);
+                newTerrainVector.setY(newTerrainVector.getY() + Config.TILE_SIZE);
             }
         }
-
     }
 
     @Override

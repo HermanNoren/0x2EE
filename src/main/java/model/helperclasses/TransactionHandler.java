@@ -1,40 +1,60 @@
 package model.helperclasses;
 
-import model.armor.Armor;
+
+import model.gameobjects.IPlayer;
 import model.gameobjects.IUpgradable;
-import model.gameobjects.Player;
-import model.weapons.Weapon;
 
-public class ShopTransaction {
-    private final Player player;
-    private final Weapon weapon;
-    private final Armor armor;
+/**
+ * The class which handles the logic behind the shop transactions.
+ * Interfaces are used to maximize abstraction and manipulate
+ * them through parametric polymorphism.
+ */
+public class TransactionHandler {
+    private final IPlayer player;
+    private final IUpgradable armor, weapon;
 
-
-    public ShopTransaction(Player player){
+    public TransactionHandler(IPlayer player){
         this.player = player;
+        this.armor =  player.getArmor();
         this.weapon = player.getWeapon();
-        this.armor = player.getArmor();
     }
 
 
-
-    public boolean purchasePossible(int currentPrize){
+    /**
+     * Sees if a purchase is possible.
+     * @param currentPrize The current price of the upgradable.
+     * @return Boolean if the player can afford the upgrade.
+     */
+    private boolean purchasePossible(int currentPrize){
         return ((player.getMoney() - currentPrize) >= 0);
     }
 
+    /**
+     * Gets the player money int.
+     * @return the amount of money the player has.
+     */
     public int getMoney(){
         return player.getMoney();
     }
 
+    /**
+     * @return the cost to upgrade the weapon.
+     */
 
     public int getWeaponUpgradeCost(){
         return weapon.upgradeCost();
     }
 
+    /**
+     * @return the current damage the weapon deals.
+     */
     public int getCurrentWeaponDamage(){
-        return weapon.damage;
+        return weapon.currentStats();
     }
+
+    /**
+     * @return the damage the weapon deals if it were to be upgraded.
+     */
     public int getUpgradedWeaponDamage(){
         return weapon.statsIfUpgraded();
     }
@@ -44,19 +64,23 @@ public class ShopTransaction {
      * The method implements this upgrade in the method "upgradeArmor" (below).
      * @param toBeUpgraded The thing to be upgraded.
      */
-    public void upgrade(IUpgradable toBeUpgraded){
+    private void upgrade(IUpgradable toBeUpgraded){
         newPlayerMoneyAmount(player.getMoney() - toBeUpgraded.upgradeCost());
-        toBeUpgraded.levelUp();
+        toBeUpgraded.upgrade();
     }
 
     /**
-     * Checks if the player has enough money, will upgrade armor if enough.
+     * Upgrades armor if possible.
      */
     public void upgradeArmor(){
         if(purchasePossible(armor.upgradeCost())) upgrade(armor);
     }
+
+    /**
+     * Upgrades weapon, if possible.
+     */
     public void upgradeWeapon(){
-        if(purchasePossible(weapon.upgradeCost())) upgrade(weapon);
+        if(purchasePossible(weapon.upgradeCost())) upgrade(player.getWeapon());
     }
 
     /**
@@ -72,8 +96,8 @@ public class ShopTransaction {
      * armor reduction is.
      * @return The current armor reduction.
      */
-    public int CurrentArmorReduction(){
-        return armor.currentDamageReduction();
+    public int getCurrentArmorReduction(){
+        return armor.currentStats();
     }
 
     /**
@@ -92,5 +116,4 @@ public class ShopTransaction {
     private void newPlayerMoneyAmount(int amountAfterTransaction) {
         player.setMoney(amountAfterTransaction);
     }
-
 }

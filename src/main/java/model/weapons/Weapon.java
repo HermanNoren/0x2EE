@@ -1,32 +1,27 @@
 package model.weapons;
 
-import model.gameobjects.IProjectileAddable;
+import model.gameinterfaces.IProjectileAddable;
 import model.gameobjects.IUpgradable;
 import model.gameobjects.Projectile;
 import model.helperclasses.EDirection;
 import model.helperclasses.Vector2;
 
-import java.util.List;
-
 public class Weapon implements IUpgradable {
-    public int damage;
-    private int currentLevel = 1;
-    public int ammo;
-    public boolean reloading;
-
-    private int currentWeaponPrize = 10;
-
+    private int damage;
+    private int currentLevel;
+    private int ammo;
+    private int currentPrice;
+    private boolean reloading;
 
     /**
      * The main weapon of the
      */
-    public Weapon(int damage, int ammo) {
-        this.damage = damage;
-        this.ammo = ammo;
+    public Weapon() {
+        damage = 10;
+        currentLevel = 1;
+        ammo = 7;
         reloading = false;
     }
-
-
 
     public void shoot(Vector2 pos, EDirection direction, IProjectileAddable addable){
         if (ammo != 0) {
@@ -44,7 +39,6 @@ public class Weapon implements IUpgradable {
     }
 
     /**
-     *
      * @return true if weapon is reloading
      */
     public boolean isReloading(){
@@ -52,10 +46,10 @@ public class Weapon implements IUpgradable {
     }
 
     @Override
-    public void levelUp() {
+    public void upgrade() {
         this.damage++;
         this.currentLevel++;
-        currentWeaponPrize *= currentLevel;
+
     }
 
     @Override
@@ -65,8 +59,19 @@ public class Weapon implements IUpgradable {
 
     @Override
     public int upgradeCost() {
-        return currentWeaponPrize * (currentLevel + 1);
+        currentPrice = currentLevel * growth;
+        return currentPrice;
     }
 
+     @Override
+     public int currentStats() {
+         return damage;
+     }
+
+    @Override
+    public int currentPrice() {
+        currentPrice = currentLevel * growth;
+        return currentPrice;
+    }
 
 }

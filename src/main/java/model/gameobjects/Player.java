@@ -3,6 +3,7 @@ package model.gameobjects;
 
 import model.armor.Armor;
 
+import model.gameinterfaces.IProjectileAddable;
 import model.helperclasses.EDirection;
 import model.mapclasses.Tile;
 import model.weapons.Weapon;
@@ -14,9 +15,9 @@ import model.weapons.Weapon;
 public class Player extends Entity implements IPlayer, IFocusableObject {
     private int score;
     private int money;
-    private Weapon weapon;
-    private Armor armor;
-    private double moveAcc;
+    private final Weapon weapon;
+    private final Armor armor;
+    private final double moveAcc;
 
     public boolean isOnShop = false;
     /**
@@ -27,7 +28,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
     public Player(int x, int y, Tile[][] coordinates){
         super(x, y, coordinates);
         this.armor = new Armor();
-        this.weapon = new Weapon(10, 10);
+        this.weapon = new Weapon();
         setMaxHp(1000);
         setHealth(1000);
         moveAcc = 0.3;

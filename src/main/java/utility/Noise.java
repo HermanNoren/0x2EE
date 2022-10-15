@@ -68,17 +68,14 @@ public class Noise {
         for(int i = 0;i < w;i++) {
             for(int j = 0;j < h;j++) {
                 if(grid[i][j] < crowding){
-                    tiles[i][j].setTileType(3);
+                    tiles[i][j].setPassable(true);
                 }else if(grid[i][j] < crowding + 1){
-                    tiles[i][j].setTileType(2);
                     tiles[i][j].setPassable(false);
                 }
                 else if(grid[i][j] < crowding + 2){
-                    tiles[i][j].setTileType(0);
                     tiles[i][j].setPassable(false);
                 }
                 else {
-                    tiles[i][j].setTileType(1);
                     tiles[i][j].setPassable(false);
                 }
 
@@ -97,7 +94,7 @@ public class Noise {
     public void printTileGrid(Tile[][] tiles){
         for(int i = 0; i < tiles.length; i++){
             for(int j = 0; j < tiles[0].length; j++){
-                System.out.print(tiles[i][j].getTileType());
+                System.out.print(tiles[i][j].isPassable());
                 System.out.print(",");
             }
             System.out.println();
