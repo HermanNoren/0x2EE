@@ -29,9 +29,7 @@ import java.util.Random;
  */
 public class Game implements IGame {
     private Player player;
-    private List<Tile> path;
     private List<String> highscoreName;
-    private List<IGameObject> tiles;
     private List<Enemy> enemies;
     private GameMap gameMap;
     private File highscoreFile;
@@ -55,6 +53,7 @@ public class Game implements IGame {
         highscoreList = highscoreHandler.getHighscoreList();
     }
 
+    @Override
     public void newGame() {
         this.gameMap = new GameMap(Config.MAP_WIDTH, Config.MAP_HEIGHT);
         this.player = new Player(500, 500, gameMap.getGameMapCoordinates());
@@ -63,7 +62,6 @@ public class Game implements IGame {
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
         highscoreName = new ArrayList<>();
-        this.path = new ArrayList<>();
         playerDead = false;
 
 
@@ -74,17 +72,17 @@ public class Game implements IGame {
     }
 
 
-
+    @Override
     public GameMap getGameMap() {
         return gameMap;
     }
-
+    @Override
     public int getMapSize() { return mapSize; }
-
+    @Override
     public List<String> getHighscoreName() {
         return new ArrayList<>(highscoreName);
     }
-
+    @Override
     public boolean isTopFive() {
         int oldScore;
         for (String playerScore : highscoreList) {
@@ -95,7 +93,7 @@ public class Game implements IGame {
         }
         return false;
     }
-
+    @Override
     /**
      * Updates the list containing highScores.
      */
@@ -103,13 +101,13 @@ public class Game implements IGame {
         highscoreHandler.saveHighscore(String.join("", highscoreName), player.getScore());
     }
 
-
+    @Override
     public void deleteLetter() {
         if (highscoreName.size() > 0) {
             highscoreName.remove(highscoreName.size() - 1);
         }
     }
-
+    @Override
     public void updateName(String letter) {
         if (highscoreName.size() < 6) {
             highscoreName.add(letter);
@@ -121,6 +119,7 @@ public class Game implements IGame {
      *
      * @return Player
      */
+    @Override
     public Player getPlayer() {
         return player;
     }
@@ -135,6 +134,7 @@ public class Game implements IGame {
         return spawner.getSpawnedItems();
     }
 
+    @Override
     public void makePlayerShoot() {
         player.shoot(this);
     }
@@ -144,15 +144,18 @@ public class Game implements IGame {
         projectiles.add(p);
     }
 
+    @Override
     public void pause() {
         player.setDirection(EDirection.NOT_MOVING);
         paused = true;
     }
 
+    @Override
     public void resume() {
         paused = false;
     }
 
+    @Override
     public boolean isPaused() {
         return paused;
     }
@@ -160,6 +163,7 @@ public class Game implements IGame {
     /**
      * Updates the current game state
      */
+    @Override
     public void update(double dt) {
         if (player.getHealth() < 1) {
             playerDead = true;
@@ -292,11 +296,10 @@ public class Game implements IGame {
             }
         }
     }
-
+    @Override
     public Boolean isPlayerDead() {
         return playerDead;
     }
-
 
     public boolean isPlayerInRangeOfShop() {
         return (CollisionHandler.testCollision(player, shop));
@@ -307,11 +310,12 @@ public class Game implements IGame {
         return new ArrayList<>(projectiles);
     }
 
+    @Override
     public Shop getShop() {
         return shop;
     }
 
-
+    @Override
     public TransactionHandler getShopTransaction(){
         return transactionHandler;
     }
