@@ -39,6 +39,6 @@ public class GameMapTest {
     @Test
     void test_getTerrains_returns_list_containing_Terrains(){
         List<Tile> testList = new ArrayList<>();
-        assertEquals(testList.getClass(), gameMap.getTerrains().getClass());
+        assertEquals(testList.getClass(), gameMap.getTiles().getClass());
     }
 }
