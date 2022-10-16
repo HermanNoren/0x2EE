@@ -3,8 +3,12 @@ package helperclasses;
 import model.helperclasses.HighscoreHandler;
 import org.junit.jupiter.api.*;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class HighscoreHandlerTest {
@@ -13,6 +17,8 @@ public class HighscoreHandlerTest {
 
     private List<String> highscores = highscoreHandler.getHighscoreList();
 
+    private final List<String> emptyContent = new ArrayList<>();
+
     @AfterEach
     void resetFile(){
         highscoreHandler.rollBackFile(highscores);
@@ -20,7 +26,7 @@ public class HighscoreHandlerTest {
 
     @Test
     void test_if_the_file_is_cleared_the_file_should_be_empty(){
-        highscoreHandler.clearFile();
+        highscoreHandler.rollBackFile(emptyContent);
         assertEquals(0, highscoreHandler.getHighscoreList().size());
     }
 
@@ -32,7 +38,7 @@ public class HighscoreHandlerTest {
 
     @Test
     void test_if_the_file_is_empty_and_new_highscores_are_saved_it_should_update(){
-        highscoreHandler.clearFile();
+        highscoreHandler.rollBackFile(emptyContent);
         highscoreHandler.saveHighscore("Test40", 5000);
         highscoreHandler.saveHighscore("Test40", 4500);
         assertEquals(2, highscoreHandler.getHighscoreList().size());
@@ -40,7 +46,7 @@ public class HighscoreHandlerTest {
 
    @Test
     void test_if_the_biggest_score_gets_placed_first(){
-        highscoreHandler.clearFile();
+        highscoreHandler.rollBackFile(emptyContent);
         int lowScore = 100;
         int midScore = 500;
         int highScore = 2000;
@@ -51,6 +57,22 @@ public class HighscoreHandlerTest {
         assertEquals(highscoreHandler.getScore(firstPlacement), highScore);
 
    }
+   @Test
+    void test_that_an_exception_is_thrown_if_file_does_not_exist(){
+        highscoreHandler.deleteFile();
+        assertThrows(RuntimeException.class, () -> {highscoreHandler.getHighscoreList();});
 
+   }
+
+   @Test
+    void test_if_file_creation_works(){
+        highscoreHandler.deleteFile();
+       try {
+           highscoreHandler.createNewFile();
+       } catch (IOException e) {
+           throw new RuntimeException(e);
+       }
+       assertEquals(0, highscoreHandler.getHighscoreList().size());
+   }
 
 }
