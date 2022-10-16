@@ -1,6 +1,6 @@
 package view.panelstates;
 
-import controllers.ButtonController;
+import controllers.ButtonSwitcherController;
 import controllers.buttonactions.UpgradeArmorButton;
 import model.helperclasses.TransactionHandler;
 import view.MainPanel;
@@ -19,7 +19,7 @@ import java.util.List;
 public class ShopPanelState implements IPanelState{
     private final MainPanel mainPanel;
     private TransactionHandler transactionHandler;
-    private final ButtonController stringButtonController;
+    private final ButtonSwitcherController stringButtonController;
     private final List<GameButton> buttons;
     private final List<GameButton> pictureButtons;
     private final List<KeyListener> keyListeners;
@@ -39,7 +39,7 @@ public class ShopPanelState implements IPanelState{
         createShopButtons(transactionHandler);
 
 
-        stringButtonController = new ButtonController(buttons);
+        stringButtonController = new ButtonSwitcherController(buttons);
         keyListeners.add(stringButtonController);
         drawers = new ArrayList<>();
         drawers.add(new InShopDrawer(pictureButtons));

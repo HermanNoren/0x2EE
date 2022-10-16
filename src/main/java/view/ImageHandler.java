@@ -1,4 +1,4 @@
-package model.helperclasses;
+package view;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

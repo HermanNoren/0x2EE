@@ -1,6 +1,6 @@
 package view.drawers;
 
-import model.helperclasses.ImageHandler;
+import view.ImageHandler;
 import model.gameobjects.Player;
 
 import java.awt.*;

@@ -2,7 +2,6 @@ package view;
 
 import config.Config;
 import model.gameobjects.Player;
-import model.helperclasses.ImageHandler;
 
 import java.awt.*;
 

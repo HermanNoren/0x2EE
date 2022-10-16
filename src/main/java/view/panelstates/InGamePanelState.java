@@ -31,7 +31,7 @@ public class InGamePanelState implements IPanelState {
 
     private ImageSwitcherController imageSwitcherController;
     private final Camera camera;
-    private final ArrayList<KeyListener> keyListeners;
+    private final List<KeyListener> keyListeners;
     private MainPanel mainPanel;
 
     public InGamePanelState(MainPanel mainPanel, IGame game) {

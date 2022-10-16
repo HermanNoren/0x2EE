@@ -1,8 +1,8 @@
 package view.panelstates;
 
 import config.Config;
-import controllers.ButtonController;
-import model.helperclasses.ImageHandler;
+import controllers.ButtonSwitcherController;
+import view.ImageHandler;
 import view.MainPanel;
 import view.buttons.GameButton;
 import controllers.buttonactions.MenuButtonAction;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class HowToPlayPanelState implements IPanelState{
     private BufferedImage controls, instructions;
-    private final ButtonController bc;
+    private final ButtonSwitcherController bc;
     private final ArrayList<GameButton> buttons;
     private List<IDrawer> drawers;
     private List<KeyListener> keyListeners;
@@ -30,7 +30,7 @@ public class HowToPlayPanelState implements IPanelState{
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons();
-        bc = new ButtonController(buttons);
+        bc = new ButtonSwitcherController(buttons);
         keyListeners = new ArrayList<>();
         keyListeners.add(bc);
         imageHandler = new ImageHandler();

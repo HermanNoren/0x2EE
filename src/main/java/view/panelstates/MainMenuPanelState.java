@@ -1,7 +1,7 @@
 package view.panelstates;
 
 import config.Config;
-import controllers.ButtonController;
+import controllers.ButtonSwitcherController;
 import model.gameinterfaces.INewGamable;
 import view.MainPanel;
 import view.buttons.GameButton;
@@ -18,7 +18,7 @@ import java.util.List;
 
 
 public class MainMenuPanelState implements IPanelState {
-    private final ButtonController bc;
+    private final ButtonSwitcherController bc;
     private final List<GameButton> buttons;
     private final List<IDrawer> drawers;
     private final List<KeyListener> keyListeners;
@@ -28,7 +28,7 @@ public class MainMenuPanelState implements IPanelState {
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons(game);
-        bc = new ButtonController(buttons);
+        bc = new ButtonSwitcherController(buttons);
         keyListeners = new ArrayList<>();
         keyListeners.add(bc);
         drawers = new ArrayList<>();

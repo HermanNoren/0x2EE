@@ -1,7 +1,7 @@
 package view.panelstates;
 
 import config.Config;
-import controllers.ButtonController;
+import controllers.ButtonSwitcherController;
 import controllers.HighscoreController;
 import model.gameinterfaces.IHighscorable;
 import view.MainPanel;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class NewHighscorePanelState implements IPanelState{
     IHighscorable game;
-    private final ButtonController bc;
+    private final ButtonSwitcherController bc;
     private final List<GameButton> buttons;
     private List<KeyListener> keyListeners;
     private List<IDrawer> drawers;
@@ -31,7 +31,7 @@ public class NewHighscorePanelState implements IPanelState{
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons();
-        bc = new ButtonController(buttons);
+        bc = new ButtonSwitcherController(buttons);
         keyListeners = new ArrayList<>();
         keyListeners.add(bc);
         keyListeners.add(new HighscoreController(game));

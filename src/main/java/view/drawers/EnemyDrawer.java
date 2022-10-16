@@ -3,7 +3,7 @@ package view.drawers;
 
 import model.gameinterfaces.IEnemiesGettable;
 import model.gameobjects.Entity;
-import model.helperclasses.ImageHandler;
+import view.ImageHandler;
 
 
 import java.awt.*;

@@ -3,7 +3,7 @@ package view.drawers;
 import config.Config;
 
 import model.helperclasses.Vector2;
-import model.helperclasses.ImageHandler;
+import view.ImageHandler;
 import model.mapclasses.Tile;
 
 import java.awt.*;
@@ -15,14 +15,14 @@ public class MapDrawer implements IDrawer, IIteratedImageDrawer {
     private final BufferedImage[] tileImgs = new BufferedImage[3];
     private final BufferedImage[] treeImgs = new BufferedImage[3];
     private BufferedImage activeTreeImg;
-    int index;
-    private Tile[][] map;
+    private int index;
+    private Tile[][] gameMap;
     private  Camera camera;
     private int spriteSize = Config.SPRITE_SIZE*3;
     private ImageHandler imageHandler;
 
-    public MapDrawer(Tile[][] map){
-        this.map = map;
+    public MapDrawer(Tile[][] gameMap){
+        this.gameMap = gameMap;
         camera = Camera.getInstance();
         this.imageHandler = new ImageHandler();
         index = 0;
@@ -47,7 +47,7 @@ public class MapDrawer implements IDrawer, IIteratedImageDrawer {
     @Override
     public void draw(Graphics2D g2) {
 
-        // Coordinates of tiles to paint with a 5 tile offset to guarantee visibility
+        // Coordinates of tiles to paint with a 2 tile offset to guarantee visibility
         int left = (int) (camera.getCenter().getX() - Config.SCREEN_WIDTH/2)/spriteSize - 2;
         int right = (int) (camera.getCenter().getX() + Config.SCREEN_WIDTH/2)/spriteSize + 2;
         int up = (int) (camera.getCenter().getY() - Config.SCREEN_HEIGHT/2)/spriteSize - 2;
@@ -65,15 +65,15 @@ public class MapDrawer implements IDrawer, IIteratedImageDrawer {
 
         for (int col = left; col < right && col < Config.MAP_WIDTH; col++){
             for(int row = up; row < down && row < Config.MAP_HEIGHT; row++){
-                newTerrainVector = new Vector2(map[col][row].getPos()); // For drawing in correct place.
+                newTerrainVector = new Vector2(gameMap[col][row].getPos()); // For drawing in correct place.
 
                 List<Integer> drawInformation = DrawerHelper.
                     calculateDrawingInformation(
                             newTerrainVector,
-                            map[col][row].getWidth(),
-                            map[col][row].getHeight());
+                            gameMap[col][row].getWidth(),
+                            gameMap[col][row].getHeight());
                 
-                if (map[col][row].isPassable()) {
+                if (gameMap[col][row].isPassable()) {
                     g2.drawImage(tileImgs[(row * col) % 3], drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
                 } else {
                     g2.drawImage(activeTreeImg, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);

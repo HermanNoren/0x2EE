@@ -2,7 +2,7 @@ package view.drawers;
 
 import model.gameinterfaces.IItemsGettable;
 import model.gameobjects.ItemSpawner.IItem;
-import model.helperclasses.ImageHandler;
+import view.ImageHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
