@@ -323,7 +323,7 @@ public class Game implements IGame {
         enemies.add(enemyFactory.createEnemy(player, gameMap));
     }
 
-   // TODO add override functionality
+    @Override
     public boolean playerOnShop() {
         return shop.playerOnShop;
     }
