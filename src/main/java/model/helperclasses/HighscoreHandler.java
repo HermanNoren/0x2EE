@@ -11,21 +11,43 @@ public class HighscoreHandler {
 
     private File highscoreFile;
 
+
     public HighscoreHandler(){
             highscoreFile = new File("textfiles/highscores.txt");
+            init();
             highscoreList = getHighscoreList();
     }
 
     /**
-     * Clears all content of the highscore file
+     * Creates a new file if it does not already exist.
      */
-    public void clearFile(){
-        highscoreFile.delete();
-        try {
-            highscoreFile.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+
+    private void init(){
+        if (highscoreFile.exists()){
+        }else{
+            try {
+                createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
+    }
+
+    /**
+     * Deletes the highscorefile
+     */
+
+    public void deleteFile(){
+        highscoreFile.delete();
+    }
+
+    /**
+     * Creates the highscorefile
+     * @throws IOException
+     */
+
+    public void createNewFile() throws IOException {
+        highscoreFile.createNewFile();
     }
 
     /**
@@ -33,7 +55,6 @@ public class HighscoreHandler {
      * @param oldVersion data to replace current file
      */
     public void rollBackFile(List<String> oldVersion) {
-        clearFile();
         writeToFile(oldVersion);
     }
 
@@ -44,11 +65,12 @@ public class HighscoreHandler {
      */
 
     public int getScore(String fileitem){
+        int score = 0;
         if (fileitem.contains(":")) {
             String[] savedScore = fileitem.split(":");
-            return Integer.valueOf(savedScore[1]);
+            score = Integer.valueOf(savedScore[1]);
         }
-        return 0;
+        return score;
     }
 
     /**
@@ -83,7 +105,6 @@ public class HighscoreHandler {
                 output.write(s + " ");
             }
             output.close();
-
         } catch (IOException ex1) {
             System.out.printf("ERROR writing score to file: %s\n", ex1);
         }
