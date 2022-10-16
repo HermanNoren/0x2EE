@@ -31,10 +31,13 @@ public class HighscoreController implements KeyListener {
         int code = e.getKeyCode();
         switch (code){
             case (KeyEvent.VK_BACK_SPACE) ->{
-                game.deleteLetter();
+                 game.deleteLetter();
             }
             default -> {
-                game.updateName(String.valueOf(e.getKeyChar()).toUpperCase());
+                // Only accept letters and numbers
+                if ((code >= 65 && code <= 90) || (code >= 48 && code <=57)) {
+                    game.updateName(String.valueOf(e.getKeyChar()).toUpperCase());
+                }
             }
 
         }
