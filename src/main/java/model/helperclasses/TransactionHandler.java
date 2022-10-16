@@ -2,7 +2,7 @@ package model.helperclasses;
 
 
 import model.gameobjects.IPlayer;
-import model.gameobjects.IUpgradable;
+import model.upgradables.IUpgradable;
 
 /**
  * The class which handles the logic behind the shop transactions.
@@ -22,7 +22,7 @@ public class TransactionHandler {
 
     /**
      * Sees if a purchase is possible.
-     * @param currentPrize The current price of the upgradable.
+     * @param currentPrize The current price of the Upgradable.
      * @return Boolean if the player can afford the upgrade.
      */
     private boolean purchasePossible(int currentPrize){
@@ -60,7 +60,7 @@ public class TransactionHandler {
     }
 
     /**
-     * Method which takes the interface of the upgradable thing in question.
+     * Method which takes the interface of the Upgradable thing in question.
      * The method implements this upgrade in the method "upgradeArmor" (below).
      * @param toBeUpgraded The thing to be upgraded.
      */

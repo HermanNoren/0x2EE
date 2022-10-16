@@ -1,4 +1,4 @@
-package model.weapons;
+package model.upgradables.weapon;
 
 public interface IWeapon {
     void shoot();
