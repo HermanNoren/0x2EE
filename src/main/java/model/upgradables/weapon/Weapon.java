@@ -1,24 +1,20 @@
-package model.weapons;
+package model.upgradables.weapon;
 
 import model.gameinterfaces.IProjectileAddable;
-import model.gameobjects.IUpgradable;
 import model.gameobjects.Projectile;
 import model.helperclasses.EDirection;
 import model.helperclasses.Vector2;
+import model.upgradables.Upgradable;
 
-public class Weapon implements IUpgradable {
-    private int damage;
-    private int currentLevel;
+public class Weapon extends Upgradable {
     private int ammo;
-    private int currentPrice;
     private boolean reloading;
 
     /**
      * The main weapon of the
      */
     public Weapon() {
-        damage = 10;
-        currentLevel = 1;
+        super(1, 40);
         ammo = 7;
         reloading = false;
     }
@@ -47,31 +43,7 @@ public class Weapon implements IUpgradable {
 
     @Override
     public void upgrade() {
-        this.damage++;
-        this.currentLevel++;
-
-    }
-
-    @Override
-    public int statsIfUpgraded() {
-        return damage + 1;
-    }
-
-    @Override
-    public int upgradeCost() {
-        currentPrice = currentLevel * growth;
-        return currentPrice;
-    }
-
-     @Override
-     public int currentStats() {
-         return damage;
-     }
-
-    @Override
-    public int currentPrice() {
-        currentPrice = currentLevel * growth;
-        return currentPrice;
+       super.upgrade();
     }
 
 }

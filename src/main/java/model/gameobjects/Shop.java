@@ -13,13 +13,13 @@ import model.helperclasses.Vector2;
 
 
 public class Shop implements IGameObject {
-    private final int x_position;
-    private final int y_position;
+    private final int xPosition;
+    private final int yPosition;
+    private final Vector2 position;
 
-    public Vector2 position;
 
     /**
-     * The 2 is made to represent that the hit-box of the shop is twice
+     * The two is made to represent that the hit-box of the shop is twice
      * as wide and long as it is represented by two pictures in both x and y directions.
      * However, the Config.SPRITE_SIZE * 3 is done to scale the program properly.
      */
@@ -27,15 +27,16 @@ public class Shop implements IGameObject {
     public final static int height = width;
 
     /**
-     * A boolean used to see if the player is on the store.
+     * A boolean used to see if the player is on the store, used by textDrawer
      */
 
     public boolean playerOnShop = false;
 
-    public  Shop(int x_position, int y_position){
-        this.x_position = x_position;
-        this.y_position = y_position;
-        this.position = new Vector2(x_position, y_position);
+
+    public  Shop(int xPosition, int yPosition){
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+        this.position = new Vector2(xPosition, yPosition);
     }
 
 
@@ -72,8 +73,8 @@ public class Shop implements IGameObject {
      */
     @Override
     public Vector2 getCenter() {
-        double x = x_position + (double) (getWidth() / 2);
-        double y = y_position + (double) (getHeight() / 2);
+        double x = xPosition + (double) (getWidth() / 2);
+        double y = yPosition + (double) (getHeight() / 2);
         return new Vector2(x, y);
     }
 

@@ -1,6 +1,6 @@
 package armor;
 
-import model.armor.Armor;
+import model.upgradables.armor.Armor;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

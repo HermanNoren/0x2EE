@@ -1,11 +1,12 @@
 package shop;
 
 
-import model.armor.Armor;
+import model.mapclasses.Tile;
+import model.upgradables.armor.Armor;
 import model.gameobjects.Player;
 import model.helperclasses.TransactionHandler;
-import model.mapclasses.Tile;
-import model.weapons.Weapon;
+
+import model.upgradables.weapon.Weapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,8 +24,8 @@ public class TestTransactionHandler {
     void init(){
         player = new Player(48, 48, new Tile[0][0]);
         transactionHandler = new TransactionHandler(player);
-        weapon = new Weapon();
-        armor = new Armor();
+        weapon = player.getWeapon();
+        armor = player.getArmor();
     }
 
 
@@ -72,37 +73,37 @@ public class TestTransactionHandler {
      */
     @Test
     void weapon_should_get_twice_as_expensive_when_upgraded(){
-        int priceBeforeUpgrade = weapon.currentPrice();
+        int priceBeforeUpgrade = weapon.upgradeCost();
         weapon.upgrade();
-        int priceAfterUpgrade = weapon.currentPrice();
+        int priceAfterUpgrade = weapon.upgradeCost();
         assertEquals(priceBeforeUpgrade * 2 , priceAfterUpgrade);
 
     }
     @Test
     void weapon_should_get_4_times_as_expensive_when_upgrade_3_times(){
-        int priceBeforeUpgrade = weapon.currentPrice();
+        int priceBeforeUpgrade = weapon.upgradeCost();
         weapon.upgrade();
         weapon.upgrade();
         weapon.upgrade();
-        int priceAfterUpgrade = weapon.currentPrice();
+        int priceAfterUpgrade = weapon.upgradeCost();
         assertEquals(priceBeforeUpgrade * 4 , priceAfterUpgrade);
     }
 
     @Test
     void armor_should_get_twice_as_expensive_when_upgraded(){
-        int priceBeforeUpgrade = armor.currentPrice();
+        int priceBeforeUpgrade = armor.upgradeCost();
         armor.upgrade();
-        int priceAfterUpgrade = armor.currentPrice();
+        int priceAfterUpgrade = armor.upgradeCost();
         assertEquals(priceBeforeUpgrade * 2, priceAfterUpgrade);
     }
 
     @Test
     void armor_should_get_4_times_as_expensive_when_upgrade_3_times(){
-        int priceBeforeUpgrade = armor.currentPrice();
+        int priceBeforeUpgrade = armor.upgradeCost();
         armor.upgrade();
         armor.upgrade();
         armor.upgrade();
-        int priceAfterUpgrade = armor.currentPrice();
+        int priceAfterUpgrade = armor.upgradeCost();
         assertEquals(priceBeforeUpgrade * 4, priceAfterUpgrade);
     }
 

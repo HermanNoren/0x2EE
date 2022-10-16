@@ -1,8 +1,7 @@
 package weapons;
 
 import model.Game;
-import model.gameobjects.Player;
-import model.weapons.Weapon;
+import model.upgradables.weapon.Weapon;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

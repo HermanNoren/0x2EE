@@ -19,7 +19,6 @@ import model.mapclasses.Tile;
 
 import java.io.*;
 import java.util.*;
-import java.util.Random;
 
 /**
  * This class contains the main game loop.
@@ -28,14 +27,16 @@ import java.util.Random;
 public class Game implements IGame {
     private Player player;
     private List<String> highscoreName;
+
     private List<Enemy> enemies;
     private GameMap gameMap;
+
     private List<String> highscoreList;
     private List<Projectile> projectiles;
     private Shop shop;
     private HighscoreHandler highscoreHandler;
     private Spawner spawner;
-    private Random random = new Random();
+
     private Boolean playerDead;
     private TransactionHandler transactionHandler;
     private Boolean paused;
@@ -60,10 +61,6 @@ public class Game implements IGame {
         projectiles = new ArrayList<>();
         highscoreName = new ArrayList<>();
         playerDead = false;
-
-
-
-
         spawner = new Spawner(this);
         paused = false;
     }
@@ -90,10 +87,11 @@ public class Game implements IGame {
         }
         return false;
     }
-    @Override
+
     /**
      * Updates the list containing highScores.
      */
+    @Override
     public void updateHighscoreList() {
         highscoreHandler.saveHighscore(String.join("", highscoreName), player.getScore());
     }
@@ -170,11 +168,7 @@ public class Game implements IGame {
         updateItems();
         updateProjectile(dt);
         checkIfProjectileHitsTerrain();
-
-        /**
-         * See if player is on shop, first for controller second for shop drawer
-         */
-        setBooleansForShop();
+        isPlayerOnShop();
     }
 
     private void updateProjectile(double dt) {
@@ -200,11 +194,10 @@ public class Game implements IGame {
 
 
     /**
-     * see if the player is on the shop.
+     * Call method to see if the player is on the shop.
      */
-    private void setBooleansForShop() {
-        player.isOnShop = isPlayerInRangeOfShop();
-        shop.playerOnShop = player.isOnShop;
+    private void isPlayerOnShop() {
+        shop.playerOnShop = CollisionHandler.testCollision(player, shop);
     }
 
     /**
@@ -330,4 +323,8 @@ public class Game implements IGame {
         enemies.add(enemyFactory.createEnemy(player, gameMap));
     }
 
+   // TODO add override functionality
+    public boolean playerOnShop() {
+        return shop.playerOnShop;
+    }
 }

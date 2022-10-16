@@ -1,12 +1,12 @@
 
 package model.gameobjects;
 
-import model.armor.Armor;
+import model.upgradables.armor.Armor;
 
 import model.gameinterfaces.IProjectileAddable;
 import model.helperclasses.EDirection;
 import model.mapclasses.Tile;
-import model.weapons.Weapon;
+import model.upgradables.weapon.Weapon;
 
 /**
  * The player, more implementation to come.
@@ -19,7 +19,6 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
     private final Armor armor;
     private final double moveAcc;
 
-    public boolean isOnShop = false;
     /**
      * @param x, starting x-position
      * @param y, starting y-position
@@ -33,7 +32,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
         setHealth(1000);
         moveAcc = 0.3;
         score = 0;
-        money = 0;
+        money = 1000;
     }
 
     public void shoot(IProjectileAddable addable) {
