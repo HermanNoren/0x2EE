@@ -25,6 +25,5 @@ public interface IUpgradable {
       * and armor-reduction in armor.
       */
      int currentStats();
-     int currentPrice();
 }
 

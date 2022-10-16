@@ -1,13 +1,12 @@
 package model.upgradables.armor;
+import model.upgradables.Upgradable;
 
-import model.upgradables.IUpgradable;
 
-
-public class Armor implements IArmor, IUpgradable  {
+public class Armor extends Upgradable implements IArmor {
     private final double armorReductionConstant  = 0.08;
-    private int currentLevel = 1;
 
     public Armor(){
+        super(1, 40);
     }
 
     /**
@@ -18,31 +17,7 @@ public class Armor implements IArmor, IUpgradable  {
      */
     @Override
     public double damageReduction(int damageTaken) {
-        return damageTaken - (currentLevel * armorReductionConstant);
+        return damageTaken - (super.getCurrentlevel() * armorReductionConstant);
     }
 
-    @Override
-    public void upgrade() {
-        currentLevel++;
-    }
-
-    @Override
-    public int statsIfUpgraded() {
-        return currentLevel + 1;
-    }
-
-    @Override
-    public int upgradeCost() {
-        return currentLevel * growth;
-    }
-
-    @Override
-    public int currentStats() {
-        return currentLevel;
-    }
-
-    @Override
-    public int currentPrice() {
-        return 0;
-    }
 }

@@ -48,7 +48,7 @@ public class InGamePanelState implements IPanelState {
         keyListeners.add(new CameraController());
 
         playerDrawer = new PlayerDrawer(game.getPlayer());
-        enemyDrawer = new EnemyDrawer(game, "boss");
+        enemyDrawer = new EnemyDrawer(game, "shrek");
         itemDrawer = new ItemDrawer(game);
 
         drawers = new ArrayList<>();
