@@ -74,7 +74,7 @@ public class MapDrawer implements IDrawer, IIteratedImageDrawer {
                             map[col][row].getHeight());
                 
                 if (map[col][row].isPassable()) {
-                    g2.drawImage(tileImgs[0], drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
+                    g2.drawImage(tileImgs[(row * col) % 3], drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
                 } else {
                     g2.drawImage(activeTreeImg, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
                 }
