@@ -4,6 +4,6 @@ import model.gameobjects.ItemSpawner.IItem;
 
 import java.util.List;
 
-public interface IItemsGettable {
+public interface IHasItems {
     List<IItem> getItems();
 }

@@ -2,7 +2,7 @@ package model.gameinterfaces;
 
 import model.gameobjects.Player;
 
-public interface IPlayerGettable {
+public interface IHasPlayer {
     Player getPlayer();
     Boolean isPlayerDead();
     boolean isTopFive();

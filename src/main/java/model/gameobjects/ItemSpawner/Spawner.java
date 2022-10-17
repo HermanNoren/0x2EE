@@ -7,6 +7,7 @@ import model.helperclasses.Vector2;
 import model.mapclasses.Tile;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -107,7 +108,7 @@ public class Spawner{
      */
 
     public List<IItem> getSpawnedItems(){
-        return spawnedItems;
+        return Collections.unmodifiableList(spawnedItems);
     }
 
 

@@ -4,6 +4,6 @@ import model.gameobjects.enemies.Enemy;
 
 import java.util.List;
 
-public interface IEnemiesGettable {
+public interface IHasEnemies {
     List<Enemy> getEnemies();
 }

@@ -1,6 +1,6 @@
 package controllers;
 
-import model.gameinterfaces.IHighscorable;
+import model.gameinterfaces.IHasHighscore;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -8,12 +8,12 @@ import java.awt.event.KeyListener;
 public class HighscoreController implements KeyListener {
 
 
-    private IHighscorable game;
+    private IHasHighscore game;
 
     private boolean enterKeyDown;
 
 
-    public HighscoreController(IHighscorable game) {
+    public HighscoreController(IHasHighscore game) {
         this.game = game;
     }
 

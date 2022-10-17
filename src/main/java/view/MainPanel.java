@@ -1,6 +1,5 @@
 package view;
 
-import model.Game;
 import model.gameinterfaces.IGame;
 import view.panelstates.EPanelState;
 import view.panelstates.IPanelState;
@@ -11,7 +10,6 @@ import java.awt.*;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 public class MainPanel extends JPanel implements IObserver {
 

@@ -3,12 +3,9 @@ package gameobjects.ItemSpawner;
 import model.Game;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.ItemSpawner.Potion;
-import model.gameobjects.ItemSpawner.Spawner;
 import model.gameobjects.Player;
 import model.helperclasses.Vector2;
 import org.junit.jupiter.api.Test;
-
-import java.util.Vector;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

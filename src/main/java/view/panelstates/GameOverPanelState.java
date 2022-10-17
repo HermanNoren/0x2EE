@@ -3,7 +3,7 @@ package view.panelstates;
 import config.Config;
 import controllers.ButtonSwitcherController;
 import controllers.buttonactions.NewGameButtonAction;
-import model.gameinterfaces.INewGamable;
+import model.gameinterfaces.ICreateGame;
 import view.MainPanel;
 import view.buttons.GameButton;
 import controllers.buttonactions.MenuButtonAction;
@@ -25,7 +25,7 @@ public class GameOverPanelState implements IPanelState{
     private final List<KeyListener> keyListeners;
 
 
-    public GameOverPanelState(MainPanel mainPanel, INewGamable game){
+    public GameOverPanelState(MainPanel mainPanel, ICreateGame game){
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons(game);
@@ -65,7 +65,7 @@ public class GameOverPanelState implements IPanelState{
         return keyListeners;
     }
 
-    private void createButtons(INewGamable game) {
+    private void createButtons(ICreateGame game) {
         GameButton button1 = new GameButton("RESTART", 325, 200, new NewGameButtonAction(EPanelState.INGAME, this, game));
         GameButton button2 = new GameButton("MAIN MENU", 325, 300, new MenuButtonAction(EPanelState.MAINMENU, this));
         GameButton button3 = new GameButton("QUIT", 325, 400, new QuitButtonAction());

@@ -1,9 +1,9 @@
 
 package model.gameobjects;
 
+import model.gameinterfaces.IProjectilesGettable;
 import model.upgradables.armor.Armor;
 
-import model.gameinterfaces.IProjectileAddable;
 import model.helperclasses.EDirection;
 import model.mapclasses.Tile;
 import model.upgradables.weapon.Weapon;
@@ -35,7 +35,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
         money = 1000;
     }
 
-    public void shoot(IProjectileAddable addable) {
+    public void shoot(IProjectilesGettable addable) {
         EDirection dir;
 
         if (getDirection() == EDirection.NOT_MOVING) {

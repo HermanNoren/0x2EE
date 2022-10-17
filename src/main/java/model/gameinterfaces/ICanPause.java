@@ -1,6 +1,6 @@
 package model.gameinterfaces;
 
-public interface IPausable {
+public interface ICanPause {
     boolean isPaused();
     void pause();
     void resume();
