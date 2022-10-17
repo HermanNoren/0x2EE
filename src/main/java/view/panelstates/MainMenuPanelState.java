@@ -24,6 +24,8 @@ public class MainMenuPanelState implements IPanelState {
     private final List<KeyListener> keyListeners;
     private IChangeableStatePanel mainPanel;
 
+    private String title = "0x2EE";
+
     public MainMenuPanelState(IChangeableStatePanel mainPanel, ICreateGame game) {
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
@@ -46,8 +48,7 @@ public class MainMenuPanelState implements IPanelState {
         }
         g2.setColor(Color.white);
         g2.setFont(Config.TITLE_FONT);
-        String paused = "0x2EE";
-        g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
+        g2.drawString(title, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(title)) / 2 , 128);
     }
 
     @Override

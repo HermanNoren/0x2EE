@@ -25,6 +25,8 @@ public class HowToPlayPanelState implements IPanelState{
 
     private ImageHandler imageHandler;
 
+    private String title = "HOW TO PLAY";
+
 
     public HowToPlayPanelState(IChangeableStatePanel mainPanel){
         this.mainPanel = mainPanel;
@@ -52,11 +54,9 @@ public class HowToPlayPanelState implements IPanelState{
         for (IDrawer drawer : drawers){
             drawer.draw(g2);
         }
-
         g2.setColor(Color.white);
         g2.setFont(Config.TITLE_FONT);
-        String paused = "HOW TO PLAY";
-        g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 100);
+        g2.drawString(title, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(title)) / 2 , 100);
         g2.drawImage(controls, 0,80, Config.SCREEN_WIDTH*100/150, Config.SCREEN_HEIGHT, null);
         g2.drawImage(instructions, 575,130, 350, 400, null);
     }

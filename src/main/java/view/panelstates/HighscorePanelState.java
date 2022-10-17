@@ -24,6 +24,8 @@ public class HighscorePanelState implements IPanelState {
     private List<KeyListener> keyListeners;
     private IChangeableStatePanel mainPanel;
 
+    private String title = "HIGHSCORES";
+
     private int rank, ypos;
 
     private Color gold = new Color(255, 221, 67);
@@ -50,21 +52,7 @@ public class HighscorePanelState implements IPanelState {
         scores = highscoreHandler.getHighscoreList();
     }
 
-    @Override
-    public void draw(Graphics2D g2) {
-
-        bc.update();
-
-        g2.setColor(Color.black);
-        g2.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        g2.setFont(Config.BUTTON_FONT);
-        for (IDrawer drawer : drawers){
-            drawer.draw(g2);
-        }
-        g2.setColor(Color.white);
-        g2.setFont(Config.TITLE_FONT);
-        String paused = "HIGHSCORES";
-        g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
+    private void drawScores(Graphics2D g2){
         ypos = 225;
         rank = 1;
         for (String score : scores){
@@ -82,6 +70,24 @@ public class HighscorePanelState implements IPanelState {
             }
 
         }
+    }
+
+    @Override
+    public void draw(Graphics2D g2) {
+
+        bc.update();
+        g2.setColor(Color.black);
+        g2.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
+        g2.setColor(Color.white);
+        g2.setFont(Config.TITLE_FONT);
+        g2.drawString(title, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(title)) / 2 , 128);
+        drawScores(g2);
+
+        g2.setFont(Config.BUTTON_FONT);
+        for (IDrawer drawer : drawers){
+            drawer.draw(g2);
+        }
+
 
     }
 
