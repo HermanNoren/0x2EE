@@ -1,5 +1,5 @@
 package model.gameinterfaces;
 
-public interface INewGamable {
+public interface ICreateGame {
     void newGame();
 }

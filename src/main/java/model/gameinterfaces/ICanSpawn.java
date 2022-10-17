@@ -1,5 +1,5 @@
 package model.gameinterfaces;
 
-public interface ISpawnable {
+public interface ICanSpawn {
     void spawnEnemy(int counter);
 }

@@ -2,7 +2,7 @@ package model.gameinterfaces;
 
 import java.util.List;
 
-public interface IHighscorable {
+public interface IHasHighscore {
     List<String> getHighscoreName();
     void updateHighscoreList();
     void deleteLetter();

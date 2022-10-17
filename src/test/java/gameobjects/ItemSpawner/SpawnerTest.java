@@ -1,11 +1,8 @@
 package gameobjects.ItemSpawner;
 
 import model.Game;
-import model.gameobjects.IGameObject;
 import model.gameobjects.ItemSpawner.IItem;
-import model.gameobjects.ItemSpawner.Potion;
 import model.gameobjects.ItemSpawner.Spawner;
-import model.gameobjects.Player;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

@@ -1,16 +1,16 @@
 package controllers.buttonactions;
 
-import model.gameinterfaces.IPausable;
+import model.gameinterfaces.ICanPause;
 import view.panelstates.EPanelState;
 import view.panelstates.IPanelState;
 
 public class ResumeGameButtonAction implements IButtonAction{
 
-    IPausable game;
+    ICanPause game;
     IPanelState currentState;
     EPanelState panelState;
 
-    public ResumeGameButtonAction(EPanelState panelState, IPanelState currentState, IPausable game) {
+    public ResumeGameButtonAction(EPanelState panelState, IPanelState currentState, ICanPause game) {
         this.game = game;
         this.currentState = currentState;
         this.panelState = panelState;

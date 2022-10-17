@@ -1,6 +1,6 @@
 package view.drawers;
 
-import model.gameinterfaces.IItemsGettable;
+import model.gameinterfaces.IHasItems;
 import model.gameobjects.ItemSpawner.IItem;
 import view.ImageHandler;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ItemDrawer implements IDrawer, IIteratedImageDrawer {
 
-    private IItemsGettable game;
+    private IHasItems game;
 
     private ImageHandler imageHandler;
 
@@ -24,7 +24,7 @@ public class ItemDrawer implements IDrawer, IIteratedImageDrawer {
 
     private int index;
 
-    public ItemDrawer(IItemsGettable game){
+    public ItemDrawer(IHasItems game){
         this.game = game;
         this.imageHandler = new ImageHandler();
         potion = imageHandler.getImage("imgs/drops/potion.png");

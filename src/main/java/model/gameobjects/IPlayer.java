@@ -1,13 +1,13 @@
 package model.gameobjects;
 
+import model.gameinterfaces.IProjectilesGettable;
 import model.upgradables.armor.Armor;
 import model.upgradables.weapon.Weapon;
 
-import model.gameinterfaces.IProjectileAddable;
 
 public interface IPlayer {
 
-    void shoot(IProjectileAddable addable);
+    void shoot(IProjectilesGettable addable);
     void stopCurrentXMovement();
     void stopCurrentYMovement();
     void stopAllCurrentMovement();

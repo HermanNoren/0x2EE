@@ -1,35 +1,46 @@
 package model.upgradables;
 
+/**
+ * An abstract class which contains the blueprint for an Upgradable.
+ */
 public abstract class Upgradable implements IUpgradable {
-    private int currentlevel;
-    private int growth;
+    private int currentLevel;
+    private final int growth;
+
+    /**
+     * Constructor declared in classes that extend it must declare. The currentLevel
+     * is used to see what level the upgradable is.
+     * The growth variable is used to determine the cost of the upgradable.
+     * @param currentLevel What level the upgradable starts at.
+     * @param growth how fast the upgradable cost will grow.
+     */
     public Upgradable(int currentLevel, int growth){
-        this.currentlevel = currentLevel;
+        this.currentLevel = currentLevel;
         this.growth = growth;
     }
 
 
     @Override
     public void upgrade() {
-        currentlevel++;
+        currentLevel++;
     }
 
     @Override
     public int statsIfUpgraded() {
-        return currentlevel + 1;
+        return currentLevel + 1;
     }
 
     @Override
     public int upgradeCost() {
-        return currentlevel * growth;
+        return currentLevel * growth;
     }
-    public int getCurrentlevel(){
-        return currentlevel;
+    public int getCurrentLevel(){
+        return currentLevel;
     }
 
     @Override
     public int currentStats() {
-        return currentlevel;
+        return currentLevel;
     }
 
 }

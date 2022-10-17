@@ -1,7 +1,7 @@
 package view.drawers;
 
 
-import model.gameinterfaces.IEnemiesGettable;
+import model.gameinterfaces.IHasEnemies;
 import model.gameobjects.Entity;
 import view.ImageHandler;
 
@@ -13,11 +13,11 @@ import java.util.List;
 
 public class EnemyDrawer implements IDrawer, IIteratedImageDrawer {
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
-    private final IEnemiesGettable game;
+    private final IHasEnemies game;
     private int imageSwitcher;
     private ImageHandler imageHandler;
 
-    public EnemyDrawer(IEnemiesGettable game, String type){
+    public EnemyDrawer(IHasEnemies game, String type){
         this.game = game;
         this.imageHandler = new ImageHandler();
         initImages(type);

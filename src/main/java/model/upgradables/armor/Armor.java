@@ -17,7 +17,7 @@ public class Armor extends Upgradable implements IArmor {
      */
     @Override
     public double damageReduction(int damageTaken) {
-        return damageTaken - (super.getCurrentlevel() * armorReductionConstant);
+        return damageTaken - (super.getCurrentLevel() * armorReductionConstant);
     }
 
 }
