@@ -2,8 +2,8 @@ package view.panelstates;
 
 import config.Config;
 import controllers.ButtonSwitcherController;
-import model.gameinterfaces.IGameEnemy;
-import view.MainPanel;
+import model.gameinterfaces.IGame;
+import view.IChangeableStatePanel;
 import view.buttons.GameButton;
 import controllers.buttonactions.MenuButtonAction;
 import controllers.buttonactions.NewGameButtonAction;
@@ -22,9 +22,9 @@ public class PausePanelState implements IPanelState {
     private final ArrayList<GameButton> buttons;
     private List<KeyListener> keyListeners;
     private List<IDrawer> drawers;
-    private MainPanel mainPanel;
+    private IChangeableStatePanel mainPanel;
 
-    public PausePanelState(MainPanel mainPanel, IGameEnemy game) {
+    public PausePanelState(IChangeableStatePanel mainPanel, IGame game) {
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons(game);
@@ -63,7 +63,7 @@ public class PausePanelState implements IPanelState {
         return keyListeners;
     }
 
-    private void createButtons(IGameEnemy game){
+    private void createButtons(IGame game){
         GameButton pauseButton1 = new GameButton("RESUME", 325, 200, new ResumeGameButtonAction(EPanelState.INGAME, this, game));
         GameButton pauseButton2 = new GameButton("RESTART", 325, 300, new NewGameButtonAction(EPanelState.INGAME, this, game));
         GameButton pauseButton3 = new GameButton("MAIN MENU", 325, 400, new MenuButtonAction(EPanelState.MAINMENU, this));

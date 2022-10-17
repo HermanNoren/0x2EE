@@ -95,35 +95,39 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
         return Double.compare(this.f, n.f);
     }
 
-    /**
-     *
-     * @param type the type indicates whether the tile is passable or not.
-     */
-    public void setTileType(int type) {
-        this.tileType = type;
-    }
 
+    /**
+     * {@inheritDoc}
+     */
     public int getTileType() {
         return tileType;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void setPassable(boolean passable){
         this.passable = passable;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public boolean isPassable() {
         return passable;
     }
 
     /**
-     * @param weight
-     * @param neighbor
+     * {@inheritDoc}
      */
     public void addBranch(int weight, Tile neighbor){
         Tile.Edge newEdge = new Tile.Edge(weight, neighbor);
         neighbors.add(newEdge);
     }
 
+    /**
+     *
+     */
     public static class Edge {
         private int weight;
         private Tile tile;

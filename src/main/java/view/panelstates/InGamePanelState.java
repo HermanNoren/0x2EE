@@ -2,10 +2,9 @@ package view.panelstates;
 
 import config.Config;
 import controllers.*;
-import model.gameinterfaces.IGameEnemy;
 import view.Camera;
 import view.HUD;
-import view.MainPanel;
+import view.IChangeableStatePanel;
 import view.drawers.*;
 
 import java.awt.*;
@@ -15,7 +14,7 @@ import java.util.List;
 
 public class InGamePanelState implements IPanelState {
 
-    private IGameEnemy game;
+    private IGame game;
     private HUD hud;
     /**
      * Important to know in the constructor in which order the drawable objects are put in as
@@ -32,9 +31,9 @@ public class InGamePanelState implements IPanelState {
     private ImageSwitcherController imageSwitcherController;
     private final Camera camera;
     private final List<KeyListener> keyListeners;
-    private MainPanel mainPanel;
+    private IChangeableStatePanel mainPanel;
 
-    public InGamePanelState(MainPanel mainPanel, IGameEnemy game) {
+    public InGamePanelState(IChangeableStatePanel mainPanel, IGame game) {
         this.game = game;
         this.mainPanel = mainPanel;
         keyListeners = new ArrayList<>();

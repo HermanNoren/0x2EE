@@ -3,7 +3,7 @@ package view.panelstates;
 import config.Config;
 import controllers.ButtonSwitcherController;
 import model.gameinterfaces.ICreateGame;
-import view.MainPanel;
+import view.IChangeableStatePanel;
 import view.buttons.GameButton;
 import controllers.buttonactions.MenuButtonAction;
 import controllers.buttonactions.NewGameButtonAction;
@@ -22,9 +22,9 @@ public class MainMenuPanelState implements IPanelState {
     private final List<GameButton> buttons;
     private final List<IDrawer> drawers;
     private final List<KeyListener> keyListeners;
-    private MainPanel mainPanel;
+    private IChangeableStatePanel mainPanel;
 
-    public MainMenuPanelState(MainPanel mainPanel, ICreateGame game) {
+    public MainMenuPanelState(IChangeableStatePanel mainPanel, ICreateGame game) {
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons(game);

@@ -11,7 +11,7 @@ import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 
-public class MainPanel extends JPanel implements IObserver {
+public class MainPanel extends JPanel implements IObserver, IChangeableStatePanel {
 
     private final IGameEnemy game;
     private IPanelState state;
@@ -47,6 +47,7 @@ public class MainPanel extends JPanel implements IObserver {
     }
 
 
+    @Override
     public void changePanelState(EPanelState state) {
         this.state = PanelStateFactory.createPanelState(state, this, game);
         changeKeyListeners();
