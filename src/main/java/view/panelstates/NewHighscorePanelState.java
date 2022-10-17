@@ -3,10 +3,10 @@ package view.panelstates;
 import config.Config;
 import controllers.ButtonSwitcherController;
 import controllers.HighscoreController;
+import controllers.buttonactions.MenuButtonAction;
 import model.gameinterfaces.IHasHighscore;
 import view.IChangeableStatePanel;
 import view.buttons.GameButton;
-import controllers.buttonactions.SaveScoreButtonAction;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 
@@ -97,7 +97,7 @@ public class NewHighscorePanelState implements IPanelState{
     }
 
     private void createButtons(){
-        GameButton button = new GameButton("CONTINUE", 325, 575, new SaveScoreButtonAction(EPanelState.MAINMENU, this));
+        GameButton button = new GameButton("CONTINUE", 325, 575, new MenuButtonAction(EPanelState.MAINMENU, this));
         buttons.add(button);
     }
 }
