@@ -1,5 +1,8 @@
 package model.upgradables;
 
+/**
+ * Class which consists of the main parts of an upgradable object.
+ */
 public abstract class Upgradable implements IUpgradable {
     private int currentlevel;
     private int growth;
@@ -7,7 +10,6 @@ public abstract class Upgradable implements IUpgradable {
         this.currentlevel = currentLevel;
         this.growth = growth;
     }
-
 
     @Override
     public void upgrade() {

@@ -41,9 +41,4 @@ public class Weapon extends Upgradable {
         return reloading;
     }
 
-    @Override
-    public void upgrade() {
-       super.upgrade();
-    }
-
 }

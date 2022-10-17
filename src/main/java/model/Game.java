@@ -17,7 +17,6 @@ import model.helperclasses.collision.ECollisionAxis;
 import model.mapclasses.GameMap;
 import model.mapclasses.Tile;
 
-import java.io.*;
 import java.util.*;
 
 /**
@@ -289,10 +288,6 @@ public class Game implements IGame {
     @Override
     public Boolean isPlayerDead() {
         return playerDead;
-    }
-
-    public boolean isPlayerInRangeOfShop() {
-        return (CollisionHandler.testCollision(player, shop));
     }
 
     @Override
