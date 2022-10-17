@@ -3,10 +3,10 @@ package view.panelstates;
 import config.Config;
 import controllers.ButtonSwitcherController;
 import controllers.HighscoreController;
-import controllers.buttonactions.MenuButtonAction;
 import model.gameinterfaces.IHasHighscore;
 import view.IChangeableStatePanel;
 import view.buttons.GameButton;
+import controllers.buttonactions.SaveScoreButtonAction;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 
@@ -40,6 +40,33 @@ public class NewHighscorePanelState implements IPanelState{
 
     }
 
+    private void drawTitles(Graphics2D g2){
+        g2.setFont(Config.TITLE_FONT);
+        String title = "NEW HIGHSCORE";
+        g2.drawString(title, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(title)) / 2 , 128);
+        g2.setFont(Config.INFO_FONT);
+        String action = "ENTER YOUR NAME:";
+        g2.drawString(action, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(action)) / 2 , 220);
+    }
+
+    private void drawNameLetters(Graphics2D g2){
+        xpos = 100;
+        ypos = 350;
+        g2.setColor(Color.white);
+        g2.fillRect(xpos+=100, ypos, 70, 2);
+        g2.fillRect(xpos+= 100, ypos, 70, 2);
+        g2.fillRect(xpos+= 100, ypos, 70, 2);
+        g2.fillRect(xpos+=100, ypos, 70, 2);
+        g2.fillRect(xpos+=100, ypos, 70, 2);
+        g2.fillRect(xpos+=100, ypos, 70, 2);
+        xpos = 110;
+        ypos = 340;
+        g2.setFont(Config.NAME_FONT);
+        for (String letter : game.getHighscoreName()){
+            g2.drawString(letter, xpos+=100, ypos);
+        }
+    }
+
     @Override
     public void draw(Graphics2D g2) {
 
@@ -47,33 +74,13 @@ public class NewHighscorePanelState implements IPanelState{
 
         g2.setColor(Color.black);
         g2.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
+        g2.setColor(Color.white);
+        drawTitles(g2);
+        drawNameLetters(g2);
         g2.setFont(Config.BUTTON_FONT);
-        xpos = 100;
-        ypos = 350;
         for (IDrawer drawer : drawers){
             drawer.draw(g2);
         }
-        g2.setColor(Color.white);
-        g2.fillRect(xpos+=100, ypos, 70, 2);
-        g2.fillRect(xpos+=100, ypos, 70, 2);
-        g2.fillRect(xpos+=100, ypos, 70, 2);
-        g2.fillRect(xpos+=100, ypos, 70, 2);
-        g2.fillRect(xpos+=100, ypos, 70, 2);
-        g2.fillRect(xpos+=100, ypos, 70, 2);
-
-        xpos = 110;
-        ypos = 340;
-        g2.setFont(Config.NAME_FONT);
-        for (String letter : game.getHighscoreName()){
-            g2.drawString(letter, xpos+=100, ypos);
-        }
-        g2.setColor(Color.white);
-        g2.setFont(Config.TITLE_FONT);
-        String title = "NEW HIGHSCORE";
-        g2.drawString(title, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(title)) / 2 , 128);
-        g2.setFont(Config.INFO_FONT);
-        String action = "ENTER YOUR NAME:";
-        g2.drawString(action, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(action)) / 2 , 220);
     }
 
     @Override
@@ -90,7 +97,7 @@ public class NewHighscorePanelState implements IPanelState{
     }
 
     private void createButtons(){
-        GameButton button = new GameButton("CONTINUE", 325, 575, new MenuButtonAction(EPanelState.MAINMENU, this));
+        GameButton button = new GameButton("CONTINUE", 325, 575, new SaveScoreButtonAction(EPanelState.MAINMENU, this));
         buttons.add(button);
     }
 }

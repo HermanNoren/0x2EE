@@ -24,6 +24,8 @@ public class GameOverPanelState implements IPanelState{
     private final List<IDrawer> drawers;
     private final List<KeyListener> keyListeners;
 
+    private String title = "GAME OVER";
+
 
     public GameOverPanelState(IChangeableStatePanel mainPanel, ICreateGame game){
         this.mainPanel = mainPanel;
@@ -50,8 +52,7 @@ public class GameOverPanelState implements IPanelState{
         }
         g2.setColor(Color.white);
         g2.setFont(Config.TITLE_FONT);
-        String paused = "GAME OVER";
-        g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
+        g2.drawString(title, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(title)) / 2 , 128);
 
     }
 

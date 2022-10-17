@@ -24,6 +24,8 @@ public class PausePanelState implements IPanelState {
     private List<IDrawer> drawers;
     private IChangeableStatePanel mainPanel;
 
+    private String title = "PAUSED";
+
     public PausePanelState(IChangeableStatePanel mainPanel, IGame game) {
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
@@ -48,8 +50,7 @@ public class PausePanelState implements IPanelState {
         }
         g2.setColor(Color.WHITE);
         g2.setFont(Config.TITLE_FONT);
-        String paused = "PAUSED";
-        g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
+        g2.drawString(title, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(title)) / 2 , 128);
 
     }
 
