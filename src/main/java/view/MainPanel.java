@@ -1,6 +1,5 @@
 package view;
 
-import model.Game;
 import model.gameinterfaces.IGame;
 import view.panelstates.EPanelState;
 import view.panelstates.IPanelState;
@@ -11,9 +10,8 @@ import java.awt.*;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
-public class MainPanel extends JPanel implements IObserver {
+public class MainPanel extends JPanel implements IObserver, IChangeableStatePanel {
 
     private final IGame game;
     private IPanelState state;
@@ -49,6 +47,7 @@ public class MainPanel extends JPanel implements IObserver {
     }
 
 
+    @Override
     public void changePanelState(EPanelState state) {
         this.state = PanelStateFactory.createPanelState(state, this, game);
         changeKeyListeners();

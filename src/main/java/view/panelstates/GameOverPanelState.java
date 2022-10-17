@@ -4,7 +4,7 @@ import config.Config;
 import controllers.ButtonSwitcherController;
 import controllers.buttonactions.NewGameButtonAction;
 import model.gameinterfaces.INewGamable;
-import view.MainPanel;
+import view.IChangeableStatePanel;
 import view.buttons.GameButton;
 import controllers.buttonactions.MenuButtonAction;
 import controllers.buttonactions.QuitButtonAction;
@@ -18,14 +18,14 @@ import java.util.List;
 
 public class GameOverPanelState implements IPanelState{
 
-    private MainPanel mainPanel;
+    private IChangeableStatePanel mainPanel;
     private final ButtonSwitcherController bc;
     private final List<GameButton> buttons;
     private final List<IDrawer> drawers;
     private final List<KeyListener> keyListeners;
 
 
-    public GameOverPanelState(MainPanel mainPanel, INewGamable game){
+    public GameOverPanelState(IChangeableStatePanel mainPanel, INewGamable game){
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons(game);

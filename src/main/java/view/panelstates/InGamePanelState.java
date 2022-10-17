@@ -5,7 +5,7 @@ import controllers.*;
 import model.gameinterfaces.IGame;
 import view.Camera;
 import view.HUD;
-import view.MainPanel;
+import view.IChangeableStatePanel;
 import view.drawers.*;
 
 import java.awt.*;
@@ -32,9 +32,9 @@ public class InGamePanelState implements IPanelState {
     private ImageSwitcherController imageSwitcherController;
     private final Camera camera;
     private final List<KeyListener> keyListeners;
-    private MainPanel mainPanel;
+    private IChangeableStatePanel mainPanel;
 
-    public InGamePanelState(MainPanel mainPanel, IGame game) {
+    public InGamePanelState(IChangeableStatePanel mainPanel, IGame game) {
         this.game = game;
         this.mainPanel = mainPanel;
         keyListeners = new ArrayList<>();

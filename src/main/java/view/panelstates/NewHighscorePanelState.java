@@ -4,7 +4,7 @@ import config.Config;
 import controllers.ButtonSwitcherController;
 import controllers.HighscoreController;
 import model.gameinterfaces.IHighscorable;
-import view.MainPanel;
+import view.IChangeableStatePanel;
 import view.buttons.GameButton;
 import controllers.buttonactions.SaveScoreButtonAction;
 import view.drawers.ButtonDrawer;
@@ -23,10 +23,10 @@ public class NewHighscorePanelState implements IPanelState{
     private List<IDrawer> drawers;
 
     private int xpos, ypos;
-    private MainPanel mainPanel;
+    private IChangeableStatePanel mainPanel;
 
 
-    public NewHighscorePanelState(MainPanel mainPanel, IHighscorable game){
+    public NewHighscorePanelState(IChangeableStatePanel mainPanel, IHighscorable game){
         this.game = game;
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();

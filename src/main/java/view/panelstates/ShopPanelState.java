@@ -3,7 +3,7 @@ package view.panelstates;
 import controllers.ButtonSwitcherController;
 import controllers.buttonactions.UpgradeArmorButton;
 import model.helperclasses.TransactionHandler;
-import view.MainPanel;
+import view.IChangeableStatePanel;
 import view.buttons.GameButton;
 import controllers.buttonactions.UpgradeWeaponAction;
 import controllers.buttonactions.MenuButtonAction;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShopPanelState implements IPanelState{
-    private final MainPanel mainPanel;
+    private final IChangeableStatePanel mainPanel;
     private TransactionHandler transactionHandler;
     private final ButtonSwitcherController stringButtonController;
     private final List<GameButton> buttons;
@@ -30,7 +30,7 @@ public class ShopPanelState implements IPanelState{
 
     private final static String currentCostText =  "UPGRADE COSTS ";
 
-    public ShopPanelState(MainPanel mainPanel, TransactionHandler transactionHandler) {
+    public ShopPanelState(IChangeableStatePanel mainPanel, TransactionHandler transactionHandler) {
         this.mainPanel = mainPanel;
         this.transactionHandler = transactionHandler;
         buttons = new ArrayList<>();

@@ -4,8 +4,6 @@ import config.Config;
 import model.gameobjects.IFocusableObject;
 import model.helperclasses.Vector2;
 
-import java.util.ArrayList;
-
 /**
  * The camera class is used to simulate a camera that follows a chosen object. What object the camera is to follow
  * can be dynamically changed. Using the chosen object the camera class then calculates an offset which every

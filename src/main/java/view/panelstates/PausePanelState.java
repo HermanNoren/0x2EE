@@ -3,7 +3,7 @@ package view.panelstates;
 import config.Config;
 import controllers.ButtonSwitcherController;
 import model.gameinterfaces.IGame;
-import view.MainPanel;
+import view.IChangeableStatePanel;
 import view.buttons.GameButton;
 import controllers.buttonactions.MenuButtonAction;
 import controllers.buttonactions.NewGameButtonAction;
@@ -22,9 +22,9 @@ public class PausePanelState implements IPanelState {
     private final ArrayList<GameButton> buttons;
     private List<KeyListener> keyListeners;
     private List<IDrawer> drawers;
-    private MainPanel mainPanel;
+    private IChangeableStatePanel mainPanel;
 
-    public PausePanelState(MainPanel mainPanel, IGame game) {
+    public PausePanelState(IChangeableStatePanel mainPanel, IGame game) {
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons(game);

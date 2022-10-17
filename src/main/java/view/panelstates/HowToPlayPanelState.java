@@ -2,8 +2,8 @@ package view.panelstates;
 
 import config.Config;
 import controllers.ButtonSwitcherController;
+import view.IChangeableStatePanel;
 import view.ImageHandler;
-import view.MainPanel;
 import view.buttons.GameButton;
 import controllers.buttonactions.MenuButtonAction;
 import view.drawers.ButtonDrawer;
@@ -21,12 +21,12 @@ public class HowToPlayPanelState implements IPanelState{
     private final ArrayList<GameButton> buttons;
     private List<IDrawer> drawers;
     private List<KeyListener> keyListeners;
-    private MainPanel mainPanel;
+    private IChangeableStatePanel mainPanel;
 
     private ImageHandler imageHandler;
 
 
-    public HowToPlayPanelState(MainPanel mainPanel){
+    public HowToPlayPanelState(IChangeableStatePanel mainPanel){
         this.mainPanel = mainPanel;
         buttons = new ArrayList<>();
         createButtons();

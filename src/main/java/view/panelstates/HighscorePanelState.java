@@ -3,7 +3,7 @@ package view.panelstates;
 import config.Config;
 import controllers.ButtonSwitcherController;
 import model.helperclasses.HighscoreHandler;
-import view.MainPanel;
+import view.IChangeableStatePanel;
 import view.buttons.GameButton;
 import controllers.buttonactions.MenuButtonAction;
 import view.drawers.ButtonDrawer;
@@ -22,7 +22,7 @@ public class HighscorePanelState implements IPanelState {
     private final List<GameButton> buttons;
     private List<IDrawer> drawers;
     private List<KeyListener> keyListeners;
-    private MainPanel mainPanel;
+    private IChangeableStatePanel mainPanel;
 
     private int rank, ypos;
 
@@ -37,7 +37,7 @@ public class HighscorePanelState implements IPanelState {
 
     private HighscoreHandler highscoreHandler;
 
-    public HighscorePanelState(MainPanel mainPanel) {
+    public HighscorePanelState(IChangeableStatePanel mainPanel) {
         this.mainPanel = mainPanel;
         this.highscoreHandler = new HighscoreHandler();
         buttons = new ArrayList<>();
