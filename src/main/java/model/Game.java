@@ -36,7 +36,7 @@ public class Game implements IGame {
     private HighscoreHandler highscoreHandler;
     private Spawner spawner;
 
-    private Boolean playerDead;
+    private boolean playerDead;
     private TransactionHandler transactionHandler;
     private Boolean paused;
 
@@ -49,6 +49,7 @@ public class Game implements IGame {
         highscoreHandler = new HighscoreHandler();
         highscoreList = highscoreHandler.getHighscoreList();
     }
+
 
     @Override
     public void newGame() {
@@ -64,17 +65,33 @@ public class Game implements IGame {
         paused = false;
     }
 
-
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public GameMap getGameMap() {
         return gameMap;
     }
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public int getMapSize() { return mapSize; }
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public List<String> getHighscoreName() {
         return new ArrayList<>(highscoreName);
     }
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public boolean isTopFive() {
         int oldScore;
@@ -95,12 +112,18 @@ public class Game implements IGame {
         highscoreHandler.saveHighscore(String.join("", highscoreName), player.getScore());
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void deleteLetter() {
         if (highscoreName.size() > 0) {
             highscoreName.remove(highscoreName.size() - 1);
         }
     }
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void updateName(String letter) {
         if (highscoreName.size() < 6) {
@@ -118,37 +141,61 @@ public class Game implements IGame {
         return player;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public List<Enemy> getEnemies() {
         return new ArrayList<>(enemies);
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public List<IItem> getItems() {
         return spawner.getSpawnedItems();
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void makePlayerShoot() {
         player.shoot(this);
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void addProjectile(Projectile p) {
         projectiles.add(p);
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void pause() {
         player.setDirection(EDirection.NOT_MOVING);
         paused = true;
     }
 
+    /**
+     *{@inheritDoc}
+     */
     @Override
     public void resume() {
         paused = false;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public boolean isPaused() {
         return paused;
@@ -285,8 +332,12 @@ public class Game implements IGame {
             }
         }
     }
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
-    public Boolean isPlayerDead() {
+    public boolean isPlayerDead() {
         return playerDead;
     }
 
@@ -294,16 +345,28 @@ public class Game implements IGame {
         return (CollisionHandler.testCollision(player, shop));
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public List<Projectile> getProjectiles() {
         return new ArrayList<>(projectiles);
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public Shop getShop() {
         return shop;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public TransactionHandler getShopTransaction(){
         return transactionHandler;
@@ -322,6 +385,10 @@ public class Game implements IGame {
         enemies.add(enemyFactory.createEnemy(player, gameMap));
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public boolean playerOnShop() {
         return shop.playerOnShop;
