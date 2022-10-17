@@ -106,7 +106,7 @@ public class HighscoreHandler {
             }
             output.close();
         } catch (IOException ex1) {
-            System.out.printf("ERROR writing score to file: %s\n", ex1);
+            ex1.printStackTrace();
         }
     }
 

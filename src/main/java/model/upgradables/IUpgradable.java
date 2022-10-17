@@ -1,7 +1,6 @@
 package model.upgradables;
 
 public interface IUpgradable {
-    int growth = 40;
     /**
      * Levels up the thing in question.
      */

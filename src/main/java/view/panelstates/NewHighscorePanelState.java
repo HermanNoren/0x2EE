@@ -47,7 +47,7 @@ public class NewHighscorePanelState implements IPanelState{
 
         g2.setColor(Color.black);
         g2.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        g2.setFont(Config.buttonFont);
+        g2.setFont(Config.BUTTON_FONT);
         xpos = 100;
         ypos = 350;
         for (IDrawer drawer : drawers){
@@ -63,15 +63,15 @@ public class NewHighscorePanelState implements IPanelState{
 
         xpos = 110;
         ypos = 340;
-        g2.setFont(Config.nameFont);
+        g2.setFont(Config.NAME_FONT);
         for (String letter : game.getHighscoreName()){
             g2.drawString(letter, xpos+=100, ypos);
         }
         g2.setColor(Color.white);
-        g2.setFont(Config.titleFont);
+        g2.setFont(Config.TITLE_FONT);
         String title = "NEW HIGHSCORE";
         g2.drawString(title, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(title)) / 2 , 128);
-        g2.setFont(Config.infoFont);
+        g2.setFont(Config.INFO_FONT);
         String action = "ENTER YOUR NAME:";
         g2.drawString(action, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(action)) / 2 , 220);
     }

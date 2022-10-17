@@ -87,7 +87,7 @@ public class TransactionHandler {
      * Inspected by the view to see the amount of armor reduction after the upgrade.
      * @return What the armor reduction will be after an upgrade.
      */
-    public int ArmorReductionAfterUpgrade(){
+    public int armorReductionAfterUpgrade(){
         return armor.statsIfUpgraded();
     }
 

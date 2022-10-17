@@ -41,7 +41,7 @@ public class InteractShopTextDrawer implements IDrawer{
     @Override
     public void draw(Graphics2D g2) {
         g2.setColor(Color.white);
-        g2.setFont(Config.buttonFont);
+        g2.setFont(Config.BUTTON_FONT);
         if(shop.playerOnShop){
             List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(shopPosition, passableValue, passableValue);
             int heightOffset = -10;

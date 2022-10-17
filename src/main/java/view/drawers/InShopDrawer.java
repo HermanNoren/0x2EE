@@ -39,7 +39,7 @@ public class InShopDrawer implements IDrawer{
             armorInactive = imageHandler.getImage("imgs/shop/armor/armorInactive.png");
         }
         catch (Exception errorMessage){
-            System.out.println(errorMessage.getMessage());
+           errorMessage.printStackTrace();
         }
     }
 

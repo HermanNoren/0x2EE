@@ -48,13 +48,13 @@ public class HowToPlayPanelState implements IPanelState{
 
         g2.setColor(Color.black);
         g2.fillRect(0,0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        g2.setFont(Config.buttonFont);
+        g2.setFont(Config.BUTTON_FONT);
         for (IDrawer drawer : drawers){
             drawer.draw(g2);
         }
 
         g2.setColor(Color.white);
-        g2.setFont(Config.titleFont);
+        g2.setFont(Config.TITLE_FONT);
         String paused = "HOW TO PLAY";
         g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 100);
         g2.drawImage(controls, 0,80, Config.SCREEN_WIDTH*100/150, Config.SCREEN_HEIGHT, null);

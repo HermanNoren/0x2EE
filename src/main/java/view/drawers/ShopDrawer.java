@@ -44,7 +44,7 @@ public class ShopDrawer implements IDrawer{
            bottomRight = imageHandler.getImage("imgs/shop/ShoppingPNGS/shopbottomright.png");
         }
         catch (Exception errorMessage){
-            System.out.println(errorMessage.getMessage());
+            errorMessage.printStackTrace();
         }
     }
 
@@ -73,7 +73,7 @@ public class ShopDrawer implements IDrawer{
                 return new Vector2(xCoordinate, yCoordinate  + shopHeight/amountOfPicturesOffset);
 
         }   catch (Exception e){
-                System.out.println(e.getMessage());
+                e.printStackTrace();
             }
     return null;
     }

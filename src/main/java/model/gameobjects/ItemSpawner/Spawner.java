@@ -14,9 +14,9 @@ import java.util.Random;
 public class Spawner{
 
     private Game game;
-    private List<Double> x_values, y_values;
+    private List<Double> xValues, yValues;
     private List<Enemy> enemies;
-    private double avg_x, avg_y;
+    private double averageX, averageY;
 
     private List<IItem> spawnedItems;
     private Random rand = new Random();
@@ -50,20 +50,20 @@ public class Spawner{
 
     private Vector2 getClosestLocation(double x, double y) {
         List<Tile> locations = game.getGameMap().getPassableTiles();
-        double tile_x, tile_y;
+        double tileX, tileY;
         double difference = 1000000;
-        double current_difference = 0;
-        Tile closest_tile = new Tile(0,0);
+        double currentDifference = 0;
+        Tile closestTile = new Tile(0,0);
         for (Tile tile : locations) {
-            tile_x = tile.getPos().getX();
-            tile_y = tile.getPos().getY();
-            current_difference = Math.abs(tile_x - x) + Math.abs(tile_y - y);
-            if (current_difference <= difference) {
-                difference = current_difference;
-                closest_tile = tile;
+            tileX = tile.getPos().getX();
+            tileY = tile.getPos().getY();
+            currentDifference = Math.abs(tileX - x) + Math.abs(tileY - y);
+            if (currentDifference <= difference) {
+                difference = currentDifference;
+                closestTile = tile;
             }
         }
-        return closest_tile.getPos();
+        return closestTile.getPos();
     }
 
     /**
@@ -77,15 +77,15 @@ public class Spawner{
         if (enemies.size() <= 1) {
            return getRandomPassableLocation(locations);
         } else {
-            x_values = new ArrayList<>();
-            y_values = new ArrayList<>();
+            xValues = new ArrayList<>();
+            yValues = new ArrayList<>();
             for (Entity enemy : enemies) {
-                x_values.add(enemy.getPos().getX());
-                y_values.add(enemy.getPos().getY());
+                xValues.add(enemy.getPos().getX());
+                yValues.add(enemy.getPos().getY());
             }
-            avg_x = getAverage(x_values);
-            avg_y = getAverage(y_values);
-            return getClosestLocation(avg_x,avg_y);
+            averageX = getAverage(xValues);
+            averageY = getAverage(yValues);
+            return getClosestLocation(averageX, averageY);
         }
     }
 

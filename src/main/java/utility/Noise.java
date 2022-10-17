@@ -94,10 +94,7 @@ public class Noise {
     public void printTileGrid(Tile[][] tiles){
         for(int i = 0; i < tiles.length; i++){
             for(int j = 0; j < tiles[0].length; j++){
-                System.out.print(tiles[i][j].isPassable());
-                System.out.print(",");
             }
-            System.out.println();
         }
     }
 
@@ -108,10 +105,7 @@ public class Noise {
     public void printBooleanGrid(boolean[][] booleans){
         for(int i = 0; i < booleans.length; i++){
             for(int j = 0; j < booleans[0].length; j++){
-                System.out.print(booleans[i][j]);
-                System.out.print(",");
             }
-            System.out.println();
         }
     }
 

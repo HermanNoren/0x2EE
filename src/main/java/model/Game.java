@@ -258,7 +258,7 @@ public class Game implements IGame {
 
     /**
      * Updates enemy states and provides necessary logic for death and collisions with projectiles
-     * @param dt time passed since last update
+     * @param dt time passed since last update.
      */
     private void updateEnemies(double dt){
         Iterator<Enemy> enemyIter = getEnemies().iterator();

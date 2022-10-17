@@ -84,7 +84,7 @@ public class PlayerDrawer implements IDrawer, IIteratedImageDrawer {
             right2 = imageHandler.getImage("imgs/player/player2_right_2.png");
         }
         catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 

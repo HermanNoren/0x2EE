@@ -14,11 +14,10 @@ public class AStar {
      * @return
      */
     private static double calculateHeuristic(Tile current, Tile goal){
-        int D = 1;
         double dx = Math.abs(current.getX() - goal.getX());
         double dy = Math.abs(current.getY() - goal.getY());
-        double prio = Math.abs(dx-dy)*0.0001;
-        return D*(dx + dy + prio);
+        double priority = Math.abs(dx-dy)*0.0001;
+        return dx + dy + priority;
     }
     /**
      * Static method with A* algorithm, used to find the shortest path between two nodes

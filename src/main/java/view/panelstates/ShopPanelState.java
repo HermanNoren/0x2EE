@@ -28,7 +28,7 @@ public class ShopPanelState implements IPanelState{
     Color panelColor = new Color(0, 0, 0);
     private final String headerText = "Shop";
 
-    private final static String currentCostText =  "UPGRADE COSTS ";
+    private final static String CURRENT_COST_TEXT =  "UPGRADE COSTS ";
 
     public ShopPanelState(IChangeableStatePanel mainPanel, TransactionHandler transactionHandler) {
         this.mainPanel = mainPanel;
@@ -62,7 +62,7 @@ public class ShopPanelState implements IPanelState{
 
     private void drawPanel(Graphics2D g2) {
         g2.setColor(Color.WHITE);
-        g2.setFont(Config.titleFont);
+        g2.setFont(Config.TITLE_FONT);
         g2.drawString(headerText, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(headerText)) / 2 , Config.SCREEN_HEIGHT/5);
         stringButtonController.update();
         g2.setColor(panelColor);
@@ -73,9 +73,9 @@ public class ShopPanelState implements IPanelState{
         drawWeaponUpgradePerks(g2, transactionHandler.getCurrentWeaponDamage(), transactionHandler.getUpgradedWeaponDamage());
 
         drawArmorCost(g2, transactionHandler.getArmorUpgradeCost());
-        drawArmorUpgradePerks(g2, transactionHandler.getCurrentArmorReduction(), transactionHandler.ArmorReductionAfterUpgrade());
+        drawArmorUpgradePerks(g2, transactionHandler.getCurrentArmorReduction(), transactionHandler.armorReductionAfterUpgrade());
 
-        g2.setFont(Config.buttonFont); //the font which the button are drawn in
+        g2.setFont(Config.BUTTON_FONT); //the font which the button are drawn in
     }
 
     /**
@@ -85,7 +85,7 @@ public class ShopPanelState implements IPanelState{
      */
     private void drawPlayerMoney(Graphics2D g2, int playerMoney){
         g2.setColor(Color.WHITE);
-        g2.setFont(Config.nameFont);
+        g2.setFont(Config.NAME_FONT);
         g2.drawString((playerMoney + "$"),(Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(playerMoney + "$")), Config.SCREEN_HEIGHT/12);
     }
 
@@ -96,8 +96,8 @@ public class ShopPanelState implements IPanelState{
      */
     private void drawWeaponCost(Graphics2D g2, int weaponUpgradeCost){
         g2.setColor(Color.WHITE);
-        g2.setFont(Config.inGameTextFont);
-        String textToBeRepresented = currentCostText + weaponUpgradeCost +"$";
+        g2.setFont(Config.IN_GAME_TEXT_FONT);
+        String textToBeRepresented = CURRENT_COST_TEXT + weaponUpgradeCost +"$";
         g2.drawString((textToBeRepresented), Config.SCREEN_WIDTH/3, (int) ((Config.SCREEN_HEIGHT)/1.7));
     }
 
@@ -108,8 +108,8 @@ public class ShopPanelState implements IPanelState{
      */
     private void drawArmorCost(Graphics2D g2, int armorUpgradeCost){
         g2.setColor(Color.WHITE);
-        g2.setFont(Config.inGameTextFont);
-        String textToBeRepresented = currentCostText + armorUpgradeCost + "$";
+        g2.setFont(Config.IN_GAME_TEXT_FONT);
+        String textToBeRepresented = CURRENT_COST_TEXT + armorUpgradeCost + "$";
         g2.drawString(textToBeRepresented, Config.SCREEN_WIDTH/3, (Config.SCREEN_HEIGHT)/4);
     }
 
@@ -122,7 +122,7 @@ public class ShopPanelState implements IPanelState{
      */
     private void drawArmorUpgradePerks(Graphics2D g2, int currentDamageReduction, int armorReductionAfterUpgrade){
         g2.setColor(Color.WHITE);
-        g2.setFont(Config.inGameTextFont);
+        g2.setFont(Config.IN_GAME_TEXT_FONT);
         String currentDamageReductionText = "ARMOR %" + currentDamageReduction;
         String damageReductionAfterUpgradeText = " -> %" +  armorReductionAfterUpgrade;
         g2.drawString(currentDamageReductionText + damageReductionAfterUpgradeText,Config.SCREEN_WIDTH/3, Config.SCREEN_HEIGHT/3);
@@ -138,7 +138,7 @@ public class ShopPanelState implements IPanelState{
 
     private void drawWeaponUpgradePerks(Graphics2D g2, int currentWeaponDamage, int weaponDamageAfterUpgrade){
         g2.setColor(Color.WHITE);
-        g2.setFont(Config.inGameTextFont);
+        g2.setFont(Config.IN_GAME_TEXT_FONT);
         String currentDamageText = "DAMAGE " + currentWeaponDamage;
         String damageAfterUpgradeText = " -> " + weaponDamageAfterUpgrade;
         g2.drawString(currentDamageText + damageAfterUpgradeText,Config.SCREEN_WIDTH/3, (int)(Config.SCREEN_HEIGHT/1.5));

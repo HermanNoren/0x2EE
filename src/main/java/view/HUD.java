@@ -28,7 +28,7 @@ public class HUD {
      */
    public void update(Graphics2D g2){
         g2.setColor(Color.black);
-        g2.setFont(Config.inGameTextFont);
+        g2.setFont(Config.IN_GAME_TEXT_FONT);
         g2.drawString("" + player.getScore(), Config.SCREEN_WIDTH/2, 32);
         g2.drawImage(imageHandler.getImage("imgs/drops/coin_front.png"), Config.SCREEN_WIDTH - 150, Config.SCREEN_HEIGHT-80, 30, 30, null);
         g2.setColor(goldColor);

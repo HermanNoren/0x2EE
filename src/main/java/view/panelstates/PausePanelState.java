@@ -42,12 +42,12 @@ public class PausePanelState implements IPanelState {
         bc.update();
         g2.setColor(Color.black);
         g2.fillRect(0, 0, Config.SCREEN_WIDTH, Config.SCREEN_HEIGHT);
-        g2.setFont(Config.buttonFont);
+        g2.setFont(Config.BUTTON_FONT);
         for (IDrawer drawer : drawers){
             drawer.draw(g2);
         }
         g2.setColor(Color.WHITE);
-        g2.setFont(Config.titleFont);
+        g2.setFont(Config.TITLE_FONT);
         String paused = "PAUSED";
         g2.drawString(paused, (Config.SCREEN_WIDTH - g2.getFontMetrics().stringWidth(paused)) / 2 , 128);
 

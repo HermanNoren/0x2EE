@@ -124,8 +124,9 @@ public class Camera{
      * @param value drag effect >= 1
      */
     public void setGlideConstant(int value) {
-        if (value < 1) { value = 1; }
-        glideConstant = value;
+        if (value < 1)
+        {glideConstant = 1; return;}
+        glideConstant = value;   
     }
 
     /**
