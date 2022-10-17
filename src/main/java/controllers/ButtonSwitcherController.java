@@ -8,7 +8,6 @@ import java.awt.event.KeyListener;
 import java.util.List;
 
 public class ButtonSwitcherController implements KeyListener {
-
     private int activePos;
     private  List<GameButton> stringButtons;
     private boolean wKeyDown, sKeyDown, enterKeyDown, escapeKeyDown, wClicked, sClicked, enterClicked, escapeClicked;
