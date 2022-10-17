@@ -3,7 +3,7 @@ package main;
 import controllers.GameLoopController;
 import controllers.SpawnTimerController;
 import model.Game;
-import model.gameinterfaces.IGameEnemy;
+import model.gameinterfaces.IGame;
 import view.MainPanel;
 import view.Window;
 
@@ -18,7 +18,7 @@ public class Program {
      * The application. Method used to run the application.
      */
     public static void main(String[] args){
-        IGameEnemy game = new Game();
+        IGame game = new Game();
         MainPanel mainPanel = new MainPanel(game);
         Window window = new Window(mainPanel);
         GameLoopController loopController = new GameLoopController(game, 120);

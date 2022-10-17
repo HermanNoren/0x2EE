@@ -1,7 +1,7 @@
 package model;
 
 import config.Config;
-import model.gameinterfaces.IGameEnemy;
+import model.gameinterfaces.IGame;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
 import model.helperclasses.EDirection;
@@ -23,7 +23,7 @@ import java.util.*;
  * This class contains the main game loop.
  * With help of the main game loop it delegates work to the active IGameState
  */
-public class Game implements IGameEnemy {
+public class Game implements IGame {
     private Player player;
     private List<String> highscoreName;
 

@@ -1,6 +1,6 @@
 package controllers;
 
-import model.gameinterfaces.IGameEnemy;
+import model.gameinterfaces.IGame;
 import view.IObserver;
 
 import javax.swing.*;
@@ -13,7 +13,7 @@ public class GameLoopController implements ActionListener {
 
     private final int UPS; // UpdatesPerSecond
     private final Timer timer;
-    private final IGameEnemy game;
+    private final IGame game;
     private final List<IObserver> gameObservers;
 
     /**
@@ -22,7 +22,7 @@ public class GameLoopController implements ActionListener {
      * @param updatesPerSecond tick rate. How often the controller updates the given model class and notifies
      *                         potential observers per second.
      */
-    public GameLoopController(IGameEnemy game, int updatesPerSecond) {
+    public GameLoopController(IGame game, int updatesPerSecond) {
         UPS = updatesPerSecond;
         this.game = game;
         timer = new Timer(1000 / UPS, this);
