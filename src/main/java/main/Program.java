@@ -9,7 +9,14 @@ import view.Window;
 
 import java.util.Timer;
 
+/**
+ * Program class, contains main method.
+ */
 public class Program {
+    /**
+     * @param args
+     * The application. Method used to run the application.
+     */
     public static void main(String[] args){
         IGame game = new Game();
         MainPanel mainPanel = new MainPanel(game);

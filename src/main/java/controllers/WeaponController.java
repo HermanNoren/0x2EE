@@ -15,7 +15,7 @@ public class WeaponController implements KeyListener {
 
     public WeaponController(IProjectilesGettable game) {
         this.game = game;
-        se.setSoundFile("sound/laserShoot.wav");
+        se.setSoundFile("sound/.wav");
     }
 
     @Override
