@@ -1,6 +1,6 @@
 package view;
 
-import model.gameinterfaces.IGame;
+import model.gameinterfaces.IGameEnemy;
 import view.panelstates.EPanelState;
 import view.panelstates.IPanelState;
 import view.panelstates.PanelStateFactory;
@@ -13,10 +13,10 @@ import java.io.IOException;
 
 public class MainPanel extends JPanel implements IObserver {
 
-    private final IGame game;
+    private final IGameEnemy game;
     private IPanelState state;
 
-    public MainPanel(IGame game) {
+    public MainPanel(IGameEnemy game) {
         this.game = game;
         state = PanelStateFactory.createPanelState(EPanelState.MAINMENU, this, game);
         changeKeyListeners();

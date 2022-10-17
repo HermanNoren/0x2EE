@@ -1,12 +1,12 @@
 package model.upgradables.weapon;
 
-import model.gameinterfaces.IProjectilesGettable;
+import model.gameinterfaces.IHasProjectiles;
 import model.gameobjects.Projectile;
 import model.helperclasses.EDirection;
 import model.helperclasses.Vector2;
 import model.upgradables.Upgradable;
 
-public class Weapon extends Upgradable {
+public class Weapon extends Upgradable implements IWeapon {
     private int ammo;
     private boolean reloading;
 
@@ -19,7 +19,7 @@ public class Weapon extends Upgradable {
         reloading = false;
     }
 
-    public void shoot(Vector2 pos, EDirection direction, IProjectilesGettable addable){
+    public void shoot(Vector2 pos, EDirection direction, IHasProjectiles addable){
         if (ammo != 0) {
             ammo--;
             addable.addProjectile(new Projectile(pos, direction));

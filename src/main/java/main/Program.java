@@ -3,7 +3,7 @@ package main;
 import controllers.GameLoopController;
 import controllers.SpawnTimerController;
 import model.Game;
-import model.gameinterfaces.IGame;
+import model.gameinterfaces.IGameEnemy;
 import view.MainPanel;
 import view.Window;
 
@@ -11,7 +11,7 @@ import java.util.Timer;
 
 public class Program {
     public static void main(String[] args){
-        IGame game = new Game();
+        IGameEnemy game = new Game();
         MainPanel mainPanel = new MainPanel(game);
         Window window = new Window(mainPanel);
         GameLoopController loopController = new GameLoopController(game, 120);

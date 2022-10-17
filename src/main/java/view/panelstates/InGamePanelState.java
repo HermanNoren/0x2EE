@@ -2,7 +2,7 @@ package view.panelstates;
 
 import config.Config;
 import controllers.*;
-import model.gameinterfaces.IGame;
+import model.gameinterfaces.IGameEnemy;
 import view.Camera;
 import view.HUD;
 import view.MainPanel;
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class InGamePanelState implements IPanelState {
 
-    private IGame game;
+    private IGameEnemy game;
     private HUD hud;
     /**
      * Important to know in the constructor in which order the drawable objects are put in as
@@ -34,7 +34,7 @@ public class InGamePanelState implements IPanelState {
     private final List<KeyListener> keyListeners;
     private MainPanel mainPanel;
 
-    public InGamePanelState(MainPanel mainPanel, IGame game) {
+    public InGamePanelState(MainPanel mainPanel, IGameEnemy game) {
         this.game = game;
         this.mainPanel = mainPanel;
         keyListeners = new ArrayList<>();

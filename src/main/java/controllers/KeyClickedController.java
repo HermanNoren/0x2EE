@@ -1,5 +1,5 @@
 package controllers;
-import model.gameinterfaces.IGame;
+import model.gameinterfaces.IGameEnemy;
 import view.panelstates.EPanelState;
 import view.panelstates.IPanelState;
 
@@ -7,12 +7,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyClickedController implements KeyListener {
-    private final IGame game;
+    private final IGameEnemy game;
     private final IPanelState panel;
     private boolean enterKeyDown;
     private boolean escapeKeyDown;
 
-    public KeyClickedController(IGame game, IPanelState panel) {
+    public KeyClickedController(IGameEnemy game, IPanelState panel) {
         this.game = game;
         this.panel = panel;
     }

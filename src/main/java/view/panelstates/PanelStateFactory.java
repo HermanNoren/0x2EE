@@ -1,11 +1,11 @@
 package view.panelstates;
 
-import model.gameinterfaces.IGame;
+import model.gameinterfaces.IGameEnemy;
 import view.MainPanel;
 
 public class PanelStateFactory {
 
-    public static IPanelState createPanelState(EPanelState state, MainPanel mainPanel, IGame game)  {
+    public static IPanelState createPanelState(EPanelState state, MainPanel mainPanel, IGameEnemy game)  {
         switch (state) {
             case INGAME -> {
                 return new InGamePanelState(mainPanel, game);
