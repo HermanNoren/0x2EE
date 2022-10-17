@@ -7,22 +7,18 @@ public interface IGameObject {
 
     Vector2 getPos();
     /**
-     * Returns the center position of the sprite
+     * Method used to get the center position of the sprite
      * @return Center position
      */
     Vector2 getCenter();
     /**
-     * Returns the width of the sprite
+     * Method used get the width of the GameObject
+     * @return the width of the sprite
      */
     int getWidth();
     /**
-     * Returns the height of the sprite
+     * Method used to get the height of the
+     * @return the height of the gameObject
      */
     int getHeight();
-    /**
-     * Returns the position of the upper left corner
-     * of the sprite.
-     */
-
-
 }

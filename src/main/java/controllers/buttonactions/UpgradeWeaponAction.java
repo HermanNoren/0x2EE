@@ -9,6 +9,7 @@ public class UpgradeWeaponAction implements IButtonAction {
         this.transactionHandler = transactionHandler;
 
     }
+
     @Override
     public void performAction() {
         transactionHandler.upgradeWeapon();

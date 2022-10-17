@@ -97,7 +97,7 @@ public class GameMap implements IGameMap{
         return passableTiles;
     }
     /**
-     * Add neighbor to the given node. If the presumed neighbor isn't grass then it won't be added as a neighbor.
+     * {@inheritDoc}
      */
     private void addNeighbors(Tile current){
         int x = current.getX();

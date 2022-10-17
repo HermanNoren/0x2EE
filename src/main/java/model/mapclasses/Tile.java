@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Tile is the node representation for the gamemap
+ * Tile is a mathematical representation of Node.
  */
 public class Tile implements IGameObject, ITile, Comparable<Tile> {
     private final int size = Config.TILE_SIZE;
@@ -38,23 +38,42 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
         this.pos.setY(y*size);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getWidth() {
         return width;
     }
 
+    /**
+     * @return {@inheritDoc}
+     */
     @Override
     public int getHeight() {
         return height;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     public List<Edge> getNeighbors() {
         return neighbors;
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     public int getX() {
         return x;
     }
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     public int getY() {
         return y;
     }
@@ -63,33 +82,73 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
         return new Vector2(pos);
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public Vector2 getCenter() {
         double x = pos.getX() + (double) (getWidth() / 2);
         double y = pos.getY() + (double) (getHeight() / 2);
         return new Vector2(x, y);
     }
+
+    /**
+     * {@inheritDoc}
+     * @param f {@inheritDoc}
+     */
     public void setF(double f) {
         this.f = f;
     }
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     public double getG() {
         return g;
     }
+
+    /**
+     * {@inheritDoc}
+     * @param g {@inheritDoc}
+     */
     public void setG(double g) {
         this.g = g;
     }
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public double getF() {
         return f;
     }
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public Tile getParent() {
         return parent;
     }
-    @Override public void setParent(Tile parent) {
+
+    /**
+     * {@inheritDoc}
+     * @param parent {@inheritDoc}
+     */
+    @Override
+    public void setParent(Tile parent) {
         this.parent = parent;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param n {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public int compareTo(Tile n) {
         return Double.compare(this.f, n.f);
@@ -98,13 +157,7 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
 
     /**
      * {@inheritDoc}
-     */
-    public int getTileType() {
-        return tileType;
-    }
-
-    /**
-     * {@inheritDoc}
+     * @param passable {@inheritDoc}
      */
     public void setPassable(boolean passable){
         this.passable = passable;
@@ -112,6 +165,7 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
 
     /**
      * {@inheritDoc}
+     * @return {@inheritDoc}
      */
     public boolean isPassable() {
         return passable;
@@ -119,6 +173,8 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
 
     /**
      * {@inheritDoc}
+     * @param weight {@inheritDoc}
+     * @param neighbor {@inheritDoc}
      */
     public void addBranch(int weight, Tile neighbor){
         Tile.Edge newEdge = new Tile.Edge(weight, neighbor);
@@ -126,7 +182,7 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
     }
 
     /**
-     *
+     * Static class, used to add neighbor, and Edge from on Tile to another.
      */
     public static class Edge {
         private int weight;
@@ -136,10 +192,18 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
             this.tile = tile;
         }
 
+        /**
+         * Method used to get neighbor Tile.
+         * @return Tile, the neighbor.
+         */
         public Tile getTile() {
             return tile;
         }
 
+        /**
+         * Method used to get the weight of the branch.
+         * @return weight of the branch.
+         */
         public int getWeight() {
             return weight;
         }

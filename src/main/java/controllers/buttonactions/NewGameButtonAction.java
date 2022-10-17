@@ -13,6 +13,7 @@ public class NewGameButtonAction implements IButtonAction {
     private EPanelState panelState;
 
     /**
+     * NewGameButtonAction constructor.
      * @param panelState new panelState.
      * @param currentState current panelState.
      * @param createGame used to create a new game when the button is pressed.
