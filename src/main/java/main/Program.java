@@ -17,8 +17,8 @@ public class Program {
         GameLoopController loopController = new GameLoopController(game, 120);
         Timer enemySpawnTimer = new Timer();
         enemySpawnTimer.schedule(new SpawnTimerController(game), 5000, 5000);
+
         loopController.addObserver(mainPanel);
         loopController.run();
     }
-
 }

@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PausePanelState implements IPanelState {
-
     private final ButtonSwitcherController bc;
     private final ArrayList<GameButton> buttons;
     private List<KeyListener> keyListeners;

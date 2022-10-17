@@ -1,7 +1,6 @@
 package controllers;
 
-import controllers.sound.SoundEffect;
-import model.Game;
+import sound.SoundEffect;
 import model.gameinterfaces.IShootable;
 
 import java.awt.event.KeyEvent;
@@ -12,11 +11,9 @@ public class WeaponController implements KeyListener {
     private final IShootable game;
     private boolean spaceKeyDown;
 
-    SoundEffect se = new SoundEffect();
 
     public WeaponController(IShootable game) {
         this.game = game;
-        se.setSoundFile("sound/laserShoot.wav");
     }
 
     @Override
@@ -24,8 +21,6 @@ public class WeaponController implements KeyListener {
         switch (e.getKeyCode()) {
             case (KeyEvent.VK_SPACE) -> {
                 if (!spaceKeyDown) {
-
-                    se.play();
                     spaceKeyDown = true;
                     game.makePlayerShoot();
                 }

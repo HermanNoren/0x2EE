@@ -31,7 +31,6 @@ public class GameMap implements IGameMap{
 
         createBorder();
         tiles.forEach(this::addNeighbors);
-        n.printTileGrid(gameMapCoordinates);
     }
 
     /**
@@ -81,7 +80,7 @@ public class GameMap implements IGameMap{
      */
     @Override
     public List<Tile> getTiles() {
-        return Collections.unmodifiableList(tiles);
+        return new ArrayList<>(tiles);
     }
 
     /**

@@ -12,8 +12,7 @@ public class BossEnemyFactory extends EnemyFactory{
 
     @Override
     public Enemy createEnemy(Entity targetEntity, GameMap gameMap) {
-        EnemySpawner enemySpawner = new EnemySpawner(this, gameMap);
-        Vector2 location = enemySpawner.chooseRandomLocation();
+        Vector2 location = EnemySpawner.chooseRandomLocation(gameMap);
         BossEnemy bossEnemy = new BossEnemy((int) location.getX(),  (int) location.getY(), gameMap.getGameMapCoordinates(), targetEntity);
         return bossEnemy;
     }

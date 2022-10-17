@@ -56,9 +56,9 @@ public class GameLoopController implements ActionListener {
         if (!game.isPaused()) {
             game.update(100.0 / UPS);
         }
-
         for (IObserver observer : gameObservers) {
             observer.update();
         }
+
     }
 }

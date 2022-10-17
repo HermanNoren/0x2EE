@@ -13,11 +13,8 @@ import java.util.List;
 public class PlayerDrawer implements IDrawer, IIteratedImageDrawer {
     private int imageSwitcher;
     private Player player;
-
     private ImageHandler imageHandler;
-
     private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
-
     public PlayerDrawer(Player player) {
         this.player = player;
         this.imageHandler = new ImageHandler();
