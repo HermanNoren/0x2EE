@@ -73,7 +73,7 @@ public class Spawner{
 
     private Vector2 getSpawnLocation() {
         List<Tile> locations = game.getGameMap().getPassableTiles();
-        enemies = game.getEnemies(); //Göra interface till game, med getEnemies, getPlayer osv..
+        enemies = game.getEnemies(); //G0ra interface till game, med getEnemies, getPlayer osv..
         if (enemies.size() <= 1) {
            return getRandomPassableLocation(locations);
         } else {

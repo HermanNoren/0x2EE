@@ -290,10 +290,6 @@ public class Game implements IGame {
         return playerDead;
     }
 
-    public boolean isPlayerInRangeOfShop() {
-        return (CollisionHandler.testCollision(player, shop));
-    }
-
     @Override
     public List<Projectile> getProjectiles() {
         return new ArrayList<>(projectiles);
