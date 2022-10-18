@@ -29,7 +29,7 @@ public class NewGameButtonAction implements IButtonAction {
      */
     @Override
     public void performAction() {
-        createGame.newGame();
+        createGame.newGameRound();
         currentState.changePanelState(panelState);
     }
 }
