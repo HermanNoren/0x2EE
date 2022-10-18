@@ -211,5 +211,4 @@ public class PlayerTest {
         List<Projectile> projectiles = new ArrayList<>();
         game.getPlayer().shoot(game);
     }
-
 }

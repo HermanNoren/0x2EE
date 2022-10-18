@@ -220,8 +220,16 @@ public class EntityTest {
     }
     @Test
     void test_getHeight_returns_height_of_entity(){
-
         assertEquals(Config.ENTITY_WIDTH, ((IGameObject) entity).getHeight());
+    }
+    @Test
+    void entity_should_take_correct_amount_of_damage_when_damageTaken_called() {
+        int damage = 100;
+        int currentHealth = entity.getHealth();
+        int totalDamageTaken = currentHealth - damage;
+        entity.damageTaken(100);
+        int healthAfterDamageTaken = entity.getHealth();
+        assertEquals(totalDamageTaken, healthAfterDamageTaken);
     }
 
 }
