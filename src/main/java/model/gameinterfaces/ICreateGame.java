@@ -7,5 +7,5 @@ public interface ICreateGame {
     /**
      * Called in game to make a new game.
      */
-    void newGame();
+    void newGameRound();
 }
