@@ -45,13 +45,13 @@ public class Game implements IGame {
 
     public Game() {
         mapSize = 25;
-        newGame();
+        newGameRound();
         highscoreHandler = new HighscoreHandler();
         highscoreList = highscoreHandler.getHighscoreList();
     }
 
     @Override
-    public void newGame() {
+    public void newGameRound() {
         this.gameMap = new GameMap(Config.MAP_WIDTH, Config.MAP_HEIGHT);
         this.player = new Player(500, 500, gameMap.getGameMapCoordinates());
         shop = new Shop(200, 100);
