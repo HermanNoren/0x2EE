@@ -21,11 +21,4 @@ public class ImageHandler {
 
     }
 
-    public static void setImgs(int nrImgs, Map<String, BufferedImage> imgs, List<String> imgTypes) {
-        for (String itemType : imgTypes) {
-            for (int i = 0; i < nrImgs; i++) {
-                imgs.put(itemType + i, getImage("imgs/drops/"+ itemType + "/" + i + ".png"));
-            }
-        }
-    }
 }

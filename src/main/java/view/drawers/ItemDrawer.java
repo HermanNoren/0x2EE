@@ -15,8 +15,6 @@ public class ItemDrawer implements IDrawer, IIteratedImageDrawer {
 
     private IHasItems game;
 
-    private ImageHandler imageHandler;
-
     private Map<String, BufferedImage> imgs;
 
     private int index;
@@ -29,7 +27,15 @@ public class ItemDrawer implements IDrawer, IIteratedImageDrawer {
         itemTypes.add("coin");
         itemTypes.add("potion");
         imgs = new HashMap<>();
-        ImageHandler.setImgs(4, imgs, itemTypes);
+        setImgs();
+    }
+
+    private void setImgs() {
+        for (String itemType : itemTypes) {
+            for (int i = 0; i < 4; i++) {
+                imgs.put(itemType + i, ImageHandler.getImage("imgs/drops/"+ itemType + "/" + i + ".png"));
+            }
+        }
     }
 
     @Override
@@ -37,6 +43,7 @@ public class ItemDrawer implements IDrawer, IIteratedImageDrawer {
         for (IItem object : game.getItems()){
             List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(object.getPos(), object.getWidth(), object.getHeight());
             g2.drawImage(imgs.get(object.getType() + index), drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
+
 
         }
     }
