@@ -18,6 +18,7 @@ public abstract class Enemy extends Entity implements IEnemy {
     public Entity getTargetEntity(){
         return this.targetEntity;
     }
+    public abstract String getType();
     /**
      * Method used to move the enemy towards player.
      */
@@ -37,19 +38,19 @@ public abstract class Enemy extends Entity implements IEnemy {
             double nextX = nextPos.getX();
             double nextY = nextPos.getY();
             if (currentX < nextX) {
-                setDirection(EDirection.RIGHT);
+                setDirection(EDirection.right);
                 setPosX(getPosX() + movementSpeed * dt);
 
             }else if (currentX > nextX) {
-                setDirection(EDirection.LEFT);
+                setDirection(EDirection.left);
                 setPosX(getPosX() - movementSpeed * dt);
 
             }else if (currentY < nextY) {
-                setDirection(EDirection.DOWN);
+                setDirection(EDirection.down);
                 setPosY(getPosY() + movementSpeed * dt);
 
             }else if (currentY > nextY) {
-                setDirection(EDirection.UP);
+                setDirection(EDirection.up);
                 setPosY(getPosY() - movementSpeed * dt);
 
             }

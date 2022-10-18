@@ -10,16 +10,17 @@ public class Projectile implements IGameObject, IProjectile {
     private final int size = Config.SPRITE_SIZE / 2;
     private final Vector2 pos;
     private final Vector2 vel;
+    private EDirection direction;
     public Projectile(Vector2 pos, EDirection direction) {
         this.pos = pos;
         vel = new Vector2(0, 0);
         switch (direction) {
-            case RIGHT -> vel.setX(10);
-            case LEFT -> vel.setX(-10);
-            case UP -> vel.setY(-10);
-            case DOWN -> vel.setY(10);
+            case right -> vel.setX(10);
+            case left -> vel.setX(-10);
+            case up -> vel.setY(-10);
+            case down -> vel.setY(10);
         }
-
+        this.direction = direction;
     }
 
     @Override
@@ -45,6 +46,11 @@ public class Projectile implements IGameObject, IProjectile {
         double x = pos.getX() + (double) (getWidth() / 2);
         double y = pos.getY() + (double) (getHeight() / 2);
         return new Vector2(x, y);
+    }
+
+    @Override
+    public EDirection getDirection() {
+        return direction;
     }
 
     @Override

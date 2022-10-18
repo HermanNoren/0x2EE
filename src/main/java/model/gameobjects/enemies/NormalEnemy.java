@@ -17,12 +17,16 @@ class NormalEnemy extends Enemy{
         return 1;
     }
 
+
+    @Override
+    public String getType() {
+        return "normal";
+    }
+
     @Override
     public int getKillReward() {
         return 100;
     }
-
-
 
 
 }

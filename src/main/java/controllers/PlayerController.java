@@ -28,7 +28,7 @@ public class PlayerController implements KeyListener {
         pressedOrder.remove(direction);
         if (pressedOrder.isEmpty()) {
             if (moving) {
-                player.setDirection(EDirection.NOT_MOVING);
+                player.setDirection(EDirection.not_moving);
                 moving = false;
             }
         }
@@ -43,16 +43,16 @@ public class PlayerController implements KeyListener {
         int code = e.getKeyCode();
         switch (code) {
             case (KeyEvent.VK_W) -> {
-                setDirection(EDirection.UP);
+                setDirection(EDirection.up);
             }
             case (KeyEvent.VK_A) -> {
-                setDirection(EDirection.LEFT);
+                setDirection(EDirection.left);
             }
             case (KeyEvent.VK_S) -> {
-                setDirection(EDirection.DOWN);
+                setDirection(EDirection.down);
             }
             case (KeyEvent.VK_D) -> {
-                setDirection(EDirection.RIGHT);
+                setDirection(EDirection.right);
             }
         }
     }
@@ -61,16 +61,16 @@ public class PlayerController implements KeyListener {
     public void keyReleased(KeyEvent e) {
         switch(e.getKeyCode()) {
             case (KeyEvent.VK_W) -> {
-                releaseDirection(EDirection.UP);
+                releaseDirection(EDirection.up);
             }
             case (KeyEvent.VK_A) -> {
-                releaseDirection(EDirection.LEFT);
+                releaseDirection(EDirection.left);
             }
             case (KeyEvent.VK_S) -> {
-                releaseDirection(EDirection.DOWN);
+                releaseDirection(EDirection.down);
             }
             case (KeyEvent.VK_D) -> {
-                releaseDirection(EDirection.RIGHT);
+                releaseDirection(EDirection.right);
             }
             case (KeyEvent.VK_SPACE) -> {
             }
