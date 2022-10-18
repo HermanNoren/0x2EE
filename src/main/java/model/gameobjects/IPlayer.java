@@ -6,7 +6,6 @@ import model.upgradables.weapon.Weapon;
 
 
 public interface IPlayer {
-
     void shoot(IHasProjectiles addable);
     void stopCurrentXMovement();
     void stopCurrentYMovement();
@@ -18,6 +17,4 @@ public interface IPlayer {
     void addMoney(int money);
     int getMoney();
     void setMoney(int money);
-    Weapon getWeapon();
-    Armor getArmor();
 }

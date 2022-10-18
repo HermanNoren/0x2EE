@@ -27,7 +27,7 @@ public class Weapon extends Upgradable implements IWeapon {
         else reload();
     }
 
-    public void reload(){
+    private void reload(){
         reloading = true;
         // TODO: Add some kind of delay
         reloading = false;

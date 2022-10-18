@@ -2,17 +2,19 @@
 package model.gameobjects;
 
 import model.gameinterfaces.IHasProjectiles;
+import model.helperclasses.IHasGear;
 import model.upgradables.armor.Armor;
 
 import model.helperclasses.EDirection;
 import model.mapclasses.Tile;
+import model.upgradables.weapon.IWeapon;
 import model.upgradables.weapon.Weapon;
 
 /**
  * The player, more implementation to come.
  */
 
-public class Player extends Entity implements IPlayer, IFocusableObject {
+public class Player extends Entity implements IPlayer, IFocusableObject, IHasGear {
     private int score;
     private int money;
     private final Weapon weapon;
@@ -106,7 +108,6 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
     public int getScore(){
         return score;
     }
-
     /**
      * Adds score to total
      * @param score to add
@@ -115,7 +116,6 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
     public void addScore(int score){
         this.score += score;
     }
-
     /**
      * @return currency acquired during game
      */
@@ -123,16 +123,17 @@ public class Player extends Entity implements IPlayer, IFocusableObject {
     public int getMoney(){
         return money;
     }
-
+    @Override
+    public void setMoney( int newAmount) {
+        money = newAmount;
+    }
+    @Override
     public Weapon getWeapon(){
         return this.weapon;
     }
-
+    @Override
     public Armor getArmor(){
         return this.armor;
-    }
-    public void setMoney( int newAmount) {
-        money = newAmount;
     }
     @Override
     public void damageTaken(int damage){

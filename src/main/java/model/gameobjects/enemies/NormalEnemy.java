@@ -11,20 +11,10 @@ class NormalEnemy extends Enemy{
         setMaxHp(20);
         setHealth(20);
     }
-
-    @Override
-    public void specialAbility() {
-
-    }
-
     @Override
     public int getKillReward() {
         return 100;
     }
 
-    @Override
-    public void update(double dt) {
-        super.update(dt);
-    }
 
 }

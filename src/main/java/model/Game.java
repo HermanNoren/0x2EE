@@ -381,7 +381,7 @@ public class Game implements IGame {
         }else{
             enemyFactory = new NormalEnemyFactory();
         }
-        enemies.add(enemyFactory.createEnemy(player, gameMap));
+        enemies.add(enemyFactory.createEnemy(player, gameMap.getPassableTiles(), getGameMap().getGameMapCoordinates()));
     }
 
     /**

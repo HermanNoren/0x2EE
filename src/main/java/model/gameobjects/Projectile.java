@@ -10,7 +10,6 @@ public class Projectile implements IGameObject, IProjectile {
     private final int size = Config.SPRITE_SIZE / 2;
     private final Vector2 pos;
     private final Vector2 vel;
-
     public Projectile(Vector2 pos, EDirection direction) {
         this.pos = pos;
         vel = new Vector2(0, 0);

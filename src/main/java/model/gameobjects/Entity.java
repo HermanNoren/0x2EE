@@ -28,7 +28,7 @@ public abstract class Entity implements IGameObject {
      * @param x represents the entities' x-coordinate
      * @param y represents the entities' y-coordinate
      */
-    public Entity(int x, int y, Tile[][] coordinates){
+    protected Entity(int x, int y, Tile[][] coordinates){
         this.coordinates = coordinates;
         this.direction = EDirection.NOT_MOVING; // Default value
         this.lastDirection = direction;
@@ -98,17 +98,15 @@ public abstract class Entity implements IGameObject {
      * @return current location based on the terrain grid of GameMap
      */
     public Tile getMapLocation(){
-        int posX = (int)getCenter().getX()/48; // 48 is terrain size
+        int posX = (int)getCenter().getX()/48; // 48 is tilw size
         int posY = (int)getCenter().getY()/48;
         currentLocation = coordinates[posX][posY];
         return currentLocation;
     }
 
-
     public Vector2 getPos() {
         return new Vector2(pos);
     }
-
     /**
      * @param direction, updated direction.
      * Used to update direction of entity.
@@ -158,6 +156,7 @@ public abstract class Entity implements IGameObject {
         return maxHp;
     }
 
+    @Override
     public int getWidth() {
         return size;
     }
@@ -166,8 +165,6 @@ public abstract class Entity implements IGameObject {
     public int getHeight() {
         return size;
     }
-
-
     public void setVel(Vector2 vel) {
         this.vel = vel;
     }
@@ -191,12 +188,7 @@ public abstract class Entity implements IGameObject {
     public void damageTaken(int damage) {
         setHealth(getHealth() - damage);
     }
-    /**
-     * @return size of entity
-     */
-    public int getSize() {
-        return size;
-    }
+
 }
 
 
