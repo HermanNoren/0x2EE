@@ -11,8 +11,18 @@ class NormalEnemy extends Enemy{
         setMaxHp(20);
         setHealth(20);
     }
+
+    @Override
+    public int getDamage() {
+        return 1;
+    }
+
     @Override
     public int getKillReward() {
         return 100;
     }
+
+
+
+
 }

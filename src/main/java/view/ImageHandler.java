@@ -5,10 +5,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 public class ImageHandler {
 
-    public BufferedImage getImage(String path) {
+    public static BufferedImage getImage(String path) {
         BufferedImage image;
         try {
             image = ImageIO.read(new File(path));
@@ -18,4 +20,5 @@ public class ImageHandler {
         return image;
 
     }
+
 }
