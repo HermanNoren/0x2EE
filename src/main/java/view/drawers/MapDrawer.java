@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 import java.util.List;
 import view.Camera;
 
-public class MapDrawer implements IDrawer, IIteratedImageDrawer {
+public class MapDrawer implements IImageIteratorDrawer {
     private final BufferedImage[] tileImgs = new BufferedImage[3];
     private final BufferedImage[] treeImgs = new BufferedImage[3];
     private BufferedImage activeTreeImg;

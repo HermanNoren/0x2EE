@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Strictly used to draw the player onto the screen
  */
-public class PlayerDrawer implements IDrawer, IIteratedImageDrawer {
+public class PlayerDrawer implements IImageIteratorDrawer {
     private int imageSwitcher;
     private Player player;
 

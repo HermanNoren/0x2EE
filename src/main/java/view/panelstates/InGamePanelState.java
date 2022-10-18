@@ -24,10 +24,7 @@ public class InGamePanelState implements IPanelState {
      * */
     private List<IDrawer> drawers;
 
-    private PlayerDrawer playerDrawer;
-    private EnemyDrawer enemyDrawer;
-    private ItemDrawer itemDrawer;
-    private MapDrawer mapDrawer;
+    private IImageIteratorDrawer playerDrawer, enemyDrawer, itemDrawer, mapDrawer;
 
     private ImageSwitcherController imageSwitcherController;
     private final Camera camera;

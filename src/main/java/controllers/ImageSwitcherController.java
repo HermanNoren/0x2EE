@@ -1,6 +1,6 @@
 package controllers;
 
-import view.drawers.IIteratedImageDrawer;
+import view.drawers.IImageIterator;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +15,7 @@ public class ImageSwitcherController implements ActionListener {
 
     private final Timer timer;
 
-    private List<IIteratedImageDrawer> imageDrawers;
+    private List<IImageIterator> imageDrawers;
 
     /**
      * Instantiates an ImageSwitcherController.
@@ -37,7 +37,7 @@ public class ImageSwitcherController implements ActionListener {
      * Add a drawer that the controller should call upon every 'delay' milliseconds
      * @param imageDrawer
      */
-    public void addImageDrawer(IIteratedImageDrawer imageDrawer) {
+    public void addImageDrawer(IImageIterator imageDrawer) {
         imageDrawers.add(imageDrawer);
     }
 
@@ -47,7 +47,7 @@ public class ImageSwitcherController implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (IIteratedImageDrawer imageDrawer : imageDrawers) {
+        for (IImageIterator imageDrawer : imageDrawers) {
             imageDrawer.switchImage();
         }
     }
