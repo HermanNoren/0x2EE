@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CoinTest {
 
     Game game = new Game();
-    Spawner spawner = new Spawner(game);
 
     Player player = game.getPlayer();
 
