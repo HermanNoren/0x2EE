@@ -179,7 +179,7 @@ public class Game implements IGame {
      */
     @Override
     public void pause() {
-        player.setDirection(EDirection.NOT_MOVING);
+        player.setDirection(EDirection.up);
         paused = true;
     }
 
@@ -376,7 +376,7 @@ public class Game implements IGame {
      */
     @Override
     public void spawnEnemy(int counter){
-        if((counter % 10) == 0 && counter != 0){
+        if((counter % 5) == 0 && counter != 0){
             enemyFactory = new BossEnemyFactory();
         }else{
             enemyFactory = new NormalEnemyFactory();

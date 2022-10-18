@@ -1,10 +1,12 @@
 package view;
 
+import model.helperclasses.EDirection;
+
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,4 +23,21 @@ public class ImageHandler {
 
     }
 
+    public static void setImgs(int nrImgs, Map<String, BufferedImage> imgs, List<String> imgTypes) {
+        for (String imgType : imgTypes) {
+            for (int i = 0; i < nrImgs; i++) {
+                imgs.put(imgType + i, getImage("imgs/"+imgType+"/" + i + ".png"));
+            }
+        }
+    }
+
+    public static void setImgsWithDirections(int nrImgs, Map<EDirection, Map<String, BufferedImage>> imgs, List<String> imgTypes, EDirection direction) {
+        Map<String, BufferedImage> tempMap = new HashMap<>();
+        for (String imgType: imgTypes){
+            for (int i = 1; i < nrImgs+1; i++) {
+                tempMap.put(imgType+(i-1), getImage("imgs/"+imgType+"/"+direction+"_"+i+".png"));
+                imgs.put(direction, tempMap);
+            }
+        }
+    }
 }

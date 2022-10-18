@@ -3,35 +3,40 @@ package view.drawers;
 
 import model.gameinterfaces.IHasEnemies;
 import model.gameobjects.Entity;
+import model.gameobjects.enemies.Enemy;
+import model.helperclasses.EDirection;
 import view.ImageHandler;
 
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import java.util.*;
 import java.util.List;
 
 public class EnemyDrawer implements IImageIteratorDrawer {
-    private BufferedImage prevImg, up1, up2, left1, left2, down1, down2, right1, right2, activeImage;
+    private BufferedImage prevImg, activeImage;
+
     private final IHasEnemies game;
-    private int imageSwitcher;
-    private ImageHandler imageHandler;
+    private List<String> imgTypes;
+    private Map<EDirection, Map<String, BufferedImage>> imgs;
+    private int index;
 
     public EnemyDrawer(IHasEnemies game, String type){
         this.game = game;
-        this.imageHandler = new ImageHandler();
-        initImages(type);
+        imgs = new HashMap<>();
+        imgTypes = new ArrayList<>();
+        imgTypes.add("normal");
+//        imgTypes.add("boss");
+        imgTypes.add("shrek");
+        initImages();
     }
 
-    private void initImages(String type){
-        up1 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_up_1.png");
-        up2 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_up_2.png");
-        left1 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_left_1.png");
-        left2 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_left_2.png");
-        down1 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_down_1.png");
-        down2 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_down_2.png");
-        right1 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_right_1.png");
-        right2 = imageHandler.getImage("imgs/enemy/"+type+"/enemy_right_2.png");
+    private void initImages(){
+        ImageHandler.setImgsWithDirections(2, imgs, imgTypes, EDirection.up);
+        ImageHandler.setImgsWithDirections(2, imgs, imgTypes, EDirection.left);
+        ImageHandler.setImgsWithDirections(2, imgs, imgTypes, EDirection.right);
+        ImageHandler.setImgsWithDirections(2, imgs, imgTypes, EDirection.down);
     }
 
     /**
@@ -41,45 +46,8 @@ public class EnemyDrawer implements IImageIteratorDrawer {
      */
     @Override
     public void draw(Graphics2D g2) {
-        for(Entity enemy: game.getEnemies()){
-            switch (enemy.getDirection()){
-                case UP ->{
-                    if(imageSwitcher == 1){
-                        activeImage = up1;
-                    }else {
-                        activeImage = up2;
-                    }
-                    prevImg = activeImage;
-                }
-                case LEFT -> {
-                    if(imageSwitcher == 1){
-                        activeImage = left1;
-                    }else {
-                        activeImage = left2;
-                    }
-                    prevImg = activeImage;
-                }
-                case DOWN -> {
-                    if(imageSwitcher == 1){
-                        activeImage = down1;
-                    }else {
-                        activeImage = down2;
-                    }
-                    prevImg = activeImage;
-                }
-                case RIGHT -> {
-                    if(imageSwitcher == 1){
-                        activeImage = right1;
-                    }else {
-                        activeImage = right2;
-                    }
-                    prevImg = activeImage;
-                }
-                case NOT_MOVING -> {
-                    activeImage = prevImg;
-                }
-            }
-
+        BufferedImage img;
+        for (Enemy enemy: game.getEnemies()){
             List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(enemy.getPos(), enemy.getWidth(), enemy.getWidth());
             if (enemy.getHealth() != enemy.getMaxHp()){
                 g2.setColor(Color.red);
@@ -87,19 +55,19 @@ public class EnemyDrawer implements IImageIteratorDrawer {
                 g2.setColor(Color.black);
                 g2.drawRoundRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / (enemy).getMaxHp()))), 4, 0,0);
             }
-            if(!(prevImg == null)){
-                g2.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
+            if(enemy.getDirection() == EDirection.not_moving){
+                img = imgs.get(enemy.getDirection()).get(enemy.getType() + 1);
             }
-            else {
-                g2.drawImage(up1, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
-                g2.drawImage(activeImage, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
+            else{
+                img = imgs.get(enemy.getDirection()).get(enemy.getType() + index);
             }
+            g2.drawImage(img, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
         }
     }
 
     @Override
     public void switchImage() {
-        if (imageSwitcher == 1) { imageSwitcher = 2; }
-        else { imageSwitcher = 1; }
+        index++;
+        index %= 2;
     }
 }

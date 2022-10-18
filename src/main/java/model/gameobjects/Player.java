@@ -38,7 +38,7 @@ public class Player extends Entity implements IPlayer, IFocusableObject, IHasGea
     public void shoot(IHasProjectiles addable) {
         EDirection dir;
 
-        if (getDirection() == EDirection.NOT_MOVING) {
+        if (getDirection() == EDirection.not_moving) {
             dir = getLastDirection();
         }
 
@@ -69,10 +69,10 @@ public class Player extends Entity implements IPlayer, IFocusableObject, IHasGea
     @Override
     public void moveX(double dt) {
         setAccX(0);
-        if (getDirection() == EDirection.RIGHT) {
+        if (getDirection() == EDirection.right) {
             setAccX(moveAcc);
         }
-        if (getDirection() == EDirection.LEFT) {
+        if (getDirection() == EDirection.left) {
             setAccX(-moveAcc);
         }
 
@@ -86,11 +86,11 @@ public class Player extends Entity implements IPlayer, IFocusableObject, IHasGea
     public void moveY(double dt) {
         setAccY(0);
 
-        if (getDirection() == EDirection.DOWN) {
+        if (getDirection() == EDirection.down) {
             setAccY(moveAcc);
         }
 
-        if (getDirection() == EDirection.UP) {
+        if (getDirection() == EDirection.up) {
             setAccY(-moveAcc);
         }
 

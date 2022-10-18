@@ -1,9 +1,9 @@
 package model.helperclasses;
 
 public enum EDirection {
-    NOT_MOVING,
-    UP,
-    LEFT,
-    DOWN,
-    RIGHT;
+    not_moving,
+    up,
+    left,
+    down,
+    right;
 }

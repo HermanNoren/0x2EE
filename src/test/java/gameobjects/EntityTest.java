@@ -138,20 +138,20 @@ public class EntityTest {
     @Test
     void test_getDirection_returns_current_direction_of_Entity(){
         //Entity starts with direction NOT_MOVING
-        assertEquals(EDirection.NOT_MOVING, entity.getDirection());
+        assertEquals(EDirection.not_moving, entity.getDirection());
     }
 
     @Test
     void test_setDirection_sets_direction_of_Entity(){
-        entity.setDirection(EDirection.UP);
-        assertEquals(EDirection.UP, entity.getDirection());
+        entity.setDirection(EDirection.up);
+        assertEquals(EDirection.up, entity.getDirection());
     }
 
     @Test
     void test_getLastDirection_returns_previous_direction_of_Entity(){
         //Entity starts with direction NOT_MOVING
-        entity.setDirection(EDirection.DOWN);
-        assertEquals(EDirection.NOT_MOVING, entity.getLastDirection());
+        entity.setDirection(EDirection.down);
+        assertEquals(EDirection.not_moving, entity.getLastDirection());
     }
 
     @Test
