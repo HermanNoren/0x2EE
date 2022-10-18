@@ -15,6 +15,4 @@ class NormalEnemy extends Enemy{
     public int getKillReward() {
         return 100;
     }
-
-
 }

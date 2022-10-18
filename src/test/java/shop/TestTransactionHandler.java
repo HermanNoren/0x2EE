@@ -68,9 +68,6 @@ public class TestTransactionHandler {
         assertEquals(temporaryValue + 1, armor.currentStats());
     }
 
-    /**
-     * The
-     */
     @Test
     void weapon_should_get_twice_as_expensive_when_upgraded(){
         int priceBeforeUpgrade = weapon.upgradeCost();
@@ -164,6 +161,23 @@ public class TestTransactionHandler {
         int armorUpgradeCostThroughTheInterface = armor.upgradeCost();
         int armorUpgradeCostThroughTheTransactionHandler = transactionHandler.getArmorUpgradeCost();
         assertEquals(armorUpgradeCostThroughTheInterface, armorUpgradeCostThroughTheTransactionHandler);
+    }
+
+    @Test
+    void the_players_money_should_be_updated_when_the_player_purchases_an_upgrade_weapon(){
+        int playerMoneyBeforePurchase = player.getMoney();
+        int weaponCost = weapon.upgradeCost();
+        transactionHandler.upgradeWeapon();
+        int playerMoneyAfterPurchase = player.getMoney();
+        assertEquals(playerMoneyAfterPurchase, playerMoneyBeforePurchase - weaponCost);
+    }
+    @Test
+    void the_players_money_should_be_updated_when_the_player_purchases_an_upgrade_armor(){
+        int playerMoneyBeforePurchase = player.getMoney();
+        int armorCost = armor.upgradeCost();
+        transactionHandler.upgradeArmor();
+        int playerMoneyAfterPurchase = player.getMoney();
+        assertEquals(playerMoneyAfterPurchase, playerMoneyBeforePurchase - armorCost);
     }
 
 }
