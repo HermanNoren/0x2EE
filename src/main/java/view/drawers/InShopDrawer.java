@@ -56,7 +56,6 @@ public class InShopDrawer implements IDrawer{
         List<BufferedImage> activePictures = new ArrayList<>(Arrays.asList(weaponActive, armorActive));
         List<BufferedImage> inactivePictures  = new ArrayList<>(Arrays.asList(weaponInactive, armorInactive));
         for(GameButton button : buttons) {
-
             int currentXPosition = (int) button.getPos().getX();
             int currentYPosition = (int) button.getPos().getY();
             int currentButtonIteration = buttons.indexOf(button);
@@ -67,13 +66,14 @@ public class InShopDrawer implements IDrawer{
 
             g2.setStroke(new BasicStroke(8));
             int pictureScaling = 3;
+            int borderWidth = 4;
             g2.drawImage( inactivePictures.get(currentButtonIteration),currentXPosition, currentYPosition, currentPictureWidth * pictureScaling,currentPictureHeight * pictureScaling, null);
             g2.setColor(Color.gray);
-            g2.drawRect(currentXPosition, currentYPosition, currentPictureWidth * pictureScaling * 4,currentPictureHeight * pictureScaling); //Draws border surrounding weapon and armor
+            g2.drawRect(currentXPosition, currentYPosition, currentPictureWidth * pictureScaling * borderWidth,currentPictureHeight * pictureScaling); //Draws border surrounding weapon and armor
                 if(button.getIsSelected()){
                     g2.setColor(Color.green); // draw border green and button selected
                     g2.drawImage(currentPicture, currentXPosition, currentYPosition, currentPictureWidth * pictureScaling,currentPictureHeight * pictureScaling, null);
-                    g2.drawRect(currentXPosition, currentYPosition, currentPictureWidth * pictureScaling * 4,currentPictureHeight * pictureScaling); //Draws border surrounding weapon and armor
+                    g2.drawRect(currentXPosition, currentYPosition, currentPictureWidth * pictureScaling * borderWidth,currentPictureHeight * pictureScaling); //Draws border surrounding weapon and armor
                 }
 
 
