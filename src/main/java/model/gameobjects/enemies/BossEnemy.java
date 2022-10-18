@@ -8,18 +8,12 @@ import model.mapclasses.Tile;
 
 public class BossEnemy extends Enemy{
 
-    public BossEnemy(int x, int y, Tile[][] coordinates, Entity targetEntity) {
+    protected BossEnemy(int x, int y, Tile[][] coordinates, Entity targetEntity) {
         super(x, y, coordinates, targetEntity);
         setVelX(1);
         setVelY(1);
         setMaxHp(500);
         setHealth(500);
-
-    }
-
-    @Override
-    public void specialAbility() {
-
     }
 
     @Override

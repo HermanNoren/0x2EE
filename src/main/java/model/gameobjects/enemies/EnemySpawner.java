@@ -8,29 +8,11 @@ import model.mapclasses.Tile;
 import java.util.List;
 import java.util.Random;
 
-public class EnemySpawner implements IEnemySpawner {
-    private final GameMap gameMap;
-    private EnemyFactory enemyFactory;
+public class EnemySpawner{
     private List<Tile> spawnableLocations;
 
-    public EnemySpawner(EnemyFactory enemyFactory, GameMap gameMap){
-        this.enemyFactory = enemyFactory;
-        this.gameMap = gameMap;
-        this.spawnableLocations = gameMap.getPassableTiles();
-    }
-
-    private void chooseLocation(IEnemy enemy, int radius){
-        Entity target = enemy.getTargetEntity();
-        Tile targetLocation = target.getMapLocation();
-
-        double targetPosX = targetLocation.getPos().getX();
-        double targetPosY = targetLocation.getPos().getY();
-
-        int possibleSpawnLocations = spawnableLocations.size();
-
-        double spawnPosX = targetPosX + radius;
-        double spawnPosY = targetPosY + radius;
-
+    public EnemySpawner(List<Tile> passableTiles){
+        this.spawnableLocations = passableTiles;
     }
 
     public Vector2 chooseRandomLocation(){
@@ -42,9 +24,4 @@ public class EnemySpawner implements IEnemySpawner {
         return new Vector2(posX, posY);
     }
 
-
-    @Override
-    public void spawnEnemy(IEnemy enemy, int radius) {
-
-    }
 }

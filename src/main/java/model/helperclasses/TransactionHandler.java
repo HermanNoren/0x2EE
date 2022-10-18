@@ -10,10 +10,10 @@ import model.upgradables.IUpgradable;
  * them through parametric polymorphism.
  */
 public class TransactionHandler {
-    private final IPlayer player;
+    private final IHasGear player;
     private final IUpgradable armor, weapon;
 
-    public TransactionHandler(IPlayer player){
+    public TransactionHandler(IHasGear player){
         this.player = player;
         this.armor =  player.getArmor();
         this.weapon = player.getWeapon();

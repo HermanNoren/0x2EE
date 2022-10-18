@@ -47,7 +47,6 @@ public class GameMap implements IGameMap{
             }
         }
     }
-
     /**
      * Method used to get the value of the height variable in GameMap
      * @return height of game map
@@ -81,7 +80,7 @@ public class GameMap implements IGameMap{
      */
     @Override
     public List<Tile> getTiles() {
-        return Collections.unmodifiableList(tiles);
+        return new ArrayList<>(tiles);
     }
 
     /**
@@ -96,26 +95,22 @@ public class GameMap implements IGameMap{
         }
         return passableTiles;
     }
+
     /**
      * {@inheritDoc}
      */
     private void addNeighbors(Tile current){
         int x = current.getX();
         int y = current.getY();
-
         // Add left side neighbour
         addNeighbor(x - 1 > -1, x - 1, y, current);
-
         // Add right side neighbour
         addNeighbor(x + 1 < width, x + 1, y, current);
-
         // Add top neighbour
         addNeighbor(y - 1 > -1, x, y - 1, current);
-
         // Add bottom neighbour
         addNeighbor(y + 1 < height, x, y + 1, current);
     }
-
     private void addNeighbor(boolean x, int x1, int y, Tile current) {
         if (x){
             Tile leftNeighbor = gameMapCoordinates[x1][y];
@@ -125,7 +120,6 @@ public class GameMap implements IGameMap{
             }
         }
     }
-
     /**
      * Method used to create a border on the game map.
      */
