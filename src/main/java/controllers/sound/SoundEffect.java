@@ -1,6 +1,5 @@
 package controllers.sound;
 
-import javax.imageio.IIOException;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
