@@ -4,13 +4,12 @@ import model.Game;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.ItemSpawner.Spawner;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SpawnerTest {
 
     Game game = new Game();
-    Spawner spawner = new Spawner(game);
+    Spawner spawner = new Spawner(game.getGameMap().getPassableTiles(),game);
 
     @Test
     void test_if_an_item_is_spawned_then_the_amount_of_spawned_items_should_increase(){

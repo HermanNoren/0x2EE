@@ -60,7 +60,7 @@ public class Game implements IGame {
         projectiles = new ArrayList<>();
         highscoreName = new ArrayList<>();
         playerDead = false;
-        spawner = new Spawner(this);
+        spawner = new Spawner(gameMap.getPassableTiles(),this);
         paused = false;
     }
 

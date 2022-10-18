@@ -1,6 +1,7 @@
 package model.gameobjects.ItemSpawner;
 
 import model.Game;
+import model.gameinterfaces.IHasEnemies;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.Enemy;
 import model.helperclasses.Vector2;
@@ -13,7 +14,9 @@ import java.util.Random;
 
 public class Spawner{
 
-    private Game game;
+    private List<Tile> passableTiles;
+
+    private IHasEnemies game;
     private List<Double> xValues, yValues;
     private List<Enemy> enemies;
     private double averageX, averageY;
@@ -21,7 +24,8 @@ public class Spawner{
     private List<IItem> spawnedItems;
     private Random rand = new Random();
 
-    public Spawner(Game game){
+    public Spawner(List<Tile> passableTiles, IHasEnemies game){
+        this.passableTiles = passableTiles;
         this.game = game;
         spawnedItems = new ArrayList<>();
     }
@@ -49,12 +53,11 @@ public class Spawner{
     }
 
     private Vector2 getClosestLocation(double x, double y) {
-        List<Tile> locations = game.getGameMap().getPassableTiles();
         double tileX, tileY;
         double difference = 1000000;
         double currentDifference = 0;
         Tile closestTile = new Tile(0,0);
-        for (Tile tile : locations) {
+        for (Tile tile : passableTiles) {
             tileX = tile.getPos().getX();
             tileY = tile.getPos().getY();
             currentDifference = Math.abs(tileX - x) + Math.abs(tileY - y);
@@ -72,10 +75,9 @@ public class Spawner{
      */
 
     private Vector2 getSpawnLocation() {
-        List<Tile> locations = game.getGameMap().getPassableTiles();
-        enemies = game.getEnemies(); //G0ra interface till game, med getEnemies, getPlayer osv..
+        enemies = game.getEnemies();
         if (enemies.size() <= 1) {
-           return getRandomPassableLocation(locations);
+           return getRandomPassableLocation(passableTiles);
         } else {
             xValues = new ArrayList<>();
             yValues = new ArrayList<>();
@@ -108,7 +110,7 @@ public class Spawner{
      */
 
     public List<IItem> getSpawnedItems(){
-        return Collections.unmodifiableList(spawnedItems);
+        return new ArrayList<>(spawnedItems);
     }
 
 
