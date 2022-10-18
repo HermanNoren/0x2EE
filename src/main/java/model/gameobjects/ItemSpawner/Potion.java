@@ -4,6 +4,9 @@ import config.Config;
 import model.gameobjects.Player;
 import model.helperclasses.Vector2;
 
+/**
+ * Class for representing the game item potion. This class handles what the result should be when the player interacts with it.
+ */
 public class Potion implements IItem {
 
     private Vector2 pos;

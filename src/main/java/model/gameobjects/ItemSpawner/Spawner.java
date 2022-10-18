@@ -12,6 +12,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This class handles the spawn logic for game items.
+ */
 public class Spawner{
 
     private List<Tile> passableTiles;

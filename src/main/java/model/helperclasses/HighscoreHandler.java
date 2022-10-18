@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Manages the highscore file, by fetching, writing and saving data from the game.
+ */
 public class HighscoreHandler {
 
     private List<String> highscoreList;
