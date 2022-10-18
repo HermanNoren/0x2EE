@@ -21,7 +21,6 @@ public class HighscoreHandler {
     /**
      * Creates a new file if it does not already exist.
      */
-
     private void init(){
         if (highscoreFile.exists()){
         }else{
@@ -36,7 +35,6 @@ public class HighscoreHandler {
     /**
      * Deletes the highscorefile
      */
-
     public void deleteFile(){
         highscoreFile.delete();
     }
@@ -45,7 +43,6 @@ public class HighscoreHandler {
      * Creates the highscorefile
      * @throws IOException
      */
-
     public void createNewFile() throws IOException {
         highscoreFile.createNewFile();
     }
@@ -63,7 +60,6 @@ public class HighscoreHandler {
      * @param fileitem string to extract score from
      * @return score as an integer
      */
-
     public int getScore(String fileitem){
         int score = 0;
         if (fileitem.contains(":")) {
@@ -77,7 +73,6 @@ public class HighscoreHandler {
      * Returns list of all highscores and related names
      * @return list of highscores
      */
-
     public List<String> getHighscoreList() {
         Scanner sc = null;
         highscoreList = new ArrayList<>();
@@ -97,7 +92,6 @@ public class HighscoreHandler {
      * Writes given data to the highscore-file.
      * @param content - data to be stored in a file
      */
-
     private void writeToFile(List<String> content){
         try {
             BufferedWriter output = new BufferedWriter(new FileWriter(highscoreFile, false));

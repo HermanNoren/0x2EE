@@ -1,9 +1,6 @@
 package model.gameobjects;
 
 import model.gameinterfaces.IHasProjectiles;
-import model.upgradables.armor.Armor;
-import model.upgradables.weapon.Weapon;
-
 
 public interface IPlayer {
     void shoot(IHasProjectiles addable);

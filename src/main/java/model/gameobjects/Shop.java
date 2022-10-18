@@ -3,7 +3,6 @@ package model.gameobjects;
 import config.Config;
 import model.helperclasses.Vector2;
 
-
 /**
  * This is the shop where weapons and armor can be
  * upgraded through the game. It also contains logic regarding
@@ -11,12 +10,10 @@ import model.helperclasses.Vector2;
  * The shop consists of 4 16x16 images.
  * */
 
-
 public class Shop implements IGameObject {
     private final int xPosition;
     private final int yPosition;
     private final Vector2 position;
-
 
     /**
      * The two is made to represent that the hit-box of the shop is twice
@@ -39,11 +36,11 @@ public class Shop implements IGameObject {
         this.position = new Vector2(xPosition, yPosition);
     }
 
-
     /**
      * Returns the width of the store.
      * @return the store's width
      */
+
     @Override
     public int getWidth() {
         return WIDTH;

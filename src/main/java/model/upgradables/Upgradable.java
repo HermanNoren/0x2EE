@@ -18,7 +18,7 @@ public abstract class Upgradable implements IUpgradable {
         this.currentLevel = currentLevel;
         this.growth = growth;
     }
-
+    
     @Override
     public void upgrade() {
         currentLevel++;

@@ -1,7 +1,10 @@
 package view.panelstates;
 
 import controllers.ButtonSwitcherController;
+import controllers.buttonactions.ResumeGameButtonAction;
 import controllers.buttonactions.UpgradeArmorButton;
+import model.gameinterfaces.ICanPause;
+import model.gameinterfaces.IGame;
 import model.helperclasses.TransactionHandler;
 import view.IChangeableStatePanel;
 import view.buttons.GameButton;
@@ -30,13 +33,13 @@ public class ShopPanelState implements IPanelState{
 
     private final static String CURRENT_COST_TEXT =  "UPGRADE COSTS ";
 
-    public ShopPanelState(IChangeableStatePanel mainPanel, TransactionHandler transactionHandler) {
+    public ShopPanelState(IChangeableStatePanel mainPanel, TransactionHandler transactionHandler, ICanPause game) {
         this.mainPanel = mainPanel;
         this.transactionHandler = transactionHandler;
         buttons = new ArrayList<>();
         keyListeners = new ArrayList<>();
         pictureButtons = new ArrayList<>();
-        createShopButtons(transactionHandler);
+        createShopButtons(transactionHandler, game);
 
 
         stringButtonController = new ButtonSwitcherController(buttons);
@@ -70,7 +73,7 @@ public class ShopPanelState implements IPanelState{
         drawPlayerMoney(g2, transactionHandler.getMoney());
 
         drawWeaponCost(g2, transactionHandler.getWeaponUpgradeCost());
-        drawWeaponUpgradePerks(g2, transactionHandler.getCurrentWeaponDamage(), transactionHandler.getUpgradedWeaponDamage());
+        drawWeaponUpgradePerks(g2, transactionHandler.getCurrentWeaponDamage(), transactionHandler.weaponDamageAfterUpgrade());
 
         drawArmorCost(g2, transactionHandler.getArmorUpgradeCost());
         drawArmorUpgradePerks(g2, transactionHandler.getCurrentArmorReduction(), transactionHandler.armorReductionAfterUpgrade());
@@ -151,10 +154,10 @@ public class ShopPanelState implements IPanelState{
      * GameButton instance to be painted respectively.
      * @param transactionHandler The object which handles the logic behind the transactions of upgrades.
      */
-    private void createShopButtons(TransactionHandler transactionHandler) {
+    private void createShopButtons(TransactionHandler transactionHandler, ICanPause game) {
         GameButton upgradeArmorButton = new GameButton("armor", Config.SCREEN_WIDTH / 10, Config.SCREEN_HEIGHT / 6, new UpgradeArmorButton(transactionHandler));
         GameButton upgradeWeaponButton = new GameButton("weapon", Config.SCREEN_WIDTH / 10, Config.SCREEN_HEIGHT / 2, new UpgradeWeaponAction(transactionHandler));
-        GameButton leaveShopButton = new GameButton("LEAVE", Config.SCREEN_WIDTH / 3, (int) (Config.SCREEN_HEIGHT * 0.8), new MenuButtonAction(EPanelState.INGAME, this));
+        GameButton leaveShopButton = new GameButton("LEAVE", Config.SCREEN_WIDTH / 3, (int) (Config.SCREEN_HEIGHT * 0.8), new ResumeGameButtonAction(EPanelState.INGAME, this, game));
         buttons.add(upgradeArmorButton);
         buttons.add(upgradeWeaponButton);
         buttons.add(leaveShopButton);

@@ -11,7 +11,7 @@ import model.helperclasses.Vector2;
  * provides the ability to zoom in and out by using a zoom multiplier that objects relative to the camera also should take
  * into consideration when being drawn.
  */
-public class Camera{
+public final class Camera{
 
     private IFocusableObject focusedObject;
     private boolean hasFocusedObject;

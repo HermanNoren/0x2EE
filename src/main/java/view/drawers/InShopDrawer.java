@@ -30,7 +30,6 @@ public class InShopDrawer implements IDrawer{
      * All the 4 parts of the pictures being initiated (see that they exist). They will represent their selected picture in case they
      * are selected, otherwise they will be idle. Logic in Draw.
      */
-
     private void initShopImages(){
         try{
             weaponActive = imageHandler.getImage("imgs/shop/weapon/weaponActive.png");
@@ -42,7 +41,6 @@ public class InShopDrawer implements IDrawer{
            errorMessage.printStackTrace();
         }
     }
-
 
     /**
      * Draws the picture representation. Loops over the two buttons and if the button is selected,
