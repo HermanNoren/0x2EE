@@ -4,6 +4,7 @@ import model.gameinterfaces.IHasProjectiles;
 import model.gameobjects.Projectile;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.List;
 
 public class ProjectileDrawer implements IDrawer {
@@ -11,6 +12,8 @@ public class ProjectileDrawer implements IDrawer {
     private IHasProjectiles game;
 
     private List<Projectile> projectiles;
+
+    private BufferedImage up1, up2, left1, left2, down1, down2, right1, right2;
 
     public ProjectileDrawer(IHasProjectiles game) {
         this.game = game;

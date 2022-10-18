@@ -218,7 +218,7 @@ public class CollisionHandlerTest {
     @Test
     void test_specific_terrain_collisions_no_collision() {
         player1.setPos(new Vector2(48, 48));
-        List<Tile> collidedTile = CollisionHandler.getSpecificTerrainCollisions(player1, createSmallTerrainMatrix());
+        List<Tile> collidedTile = CollisionHandler.getSpecificTileCollisions(player1, createSmallTerrainMatrix());
         assertEquals(0, collidedTile.size());
     }
 
@@ -227,7 +227,7 @@ public class CollisionHandlerTest {
         player1.setPos(new Vector2(48, 48));
         player1.setVelX(-1);
         player1.moveX(1);
-        List<Tile> collidedTile = CollisionHandler.getSpecificTerrainCollisions(player1, createSmallTerrainMatrix());
+        List<Tile> collidedTile = CollisionHandler.getSpecificTileCollisions(player1, createSmallTerrainMatrix());
         assertEquals(1, collidedTile.size());
     }
 
@@ -238,7 +238,7 @@ public class CollisionHandlerTest {
         player1.moveX(1);
         player1.setVelY(-1);
         player1.moveY(1);
-        List<Tile> collidedTile = CollisionHandler.getSpecificTerrainCollisions(player1, createSmallTerrainMatrix());
+        List<Tile> collidedTile = CollisionHandler.getSpecificTileCollisions(player1, createSmallTerrainMatrix());
         assertEquals(3, collidedTile.size());
     }
 

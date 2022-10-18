@@ -1,7 +1,7 @@
 package model.helperclasses;
 
 
-import model.gameobjects.IPlayer;
+import model.gameobjects.IHasGear;
 import model.upgradables.IUpgradable;
 
 /**

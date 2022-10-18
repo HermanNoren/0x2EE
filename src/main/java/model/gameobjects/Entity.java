@@ -36,64 +36,73 @@ public abstract class Entity implements IGameObject {
         this.acc = new Vector2(0, 0);
         this.vel = new Vector2(0,0);
     }
+    public Vector2 getPos() {
+        return new Vector2(pos);
+    }
+
     public void setPos(Vector2 pos) {
         this.pos = pos;
     }
+    public Vector2 getVel(){
+        return new Vector2(vel);
+    }
+    public void setVel(Vector2 vel) {
+        this.vel = vel;
 
-    public double getVelX(){
-        return vel.getX();
+    }
+    public Vector2 getAcc(){
+        return new Vector2(acc);
     }
 
-    public void setVelX(double velX){
-        vel.setX(velX);
-    }
-
-    public void setPosX(double posX) {
-        pos.setX(posX);
-    }
-
-    public double getPosX(){
-        return pos.getX();
-    }
-
-    public void setAccX(double accX){
-        acc.setX(accX);
-    }
-
-    public double getAccX(){
-        return acc.getX();
-    }
-
-    public double getVelY(){
-        return vel.getY();
-    }
-
-    public void setVelY(double velY){
-        vel.setY(velY);
+    public void setAcc(Vector2 acc) {
+        this.acc = acc;
     }
 
     public void setPosY(double posY) {
         pos.setY(posY);
     }
-
     public double getPosY(){
         return pos.getY();
     }
-
+    public void setPosX(double posX) {
+        pos.setX(posX);
+    }
+    public double getPosX(){
+        return pos.getX();
+    }
+    public double getVelX(){
+        return vel.getX();
+    }
+    public void setVelX(double velX){
+        vel.setX(velX);
+    }
+    public double getVelY(){
+        return vel.getY();
+    }
+    public void setVelY(double velY){
+        vel.setY(velY);
+    }
+    public void setAccX(double accX){
+        acc.setX(accX);
+    }
+    public double getAccX(){
+        return acc.getX();
+    }
     public void setAccY(double accY){
         acc.setY(accY);
     }
-
     public double getAccY(){
         return acc.getY();
     }
+
+
+
     @Override
     public Vector2 getCenter() {
         double x = pos.getX() + (double) (getWidth() / 2);
         double y = pos.getY() + (double) (getHeight() / 2);
         return new Vector2(x, y);
     }
-
     /**
      * @return current location based on the terrain grid of GameMap
      */
@@ -104,9 +113,6 @@ public abstract class Entity implements IGameObject {
         return currentLocation;
     }
 
-    public Vector2 getPos() {
-        return new Vector2(pos);
-    }
     /**
      * @param direction, updated direction.
      * Used to update direction of entity.
@@ -160,27 +166,10 @@ public abstract class Entity implements IGameObject {
     public int getWidth() {
         return size;
     }
-
     @Override
     public int getHeight() {
         return size;
-    }
-    public void setVel(Vector2 vel) {
-        this.vel = vel;
-    }
-
-    public Vector2 getVel(){
-        return new Vector2(vel);
-    }
-
-    public Vector2 getAcc(){
-        return new Vector2(acc);
-    }
-
-    public void setAcc(Vector2 acc) {
-        this.acc = acc;
-    }
-
+}
     /**
      * Sets a new health according to how much damage is taken
      * @param damage taken

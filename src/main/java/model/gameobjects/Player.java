@@ -2,12 +2,10 @@
 package model.gameobjects;
 
 import model.gameinterfaces.IHasProjectiles;
-import model.helperclasses.IHasGear;
 import model.upgradables.armor.Armor;
 
 import model.helperclasses.EDirection;
 import model.mapclasses.Tile;
-import model.upgradables.weapon.IWeapon;
 import model.upgradables.weapon.Weapon;
 
 /**

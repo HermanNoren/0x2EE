@@ -1,4 +1,4 @@
-package model.helperclasses;
+package model.gameobjects;
 
 import model.gameobjects.IHasArmor;
 import model.gameobjects.IHasWeapon;

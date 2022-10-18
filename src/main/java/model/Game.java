@@ -227,7 +227,7 @@ public class Game implements IGame {
         Iterator<Projectile> pIter = getProjectiles().iterator();
         while (pIter.hasNext()){
             Projectile p = pIter.next();
-            List<Tile> collidedTiles = CollisionHandler.getSpecificTerrainCollisions(p, gameMap.getGameMapCoordinates());
+            List<Tile> collidedTiles = CollisionHandler.getSpecificTileCollisions(p, gameMap.getGameMapCoordinates());
             if (collidedTiles.size() > 0){
                 projectiles.remove(p);
                 break;
@@ -310,7 +310,7 @@ public class Game implements IGame {
      * @param axis tells the method which axis to consider
      */
     private void collisionCheck(ECollisionAxis axis){
-        List<Tile> collidedTile = CollisionHandler.getSpecificTerrainCollisions(player, gameMap.getGameMapCoordinates());
+        List<Tile> collidedTile = CollisionHandler.getSpecificTileCollisions(player, gameMap.getGameMapCoordinates());
         for (Tile t : collidedTile) {
             Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, axis);
             if (collisionTypes.get("right")) {

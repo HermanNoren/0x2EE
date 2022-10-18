@@ -29,7 +29,7 @@ public class CollisionHandler {
      * @param tile Matrix containing all the tile tiles.
      * @return A list containing the tile pieces that is being collided with
      */
-    public static List<Tile> getSpecificTerrainCollisions(IGameObject object, Tile[][] tile) {
+    public static List<Tile> getSpecificTileCollisions(IGameObject object, Tile[][] tile) {
         List<Tile> collidedTile = new ArrayList<>();
 
         // Defining the bounds of how many tiles to iterate through.

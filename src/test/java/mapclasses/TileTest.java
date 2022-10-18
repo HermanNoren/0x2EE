@@ -21,12 +21,12 @@ public class TileTest {
     }
 
     @Test
-    void test_getHeight_returns_height_of_Terrain(){
+    void test_getHeight_returns_height_of_Tile(){
         assertEquals(Config.TILE_SIZE, tile.getHeight());
     }
 
     @Test
-    void test_getWidth_returns_height_of_Terrain(){
+    void test_getWidth_returns_height_of_Tile(){
         assertEquals(Config.TILE_SIZE, tile.getWidth());
     }
 
@@ -41,11 +41,11 @@ public class TileTest {
     }
 
     @Test
-    void test_getG_returns_g_value_of_Terrain(){
+    void test_getG_returns_g_value_of_Tile(){
         assertEquals(Double.MAX_VALUE, tile.getG());
     }
     @Test
-    void test_setG_sets_g_value_of_Terrain(){
+    void test_setG_sets_g_value_of_Tile(){
         tile.setG(10);
         assertEquals(10, tile.getG());
     }
@@ -61,55 +61,45 @@ public class TileTest {
     }
 
     @Test
-    void test_getParent_returns_null_on_new_Terrain(){
+    void test_getParent_returns_null_on_new_Tile(){
         assertNull(tile.getParent());
     }
 
     @Test
-    void test_setParent_sets_parent_Terrain_to_Terrain(){
+    void test_setParent_sets_parent_Tile_to_Tile(){
         Tile testTile = new Tile(11, 11);
         tile.setParent(testTile);
         assertEquals(testTile, tile.getParent());
     }
 
     @Test
-    void test_getParent_returns_parent_of_Terrain(){
+    void test_getParent_returns_parent_of_Tile(){
         Tile testTile = new Tile(11, 11);
         tile.setParent(testTile);
         boolean test = tile.getParent() == testTile;
         assertTrue(test);
     }
 
-    @Test
-    void test_getTerrainType_returns_0_for_new_Terrain(){
-        assertEquals(0, tile.getTileType());
-    }
 
     @Test
-    void test_setTerrainType_sets_TerrainType_of_Terrain(){
-        tile.setTileType(1);
-        assertEquals(1, tile.getTileType());
-    }
-
-    @Test
-    void test_isPassable_returns_true_for_new_Terrain(){
+    void test_isPassable_returns_true_for_new_Tile(){
         assertTrue(tile.isPassable());
     }
 
     @Test
-    void test_setPassable_sets_boolean_to_false_on_Terrain(){
+    void test_setPassable_sets_boolean_to_false_on_Tile(){
         tile.setPassable(false);
         assertFalse(tile.isPassable());
     }
     @Test
-    void test_setPassable_sets_boolean_to_true_on_Terrain() {
+    void test_setPassable_sets_boolean_to_true_on_Tile() {
         tile.setPassable(false);
         tile.setPassable(true);
         assertTrue(tile.isPassable());
     }
 
     @Test
-    void test_getNeighbors_returns_empty_list_on_new_Terrain(){
+    void test_getNeighbors_returns_empty_list_on_new_Tile(){
         assertTrue(tile.getNeighbors().isEmpty());
     }
 
@@ -120,7 +110,7 @@ public class TileTest {
     }
 
     @Test
-    void test_addBranch_adds_Edge_with_neighbor_to_Terrain(){
+    void test_addBranch_adds_Edge_with_neighbor_to_Tile(){
         Tile testTile = new Tile(11, 11);
         tile.addBranch(1, testTile);
 
@@ -159,21 +149,21 @@ public class TileTest {
     }
 
     @Test
-    void test_getCenter_returns_center_vector_xpos_of_Terrain(){
+    void test_getCenter_returns_center_vector_xpos_of_Tile(){
         Vector2 testVector = new Vector2(48+24, 48+24);
         Tile testTile = new Tile(1, 1);
         assertEquals(testVector.getX(), testTile.getCenter().getX());
     }
 
     @Test
-    void test_getCenter_returns_new_center_vector_ypos_of_Terrain(){
+    void test_getCenter_returns_new_center_vector_ypos_of_Tile(){
         Vector2 testVector = new Vector2(48+24, 48+24);
         Tile testTile = new Tile(1, 1);
         assertEquals(testVector.getY(), testTile.getCenter().getY());
     }
 
     @Test
-    void test_Edge_class_in_Terrain_creates_new_Edge(){
+    void test_Edge_class_in_Tile_creates_new_Edge(){
         Tile neighbor = new Tile(1, 1);
         tile.addBranch(1 , neighbor);
         Tile.Edge edge  = tile.getNeighbors().get(0);

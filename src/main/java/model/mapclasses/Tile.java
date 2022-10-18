@@ -58,6 +58,7 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
      * {@inheritDoc}
      * @return {@inheritDoc}
      */
+    @Override
     public List<Edge> getNeighbors() {
         return neighbors;
     }
@@ -66,6 +67,7 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
      * {@inheritDoc}
      * @return {@inheritDoc}
      */
+    @Override
     public int getX() {
         return x;
     }
@@ -74,6 +76,7 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
      * {@inheritDoc}
      * @return {@inheritDoc}
      */
+    @Override
     public int getY() {
         return y;
     }
@@ -97,6 +100,7 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
      * {@inheritDoc}
      * @param f {@inheritDoc}
      */
+    @Override
     public void setF(double f) {
         this.f = f;
     }
@@ -105,6 +109,7 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
      * {@inheritDoc}
      * @return {@inheritDoc}
      */
+    @Override
     public double getG() {
         return g;
     }
@@ -113,6 +118,7 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
      * {@inheritDoc}
      * @param g {@inheritDoc}
      */
+    @Override
     public void setG(double g) {
         this.g = g;
     }
@@ -159,6 +165,7 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
      * {@inheritDoc}
      * @param passable {@inheritDoc}
      */
+    @Override
     public void setPassable(boolean passable){
         this.passable = passable;
     }
@@ -167,6 +174,7 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
      * {@inheritDoc}
      * @return {@inheritDoc}
      */
+    @Override
     public boolean isPassable() {
         return passable;
     }
@@ -176,6 +184,7 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
      * @param weight {@inheritDoc}
      * @param neighbor {@inheritDoc}
      */
+    @Override
     public void addBranch(int weight, Tile neighbor){
         Tile.Edge newEdge = new Tile.Edge(weight, neighbor);
         neighbors.add(newEdge);
@@ -187,7 +196,7 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
     public static class Edge {
         private int weight;
         private Tile tile;
-        Edge(int weight, Tile tile){
+        protected Edge(int weight, Tile tile){
             this.weight = weight;
             this.tile = tile;
         }

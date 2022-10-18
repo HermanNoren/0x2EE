@@ -5,6 +5,7 @@ import utility.Noise;
 import java.util.*;
 
 /**
+ * Class used to create a GameMap with Tiles.
  * Game map class
  */
 public class GameMap implements IGameMap{
@@ -48,8 +49,8 @@ public class GameMap implements IGameMap{
         }
     }
     /**
-     * Method used to get the value of the height variable in GameMap
-     * @return height of game map
+     * {@inheritDoc}
+     * @return {@inheritDoc}
      */
     @Override
     public int getHeight() {
@@ -57,8 +58,8 @@ public class GameMap implements IGameMap{
     }
 
     /**
-     * Method used to get the value of the width variable in GameMap
-     * @return width of the game map
+     * {@inheritDoc}
+     * @return {@inheritDoc}
      */
     @Override
     public int getWidth() {
@@ -66,8 +67,8 @@ public class GameMap implements IGameMap{
     }
 
     /**
-     * Method used to get the reference to the gameMapCoordinates grid.
-     * @return grid of tiles
+     * {@inheritDoc}
+     * @return {@inheritDoc}
      */
     @Override
     public Tile[][] getGameMapCoordinates() {
@@ -75,8 +76,8 @@ public class GameMap implements IGameMap{
     }
 
     /**
-     * Method used to get a copy of the List of tiles.
-     * @return a copy of List<Tile> tiles.
+     * {@inheritDoc}
+     * @return defensive copy of tiles
      */
     @Override
     public List<Tile> getTiles() {
@@ -84,6 +85,7 @@ public class GameMap implements IGameMap{
     }
 
     /**
+     * Method used to get a new List of the passable tiles
      * @return List containing all tiles which are passable.
      */
     public List<Tile> getPassableTiles(){
