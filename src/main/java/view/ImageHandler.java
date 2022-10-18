@@ -23,12 +23,14 @@ public class ImageHandler {
 
     }
 
-    public static void setImgs(int nrImgs, Map<String, BufferedImage> imgs, List<String> imgTypes) {
+    public static Map<String, BufferedImage> getImgs(int nrImgs, List<String> imgTypes) {
+        Map<String, BufferedImage> imgs = new HashMap<>();
         for (String imgType : imgTypes) {
             for (int i = 0; i < nrImgs; i++) {
                 imgs.put(imgType + i, getImage("imgs/"+imgType+"/" + i + ".png"));
             }
         }
+        return imgs;
     }
 
     public static void setImgsWithDirections(int nrImgs, Map<EDirection, Map<String, BufferedImage>> imgs, List<String> imgTypes, EDirection direction) {

@@ -15,8 +15,6 @@ public class ItemDrawer implements IImageIteratorDrawer {
 
     private IHasItems game;
 
-    private ImageHandler imageHandler;
-
     private Map<String, BufferedImage> imgs;
 
     private int index;
@@ -28,8 +26,7 @@ public class ItemDrawer implements IImageIteratorDrawer {
         itemTypes = new ArrayList<>();
         itemTypes.add("coin");
         itemTypes.add("potion");
-        imgs = new HashMap<>();
-        ImageHandler.setImgs(4, imgs, itemTypes);
+        imgs = ImageHandler.getImgs(4, itemTypes);
     }
 
     @Override
