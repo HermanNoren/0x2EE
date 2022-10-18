@@ -1,5 +1,4 @@
 package gameobjects.ItemSpawner;
-
 import model.Game;
 import model.gameobjects.ItemSpawner.Coin;
 import model.gameobjects.ItemSpawner.IItem;
