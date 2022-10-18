@@ -17,6 +17,11 @@ public class BossEnemy extends Enemy{
     }
 
     @Override
+    public int getDamage() {
+        return 5;
+    }
+
+    @Override
     public int getKillReward() {
         return 500;
     }

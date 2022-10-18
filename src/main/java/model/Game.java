@@ -274,7 +274,7 @@ public class Game implements IGame {
             enemy.update(dt);
             //Check if enemy is close enough to damage player, could be done somewhere else also.
             if (CollisionHandler.testCollision(player, enemy)) {
-                this.player.damageTaken(1);
+                this.player.damageTaken(enemy.getDamage());
             }
             checkIfProjectileHitsEnemy(enemy);
         }
