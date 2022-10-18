@@ -55,7 +55,7 @@ public class TransactionHandler {
     /**
      * @return the damage the weapon deals if it were to be upgraded.
      */
-    public int weaponDamageAfterUpgrade(){
+    public int weaponDamageIfUpgrade(){
         return weapon.statsIfUpgraded();
     }
 

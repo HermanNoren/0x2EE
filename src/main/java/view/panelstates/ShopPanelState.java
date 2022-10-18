@@ -4,12 +4,10 @@ import controllers.ButtonSwitcherController;
 import controllers.buttonactions.ResumeGameButtonAction;
 import controllers.buttonactions.UpgradeArmorButton;
 import model.gameinterfaces.ICanPause;
-import model.gameinterfaces.IGame;
 import model.helperclasses.TransactionHandler;
 import view.IChangeableStatePanel;
 import view.buttons.GameButton;
 import controllers.buttonactions.UpgradeWeaponAction;
-import controllers.buttonactions.MenuButtonAction;
 import view.drawers.ButtonDrawer;
 import view.drawers.IDrawer;
 import view.drawers.InShopDrawer;
@@ -73,7 +71,7 @@ public class ShopPanelState implements IPanelState{
         drawPlayerMoney(g2, transactionHandler.getMoney());
 
         drawWeaponCost(g2, transactionHandler.getWeaponUpgradeCost());
-        drawWeaponUpgradePerks(g2, transactionHandler.getCurrentWeaponDamage(), transactionHandler.weaponDamageAfterUpgrade());
+        drawWeaponUpgradePerks(g2, transactionHandler.getCurrentWeaponDamage(), transactionHandler.weaponDamageIfUpgrade());
 
         drawArmorCost(g2, transactionHandler.getArmorUpgradeCost());
         drawArmorUpgradePerks(g2, transactionHandler.getCurrentArmorReduction(), transactionHandler.armorReductionAfterUpgrade());

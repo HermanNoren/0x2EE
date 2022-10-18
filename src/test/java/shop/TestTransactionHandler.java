@@ -179,5 +179,19 @@ public class TestTransactionHandler {
         int playerMoneyAfterPurchase = player.getMoney();
         assertEquals(playerMoneyAfterPurchase, playerMoneyBeforePurchase - armorCost);
     }
+    @Test
+    void the_to_be_upgraded_armor_reduction_should_be_matched_if_upgraded(){
+        int armorReductionShouldBeAfterUpgradeNotUpgraded = transactionHandler.armorReductionAfterUpgrade();
+        transactionHandler.upgradeArmor();
+        int currentArmorReductionAfterUpgrade = transactionHandler.getCurrentArmorReduction();
+        assertEquals(currentArmorReductionAfterUpgrade, armorReductionShouldBeAfterUpgradeNotUpgraded);
+    }
+    @Test
+    void the_to_be_upgraded_weapon_damage_should_be_matched_if_upgraded(){
+        int weaponReductionShouldBeAfterUpgradeNotUpgraded = transactionHandler.weaponDamageIfUpgrade();
+        transactionHandler.upgradeWeapon();
+        int currentWeaponDamageAfterUpgrade = transactionHandler.getCurrentWeaponDamage();
+        assertEquals(currentWeaponDamageAfterUpgrade, weaponReductionShouldBeAfterUpgradeNotUpgraded);
+    }
 
 }
