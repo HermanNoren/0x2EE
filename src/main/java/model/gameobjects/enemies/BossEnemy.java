@@ -8,8 +8,8 @@ import model.mapclasses.Tile;
 
 public class BossEnemy extends Enemy{
     private int damage;
-    protected BossEnemy(int x, int y, int damage, Tile[][] coordinates, Entity targetEntity) {
-        super(x, y,damage, coordinates, targetEntity);
+    protected BossEnemy(int x, int y, int damage, int killReward, Tile[][] coordinates, Entity targetEntity) {
+        super(x, y, damage, killReward, coordinates, targetEntity);
         this.damage = damage;
         setVelX(1);
         setVelY(1);

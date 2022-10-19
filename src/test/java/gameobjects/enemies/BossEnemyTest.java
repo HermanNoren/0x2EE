@@ -18,7 +18,7 @@ public class BossEnemyTest {
         Game game = new Game();
         Player player = new Player(1, 1, game.getGameMap().getGameMapCoordinates());
         EnemyFactory enemyFactory = new BossEnemyFactory();
-        bossEnemy = enemyFactory.createEnemy(player, game.getGameMap().getPassableTiles(), game.getGameMap().getGameMapCoordinates());
+        bossEnemy = enemyFactory.createEnemy(player,5, 500, game.getGameMap().getPassableTiles(), game.getGameMap().getGameMapCoordinates());
     }
 
     @Test

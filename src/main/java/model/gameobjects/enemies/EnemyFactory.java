@@ -10,5 +10,5 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class EnemyFactory {
-    public abstract Enemy createEnemy(Entity targetEntity, List<Tile> passableTiles, Tile[][] coordinates);
+    public abstract Enemy createEnemy(Entity targetEntity, int damage, int killReward, List<Tile> passableTiles, Tile[][] coordinates);
 }

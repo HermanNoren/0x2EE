@@ -380,12 +380,18 @@ public class Game implements IGame {
      */
     @Override
     public void spawnEnemy(int counter){
+        int damage;
+        int killReward;
         if((counter % 5) == 0 && counter != 0){
+            killReward = 500;
+            damage = 5;
             enemyFactory = new BossEnemyFactory();
         }else{
+            damage = 1;
+            killReward = 100;
             enemyFactory = new NormalEnemyFactory();
         }
-        enemies.add(enemyFactory.createEnemy(player, gameMap.getPassableTiles(), getGameMap().getGameMapCoordinates()));
+        enemies.add(enemyFactory.createEnemy(player, damage, killReward, gameMap.getPassableTiles(), gameMap.getGameMapCoordinates()));
     }
 
     /**

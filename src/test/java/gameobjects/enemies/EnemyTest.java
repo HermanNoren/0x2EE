@@ -27,7 +27,7 @@ public class EnemyTest {
         gameMap = new GameMap(10, 10, false);
         enemyFactory = new NormalEnemyFactory();
         player = new Player(10, 10, gameMap.getGameMapCoordinates());
-        enemy = enemyFactory.createEnemy(player, gameMap.getPassableTiles(), gameMap.getGameMapCoordinates());
+        enemy = enemyFactory.createEnemy(player, 1, 100, gameMap.getPassableTiles(), gameMap.getGameMapCoordinates());
     }
 
     @Test
