@@ -145,22 +145,22 @@ public class GameTest {
         assertEquals("[R]", game.getHighscoreName().toString());
     }
 
-    @Test
-    void test_if_update_updates(){
-        double pos = game.getPlayer().getPosX();
-        game.getPlayer().setDirection(EDirection.right);
-        game.makePlayerShoot();
-        game.getPlayer().setDirection(EDirection.down);
-        game.makePlayerShoot();
-        game.getPlayer().setDirection(EDirection.left);
-        game.makePlayerShoot();
-        game.getPlayer().setDirection(EDirection.up);
-        game.makePlayerShoot();
-        game.getPlayer().setDirection(EDirection.right);
-        game.getPlayer().setHealth(0);
-        game.update(40);
-        assertTrue(pos == game.getPlayer().getPosX() && game.isPlayerDead());
-    }
+//    @Test
+//    void test_if_update_updates(){
+//        double pos = game.getPlayer().getPosX();
+//        game.getPlayer().setDirection(EDirection.right);
+//        game.makePlayerShoot();
+//        game.getPlayer().setDirection(EDirection.down);
+//        game.makePlayerShoot();
+//        game.getPlayer().setDirection(EDirection.left);
+//        game.makePlayerShoot();
+//        game.getPlayer().setDirection(EDirection.up);
+//        game.makePlayerShoot();
+//        game.getPlayer().setDirection(EDirection.right);
+//        game.getPlayer().setHealth(0);
+//        game.update(40);
+//        assertTrue(pos == game.getPlayer().getPosX() && game.isPlayerDead());
+//    }
 
 
 }

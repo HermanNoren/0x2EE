@@ -98,15 +98,7 @@ public class GameMap implements IGameMap{
         return passableTiles;
     }
 
-    public Tile getRandomPassableTile(){
-        int nrPossibleSpawnLocations = getPassableTiles().size();
-        Random random = new Random();
-        Tile randomSpawnableTile = getPassableTiles().get(
-                random.nextInt(nrPossibleSpawnLocations-1));
-        double posX = randomSpawnableTile.getPos().getX();
-        double posY = randomSpawnableTile.getPos().getY();
-        return randomSpawnableTile;
-    }
+
     /**
      * {@inheritDoc}
      */

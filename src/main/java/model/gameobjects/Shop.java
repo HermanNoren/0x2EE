@@ -2,6 +2,10 @@ package model.gameobjects;
 
 import config.Config;
 import model.Vector2;
+import model.mapclasses.Tile;
+
+import java.util.List;
+import java.util.Random;
 
 /**
  * This is the shop where weapons and armor can be

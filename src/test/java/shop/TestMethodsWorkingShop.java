@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 /**
  * Test for seeing if the player is in correct position to shop. Background
@@ -14,7 +15,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * twice as wide and tall as the player.
  */
 public class TestMethodsWorkingShop {
-    public Shop shop;
+
+    private Shop shop;
    @BeforeEach
    void init(){
        shop = new Shop(100,100);
@@ -26,8 +28,9 @@ public class TestMethodsWorkingShop {
 
    @Test
     void test_assert_that_getHeight_is_the_given_value(){
-       assertEquals(shop.getHeight(), 96);
+       assertSame(shop.getHeight(), 96);
    }
+
    @Test
     void test_assert_that_the_Y_position_is_true_to_the_given_Y_position(){
        Vector2 pos = new Vector2(100,100);
