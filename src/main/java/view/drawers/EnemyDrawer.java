@@ -12,12 +12,13 @@ import java.awt.image.BufferedImage;
 import java.util.*;
 import java.util.List;
 
+/**
+ * Draws all types of enemies.
+ */
 public class EnemyDrawer implements IImageIteratorDrawer {
-    private List<EDirection> directions;
-    private BufferedImage prevImg, activeImage;
-
+    private final List<EDirection> directions;
     private final IHasEnemies game;
-    private List<String> imgTypes;
+    private final List<String> imgTypes;
     private Map<EDirection, Map<String, BufferedImage>> imgs;
     private int index;
 
@@ -25,8 +26,8 @@ public class EnemyDrawer implements IImageIteratorDrawer {
         this.game = game;
         imgs = new HashMap<>();
         imgTypes = new ArrayList<>();
-        imgTypes.add("boss");
         imgTypes.add("normal");
+        imgTypes.add("boss");
         directions = new ArrayList<>();
         directions.add(EDirection.up);
         directions.add(EDirection.left);

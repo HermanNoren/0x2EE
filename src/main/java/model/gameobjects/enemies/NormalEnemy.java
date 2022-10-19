@@ -4,7 +4,7 @@ import model.gameobjects.Entity;
 import model.mapclasses.Tile;
 
 /**
- * The mundane enemy, standard enemy which spawns.
+ * The mundane enemy, standard enemy.
  */
 class NormalEnemy extends Enemy{
     private int damage;

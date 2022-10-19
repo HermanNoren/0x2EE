@@ -8,16 +8,15 @@ import model.mapclasses.Tile;
 import model.upgradables.weapon.Weapon;
 
 /**
- * The player, more implementation to come.
+ * The player of the game, weapon and armor acts as compositions.
+ * Also has movement logic.
  */
-
-public class Player extends Entity implements IPlayer, IFocusableObject, IHasUpgradables {
+public class Player extends Entity implements IPlayer, IFocusableObject, IHasUpgradable {
     private int score;
     private int money;
     private final Weapon weapon;
     private final Armor armor;
     private final double moveAcc;
-
     /**
      * @param x, starting x-position
      * @param y, starting y-position
@@ -134,9 +133,8 @@ public class Player extends Entity implements IPlayer, IFocusableObject, IHasUpg
     }
     @Override
     public void damageTaken(int damage){
-       setHealth((int) (getHealth() - armor.damageReduction(damage)));
+        if(damage > 0) setHealth((int) (getHealth() - armor.damageReduction(damage)));
     }
-
     @Override
     public void addMoney(int amount){
         this.money += amount;

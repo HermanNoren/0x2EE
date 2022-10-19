@@ -3,6 +3,9 @@ package view.panelstates;
 import model.gameinterfaces.IGame;
 import view.IChangeableStatePanel;
 
+/**
+ * Factory pattern which creates a new state method is called with correct parameters.x
+ */
 public class PanelStateFactory {
 
     public static IPanelState createPanelState(EPanelState state, IChangeableStatePanel mainPanel, IGame game)  {
