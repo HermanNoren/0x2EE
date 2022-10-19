@@ -3,6 +3,9 @@ package model.gameobjects.enemies;
 import model.gameobjects.Entity;
 import model.mapclasses.Tile;
 
+/**
+ * The mundane enemy, standard enemy which spawns.
+ */
 class NormalEnemy extends Enemy{
     private int damage;
     protected NormalEnemy(int x, int y, int damage, int killReward, Tile[][] coordinates, Entity targetEntity) {

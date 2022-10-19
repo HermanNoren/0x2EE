@@ -6,6 +6,9 @@ import model.helperclasses.Vector2;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test for projectile.
+ */
 public class ProjectileTest {
 
     Projectile projectile;

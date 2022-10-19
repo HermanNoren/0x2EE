@@ -6,6 +6,10 @@ import model.helperclasses.Vector2;
 import model.mapclasses.Tile;
 import model.gameobjects.Entity;
 
+/**
+ * Representation of the enemy class, used to glue together logic
+ * from AStar, implements damage that damages the player when player is hit.
+ */
 public abstract class Enemy extends Entity implements IEnemy {
     private double movementSpeed;
     private final Entity targetEntity;

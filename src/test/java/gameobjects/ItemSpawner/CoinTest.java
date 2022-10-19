@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test for coin.
+ */
 public class CoinTest {
 
     Game game = new Game();

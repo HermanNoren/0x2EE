@@ -4,6 +4,9 @@ import model.upgradables.armor.Armor;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test for armor.
+ */
 public class ArmorTest {
     @Test
     void test_armor_upgrades(){

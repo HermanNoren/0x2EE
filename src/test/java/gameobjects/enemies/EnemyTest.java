@@ -4,15 +4,14 @@ import model.gameobjects.Player;
 import model.gameobjects.enemies.Enemy;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
-import model.helperclasses.EDirection;
 import model.helperclasses.Vector2;
 import model.mapclasses.GameMap;
-import model.mapclasses.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.Random;
-
+/**
+ * Test for enemy.
+ */
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

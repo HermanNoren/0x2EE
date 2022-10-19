@@ -7,6 +7,9 @@ import view.Camera;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test for camera.
+ */
 public class CameraTest {
 
     Game game;
