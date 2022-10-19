@@ -1,6 +1,6 @@
 package utility;
 
-import model.mapclasses.GameMap;
+import model.mapclasses.IGameMap;
 import model.mapclasses.Tile;
 
 import java.util.Random;
@@ -13,7 +13,7 @@ public class Noise {
     private final Random random;
     private final float roughness;
     private final float[][] grid;
-    public Noise(float roughness, GameMap gameMap){
+    public Noise(float roughness, IGameMap gameMap){
         this.random = new Random();
         this.roughness = roughness/gameMap.getWidth();
         this.grid = new float[gameMap.getWidth()][gameMap.getHeight()];

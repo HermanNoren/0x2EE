@@ -4,7 +4,7 @@ import config.Config;
 import model.gameinterfaces.IGame;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
-import model.helperclasses.EDirection;
+import model.gameobjects.EDirection;
 import model.helperclasses.TransactionHandler;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;

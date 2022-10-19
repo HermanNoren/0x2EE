@@ -1,10 +1,8 @@
 package view.drawers;
 
 import model.gameinterfaces.IHasProjectiles;
-import model.gameobjects.IGameObject;
-import model.gameobjects.IProjectile;
 import model.gameobjects.Projectile;
-import model.helperclasses.EDirection;
+import model.gameobjects.EDirection;
 import view.ImageHandler;
 
 import java.awt.*;

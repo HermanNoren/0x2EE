@@ -1,6 +1,6 @@
 package view;
 
-import model.helperclasses.EDirection;
+import model.gameobjects.EDirection;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
