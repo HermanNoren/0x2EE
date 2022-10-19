@@ -24,7 +24,7 @@ class NormalEnemy extends Enemy{
     }
 
     @Override
-    public int getKillReward() {
+    public int getSCoreReward() {
         return 100;
     }
 

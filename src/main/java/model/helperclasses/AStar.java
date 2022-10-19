@@ -1,7 +1,6 @@
 package model.helperclasses;
 
-import model.mapclasses.Tile;
-
+import model.mapclasses.Tile;  
 import java.util.PriorityQueue;
 
 /**

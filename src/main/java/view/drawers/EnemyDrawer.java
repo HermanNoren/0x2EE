@@ -28,7 +28,8 @@ public class EnemyDrawer implements IImageIteratorDrawer {
         imgTypes = new ArrayList<>();
         imgTypes.add("normal");
 //        imgTypes.add("boss");
-        imgTypes.add("shrek");
+       // imgTypes.add("shrek");
+        imgTypes.add("obunga");
         directions = new ArrayList<>();
         directions.add(EDirection.up);
         directions.add(EDirection.left);

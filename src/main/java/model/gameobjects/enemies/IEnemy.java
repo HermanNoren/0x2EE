@@ -5,7 +5,7 @@ import model.gameobjects.Entity;
 public interface IEnemy{
 
     int getDamage();
-    int getKillReward();
+    int getSCoreReward();
     void update(double dt);
     Entity getTargetEntity();
 }

@@ -23,11 +23,11 @@ public class BossEnemy extends Enemy{
 
     @Override
     public String getType() {
-        return "shrek";
+        return "obunga";
     }
 
     @Override
-    public int getKillReward() {
+    public int getSCoreReward() {
         return 500;
     }
 

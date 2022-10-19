@@ -271,11 +271,10 @@ public class Game implements IGame {
             Enemy enemy = enemyIter.next();
             if (enemy.getHealth() <= 0) {
                 spawner.spawnItem();
-                player.addScore(enemy.getKillReward());
+                player.addScore(enemy.getSCoreReward());
                 enemies.remove(enemy);
                 break;
             }
-
             enemy.update(dt);
             //Check if enemy is close enough to damage player, could be done somewhere else also.
             if (CollisionHandler.testCollision(player, enemy)) {
