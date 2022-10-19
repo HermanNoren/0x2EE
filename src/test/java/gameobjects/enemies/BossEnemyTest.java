@@ -31,6 +31,6 @@ public class BossEnemyTest {
     }
     @Test
     void test_getKillReward_returns_500(){
-        assertEquals(500, bossEnemy.getKillReward());
+        assertEquals(500, bossEnemy.getSCoreReward());
     }
 }
