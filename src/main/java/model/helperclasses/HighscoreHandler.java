@@ -29,7 +29,7 @@ public class HighscoreHandler {
         }else{
             try {
                 createNewFile();
-            } catch (IOException e) {
+            } catch (IOException e) { //Meant to be unreachable
                 throw new RuntimeException(e);
             }
         }
@@ -102,7 +102,7 @@ public class HighscoreHandler {
                 output.write(s + " ");
             }
             output.close();
-        } catch (IOException ex1) {
+        } catch (IOException ex1) {  //Meant to be unreachable
             ex1.printStackTrace();
         }
     }
