@@ -7,6 +7,11 @@ object-oriented programming project.
 How to start from terminal
 ======
 
+From project directory run: 
+
+java -jar target/GameLibrary-1.0-SNAPSHOT.jar
+
+in terminal. 
 ____
-Arthur, please help us you are our only hope
+
 ![img_2.png](img_2.png)

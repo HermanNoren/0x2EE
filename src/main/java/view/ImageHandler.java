@@ -15,7 +15,7 @@ public class ImageHandler {
     public static BufferedImage getImage(String path) {
         BufferedImage image;
         try {
-            image = ImageIO.read(new File(path));
+            image = ImageIO.read(new File("src/main/resources/"+path));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
