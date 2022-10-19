@@ -6,12 +6,11 @@ object-oriented programming project.
 
 How to start from terminal
 ======
-
-From project directory run: 
-
+Clone repo
+Run mvn package
+From Terminal, project directory run:
 java -jar target/GameLibrary-1.0-SNAPSHOT.jar
 
-in terminal. 
 ____
 
 ![img_2.png](img_2.png)

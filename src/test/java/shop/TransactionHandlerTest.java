@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Test for TransactionHandler.
  */
-public class TestTransactionHandler {
+public class TransactionHandlerTest {
 
     public Player player;
     public TransactionHandler transactionHandler;

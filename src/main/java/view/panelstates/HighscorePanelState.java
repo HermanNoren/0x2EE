@@ -49,7 +49,9 @@ public class HighscorePanelState implements IPanelState {
         keyListeners.add(bc);
         drawers = new ArrayList<>();
         drawers.add(new ButtonDrawer(buttons));
+
         scores = highscoreHandler.getHighscoreList();
+
     }
 
     private void drawScores(Graphics2D g2){
