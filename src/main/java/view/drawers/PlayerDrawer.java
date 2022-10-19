@@ -15,11 +15,11 @@ import java.util.Map;
  * Strictly used to draw the player onto the screen
  */
 public class PlayerDrawer implements IImageIteratorDrawer {
-    private int imageSwitcher;
     private Player player;
 
     private Map<EDirection, Map<String, BufferedImage>> imgs;
     private List<String> imgTypes;
+    private List<EDirection> directions;
     private int index;
 
     public PlayerDrawer(Player player) {
@@ -27,6 +27,11 @@ public class PlayerDrawer implements IImageIteratorDrawer {
         imgTypes = new ArrayList<>();
         imgs = new HashMap<>();
         imgTypes.add("player");
+        directions = new ArrayList<>();
+        directions.add(EDirection.right);
+        directions.add(EDirection.up);
+        directions.add(EDirection.left);
+        directions.add(EDirection.down);
         initPlayerImages();
     }
 
@@ -36,10 +41,7 @@ public class PlayerDrawer implements IImageIteratorDrawer {
      * Initializes all the images used to draw the player
      */
     private void initPlayerImages(){
-        ImageHandler.setImgsWithDirections(2, imgs, imgTypes, EDirection.up);
-        ImageHandler.setImgsWithDirections(2, imgs, imgTypes, EDirection.left);
-        ImageHandler.setImgsWithDirections(2, imgs, imgTypes, EDirection.down);
-        ImageHandler.setImgsWithDirections(2, imgs, imgTypes, EDirection.right);
+        imgs = ImageHandler.getImgsWithDirections(2, imgTypes, directions);
     }
 
     /**
