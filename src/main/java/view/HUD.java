@@ -32,7 +32,7 @@ public class HUD {
         g2.drawString("" + player.getScore(), Config.SCREEN_WIDTH/2, 32);
         g2.drawImage(ImageHandler.getImage("imgs/coin/0.png"), Config.SCREEN_WIDTH - 150, Config.SCREEN_HEIGHT-80, 30, 30, null);
         g2.setColor(goldColor);
-        g2.drawString("" + player.getMoney(),Config.SCREEN_WIDTH - 90, Config.SCREEN_HEIGHT-55);
+        g2.drawString("" + player.getMoney(),Config.SCREEN_WIDTH - 100, Config.SCREEN_HEIGHT-55);
         g2.setColor(Color.red);
         g2.fillRoundRect(20, Config.SCREEN_HEIGHT - 100, 200, 20, 0, 0);
         g2.setColor(Color.green);
@@ -40,11 +40,12 @@ public class HUD {
         g2.setColor(Color.black);
         g2.setStroke(outline);
         g2.drawRoundRect(20, Config.SCREEN_HEIGHT - 100, 200, 20, 0, 0);
+
+        //Mana has not yet been implemented
         g2.setColor(manaColor);
         g2.fillRoundRect(20, Config.SCREEN_HEIGHT - 70, 200, 20, 0, 0);
         g2.setColor(Color.black);
         g2.drawRoundRect(20, Config.SCREEN_HEIGHT - 70, 200, 20, 0, 0);
-        g2.drawString("10/15", 20, Config.SCREEN_HEIGHT - 120);
     }
 
 }
