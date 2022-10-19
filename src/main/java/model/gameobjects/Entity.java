@@ -119,9 +119,10 @@ public abstract class Entity implements IGameObject {
      */
 
     public void setDirection(EDirection direction) {
-        if (this.direction != EDirection.not_moving)
+        if (this.direction != direction) {
             lastDirection = this.direction;
-        this.direction = direction;
+            this.direction = direction;
+        }
     }
 
     /**

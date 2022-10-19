@@ -151,7 +151,7 @@ public class EntityTest {
     void test_getLastDirection_returns_previous_direction_of_Entity(){
         //Entity starts with direction NOT_MOVING
         entity.setDirection(EDirection.down);
-        assertEquals(EDirection.not_moving, entity.getLastDirection());
+        assertEquals(EDirection.down, entity.getLastDirection());
     }
 
     @Test
