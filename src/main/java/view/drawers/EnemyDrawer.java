@@ -21,12 +21,12 @@ public class EnemyDrawer implements IImageIteratorDrawer {
     private Map<EDirection, Map<String, BufferedImage>> imgs;
     private int index;
 
-    public EnemyDrawer(IHasEnemies game, String type){
+    public EnemyDrawer(IHasEnemies game){
         this.game = game;
         imgs = new HashMap<>();
         imgTypes = new ArrayList<>();
-        imgTypes.add("normal");
         imgTypes.add("boss");
+        imgTypes.add("normal");
         directions = new ArrayList<>();
         directions.add(EDirection.up);
         directions.add(EDirection.left);

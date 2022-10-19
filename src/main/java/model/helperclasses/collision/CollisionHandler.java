@@ -41,10 +41,10 @@ public class CollisionHandler {
         int down = (int) (objectPos.getY() / Config.TILE_SIZE + 2);
 
         if (left < 0) {
-            left = 0;
+            left = 0; // Unreachable
         }
         if (up < 0) {
-            up = 0;
+            up = 0; // Unreachable
         }
 
         for (int row = left; row < right && row < tile.length; row++) {
