@@ -52,7 +52,7 @@ public class Game implements IGame {
 
     @Override
     public void newGameRound() {
-        this.gameMap = new GameMap(Config.MAP_WIDTH, Config.MAP_HEIGHT);
+        this.gameMap = new GameMap(Config.MAP_WIDTH, Config.MAP_HEIGHT, true);
         this.player = new Player(500, 500, gameMap.getGameMapCoordinates());
         shop = new Shop(200, 100);
         this.transactionHandler = new TransactionHandler(this.getPlayer());
@@ -382,6 +382,7 @@ public class Game implements IGame {
     @Override
     public void spawnEnemy(int counter){
         if((counter % 5) == 0 && counter != 0){
+            System.out.println("boss spawned");
             enemyFactory = new BossEnemyFactory();
         }else{
             enemyFactory = new NormalEnemyFactory();

@@ -130,10 +130,6 @@ public class EntityTest {
         assertEquals(1, entity.getAccY());
     }
 
-    @Test
-    void test_getCenter_returns_center_position_of_Entity(){
-
-    }
 
     @Test
     void test_getDirection_returns_current_direction_of_Entity(){
@@ -149,9 +145,8 @@ public class EntityTest {
 
     @Test
     void test_getLastDirection_returns_previous_direction_of_Entity(){
-        //Entity starts with direction NOT_MOVING
-        entity.setDirection(EDirection.down);
-        assertEquals(EDirection.not_moving, entity.getLastDirection());
+        entity.setDirection(EDirection.up);
+        assertEquals(EDirection.down, entity.getLastDirection());
     }
 
     @Test
@@ -192,7 +187,7 @@ public class EntityTest {
 
     @Test
     void test_getCenter_returns_center_of_IGameObject(){
-        IGameObject gameObject = (IGameObject) entity;
+        IGameObject gameObject = entity;
         Vector2 centerTestVec = new Vector2(entity.getPosX() + (double) gameObject.getWidth() / 2,
                 entity.getPosY() + (double) gameObject.getHeight() / 2);
         assertEquals(centerTestVec.getX(), gameObject.getCenter().getX());

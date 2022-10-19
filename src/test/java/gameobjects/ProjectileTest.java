@@ -17,6 +17,11 @@ public class ProjectileTest {
     }
 
     @Test
+    void test_getDirection_returns_projectile_direction(){
+        projectile = new Projectile(new Vector2(0, 0), EDirection.up);
+        assertEquals(EDirection.up, projectile.getDirection());
+    }
+    @Test
     void test_get_height() {
         projectile = new Projectile(new Vector2(0, 0), EDirection.not_moving);
         assertEquals(8, projectile.getHeight());

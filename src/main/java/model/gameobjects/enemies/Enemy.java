@@ -12,7 +12,7 @@ public abstract class Enemy extends Entity implements IEnemy {
     protected Enemy(int x, int y, Tile[][] coordinates, Entity targetEntity){
         super(x, y, coordinates);
         this.targetEntity = targetEntity;
-        setMovementSpeed(2);
+        setMovementSpeed(1.5);
     }
     @Override
     public Entity getTargetEntity(){

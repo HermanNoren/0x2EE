@@ -10,7 +10,7 @@ public class AStarTest {
     Tile[][] tiles;
     @BeforeEach
     void init(){
-        GameMap map = new GameMap(100, 100);
+        GameMap map = new GameMap(100, 100, true);
         tiles = map.getGameMapCoordinates();
         for (Tile[] tileRow : tiles){
             for (Tile tile : tileRow){
