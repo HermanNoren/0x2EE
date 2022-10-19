@@ -54,7 +54,9 @@ public class Game implements IGame {
     public void newGameRound() {
         this.gameMap = new GameMap(Config.MAP_WIDTH, Config.MAP_HEIGHT, true);
         this.player = new Player(500, 500, gameMap.getGameMapCoordinates());
-        shop = new Shop(200, 100);
+
+        Tile shopSpawn = gameMap.getRandomPassableTile();
+        shop = new Shop((int) shopSpawn.getPos().getX(), (int) shopSpawn.getPos().getY());
         this.transactionHandler = new TransactionHandler(this.getPlayer());
         enemies = new ArrayList<>();
         projectiles = new ArrayList<>();
