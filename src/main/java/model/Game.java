@@ -94,10 +94,15 @@ public class Game implements IGame {
     @Override
     public boolean isTopFive() {
         int oldScore;
-        for (String playerScore : highscoreList) {
-            oldScore = Integer.valueOf(playerScore.split(":")[1]);
-            if (player.getScore() >= oldScore) {
+        if (player.getScore() > 0) {
+            if (highscoreList.size() < 5) {
                 return true;
+            }
+            for (String playerScore : highscoreList) {
+                oldScore = Integer.valueOf(playerScore.split(":")[1]);
+                if (player.getScore() >= oldScore) {
+                    return true;
+                }
             }
         }
         return false;

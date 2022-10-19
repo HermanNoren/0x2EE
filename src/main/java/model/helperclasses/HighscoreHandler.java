@@ -132,7 +132,7 @@ public class HighscoreHandler {
             }
 
             }
-            writeToFile(highscoreList);
+            writeToFile(highscoreList.subList(0, 5));
 
         }
 
