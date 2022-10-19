@@ -6,10 +6,14 @@ import model.gameobjects.Entity;
 
 import model.mapclasses.Tile;
 
+/**
+ * The Boss extension of Enemy. This extension is stronger and has more health than
+ * a regular enemy.
+ */
 public class BossEnemy extends Enemy{
     private int damage;
-    protected BossEnemy(int x, int y, int damage, Tile[][] coordinates, Entity targetEntity) {
-        super(x, y,damage, coordinates, targetEntity);
+    protected BossEnemy(int x, int y, int damage, int killReward, Tile[][] coordinates, Entity targetEntity) {
+        super(x, y, damage, killReward, coordinates, targetEntity);
         this.damage = damage;
         setVelX(1);
         setVelY(1);

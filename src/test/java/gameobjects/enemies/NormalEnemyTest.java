@@ -18,7 +18,7 @@ public class NormalEnemyTest {
         Game game = new Game();
         Player player = new Player(1, 1, game.getGameMap().getGameMapCoordinates());
         EnemyFactory enemyFactory = new NormalEnemyFactory();
-        normalEnemy= enemyFactory.createEnemy(player, game.getGameMap().getPassableTiles(), game.getGameMap().getGameMapCoordinates());
+        normalEnemy= enemyFactory.createEnemy(player, 1, 100,game.getGameMap().getPassableTiles(), game.getGameMap().getGameMapCoordinates());
     }
 
     @Test

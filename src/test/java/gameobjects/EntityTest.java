@@ -14,6 +14,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test for the abstract class Entity.
+ */
 public class EntityTest {
     private Entity entity;
     @BeforeEach

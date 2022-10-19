@@ -14,6 +14,9 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test for collision.
+ */
 public class CollisionHandlerTest {
 
     Game game;
