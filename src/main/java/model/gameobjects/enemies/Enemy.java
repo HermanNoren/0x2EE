@@ -18,7 +18,7 @@ public abstract class Enemy extends Entity implements IEnemy {
     public Entity getTargetEntity(){
         return this.targetEntity;
     }
-    public abstract String getType();
+
     /**
      * Method used to move the enemy towards player.
      */
@@ -60,6 +60,11 @@ public abstract class Enemy extends Entity implements IEnemy {
     @Override
     public void update(double dt) {
         moveToGoal(dt);
+    }
+
+    @Override
+    public void damageTaken(int damage) {
+        setHealth(getHealth()-damage);
     }
 
     public void setMovementSpeed(double movementSpeed) {

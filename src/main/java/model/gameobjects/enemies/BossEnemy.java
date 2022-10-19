@@ -23,7 +23,7 @@ public class BossEnemy extends Enemy{
 
     @Override
     public String getType() {
-        return "obunga";
+        return "boss";
     }
 
     @Override

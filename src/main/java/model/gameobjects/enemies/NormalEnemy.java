@@ -16,8 +16,6 @@ class NormalEnemy extends Enemy{
     public int getDamage() {
         return 1;
     }
-
-
     @Override
     public String getType() {
         return "normal";

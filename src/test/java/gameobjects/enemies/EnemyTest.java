@@ -36,7 +36,7 @@ public class EnemyTest {
     }
 
     @Test
-    void test_update_moves_enemy_towards_target_entity_x_position(){
+    void test_update_moves_right_enemy_towards_target_entity_x_position(){
 
         enemy.setPos(new Vector2(100, 100));
         player.setPos(new Vector2(enemy.getPosX()+100, enemy.getPosY()));
@@ -47,6 +47,52 @@ public class EnemyTest {
         double deltaX = Math.abs(player.getPosX() - enemy.getPosX());
 
         assertTrue(prevDeltaX > deltaX);
+    }
+    @Test
+    void test_update_moves_left_enemy_towards_target_entity_x_position(){
+
+        enemy.setPos(new Vector2(200, 100));
+        player.setPos(new Vector2(enemy.getPosX()-100, enemy.getPosY()));
+        double prevDeltaX = Math.abs(player.getPosX() - enemy.getPosX());
+
+        enemy.update(4);
+
+        double deltaX = Math.abs(player.getPosX() - enemy.getPosX());
+
+        assertTrue(prevDeltaX > deltaX);
+    }
+    @Test
+    void test_update_moves_down_enemy_towards_target_entity_x_position(){
+
+        enemy.setPos(new Vector2(100, 100));
+        player.setPos(new Vector2(enemy.getPosX(), enemy.getPosY()+100));
+        double prevDeltaY = Math.abs(player.getPosY() - enemy.getPosY());
+
+        enemy.update(4);
+
+        double deltaY = Math.abs(player.getPosY() - enemy.getPosY());
+
+        assertTrue(prevDeltaY > deltaY);
+    }
+    @Test
+    void test_update_moves_up_enemy_towards_target_entity_x_position(){
+
+        enemy.setPos(new Vector2(100, 200));
+        player.setPos(new Vector2(enemy.getPosX(), enemy.getPosY()-100));
+        double prevDeltaY = Math.abs(player.getPosY() - enemy.getPosY());
+
+        enemy.update(4);
+
+        double deltaY = Math.abs(player.getPosY() - enemy.getPosY());
+
+        assertTrue(prevDeltaY > deltaY);
+    }
+
+    @Test
+    void test_damageTaken_reduces_enemy_health() {
+        int prevHealth = enemy.getHealth();
+        enemy.damageTaken(1);
+        assertTrue(enemy.getHealth() < prevHealth);
     }
 
 

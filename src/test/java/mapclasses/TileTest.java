@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TileTest {
 
-    Tile tile;
+    private Tile tile;
     @BeforeEach
     void init(){
         tile = new Tile(10, 10);
@@ -168,5 +168,24 @@ public class TileTest {
         tile.addBranch(1 , neighbor);
         Tile.Edge edge  = tile.getNeighbors().get(0);
         assertSame(Tile.Edge.class, edge.getClass());
+    }
+    @Test
+    void test_getTile_in_Edge_returns_tile(){
+        Tile tile1 = new Tile(1, 1);
+        Tile tile2 = new Tile(2, 2);
+        tile1.addBranch(1,tile2);
+        Tile.Edge edge = tile1.getNeighbors().get(0);
+        assertEquals(tile2, edge.getTile());
+
+    }
+    @Test
+    void test_getWeight_in_Edge_returns_weight(){
+        int weight = 10;
+        Tile tile1 = new Tile(1, 1);
+        Tile tile2 = new Tile(2, 2);
+        tile1.addBranch(weight,tile2);
+        Tile.Edge edge = tile1.getNeighbors().get(0);
+        assertEquals(weight, edge.getWeight());
+
     }
 }

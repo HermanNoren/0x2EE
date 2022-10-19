@@ -381,7 +381,6 @@ public class Game implements IGame {
     @Override
     public void spawnEnemy(int counter){
         if((counter % 5) == 0 && counter != 0){
-            System.out.println("boss spawned");
             enemyFactory = new BossEnemyFactory();
         }else{
             enemyFactory = new NormalEnemyFactory();
