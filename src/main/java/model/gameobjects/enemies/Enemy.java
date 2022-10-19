@@ -1,8 +1,7 @@
 package model.gameobjects.enemies;
 
 import model.gameobjects.EDirection;
-import model.helperclasses.AStar;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import model.mapclasses.Tile;
 import model.gameobjects.Entity;
 

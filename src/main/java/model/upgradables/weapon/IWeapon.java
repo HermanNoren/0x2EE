@@ -2,7 +2,7 @@ package model.upgradables.weapon;
 
 import model.gameinterfaces.IHasProjectiles;
 import model.gameobjects.EDirection;
-import model.helperclasses.Vector2;
+import model.Vector2;
 
 /**
  * Contains method which are called regarding the weapon, shoot and reload.

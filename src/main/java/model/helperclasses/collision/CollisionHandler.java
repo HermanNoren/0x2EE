@@ -3,7 +3,7 @@ package model.helperclasses.collision;
 import config.Config;
 import model.gameobjects.Entity;
 import model.gameobjects.IGameObject;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import model.mapclasses.Tile;
 
 import java.util.*;

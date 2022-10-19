@@ -4,7 +4,7 @@ import model.gameobjects.Player;
 import model.gameobjects.enemies.Enemy;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import model.mapclasses.GameMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

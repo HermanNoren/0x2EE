@@ -95,7 +95,7 @@ public class Game implements IGame {
     public boolean isTopFive() {
         int oldScore;
         if (player.getScore() > 0) {
-            if (highscoreList.size() < 5) {
+            if (highscoreHandler.getHighscoreList().size() < 5) {
                 return true;
             }
             for (String playerScore : highscoreList) {

@@ -3,7 +3,7 @@ package view.drawers;
 
 import model.gameobjects.Shop;
 import view.ImageHandler;
-import model.helperclasses.Vector2;
+import model.Vector2;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

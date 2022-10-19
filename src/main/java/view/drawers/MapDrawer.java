@@ -2,7 +2,7 @@ package view.drawers;
 
 import config.Config;
 
-import model.helperclasses.Vector2;
+import model.Vector2;
 import view.ImageHandler;
 import model.mapclasses.Tile;
 

@@ -1,7 +1,7 @@
 package model.gameobjects;
 
 import config.Config;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import model.mapclasses.Tile;
 
 /**
@@ -118,9 +118,10 @@ public abstract class Entity implements IGameObject {
      */
 
     public void setDirection(EDirection direction) {
-        if (this.direction != EDirection.not_moving)
+        if (this.direction != direction) {
             lastDirection = this.direction;
-        this.direction = direction;
+            this.direction = direction;
+        }
     }
 
     /**

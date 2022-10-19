@@ -1,7 +1,7 @@
 package mapclasses;
 
 import config.Config;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import model.mapclasses.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

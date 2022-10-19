@@ -1,5 +1,5 @@
 package view.buttons;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import config.Config;
 import controllers.buttonactions.IButtonAction;
 
