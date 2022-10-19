@@ -1,14 +1,14 @@
 import model.Game;
 import model.gameinterfaces.*;
+import model.gameobjects.EDirection;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.Player;
 import model.gameobjects.Projectile;
 import model.gameobjects.Shop;
 import model.gameobjects.enemies.Enemy;
-import model.helperclasses.EDirection;
 import model.helperclasses.HighscoreHandler;
 import model.helperclasses.TransactionHandler;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import model.mapclasses.GameMap;
 import model.mapclasses.Tile;
 import org.junit.jupiter.api.BeforeEach;
@@ -61,7 +61,7 @@ public class GameTest {
     @Test
     void test_if_gameMap_methods_work(){
         IHasGameMap game = this.game;
-        GameMap gameMap = new GameMap(2,2);
+        GameMap gameMap = new GameMap(2,2, false);
         assertEquals(game.getGameMap().getClass(), gameMap.getClass());
     }
 
