@@ -1,7 +1,7 @@
 package model.gameobjects;
 
 import config.Config;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import model.mapclasses.Tile;
 
 /**

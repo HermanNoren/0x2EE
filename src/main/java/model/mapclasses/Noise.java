@@ -1,4 +1,4 @@
-package utility;
+package model.mapclasses;
 
 import model.mapclasses.IGameMap;
 import model.mapclasses.Tile;

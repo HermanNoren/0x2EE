@@ -2,7 +2,7 @@ package view.drawers;
 
 import model.gameobjects.Shop;
 import config.Config;
-import model.helperclasses.Vector2;
+import model.Vector2;
 
 import java.awt.*;
 import java.util.List;

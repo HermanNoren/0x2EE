@@ -6,7 +6,7 @@ import model.Game;
 import model.gameobjects.Entity;
 import model.gameobjects.IGameObject;
 import model.gameobjects.Player;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import model.mapclasses.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

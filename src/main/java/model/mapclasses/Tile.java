@@ -2,7 +2,7 @@ package model.mapclasses;
 
 import config.Config;
 import model.gameobjects.IGameObject;
-import model.helperclasses.Vector2;
+import model.Vector2;
 
 
 import java.util.ArrayList;

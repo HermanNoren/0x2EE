@@ -2,9 +2,8 @@ package gameobjects.ItemSpawner;
 import model.Game;
 import model.gameobjects.ItemSpawner.Coin;
 import model.gameobjects.ItemSpawner.IItem;
-import model.gameobjects.ItemSpawner.Spawner;
 import model.gameobjects.Player;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

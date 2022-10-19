@@ -2,7 +2,7 @@ package view;
 
 import config.Config;
 import model.gameobjects.IFocusableObject;
-import model.helperclasses.Vector2;
+import model.Vector2;
 
 /**
  * The camera class is used to simulate a camera that follows a chosen object. What object the camera is to follow

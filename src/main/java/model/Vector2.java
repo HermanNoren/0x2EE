@@ -1,4 +1,4 @@
-package model.helperclasses;
+package model;
 
 public class Vector2 {
     private double x;
