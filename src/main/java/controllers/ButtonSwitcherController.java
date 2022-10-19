@@ -7,6 +7,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
 
+/**
+ * This class provides the ability to use GameButtons with keyboard-only mechanics. Any view-class that uses buttons
+ * should use this controller to provide navigation.
+ * @author Herman Norén
+ * @responsibility Switch between buttons with keyboard-only mechanics
+ */
 public class ButtonSwitcherController implements KeyListener {
     private int activePos;
     private  List<GameButton> stringButtons;
