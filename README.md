@@ -9,7 +9,7 @@ How to start from terminal
 Clone repo
 Run mvn package
 From Terminal, project directory run:
-java -jar target/GameLibrary-1.0-SNAPSHOT.jar
+java -jar target/Game-1.0-SNAPSHOT.jar
 
 ____
 
