@@ -106,17 +106,16 @@ public abstract class Entity implements IGameObject {
      * @return current location based on the terrain grid of GameMap
      */
     public Tile getMapLocation(){
-        int posX = (int)getCenter().getX()/48; // 48 is tilw size
-        int posY = (int)getCenter().getY()/48;
+        int posX = (int)getCenter().getX()/Config.TILE_SIZE; // 48 is tile size
+        int posY = (int)getCenter().getY()/Config.TILE_SIZE;
         currentLocation = coordinates[posX][posY];
         return currentLocation;
     }
 
     /**
-     * @param direction, updated direction.
      * Used to update direction of entity.
+     * @param direction, updated direction.
      */
-
     public void setDirection(EDirection direction) {
         if (this.direction != direction) {
             lastDirection = this.direction;

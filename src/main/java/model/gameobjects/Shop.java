@@ -2,6 +2,10 @@ package model.gameobjects;
 
 import config.Config;
 import model.Vector2;
+import model.mapclasses.Tile;
+
+import java.util.List;
+import java.util.Random;
 
 /**
  * This is the shop where weapons and armor can be
@@ -20,7 +24,7 @@ public class Shop implements IGameObject {
      * as wide and long as it is represented by two pictures in both x and y directions.
      * However, the Config.SPRITE_SIZE * 3 is done to scale the program properly.
      */
-    public final static int WIDTH = Config.SPRITE_SIZE * 3 * 2;
+    public final static int WIDTH = Config.TILE_SIZE * 2;
     public final static int HEIGHT = WIDTH;
 
     /**

@@ -2,6 +2,9 @@ package model.gameobjects;
 
 import model.gameinterfaces.IHasProjectiles;
 
+/**
+ * Used to abstract method from the regular Player instance, use a IPlayer instead.
+ */
 public interface IPlayer {
     void shoot(IHasProjectiles addable);
     void stopCurrentXMovement();

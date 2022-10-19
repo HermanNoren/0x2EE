@@ -1,5 +1,7 @@
 package model.mapclasses;
 
+import model.Vector2;
+
 import java.util.*;
 
 /**
@@ -95,6 +97,7 @@ public class GameMap implements IGameMap{
         }
         return passableTiles;
     }
+
 
     /**
      * {@inheritDoc}

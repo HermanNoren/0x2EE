@@ -19,12 +19,10 @@ public class MapDrawer implements IImageIteratorDrawer {
     private Tile[][] gameMap;
     private  Camera camera;
     private int spriteSize = Config.SPRITE_SIZE*3;
-    private ImageHandler imageHandler;
 
     public MapDrawer(Tile[][] gameMap){
         this.gameMap = gameMap;
         camera = Camera.getInstance();
-        this.imageHandler = new ImageHandler();
         index = 0;
         initTileImgs();
         initTreeImgs();
@@ -32,15 +30,15 @@ public class MapDrawer implements IImageIteratorDrawer {
     }
 
     private void initTileImgs(){
-        tileImgs[0] = imageHandler.getImage("imgs/tile/grass/grass1.png");
-        tileImgs[1] = imageHandler.getImage("imgs/tile/grass/grass2.png");
-        tileImgs[2] = imageHandler.getImage("imgs/tile/grass/grass3.png");
+        tileImgs[0] = ImageHandler.getImage("imgs/tile/grass/grass1.png");
+        tileImgs[1] = ImageHandler.getImage("imgs/tile/grass/grass2.png");
+        tileImgs[2] = ImageHandler.getImage("imgs/tile/grass/grass3.png");
     }
 
     private void initTreeImgs() {
-        treeImgs[0] = imageHandler.getImage("imgs/tile/tree/tree1.png");
-        treeImgs[1] = imageHandler.getImage("imgs/tile/tree/tree2.png");
-        treeImgs[2] = imageHandler.getImage("imgs/tile/tree/tree3.png");
+        treeImgs[0] = ImageHandler.getImage("imgs/tile/tree/tree1.png");
+        treeImgs[1] = ImageHandler.getImage("imgs/tile/tree/tree2.png");
+        treeImgs[2] = ImageHandler.getImage("imgs/tile/tree/tree3.png");
     }
 
 

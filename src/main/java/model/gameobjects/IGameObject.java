@@ -3,7 +3,14 @@ package model.gameobjects;
 
 import model.Vector2;
 
+/**
+ * methods used for
+ */
 public interface IGameObject {
+    /**
+     * Method used for returning the position of the sprite.
+     * @return
+     */
 
     Vector2 getPos();
     /**

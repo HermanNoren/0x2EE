@@ -1,7 +1,7 @@
 package model.helperclasses;
 
 
-import model.gameobjects.IHasUpgradables;
+import model.gameobjects.IHasUpgradable;
 import model.upgradables.IUpgradable;
 
 /**
@@ -10,10 +10,10 @@ import model.upgradables.IUpgradable;
  * them through parametric polymorphism.
  */
 public class TransactionHandler {
-    private final IHasUpgradables player;
+    private final IHasUpgradable player;
     private final IUpgradable armor, weapon;
 
-    public TransactionHandler(IHasUpgradables player){
+    public TransactionHandler(IHasUpgradable player){
         this.player = player;
         this.armor =  player.getArmor();
         this.weapon = player.getWeapon();

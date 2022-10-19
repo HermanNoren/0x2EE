@@ -16,7 +16,7 @@ public class HighscoreHandler {
 
 
     public HighscoreHandler(){
-            highscoreFile = new File("textfiles/highscores.txt");
+            highscoreFile = new File("src/main/resources/textfiles/highscores.txt");
             init();
             highscoreList = getHighscoreList();
     }
