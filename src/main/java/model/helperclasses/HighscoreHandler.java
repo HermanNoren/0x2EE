@@ -131,10 +131,13 @@ public class HighscoreHandler {
                 }
             }
 
-            }
-            writeToFile(highscoreList.subList(0, 5));
-
         }
+        List<String> topList = highscoreList;
+        if (highscoreList.size() > 5) {
+            topList = topList.subList(0, 5);
+        }
+        writeToFile(topList);
+    }
 
 
 }

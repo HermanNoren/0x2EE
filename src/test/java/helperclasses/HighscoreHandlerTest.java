@@ -32,8 +32,11 @@ public class HighscoreHandlerTest {
 
     @Test
     void test_if_a_highscore_is_saved_the_file_should_have_update(){
+        highscoreHandler.rollBackFile(emptyContent);
         highscoreHandler.saveHighscore("Test40", 5000);
-        assertTrue(highscoreHandler.getHighscoreList().size() > highscores.size());
+        int prevSize = highscoreHandler.getHighscoreList().size();
+        highscoreHandler.saveHighscore("Test30", 6000);
+        assertTrue(highscoreHandler.getHighscoreList().size() > prevSize);
     }
 
     @Test
@@ -62,6 +65,18 @@ public class HighscoreHandlerTest {
         highscoreHandler.deleteFile();
         assertThrows(RuntimeException.class, () -> {highscoreHandler.getHighscoreList();});
 
+   }
+
+   @Test
+   void test_that_the_highscore_file_should_not_exceed_5_scores(){
+        highscoreHandler.rollBackFile(emptyContent);
+       highscoreHandler.saveHighscore("TEST34", 1000);
+       highscoreHandler.saveHighscore("TEST23", 2000);
+       highscoreHandler.saveHighscore("TEST11", 3000);
+       highscoreHandler.saveHighscore("TEST34", 4000);
+       highscoreHandler.saveHighscore("TEST23", 5000);
+       highscoreHandler.saveHighscore("TEST11", 6000);
+       assertEquals(5, highscoreHandler.getHighscoreList().size());
    }
 
    @Test
