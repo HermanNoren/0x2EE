@@ -1,14 +1,12 @@
 package model.gameobjects.ItemSpawner;
 
-import model.Game;
 import model.gameinterfaces.IHasEnemies;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.Enemy;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import model.mapclasses.Tile;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 

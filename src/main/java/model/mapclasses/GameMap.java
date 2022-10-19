@@ -1,7 +1,5 @@
 package model.mapclasses;
 
-import utility.Noise;
-
 import java.util.*;
 
 /**

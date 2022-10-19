@@ -1,9 +1,8 @@
 package view.drawers;
 
 import model.gameinterfaces.IHasEnemies;
-import model.gameobjects.Entity;
 import model.gameobjects.enemies.Enemy;
-import model.helperclasses.EDirection;
+import model.gameobjects.EDirection;
 import view.ImageHandler;
 
 
@@ -27,8 +26,7 @@ public class EnemyDrawer implements IImageIteratorDrawer {
         imgs = new HashMap<>();
         imgTypes = new ArrayList<>();
         imgTypes.add("normal");
-//        imgTypes.add("boss");
-        imgTypes.add("shrek");
+        imgTypes.add("boss");
         directions = new ArrayList<>();
         directions.add(EDirection.up);
         directions.add(EDirection.left);

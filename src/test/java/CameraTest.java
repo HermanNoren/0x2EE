@@ -1,12 +1,15 @@
 import config.Config;
 import model.Game;
 import model.gameobjects.Player;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import org.junit.jupiter.api.Test;
 import view.Camera;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test for camera.
+ */
 public class CameraTest {
 
     Game game;

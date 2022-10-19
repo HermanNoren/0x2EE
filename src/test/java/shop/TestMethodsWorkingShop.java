@@ -1,7 +1,7 @@
 package shop;
 
 import model.gameobjects.Shop;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

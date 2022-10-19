@@ -7,6 +7,9 @@ import model.mapclasses.Tile;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test for spawner.
+ */
 public class SpawnerTest {
 
     Game game = new Game();

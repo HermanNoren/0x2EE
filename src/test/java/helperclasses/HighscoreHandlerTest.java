@@ -2,15 +2,14 @@ package helperclasses;
 
 import model.helperclasses.HighscoreHandler;
 import org.junit.jupiter.api.*;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test for highScoreHandler.
+ */
 public class HighscoreHandlerTest {
 
     private HighscoreHandler highscoreHandler = new HighscoreHandler();

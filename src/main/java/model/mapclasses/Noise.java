@@ -1,6 +1,6 @@
-package utility;
+package model.mapclasses;
 
-import model.mapclasses.GameMap;
+import model.mapclasses.IGameMap;
 import model.mapclasses.Tile;
 
 import java.util.Random;
@@ -13,7 +13,7 @@ public class Noise {
     private final Random random;
     private final float roughness;
     private final float[][] grid;
-    public Noise(float roughness, GameMap gameMap){
+    public Noise(float roughness, IGameMap gameMap){
         this.random = new Random();
         this.roughness = roughness/gameMap.getWidth();
         this.grid = new float[gameMap.getWidth()][gameMap.getHeight()];
@@ -87,44 +87,5 @@ public class Noise {
         return v + roughness * (float) (random.nextGaussian() * (h - l));
     }
 
-    /**
-     * Method used to print grid containing tiles.
-     * @param tiles grid of type Tile.
-     */
-    public void printTileGrid(Tile[][] tiles){
-        for(int i = 0; i < tiles.length; i++){
-            for(int j = 0; j < tiles[0].length; j++){
-            }
-        }
-    }
 
-    /**
-     * Method used to print out grid containing booleans.
-     * @param booleans Grid of type boolean.
-     */
-    public void printBooleanGrid(boolean[][] booleans){
-        for(int i = 0; i < booleans.length; i++){
-            for(int j = 0; j < booleans[0].length; j++){
-            }
-        }
-    }
-
-    /**
-     * Index set to true if terrainType < v, and false if terrainType > v
-     * @param v value to compare value in the grid.
-     * @return Returns a new grid containing booleans.
-     */
-    public boolean[][] toBooleans(float v) {
-        int width = grid.length;
-        int height= grid[0].length;
-
-        boolean[][] booleans = new boolean[width][height];
-        for(int i = 0; i < width; i++) {
-            for(int j = 0; j < height;j++) {
-                booleans[i][j] = grid[i][j] < v;
-            }
-        }
-
-        return booleans;
-    }
 }

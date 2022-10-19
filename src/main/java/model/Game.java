@@ -4,7 +4,7 @@ import config.Config;
 import model.gameinterfaces.IGame;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.enemies.*;
-import model.helperclasses.EDirection;
+import model.gameobjects.EDirection;
 import model.helperclasses.TransactionHandler;
 import model.helperclasses.collision.CollisionHandler;
 import model.gameobjects.*;
@@ -271,11 +271,10 @@ public class Game implements IGame {
             Enemy enemy = enemyIter.next();
             if (enemy.getHealth() <= 0) {
                 spawner.spawnItem();
-                player.addScore(enemy.getKillReward());
+                player.addScore(enemy.getSCoreReward());
                 enemies.remove(enemy);
                 break;
             }
-
             enemy.update(dt);
             //Check if enemy is close enough to damage player, could be done somewhere else also.
             if (CollisionHandler.testCollision(player, enemy)) {
@@ -381,13 +380,18 @@ public class Game implements IGame {
      */
     @Override
     public void spawnEnemy(int counter){
+        int damage;
+        int killReward;
         if((counter % 5) == 0 && counter != 0){
-            System.out.println("boss spawned");
+            killReward = 500;
+            damage = 5;
             enemyFactory = new BossEnemyFactory();
         }else{
+            damage = 1;
+            killReward = 100;
             enemyFactory = new NormalEnemyFactory();
         }
-        enemies.add(enemyFactory.createEnemy(player, gameMap.getPassableTiles(), getGameMap().getGameMapCoordinates()));
+        enemies.add(enemyFactory.createEnemy(player, damage, killReward, gameMap.getPassableTiles(), gameMap.getGameMapCoordinates()));
     }
 
     /**

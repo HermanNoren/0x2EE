@@ -3,9 +3,14 @@ package model.gameobjects.enemies;
 import model.gameobjects.Entity;
 import model.mapclasses.Tile;
 
+/**
+ * The mundane enemy, standard enemy which spawns.
+ */
 class NormalEnemy extends Enemy{
-    protected NormalEnemy(int x, int y, Tile[][] coordinates, Entity targetEntity) {
-        super(x, y, coordinates, targetEntity);
+    private int damage;
+    protected NormalEnemy(int x, int y, int damage, int killReward, Tile[][] coordinates, Entity targetEntity) {
+        super(x, y, damage, killReward, coordinates, targetEntity);
+        this.damage = damage;
         setVelX(0.3);
         setVelY(0.3);
         setMaxHp(20);
@@ -14,17 +19,15 @@ class NormalEnemy extends Enemy{
 
     @Override
     public int getDamage() {
-        return 1;
+        return damage;
     }
-
-
     @Override
     public String getType() {
-        return "normal";
+        return "shrek";
     }
 
     @Override
-    public int getKillReward() {
+    public int getSCoreReward() {
         return 100;
     }
 

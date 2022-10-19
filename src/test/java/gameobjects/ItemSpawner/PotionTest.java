@@ -5,12 +5,15 @@ import model.gameobjects.ItemSpawner.Coin;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.ItemSpawner.Potion;
 import model.gameobjects.Player;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test for potion.
+ */
 public class PotionTest {
 
     Game game = new Game();

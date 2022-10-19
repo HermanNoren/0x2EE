@@ -2,7 +2,7 @@ package view.drawers;
 
 import config.Config;
 
-import model.helperclasses.Vector2;
+import model.Vector2;
 import view.ImageHandler;
 import model.mapclasses.Tile;
 
@@ -72,7 +72,6 @@ public class MapDrawer implements IImageIteratorDrawer {
                             newTerrainVector,
                             gameMap[col][row].getWidth(),
                             gameMap[col][row].getHeight());
-                
                 if (gameMap[col][row].isPassable()) {
                     g2.drawImage(tileImgs[(row * col) % 3], drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
                 } else {
