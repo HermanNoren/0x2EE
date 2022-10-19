@@ -22,7 +22,6 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
     private final int y;
     private final int width;
     private final int height;
-    private int tileType;
     private boolean passable;
 
     public Tile(int x, int y){
@@ -30,7 +29,6 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
         this.y = y;
         this.height = size;
         this.width = size;
-        this.tileType = 0;
         this.passable = true;
         this.neighbors = new ArrayList<>();
         this.pos = new Vector2(x, y);
@@ -200,7 +198,6 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
             this.weight = weight;
             this.tile = tile;
         }
-
         /**
          * Method used to get neighbor Tile.
          * @return Tile, the neighbor.
@@ -208,7 +205,6 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
         public Tile getTile() {
             return tile;
         }
-
         /**
          * Method used to get the weight of the branch.
          * @return weight of the branch.
@@ -217,5 +213,4 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
             return weight;
         }
     }
-
 }

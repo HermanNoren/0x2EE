@@ -11,7 +11,7 @@ import model.upgradables.weapon.Weapon;
  * The player, more implementation to come.
  */
 
-public class Player extends Entity implements IPlayer, IFocusableObject, IHasGear {
+public class Player extends Entity implements IPlayer, IFocusableObject, IHasUpgradables {
     private int score;
     private int money;
     private final Weapon weapon;

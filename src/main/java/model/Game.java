@@ -52,7 +52,7 @@ public class Game implements IGame {
 
     @Override
     public void newGameRound() {
-        this.gameMap = new GameMap(Config.MAP_WIDTH, Config.MAP_HEIGHT);
+        this.gameMap = new GameMap(Config.MAP_WIDTH, Config.MAP_HEIGHT, true);
         this.player = new Player(500, 500, gameMap.getGameMapCoordinates());
         shop = new Shop(200, 100);
         this.transactionHandler = new TransactionHandler(this.getPlayer());
@@ -94,10 +94,15 @@ public class Game implements IGame {
     @Override
     public boolean isTopFive() {
         int oldScore;
-        for (String playerScore : highscoreList) {
-            oldScore = Integer.valueOf(playerScore.split(":")[1]);
-            if (player.getScore() >= oldScore) {
+        if (player.getScore() > 0) {
+            if (highscoreList.size() < 5) {
                 return true;
+            }
+            for (String playerScore : highscoreList) {
+                oldScore = Integer.valueOf(playerScore.split(":")[1]);
+                if (player.getScore() >= oldScore) {
+                    return true;
+                }
             }
         }
         return false;
@@ -266,11 +271,10 @@ public class Game implements IGame {
             Enemy enemy = enemyIter.next();
             if (enemy.getHealth() <= 0) {
                 spawner.spawnItem();
-                player.addScore(enemy.getKillReward());
+                player.addScore(enemy.getSCoreReward());
                 enemies.remove(enemy);
                 break;
             }
-
             enemy.update(dt);
             //Check if enemy is close enough to damage player, could be done somewhere else also.
             if (CollisionHandler.testCollision(player, enemy)) {

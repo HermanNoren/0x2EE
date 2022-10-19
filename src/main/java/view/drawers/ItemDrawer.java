@@ -11,6 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Handles the drawing logic of spawnable items on the map.
+ */
+
 public class ItemDrawer implements IImageIteratorDrawer {
 
     private IHasItems game;

@@ -12,6 +12,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class EntityTest {
     private Entity entity;
     @BeforeEach
@@ -130,10 +132,6 @@ public class EntityTest {
         assertEquals(1, entity.getAccY());
     }
 
-    @Test
-    void test_getCenter_returns_center_position_of_Entity(){
-
-    }
 
     @Test
     void test_getDirection_returns_current_direction_of_Entity(){
@@ -149,10 +147,17 @@ public class EntityTest {
 
     @Test
     void test_getLastDirection_returns_previous_direction_of_Entity(){
-        //Entity starts with direction NOT_MOVING
-        entity.setDirection(EDirection.down);
-        assertEquals(EDirection.not_moving, entity.getLastDirection());
+        entity.setDirection(EDirection.not_moving);
+        assertEquals(EDirection.down, entity.getLastDirection());
     }
+
+    @Test
+    void test_setDirection_sets_lastDirection_of_Entity(){
+        entity.setDirection(EDirection.up);
+        entity.setDirection(EDirection.down);
+        assertEquals(EDirection.up, entity.getLastDirection());
+    }
+
 
     @Test
     void test_getHealth_returns_health_of_Entity(){
@@ -192,7 +197,7 @@ public class EntityTest {
 
     @Test
     void test_getCenter_returns_center_of_IGameObject(){
-        IGameObject gameObject = (IGameObject) entity;
+        IGameObject gameObject = entity;
         Vector2 centerTestVec = new Vector2(entity.getPosX() + (double) gameObject.getWidth() / 2,
                 entity.getPosY() + (double) gameObject.getHeight() / 2);
         assertEquals(centerTestVec.getX(), gameObject.getCenter().getX());
@@ -215,21 +220,17 @@ public class EntityTest {
 
     @Test
     void test_getWidth_returns_width_of_entity(){
-
         assertEquals(Config.ENTITY_WIDTH, ((IGameObject) entity).getWidth());
     }
     @Test
     void test_getHeight_returns_height_of_entity(){
         assertEquals(Config.ENTITY_WIDTH, ((IGameObject) entity).getHeight());
     }
-    @Test
-    void entity_should_take_correct_amount_of_damage_when_damageTaken_called() {
-        int damage = 100;
-        int currentHealth = entity.getHealth();
-        int totalDamageTaken = currentHealth - damage;
-        entity.damageTaken(100);
-        int healthAfterDamageTaken = entity.getHealth();
-        assertEquals(totalDamageTaken, healthAfterDamageTaken);
-    }
 
+    @Test
+    void test_damageTaken_reduces_entity_health() {
+        int prevHealth = entity.getHealth();
+        entity.damageTaken(1);
+        assertTrue(entity.getHealth() < prevHealth);
+    }
 }

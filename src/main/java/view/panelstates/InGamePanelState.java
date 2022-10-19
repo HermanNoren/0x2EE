@@ -27,6 +27,7 @@ public class InGamePanelState implements IPanelState {
     private IImageIteratorDrawer playerDrawer, enemyDrawer, itemDrawer, mapDrawer;
 
     private ImageSwitcherController imageSwitcherController;
+    private SpawnTimerController spawnTimerController;
     private final Camera camera;
     private final List<KeyListener> keyListeners;
     private IChangeableStatePanel mainPanel;
@@ -34,6 +35,10 @@ public class InGamePanelState implements IPanelState {
     public InGamePanelState(IChangeableStatePanel mainPanel, IGame game) {
         this.game = game;
         this.mainPanel = mainPanel;
+
+        spawnTimerController = new SpawnTimerController(game, 5000);
+        spawnTimerController.run();
+
         keyListeners = new ArrayList<>();
         keyListeners.add(new PlayerController(game.getPlayer()));
         keyListeners.add(new WeaponController(game));
@@ -46,7 +51,7 @@ public class InGamePanelState implements IPanelState {
         keyListeners.add(new CameraController());
 
         playerDrawer = new PlayerDrawer(game.getPlayer());
-        enemyDrawer = new EnemyDrawer(game, "shrek");
+        enemyDrawer = new EnemyDrawer(game, "obunga");
         itemDrawer = new ItemDrawer(game);
         mapDrawer = new MapDrawer(game.getGameMap().getGameMapCoordinates());
 
@@ -60,6 +65,7 @@ public class InGamePanelState implements IPanelState {
         drawers.add(new InteractShopTextDrawer(game.getShop()));
 
         imageSwitcherController = new ImageSwitcherController(200);
+
         imageSwitcherController.addImageDrawer(playerDrawer);
         imageSwitcherController.addImageDrawer(enemyDrawer);
         imageSwitcherController.addImageDrawer(itemDrawer);
@@ -91,6 +97,7 @@ public class InGamePanelState implements IPanelState {
     @Override
     public void changePanelState(EPanelState panelState) {
         mainPanel.changePanelState(panelState);
+        spawnTimerController.pause();
     }
 
     @Override

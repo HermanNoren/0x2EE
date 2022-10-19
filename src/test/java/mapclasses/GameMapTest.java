@@ -15,7 +15,7 @@ public class GameMapTest {
     private GameMap gameMap;
     @BeforeEach
     void init(){
-        gameMap = new GameMap(20, 10);
+        gameMap = new GameMap(20, 10, true);
     }
     @Test
     void test_getHeight_returns_height_of_gameMap(){

@@ -7,9 +7,10 @@ import model.gameobjects.Entity;
 import model.mapclasses.Tile;
 
 public class BossEnemy extends Enemy{
-
-    protected BossEnemy(int x, int y, Tile[][] coordinates, Entity targetEntity) {
-        super(x, y, coordinates, targetEntity);
+    private int damage;
+    protected BossEnemy(int x, int y, int damage, Tile[][] coordinates, Entity targetEntity) {
+        super(x, y,damage, coordinates, targetEntity);
+        this.damage = damage;
         setVelX(1);
         setVelY(1);
         setMaxHp(500);
@@ -18,7 +19,7 @@ public class BossEnemy extends Enemy{
 
     @Override
     public int getDamage() {
-        return 5;
+        return damage;
     }
 
     @Override
@@ -27,7 +28,7 @@ public class BossEnemy extends Enemy{
     }
 
     @Override
-    public int getKillReward() {
+    public int getSCoreReward() {
         return 500;
     }
 

@@ -1,7 +1,7 @@
 package model.helperclasses;
 
 
-import model.gameobjects.IHasGear;
+import model.gameobjects.IHasUpgradables;
 import model.upgradables.IUpgradable;
 
 /**
@@ -10,18 +10,18 @@ import model.upgradables.IUpgradable;
  * them through parametric polymorphism.
  */
 public class TransactionHandler {
-    private final IHasGear player;
+    private final IHasUpgradables player;
     private final IUpgradable armor, weapon;
 
-    public TransactionHandler(IHasGear player){
+    public TransactionHandler(IHasUpgradables player){
         this.player = player;
         this.armor =  player.getArmor();
         this.weapon = player.getWeapon();
     }
 
-
     /**
-     * Sees if a purchase is possible.
+     * Sees if a purchase is possible, money should be more
+     * or equal to 0 after purchase.
      * @param currentPrize The current price of the Upgradable.
      * @return Boolean if the player can afford the upgrade.
      */
@@ -80,7 +80,7 @@ public class TransactionHandler {
      * Upgrades weapon, if possible.
      */
     public void upgradeWeapon(){
-        if(purchasePossible(weapon.upgradeCost())) upgrade(player.getWeapon());
+        if(purchasePossible(weapon.upgradeCost())) upgrade(weapon);
     }
 
     /**

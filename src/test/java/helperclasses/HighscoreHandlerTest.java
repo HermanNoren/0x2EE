@@ -32,8 +32,11 @@ public class HighscoreHandlerTest {
 
     @Test
     void test_if_a_highscore_is_saved_the_file_should_have_update(){
+        highscoreHandler.rollBackFile(emptyContent);
         highscoreHandler.saveHighscore("Test40", 5000);
-        assertTrue(highscoreHandler.getHighscoreList().size() > highscores.size());
+        int prevSize = highscoreHandler.getHighscoreList().size();
+        highscoreHandler.saveHighscore("Test30", 6000);
+        assertTrue(highscoreHandler.getHighscoreList().size() > prevSize);
     }
 
     @Test
@@ -65,6 +68,18 @@ public class HighscoreHandlerTest {
    }
 
    @Test
+   void test_that_the_highscore_file_should_not_exceed_5_scores(){
+        highscoreHandler.rollBackFile(emptyContent);
+       highscoreHandler.saveHighscore("TEST34", 1000);
+       highscoreHandler.saveHighscore("TEST23", 2000);
+       highscoreHandler.saveHighscore("TEST11", 3000);
+       highscoreHandler.saveHighscore("TEST34", 4000);
+       highscoreHandler.saveHighscore("TEST23", 5000);
+       highscoreHandler.saveHighscore("TEST11", 6000);
+       assertEquals(5, highscoreHandler.getHighscoreList().size());
+   }
+
+   @Test
     void test_if_file_creation_works(){
         highscoreHandler.deleteFile();
        try {
@@ -73,6 +88,13 @@ public class HighscoreHandlerTest {
            throw new RuntimeException(e);
        }
        assertEquals(0, highscoreHandler.getHighscoreList().size());
+   }
+
+   @Test
+    void test_if_constructor_creates_a_new_file_if_the_file_does_not_exist(){
+        highscoreHandler.deleteFile();
+        HighscoreHandler handler = new HighscoreHandler();
+        assertEquals(0, handler.getHighscoreList().size());
    }
 
 }

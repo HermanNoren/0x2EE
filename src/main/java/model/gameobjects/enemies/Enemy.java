@@ -9,16 +9,18 @@ import model.gameobjects.Entity;
 public abstract class Enemy extends Entity implements IEnemy {
     private double movementSpeed;
     private final Entity targetEntity;
-    protected Enemy(int x, int y, Tile[][] coordinates, Entity targetEntity){
+    private int damage;
+    protected Enemy(int x, int y, int damage, Tile[][] coordinates, Entity targetEntity){
         super(x, y, coordinates);
         this.targetEntity = targetEntity;
-        setMovementSpeed(2);
+        this.damage = damage;
+        setMovementSpeed(1.5);
     }
     @Override
     public Entity getTargetEntity(){
         return this.targetEntity;
     }
-    public abstract String getType();
+
     /**
      * Method used to move the enemy towards player.
      */
@@ -60,6 +62,11 @@ public abstract class Enemy extends Entity implements IEnemy {
     @Override
     public void update(double dt) {
         moveToGoal(dt);
+    }
+
+    @Override
+    public void damageTaken(int damage) {
+        setHealth(getHealth()-damage);
     }
 
     public void setMovementSpeed(double movementSpeed) {
