@@ -20,7 +20,7 @@ class NormalEnemy extends Enemy{
     }
     @Override
     public String getType() {
-        return "normal";
+        return "shrek";
     }
 
     @Override

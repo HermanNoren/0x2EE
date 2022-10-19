@@ -1,9 +1,8 @@
 package view.drawers;
 
 import model.gameinterfaces.IHasEnemies;
-import model.gameobjects.Entity;
 import model.gameobjects.enemies.Enemy;
-import model.helperclasses.EDirection;
+import model.gameobjects.EDirection;
 import view.ImageHandler;
 
 

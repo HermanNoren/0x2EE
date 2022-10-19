@@ -1,6 +1,6 @@
 package view.drawers;
 
-import model.helperclasses.EDirection;
+import model.gameobjects.EDirection;
 import view.ImageHandler;
 import model.gameobjects.Player;
 

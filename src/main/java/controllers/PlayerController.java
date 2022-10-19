@@ -1,7 +1,7 @@
 package controllers;
 
 import model.gameobjects.Player;
-import model.helperclasses.EDirection;
+import model.gameobjects.EDirection;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

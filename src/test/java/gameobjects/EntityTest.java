@@ -1,7 +1,7 @@
 package gameobjects;
 
 import config.Config;
-import model.helperclasses.EDirection;
+import model.gameobjects.EDirection;
 import model.Game;
 import model.gameobjects.Entity;
 import model.gameobjects.IGameObject;

@@ -1,7 +1,7 @@
 package model.upgradables.weapon;
 
 import model.gameinterfaces.IHasProjectiles;
-import model.helperclasses.EDirection;
+import model.gameobjects.EDirection;
 import model.helperclasses.Vector2;
 
 /**
