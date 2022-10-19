@@ -90,4 +90,11 @@ public class HighscoreHandlerTest {
        assertEquals(0, highscoreHandler.getHighscoreList().size());
    }
 
+   @Test
+    void test_if_constructor_creates_a_new_file_if_the_file_does_not_exist(){
+        highscoreHandler.deleteFile();
+        HighscoreHandler handler = new HighscoreHandler();
+        assertEquals(0, handler.getHighscoreList().size());
+   }
+
 }
