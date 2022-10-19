@@ -1,6 +1,7 @@
 package gameobjects.ItemSpawner;
 
 import model.Game;
+import model.gameobjects.ItemSpawner.Coin;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.ItemSpawner.Potion;
 import model.gameobjects.Player;
@@ -43,6 +44,20 @@ public class PotionTest {
     void test_getCenter_y_position(){
         IItem potion = new Potion(new Vector2(10, 20));
         assertEquals(20 + potion.getHeight()/2 ,potion.getCenter().getY());
+
+    }
+
+    @Test
+    void test_getPos_x_position(){
+        IItem potion = new Potion(new Vector2(20, 50));
+        assertEquals(20, potion.getPos().getX());
+
+    }
+
+    @Test
+    void test_getPos_y_position(){
+        IItem potion = new Potion(new Vector2(20, 50));
+        assertEquals(50, potion.getPos().getY());
 
     }
 

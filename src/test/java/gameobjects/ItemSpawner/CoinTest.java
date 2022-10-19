@@ -45,4 +45,18 @@ public class CoinTest {
 
     }
 
+    @Test
+    void test_getPos_x_position(){
+        IItem coin = new Coin(new Vector2(20, 50));
+        assertEquals(20, coin.getPos().getX());
+
+    }
+
+    @Test
+    void test_getPos_y_position(){
+        IItem coin = new Coin(new Vector2(20, 50));
+        assertEquals(50, coin.getPos().getY());
+
+    }
+
 }

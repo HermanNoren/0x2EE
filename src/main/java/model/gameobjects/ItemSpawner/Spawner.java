@@ -98,11 +98,16 @@ public class Spawner{
      * Either spawns a random item or does nothing
      */
 
-    public void spawnItem(){
-        int r = rand.nextInt(2);
-        switch (r){
-            case 0 -> spawnedItems.add(new Coin(getSpawnLocation()));
-            case 1 -> spawnedItems.add(new Potion(getSpawnLocation()));
+    public void spawnItem() {
+        int r = rand.nextInt(100);
+        // 50% chance of spawning an item
+        if (r <= 49) {
+            if (r <= 24)
+                spawnedItems.add(new Coin(getSpawnLocation()));
+            else {
+                spawnedItems.add(new Potion(getSpawnLocation()));
+            }
+
         }
 
     }
