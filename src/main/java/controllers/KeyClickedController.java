@@ -30,6 +30,7 @@ public class KeyClickedController implements KeyListener {
                     enterKeyDown = true;
                     if (game.playerOnShop()){
                         panel.changePanelState(EPanelState.SHOP);
+
                         game.pause();
                     }
                 }

@@ -1,13 +1,13 @@
 package model.gameobjects.enemies;
-
 import model.Vector2;
 import model.mapclasses.Tile;
-
 import java.util.List;
 import java.util.Random;
-
+/**
+ * Used for setting a random position for an enemy.
+ */
 public class EnemySpawner{
-    private List<Tile> spawnableLocations;
+    private final List<Tile> spawnableLocations;
 
     public EnemySpawner(List<Tile> passableTiles){
         this.spawnableLocations = passableTiles;
