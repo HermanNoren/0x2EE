@@ -21,14 +21,12 @@ public class ShopDrawer implements IDrawer{
     private final double shopHeight;
     private final int amountOfPicturesOffset = (int) Math.sqrt(4);
 
-    private final ImageHandler imageHandler;
     public ShopDrawer(Shop shop){
         this.shop = shop;
         xCoordinate = shop.getPos().getX();
         yCoordinate = shop.getPos().getY();
         shopWidth = shop.getWidth();
         shopHeight = shop.getHeight();
-        this.imageHandler = new ImageHandler();
         initShopImages();
     }
 
@@ -38,10 +36,10 @@ public class ShopDrawer implements IDrawer{
      */
     private void initShopImages(){
         try{
-           topLeft = imageHandler.getImage("imgs/shop/ShoppingPNGS/shoptopleft.png");
-           topRight = imageHandler.getImage("imgs/shop/ShoppingPNGS/shoptopright.png");
-           bottomLeft = imageHandler.getImage("imgs/shop/ShoppingPNGS/shopbottomleft.png");
-           bottomRight = imageHandler.getImage("imgs/shop/ShoppingPNGS/shopbottomright.png");
+           topLeft = ImageHandler.getImage("imgs/shop/ShoppingPNGS/shoptopleft.png");
+           topRight = ImageHandler.getImage("imgs/shop/ShoppingPNGS/shoptopright.png");
+           bottomLeft = ImageHandler.getImage("imgs/shop/ShoppingPNGS/shopbottomleft.png");
+           bottomRight = ImageHandler.getImage("imgs/shop/ShoppingPNGS/shopbottomright.png");
         }
         catch (Exception errorMessage){
             errorMessage.printStackTrace();
