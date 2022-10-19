@@ -10,8 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class InShopDrawer implements IDrawer{
-
-    private final ImageHandler imageHandler;
     private final List<GameButton> buttons;
 
     private static BufferedImage weaponActive, weaponInactive, armorActive, armorInactive;
@@ -22,7 +20,6 @@ public class InShopDrawer implements IDrawer{
      */
     public InShopDrawer(List<GameButton> buttons) {
         this.buttons = buttons;
-        this.imageHandler = new ImageHandler();
         initShopImages();
     }
 
@@ -32,10 +29,10 @@ public class InShopDrawer implements IDrawer{
      */
     private void initShopImages(){
         try{
-            weaponActive = imageHandler.getImage("imgs/shop/weapon/weaponActive.png");
-            weaponInactive = imageHandler.getImage("imgs/shop/weapon/weaponInactive.png");
-            armorActive = imageHandler.getImage("imgs/shop/armor/armorActive.png");
-            armorInactive = imageHandler.getImage("imgs/shop/armor/armorInactive.png");
+            weaponActive = ImageHandler.getImage("imgs/shop/weapon/weaponActive.png");
+            weaponInactive = ImageHandler.getImage("imgs/shop/weapon/weaponInactive.png");
+            armorActive = ImageHandler.getImage("imgs/shop/armor/armorActive.png");
+            armorInactive = ImageHandler.getImage("imgs/shop/armor/armorInactive.png");
         }
         catch (Exception errorMessage){
            errorMessage.printStackTrace();

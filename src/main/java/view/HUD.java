@@ -9,8 +9,6 @@ public class HUD {
 
     private Player player;
 
-    private ImageHandler imageHandler;
-
     private Color goldColor = new Color(255,221,67);
     private Color manaColor = new Color(0,102,255);
     private BasicStroke outline = new BasicStroke(3);
@@ -18,7 +16,6 @@ public class HUD {
 
     public HUD(Player player){
         this.player = player;
-        this.imageHandler = new ImageHandler();
 
     }
 
