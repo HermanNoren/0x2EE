@@ -9,9 +9,11 @@ import model.gameobjects.Entity;
 public abstract class Enemy extends Entity implements IEnemy {
     private double movementSpeed;
     private final Entity targetEntity;
-    protected Enemy(int x, int y, Tile[][] coordinates, Entity targetEntity){
+    private int damage;
+    protected Enemy(int x, int y, int damage, Tile[][] coordinates, Entity targetEntity){
         super(x, y, coordinates);
         this.targetEntity = targetEntity;
+        this.damage = damage;
         setMovementSpeed(1.5);
     }
     @Override
