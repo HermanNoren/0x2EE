@@ -20,6 +20,7 @@ public class ProjectileDrawer implements IImageIteratorDrawer{
     private List<Projectile> projectiles;
     private Map<EDirection, Map<String, BufferedImage>> projectileImgs;
     private List<String> imgsTypes;
+    private List<EDirection> directions;
 
 
 
@@ -28,14 +29,16 @@ public class ProjectileDrawer implements IImageIteratorDrawer{
         projectileImgs = new HashMap<>();
         imgsTypes = new ArrayList<>();
         imgsTypes.add("bullet");
+        directions = new ArrayList<>();
+        directions.add(EDirection.up);
+        directions.add(EDirection.left);
+        directions.add(EDirection.down);
+        directions.add(EDirection.right);
+
         initImgs();
     }
     private void initImgs(){
-        ImageHandler.setImgsWithDirections(2, projectileImgs, imgsTypes, EDirection.up);
-        ImageHandler.setImgsWithDirections(2, projectileImgs, imgsTypes, EDirection.left);
-        ImageHandler.setImgsWithDirections(2, projectileImgs, imgsTypes, EDirection.down);
-        ImageHandler.setImgsWithDirections(2, projectileImgs, imgsTypes, EDirection.right);
-
+        projectileImgs = ImageHandler.getImgsWithDirections(2, imgsTypes, directions);
     }
 
 

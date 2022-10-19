@@ -1,6 +1,5 @@
 package view.drawers;
 
-
 import model.gameinterfaces.IHasEnemies;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.Enemy;
@@ -15,6 +14,7 @@ import java.util.*;
 import java.util.List;
 
 public class EnemyDrawer implements IImageIteratorDrawer {
+    private List<EDirection> directions;
     private BufferedImage prevImg, activeImage;
 
     private final IHasEnemies game;
@@ -29,20 +29,21 @@ public class EnemyDrawer implements IImageIteratorDrawer {
         imgTypes.add("normal");
 //        imgTypes.add("boss");
         imgTypes.add("shrek");
+        directions = new ArrayList<>();
+        directions.add(EDirection.up);
+        directions.add(EDirection.left);
+        directions.add(EDirection.down);
+        directions.add(EDirection.right);
         initImages();
     }
 
     private void initImages(){
-        ImageHandler.setImgsWithDirections(2, imgs, imgTypes, EDirection.up);
-        ImageHandler.setImgsWithDirections(2, imgs, imgTypes, EDirection.left);
-        ImageHandler.setImgsWithDirections(2, imgs, imgTypes, EDirection.right);
-        ImageHandler.setImgsWithDirections(2, imgs, imgTypes, EDirection.down);
+        imgs = ImageHandler.getImgsWithDirections(2, imgTypes, directions);
     }
 
     /**
      * Draws/updates enemy images on screen.
      * @param g2
-     *
      */
     @Override
     public void draw(Graphics2D g2) {

@@ -33,13 +33,25 @@ public class ImageHandler {
         return imgs;
     }
 
-    public static void setImgsWithDirections(int nrImgs, Map<EDirection, Map<String, BufferedImage>> imgs, List<String> imgTypes, EDirection direction) {
+    public static Map<EDirection, Map<String, BufferedImage>> getImgsWithDirections(int nrImgs, List<String> imgTypes, List<EDirection> directions) {
+
+        Map<EDirection, Map<String, BufferedImage>> retMap = new HashMap<>();
+        for (EDirection direction: directions){
+            retMap.put(direction, getImgMap(nrImgs, imgTypes, direction));
+        }
+
+        return retMap;
+    }
+
+    private static Map<String, BufferedImage> getImgMap(int nrImgs, List<String> imgTypes, EDirection direction){
         Map<String, BufferedImage> tempMap = new HashMap<>();
         for (String imgType: imgTypes){
             for (int i = 1; i < nrImgs+1; i++) {
                 tempMap.put(imgType+(i-1), getImage("imgs/"+imgType+"/"+direction+"_"+i+".png"));
-                imgs.put(direction, tempMap);
             }
         }
+        return tempMap;
+
     }
+
 }
