@@ -2,8 +2,7 @@ package model.gameobjects;
 
 
 import config.Config;
-import model.helperclasses.EDirection;
-import model.helperclasses.Vector2;
+import model.Vector2;
 
 
 public class Projectile implements IGameObject, IProjectile {

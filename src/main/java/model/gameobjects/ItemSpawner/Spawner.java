@@ -1,14 +1,12 @@
 package model.gameobjects.ItemSpawner;
 
-import model.Game;
 import model.gameinterfaces.IHasEnemies;
 import model.gameobjects.Entity;
 import model.gameobjects.enemies.Enemy;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import model.mapclasses.Tile;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -98,11 +96,16 @@ public class Spawner{
      * Either spawns a random item or does nothing
      */
 
-    public void spawnItem(){
-        int r = rand.nextInt(2);
-        switch (r){
-            case 0 -> spawnedItems.add(new Coin(getSpawnLocation()));
-            case 1 -> spawnedItems.add(new Potion(getSpawnLocation()));
+    public void spawnItem() {
+        int r = rand.nextInt(100);
+        // 50% chance of spawning an item
+        if (r <= 49) {
+            if (r <= 24)
+                spawnedItems.add(new Coin(getSpawnLocation()));
+            else {
+                spawnedItems.add(new Potion(getSpawnLocation()));
+            }
+
         }
 
     }

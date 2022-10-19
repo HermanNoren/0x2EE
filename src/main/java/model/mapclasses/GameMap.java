@@ -1,7 +1,5 @@
 package model.mapclasses;
 
-import utility.Noise;
-
 import java.util.*;
 
 /**
@@ -20,19 +18,19 @@ public class GameMap implements IGameMap{
      * @param width number of tiles in width
      * @param height number of tiles in height
      */
-    public GameMap(int width, int height) {
+    public GameMap(int width, int height, boolean obstacles) {
         this.width = width;
         this.height = height;
         this.gameMapCoordinates = new Tile[width][height];
 
         addCoordinatesAndTiles(width, height);
-
-        Noise n = new Noise(10, this); // Generates random tile on the game map.
-        n.setNoise(gameMapCoordinates,  2);
-
-        createBorder();
+        if(obstacles) {
+            Noise n = new Noise(10, this); // Generates random tile on the game map.
+            n.setNoise(gameMapCoordinates, 2);
+            createBorder();
+        }
         tiles.forEach(this::addNeighbors);
-        n.printTileGrid(gameMapCoordinates);
+
     }
 
     /**
@@ -102,6 +100,7 @@ public class GameMap implements IGameMap{
      * {@inheritDoc}
      */
     private void addNeighbors(Tile current){
+
         int x = current.getX();
         int y = current.getY();
         // Add left side neighbour

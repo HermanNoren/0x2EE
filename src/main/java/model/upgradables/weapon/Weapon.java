@@ -2,8 +2,8 @@ package model.upgradables.weapon;
 
 import model.gameinterfaces.IHasProjectiles;
 import model.gameobjects.Projectile;
-import model.helperclasses.EDirection;
-import model.helperclasses.Vector2;
+import model.gameobjects.EDirection;
+import model.Vector2;
 import model.upgradables.Upgradable;
 
 public class Weapon extends Upgradable implements IWeapon {

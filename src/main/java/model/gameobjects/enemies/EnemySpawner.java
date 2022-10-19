@@ -1,8 +1,6 @@
 package model.gameobjects.enemies;
 
-import model.gameobjects.Entity;
-import model.helperclasses.Vector2;
-import model.mapclasses.GameMap;
+import model.Vector2;
 import model.mapclasses.Tile;
 
 import java.util.List;

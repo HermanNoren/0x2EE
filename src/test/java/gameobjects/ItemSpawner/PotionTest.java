@@ -1,15 +1,19 @@
 package gameobjects.ItemSpawner;
 
 import model.Game;
+import model.gameobjects.ItemSpawner.Coin;
 import model.gameobjects.ItemSpawner.IItem;
 import model.gameobjects.ItemSpawner.Potion;
 import model.gameobjects.Player;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Test for potion.
+ */
 public class PotionTest {
 
     Game game = new Game();
@@ -43,6 +47,20 @@ public class PotionTest {
     void test_getCenter_y_position(){
         IItem potion = new Potion(new Vector2(10, 20));
         assertEquals(20 + potion.getHeight()/2 ,potion.getCenter().getY());
+
+    }
+
+    @Test
+    void test_getPos_x_position(){
+        IItem potion = new Potion(new Vector2(20, 50));
+        assertEquals(20, potion.getPos().getX());
+
+    }
+
+    @Test
+    void test_getPos_y_position(){
+        IItem potion = new Potion(new Vector2(20, 50));
+        assertEquals(50, potion.getPos().getY());
 
     }
 

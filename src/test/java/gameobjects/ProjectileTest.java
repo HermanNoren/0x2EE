@@ -1,11 +1,14 @@
 package gameobjects;
 
-import model.helperclasses.EDirection;
+import model.gameobjects.EDirection;
 import model.gameobjects.Projectile;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test for projectile.
+ */
 public class ProjectileTest {
 
     Projectile projectile;
@@ -16,6 +19,11 @@ public class ProjectileTest {
         assertEquals(8, projectile.getWidth());
     }
 
+    @Test
+    void test_getDirection_returns_projectile_direction(){
+        projectile = new Projectile(new Vector2(0, 0), EDirection.up);
+        assertEquals(EDirection.up, projectile.getDirection());
+    }
     @Test
     void test_get_height() {
         projectile = new Projectile(new Vector2(0, 0), EDirection.not_moving);

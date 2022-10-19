@@ -2,7 +2,7 @@ package helperclasses.collision;
 
 import model.Game;
 import model.gameobjects.Player;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import model.helperclasses.collision.CollisionHandler;
 import model.helperclasses.collision.ECollisionAxis;
 import model.mapclasses.Tile;
@@ -14,6 +14,9 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test for collision.
+ */
 public class CollisionHandlerTest {
 
     Game game;

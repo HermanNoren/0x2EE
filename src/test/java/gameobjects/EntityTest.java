@@ -1,17 +1,22 @@
 package gameobjects;
 
 import config.Config;
-import model.helperclasses.EDirection;
+import model.gameobjects.EDirection;
 import model.Game;
 import model.gameobjects.Entity;
 import model.gameobjects.IGameObject;
 import model.gameobjects.Player;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import model.mapclasses.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+/**
+ * Test for the abstract class Entity.
+ */
 public class EntityTest {
     private Entity entity;
     @BeforeEach
@@ -151,7 +156,7 @@ public class EntityTest {
     void test_getLastDirection_returns_previous_direction_of_Entity(){
         //Entity starts with direction NOT_MOVING
         entity.setDirection(EDirection.down);
-        assertEquals(EDirection.down, entity.getLastDirection());
+        assertEquals(EDirection.not_moving, entity.getLastDirection());
     }
 
     @Test
@@ -223,13 +228,10 @@ public class EntityTest {
         assertEquals(Config.ENTITY_WIDTH, ((IGameObject) entity).getHeight());
     }
     @Test
-    void entity_should_take_correct_amount_of_damage_when_damageTaken_called() {
-        int damage = 100;
-        int currentHealth = entity.getHealth();
-        int totalDamageTaken = currentHealth - damage;
-        entity.damageTaken(100);
-        int healthAfterDamageTaken = entity.getHealth();
-        assertEquals(totalDamageTaken, healthAfterDamageTaken);
+    void test_damageTaken_reduces_entity_health() {
+        int prevHealth = entity.getHealth();
+        entity.damageTaken(1);
+        assertTrue(entity.getHealth() < prevHealth);
     }
 
 }

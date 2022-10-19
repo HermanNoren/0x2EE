@@ -1,4 +1,4 @@
-package model.helperclasses;
+package model.gameobjects;
 
 public enum EDirection {
     not_moving,

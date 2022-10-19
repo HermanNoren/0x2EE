@@ -1,10 +1,10 @@
 package gameobjects.Player;
 
-import model.helperclasses.EDirection;
+import model.gameobjects.EDirection;
 import model.Game;
 import model.gameobjects.Player;
 import model.gameobjects.Projectile;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import model.mapclasses.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,8 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+/**
+ * Test for player.
+ */
 public class PlayerTest {
     private Player player;
     @BeforeEach

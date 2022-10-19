@@ -1,24 +1,27 @@
 package model.gameobjects.enemies;
 
-import model.helperclasses.EDirection;
-import model.helperclasses.AStar;
-import model.helperclasses.Vector2;
+import model.gameobjects.EDirection;
+import model.Vector2;
 import model.mapclasses.Tile;
 import model.gameobjects.Entity;
 
+/**
+ * Representation of the enemy class, used to glue together logic
+ * from AStar, implements damage that damages the player when player is hit.
+ */
 public abstract class Enemy extends Entity implements IEnemy {
     private double movementSpeed;
     private final Entity targetEntity;
-    protected Enemy(int x, int y, Tile[][] coordinates, Entity targetEntity){
+    protected Enemy(int x, int y, int damage, int killReward, Tile[][] coordinates, Entity targetEntity){
         super(x, y, coordinates);
         this.targetEntity = targetEntity;
-        setMovementSpeed(2);
+        setMovementSpeed(1.5);
     }
     @Override
     public Entity getTargetEntity(){
         return this.targetEntity;
     }
-    public abstract String getType();
+
     /**
      * Method used to move the enemy towards player.
      */
@@ -60,6 +63,11 @@ public abstract class Enemy extends Entity implements IEnemy {
     @Override
     public void update(double dt) {
         moveToGoal(dt);
+    }
+
+    @Override
+    public void damageTaken(int damage) {
+        setHealth(getHealth()-damage);
     }
 
     public void setMovementSpeed(double movementSpeed) {

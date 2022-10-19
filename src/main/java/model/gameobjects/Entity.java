@@ -1,8 +1,7 @@
 package model.gameobjects;
 
 import config.Config;
-import model.helperclasses.EDirection;
-import model.helperclasses.Vector2;
+import model.Vector2;
 import model.mapclasses.Tile;
 
 /**
@@ -176,9 +175,7 @@ public abstract class Entity implements IGameObject {
      * Sets a new health according to how much damage is taken
      * @param damage taken
      */
-    public void damageTaken(int damage) {
-        setHealth(getHealth() - damage);
-    }
+    public abstract void damageTaken(int damage);
 
 }
 

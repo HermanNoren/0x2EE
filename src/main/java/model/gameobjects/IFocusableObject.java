@@ -1,6 +1,6 @@
 package model.gameobjects;
 
-import model.helperclasses.Vector2;
+import model.Vector2;
 
 public interface IFocusableObject {
     /**
