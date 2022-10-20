@@ -8,6 +8,7 @@ import java.util.Random;
 /**
  * Noise generation based on the Random displacement fractal.
  * Random displacement fractal: <a href="https://old.cescg.org/CESCG97/marak/node3.html">...</a>
+ * @author Arthur Alexandersson
  */
 public class Noise {
     private final Random random;

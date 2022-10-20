@@ -5,8 +5,8 @@ import model.Vector2;
 import java.util.*;
 
 /**
- * Class used to create a GameMap with Tiles.
- * Game map class
+ * Class used to create a GameMap. Tile is used in the GameMap.
+ * @author Arthur Alexandersson
  */
 public class GameMap implements IGameMap{
     private final List<Tile> tiles = new ArrayList<>();

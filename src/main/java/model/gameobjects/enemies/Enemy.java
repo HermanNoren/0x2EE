@@ -8,6 +8,7 @@ import model.gameobjects.Entity;
 /**
  * Representation of the enemy class, used to glue together logic
  * from AStar, implements damage that damages the player when player is hit.
+ * @author Arthur Alexandersson, Gustav Gille, Herman Norén, Kasper Lundgren, Rickard Leksell
  */
 public abstract class Enemy extends Entity implements IEnemy {
     private double movementSpeed;

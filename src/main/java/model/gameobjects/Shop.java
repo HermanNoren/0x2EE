@@ -12,6 +12,7 @@ import java.util.Random;
  * upgraded through the game. It also contains logic regarding
  * when the player is in range to enter the shop.
  * The shop consists of 4 16x16 images.
+ * @author Gustav Gille
  * */
 
 public class Shop implements IGameObject {

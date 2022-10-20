@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Factory for creating a NormalEnemy.
+ * @author Arthur Alexandersson
  */
 public class NormalEnemyFactory extends EnemyFactory{
     @Override
