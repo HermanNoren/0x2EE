@@ -2,6 +2,10 @@ package model.gameinterfaces;
 
 import model.gameobjects.Player;
 
+/**
+ * Interface a model with a player should implement
+ */
+
 public interface IHasPlayer {
 
     /**

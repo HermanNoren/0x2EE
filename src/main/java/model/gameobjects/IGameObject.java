@@ -4,7 +4,7 @@ package model.gameobjects;
 import model.Vector2;
 
 /**
- * methods used for
+ * Interface all game-objects with a position and size should implement
  */
 public interface IGameObject {
     /**

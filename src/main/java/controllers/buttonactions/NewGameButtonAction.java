@@ -6,7 +6,7 @@ import view.panelstates.IPanelState;
 
 /**
  * Class used by buttons which creates a new game.
- * @author Arthur Alexandersson, Herman Norén
+ * @author Arthur Alexandersson, Herman Noren
  */
 public class NewGameButtonAction implements IButtonAction {
     private final ICreateGame createGame;

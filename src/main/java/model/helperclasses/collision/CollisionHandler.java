@@ -12,7 +12,7 @@ import java.util.*;
  * This class is used for testing different collision conditions in the game. More specific it gives the possibility
  * to test generic collision, test which specific tiles an object collides with and test in which direction a
  * object collides with another object.
- * @author Herman Norén
+ * @author Herman Noren
  * @responsibility Testing different collision conditions.
  */
 public class CollisionHandler {

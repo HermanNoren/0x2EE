@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * @author Herman Norén
+ * @author Herman Noren
  * @responsibility This class is the main panel that everything is drawn upon.
  */
 public class MainPanel extends JPanel implements IObserver, IChangeableStatePanel {

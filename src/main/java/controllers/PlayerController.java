@@ -9,7 +9,7 @@ import java.util.*;
 
 /**
  * This class is responsible for giving the player a direction to move depending on keyboard input
- * @author Kasper Ljunggren, Herman Norén
+ * @author Kasper Ljunggren, Herman Noren
  */
 public class PlayerController implements KeyListener {
     private final Player player;
