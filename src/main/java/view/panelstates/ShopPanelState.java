@@ -17,6 +17,11 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles the view for the shop state.
+ * @author Gustav Gille
+ */
+
 public class ShopPanelState implements IPanelState{
     private final IChangeableStatePanel mainPanel;
     private TransactionHandler transactionHandler;

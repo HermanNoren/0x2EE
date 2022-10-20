@@ -16,6 +16,11 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles the view for the paused state.
+ * @author Rickard Leksell
+ */
+
 public class PausePanelState implements IPanelState {
 
     private final ButtonSwitcherController bc;
