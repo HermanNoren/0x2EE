@@ -2,7 +2,7 @@ package model.upgradables.armor;
 
 /**
  * Contains method that determines the reduced damage taken, damageReduction.
- * @Author Gustav Gille
+ * @author Gustav Gille
  */
 public interface IArmor {
     /**

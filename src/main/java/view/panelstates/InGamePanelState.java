@@ -2,7 +2,6 @@ package view.panelstates;
 
 import config.Config;
 import controllers.*;
-import controllers.sound.InGameSound;
 import model.gameinterfaces.IGame;
 import view.Camera;
 import view.HUD;
@@ -33,7 +32,6 @@ public class InGamePanelState implements IPanelState {
     private final List<KeyListener> keyListeners;
     private IChangeableStatePanel mainPanel;
 
-    private InGameSound inGameSound;
 
     public InGamePanelState(IChangeableStatePanel mainPanel, IGame game) {
         this.game = game;
@@ -41,10 +39,6 @@ public class InGamePanelState implements IPanelState {
 
         spawnTimerController = new SpawnTimerController(game, 5000);
         spawnTimerController.run();
-
-        inGameSound = new InGameSound();
-        inGameSound.run();
-
         keyListeners = new ArrayList<>();
         keyListeners.add(new PlayerController(game.getPlayer()));
         keyListeners.add(new WeaponController(game));

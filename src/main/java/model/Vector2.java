@@ -1,9 +1,9 @@
 package model;
 
 /**
- * Object used through delegation to act as the delegates´ position object. Used
+ * Object used through delegation to act as the objects position object. Used
  * in multiple places such as calculating enemy movement.
- * @author Herman Norén
+ * @author Herman Noren
  */
 public class Vector2 {
     private double x;
@@ -36,5 +36,4 @@ public class Vector2 {
         this.y = y;
 
     }
-
 }

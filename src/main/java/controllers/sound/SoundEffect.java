@@ -13,7 +13,6 @@ public class SoundEffect {
             AudioInputStream sound = AudioSystem.getAudioInputStream(soundFile);
             clip = AudioSystem.getClip();
             clip.open(sound);
-
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
             throw new RuntimeException(e);
         }

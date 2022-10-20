@@ -8,7 +8,7 @@ import model.upgradables.Upgradable;
 /**
  * The weapon class which delegated to the player (has-a relation) when the
  * player is constructed.
- * @Author Gustav Gille
+ * @author Gustav Gille
  */
 public class Weapon extends Upgradable implements IWeapon {
 

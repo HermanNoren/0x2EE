@@ -43,7 +43,7 @@ public class EnemyDrawer implements IImageIteratorDrawer {
 
     /**
      * Draws/updates enemy images on screen.
-     * @param g2
+     * @param g2 see Graphics2D java
      */
     @Override
     public void draw(Graphics2D g2) {

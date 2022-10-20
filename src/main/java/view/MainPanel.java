@@ -56,7 +56,6 @@ public class MainPanel extends JPanel implements IObserver, IChangeableStatePane
 
     /**
      * {@inheritDoc}
-     * @param {@inheritDoc}
      */
     @Override
     public void changePanelState(EPanelState state) {

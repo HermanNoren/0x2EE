@@ -3,7 +3,7 @@ package model.upgradables;
 /**
  * Used to call the same methods from different objects, see the Upgradable class
  * for more information regarding the usage of this interface.
- * @Author Gustav Gille
+ * @author Gustav Gille
  */
 public interface IUpgradable {
     /**
@@ -27,6 +27,7 @@ public interface IUpgradable {
      /**
       * The current state of the Upgradable, for example damage in weapon
       * and armor-reduction in armor.
+      * @Return an integer of the current stat.
       */
      int currentStats();
 }

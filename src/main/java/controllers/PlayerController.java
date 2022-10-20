@@ -46,7 +46,6 @@ public class PlayerController implements KeyListener {
 
     /**
      * {@inheritDoc}
-     * @return {@inheritDoc}
      */
     @Override
     public void keyTyped(KeyEvent e) {}

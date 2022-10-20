@@ -5,7 +5,7 @@ import controllers.buttonactions.IButtonAction;
 
 /**
  * The game button is used as a blueprint for the majority of the games buttons.
- * @Author Herman Noren
+ * @author Herman Noren
  */
 public class GameButton {
 

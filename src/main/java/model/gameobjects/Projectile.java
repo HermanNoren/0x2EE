@@ -82,7 +82,6 @@ public class Projectile implements IGameObject, IProjectile {
 
     /**
      * {@inheritDoc}
-     * @return {@inheritDoc}
      */
     @Override
     public void update(double dt) {

@@ -6,7 +6,7 @@ import model.Vector2;
 
 /**
  * Contains method which are called regarding the weapon, shoot and reload.
- * @Author Gustav Gille
+ * @author Gustav Gille
  */
 public interface IWeapon{
     /**

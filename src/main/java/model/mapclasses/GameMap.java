@@ -19,6 +19,7 @@ public class GameMap implements IGameMap{
      * Width and height is in number of tiles.
      * @param width number of tiles in width
      * @param height number of tiles in height
+      *@param obstacles unpassable terrain
      */
     public GameMap(int width, int height, boolean obstacles) {
         this.width = width;

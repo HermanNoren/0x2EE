@@ -1,5 +1,6 @@
 package view.drawers;
 
+import controllers.sound.SoundEffect;
 import model.gameinterfaces.IHasProjectiles;
 import model.gameobjects.Projectile;
 import model.gameobjects.EDirection;
@@ -37,10 +38,10 @@ public class ProjectileDrawer implements IImageIteratorDrawer{
         directions.add(EDirection.DOWN);
         directions.add(EDirection.RIGHT);
 
-        initImgs();
+        initImages();
     }
 
-    private void initImgs(){
+    private void initImages(){
         projectileImgs = ImageHandler.getImgsWithDirections(2, imgsTypes, directions);
     }
 
@@ -53,6 +54,7 @@ public class ProjectileDrawer implements IImageIteratorDrawer{
             List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(projectile.getPos(), projectile.getWidth(), projectile.getWidth());
             g.drawImage(img, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
         }
+
     }
 
     @Override

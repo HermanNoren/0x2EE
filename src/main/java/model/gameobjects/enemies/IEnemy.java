@@ -24,7 +24,7 @@ public interface IEnemy{
 
     /**
      * Updates the enemy with an improvement of dt.
-     * @param dt
+     * @param dt the delta time from previous update
      */
     void update(double dt);
 
