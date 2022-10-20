@@ -403,7 +403,6 @@ public class Game implements IGame {
      */
     @Override
     public void spawnEnemy(){
-        System.out.println(spawnCounter);
         int damage;
         int killReward;
         if((spawnCounter % 10) == 0 && spawnCounter != 0){
