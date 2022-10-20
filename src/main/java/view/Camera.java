@@ -1,6 +1,8 @@
 package view;
 
 import config.Config;
+import controllers.CameraZoomController;
+import controllers.EZoomDirection;
 import model.gameobjects.IFocusableObject;
 import model.Vector2;
 
@@ -24,6 +26,8 @@ public final class Camera{
     private final int standardGlideConstant;
     private int glideConstant;
     private double currentZoomMultiplier;
+
+    private CameraZoomController zoomController;
     private boolean borderLimited;
     private int leftBorderLimit, rightBorderLimit, topBorderLimit, bottomBorderLimit;
 
@@ -44,6 +48,7 @@ public final class Camera{
         screenCenter = new Vector2(Config.SCREEN_WIDTH / 2.0, Config.SCREEN_HEIGHT / 2.0);
         width = Config.SCREEN_WIDTH;
         height = Config.SCREEN_HEIGHT;
+        zoomController = new CameraZoomController();
     }
 
     /**
@@ -100,17 +105,36 @@ public final class Camera{
      * Zoom in
      */
     public void zoomIn() {
-        currentZoomMultiplier *= 1.05;
-        if (currentZoomMultiplier >= 4) { currentZoomMultiplier = 4; }
+        currentZoomMultiplier *= 1.01;
+        if (currentZoomMultiplier >= 2.5) {
+            currentZoomMultiplier = 2.5;
+            stopZoom();
+        }
     }
 
     /**
      * Zoom out
      */
     public void zoomOut() {
-        currentZoomMultiplier *= 0.95;
-        if (currentZoomMultiplier <= 1) { currentZoomMultiplier = 1; }
+        currentZoomMultiplier *= 0.99;
+        if (currentZoomMultiplier <= 1) {
+            currentZoomMultiplier = 1;
+            stopZoom();
+        }
     }
+
+    public void startZoomIn() {
+        zoomController.start(EZoomDirection.IN);
+    }
+
+    public void startZoomOut() {
+        zoomController.start(EZoomDirection.OUT);
+    }
+
+    public void stopZoom() {
+        zoomController.stop();
+    }
+
 
     /**
      * Returns the current zoom multiplier.

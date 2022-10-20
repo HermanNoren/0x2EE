@@ -17,8 +17,8 @@ public class BossEnemy extends Enemy{
         super(x, y, damage, killReward, coordinates, targetEntity);
         setVelX(1);
         setVelY(1);
-        setMaxHp(500);
-        setHealth(500);
+        setMaxHp(200);
+        setHealth(200);
     }
 
     @Override

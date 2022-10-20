@@ -44,12 +44,16 @@ public class Game implements IGame {
     private final int mapSize;
     private EnemyFactory enemyFactory;
     private int spawnCounter = 1;
+    private boolean bossSpawnedFlag;
+
+    private List<ISoundObserver> soundObservers;
 
     public Game() {
         mapSize = 25;
         newGameRound();
         highscoreHandler = new HighscoreHandler();
         highscoreList = highscoreHandler.getHighscoreList();
+        soundObservers = new ArrayList<>();
     }
 
     @Override
@@ -65,6 +69,7 @@ public class Game implements IGame {
         this.playerDead = false;
         this.spawner = new Spawner(gameMap.getPassableTiles(),this);
         this.paused = false;
+        this.bossSpawnedFlag = false;
     }
     /**
      * {@inheritDoc}
@@ -172,6 +177,7 @@ public class Game implements IGame {
     @Override
     public void makePlayerShoot() {
         player.shoot(this);
+        notifySoundObservers(EGameEvents.PLAYER_SHOOT);
     }
 
     /**
@@ -208,12 +214,17 @@ public class Game implements IGame {
         return paused;
     }
 
+    public boolean getBossSpawnedFlag() { return bossSpawnedFlag; }
+
+    public void resetBossSpawnFlag() { bossSpawnedFlag = false; }
+
     /**
      * Updates the current game state
      */
     @Override
     public void update(double dt) {
         if (player.getHealth() < 1) {
+            notifySoundObservers(EGameEvents.PLAYER_DEAD);
             playerDead = true;
         }
         updatePlayer(dt);
@@ -377,10 +388,12 @@ public class Game implements IGame {
     public void spawnEnemy(){
         int damage;
         int killReward;
-        if((spawnCounter % 5) == 0 && spawnCounter != 0){
+        if((spawnCounter % 2) == 0 && spawnCounter != 0){
             killReward = 500;
             damage = 5;
             enemyFactory = new BossEnemyFactory();
+            bossSpawnedFlag = true;
+            notifySoundObservers(EGameEvents.BOSS_SPAWN);
         }else{
             damage = 1;
             killReward = 100;
@@ -388,6 +401,17 @@ public class Game implements IGame {
         }
         spawnCounter++;
         enemies.add(enemyFactory.createEnemy(player, damage, killReward, gameMap.getPassableTiles(), gameMap.getGameMapCoordinates()));
+    }
+
+    @Override
+    public void subscribe(ISoundObserver observer) {
+        soundObservers.add(observer);
+    }
+
+    private void notifySoundObservers(EGameEvents event) {
+        for (ISoundObserver observer : soundObservers) {
+            observer.notifySoundEvent(event);
+        }
     }
 
     /**
