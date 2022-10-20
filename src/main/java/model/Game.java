@@ -23,7 +23,7 @@ import java.util.*;
  * This class contains the main game loop.
  * With help of the main game loop it delegates work to the active IGameState
  */
-public class Game implements IGame {
+public class Game implements IGame, SoundObservable {
     private Player player;
     private List<String> highscoreName;
 
@@ -45,11 +45,14 @@ public class Game implements IGame {
     private int spawnCounter = 1;
     private boolean bossSpawnedFlag;
 
+    private List<SoundObserver> soundObservers;
+
     public Game() {
         mapSize = 25;
         newGameRound();
         highscoreHandler = new HighscoreHandler();
         highscoreList = highscoreHandler.getHighscoreList();
+        soundObservers = new ArrayList<>();
     }
 
     @Override
@@ -387,6 +390,7 @@ public class Game implements IGame {
             damage = 5;
             enemyFactory = new BossEnemyFactory();
             bossSpawnedFlag = true;
+            notifySoundObservers(EGameEvents.BOSS_SPAWN);
         }else{
             damage = 1;
             killReward = 100;
@@ -396,6 +400,12 @@ public class Game implements IGame {
         enemies.add(enemyFactory.createEnemy(player, damage, killReward, gameMap.getPassableTiles(), gameMap.getGameMapCoordinates()));
     }
 
+    private void notifySoundObservers(EGameEvents event) {
+        for (SoundObserver observer : soundObservers) {
+            observer.notifySoundEvent(event);
+        }
+    }
+
     /**
      * {@inheritDoc}
      * @return {@inheritDoc}
@@ -403,5 +413,10 @@ public class Game implements IGame {
     @Override
     public boolean playerOnShop() {
         return shop.playerOnShop;
+    }
+
+    @Override
+    public void subscribe(SoundObserver observer) {
+        soundObservers.add(observer);
     }
 }

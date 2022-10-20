@@ -5,20 +5,20 @@ import view.Camera;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BossIntroductionControllerHelper implements ActionListener {
+public class ZoomControllerHelper implements ActionListener {
 
-    EBossControllerZoomDirection direction;
+    EZoomDirection direction;
 
-    public BossIntroductionControllerHelper(EBossControllerZoomDirection direction) {
+    public ZoomControllerHelper(EZoomDirection direction) {
         this.direction = direction;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (direction == EBossControllerZoomDirection.IN) {
+        if (direction == EZoomDirection.IN) {
             Camera.getInstance().zoomIn();
         }
-        if (direction == EBossControllerZoomDirection.OUT) {
+        if (direction == EZoomDirection.OUT) {
             Camera.getInstance().zoomOut();
         }
     }

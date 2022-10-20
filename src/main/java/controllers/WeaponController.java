@@ -1,6 +1,6 @@
 package controllers;
 
-import controllers.sound.SoundEffect;
+import sound.SoundEffect;
 import model.gameinterfaces.IHasProjectiles;
 
 import java.awt.event.KeyEvent;
@@ -14,7 +14,6 @@ public class WeaponController implements KeyListener {
 
     private final IHasProjectiles game;
     private boolean spaceKeyDown;
-
     SoundEffect se = new SoundEffect();
 
     /**
@@ -36,7 +35,7 @@ public class WeaponController implements KeyListener {
             case (KeyEvent.VK_SPACE) -> {
                 if (!spaceKeyDown) {
 
-                    se.play();
+                    //se.play();
                     spaceKeyDown = true;
                     game.makePlayerShoot();
                 }
