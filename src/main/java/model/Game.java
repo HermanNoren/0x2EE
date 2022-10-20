@@ -406,7 +406,7 @@ public class Game implements IGame {
         System.out.println(spawnCounter);
         int damage;
         int killReward;
-        if((spawnCounter % 2) == 0 && spawnCounter != 0){
+        if((spawnCounter % 10) == 0 && spawnCounter != 0){
             killReward = bossKillReward;
             damage = bossDamage;
             enemyFactory = new BossEnemyFactory();

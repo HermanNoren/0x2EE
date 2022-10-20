@@ -123,14 +123,23 @@ public final class Camera{
         }
     }
 
+    /**
+     * Starts a zoom in effect. This will zoom from current zoom multiplier into fully zoomed in over a period of time.
+     */
     public void startZoomIn() {
         zoomController.start(EZoomDirection.IN);
     }
 
+    /**
+     * Starts a zoom out effect. This will zoom from current zoom multiplier into fully zoomed out over a period of time.
+     */
     public void startZoomOut() {
         zoomController.start(EZoomDirection.OUT);
     }
 
+    /**
+     *
+     */
     private void stopZoom() {
         zoomController.stop();
     }
