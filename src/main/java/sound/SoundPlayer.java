@@ -13,13 +13,16 @@ public class SoundPlayer implements ISoundObserver {
     public SoundPlayer() {
         soundEffects = new HashMap<>(Map.of(
              EGameEvents.BOSS_SPAWN, new SoundEffect("src/main/resources/sound/shrek.wav"),
-             EGameEvents.PLAYER_SHOOT, new SoundEffect("src/main/resources/sound/laserShoot.wav")
+             EGameEvents.PLAYER_SHOOT, new SoundEffect("src/main/resources/sound/laserShoot.wav"),
+             EGameEvents.PLAYER_DEAD, new SoundEffect("src/main/resources/sound/bruh.wav")
         ));
     }
 
     @Override
     public void notifySoundEvent(EGameEvents event) {
         activeSound = soundEffects.get(event);
-        activeSound.play();
+        if (activeSound != null) {
+            activeSound.play();
+        }
     }
 }
