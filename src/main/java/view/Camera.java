@@ -131,7 +131,7 @@ public final class Camera{
         zoomController.start(EZoomDirection.OUT);
     }
 
-    public void stopZoom() {
+    private void stopZoom() {
         zoomController.stop();
     }
 

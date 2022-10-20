@@ -79,6 +79,7 @@ public class Game implements IGame {
         this.spawner = new Spawner(gameMap.getPassableTiles(),this);
         this.paused = false;
         this.bossSpawnedFlag = false;
+        this.bossIsAlive = false;
     }
     /**
      * {@inheritDoc}
@@ -401,6 +402,7 @@ public class Game implements IGame {
      */
     @Override
     public void spawnEnemy(){
+        System.out.println(spawnCounter);
         int damage;
         int killReward;
         if((spawnCounter % 2) == 0 && spawnCounter != 0){
@@ -420,6 +422,11 @@ public class Game implements IGame {
         enemies.add(enemyFactory.createEnemy(player, damage, killReward, gameMap.getPassableTiles(), gameMap.getGameMapCoordinates()));
     }
 
+    /**
+     * Provides the ability for sound observers to subscribe to Game. Sound observers will be notified
+     * every time an event in EGameEvent occurs.
+     * @param observer Object that should be notified by game
+     */
     @Override
     public void subscribe(ISoundObserver observer) {
         soundObservers.add(observer);

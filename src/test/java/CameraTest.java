@@ -53,14 +53,17 @@ public class CameraTest {
         assertEquals(center.getY(), offset.getY() + Config.SCREEN_HEIGHT / 2.0);
     }
 
-//    @Test
-//    void test_camera_zoom() {
-//        assertEquals(1, camera.getZoomMultiplier());
-//        camera.zoomIn();
-//        assertEquals(1.01, camera.getZoomMultiplier());
-//        camera.zoomOut();
-//        assertEquals(1, camera.getZoomMultiplier());
-//    }
+    @Test
+    void test_camera_zoom_in() {
+        camera.startZoomIn();
+        assertEquals(2.5, camera.getZoomMultiplier());
+    }
+
+    @Test
+    void test_camera_zoom_out() {
+        camera.startZoomOut();
+        assertEquals(1, camera.getZoomMultiplier());
+    }
 
 //    @Test
 //    void test_camera_zoom_boundaries() {
