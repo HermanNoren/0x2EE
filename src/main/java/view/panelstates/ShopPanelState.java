@@ -2,7 +2,7 @@ package view.panelstates;
 
 import controllers.ButtonSwitcherController;
 import controllers.buttonactions.ResumeGameButtonAction;
-import controllers.buttonactions.UpgradeArmorButton;
+import controllers.buttonactions.UpgradeArmorButtonAction;
 import model.gameinterfaces.ICanPause;
 import model.helperclasses.TransactionHandler;
 import view.IChangeableStatePanel;
@@ -153,7 +153,7 @@ public class ShopPanelState implements IPanelState{
      * @param transactionHandler The object which handles the logic behind the transactions of upgrades.
      */
     private void createShopButtons(TransactionHandler transactionHandler, ICanPause game) {
-        GameButton upgradeArmorButton = new GameButton("armor", Config.SCREEN_WIDTH / 10, Config.SCREEN_HEIGHT / 6, new UpgradeArmorButton(transactionHandler));
+        GameButton upgradeArmorButton = new GameButton("armor", Config.SCREEN_WIDTH / 10, Config.SCREEN_HEIGHT / 6, new UpgradeArmorButtonAction(transactionHandler));
         GameButton upgradeWeaponButton = new GameButton("weapon", Config.SCREEN_WIDTH / 10, Config.SCREEN_HEIGHT / 2, new UpgradeWeaponAction(transactionHandler));
         GameButton leaveShopButton = new GameButton("LEAVE", Config.SCREEN_WIDTH / 3, (int) (Config.SCREEN_HEIGHT * 0.8), new ResumeGameButtonAction(EPanelState.INGAME, this, game));
         buttons.add(upgradeArmorButton);

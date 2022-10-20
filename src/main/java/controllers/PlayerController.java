@@ -7,11 +7,19 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.*;
 
+/**
+ * This class is responsible for giving the player a direction to move depending on keyboard input
+ * @author Kasper Ljunggren, Herman Norén
+ */
 public class PlayerController implements KeyListener {
     private final Player player;
     private boolean moving;
-    private List<EDirection> pressedOrder;
+    private final List<EDirection> pressedOrder;
 
+    /**
+     * Instantiates a PlayerController
+     * @param player player object to handle
+     */
     public PlayerController(Player player) {
         pressedOrder = new ArrayList<>();
         this.player = player;
@@ -35,9 +43,18 @@ public class PlayerController implements KeyListener {
         else
             player.setDirection(pressedOrder.get(pressedOrder.size()-1));
     }
+
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public void keyTyped(KeyEvent e) {}
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
@@ -57,6 +74,10 @@ public class PlayerController implements KeyListener {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         switch(e.getKeyCode()) {
@@ -71,8 +92,6 @@ public class PlayerController implements KeyListener {
             }
             case (KeyEvent.VK_D) -> {
                 releaseDirection(EDirection.RIGHT);
-            }
-            case (KeyEvent.VK_SPACE) -> {
             }
         }
     }

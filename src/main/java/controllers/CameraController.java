@@ -4,20 +4,34 @@ import view.Camera;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+
+/**
+ * This controller provides the ability to zoom the camera using the keyboard.
+ * @author Herman Noren
+ */
 public class CameraController implements KeyListener {
 
     private final Camera camera;
-    private boolean upKeyDown;
-    private boolean downKeyDown;
 
+    /**
+     * Instantiates a camera controller
+     */
     public CameraController() {
         camera = Camera.getInstance();
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public void keyTyped(KeyEvent e) {
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
@@ -31,15 +45,12 @@ public class CameraController implements KeyListener {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public void keyReleased(KeyEvent e) {
-        switch(e.getKeyCode()) {
-            case (KeyEvent.VK_UP) -> {
-                upKeyDown = false;
-            }
-            case (KeyEvent.VK_DOWN) -> {
-                downKeyDown = false;
-            }
-        }
+
     }
 }

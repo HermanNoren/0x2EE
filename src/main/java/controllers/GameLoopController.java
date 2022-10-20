@@ -10,10 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class holds the main game loop.
- * @author Herman Norén
- * @responsibility This class is responsible for updating the model and notifying potential observers at given
- * updates per second.
+ * This class contains the main game loop. It is responsible for updating the model and notifying potential
+ * observers at given updates per second.
+ * @author Herman Noren
  */
 public class GameLoopController implements ActionListener {
 

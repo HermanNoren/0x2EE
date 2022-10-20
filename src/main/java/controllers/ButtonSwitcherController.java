@@ -10,27 +10,31 @@ import java.util.List;
 /**
  * This class provides the ability to use GameButtons with keyboard-only mechanics. Any view-class that uses buttons
  * should use this controller to provide navigation.
- * @author Herman Norén
- * @responsibility Switch between buttons with keyboard-only mechanics
+ * @author Herman Noren
  */
 public class ButtonSwitcherController implements KeyListener {
     private int activePos;
-    private  List<GameButton> stringButtons;
-    private boolean wKeyDown, sKeyDown, enterKeyDown, escapeKeyDown, wClicked, sClicked, enterClicked, escapeClicked;
+    private final List<GameButton> stringButtons;
+    private boolean wKeyDown, sKeyDown, enterKeyDown, wClicked, sClicked, enterClicked;
 
+    /**
+     * Instantiates a ButtonSwitcherController
+     * @param buttons list of GameButtons to handle
+     */
     public ButtonSwitcherController(List<GameButton> buttons) {
         this.stringButtons = buttons;
         activePos = 0;
         wKeyDown = false;
         sKeyDown = false;
         enterKeyDown = false;
-        escapeKeyDown = false;
         wClicked = false;
         sClicked = false;
         enterClicked = false;
-        escapeClicked = false;
     }
 
+    /**
+     * Updates the current state of buttons that are being handled.
+     */
     public void update() {
 
         if (sClicked) {
@@ -57,11 +61,19 @@ public class ButtonSwitcherController implements KeyListener {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
@@ -86,15 +98,13 @@ public class ButtonSwitcherController implements KeyListener {
                 }
 
             }
-            case (KeyEvent.VK_ESCAPE) -> {
-                if (!escapeKeyDown) {
-                    escapeKeyDown = true;
-                    escapeClicked = true;
-                }
-            }
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * @return {@inheritDoc}
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         switch(e.getKeyCode()) {
@@ -106,9 +116,6 @@ public class ButtonSwitcherController implements KeyListener {
             }
             case (KeyEvent.VK_ENTER) -> {
                 enterKeyDown = false;
-            }
-            case (KeyEvent.VK_ESCAPE) -> {
-                escapeKeyDown = false;
             }
         }
     }
