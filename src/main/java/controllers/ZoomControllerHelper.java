@@ -15,11 +15,12 @@ public class ZoomControllerHelper implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        Camera camera = Camera.getInstance();
         if (direction == EZoomDirection.IN) {
-            Camera.getInstance().zoomIn();
+            camera.zoomIn();
         }
         if (direction == EZoomDirection.OUT) {
-            Camera.getInstance().zoomOut();
+            camera.zoomOut();
         }
     }
 }
