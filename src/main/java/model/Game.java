@@ -22,7 +22,7 @@ import java.util.*;
 /**
  * This class contains the main game loop.
  * With help of the main game loop it delegates work to the active IGameState
- * @Author Arthur Alexandersson, Gustav Gille, Herman Noren, Kasper Ljunggren, Rickard Leksell
+ * @author Arthur Alexandersson, Gustav Gille, Herman Noren, Kasper Ljunggren, Rickard Leksell
  */
 public class Game implements IGame {
     private Player player;
