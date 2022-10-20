@@ -6,6 +6,7 @@ public enum EGameEvents {
     PLAYER_SHOOT,
     PLAYER_HIT,
     ENEMY_HIT,
+    ENEMY_DEAD,
     PLAYER_DEAD
 
 }

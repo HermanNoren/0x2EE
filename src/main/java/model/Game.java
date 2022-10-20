@@ -282,6 +282,7 @@ public class Game implements IGame {
         while (enemyIter.hasNext()) {
             Enemy enemy = enemyIter.next();
             if (enemy.getHealth() <= 0) {
+                notifySoundObservers(EGameEvents.ENEMY_DEAD);
                 spawner.spawnItem();
                 player.addScore(enemy.getKillReward());
                 enemies.remove(enemy);

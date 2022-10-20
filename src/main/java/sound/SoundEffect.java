@@ -7,6 +7,8 @@ import java.io.IOException;
 public class SoundEffect {
     private Clip clip;
 
+    private AudioInputStream sound;
+
     public SoundEffect(String soundFileName) {
         setSoundFile(soundFileName);
     }
@@ -14,7 +16,7 @@ public class SoundEffect {
     private void setSoundFile(String soundFileName){
         try {
             File soundFile = new File(soundFileName);
-            AudioInputStream sound = AudioSystem.getAudioInputStream(soundFile);
+            sound = AudioSystem.getAudioInputStream(soundFile);
             clip = AudioSystem.getClip();
             clip.open(sound);
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
