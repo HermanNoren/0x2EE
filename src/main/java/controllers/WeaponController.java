@@ -1,6 +1,6 @@
 package controllers;
 
-import controllers.sound.SoundEffect;
+import sound.SoundEffect;
 import model.gameinterfaces.IHasProjectiles;
 
 import java.awt.event.KeyEvent;
@@ -22,7 +22,6 @@ public class WeaponController implements KeyListener {
      */
     public WeaponController(IHasProjectiles game) {
         this.game = game;
-
     }
 
     /**
@@ -42,21 +41,18 @@ public class WeaponController implements KeyListener {
 
     /**
      * {@inheritDoc}
-     *
      */
     @Override
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()){
             case (KeyEvent.VK_SPACE) -> {
                 spaceKeyDown = false;
-
             }
         }
     }
 
     /**
      * {@inheritDoc}
-     *
      */
     @Override
     public void keyTyped(KeyEvent e) {

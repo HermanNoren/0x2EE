@@ -8,4 +8,8 @@ public interface ICanSpawnEnemy {
      * used to determine how often said enemy will be spawned.
      */
     void spawnEnemy();
+
+    boolean getBossSpawnedFlag();
+
+    void resetBossSpawnFlag();
 }
