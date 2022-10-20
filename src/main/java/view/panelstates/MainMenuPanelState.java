@@ -16,6 +16,10 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles the view for the main menu state.
+ * @author Rickard Leksell
+ */
 
 public class MainMenuPanelState implements IPanelState {
     private final ButtonSwitcherController bc;

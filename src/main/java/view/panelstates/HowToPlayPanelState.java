@@ -15,6 +15,10 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles the view for the howToPlay state.
+ * @author Rickard Leksell
+ */
 public class HowToPlayPanelState implements IPanelState{
     private BufferedImage controls, instructions;
     private final ButtonSwitcherController bc;

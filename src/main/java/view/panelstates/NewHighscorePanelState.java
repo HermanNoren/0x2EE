@@ -15,6 +15,10 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles the view for the state that occurs when a new highscore is reached.
+ * @author Rickard Leksell
+ */
 public class NewHighscorePanelState implements IPanelState{
     private IHasHighscore game;
     private final ButtonSwitcherController bc;
