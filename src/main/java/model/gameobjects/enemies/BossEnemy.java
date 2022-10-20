@@ -32,7 +32,7 @@ public class BossEnemy extends Enemy{
     }
 
     @Override
-    public int getSCoreReward() {
+    public int getKillReward() {
         return 500;
     }
 

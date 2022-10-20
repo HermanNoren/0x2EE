@@ -271,7 +271,7 @@ public class Game implements IGame {
             Enemy enemy = enemyIter.next();
             if (enemy.getHealth() <= 0) {
                 spawner.spawnItem();
-                player.addScore(enemy.getSCoreReward());
+                player.addScore(enemy.getKillReward());
                 enemies.remove(enemy);
                 break;
             }
