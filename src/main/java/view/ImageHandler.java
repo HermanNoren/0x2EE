@@ -34,12 +34,10 @@ public class ImageHandler {
     }
 
     public static Map<EDirection, Map<String, BufferedImage>> getImgsWithDirections(int nrImgs, List<String> imgTypes, List<EDirection> directions) {
-
         Map<EDirection, Map<String, BufferedImage>> retMap = new HashMap<>();
         for (EDirection direction: directions){
             retMap.put(direction, getImgMap(nrImgs, imgTypes, direction));
         }
-
         return retMap;
     }
 
@@ -47,7 +45,7 @@ public class ImageHandler {
         Map<String, BufferedImage> tempMap = new HashMap<>();
         for (String imgType: imgTypes){
             for (int i = 1; i < nrImgs+1; i++) {
-                tempMap.put(imgType+(i-1), getImage("imgs/"+imgType+"/"+direction+"_"+i+".png"));
+                tempMap.put(imgType + (i - 1), getImage("imgs/" + imgType + "/" + direction.toString().toLowerCase() + "_" + i + ".png"));
             }
         }
         return tempMap;

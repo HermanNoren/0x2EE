@@ -3,6 +3,10 @@ import model.Vector2;
 import config.Config;
 import controllers.buttonactions.IButtonAction;
 
+/**
+ * The game button is used as a blueprint for the majority of the games buttons.
+ * @Author Herman Noren
+ */
 public class GameButton {
 
     private String buttonText;

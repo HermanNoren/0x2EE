@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Draws the representation of the Shop.
+ */
 public class ShopDrawer implements IDrawer{
     private static BufferedImage topLeft, topRight, bottomLeft, bottomRight;
     private final Shop shop;
@@ -19,6 +22,10 @@ public class ShopDrawer implements IDrawer{
     private final double yCoordinate;
     private final double shopWidth;
     private final double shopHeight;
+    /**
+     * Takes the representation of the pictures and takes the square amount of images as the
+     * amount of images squared represents the side of the
+     */
     private final int amountOfPicturesOffset = (int) Math.sqrt(4);
 
     public ShopDrawer(Shop shop){

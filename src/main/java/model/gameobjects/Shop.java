@@ -15,7 +15,7 @@ import java.util.Random;
  * @author Gustav Gille
  * */
 
-public class Shop implements IGameObject {
+public final class Shop implements IGameObject {
     private final int xPosition;
     private final int yPosition;
     private final Vector2 position;

@@ -4,6 +4,10 @@ import config.Config;
 
 import javax.swing.*;
 
+/**
+ * The window of the game, centers the screen and also makes it unable to resize the window.
+ * @Author Herman Noren
+ */
 public class Window {
     private JFrame jframe;
     private JPanel mainPanel;
