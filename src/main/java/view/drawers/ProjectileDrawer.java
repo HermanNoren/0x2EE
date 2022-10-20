@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class used to draw Projectiles
+ */
 public class ProjectileDrawer implements IImageIteratorDrawer{
 
     private IHasProjectiles game;
@@ -19,6 +22,7 @@ public class ProjectileDrawer implements IImageIteratorDrawer{
     private Map<EDirection, Map<String, BufferedImage>> projectileImgs;
     private List<String> imgsTypes;
     private List<EDirection> directions;
+    private int index = 0;
 
 
 
@@ -35,12 +39,11 @@ public class ProjectileDrawer implements IImageIteratorDrawer{
 
         initImgs();
     }
+
     private void initImgs(){
         projectileImgs = ImageHandler.getImgsWithDirections(2, imgsTypes, directions);
     }
 
-
-    private int index = 0;
     @Override
     public void draw(Graphics2D g) {
         projectiles = game.getProjectiles();

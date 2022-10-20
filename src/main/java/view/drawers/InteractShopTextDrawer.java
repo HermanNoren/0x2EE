@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * Drawer that represents a pop-up text to communicate to the player that the shop is
  * close enough to be interacted with.
+ * @author Gustav Gille
  */
 public class InteractShopTextDrawer implements IDrawer{
     /**
