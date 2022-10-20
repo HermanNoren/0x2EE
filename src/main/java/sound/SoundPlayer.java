@@ -1,20 +1,25 @@
 package sound;
 
 import model.EGameEvents;
-import model.SoundObserver;
+import model.ISoundObserver;
 
-public class SoundPlayer implements SoundObserver {
+import java.util.HashMap;
+import java.util.Map;
 
-    private SoundEffect soundEffect;
+public class SoundPlayer implements ISoundObserver {
+    private SoundEffect activeSound;
+    private final Map<EGameEvents, SoundEffect> soundEffects;
 
-    private SoundPlayer() {
-        soundEffect = new SoundEffect();
+    public SoundPlayer() {
+        soundEffects = new HashMap<>(Map.of(
+             EGameEvents.BOSS_SPAWN, new SoundEffect("src/main/resources/sound/shrek.wav"),
+             EGameEvents.PLAYER_SHOOT, new SoundEffect("src/main/resources/sound/laserShoot.wav")
+        ));
     }
 
     @Override
     public void notifySoundEvent(EGameEvents event) {
-        switch (event) {
-            case BOSS_SPAWN -> soundEffect.setSoundFile("src/main/resources/sound/shrek.wav");
-        }
+        activeSound = soundEffects.get(event);
+        activeSound.play();
     }
 }

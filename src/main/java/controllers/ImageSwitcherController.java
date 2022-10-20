@@ -33,6 +33,8 @@ public class ImageSwitcherController implements ActionListener {
         timer.start();
     }
 
+    public void stop() { timer.stop(); }
+
     /**
      * Add a drawer that the controller should call upon every 'delay' milliseconds
      * @param imageDrawer object that has images to iterate through

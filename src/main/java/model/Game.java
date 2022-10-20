@@ -23,7 +23,7 @@ import java.util.*;
  * This class contains the main game loop.
  * With help of the main game loop it delegates work to the active IGameState
  */
-public class Game implements IGame, SoundObservable {
+public class Game implements IGame {
     private Player player;
     private List<String> highscoreName;
 
@@ -45,7 +45,7 @@ public class Game implements IGame, SoundObservable {
     private int spawnCounter = 1;
     private boolean bossSpawnedFlag;
 
-    private List<SoundObserver> soundObservers;
+    private List<ISoundObserver> soundObservers;
 
     public Game() {
         mapSize = 25;
@@ -176,6 +176,7 @@ public class Game implements IGame, SoundObservable {
     @Override
     public void makePlayerShoot() {
         player.shoot(this);
+        notifySoundObservers(EGameEvents.PLAYER_SHOOT);
     }
 
     /**
@@ -222,6 +223,7 @@ public class Game implements IGame, SoundObservable {
     @Override
     public void update(double dt) {
         if (player.getHealth() < 1) {
+            notifySoundObservers(EGameEvents.PLAYER_DEAD);
             playerDead = true;
         }
         updatePlayer(dt);
@@ -400,8 +402,13 @@ public class Game implements IGame, SoundObservable {
         enemies.add(enemyFactory.createEnemy(player, damage, killReward, gameMap.getPassableTiles(), gameMap.getGameMapCoordinates()));
     }
 
+    @Override
+    public void subscribe(ISoundObserver observer) {
+        soundObservers.add(observer);
+    }
+
     private void notifySoundObservers(EGameEvents event) {
-        for (SoundObserver observer : soundObservers) {
+        for (ISoundObserver observer : soundObservers) {
             observer.notifySoundEvent(event);
         }
     }
@@ -413,10 +420,5 @@ public class Game implements IGame, SoundObservable {
     @Override
     public boolean playerOnShop() {
         return shop.playerOnShop;
-    }
-
-    @Override
-    public void subscribe(SoundObserver observer) {
-        soundObservers.add(observer);
     }
 }

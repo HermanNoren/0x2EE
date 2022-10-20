@@ -26,7 +26,7 @@ public class InGamePanelState implements IPanelState {
 
     private IImageIteratorDrawer playerDrawer, enemyDrawer, itemDrawer, mapDrawer;
 
-    private ImageSwitcherController imageSwitcherController;
+    private ImageSwitcherController characterImageSwitcherController, tileImageSwitcherController;
     private SpawnTimerController spawnTimerController;
 
     private BossIntroductionController bossIntroductionController;
@@ -68,13 +68,16 @@ public class InGamePanelState implements IPanelState {
         drawers.add(itemDrawer);
         drawers.add(new InteractShopTextDrawer(game.getShop()));
 
-        imageSwitcherController = new ImageSwitcherController(200);
+        characterImageSwitcherController = new ImageSwitcherController(200);
 
-        imageSwitcherController.addImageDrawer(playerDrawer);
-        imageSwitcherController.addImageDrawer(enemyDrawer);
-        imageSwitcherController.addImageDrawer(itemDrawer);
-        imageSwitcherController.addImageDrawer(mapDrawer);
-        imageSwitcherController.start();
+        characterImageSwitcherController.addImageDrawer(playerDrawer);
+        characterImageSwitcherController.addImageDrawer(enemyDrawer);
+        characterImageSwitcherController.addImageDrawer(itemDrawer);
+        characterImageSwitcherController.start();
+
+        tileImageSwitcherController = new ImageSwitcherController(400);
+        tileImageSwitcherController.addImageDrawer(mapDrawer);
+        tileImageSwitcherController.start();
     }
 
 
@@ -90,9 +93,9 @@ public class InGamePanelState implements IPanelState {
         } else {
 
             bossIntroductionController.listenForBossSpawn();
+
             camera.update();
             for (IDrawer drawer : drawers) {
-
                 drawer.draw(g);
             }
            hud.update(g);

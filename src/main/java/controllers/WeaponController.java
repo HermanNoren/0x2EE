@@ -14,15 +14,12 @@ public class WeaponController implements KeyListener {
 
     private final IHasProjectiles game;
     private boolean spaceKeyDown;
-    SoundEffect se = new SoundEffect();
-
     /**
      * Instantiates a WeaponController
      * @param game object that has projectiles
      */
     public WeaponController(IHasProjectiles game) {
         this.game = game;
-        se.setSoundFile("src/main/resources/sound/laserShoot.wav");
     }
 
     /**
@@ -34,8 +31,6 @@ public class WeaponController implements KeyListener {
         switch (e.getKeyCode()) {
             case (KeyEvent.VK_SPACE) -> {
                 if (!spaceKeyDown) {
-
-                    //se.play();
                     spaceKeyDown = true;
                     game.makePlayerShoot();
                 }
@@ -52,7 +47,6 @@ public class WeaponController implements KeyListener {
         switch (e.getKeyCode()){
             case (KeyEvent.VK_SPACE) -> {
                 spaceKeyDown = false;
-
             }
         }
     }

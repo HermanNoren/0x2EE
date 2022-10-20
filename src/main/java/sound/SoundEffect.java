@@ -7,7 +7,11 @@ import java.io.IOException;
 public class SoundEffect {
     private Clip clip;
 
-    public void setSoundFile(String soundFileName){
+    public SoundEffect(String soundFileName) {
+        setSoundFile(soundFileName);
+    }
+
+    private void setSoundFile(String soundFileName){
         try {
             File soundFile = new File(soundFileName);
             AudioInputStream sound = AudioSystem.getAudioInputStream(soundFile);

@@ -1,6 +1,7 @@
 package controllers;
 
 import model.gameinterfaces.IGame;
+import model.gameobjects.EDirection;
 import model.gameobjects.enemies.Enemy;
 import view.Camera;
 
@@ -20,18 +21,18 @@ public class BossIntroductionController implements ActionListener {
         this.camera = Camera.getInstance();
     }
 
-    public boolean listenForBossSpawn() {
+    public void listenForBossSpawn() {
         if (game.getBossSpawnedFlag()) {
             game.resetBossSpawnFlag();
             game.pause();
             List<Enemy> gameEnemies = game.getEnemies();
-            camera.setFocusedObject(gameEnemies.get(gameEnemies.size()-1));
+            Enemy boss = gameEnemies.get(gameEnemies.size()-1);
+            boss.setDirection(EDirection.DOWN);
+            camera.setFocusedObject(boss);
             camera.startZoomIn();
             pauseTimer = new Timer(2500, this);
             pauseTimer.start();
-            return true;
         }
-        return false;
     }
 
     @Override
