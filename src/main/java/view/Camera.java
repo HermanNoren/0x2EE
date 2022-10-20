@@ -143,18 +143,16 @@ public final class Camera{
      * Allows the possibility to make the camera movement limited by a border. The difference between the left border
      * limit and the right border limit must be equal to or larger than the screen width. Likewise, the difference
      * between top and bottom border limits must be equal to or larger than the screen height. Violation of this will
-     * automatically set the right or bottom border to minimal accepted number.
+     * result in the method call being ignored.
      * @param leftBorderLimit any integer
      * @param rightBorderLimit any integer >= leftBorderLimit + screenWidth
      * @param topBorderLimit any integer
      * @param bottomBorderLimit any integer >= topBorderLimit + screenHeight
      */
     public void setBorderLimit(int leftBorderLimit, int rightBorderLimit, int topBorderLimit, int bottomBorderLimit) {
-        if (Math.abs(leftBorderLimit - rightBorderLimit) < width) {
-            rightBorderLimit = leftBorderLimit + width;
-        }
-        if (Math.abs(topBorderLimit - bottomBorderLimit) < height) {
-            bottomBorderLimit = topBorderLimit + height;
+        if (Math.abs(leftBorderLimit - rightBorderLimit) < width ||
+                Math.abs(topBorderLimit - bottomBorderLimit) < height) {
+            return;
         }
         borderLimited = true;
         this.leftBorderLimit = leftBorderLimit;
