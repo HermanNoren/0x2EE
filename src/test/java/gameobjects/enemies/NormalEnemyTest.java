@@ -31,7 +31,7 @@ public class NormalEnemyTest {
     }
     @Test
     void test_getKillReward_returns_100(){
-        assertEquals(100, normalEnemy.getSCoreReward());
+        assertEquals(100, normalEnemy.getKillReward());
     }
 
 }

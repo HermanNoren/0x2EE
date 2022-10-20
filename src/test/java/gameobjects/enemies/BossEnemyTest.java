@@ -5,7 +5,6 @@ import model.gameobjects.Player;
 import model.gameobjects.enemies.BossEnemyFactory;
 import model.gameobjects.enemies.Enemy;
 import model.gameobjects.enemies.EnemyFactory;
-import model.gameobjects.enemies.NormalEnemyFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,6 +30,6 @@ public class BossEnemyTest {
     }
     @Test
     void test_getKillReward_returns_500(){
-        assertEquals(500, bossEnemy.getSCoreReward());
+        assertEquals(500, bossEnemy.getKillReward());
     }
 }

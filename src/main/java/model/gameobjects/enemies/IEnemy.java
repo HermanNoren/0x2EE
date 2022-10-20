@@ -1,9 +1,6 @@
 package model.gameobjects.enemies;
 
 import model.gameobjects.Entity;
-import model.mapclasses.Tile;
-
-import java.util.PriorityQueue;
 
 /**
  * Interface for IEnemy which encapsulated methods to create better abstraction
@@ -23,7 +20,7 @@ public interface IEnemy{
     /**
      * @return The score reward for killing an enemy.
      */
-    int getSCoreReward();
+    int getKillReward();
 
     /**
      * Updates the enemy with an improvement of dt.
