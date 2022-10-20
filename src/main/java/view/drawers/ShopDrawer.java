@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class used to draw the shop on the map.
+ * @author Gustav Gille
+ */
 public class ShopDrawer implements IDrawer{
     private static BufferedImage topLeft, topRight, bottomLeft, bottomRight;
     private final Shop shop;

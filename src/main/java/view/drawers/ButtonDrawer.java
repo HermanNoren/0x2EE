@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Drawer which draws the majority of the game's buttons.
+ * @author Herman Noren
  */
 public class ButtonDrawer implements IDrawer {
     private final List<GameButton> buttons;
