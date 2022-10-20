@@ -28,6 +28,13 @@ public class ImageHandler {
 
     }
 
+    /**
+     * Used to get a Map to match certain strings with actual images
+     * @param nrImgs amount of images
+     * @param imgTypes strings
+     * @return Map with certain strings as keys, and images as values
+     */
+
     public static Map<String, BufferedImage> getImgs(int nrImgs, List<String> imgTypes) {
         Map<String, BufferedImage> imgs = new HashMap<>();
         for (String imgType : imgTypes) {
