@@ -85,8 +85,5 @@ public abstract class Enemy extends Entity implements IEnemy, IFocusableObject {
     public void damageTaken(int damage) {
         setHealth(getHealth()-damage);
     }
-
-    public void setMovementSpeed(double movementSpeed) {
-        this.movementSpeed = movementSpeed;
-    }
+    
 }
