@@ -53,7 +53,7 @@ public class PlayerController implements KeyListener {
 
     /**
      * {@inheritDoc}
-     * @return {@inheritDoc}
+     *
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -76,7 +76,7 @@ public class PlayerController implements KeyListener {
 
     /**
      * {@inheritDoc}
-     * @return {@inheritDoc}
+     *
      */
     @Override
     public void keyReleased(KeyEvent e) {

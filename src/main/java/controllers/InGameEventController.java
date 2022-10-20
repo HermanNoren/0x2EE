@@ -30,7 +30,7 @@ public class InGameEventController implements KeyListener {
 
     /**
      * {@inheritDoc}
-     * @return {@inheritDoc}
+     *
      */
     @Override
     public void keyTyped(KeyEvent e) {
@@ -38,7 +38,7 @@ public class InGameEventController implements KeyListener {
 
     /**
      * {@inheritDoc}
-     * @return {@inheritDoc}
+     *
      */
     @Override
     public void keyPressed(KeyEvent e) {
@@ -65,7 +65,7 @@ public class InGameEventController implements KeyListener {
 
     /**
      * {@inheritDoc}
-     * @return {@inheritDoc}
+     *
      */
     @Override
     public void keyReleased(KeyEvent e) {

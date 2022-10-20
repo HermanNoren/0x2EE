@@ -46,7 +46,7 @@ public class WeaponController implements KeyListener {
 
     /**
      * {@inheritDoc}
-     * @return {@inheritDoc}
+     *
      */
     @Override
     public void keyReleased(KeyEvent e) {
@@ -60,7 +60,7 @@ public class WeaponController implements KeyListener {
 
     /**
      * {@inheritDoc}
-     * @return {@inheritDoc}
+     *
      */
     @Override
     public void keyTyped(KeyEvent e) {
