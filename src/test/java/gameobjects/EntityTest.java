@@ -47,45 +47,74 @@ public class EntityTest {
         assertEquals(96, entity.getPosY());
     }
     @Test
-    void test_getPos_returns_vector2_with_Entity_current_pos(){
+    void test_getPos_returns_vector2_with_Entity_current_posX(){
         //Entity starting pos is x=48, y=48
         Vector2 testPosVector = new Vector2(48, 48);
         assertEquals(testPosVector.getX(), entity.getPos().getX());
+    }
+    @Test
+    void test_getPos_returns_vector2_with_Entity_current_posY(){
+        //Entity starting pos is x=48, y=48
+        Vector2 testPosVector = new Vector2(48, 48);
         assertEquals(testPosVector.getY(), entity.getPos().getY());
     }
     @Test
-    void test_setPos_sets_vector2_with_x_and_y_values(){
+    void test_setPos_sets_vector2_with_x_values(){
         entity.setPos(new Vector2(10, 10));
         assertEquals(10, entity.getPosX());
+    }
+    @Test
+    void test_setPos_sets_vector2_with_y_values(){
+        entity.setPos(new Vector2(10, 10));
         assertEquals(10, entity.getPosY());
     }
 
     @Test
-    void test_getVel_returns_vector2_with_Entity_current_vel(){
+    void test_getVel_returns_vector2_with_Entity_current_velX(){
         //Entity starting vel is x=0, y=0
         Vector2 testVelVector = new Vector2(0, 0);
         assertEquals(testVelVector.getX(), entity.getVel().getX());
+    }
+    @Test
+    void test_getVel_returns_vector2_with_Entity_current_velY(){
+        //Entity starting vel is x=0, y=0
+        Vector2 testVelVector = new Vector2(0, 0);
         assertEquals(testVelVector.getY(),entity.getVel().getY());
     }
     @Test
-    void test_setVel_sets_vector2_with_x_and_y_values(){
+    void test_setVel_sets_vector2_with_x_values(){
         entity.setVel(new Vector2(10, 10));
         assertEquals(10, entity.getVelX());
+
+    }
+    @Test
+    void test_setVel_sets_vector2_with_y_values(){
+        entity.setVel(new Vector2(10, 10));
         assertEquals(10, entity.getVelY());
     }
 
     @Test
-    void test_getAcc_returns_vector2_with_Entity_current_acc(){
+    void test_getAcc_returns_vector2_with_Entity_current_accX(){
         //Entity starting acc is x=0, y=0
         Vector2 testAccVector = new Vector2(0, 0);
         assertEquals(testAccVector.getX(), entity.getAcc().getX());
+    }
+    @Test
+    void test_getAcc_returns_vector2_with_Entity_current_accY(){
+        //Entity starting acc is x=0, y=0
+        Vector2 testAccVector = new Vector2(0, 0);
         assertEquals(testAccVector.getY(),entity.getAcc().getY());
     }
     @Test
-    void test_setAcc_sets_vector2_with_x_and_y_values(){
+    void test_setAcc_sets_vector2_with_x_values(){
         entity.setAcc(new Vector2(10, 10));
         assertEquals(10, entity.getAccX());
-        assertEquals(10, entity.getAccY());
+
+    }
+    @Test
+    void test_setAcc_sets_vector2_with_y_values(){
+        entity.setAcc(new Vector2(10, 10));
+        assertEquals(10, entity.getAccX());
     }
     @Test
     void test_getVelX_returns_Entity_current_velX(){
@@ -205,7 +234,7 @@ public class EntityTest {
     }
 
     @Test
-    void test_getMapLocation_returns_Entity_location_on_map(){
+    void test_getMapLocation_returns_Entity_x_location_on_map(){
         Tile[][] testCoords = new Tile[10][10];
         for(int i = 0 ; i < 10; i ++){
             for(int j = 0 ; j < 10; j ++){
@@ -214,9 +243,22 @@ public class EntityTest {
         }
 
         assertEquals(1, entity.getMapLocation().getX());
+
+    }
+    @Test
+    void test_getMapLocation_returns_Entity_y_location_on_map(){
+        Tile[][] testCoords = new Tile[10][10];
+        for(int i = 0 ; i < 10; i ++){
+            for(int j = 0 ; j < 10; j ++){
+                testCoords[i][j] = new Tile(i, j);
+            }
+        }
+
+
         assertEquals(1, entity.getMapLocation().getY());
 
     }
+
 
     @Test
     void test_getWidth_returns_width_of_entity(){
