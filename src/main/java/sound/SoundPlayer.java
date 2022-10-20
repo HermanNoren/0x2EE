@@ -15,7 +15,8 @@ public class SoundPlayer implements ISoundObserver {
              EGameEvents.BOSS_SPAWN, new SoundEffect("src/main/resources/sound/shrek.wav"),
              EGameEvents.PLAYER_SHOOT, new SoundEffect("src/main/resources/sound/shot.wav"),
              EGameEvents.ENEMY_HIT, new SoundEffect("src/main/resources/sound/hit.wav"),
-             EGameEvents.ENEMY_DEAD, new SoundEffect("src/main/resources/sound/hit.wav")
+             EGameEvents.ENEMY_DEAD, new SoundEffect("src/main/resources/sound/oof.wav"),
+             EGameEvents.ITEM_PICKUP, new SoundEffect("src/main/resources/sound/item_pickup.wav")
         ));
     }
 

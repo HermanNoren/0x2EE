@@ -43,13 +43,22 @@ public class Game implements IGame {
 
     private final int mapSize;
     private EnemyFactory enemyFactory;
+    private int bossKillReward;
+    private int bossDamage;
+    private int normalEnemyKillReward;
+    private int normalEnemyDamage;
     private int spawnCounter = 1;
     private boolean bossSpawnedFlag;
+    private boolean bossIsAlive;
 
     private List<ISoundObserver> soundObservers;
 
     public Game() {
         mapSize = 25;
+        bossKillReward = 500;
+        bossDamage = 5;
+        normalEnemyKillReward = 100;
+        normalEnemyDamage = 1;
         newGameRound();
         highscoreHandler = new HighscoreHandler();
         highscoreList = highscoreHandler.getHighscoreList();
@@ -283,6 +292,9 @@ public class Game implements IGame {
             Enemy enemy = enemyIter.next();
             if (enemy.getHealth() <= 0) {
                 notifySoundObservers(EGameEvents.ENEMY_DEAD);
+                if (enemy.getKillReward() == bossKillReward) {
+                    bossIsAlive = false;
+                }
                 spawner.spawnItem();
                 player.addScore(enemy.getKillReward());
                 enemies.remove(enemy);
@@ -316,6 +328,7 @@ public class Game implements IGame {
     private void updateItems(){
         for (IItem item : spawner.getSpawnedItems()) {
             if (CollisionHandler.testCollision(item, player)) {
+                notifySoundObservers(EGameEvents.ITEM_PICKUP);
                 item.consume(player);
                 spawner.clearItem(item);
                 break;
@@ -391,17 +404,19 @@ public class Game implements IGame {
         int damage;
         int killReward;
         if((spawnCounter % 2) == 0 && spawnCounter != 0){
-            killReward = 500;
-            damage = 5;
+            killReward = bossKillReward;
+            damage = bossDamage;
             enemyFactory = new BossEnemyFactory();
             bossSpawnedFlag = true;
+            bossIsAlive = true;
+            spawnCounter++;
             notifySoundObservers(EGameEvents.BOSS_SPAWN);
         }else{
-            damage = 1;
-            killReward = 100;
+            damage = normalEnemyDamage;
+            killReward = normalEnemyKillReward;
             enemyFactory = new NormalEnemyFactory();
         }
-        spawnCounter++;
+        if (!bossIsAlive) { spawnCounter++; }
         enemies.add(enemyFactory.createEnemy(player, damage, killReward, gameMap.getPassableTiles(), gameMap.getGameMapCoordinates()));
     }
 
