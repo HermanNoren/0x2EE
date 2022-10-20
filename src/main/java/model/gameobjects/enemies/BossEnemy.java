@@ -17,8 +17,8 @@ public class BossEnemy extends Enemy{
         this.damage = damage;
         setVelX(1);
         setVelY(1);
-        setMaxHp(500);
-        setHealth(500);
+        setMaxHp(200);
+        setHealth(200);
     }
 
     @Override
