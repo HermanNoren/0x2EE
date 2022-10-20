@@ -4,6 +4,9 @@ import config.Config;
 
 import javax.swing.*;
 
+/**
+ * @author Herman Noren
+ */
 public class Window {
     private JFrame jframe;
     private JPanel mainPanel;

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
 public class InShopDrawer implements IDrawer{
     private final List<GameButton> buttons;
 

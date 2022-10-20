@@ -10,6 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class containing static methods to get Buffered images, or Map with buffered images.
+ * Used in drawers to load correct images.
+ * @author Arthur Alexandersson, Rickard Leksell
+ */
 public class ImageHandler {
 
     public static BufferedImage getImage(String path) {
@@ -47,7 +52,7 @@ public class ImageHandler {
         Map<String, BufferedImage> tempMap = new HashMap<>();
         for (String imgType: imgTypes){
             for (int i = 1; i < nrImgs+1; i++) {
-                tempMap.put(imgType+(i-1), getImage("imgs/"+imgType+"/"+direction+"_"+i+".png"));
+                tempMap.put(imgType+(i-1), getImage("imgs/"+imgType+"/"+direction.toString().toLowerCase()+"_"+i+".png"));
             }
         }
         return tempMap;

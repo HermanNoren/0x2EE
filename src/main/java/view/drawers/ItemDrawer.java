@@ -13,6 +13,7 @@ import java.util.Map;
 
 /**
  * Handles the drawing logic of spawnable items on the map.
+ * @author Rickard Leksell
  */
 
 public class ItemDrawer implements IImageIteratorDrawer {

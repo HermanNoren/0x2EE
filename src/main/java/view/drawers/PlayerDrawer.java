@@ -13,6 +13,7 @@ import java.util.Map;
 
 /**
  * Strictly used to draw the player onto the screen
+ * @author Arthur Alexandersson, Herman Noren
  */
 public class PlayerDrawer implements IImageIteratorDrawer {
     private Player player;
