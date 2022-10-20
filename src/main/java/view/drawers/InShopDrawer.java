@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+/**
+ * Class used to draw the in Shop view
+ * @author Gustav Gille
+ */
 public class InShopDrawer implements IDrawer{
     private final List<GameButton> buttons;
 

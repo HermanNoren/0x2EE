@@ -9,6 +9,7 @@ import model.mapclasses.Tile;
 /**
  * The Boss extension of Enemy. This extension is stronger and has more health than
  * a regular enemy.
+ * @author Arthur Alexandersson, Kasper Ljunggren
  */
 public class BossEnemy extends Enemy{
 

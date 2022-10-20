@@ -5,7 +5,7 @@ import model.mapclasses.Tile;
 
 /**
  * The mundane enemy, standard enemy.
- * @author Arthur Alexandersson, Gustav Gille, Herman Norén, Kasper Lundgren, Rickard Leksell
+ * @author Kasper Lundgren
  */
 class NormalEnemy extends Enemy{
     protected NormalEnemy(int x, int y, int damage, int killReward, Tile[][] coordinates, Entity targetEntity) {

@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * Draws all types of enemies.
+ * @author Rickard Leksell
  */
 public class EnemyDrawer implements IImageIteratorDrawer {
     private final List<EDirection> directions;

@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * The DrawerHelper class is made to aid the representation of the sprite relative to the camera-view.
+ * @author Herman Noren
  */
 public class DrawerHelper {
 
