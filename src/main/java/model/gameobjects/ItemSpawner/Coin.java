@@ -6,6 +6,7 @@ import model.Vector2;
 
 /**
  * Class for representing the game item coin. This class handles what the result should be when the player interacts with it.
+ * @author Rickard Leksell
  */
 public class Coin implements IItem {
 

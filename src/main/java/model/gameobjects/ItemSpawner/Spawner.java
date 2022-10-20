@@ -12,6 +12,7 @@ import java.util.Random;
 
 /**
  * This class handles the spawn logic for game items.
+ * @author Rickard Leksell
  */
 public class Spawner{
 
