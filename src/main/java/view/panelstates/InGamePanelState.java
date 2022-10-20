@@ -28,6 +28,8 @@ public class InGamePanelState implements IPanelState {
 
     private ImageSwitcherController imageSwitcherController;
     private SpawnTimerController spawnTimerController;
+
+    private BossIntroductionController bossIntroductionController;
     private final Camera camera;
     private final List<KeyListener> keyListeners;
     private IChangeableStatePanel mainPanel;
@@ -39,15 +41,18 @@ public class InGamePanelState implements IPanelState {
         spawnTimerController = new SpawnTimerController(game, 5000);
         spawnTimerController.run();
 
-        keyListeners = new ArrayList<>();
-        keyListeners.add(new PlayerController(game.getPlayer()));
-        keyListeners.add(new WeaponController(game));
-        keyListeners.add(new InGameEventController(game, this));
+        bossIntroductionController = new BossIntroductionController(game);
+
         hud = new HUD(game.getPlayer());
         camera = Camera.getInstance();
         camera.setFocusedObject(game.getPlayer());
         camera.setBorderLimit(0, game.getMapSize() * Config.TILE_SIZE,
                               0, game.getMapSize() * Config.TILE_SIZE);
+
+        keyListeners = new ArrayList<>();
+        keyListeners.add(new PlayerController(game.getPlayer()));
+        keyListeners.add(new WeaponController(game));
+        keyListeners.add(new InGameEventController(game, this));
         keyListeners.add(new CameraController());
 
         playerDrawer = new PlayerDrawer(game.getPlayer());
@@ -85,6 +90,7 @@ public class InGamePanelState implements IPanelState {
             }
         } else {
 
+            bossIntroductionController.listenForBossSpawn();
             camera.update();
             for (IDrawer drawer : drawers) {
 

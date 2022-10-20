@@ -43,6 +43,7 @@ public class Game implements IGame {
     private final int mapSize;
     private EnemyFactory enemyFactory;
     private int spawnCounter = 1;
+    private boolean bossSpawnedFlag;
 
     public Game() {
         mapSize = 25;
@@ -64,6 +65,7 @@ public class Game implements IGame {
         this.playerDead = false;
         this.spawner = new Spawner(gameMap.getPassableTiles(),this);
         this.paused = false;
+        this.bossSpawnedFlag = false;
     }
     /**
      * {@inheritDoc}
@@ -206,6 +208,10 @@ public class Game implements IGame {
     public boolean isPaused() {
         return paused;
     }
+
+    public boolean getBossSpawnedFlag() { return bossSpawnedFlag; }
+
+    public void resetBossSpawnFlag() { bossSpawnedFlag = false; }
 
     /**
      * Updates the current game state
@@ -376,10 +382,11 @@ public class Game implements IGame {
     public void spawnEnemy(){
         int damage;
         int killReward;
-        if((spawnCounter % 5) == 0 && spawnCounter != 0){
+        if((spawnCounter % 2) == 0 && spawnCounter != 0){
             killReward = 500;
             damage = 5;
             enemyFactory = new BossEnemyFactory();
+            bossSpawnedFlag = true;
         }else{
             damage = 1;
             killReward = 100;

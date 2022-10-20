@@ -9,4 +9,8 @@ public interface ICanSpawnEnemy {
      * @param counter How often an enemy will be spawned, used with modulo.
      */
     void spawnEnemy();
+
+    boolean getBossSpawnedFlag();
+
+    void resetBossSpawnFlag();
 }
