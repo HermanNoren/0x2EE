@@ -20,7 +20,7 @@ public abstract class Enemy extends Entity implements IEnemy {
         this.killreward = killReward;
         this.damage = damage;
         this.targetEntity = targetEntity;
-        setMovementSpeed(1.5);
+        this.movementSpeed = 1.5;
     }
     @Override
     public Entity getTargetEntity(){

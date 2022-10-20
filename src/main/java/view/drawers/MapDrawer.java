@@ -25,7 +25,7 @@ public class MapDrawer implements IImageIteratorDrawer {
     private int spriteSize = Config.SPRITE_SIZE*3;
 
     public MapDrawer(Tile[][] gameMap){
-        this.gameMap = gameMap;
+        this.gameMap = gameMap.clone();
         camera = Camera.getInstance();
         index = 0;
         initTileImgs();

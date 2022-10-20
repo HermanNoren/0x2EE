@@ -30,7 +30,7 @@ public abstract class Entity implements IGameObject {
      * @param coordinates represents the entities' coordinates on the map
      */
     protected Entity(int x, int y, Tile[][] coordinates){
-        this.coordinates = coordinates;
+        this.coordinates = coordinates.clone();
         this.direction = EDirection.NOT_MOVING; // Default value
         this.lastDirection = EDirection.DOWN;
         this.pos = new Vector2(x, y);
