@@ -2,8 +2,9 @@ package model.upgradables.armor;
 import model.upgradables.Upgradable;
 
 /**
- * Class which represents the player's armor.
- * Is delegated to the player.
+ * The Armor representation, used to determine the armor reduction constant and acts as the player's armor object
+ * when initiated.
+ * @Author Gustav Gille
  */
 
 public class Armor extends Upgradable implements IArmor {

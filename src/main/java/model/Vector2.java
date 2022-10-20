@@ -1,7 +1,8 @@
 package model;
 
 /**
- * Vector
+ * Object used through delegation to act as the delegates´ position object. Used
+ * in multiple places such as calculating enemy movement.
  * @author Herman Norén
  */
 public class Vector2 {

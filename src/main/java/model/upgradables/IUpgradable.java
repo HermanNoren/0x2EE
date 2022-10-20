@@ -1,5 +1,10 @@
 package model.upgradables;
 
+/**
+ * Used to call the same methods from different objects, see the Upgradable class
+ * for more information regarding the usage of this interface.
+ * @Author Gustav Gille
+ */
 public interface IUpgradable {
     /**
      * Levels up the thing in question.

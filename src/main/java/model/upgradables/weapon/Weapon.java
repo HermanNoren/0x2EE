@@ -5,11 +5,13 @@ import model.gameobjects.Projectile;
 import model.gameobjects.EDirection;
 import model.Vector2;
 import model.upgradables.Upgradable;
-
+/**
+ * The weapon class which delegated to the player (has-a relation) when the
+ * player is constructed.
+ * @Author Gustav Gille
+ */
 public class Weapon extends Upgradable implements IWeapon {
-    /**
-     * The weapon class, delegated to the player (has-a relation).
-     */
+
     public Weapon() {
         super(1, 2);
     }

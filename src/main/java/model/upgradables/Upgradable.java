@@ -1,7 +1,9 @@
 package model.upgradables;
 
 /**
- * An abstract class which contains the blueprint for an Upgradable.
+ * An abstract class which contains the blueprint for an Upgradable, uses IUpgradable interfaces
+ * for abstraction in the TransactionHandler class.
+ * @Author Gustav Gille
  */
 public abstract class Upgradable implements IUpgradable {
     private int currentLevel;
