@@ -147,6 +147,7 @@ public class GameTest {
 
     @Test
     void test_if_update_updates(){
+        game.spawnEnemy(6);
         game.getPlayer().setPosX(5);
         game.getPlayer().setPosY(5);
         double pos = game.getPlayer().getPosX();

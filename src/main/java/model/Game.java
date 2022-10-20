@@ -344,10 +344,6 @@ public class Game implements IGame {
         return playerDead;
     }
 
-    public boolean isPlayerInRangeOfShop() {
-        return (CollisionHandler.testCollision(player, shop));
-    }
-
     /**
      * {@inheritDoc}
      * @return {@inheritDoc}
