@@ -8,8 +8,9 @@ import model.mapclasses.Tile;
 import model.upgradables.weapon.Weapon;
 
 /**
- * The player of the game, weapon and armor acts as compositions.
+ * Class used to create player within the game. A player has a weapon and armor which acts as compositions.
  * Also has movement logic.
+ * @Author
  */
 public class Player extends Entity implements IPlayer, IFocusableObject, IHasUpgradable {
     private int score;
@@ -33,6 +34,11 @@ public class Player extends Entity implements IPlayer, IFocusableObject, IHasUpg
         money = 10;
     }
 
+    /**
+     * {@inheritDoc}
+     * @param addable {@inheritDoc}
+     */
+    @Override
     public void shoot(IHasProjectiles addable) {
         EDirection dir;
 

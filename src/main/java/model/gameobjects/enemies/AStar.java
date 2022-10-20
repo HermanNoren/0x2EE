@@ -4,6 +4,11 @@ import model.mapclasses.Tile;
 
 import java.util.PriorityQueue;
 
+/**
+ * AStar algorithm used to find the shortest distance between two Tiles.
+ * Used in Enemy to find the shortest distance between Enemy and Player.
+ * @author Arthur Alexandersson + Kasper Lundgren
+ */
 public class AStar {
 
         /**
