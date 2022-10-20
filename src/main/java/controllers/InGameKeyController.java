@@ -12,7 +12,7 @@ import java.awt.event.KeyListener;
  * As of now it can pause by clicking escape and enter the shop by clicking enter while player is on shop.
  * @author Arthur Alexandersson, Gustav Gille
  */
-public class InGameEventController implements KeyListener {
+public class InGameKeyController implements KeyListener {
     private final IGame game;
     private final IPanelState panel;
     private boolean enterKeyDown;
@@ -23,7 +23,7 @@ public class InGameEventController implements KeyListener {
      * @param game model class to handle
      * @param panel current panel state
      */
-    public InGameEventController(IGame game, IPanelState panel) {
+    public InGameKeyController(IGame game, IPanelState panel) {
         this.game = game;
         this.panel = panel;
     }

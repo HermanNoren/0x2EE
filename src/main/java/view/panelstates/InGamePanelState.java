@@ -56,7 +56,7 @@ public class InGamePanelState implements IPanelState {
         keyListeners = new ArrayList<>();
         keyListeners.add(new PlayerController(game.getPlayer()));
         keyListeners.add(new WeaponController(game));
-        keyListeners.add(new InGameEventController(game, this));
+        keyListeners.add(new InGameKeyController(game, this));
 
         playerDrawer = new PlayerDrawer(game.getPlayer());
         enemyDrawer = new EnemyDrawer(game);
