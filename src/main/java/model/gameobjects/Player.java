@@ -10,7 +10,7 @@ import model.upgradables.weapon.Weapon;
 /**
  * Class used to create player within the game. A player has a weapon and armor which acts as compositions.
  * Also has movement logic.
- * @author Arthur Alexandersson, Gustav Gille, Herman Norén, Kasper Lundgren, Rickard Leksell
+ * @author Arthur Alexandersson, Gustav Gille, Herman Noren, Kasper Lundgren, Rickard Leksell
  */
 public class Player extends Entity implements IPlayer, IFocusableObject, IHasUpgradable {
     private int score;

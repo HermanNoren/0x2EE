@@ -13,7 +13,6 @@ public class InGameSound implements ActionListener {
         timer = new Timer(1000,this);
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         soundEffect.play();

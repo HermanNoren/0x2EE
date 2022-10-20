@@ -9,7 +9,7 @@ import model.mapclasses.Tile;
  * for example by containing information regarding its position
  * and health the program can determine if an entity is in range
  * to take damage thus if reduces its health.
- * @author Arthur Alexandersson, Gustav Gille, Herman Norén, Kasper Ljunggren, Rickard Leksell
+ * @author Arthur Alexandersson, Gustav Gille, Herman Noren, Kasper Ljunggren, Rickard Leksell
  */
 public abstract class Entity implements IGameObject {
     private Vector2 pos;
