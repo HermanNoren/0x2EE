@@ -7,10 +7,9 @@ import model.mapclasses.Tile;
  * The mundane enemy, standard enemy.
  */
 class NormalEnemy extends Enemy{
-    private int damage;
     protected NormalEnemy(int x, int y, int damage, int killReward, Tile[][] coordinates, Entity targetEntity) {
         super(x, y, damage, killReward, coordinates, targetEntity);
-        this.damage = damage;
+
         setVelX(0.3);
         setVelY(0.3);
         setMaxHp(20);
@@ -19,7 +18,7 @@ class NormalEnemy extends Enemy{
 
     @Override
     public int getDamage() {
-        return damage;
+        return super.getDamage();
     }
     @Override
     public String getType() {
@@ -28,7 +27,7 @@ class NormalEnemy extends Enemy{
 
     @Override
     public int getKillReward() {
-        return 100;
+        return super.getKillReward();
     }
 
 

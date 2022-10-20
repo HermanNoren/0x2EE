@@ -11,10 +11,9 @@ import model.mapclasses.Tile;
  * a regular enemy.
  */
 public class BossEnemy extends Enemy{
-    private int damage;
+
     protected BossEnemy(int x, int y, int damage, int killReward, Tile[][] coordinates, Entity targetEntity) {
         super(x, y, damage, killReward, coordinates, targetEntity);
-        this.damage = damage;
         setVelX(1);
         setVelY(1);
         setMaxHp(500);
@@ -23,7 +22,7 @@ public class BossEnemy extends Enemy{
 
     @Override
     public int getDamage() {
-        return damage;
+        return super.getDamage();
     }
 
     @Override
@@ -33,7 +32,7 @@ public class BossEnemy extends Enemy{
 
     @Override
     public int getKillReward() {
-        return 500;
+        return super.getKillReward();
     }
 
 }

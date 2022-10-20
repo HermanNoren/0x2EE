@@ -12,8 +12,12 @@ import model.gameobjects.Entity;
 public abstract class Enemy extends Entity implements IEnemy {
     private double movementSpeed;
     private final Entity targetEntity;
+    private int killreward;
+    private int damage;
     protected Enemy(int x, int y, int damage, int killReward, Tile[][] coordinates, Entity targetEntity){
         super(x, y, coordinates);
+        this.killreward = killReward;
+        this.damage = damage;
         this.targetEntity = targetEntity;
         setMovementSpeed(1.5);
     }
@@ -63,6 +67,16 @@ public abstract class Enemy extends Entity implements IEnemy {
     @Override
     public void update(double dt) {
         moveToGoal(dt);
+    }
+
+    @Override
+    public int getKillReward() {
+        return killreward;
+    }
+
+    @Override
+    public int getDamage() {
+        return damage;
     }
 
     @Override
