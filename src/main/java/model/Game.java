@@ -301,6 +301,7 @@ public class Game implements IGame {
         while (pIter.hasNext()) {
             Projectile pr = pIter.next();
             if (CollisionHandler.testCollision(enemy, pr)) {
+                notifySoundObservers(EGameEvents.ENEMY_HIT);
                 enemy.damageTaken(player.getWeapon().currentStats());
                 projectiles.remove(pr);
                 break;

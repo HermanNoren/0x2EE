@@ -23,7 +23,7 @@ public class SoundEffect {
     }
 
     public void play(){
-        stop();
+        //stop();
         clip.setFramePosition(0);
         clip.start();
     }

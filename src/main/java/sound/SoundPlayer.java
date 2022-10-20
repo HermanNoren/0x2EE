@@ -14,6 +14,7 @@ public class SoundPlayer implements ISoundObserver {
         soundEffects = new HashMap<>(Map.of(
              EGameEvents.BOSS_SPAWN, new SoundEffect("src/main/resources/sound/shrek.wav"),
              EGameEvents.PLAYER_SHOOT, new SoundEffect("src/main/resources/sound/laserShoot.wav"),
+             EGameEvents.ENEMY_HIT, new SoundEffect("src/main/resources/sound/oof.wav"),
              EGameEvents.PLAYER_DEAD, new SoundEffect("src/main/resources/sound/bruh.wav")
         ));
     }
