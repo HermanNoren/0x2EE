@@ -8,6 +8,7 @@ import model.upgradables.IUpgradable;
  * The class which handles the logic behind the shop transactions.
  * Interfaces are used to maximize abstraction and manipulate
  * them through parametric polymorphism.
+ * @author Gustav Gille
  */
 public class TransactionHandler {
     private final IHasUpgradable player;

@@ -10,12 +10,12 @@ import java.util.List;
 
 /**
  * ImageSwitcherController handles the delay between image switches in classes that implement the IIteratedImageDrawer.
+ * @author Herman Noren
  */
 public class ImageSwitcherController implements ActionListener {
 
     private final Timer timer;
-
-    private List<IImageIterator> imageDrawers;
+    private final List<IImageIterator> imageDrawers;
 
     /**
      * Instantiates an ImageSwitcherController.
@@ -27,7 +27,7 @@ public class ImageSwitcherController implements ActionListener {
     }
 
     /**
-     * Start the internal timer.
+     * Starts the internal timer.
      */
     public void start() {
         timer.start();
@@ -35,7 +35,7 @@ public class ImageSwitcherController implements ActionListener {
 
     /**
      * Add a drawer that the controller should call upon every 'delay' milliseconds
-     * @param imageDrawer
+     * @param imageDrawer object that has images to iterate through
      */
     public void addImageDrawer(IImageIterator imageDrawer) {
         imageDrawers.add(imageDrawer);

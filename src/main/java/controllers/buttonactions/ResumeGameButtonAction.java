@@ -6,15 +6,16 @@ import view.panelstates.IPanelState;
 
 /**
  * ResumeGameButtonAction is used by buttons, which when activated, that resume to game from paused state.
+ * @author Herman Noren, Arthur Alexandersson
  */
 public class ResumeGameButtonAction implements IButtonAction{
 
-    private ICanPause game;
-    private IPanelState currentState;
-    private EPanelState panelState;
+    private final ICanPause game;
+    private final IPanelState currentState;
+    private final EPanelState panelState;
 
     /**
-     *
+     * Instantiates a ResumeGameButtonAction
      * @param panelState new panelState
      * @param currentState the current panelState
      * @param canPause of type ICanPause, interface with methods used for pause/resume

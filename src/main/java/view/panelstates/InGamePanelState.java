@@ -42,7 +42,7 @@ public class InGamePanelState implements IPanelState {
         keyListeners = new ArrayList<>();
         keyListeners.add(new PlayerController(game.getPlayer()));
         keyListeners.add(new WeaponController(game));
-        keyListeners.add(new KeyClickedController(game, this));
+        keyListeners.add(new InGameEventController(game, this));
         hud = new HUD(game.getPlayer());
         camera = Camera.getInstance();
         camera.setFocusedObject(game.getPlayer());
