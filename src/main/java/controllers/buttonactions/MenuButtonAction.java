@@ -6,6 +6,7 @@ import view.panelstates.IPanelState;
 /**
  * MenuButtonAction is used by the buttons in the menu. When a button in the menu is pressed,
  * the panelState is changed.
+ * @Author Kasper Ljunggren
  */
 public class MenuButtonAction implements IButtonAction{
     private EPanelState panelState;
