@@ -165,5 +165,17 @@ public class GameTest {
         assertTrue(pos != game.getPlayer().getPosX() && game.isPlayerDead());
     }
 
+    @Test
+    void test_boss_spawned_methods(){
+        boolean shouldBeFalse = game.getBossSpawnedFlag();
+        game.update(1000);
+        game.resetBossSpawnFlag();
+        boolean shouldAlsoBeFalse = game.getBossSpawnedFlag();
+        assertFalse(shouldBeFalse || shouldAlsoBeFalse);
+    }
 
+    @Test
+    void try_subscribing(){
+        //TODO
+    }
 }
