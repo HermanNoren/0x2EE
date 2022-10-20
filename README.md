@@ -4,6 +4,12 @@ A game inspired by the popular survival shooter BoxHead.
 0x2EE has been developed by group 1 for TDA367, a course in
 object-oriented programming project.
 ____
+
+REQUIREMENTS
+======
+* Working maven, latest version (3.8.6)
+* Java JDK version 16 or over
+
 How to start from terminal
 ======
 1. Clone repo to your computer
