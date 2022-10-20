@@ -5,6 +5,12 @@ import model.gameobjects.Player;
 
 import java.awt.*;
 
+/**
+ * This class is responsible for updating the HUD throughout the game.
+ * It draws the player's health, money & score on the screen.
+ *
+ */
+
 public class HUD {
 
     private Player player;
@@ -19,17 +25,7 @@ public class HUD {
 
     }
 
-    /**
-     * Updates the HUD of the game (Player health, score & money)
-     * @param g2
-     */
-   public void update(Graphics2D g2){
-        g2.setColor(Color.black);
-        g2.setFont(Config.IN_GAME_TEXT_FONT);
-        g2.drawString("" + player.getScore(), Config.SCREEN_WIDTH/2, 32);
-        g2.drawImage(ImageHandler.getImage("imgs/coin/0.png"), Config.SCREEN_WIDTH - 150, Config.SCREEN_HEIGHT-80, 30, 30, null);
-        g2.setColor(goldColor);
-        g2.drawString("" + player.getMoney(),Config.SCREEN_WIDTH - 100, Config.SCREEN_HEIGHT-55);
+    private void drawHealthAndManaBar(Graphics2D g2) {
         g2.setColor(Color.red);
         g2.fillRoundRect(20, Config.SCREEN_HEIGHT - 100, 200, 20, 0, 0);
         g2.setColor(Color.green);
@@ -44,5 +40,18 @@ public class HUD {
         g2.setColor(Color.black);
         g2.drawRoundRect(20, Config.SCREEN_HEIGHT - 70, 200, 20, 0, 0);
     }
+
+
+   public void update(Graphics2D g2){
+        g2.setColor(Color.black);
+        g2.setFont(Config.IN_GAME_TEXT_FONT);
+        g2.drawString("" + player.getScore(), Config.SCREEN_WIDTH/2, 32);
+        g2.drawImage(ImageHandler.getImage("imgs/coin/0.png"), Config.SCREEN_WIDTH - 170, Config.SCREEN_HEIGHT-80, 30, 30, null);
+        g2.setColor(goldColor);
+        g2.drawString("" + player.getMoney(),Config.SCREEN_WIDTH - 120, Config.SCREEN_HEIGHT-55);
+        drawHealthAndManaBar(g2);
+
+    }
+
 
 }

@@ -10,6 +10,9 @@ import model.Vector2;
  * object being drawn should take into consideration if they have positions relative to the camera. The camera also
  * provides the ability to zoom in and out by using a zoom multiplier that objects relative to the camera also should take
  * into consideration when being drawn.
+ * @author Herman Norén
+ * @responsibility Provides an offset and size information that objects that are being drawn should use to be
+ * drawn in the correct position.
  */
 public final class Camera{
 

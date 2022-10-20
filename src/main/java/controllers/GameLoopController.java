@@ -9,6 +9,12 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class holds the main game loop.
+ * @author Herman Norén
+ * @responsibility This class is responsible for updating the model and notifying potential observers at given
+ * updates per second.
+ */
 public class GameLoopController implements ActionListener {
 
     private final int UPS; // UpdatesPerSecond
@@ -31,7 +37,7 @@ public class GameLoopController implements ActionListener {
 
     /**
      * Add an observer.
-     * @param observer observer
+     * @param observer observer to be notified each game tick
      */
     public void addObserver(IObserver observer) {
         gameObservers.add(observer);

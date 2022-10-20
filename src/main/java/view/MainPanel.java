@@ -11,11 +11,19 @@ import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * @author Herman Norén
+ * @responsibility This class is the main panel that everything is drawn upon.
+ */
 public class MainPanel extends JPanel implements IObserver, IChangeableStatePanel {
 
     private final IGame game;
     private IPanelState state;
 
+    /**
+     * Instantiates a MainPanel
+     * @param game main model object
+     */
     public MainPanel(IGame game) {
         this.game = game;
         state = PanelStateFactory.createPanelState(EPanelState.MAINMENU, this, game);
@@ -46,7 +54,10 @@ public class MainPanel extends JPanel implements IObserver, IChangeableStatePane
         state.draw(g2);
     }
 
-
+    /**
+     * {@inheritDoc}
+     * @param {@inheritDoc}
+     */
     @Override
     public void changePanelState(EPanelState state) {
         this.state = PanelStateFactory.createPanelState(state, this, game);
@@ -62,6 +73,9 @@ public class MainPanel extends JPanel implements IObserver, IChangeableStatePane
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void update() {
         repaint();

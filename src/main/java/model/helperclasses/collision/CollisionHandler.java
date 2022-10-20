@@ -8,6 +8,13 @@ import model.mapclasses.Tile;
 
 import java.util.*;
 
+/**
+ * This class is used for testing different collision conditions in the game. More specific it gives the possibility
+ * to test generic collision, test which specific tiles an object collides with and test in which direction a
+ * object collides with another object.
+ * @author Herman Norén
+ * @responsibility Testing different collision conditions.
+ */
 public class CollisionHandler {
     /**
      * Method for calculating if a game object is colliding with another game object
@@ -41,10 +48,10 @@ public class CollisionHandler {
         int down = (int) (objectPos.getY() / Config.TILE_SIZE + 2);
 
         if (left < 0) {
-            left = 0; // Unreachable
+            left = 0; // Unreachable given the map has a border with size TILE_SIZE
         }
         if (up < 0) {
-            up = 0; // Unreachable
+            up = 0; // Unreachable given the map has a border with size TILE_SIZE
         }
 
         for (int row = left; row < right && row < tile.length; row++) {
