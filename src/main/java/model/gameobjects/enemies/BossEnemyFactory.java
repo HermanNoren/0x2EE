@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Creates and returns an BossEnemy.
+ * @author Arthur Alexandersson
  */
 public class BossEnemyFactory extends EnemyFactory{
     @Override

@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Tile is a mathematical representation of Node.
+ * Tile is used within the gameMap to create either unpassable or passable Tiles
+ * which the Player and enemy moves on. And where items spawns on.
+ * @author Arthur Alexandersson
  */
 public class Tile implements IGameObject, ITile, Comparable<Tile> {
     private final int size = Config.TILE_SIZE;

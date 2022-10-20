@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 /**
  * Used for setting a random position for an enemy.
+ * @author Arthur Alexandersson
  */
 public class EnemySpawner{
     private final List<Tile> spawnableLocations;

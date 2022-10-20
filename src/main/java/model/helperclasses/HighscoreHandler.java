@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 /**
  * Manages the highscore file, by fetching, writing and saving data from the game.
+ * @author Rickard Leksell
  */
 public class HighscoreHandler {
 
