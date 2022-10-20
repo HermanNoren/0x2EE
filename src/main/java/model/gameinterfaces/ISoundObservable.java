@@ -1,6 +1,6 @@
 package model.gameinterfaces;
 
-import model.ISoundObserver;
+import sound.ISoundObserver;
 
 public interface ISoundObservable {
 

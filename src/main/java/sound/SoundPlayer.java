@@ -1,7 +1,6 @@
 package sound;
 
 import model.EGameEvents;
-import model.ISoundObserver;
 
 import java.util.HashMap;
 import java.util.Map;

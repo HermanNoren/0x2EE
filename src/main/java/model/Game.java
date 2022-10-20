@@ -16,6 +16,7 @@ import model.helperclasses.HighscoreHandler;
 import model.helperclasses.collision.ECollisionAxis;
 import model.mapclasses.GameMap;
 import model.mapclasses.Tile;
+import sound.ISoundObserver;
 
 import java.util.*;
 
