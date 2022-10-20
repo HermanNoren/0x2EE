@@ -42,6 +42,7 @@ public class Game implements IGame {
 
     private final int mapSize;
     private EnemyFactory enemyFactory;
+    private int spawnCounter = 1;
 
     public Game() {
         mapSize = 25;
@@ -52,18 +53,18 @@ public class Game implements IGame {
 
     @Override
     public void newGameRound() {
+        this.spawnCounter = 1;
         this.gameMap = new GameMap(Config.MAP_WIDTH, Config.MAP_HEIGHT, true);
         this.player = new Player(500, 500, gameMap.getGameMapCoordinates());
-        shop = new Shop(100, 100);
+        this.shop = new Shop(100, 100);
         this.transactionHandler = new TransactionHandler(this.getPlayer());
-        enemies = new ArrayList<>();
-        projectiles = new ArrayList<>();
-        highscoreName = new ArrayList<>();
-        playerDead = false;
-        spawner = new Spawner(gameMap.getPassableTiles(),this);
-        paused = false;
+        this.enemies = new ArrayList<>();
+        this.projectiles = new ArrayList<>();
+        this.highscoreName = new ArrayList<>();
+        this.playerDead = false;
+        this.spawner = new Spawner(gameMap.getPassableTiles(),this);
+        this.paused = false;
     }
-
     /**
      * {@inheritDoc}
      * @return {@inheritDoc}
@@ -78,6 +79,7 @@ public class Game implements IGame {
      */
     @Override
     public int getMapSize() { return mapSize; }
+
     /**
      * {@inheritDoc}
      * @return {@inheritDoc}
@@ -115,7 +117,6 @@ public class Game implements IGame {
     public void updateHighscoreList() {
         highscoreHandler.saveHighscore(String.join("", highscoreName), player.getScore());
     }
-
     /**
      *{@inheritDoc}
      */
@@ -125,6 +126,7 @@ public class Game implements IGame {
             highscoreName.remove(highscoreName.size() - 1);
         }
     }
+
     /**
      *{@inheritDoc}
      */
@@ -237,9 +239,7 @@ public class Game implements IGame {
                 projectiles.remove(p);
                 break;
             }
-
         }
-
     }
 
 
@@ -308,7 +308,6 @@ public class Game implements IGame {
             }
         }
     }
-
     /**
      * Checks for collisions with terrain and corrects position if collision occurs
      * @param axis tells the method which axis to consider
@@ -335,6 +334,7 @@ public class Game implements IGame {
             }
         }
     }
+
     /**
      * {@inheritDoc}
      * @return {@inheritDoc}
@@ -361,7 +361,6 @@ public class Game implements IGame {
     public Shop getShop() {
         return shop;
     }
-
     /**
      * {@inheritDoc}
      * @return {@inheritDoc}
@@ -370,15 +369,14 @@ public class Game implements IGame {
     public TransactionHandler getShopTransaction(){
         return transactionHandler;
     }
-
     /**
-     * @param counter adds Enemy to enemies.
+     *
      */
     @Override
-    public void spawnEnemy(int counter){
+    public void spawnEnemy(){
         int damage;
         int killReward;
-        if((counter % 5) == 0 && counter != 0){
+        if((spawnCounter % 5) == 0 && spawnCounter != 0){
             killReward = 500;
             damage = 5;
             enemyFactory = new BossEnemyFactory();
@@ -387,6 +385,7 @@ public class Game implements IGame {
             killReward = 100;
             enemyFactory = new NormalEnemyFactory();
         }
+        spawnCounter++;
         enemies.add(enemyFactory.createEnemy(player, damage, killReward, gameMap.getPassableTiles(), gameMap.getGameMapCoordinates()));
     }
 

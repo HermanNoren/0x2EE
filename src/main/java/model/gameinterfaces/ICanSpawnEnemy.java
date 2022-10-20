@@ -8,5 +8,5 @@ public interface ICanSpawnEnemy {
      * used to determine how often said enemy will be spawned.
      * @param counter How often an enemy will be spawned, used with modulo.
      */
-    void spawnEnemy(int counter);
+    void spawnEnemy();
 }

@@ -36,8 +36,8 @@ public class SpawnerTest {
 
     @Test
     void test_that_an_item_spawned_on_average_position_is_reachable(){
-        game.spawnEnemy(1);
-        game.spawnEnemy(1);
+        game.spawnEnemy();
+        game.spawnEnemy();
         spawner.spawnItem();
         for (int i = 0; i < 100; i++){
             spawner.spawnItem();
