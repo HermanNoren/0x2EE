@@ -178,14 +178,14 @@ public class PlayerTest {
 
     @Test
     void test_getMoney_returns_current_amount_of_money_player_possesses(){
-        //Player starts with 1000 money
-        assertEquals(1000, player.getMoney());
+        //Player starts with 10 money
+        assertEquals(10, player.getMoney());
     }
     @Test
     void test_addMoney_increments_money_with_amount(){
         //Player starts with 1000 money
         player.addMoney(10);
-        assertEquals(1010, player.getMoney());
+        assertEquals(20, player.getMoney());
     }
     @Test
     void test_getScore_returns_player_current_score(){
