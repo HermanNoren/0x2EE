@@ -154,7 +154,6 @@ public final class Camera{
                 Math.abs(topBorderLimit - bottomBorderLimit) < height) {
             return;
         }
-
         borderLimited = true;
         this.leftBorderLimit = leftBorderLimit;
         this.rightBorderLimit = rightBorderLimit;

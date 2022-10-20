@@ -1,6 +1,5 @@
 package view.drawers;
 
-import controllers.sound.SoundEffect;
 import model.gameinterfaces.IHasProjectiles;
 import model.gameobjects.Projectile;
 import model.gameobjects.EDirection;
