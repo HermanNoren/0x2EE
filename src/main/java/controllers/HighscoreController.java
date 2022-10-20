@@ -10,9 +10,6 @@ public class HighscoreController implements KeyListener {
 
     private IHasHighscore game;
 
-    private boolean enterKeyDown;
-
-
     public HighscoreController(IHasHighscore game) {
         this.game = game;
     }
@@ -24,23 +21,21 @@ public class HighscoreController implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        int code = e.getKeyCode();
+        switch (code) {
+            case (KeyEvent.VK_BACK_SPACE) -> {
+                game.deleteLetter();
+            }
+            default -> {
+                // Only accept letters and numbers
+                if ((code >= 65 && code <= 90) || (code >= 48 && code <= 57)) {
+                    game.updateName(String.valueOf(e.getKeyChar()).toUpperCase());
+                }
+            }
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        int code = e.getKeyCode();
-        switch (code){
-            case (KeyEvent.VK_BACK_SPACE) ->{
-                 game.deleteLetter();
-            }
-            default -> {
-                // Only accept letters and numbers
-                if ((code >= 65 && code <= 90) || (code >= 48 && code <=57)) {
-                    game.updateName(String.valueOf(e.getKeyChar()).toUpperCase());
-                }
-            }
-
-        }
-
     }
 }
