@@ -48,8 +48,9 @@ public class Spawner{
     private Vector2 getRandomPassableLocation(List<Tile> locations){
         int nrPossibleSpawnLocations = locations.size();
         Tile randomSpawnableTile = locations.get(rand.nextInt(nrPossibleSpawnLocations-1));
-        double posX = randomSpawnableTile.getPos().getX();
-        double posY = randomSpawnableTile.getPos().getY();
+        Vector2 pos = randomSpawnableTile.getPos();
+        double posX = pos.getX();
+        double posY = pos.getY();
         return new Vector2(posX, posY);
     }
 

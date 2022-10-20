@@ -28,10 +28,10 @@ public class ProjectileDrawer implements IImageIteratorDrawer{
         imgsTypes = new ArrayList<>();
         imgsTypes.add("bullet");
         directions = new ArrayList<>();
-        directions.add(EDirection.up);
-        directions.add(EDirection.left);
-        directions.add(EDirection.down);
-        directions.add(EDirection.right);
+        directions.add(EDirection.UP);
+        directions.add(EDirection.LEFT);
+        directions.add(EDirection.DOWN);
+        directions.add(EDirection.RIGHT);
 
         initImgs();
     }

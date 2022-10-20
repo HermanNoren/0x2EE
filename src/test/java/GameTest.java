@@ -10,7 +10,6 @@ import model.helperclasses.HighscoreHandler;
 import model.helperclasses.TransactionHandler;
 import model.Vector2;
 import model.mapclasses.GameMap;
-import model.mapclasses.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -83,7 +82,7 @@ public class GameTest {
 
     @Test
     void test_if_game_has_projectiles(){
-        game.addProjectile(new Projectile(new Vector2(1,1), EDirection.up));
+        game.addProjectile(new Projectile(new Vector2(1,1), EDirection.UP));
         List<Projectile> projectiles = game.getProjectiles();
         assertEquals(1, projectiles.size());
     }
@@ -151,15 +150,15 @@ public class GameTest {
         game.getPlayer().setPosX(5);
         game.getPlayer().setPosY(5);
         double pos = game.getPlayer().getPosX();
-        game.getPlayer().setDirection(EDirection.right);
+        game.getPlayer().setDirection(EDirection.RIGHT);
         game.makePlayerShoot();
-        game.getPlayer().setDirection(EDirection.down);
+        game.getPlayer().setDirection(EDirection.DOWN);
         game.makePlayerShoot();
-        game.getPlayer().setDirection(EDirection.left);
+        game.getPlayer().setDirection(EDirection.LEFT);
         game.makePlayerShoot();
-        game.getPlayer().setDirection(EDirection.up);
+        game.getPlayer().setDirection(EDirection.UP);
         game.makePlayerShoot();
-        game.getPlayer().setDirection(EDirection.right);
+        game.getPlayer().setDirection(EDirection.RIGHT);
         game.update(40);
         game.getPlayer().setHealth(0);
         game.update(0);

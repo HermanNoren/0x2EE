@@ -30,13 +30,13 @@ public class Player extends Entity implements IPlayer, IFocusableObject, IHasUpg
         setHealth(1000);
         moveAcc = 0.3;
         score = 0;
-        money = 1000;
+        money = 10;
     }
 
     public void shoot(IHasProjectiles addable) {
         EDirection dir;
 
-        if (getDirection() == EDirection.not_moving) {
+        if (getDirection() == EDirection.NOT_MOVING) {
             dir = getLastDirection();
         }
 
@@ -67,10 +67,10 @@ public class Player extends Entity implements IPlayer, IFocusableObject, IHasUpg
     @Override
     public void moveX(double dt) {
         setAccX(0);
-        if (getDirection() == EDirection.right) {
+        if (getDirection() == EDirection.RIGHT) {
             setAccX(moveAcc);
         }
-        if (getDirection() == EDirection.left) {
+        if (getDirection() == EDirection.LEFT) {
             setAccX(-moveAcc);
         }
 
@@ -84,11 +84,11 @@ public class Player extends Entity implements IPlayer, IFocusableObject, IHasUpg
     public void moveY(double dt) {
         setAccY(0);
 
-        if (getDirection() == EDirection.down) {
+        if (getDirection() == EDirection.DOWN) {
             setAccY(moveAcc);
         }
 
-        if (getDirection() == EDirection.up) {
+        if (getDirection() == EDirection.UP) {
             setAccY(-moveAcc);
         }
 

@@ -29,8 +29,8 @@ public abstract class Entity implements IGameObject {
      */
     protected Entity(int x, int y, Tile[][] coordinates){
         this.coordinates = coordinates;
-        this.direction = EDirection.not_moving; // Default value
-        this.lastDirection = EDirection.down;
+        this.direction = EDirection.NOT_MOVING; // Default value
+        this.lastDirection = EDirection.DOWN;
         this.pos = new Vector2(x, y);
         this.acc = new Vector2(0, 0);
         this.vel = new Vector2(0,0);

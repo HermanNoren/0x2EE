@@ -184,7 +184,7 @@ public class Game implements IGame {
      */
     @Override
     public void pause() {
-        player.setDirection(EDirection.not_moving);
+        player.setDirection(EDirection.NOT_MOVING);
         paused = true;
     }
 

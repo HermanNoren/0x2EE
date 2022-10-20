@@ -17,7 +17,7 @@ public class InteractShopTextDrawer implements IDrawer{
      * Work around in DrawerHelper which seems unnecessary for this project, although it
      * would be good in a larger OOP project.
      */
-    public static int passableValue;
+    public int passableValue;
     private final Vector2 shopPosition;
     private final int shopWidth;
     private final Shop shop;

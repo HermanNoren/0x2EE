@@ -149,28 +149,28 @@ public class PlayerTest {
 
     @Test
     void test_if_player_x_pos_is_increased_when_moveX_is_called_and_direction_equals_right(){
-        player.setDirection(EDirection.right);
+        player.setDirection(EDirection.RIGHT);
         double prevPosX = player.getPosX();
         player.moveX(1);
         assertEquals(prevPosX + 0.5, player.getPosY(), 0.5);
     }
     @Test
     void test_if_player_x_pos_is_decreased_when_moveX_is_called_and_direction_equals_left(){
-        player.setDirection(EDirection.left);
+        player.setDirection(EDirection.LEFT);
         double prevPosX = player.getPosX();
         player.moveX(1);
         assertEquals(prevPosX - 0.5, player.getPosX(), 0.5);
     }
     @Test
     void test_if_player_y_pos_is_increased_when_moveY_is_called_and_direction_equals_down(){
-        player.setDirection(EDirection.down);
+        player.setDirection(EDirection.DOWN);
         double prevPosY = player.getPosY();
         player.moveY(1);
         assertEquals(prevPosY + 0.5, player.getPosY(), 0.5);
     }
     @Test
     void test_if_player_Y_pos_is_decreased_when_moveY_is_called_and_direction_equals_up(){
-        player.setDirection(EDirection.up);
+        player.setDirection(EDirection.UP);
         double prevPosY = player.getPosY();
         player.moveY(1);
         assertEquals(prevPosY - 0.5, player.getPosY(), 0.5);
@@ -208,7 +208,7 @@ public class PlayerTest {
     @Test
     void test_shoot_gets_current_direction_if_direction_does_not_equal_not_moving(){
         Game game = new Game();
-        game.getPlayer().setDirection(EDirection.up);
+        game.getPlayer().setDirection(EDirection.UP);
         List<Projectile> projectiles = new ArrayList<>();
         game.getPlayer().shoot(game);
     }

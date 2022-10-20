@@ -1,7 +1,6 @@
 package main;
 
 import controllers.GameLoopController;
-import controllers.SpawnTimerController;
 import model.Game;
 import model.gameinterfaces.IGame;
 import view.MainPanel;

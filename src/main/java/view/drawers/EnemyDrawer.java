@@ -29,10 +29,10 @@ public class EnemyDrawer implements IImageIteratorDrawer {
         imgTypes.add("normal");
         imgTypes.add("boss");
         directions = new ArrayList<>();
-        directions.add(EDirection.up);
-        directions.add(EDirection.left);
-        directions.add(EDirection.down);
-        directions.add(EDirection.right);
+        directions.add(EDirection.UP);
+        directions.add(EDirection.LEFT);
+        directions.add(EDirection.DOWN);
+        directions.add(EDirection.RIGHT);
         initImages();
     }
 
@@ -55,7 +55,7 @@ public class EnemyDrawer implements IImageIteratorDrawer {
                 g2.setColor(Color.black);
                 g2.drawRoundRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / (enemy).getMaxHp()))), 4, 0,0);
             }
-            if(enemy.getDirection() == EDirection.not_moving){
+            if(enemy.getDirection() == EDirection.NOT_MOVING){
                 img = imgs.get(enemy.getLastDirection()).get(enemy.getType() + 1);
             }
             else{

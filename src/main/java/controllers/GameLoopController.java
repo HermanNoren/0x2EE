@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class GameLoopController implements ActionListener {
 
-    private final int UPS; // UpdatesPerSecond
+    private final int ups; // UpdatesPerSecond
     private final Timer timer;
     private final IGame game;
     private final List<IObserver> gameObservers;
@@ -29,9 +29,9 @@ public class GameLoopController implements ActionListener {
      *                         potential observers per second.
      */
     public GameLoopController(IGame game, int updatesPerSecond) {
-        UPS = updatesPerSecond;
+        ups = updatesPerSecond;
         this.game = game;
-        timer = new Timer(1000 / UPS, this);
+        timer = new Timer(1000 / ups, this);
         gameObservers = new ArrayList<>();
     }
 
@@ -60,7 +60,7 @@ public class GameLoopController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!game.isPaused()) {
-            game.update(100.0 / UPS);
+            game.update(100.0 / ups);
         }
 
         for (IObserver observer : gameObservers) {

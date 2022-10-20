@@ -28,10 +28,10 @@ public class PlayerDrawer implements IImageIteratorDrawer {
         imgs = new HashMap<>();
         imgTypes.add("player");
         directions = new ArrayList<>();
-        directions.add(EDirection.right);
-        directions.add(EDirection.up);
-        directions.add(EDirection.left);
-        directions.add(EDirection.down);
+        directions.add(EDirection.RIGHT);
+        directions.add(EDirection.UP);
+        directions.add(EDirection.LEFT);
+        directions.add(EDirection.DOWN);
         initPlayerImages();
     }
 
@@ -51,7 +51,7 @@ public class PlayerDrawer implements IImageIteratorDrawer {
     public void draw(Graphics2D g) {
         BufferedImage img;
         List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(player.getPos(), player.getWidth(), player.getWidth());
-        if (player.getDirection() == EDirection.not_moving){
+        if (player.getDirection() == EDirection.NOT_MOVING){
             img = imgs.get(player.getLastDirection()).get("player"+1);
         }
         else {

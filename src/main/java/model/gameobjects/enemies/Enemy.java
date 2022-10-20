@@ -41,19 +41,19 @@ public abstract class Enemy extends Entity implements IEnemy {
             double nextX = nextPos.getX();
             double nextY = nextPos.getY();
             if (currentX < nextX) {
-                setDirection(EDirection.right);
+                setDirection(EDirection.RIGHT);
                 setPosX(getPosX() + movementSpeed * dt);
 
             }else if (currentX > nextX) {
-                setDirection(EDirection.left);
+                setDirection(EDirection.LEFT);
                 setPosX(getPosX() - movementSpeed * dt);
 
             }else if (currentY < nextY) {
-                setDirection(EDirection.down);
+                setDirection(EDirection.DOWN);
                 setPosY(getPosY() + movementSpeed * dt);
 
             }else if (currentY > nextY) {
-                setDirection(EDirection.up);
+                setDirection(EDirection.UP);
                 setPosY(getPosY() - movementSpeed * dt);
 
             }

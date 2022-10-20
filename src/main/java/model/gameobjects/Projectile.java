@@ -24,10 +24,10 @@ public class Projectile implements IGameObject, IProjectile {
         this.pos = pos;
         vel = new Vector2(0, 0);
         switch (direction) {
-            case right -> vel.setX(10);
-            case left -> vel.setX(-10);
-            case up -> vel.setY(-10);
-            case down -> vel.setY(10);
+            case RIGHT -> vel.setX(10);
+            case LEFT -> vel.setX(-10);
+            case UP -> vel.setY(-10);
+            case DOWN -> vel.setY(10);
         }
         this.direction = direction;
     }

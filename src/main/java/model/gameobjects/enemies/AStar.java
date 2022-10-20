@@ -56,18 +56,6 @@ public class AStar {
                         openList.add(m);
 
                     }
-                    //                else {
-                    //                    if(totalWeight < m.getG() && m.isPassable()){
-                    //                        m.setParent(n);
-                    //                        m.setG(totalWeight);
-                    //                        m.setF(m.getG() + calculateHeuristic(m, target));
-                    //
-                    //                        if(closedList.contains(m)){
-                    //                            closedList.remove(m);
-                    //                            openList.add(m);
-                    //                        }
-                    //                    }
-                    //                }
                 }
 
                 openList.remove(n);
