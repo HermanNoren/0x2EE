@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * Vector
+ * @author Herman Norén
+ */
 public class Vector2 {
     private double x;
     private double y;
