@@ -7,7 +7,7 @@ import java.awt.*;
 
 /**
  * This class is responsible for updating the HUD throughout the game.
- * It draws the player's health, money & score on the screen.
+ * It draws the player's health, money and score on the screen.
  * @author Rickard Leksell
  */
 
