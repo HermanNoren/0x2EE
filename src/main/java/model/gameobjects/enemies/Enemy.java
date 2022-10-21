@@ -12,13 +12,13 @@ import model.gameobjects.Entity;
  * @author Arthur Alexandersson, Gustav Gille, Kasper Ljunggren
  */
 public abstract class Enemy extends Entity implements IEnemy, IFocusableObject {
-    private double movementSpeed;
+    private final double movementSpeed;
     private final Entity targetEntity;
-    private int killreward;
-    private int damage;
+    private final int killReward;
+    private final int damage;
     protected Enemy(int x, int y, int damage, int killReward, Tile[][] coordinates, Entity targetEntity){
         super(x, y, coordinates);
-        this.killreward = killReward;
+        this.killReward = killReward;
         this.damage = damage;
         this.targetEntity = targetEntity;
         this.movementSpeed = 1.5;
@@ -73,7 +73,7 @@ public abstract class Enemy extends Entity implements IEnemy, IFocusableObject {
 
     @Override
     public int getKillReward() {
-        return killreward;
+        return killReward;
     }
 
     @Override

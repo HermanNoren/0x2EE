@@ -12,6 +12,8 @@ import model.Vector2;
 import model.mapclasses.GameMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import sound.ISoundObserver;
+import sound.SoundPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -175,7 +177,19 @@ public class GameTest {
     }
 
     @Test
-    void try_subscribing(){
-        //TODO
+    void adding_a_subscription_to_the_observer_should_result_in_the_list_becoming_one_in_size(){
+        ISoundObserver iSound = new SoundPlayer();
+        game.subscribeToSoundEvent(iSound);
+        int length = 1;
+        assertEquals(length, game.getSubscribedToSoundEvent().size());
+    }
+    @Test
+    void adding_two_subscriptions_to_the_observer_should_result_in_the_list_becoming_two_in_size(){
+        ISoundObserver iSound = new SoundPlayer();
+        ISoundObserver iSound2 = new SoundPlayer();
+        game.subscribeToSoundEvent(iSound);
+        game.subscribeToSoundEvent(iSound2);
+        int length = 2;
+        assertEquals(length, game.getSubscribedToSoundEvent().size());
     }
 }

@@ -18,7 +18,7 @@ public class Program {
      */
     public static void main(String[] args){
         IGame game = new Game();
-        game.subscribe(new SoundPlayer());
+        game.subscribeToSoundEvent(new SoundPlayer());
         MainPanel mainPanel = new MainPanel(game);
         Window window = new Window(mainPanel);
         GameLoopController loopController = new GameLoopController(game, 120);

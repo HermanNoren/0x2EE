@@ -428,7 +428,7 @@ public class Game implements IGame {
      * @param observer Object that should be notified by game
      */
     @Override
-    public void subscribe(ISoundObserver observer) {
+    public void subscribeToSoundEvent(ISoundObserver observer) {
         soundObservers.add(observer);
     }
 
@@ -436,6 +436,9 @@ public class Game implements IGame {
         for (ISoundObserver observer : soundObservers) {
             observer.notifySoundEvent(event);
         }
+    }
+    public List<ISoundObserver> getSubscribedToSoundEvent(){
+        return new ArrayList<>(soundObservers);
     }
 
     /**
