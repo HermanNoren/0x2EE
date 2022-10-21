@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ISoundObservable {
 
-    void subscribeToSoundEvent(ISoundObserver observer);
-    List<ISoundObserver> getSubscribedToSoundEvent();
+    void subscribe(ISoundObserver observer);
+    List<ISoundObserver> getSubscribedSoundObservevrs();
 
 }

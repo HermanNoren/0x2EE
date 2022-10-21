@@ -179,17 +179,17 @@ public class GameTest {
     @Test
     void adding_a_subscription_to_the_observer_should_result_in_the_list_becoming_one_in_size(){
         ISoundObserver iSound = new SoundPlayer();
-        game.subscribeToSoundEvent(iSound);
+        game.subscribe(iSound);
         int length = 1;
-        assertEquals(length, game.getSubscribedToSoundEvent().size());
+        assertEquals(length, game.getSubscribedSoundObservevrs().size());
     }
     @Test
     void adding_two_subscriptions_to_the_observer_should_result_in_the_list_becoming_two_in_size(){
         ISoundObserver iSound = new SoundPlayer();
         ISoundObserver iSound2 = new SoundPlayer();
-        game.subscribeToSoundEvent(iSound);
-        game.subscribeToSoundEvent(iSound2);
+        game.subscribe(iSound);
+        game.subscribe(iSound2);
         int length = 2;
-        assertEquals(length, game.getSubscribedToSoundEvent().size());
+        assertEquals(length, game.getSubscribedSoundObservevrs().size());
     }
 }
