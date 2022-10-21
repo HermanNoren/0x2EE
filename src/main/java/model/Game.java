@@ -187,6 +187,7 @@ public class Game implements IGame {
      */
     @Override
     public void makePlayerShoot() {
+        if (paused) { return; }
         player.shoot(this);
         notifySoundObservers(EGameEvents.PLAYER_SHOOT);
     }
