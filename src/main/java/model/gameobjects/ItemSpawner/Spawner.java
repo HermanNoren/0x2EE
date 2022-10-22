@@ -46,6 +46,12 @@ public class Spawner{
         return sum / list.size();
     }
 
+
+    /**
+     * Returns a random location that is passable
+     * @param locations list of passable tiles
+     * @return random possable location
+     */
     private Vector2 getRandomPassableLocation(List<Tile> locations){
         int nrPossibleSpawnLocations = locations.size();
         Tile randomSpawnableTile = locations.get(rand.nextInt(nrPossibleSpawnLocations-1));
@@ -55,6 +61,13 @@ public class Spawner{
         return new Vector2(posX, posY);
     }
 
+
+    /**
+     * Matches a position with a nearby passable location
+     * @param x x-coordinate
+     * @param y y-coordinate
+     * @return a passable location
+     */
     private Vector2 getClosestLocation(double x, double y) {
         double tileX, tileY;
         double difference = 1000000;
