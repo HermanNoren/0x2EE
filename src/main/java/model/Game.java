@@ -270,10 +270,9 @@ public class Game implements IGame {
     /**
      * Call method to see if the player is on the shop.
      */
-    private void isPlayerOnShop() {
-        shop.playerOnShop = CollisionHandler.testCollision(player, shop);
+    public boolean isPlayerOnShop() {
+        return CollisionHandler.testCollision(player, shop);
     }
-
     /**
      * Updates player position and checks for collisions with terrain
      * @param dt time passed since last update
@@ -442,12 +441,12 @@ public class Game implements IGame {
         return new ArrayList<>(soundObservers);
     }
 
-    /**
-     * {@inheritDoc}
-     * @return {@inheritDoc}
-     */
-    @Override
-    public boolean playerOnShop() {
-        return shop.playerOnShop;
-    }
+//    /**
+//     * {@inheritDoc}
+//     * @return {@inheritDoc}
+//     */
+//    @Override
+//    public boolean playerOnShop() {
+//        return shop.playerOnShop;
+//    }
 }

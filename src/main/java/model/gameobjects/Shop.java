@@ -25,14 +25,12 @@ public final class Shop implements IGameObject {
      * as wide and long as it is represented by two pictures in both x and y directions.
      * However, the Config.SPRITE_SIZE * 3 is done to scale the program properly.
      */
-    public final static int WIDTH = Config.TILE_SIZE * 2;
-    public final static int HEIGHT = WIDTH;
+    private final static int WIDTH = Config.TILE_SIZE * 2;
+    private final static int HEIGHT = WIDTH;
 
     /**
      * A boolean used to see if the player is on the store, used by textDrawer
      */
-
-    public boolean playerOnShop = false;
 
 
     public  Shop(int xPosition, int yPosition){

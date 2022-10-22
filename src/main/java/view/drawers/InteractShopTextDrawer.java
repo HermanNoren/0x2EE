@@ -1,5 +1,6 @@
 package view.drawers;
 
+import model.gameinterfaces.IHasShop;
 import model.gameobjects.Shop;
 import config.Config;
 import model.Vector2;
@@ -18,19 +19,19 @@ public class InteractShopTextDrawer implements IDrawer{
      * Work around in DrawerHelper which seems unnecessary for this project, although it
      * would be good in a larger OOP project.
      */
-    public int passableValue;
+    private static int passableValue;
     private final Vector2 shopPosition;
     private final int shopWidth;
-    private final Shop shop;
+    private final IHasShop shop;
     /**
      * String used to determine the text above the shop.
      */
-    String popUpText = "Enter to shop";
+    private String popUpText = "Enter to shop";
 
-    public InteractShopTextDrawer(Shop shop){
-        this.shopPosition = shop.getPos();
-        this.shopWidth = shop.getWidth();
+    public InteractShopTextDrawer(IHasShop shop){
         this.shop = shop;
+        this.shopPosition = shop.getShop().getPos();
+        this.shopWidth = shop.getShop().getWidth();
     }
 
     /**
@@ -43,7 +44,7 @@ public class InteractShopTextDrawer implements IDrawer{
     public void draw(Graphics2D g2) {
         g2.setColor(Color.white);
         g2.setFont(Config.BUTTON_FONT);
-        if(shop.playerOnShop){
+        if(shop.isPlayerOnShop()){
             List<Integer> drawInformation = DrawerHelper.calculateDrawingInformation(shopPosition, passableValue, passableValue);
             int heightOffset = -10;
             g2.drawString(popUpText, drawInformation.get(0) - (g2.getFontMetrics().stringWidth(popUpText)/2) + shopWidth/2, drawInformation.get(1) + heightOffset);

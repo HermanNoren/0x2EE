@@ -70,7 +70,7 @@ public class InGamePanelState implements IPanelState {
         drawers.add(playerDrawer);
         drawers.add(enemyDrawer);
         drawers.add(itemDrawer);
-        drawers.add(new InteractShopTextDrawer(game.getShop()));
+        drawers.add(new InteractShopTextDrawer(game));
 
         characterImageSwitcherController = new ImageSwitcherController(200);
 

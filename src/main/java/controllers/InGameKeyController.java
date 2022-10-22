@@ -47,7 +47,7 @@ public class InGameKeyController implements KeyListener {
             case (KeyEvent.VK_ENTER) -> {
                 if (!enterKeyDown) {
                     enterKeyDown = true;
-                    if (game.playerOnShop()){
+                    if (game.isPlayerOnShop()){
                         panel.changePanelState(EPanelState.SHOP);
                         game.pause();
                     }
