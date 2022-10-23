@@ -17,7 +17,6 @@ import java.util.Map;
  */
 public class PlayerDrawer implements IImageIteratorDrawer {
     private Player player;
-
     private Map<EDirection, Map<String, BufferedImage>> imgs;
     private List<String> imgTypes;
     private List<EDirection> directions;

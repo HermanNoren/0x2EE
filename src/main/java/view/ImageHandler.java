@@ -34,7 +34,6 @@ public class ImageHandler {
      * @param imgTypes strings
      * @return Map with certain strings as keys, and images as values
      */
-
     public static Map<String, BufferedImage> getImgs(int nrImgs, List<String> imgTypes) {
         Map<String, BufferedImage> imgs = new HashMap<>();
         for (String imgType : imgTypes) {
@@ -45,6 +44,12 @@ public class ImageHandler {
         return imgs;
     }
 
+    /**
+     * @param nrImgs total images
+     * @param imgTypes type of image
+     * @param directions direction, up, down, left, right.
+     * @return a Map containing a map.
+     */
     public static Map<EDirection, Map<String, BufferedImage>> getImgsWithDirections(int nrImgs, List<String> imgTypes, List<EDirection> directions) {
         Map<EDirection, Map<String, BufferedImage>> retMap = new HashMap<>();
         for (EDirection direction: directions){
@@ -57,7 +62,7 @@ public class ImageHandler {
         Map<String, BufferedImage> tempMap = new HashMap<>();
         for (String imgType: imgTypes){
             for (int i = 1; i < nrImgs+1; i++) {
-                tempMap.put(imgType + (i - 1), getImage("imgs/" + imgType + "/" + direction.toString().toLowerCase() + "_" + i + ".png"));
+                tempMap.put(imgType + (i - 1), getImage("imgs/"+imgType+"/"+direction.toString().toLowerCase()+"_"+i+".png"));
             }
         }
         return tempMap;

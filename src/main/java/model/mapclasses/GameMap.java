@@ -1,7 +1,4 @@
 package model.mapclasses;
-
-import model.Vector2;
-
 import java.util.*;
 
 /**
@@ -13,7 +10,6 @@ public class GameMap implements IGameMap{
     private final Tile[][] gameMapCoordinates;
     private final int width;
     private final int height;
-
      /**
      * Game map constructor, set height and width.
      * Width and height is in number of tiles.
