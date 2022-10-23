@@ -180,6 +180,7 @@ public class GameTest {
     void adding_a_subscription_to_the_observer_should_result_in_the_list_becoming_one_in_size(){
         ISoundObserver iSound = new SoundPlayer();
         game.subscribe(iSound);
+        game.makePlayerShoot();
         int length = 1;
         assertEquals(length, game.getSubscribedSoundObservevrs().size());
     }
@@ -191,5 +192,16 @@ public class GameTest {
         game.subscribe(iSound2);
         int length = 2;
         assertEquals(length, game.getSubscribedSoundObservevrs().size());
+    }
+
+    @Test
+    void test_if_boss_spawns(){
+        for (int i = 0; i < 15; i++)
+            game.spawnEnemy();
+        boolean bossWasSpawned = game.getBossSpawnedFlag();
+        for (Enemy enemy : game.getEnemies())
+            enemy.setHealth(0);
+        game.update(0);
+        assertTrue(bossWasSpawned);
     }
 }
