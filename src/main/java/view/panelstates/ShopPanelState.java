@@ -22,7 +22,7 @@ import java.util.List;
  * @author Gustav Gille
  */
 
-public class ShopPanelState implements IPanelState{
+class ShopPanelState implements IPanelState{
     private final IChangeableStatePanel mainPanel;
     private TransactionHandler transactionHandler;
     private final ButtonSwitcherController stringButtonController;

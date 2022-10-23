@@ -1,6 +1,5 @@
 package controllers;
 
-import sound.SoundEffect;
 import model.gameinterfaces.IHasProjectiles;
 
 import java.awt.event.KeyEvent;

@@ -2,6 +2,7 @@ package gameobjects.enemies;
 
 import model.Game;
 import model.gameobjects.Player;
+import model.gameobjects.enemies.EEnemyType;
 import model.gameobjects.enemies.Enemy;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
@@ -27,7 +28,7 @@ public class NormalEnemyTest {
     }
     @Test
     void test_getType_returns_normal(){
-        assertEquals("normal", normalEnemy.getType());
+        assertEquals(EEnemyType.NORMAL, normalEnemy.getType());
     }
     @Test
     void test_getKillReward_returns_100(){

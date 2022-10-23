@@ -57,10 +57,10 @@ public class EnemyDrawer implements IImageIteratorDrawer {
                 g2.drawRoundRect(drawInformation.get(0), drawInformation.get(1) - 6, (int) (drawInformation.get(2) - (drawInformation.get(2) * (1 - enemy.getHealth() / (enemy).getMaxHp()))), 4, 0,0);
             }
             if(enemy.getDirection() == EDirection.NOT_MOVING){
-                img = imgs.get(enemy.getLastDirection()).get(enemy.getType() + 1);
+                img = imgs.get(enemy.getLastDirection()).get(enemy.getType().toString().toLowerCase() + 1);
             }
             else{
-                img = imgs.get(enemy.getDirection()).get(enemy.getType() + index);
+                img = imgs.get(enemy.getDirection()).get(enemy.getType().toString().toLowerCase() + index);
             }
             g2.drawImage(img, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
         }

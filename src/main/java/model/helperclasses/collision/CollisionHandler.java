@@ -74,33 +74,33 @@ public class CollisionHandler {
      * @param axis The desired axis to test. If desired axis is X_AXIS the method will test if collision is happening
      *             to the right or to the left. If desired axis is Y_AXIS the method will test if collision is happening
      *             at the top or at the bottom.
-     * @return The method returns a map containing 4 keys; 'top', 'bottom', 'right', 'left'. Use these keys to get the
-     * boolean value of the direction. Example: map.get("top") will be true if collision is at the top.
+     * @return The method returns a map containing 4 keys which is the 4 different elements of ECollisionDirection.
+     * Use these keys to get the boolean value of the direction.
      */
-    public static Map<String, Boolean> getCollisionDirection(Entity movingObject, IGameObject otherObject, ECollisionAxis axis) {
-        Map<String, Boolean> collisionDirection = new HashMap<>(Map.of(
-                "top", false,
-                "bottom", false,
-                "right", false,
-                "left", false
+    public static Map<ECollisionDirection, Boolean> getCollisionDirection(Entity movingObject, IGameObject otherObject, ECollisionAxis axis) {
+        Map<ECollisionDirection, Boolean> collisionDirection = new HashMap<>(Map.of(
+                ECollisionDirection.TOP, false,
+                ECollisionDirection.BOTTOM, false,
+                ECollisionDirection.RIGHT, false,
+                ECollisionDirection.LEFT, false
         ));
 
         if (testCollision(movingObject, otherObject)) {
             if (axis == ECollisionAxis.X_AXIS) {
                 if (movingObject.getVelX() > 0) {
-                    collisionDirection.replace("right", true);
+                    collisionDirection.replace(ECollisionDirection.RIGHT, true);
                 }
                 if (movingObject.getVelX() < 0) {
-                    collisionDirection.replace("left", true);
+                    collisionDirection.replace(ECollisionDirection.LEFT, true);
                 }
             }
 
             if (axis == ECollisionAxis.Y_AXIS) {
                 if (movingObject.getVelY() < 0) {
-                    collisionDirection.replace("top", true);
+                    collisionDirection.replace(ECollisionDirection.TOP, true);
                 }
                 if (movingObject.getVelY() > 0) {
-                    collisionDirection.replace("bottom", true);
+                    collisionDirection.replace(ECollisionDirection.BOTTOM, true);
                 }
             }
         }

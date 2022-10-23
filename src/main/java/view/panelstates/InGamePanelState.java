@@ -17,7 +17,7 @@ import java.util.List;
  * Handles the view for the in-game state.
  * @author Arthur Alexandersson, Gustav Gille, Herman Noren, Kasper Lundgren, Rickard Leksell
  */
-public class InGamePanelState implements IPanelState {
+class InGamePanelState implements IPanelState {
 
     private IGame game;
     private HUD hud;

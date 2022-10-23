@@ -9,7 +9,7 @@ import java.util.PriorityQueue;
  * Used in Enemy to find the shortest distance between Enemy and Player.
  * @author Arthur Alexandersson, Kasper Ljunggren
  */
-public class AStar {
+ public class AStar {
 
         /**
          * Manhattan heuristic

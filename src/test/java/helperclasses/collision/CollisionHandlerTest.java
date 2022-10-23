@@ -5,6 +5,7 @@ import model.gameobjects.Player;
 import model.Vector2;
 import model.helperclasses.collision.CollisionHandler;
 import model.helperclasses.collision.ECollisionAxis;
+import model.helperclasses.collision.ECollisionDirection;
 import model.mapclasses.Tile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -159,11 +160,8 @@ public class CollisionHandlerTest {
         player2.setPos(new Vector2(player1.getPosX() - player2.getWidth(), player1.getPosY()));
         player1.setVelX(-1);
         player1.moveX(1);
-        Map<String, Boolean> collisionDirection = CollisionHandler.getCollisionDirection(player1, player2, ECollisionAxis.X_AXIS);
-        assertTrue(collisionDirection.get("left"));
-        assertFalse(collisionDirection.get("right"));
-        assertFalse(collisionDirection.get("top"));
-        assertFalse(collisionDirection.get("bottom"));
+        Map<ECollisionDirection, Boolean> collisionDirection = CollisionHandler.getCollisionDirection(player1, player2, ECollisionAxis.X_AXIS);
+        assertTrue(collisionDirection.get(ECollisionDirection.LEFT));
     }
 
     @Test
@@ -172,11 +170,8 @@ public class CollisionHandlerTest {
         player2.setPos(new Vector2(player1.getPosX() + player1.getWidth(), player1.getPosY()));
         player1.setVelX(1);
         player1.moveX(1);
-        Map<String, Boolean> collisionDirection = CollisionHandler.getCollisionDirection(player1, player2, ECollisionAxis.X_AXIS);
-        assertFalse(collisionDirection.get("left"));
-        assertTrue(collisionDirection.get("right"));
-        assertFalse(collisionDirection.get("top"));
-        assertFalse(collisionDirection.get("bottom"));
+        Map<ECollisionDirection, Boolean> collisionDirection = CollisionHandler.getCollisionDirection(player1, player2, ECollisionAxis.X_AXIS);
+        assertTrue(collisionDirection.get(ECollisionDirection.RIGHT));
     }
 
     @Test
@@ -185,11 +180,8 @@ public class CollisionHandlerTest {
         player2.setPos(new Vector2(player1.getPosX(), player1.getPosY() - player2.getHeight()));
         player1.setVelY(-1);
         player1.moveY(1);
-        Map<String, Boolean> collisionDirection = CollisionHandler.getCollisionDirection(player1, player2, ECollisionAxis.Y_AXIS);
-        assertFalse(collisionDirection.get("left"));
-        assertFalse(collisionDirection.get("right"));
-        assertTrue(collisionDirection.get("top"));
-        assertFalse(collisionDirection.get("bottom"));
+        Map<ECollisionDirection, Boolean> collisionDirection = CollisionHandler.getCollisionDirection(player1, player2, ECollisionAxis.Y_AXIS);
+        assertTrue(collisionDirection.get(ECollisionDirection.TOP));
     }
 
     @Test
@@ -198,11 +190,8 @@ public class CollisionHandlerTest {
         player2.setPos(new Vector2(player1.getPosX(), player1.getPosY() + player1.getHeight()));
         player1.setVelY(1);
         player1.moveY(1);
-        Map<String, Boolean> collisionDirection = CollisionHandler.getCollisionDirection(player1, player2, ECollisionAxis.Y_AXIS);
-        assertFalse(collisionDirection.get("left"));
-        assertFalse(collisionDirection.get("right"));
-        assertFalse(collisionDirection.get("top"));
-        assertTrue(collisionDirection.get("bottom"));
+        Map<ECollisionDirection, Boolean> collisionDirection = CollisionHandler.getCollisionDirection(player1, player2, ECollisionAxis.Y_AXIS);
+        assertTrue(collisionDirection.get(ECollisionDirection.BOTTOM));
     }
 
 

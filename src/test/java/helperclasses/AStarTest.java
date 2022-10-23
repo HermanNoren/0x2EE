@@ -1,6 +1,5 @@
 package helperclasses;
 import model.gameobjects.enemies.AStar;
-import model.gameobjects.enemies.IEnemy;
 import model.mapclasses.GameMap;
 import model.mapclasses.Tile;
 import org.junit.jupiter.api.BeforeEach;

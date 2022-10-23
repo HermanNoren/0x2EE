@@ -14,6 +14,7 @@ import model.gameobjects.enemies.NormalEnemyFactory;
 import model.gameobjects.Shop;
 import model.helperclasses.HighscoreHandler;
 import model.helperclasses.collision.ECollisionAxis;
+import model.helperclasses.collision.ECollisionDirection;
 import model.mapclasses.GameMap;
 import model.mapclasses.Tile;
 import sound.ISoundObserver;
@@ -294,7 +295,7 @@ public class Game implements IGame {
             Enemy enemy = enemyIter.next();
             if (enemy.getHealth() <= 0) {
                 notifySoundObservers(EGameEvents.ENEMY_DEAD);
-                if (enemy.getKillReward() == bossKillReward) {
+                if (enemy.getType() == EEnemyType.BOSS) {
                     bossIsAlive = false;
                 }
                 spawner.spawnItem();
@@ -344,20 +345,20 @@ public class Game implements IGame {
     private void collisionCheck(ECollisionAxis axis){
         List<Tile> collidedTile = CollisionHandler.getSpecificTileCollisions(player, gameMap.getGameMapCoordinates());
         for (Tile t : collidedTile) {
-            Map<String, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, axis);
-            if (collisionTypes.get("right")) {
+            Map<ECollisionDirection, Boolean> collisionTypes = CollisionHandler.getCollisionDirection(player, t, axis);
+            if (collisionTypes.get(ECollisionDirection.RIGHT)) {
                 player.setPosX(t.getPos().getX() - player.getWidth());
                 player.stopCurrentXMovement();
             }
-            if (collisionTypes.get("left")) {
+            if (collisionTypes.get(ECollisionDirection.LEFT)) {
                 player.setPosX((t.getPos().getX() + t.getWidth()));
                 player.stopCurrentXMovement();
             }
-            if (collisionTypes.get("top")) {
+            if (collisionTypes.get(ECollisionDirection.TOP)) {
                 player.setPosY(t.getPos().getY() + player.getHeight());
                 player.stopCurrentYMovement();
             }
-            if (collisionTypes.get("bottom")) {
+            if (collisionTypes.get(ECollisionDirection.BOTTOM)) {
                 player.setPosY((t.getPos().getY() - t.getHeight()));
                 player.stopCurrentYMovement();
             }

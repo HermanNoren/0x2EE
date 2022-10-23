@@ -21,7 +21,7 @@ import java.util.List;
  * @author Rickard Leksell
  */
 
-public class MainMenuPanelState implements IPanelState {
+class MainMenuPanelState implements IPanelState {
     private final ButtonSwitcherController bc;
     private final List<GameButton> buttons;
     private final List<IDrawer> drawers;

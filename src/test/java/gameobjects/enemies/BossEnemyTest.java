@@ -3,6 +3,7 @@ package gameobjects.enemies;
 import model.Game;
 import model.gameobjects.Player;
 import model.gameobjects.enemies.BossEnemyFactory;
+import model.gameobjects.enemies.EEnemyType;
 import model.gameobjects.enemies.Enemy;
 import model.gameobjects.enemies.EnemyFactory;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +27,7 @@ public class BossEnemyTest {
     }
     @Test
     void test_getType_returns_normal(){
-        assertEquals("boss", bossEnemy.getType());
+        assertEquals(EEnemyType.BOSS, bossEnemy.getType());
     }
     @Test
     void test_getKillReward_returns_500(){

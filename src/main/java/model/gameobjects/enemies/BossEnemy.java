@@ -11,7 +11,7 @@ import model.mapclasses.Tile;
  * a regular enemy.
  * @author Arthur Alexandersson, Kasper Ljunggren
  */
-public class BossEnemy extends Enemy{
+class BossEnemy extends Enemy{
 
     protected BossEnemy(int x, int y, int damage, int killReward, Tile[][] coordinates, Entity targetEntity) {
         super(x, y, damage, killReward, coordinates, targetEntity);
@@ -27,8 +27,8 @@ public class BossEnemy extends Enemy{
     }
 
     @Override
-    public String getType() {
-        return "boss";
+    public EEnemyType getType() {
+        return EEnemyType.BOSS;
     }
 
     @Override

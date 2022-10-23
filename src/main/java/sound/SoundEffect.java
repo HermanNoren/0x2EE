@@ -4,7 +4,7 @@ import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
 
-public class SoundEffect {
+class SoundEffect {
     private Clip clip;
 
     private AudioInputStream sound;

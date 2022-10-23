@@ -19,7 +19,7 @@ import java.util.List;
  * Handles the view for the highscore state.
  * @author Rickard Leksell
  */
-public class HighscorePanelState implements IPanelState {
+class HighscorePanelState implements IPanelState {
 
     private List<String> scores;
     private final ButtonSwitcherController bc;

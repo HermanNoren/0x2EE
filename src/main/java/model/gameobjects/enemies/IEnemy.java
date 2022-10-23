@@ -10,7 +10,7 @@ public interface IEnemy{
     /**
      * @return The enemy type.
      */
-    String getType();
+    EEnemyType getType();
 
     /**
      * @return The enemy damage.

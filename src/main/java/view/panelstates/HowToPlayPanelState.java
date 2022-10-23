@@ -19,7 +19,7 @@ import java.util.List;
  * Handles the view for the howToPlay state.
  * @author Rickard Leksell
  */
-public class HowToPlayPanelState implements IPanelState{
+class HowToPlayPanelState implements IPanelState{
     private BufferedImage controls, instructions;
     private final ButtonSwitcherController bc;
     private final ArrayList<GameButton> buttons;

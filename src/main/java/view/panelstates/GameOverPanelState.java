@@ -20,7 +20,7 @@ import java.util.List;
  * Handles the view for the game over state.
  * @author Rickard Leksell
  */
-public class GameOverPanelState implements IPanelState{
+class GameOverPanelState implements IPanelState{
 
     private IChangeableStatePanel mainPanel;
     private final ButtonSwitcherController bc;

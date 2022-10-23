@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
  * method is called multiple times by CameraZoomControllers Timer.
  * @author Herman Noren
  */
-public class ZoomControllerHelper implements ActionListener {
+class ZoomControllerHelper implements ActionListener {
 
     private final EZoomDirection direction;
 
