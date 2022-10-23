@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 public class SpawnTimerController implements ActionListener {
     private final ICanSpawnEnemy game;
     private final Timer timer;
-    private int counter = 1;
+    private int delay;
 
     /**
      * Instantiates a SpawnTimerController
@@ -22,6 +22,7 @@ public class SpawnTimerController implements ActionListener {
      */
     public SpawnTimerController(ICanSpawnEnemy game, int delay){
         timer = new Timer(delay, this);
+        this.delay = delay;
         this.game = game;
     }
 
@@ -48,4 +49,5 @@ public class SpawnTimerController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         game.spawnEnemy();
     }
+
 }

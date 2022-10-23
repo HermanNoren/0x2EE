@@ -26,7 +26,7 @@ public class InteractShopTextDrawer implements IDrawer{
     /**
      * String used to determine the text above the shop.
      */
-    private String popUpText = "Enter to shop";
+    private final String popUpText = "Enter to shop";
 
     public InteractShopTextDrawer(IHasShop shop){
         this.shop = shop;

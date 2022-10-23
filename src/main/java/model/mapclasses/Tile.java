@@ -26,6 +26,12 @@ public class Tile implements IGameObject, ITile, Comparable<Tile> {
     private final int height;
     private boolean passable;
 
+    /**
+     * Creates a new instance of tile, every tile starts as passable,
+     * all tiles have a Vector2 position.
+     * @param x Position and index
+     * @param y Position and index
+     */
     public Tile(int x, int y){
         this.x = x;
         this.y = y;

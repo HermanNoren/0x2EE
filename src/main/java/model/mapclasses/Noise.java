@@ -63,6 +63,11 @@ public class Noise {
 
     }
 
+    /**
+     * Method used to generate passable and unpassable Tiles on the GameMap.
+     * @param tiles The grid which will be modified.
+     * @param crowding Low value = higher amount of unpassable tiles
+     */
     public void setNoise(Tile[][] tiles, float crowding){
         int w = grid.length;
         int h = grid[0].length;
@@ -79,7 +84,6 @@ public class Noise {
                 else {
                     tiles[i][j].setPassable(false);
                 }
-
             }
         }
     }

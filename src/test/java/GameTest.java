@@ -91,7 +91,7 @@ public class GameTest {
 
     @Test
     void test_if_player_starts_on_shop(){
-        assertFalse(game.playerOnShop());
+        assertFalse(game.isPlayerOnShop());
     }
 
     @Test
