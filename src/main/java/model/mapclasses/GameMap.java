@@ -24,10 +24,11 @@ public class GameMap implements IGameMap{
 
         addCoordinatesAndTiles(width, height);
         if(obstacles) {
-            Noise n = new Noise(10, this); // Generates random tile on the game map.
+            Noise n = new Noise(10, this); // Generates random non-passable tiles.
             n.setNoise(gameMapCoordinates, 2);
-            createBorder();
         }
+
+        createBorder();
         tiles.forEach(this::addNeighbors);
 
     }
@@ -88,12 +89,13 @@ public class GameMap implements IGameMap{
     public List<Tile> getPassableTiles(){
         List<Tile> passableTiles = new ArrayList<>();
         for (Tile tile : tiles){
-            if(tile.isPassable()){
+            if(tile.isPassable()&&tile.getNeighbors().size()==4){
                 passableTiles.add(tile);
             }
         }
         return passableTiles;
     }
+
 
 
     /**

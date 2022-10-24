@@ -1,25 +1,25 @@
 package gameobjects.enemies;
 
-import model.Game;
+
 import model.gameobjects.Player;
 import model.gameobjects.enemies.EEnemyType;
 import model.gameobjects.enemies.Enemy;
 import model.gameobjects.enemies.EnemyFactory;
 import model.gameobjects.enemies.NormalEnemyFactory;
+import model.mapclasses.GameMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class NormalEnemyTest {
     private Enemy normalEnemy;
     @BeforeEach
     void init(){
-        Game game = new Game();
-        Player player = new Player(1, 1, game.getGameMap().getGameMapCoordinates());
+        GameMap gameMap = new GameMap(10, 10, false);
+        Player player = new Player(1, 1, gameMap.getGameMapCoordinates());
         EnemyFactory enemyFactory = new NormalEnemyFactory();
-        normalEnemy= enemyFactory.createEnemy(player, 1, 100,game.getGameMap().getPassableTiles(), game.getGameMap().getGameMapCoordinates());
+        normalEnemy= enemyFactory.createEnemy(player, 1, 100, gameMap.getPassableTiles().get(2), gameMap.getGameMapCoordinates());
     }
 
     @Test

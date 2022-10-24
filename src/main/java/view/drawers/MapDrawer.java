@@ -20,9 +20,9 @@ public class MapDrawer implements IImageIteratorDrawer {
     private final BufferedImage[] treeImgs = new BufferedImage[3];
     private BufferedImage activeTreeImg;
     private int index;
-    private Tile[][] gameMap;
-    private  Camera camera;
-    private int spriteSize = Config.SPRITE_SIZE*3;
+    private final Tile[][] gameMap;
+    private Camera camera;
+    private int tileSize = Config.TILE_SIZE;
 
     public MapDrawer(Tile[][] gameMap){
         this.gameMap = gameMap.clone();
@@ -48,12 +48,11 @@ public class MapDrawer implements IImageIteratorDrawer {
 
     @Override
     public void draw(Graphics2D g2) {
-
         // Coordinates of tiles to paint with a 2 tile offset to guarantee visibility
-        int left = (int) (camera.getCenter().getX() - Config.SCREEN_WIDTH/2)/spriteSize - 2;
-        int right = (int) (camera.getCenter().getX() + Config.SCREEN_WIDTH/2)/spriteSize + 2;
-        int up = (int) (camera.getCenter().getY() - Config.SCREEN_HEIGHT/2)/spriteSize - 2;
-        int down = (int) (camera.getCenter().getY() + Config.SCREEN_HEIGHT/2)/spriteSize + 2;
+        int left = (int) (camera.getCenter().getX() - Config.SCREEN_WIDTH/2)/ tileSize - 2;
+        int right = (int) (camera.getCenter().getX() + Config.SCREEN_WIDTH/2)/ tileSize + 2;
+        int up = (int) (camera.getCenter().getY() - Config.SCREEN_HEIGHT/2)/ tileSize - 2;
+        int down = (int) (camera.getCenter().getY() + Config.SCREEN_HEIGHT/2)/ tileSize + 2;
 
         // If out of bounds
         if (left < 0) {
@@ -62,16 +61,11 @@ public class MapDrawer implements IImageIteratorDrawer {
         if (up < 0) {
             up = 0;
         }
-
-        Vector2 newTerrainVector;
-
         for (int col = left; col < right && col < Config.MAP_WIDTH; col++){
             for(int row = up; row < down && row < Config.MAP_HEIGHT; row++){
-                newTerrainVector = new Vector2(gameMap[col][row].getPos()); // For drawing in correct place.
-
                 List<Integer> drawInformation = DrawerHelper.
                     calculateDrawingInformation(
-                            newTerrainVector,
+                            gameMap[col][row].getPos(),
                             gameMap[col][row].getWidth(),
                             gameMap[col][row].getHeight());
                 if (gameMap[col][row].isPassable()) {
@@ -79,11 +73,9 @@ public class MapDrawer implements IImageIteratorDrawer {
                 } else {
                     g2.drawImage(activeTreeImg, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
                 }
-
-                newTerrainVector.setX(newTerrainVector.getX() + Config.TILE_SIZE);
-                newTerrainVector.setY(newTerrainVector.getY() + Config.TILE_SIZE);
             }
         }
+
     }
 
     @Override

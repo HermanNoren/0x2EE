@@ -32,7 +32,6 @@ public class Game implements IGame {
 
     private List<Enemy> enemies;
     private GameMap gameMap;
-
     private List<String> highscoreList;
     private List<Projectile> projectiles;
     private Shop shop;
@@ -67,12 +66,16 @@ public class Game implements IGame {
         soundObservers = new ArrayList<>();
     }
 
+
     @Override
     public void newGameRound() {
         this.spawnCounter = 1;
         this.gameMap = new GameMap(Config.MAP_WIDTH, Config.MAP_HEIGHT, true);
-        this.player = new Player(500, 500, gameMap.getGameMapCoordinates());
-        this.shop = new Shop(100, 100);
+
+        Tile playerSpawn = getSpawnTile();
+        this.player = new Player((int) playerSpawn.getPos().getX(), (int) playerSpawn.getPos().getY(), gameMap.getGameMapCoordinates());
+        Tile shopSpawn = getSpawnTile();
+        this.shop = new Shop((int) shopSpawn.getPos().getX(), (int) shopSpawn.getPos().getY());
         this.transactionHandler = new TransactionHandler(this.getPlayer());
         this.enemies = new ArrayList<>();
         this.projectiles = new ArrayList<>();
@@ -82,6 +85,16 @@ public class Game implements IGame {
         this.paused = false;
         this.bossSpawnedFlag = false;
         this.bossIsAlive = false;
+    }
+
+    /**
+     *
+     * @return random spawnable location.
+     */
+    private Tile getSpawnTile(){
+        int nrpassableTiles = gameMap.getPassableTiles().size();
+        Random random = new Random();
+        return gameMap.getPassableTiles().get(random.nextInt(nrpassableTiles-1));
     }
     /**
      * {@inheritDoc}
@@ -420,7 +433,7 @@ public class Game implements IGame {
             enemyFactory = new NormalEnemyFactory();
         }
         if (!bossIsAlive) { spawnCounter++; }
-        enemies.add(enemyFactory.createEnemy(player, damage, killReward, gameMap.getPassableTiles(), gameMap.getGameMapCoordinates()));
+        enemies.add(enemyFactory.createEnemy(player, damage, killReward, getSpawnTile(), gameMap.getGameMapCoordinates()));
     }
 
     /**

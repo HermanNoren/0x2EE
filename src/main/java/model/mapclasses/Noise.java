@@ -19,6 +19,7 @@ public class Noise {
         this.roughness = roughness/gameMap.getWidth();
         this.grid = new float[gameMap.getWidth()][gameMap.getHeight()];
         init();
+
     }
 
     /**

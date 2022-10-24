@@ -2,6 +2,8 @@ package model.gameobjects.enemies;
 
 import model.mapclasses.Tile;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
 
 /**
@@ -9,7 +11,7 @@ import java.util.PriorityQueue;
  * Used in Enemy to find the shortest distance between Enemy and Player.
  * @author Arthur Alexandersson, Kasper Ljunggren
  */
- public class AStar {
+public class AStar {
 
         /**
          * Manhattan heuristic
@@ -42,7 +44,7 @@ import java.util.PriorityQueue;
 
             openList.add(start);
             while(!openList.isEmpty()){
-                Tile n = openList.peek(); //n = next node
+                Tile n = openList.peek();
 
                 if(n == target){
                     while (n.getParent() != start && n != start)
@@ -57,7 +59,7 @@ import java.util.PriorityQueue;
                     if(!openList.contains(m) && !closedList.contains(m) && m.isPassable()){
                         m.setParent(n);
                         m.setG(totalWeight);
-                        m.setF(m.getG() + calculateHeuristic(m, target)); // f = g+h
+                        m.setF(m.getG() + calculateHeuristic(m, target));
                         openList.add(m);
 
                     }
@@ -69,5 +71,4 @@ import java.util.PriorityQueue;
             }
             return null;
         }
-
 }

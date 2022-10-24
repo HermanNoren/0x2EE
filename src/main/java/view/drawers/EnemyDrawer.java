@@ -64,6 +64,7 @@ public class EnemyDrawer implements IImageIteratorDrawer {
             }
             g2.drawImage(img, drawInformation.get(0), drawInformation.get(1), drawInformation.get(2), drawInformation.get(3), null);
         }
+
     }
 
     @Override
